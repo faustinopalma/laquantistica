@@ -55,6 +55,100 @@ CHAPTERS = [
 ]
 
 
+# --- Figure mapping (number -> file, caption) for the OLE chapters ------------
+# Built by inspecting each image against the text so that numbered figures appear
+# progressively in the text and references become hoverable.
+FIGURES = {
+    '04_diffrazione': {
+        1: ('FIG1~1.png', 'Schema di principio dell’esperimento.'),
+        2: ('FIG2~1.png', 'Struttura cristallina: reticolo tridimensionale di nuclei.'),
+        3: ('FIG3~1.png', 'Previsione classica: deflessione dell’elettrone nel cristallo.'),
+        5: ('IMG1.jpg', 'Foto dell’ampolla di vetro sotto vuoto.'),
+        6: ('IMG2.jpg', 'Dettaglio del cannone elettronico.'),
+        7: ('IMG3.jpg', 'Dettaglio del cannone elettronico.'),
+        8: ('AMPOLLA1.png', 'Schema dell’ampolla con cannone e lamina.'),
+        9: ('AMPOLLA2.png', 'Schema di alimentazione del sistema.'),
+        10: ('IMG4.jpg', 'L’intero sistema alimentato.'),
+        11: ('IMG5.jpg', 'Immagine ottenuta sullo schermo: punto centrale e due cerchi.'),
+        14: ('GRAFITE1.png', 'Struttura cristallina piana della grafite.'),
+        15: ('CERCHI1.png', 'Scomposizione del reticolo in sottoreticoli a linee parallele.'),
+    },
+    '05_rutherford': {
+        1: ('PALLE.png', 'In un cristallo il volume di un atomo è quasi tutto vuoto; il nucleo sta al centro.'),
+        2: ('APPARATO.png', 'Schema dell’apparato: sorgente, collimatore, lamina d’oro, rilevatore.'),
+        3: ('PREPAR~1.jpg', 'Il preparato radioattivo Am241.'),
+        4: ('LAMINA.jpg', 'La lamina d’oro con le fenditure di collimazione.'),
+        5: ('AMPLIF.jpg', 'Il detector al silicio e l’amplificatore di misura.'),
+        6: ('RESIST~1.png', 'Caduta della resistenza del detector al passaggio di una particella α.'),
+        7: ('AMPLIF2.jpg', 'L’amplificatore dal lato dei morsetti di uscita.'),
+        8: ('IMPULSO.png', 'L’impulso squadrato e la tensione di soglia U.'),
+        9: ('INSIEME.jpg', 'L’intero apparato sperimentale.'),
+        10: ('COMPON~1.jpg', 'La camera aperta con tutti i componenti.'),
+        11: ('ASSEMB~1.jpg', 'La camera chiusa con il goniometro.'),
+        13: ('IMPATTO.png', 'Urto contro atomi immaginati come sferette piene.'),
+        14: ('ATTRAV~1.png', 'Con nuclei piccolissimi la lamina è quasi trasparente ai raggi α.'),
+        15: ('DISTANZA.png', 'Geometria della diffusione.'),
+        16: ('ONDELA~1.png', 'Onda piana incidente → onda piana più onda sferica divergente.'),
+        17: ('ONDEST~1.png', 'Un fascio stretto: solo l’onda sferica raggiunge il detector.'),
+        21: ('ANGOLO.png', 'Angolo solido del rivelatore.'),
+    },
+    '07_franck_hertz': {
+        1: ('AMPOLLA.png', 'Ampolla con gli elettrodi.'),
+        2: ('AMPOLL~1.png', 'Alimentazione degli elettrodi.'),
+        3: ('AMPOLL~1.jpg', 'Foto dell’ampolla contenente il neon.'),
+        4: ('APPARA~1.jpg', 'L’intero apparato sperimentale (neon).'),
+        5: ('DISPLA~1.jpg', 'Schermo dell’oscilloscopio: diagramma tensione/corrente.'),
+        6: ('DIAGRA~1.png', 'Corrente in funzione della tensione: massimi e minimi.'),
+        7: ('BANDED~1.png', 'Le zone luminose tra le griglie (a 70 V).'),
+        8: ('APPARA~2.jpg', 'Apparato sperimentale per il mercurio.'),
+        9: ('APPARA~3.jpg', 'Apparato sperimentale per il mercurio.'),
+        10: ('DISPLA~2.jpg', 'Grafico tensione/corrente per il mercurio: sei massimi.'),
+    },
+    '08_effetto_fotoelettrico': {
+        1: ('EMISSI~1.png', 'L’effetto fotoelettrico: la luce estrae elettroni dal metallo.'),
+        2: ('AMPOLL~2.png', 'Sistema di rilevazione: catodo, anodo e corrente I.'),
+        3: ('AMPOLL~1.png', 'Sistema per misurare l’energia degli elettroni (condensatore).'),
+        4: ('AMPOLLA.jpg', 'Foto dell’ampolla usata nell’esperimento.'),
+        5: ('AMPOLL~1.jpg', 'L’ampolla montata sul supporto.'),
+        6: ('LAMPAD~1.jpg', 'Lampada ai vapori di mercurio.'),
+        7: ('FILTRO~1.jpg', 'Filtro interferometrico per il blu.'),
+        8: ('FILTRO~2.jpg', 'Filtro interferometrico per il giallo.'),
+        9: ('FILTRI.jpg', 'Supporto dei quattro filtri con diaframma a iride.'),
+        10: ('BANCOO~1.jpg', 'Il banco ottico montato.'),
+        11: ('APPARATO.jpg', 'L’intero apparato sperimentale in funzione.'),
+        12: ('SOLOVO~1.png', 'Con un normale voltmetro la corrente fotoelettrica si richiude sul voltmetro.'),
+        13: ('SEPARA~1.png', 'Il separatore di impedenza per misurare la tensione.'),
+    },
+    '09_spettri_atomici': {
+        1: ('LIVELLI.png', 'Livelli energetici dell’atomo di idrogeno.'),
+        2: ('SALTI.png', 'I possibili salti energetici tra i livelli.'),
+        3: ('TUBI.jpg', 'Quattro tubicini con gas diversi (ossigeno, neon, argon, azoto).'),
+        4: ('NEONAC~1.jpg', 'Il tubo contenente neon acceso.'),
+        5: ('APPARA~3.jpg', 'Il banco ottico: tubo, lenti, reticolo e schermo.'),
+        6: ('IMMAGI~1.jpg', 'L’immagine sullo schermo: le righe dei diversi colori.'),
+        7: ('LAMPAD~1.jpg', 'Lampada ai vapori di mercurio.'),
+        8: ('APPARA~1.jpg', 'Immagine spettrale della lampada al mercurio.'),
+        9: ('APPARA~2.jpg', 'Immagine spettrale della lampada al mercurio.'),
+        10: ('LUCIME~1.jpg', 'Immagine spettrale della lampada al mercurio.'),
+        11: ('LAMPAD~1.png', 'Lampada di Balmer (idrogeno).'),
+        12: ('SPETTO~1.png', 'Spettrometro a goniometro.'),
+    },
+}
+
+# Un-numbered images that belong inline: placed right after the paragraph that
+# contains the given text cue. (cue_substring, filename, caption)
+INLINE_EXTRA = {
+    '04_diffrazione': [
+        ('cristalli orientati a caso', 'DIFFRA~1.png',
+         'Formazione dei cerchi: diffrazione dal reticolo.'),
+        ('costituita da alcuni punti', 'CERCHI2.png',
+         'Immagine prodotta da un singolo cristallo.'),
+        ('sovrapposizione di tante immagini', 'CERCHI3.png',
+         'Sovrapposizione di cristalli orientati a caso: si formano i cerchi.'),
+    ],
+}
+
+
 def load_equations(key):
     f = EQ / f'{key}.txt'
     if not f.exists():
@@ -122,6 +216,12 @@ def build_ole_body(src_rel, key, ch=None):
     full = ''.join(parts)
     raw_paras = [p.strip() for p in re.split(r'\n+', full) if p.strip()]
 
+    imgkey = ch['imgkey'] if ch and ch.get('imgkey') else key
+    figs = FIGURES.get(key, {})
+    extras = INLINE_EXTRA.get(key, [])
+    placed = set()
+    used = set()
+
     html_paras = []
     for i, p in enumerate(raw_paras):
         if i == 0:
@@ -130,16 +230,138 @@ def build_ole_body(src_rel, key, ch=None):
         if SENT.search(p) and SENT.sub('', p).strip() == '':
             imgs = ''.join(img_tag(int(m), True) for m in SENT.findall(p))
             html_paras.append('<div class="equation">' + imgs + '</div>')
-            continue
-        p2 = SENT.sub(lambda m: img_tag(int(m.group(1)), False), p)
-        if '\u0001' not in p and _looks_like_heading(p):
-            html_paras.append('<h2>' + p2 + '</h2>')
         else:
-            html_paras.append('<p>' + p2 + '</p>')
+            p2 = SENT.sub(lambda m: img_tag(int(m.group(1)), False), p)
+            if '\u0001' not in p and _looks_like_heading(p):
+                html_paras.append('<h2>' + p2 + '</h2>')
+            else:
+                html_paras.append('<p>' + p2 + '</p>')
+        # Progressive numbered figures: insert after the first paragraph that
+        # references figure N (handles lists like "figure 6 e 7").
+        refs_here = figs_referenced(p)
+        for n in sorted(figs):
+            if n in placed:
+                continue
+            if n in refs_here:
+                fn, cap = figs[n]
+                html_paras.append(figure_block(imgkey, n, fn, cap, key))
+                placed.add(n)
+                used.add(fn)
+        # Un-numbered inline extras placed at their text cue.
+        for cue, fn, cap in extras:
+            if fn in used:
+                continue
+            if cue in p:
+                html_paras.append(figure_block(imgkey, None, fn, cap, key))
+                used.add(fn)
+
+    # Figures referenced but never matched (or unreferenced) -> append in order.
+    for n in sorted(figs):
+        if n not in placed:
+            fn, cap = figs[n]
+            html_paras.append(figure_block(imgkey, n, fn, cap, key))
+            placed.add(n)
+            used.add(fn)
+
     body = '\n'.join(html_paras)
     if ch is not None:
-        body += figure_gallery(ch)
+        body += leftover_gallery(ch, used)
     return body
+
+
+def references_fig(text, n):
+    """True if the paragraph text refers to figure number n."""
+    return re.search(rf'[Ff]ig(?:ur[ae])?\.?\s*(?:n\.?\s*)?0*{n}(?!\d)', text) is not None
+
+
+def figs_referenced(text):
+    """Set of figure numbers referenced in the text (handles 'figure 6 e 7')."""
+    out = set()
+    for m in REF_RE.finditer(text):
+        for tok in re.split(r'(?:e|,|-)', m.group(2)):
+            tok = tok.strip()
+            if tok.isdigit():
+                out.add(int(tok))
+    return out
+
+
+def figure_block(imgkey, n, filename, caption, key):
+    idattr = f' id="fig-{key}-{n}"' if n else ''
+    if n:
+        cap = f'<b>Fig. {n}</b> — {esc(caption)}' if caption else f'<b>Fig. {n}</b>'
+        alt = caption or f'Figura {n}'
+    else:
+        cap = esc(caption)
+        alt = caption
+    return (f'<figure{idattr} class="fig-inline"><img loading="lazy" '
+            f'src="img/{imgkey}/{filename}" alt="{esc(alt)}">'
+            f'<figcaption>{cap}</figcaption></figure>')
+
+
+# Reference pattern: "fig. 3", "figura 12", "figure 6 e 7", "Fig.3", ...
+REF_RE = re.compile(r'([Ff]ig(?:ur[ae])?\.?\s*(?:n\.?\s*)?)(\d+(?:\s*(?:e|,|-)\s*\d+)*)')
+
+
+def add_ref_system(body, key):
+    """Assign ids to figures (from their 'Fig. N' caption) and turn textual
+    references like 'figura 3' into hoverable anchors pointing at them."""
+    # 1. Give every <figure> an id derived from its caption, if it lacks one.
+    def assign(m):
+        tag = m.group(0)
+        if 'id="fig-' in tag:
+            return tag
+        cm = re.search(r'Fig(?:ur[ae])?\.?\s*(\d+)', m.group(1))
+        if not cm:
+            return tag
+        return tag.replace('<figure', f'<figure id="fig-{key}-{int(cm.group(1))}"', 1)
+    body = re.sub(r'<figure\b[^>]*>(.*?)</figure>', assign, body, flags=re.S)
+    avail = set(int(x) for x in re.findall(rf'id="fig-{re.escape(key)}-(\d+)"', body))
+    if not avail:
+        return body
+    # 2. Wrap references, but never inside the <figure> blocks themselves.
+    blocks = []
+
+    def stash(m):
+        blocks.append(m.group(0))
+        return f'\u0002{len(blocks)-1}\u0002'
+    tmp = re.sub(r'<figure\b.*?</figure>', stash, body, flags=re.S)
+
+    def wrap(m):
+        kw, nums = m.group(1), m.group(2)
+
+        def anc(tok):
+            t = tok.strip()
+            if t.isdigit() and int(t) in avail:
+                n = int(t)
+                return (f'<a class="ref" href="#fig-{key}-{n}" '
+                        f'data-ref="fig-{key}-{n}">{tok}</a>')
+            return tok
+        parts = re.split(r'(\s*(?:e|,|-)\s*)', nums)
+        return kw + ''.join(anc(t) for t in parts)
+    tmp = REF_RE.sub(wrap, tmp)
+    body = re.sub('\u0002(\\d+)\u0002', lambda m: blocks[int(m.group(1))], tmp)
+    return body
+
+
+def leftover_gallery(ch, used):
+    """Gallery of chapter images that were not placed inline as numbered figures."""
+    if not ch or not ch.get('imgkey'):
+        return ''
+    d = SITE / 'img' / ch['imgkey']
+    if not d.exists():
+        return ''
+    exts = {'.png', '.jpg', '.jpeg', '.gif'}
+    files = sorted([f for f in d.iterdir()
+                    if f.suffix.lower() in exts and f.name not in used])
+    if not files:
+        return ''
+    cards = []
+    for f in files:
+        cards.append(
+            f'<figure class="plain"><img loading="lazy" src="img/{ch["imgkey"]}/{f.name}" '
+            f'alt="{esc(f.stem)}"><figcaption>{esc(f.stem)}</figcaption></figure>')
+    return ('\n<h2>Altre immagini del capitolo</h2>\n'
+            '<div class="gallery">\n' + '\n'.join(cards) + '\n</div>')
 
 
 def _looks_like_heading(p):
@@ -408,11 +630,13 @@ def build(outdir, mode):
             body = build_pandoc_body(ch)
         elif ch['pipe'] == 'authored':
             b = ch3_to_mathml(CH3_BODY) if mode == 'mathml' else CH3_BODY
-            body = b + figure_gallery(ch)
+            used = set(re.findall(r'img/[^/"]+/([^"]+)', b))
+            body = b + leftover_gallery(ch, used)
         else:
             body = build_ole_body(ch['src'], ch['key'], ch)
+        body = add_ref_system(body, ch['key'])
         (SITE / f'{ch["slug"]}.html').write_text(page_html(ch, body, prev_ch, next_ch), encoding='utf-8')
-    intro_body = build_ole_body(INTRO['src'], INTRO['key'], None)
+    intro_body = add_ref_system(build_ole_body(INTRO['src'], INTRO['key'], None), INTRO['key'])
     (SITE / 'index.html').write_text(build_index(intro_body), encoding='utf-8')
     print(f'built {mode} -> {SITE}')
 

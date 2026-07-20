@@ -231,6 +231,56 @@ figcaption {
 }
 .gallery figure { margin: 0; }
 
+/* ----- Cross references + hover preview ----- */
+a.ref {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--accent-soft);
+  cursor: help;
+  font-weight: 600;
+  white-space: nowrap;
+}
+a.ref:hover { background: var(--accent-soft); color: #fff; border-radius: 3px; }
+figure.fig-inline { scroll-margin-top: 5rem; }
+figure.fig-inline.flash img { animation: figflash 1.8s ease; }
+@keyframes figflash {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(168,68,59,0); }
+  12%      { box-shadow: 0 0 0 5px var(--accent-soft); }
+}
+.ref-pop {
+  position: fixed;
+  z-index: 1000;
+  max-width: 380px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 14px 44px rgba(0, 0, 0, .24);
+  padding: 10px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .12s ease;
+}
+.ref-pop.show { opacity: 1; }
+.ref-pop .pv { text-align: center; }
+.ref-pop .pv img {
+  max-width: 360px;
+  max-height: 320px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  background: #fff;
+}
+.ref-pop .pv.zoom img { max-height: 200px; }
+.ref-pop .pv.zoom math { font-size: 2.1em; }
+.ref-pop .cap {
+  font-family: var(--font-sans);
+  font-size: .74rem;
+  color: var(--ink-soft);
+  text-align: center;
+  margin-top: 6px;
+  font-style: italic;
+}
+
 /* Data tables */
 table.data {
   border-collapse: collapse;
