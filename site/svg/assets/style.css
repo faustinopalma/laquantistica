@@ -276,11 +276,12 @@ table.data tbody tr:nth-child(even) { background: #faf8f2; }
 .chapter-nav a.next { text-align: right; margin-left: auto; }
 .chapter-nav a span { font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; color: var(--accent-soft); }
 
-/* ----- Cover page ----- */
+/* ----- Cover / intro header ----- */
 .cover {
   text-align: center;
   padding: 4rem clamp(1.5rem, 5vw, 4rem) 5rem;
 }
+#introduzione .kicker,
 .cover .kicker {
   font-family: var(--font-sans);
   text-transform: uppercase;
@@ -288,40 +289,24 @@ table.data tbody tr:nth-child(even) { background: #faf8f2; }
   font-size: .8rem;
   color: var(--accent-soft);
   font-weight: 700;
+  text-align: center;
 }
+#introduzione .cover-title,
 .cover h1 {
   font-size: clamp(2rem, 5vw, 3.2rem);
   color: var(--accent);
   margin: 1rem 0;
   line-height: 1.1;
+  text-align: center;
 }
-.cover .subtitle { font-size: 1.2rem; color: var(--ink-soft); font-style: italic; }
-.cover .toc-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1rem;
-  margin-top: 3rem;
-  text-align: left;
+#introduzione .subtitle,
+.cover .subtitle { font-size: 1.2rem; color: var(--ink-soft); font-style: italic; text-align: center; }
+.intro-sep {
+  border: 0;
+  border-top: 1px solid var(--line);
+  width: min(160px, 40%);
+  margin: 2.75rem auto;
 }
-.cover .toc-card {
-  display: block;
-  padding: 1.1rem 1.3rem;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  box-shadow: var(--shadow);
-  transition: transform .15s, border-color .15s;
-}
-.cover .toc-card:hover { transform: translateY(-3px); border-color: var(--accent-soft); text-decoration: none; }
-.cover .toc-card .n {
-  font-family: var(--font-sans);
-  font-size: .75rem;
-  font-weight: 700;
-  letter-spacing: .1em;
-  color: var(--accent-soft);
-  text-transform: uppercase;
-}
-.cover .toc-card .t { display: block; margin-top: .3rem; font-size: 1.1rem; color: var(--ink); font-weight: 700; }
 
 /* ----- Mobile ----- */
 .menu-toggle { display: none; }

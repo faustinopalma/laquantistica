@@ -300,13 +300,6 @@ window.MathJax = {{
 
 
 def build_index(intro_body):
-    cards = []
-    for c in CHAPTERS:
-        num = f'Capitolo {c["n"]}'
-        cards.append(
-            f'<a class="toc-card" href="{c["slug"]}.html"><span class="n">{num}</span>'
-            f'<span class="t">{esc(c["title"])}</span></a>')
-    toc = '\n'.join(cards)
     nav = build_nav()
     return f'''<!DOCTYPE html>
 <html lang="it">
@@ -333,15 +326,12 @@ window.MathJax = {{
   <nav>{nav}</nav>
 </aside>
 <main class="content">
-  <article class="page cover">
-    <p class="kicker">Tesi di Laurea</p>
-    <h1>Esperimenti fondamentali della Meccanica Quantistica</h1>
-    <p class="subtitle">Materiale didattico per la comprensione della fisica atomica e quantistica</p>
-    <div class="toc-grid">{toc}</div>
-  </article>
   <article class="page" id="introduzione">
+    <p class="kicker">Tesi di Laurea</p>
+    <h1 class="cover-title">Esperimenti fondamentali della Meccanica Quantistica</h1>
+    <p class="subtitle">Materiale didattico per la comprensione della fisica atomica e quantistica</p>
+    <hr class="intro-sep">
     <p class="eyebrow">Introduzione</p>
-    <h1 class="title">Introduzione</h1>
     {intro_body}
   </article>
 </main>
