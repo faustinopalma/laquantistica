@@ -46,8 +46,6 @@ def crop(text):
         return tag
 
     text = re.sub(r'<svg\b[^>]*>', fix_open, text, count=1)
-    # remove the full-page background rect(s) that fill the old page
-    text = re.sub(r'<rect x="0" y="0" width="\d+" height="\d+"/>', '', text, count=1)
     return text
 
 

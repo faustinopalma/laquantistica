@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Esperimenti di Stern-Gerlach in cascata — Tesi di Laurea</title>
+<link rel="stylesheet" href="assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  svg: { fontCache: 'global' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script defer src="assets/mathjax/tex-mml-svg.js"></script>
+</head>
+<body>
+<button class="menu-toggle" aria-label="Menu">☰ Indice</button>
+<div class="scrim"></div>
+<div class="layout">
+<aside class="sidebar">
+  <a class="brand" href="index.html">Fisica Atomica<small>Esperimenti fondamentali di Meccanica Quantistica — Tesi di Laurea</small></a>
+  <nav><a href="index.html"><span class="num"></span>Introduzione</a>
+<a href="01-stern-gerlach.html"><span class="num">1</span>Esperimento di Stern-Gerlach</a>
+<a href="02-stern-gerlach-cascata.html"><span class="num">2</span>Esperimenti di Stern-Gerlach in cascata</a>
+<a href="03-elettroni.html"><span class="num">3</span>Esperimenti con gli Elettroni</a>
+<a href="04-diffrazione.html"><span class="num">4</span>Diffrazione degli Elettroni</a>
+<a href="05-rutherford.html"><span class="num">5</span>Esperimento di Rutherford</a>
+<a href="06-ulteriori-sviluppi.html"><span class="num">6</span>Ulteriori sviluppi della Teoria</a>
+<a href="07-franck-hertz.html"><span class="num">7</span>Esperimento di Franck-Hertz</a>
+<a href="08-effetto-fotoelettrico.html"><span class="num">8</span>Effetto Fotoelettrico</a>
+<a href="09-spettri-atomici.html"><span class="num">9</span>Spettri atomici di emissione</a></nav>
+</aside>
+<main class="content">
+  <article class="page">
+    <p class="eyebrow">Capitolo 2</p>
+    <h1 class="title">Esperimenti di Stern-Gerlach in cascata</h1>
+    
+<p><img class="eq-figure" src="img/pandoc_ch2/image1.svg" style="width:2.417in;height:1.760in" />In questa
+scheda descriveremo una serie di esperimenti realizzati disponendo più
+macchine di Stern-Gerlach in cascata. I risultati di questi esperimenti
+ci porteranno ad introdurre le caratteristiche fondamentali della
+Meccanica Quantistica, e, nella parte finale, daremo una prima
+formulazione semplificata di questa teoria.</p>
+<h3 id="esperimento-numero1.">Esperimento numero1.</h3>
+<p>Fig.1</p>
+<p>(Vedi fig.1) Abbiamo due macchine di Stern-Gerlach in fila, una ha
+l’asse magnetico verticale, l’altra è inclinata rispetto alla verticale
+di un angolo ϑ.</p>
+<p><img class="eq-figure" src="img/pandoc_ch2/image2.svg" style="width:2.113in;height:1.823in" />La prima
+macchina divide il fascio atomico in due parti, scriveremo che una parte
+ha momento magnetico <em>m<sub>0</sub>=+k</em> e l’altra
+<em>m<sub>0</sub>=-k.</em> Il pedice zero nel simbolo
+<em>m<sub>0</sub></em> rappresenta l’angolo di inclinazione della
+macchina, ad esempio se l’angolo è di 45° scriveremo
+<em>m<sub>45</sub></em>. Il simbolo <em>k</em> rappresenta il valore
+assoluto del momento magnetico misurato che, come abbiamo visto nella
+scheda precedente è sempre uguale in ogni esperimento.</p>
+<p>La figura 2 mostra uno schema che rappresenta la disposizione delle
+macchine ed il percorso degli atomi. All’uscita della prima macchina
+viene bloccato il fascio con <em>m<sub>0</sub>=-k</em> e viene lasciato
+passare solo il fascio con <em>m<sub>0</sub>=+k</em>, diremo quindi che
+la prima macchina seleziona atomi con <em>m<sub>0</sub>=+k</em>.</p>
+<p>Fig.2</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image3.svg" style="width:2.113in;height:1.823in" /><img class="eq-block" src="img/pandoc_ch2/image4.svg" style="width:1.374in;height:0.486in" /></div>
+<p>Il fascio con <em>m<sub>0</sub>=+k</em>, viene fatto passare nella
+seconda macchina e qui si divide di nuovo in due parti,
+<em>m<sub>ϑ</sub>=+k</em> ed <em>m<sub>ϑ</sub>=-k</em>. Le due frazioni
+in generale non sono uguali e si vede sperimentalmente che sono
+proporzionali ai termini .</p>
+<figure>
+<img src="img/pandoc_ch2/image5.svg" style="width:2.010in;height:1.637in" />
+<figcaption><p>Fig.3</p></figcaption>
+</figure>
+<p>Ad esempio se anche la seconda macchina è disposta verticalmente
+(fig.3 ϑ=0°) allora abbiamo che i fasci <em>m<sub>ϑ</sub>=+k</em> ed
+<em>m<sub>ϑ</sub>=-k</em> hanno intensità proporzionali ai termini 1 e
+0, cioè il fascio <em>m<sub>ϑ</sub>=+k</em> ha tutta l’intensità ed il
+fascio <em>m<sub>ϑ</sub>=-k</em> ha intensità zero. Se invece la seconda
+macchina è disposta a novanta gradi (fig.4 ϑ=90°) allora i fasci
+<em>m<sub>90</sub>=+k</em> e <em>m<sub>90</sub>=-k</em> hanno intensità
+proporzionali ai termini ½ ed ½, cioè sono uguali.</p>
+<p>Fig.4</p>
+<p>E’ interessante osservare che già questi primi risultati non si
+possono spiegare mediante i concetti della meccanica classica.</p>
+<p>Se ruotiamo anche la prima macchina (fig.5) osserviamo che i
+risultati non cambiano sostanzialmente e, come era facile immaginare, i
+due fasci uscenti hanno intensità proporzionali ai termini</p>
+<p><img class="eq-figure" src="img/pandoc_ch2/image6.svg" style="width:1.710in;height:1.637in" /><img class="eq-inline eq-axis" src="img/pandoc_ch2/image7.svg" style="width:2.278in;height:0.500in" />.</p>
+<p>Questo vuol dire che ciò che conta è solo l’inclinazione relativa tra
+le due macchine e non l’inclinazione assoluta rispetto al filo a
+piombo.</p>
+<p>Fig.5</p>
+<h3 id="esperimento-numero-2.">Esperimento numero 2.</h3>
+<figure>
+<img src="img/pandoc_ch2/image8.svg" style="width:6.010in;height:4.113in" />
+<figcaption><p>Fig.6</p></figcaption>
+</figure>
+<figure>
+<img src="img/pandoc_ch2/image9.svg" style="width:2.306in;height:0.500in" />
+<figcaption><p>(Vedi fig.6) Abbiamo tre macchine. Consideriamo il fascio
+uscente dalla macchina due, questo fascio viene diviso dalla macchina
+tre in due parti di intensità proporzionali ai termini . Se si varia
+l’inclinazione della prima macchina osserviamo che varia l’intensità del
+fascio uscente dalla seconda macchina, ma non varia il modo in cui la
+terza macchina divide questo fascio, cioè non variano i rapporti tra le
+intensità dei fasci uscenti e l’intensità del fascio entrante alla terza
+macchina. Questo esperimento ci porta a concludere che gli atomi che
+escono dalla macchina due si trovano in uno stato fisico che è
+indipendente dall’orientamento della macchina uno. Indicheremo questo
+stato fisico dicendo che gli atomi si trovano nello stato
+<em>m<sub>ϑ2</sub>=+k.</em></p></figcaption>
+</figure>
+<h2 id="interpretazione-probabilistica-dei-risultati.">Interpretazione
+probabilistica dei risultati.</h2>
+<p>In questo paragrafo daremo una possibile interpretazione di queste
+prime esperienza che abbiamo descritto.</p>
+<p><img class="eq-figure" src="img/pandoc_ch2/image2.svg" style="width:2.113in;height:1.823in" />Consideriamo il
+primo esperimento, la cui figura è riportata qui per comodità. Possiamo
+pensare che la macchina uno dispone gli atomi in un particolare stato
+fisico, che indicheremo con <em>m<sub>0</sub>=+k</em>. Se si esegue una
+misura di <em>m<sub>0</sub></em> su questi atomi, orientando la macchina
+due verticalmente, si ottiene con certezza il valore
+<em>m<sub>0</sub>=+k</em>. Se invece si esegue una misura di
+<em>m<sub>ϑ</sub></em> (con ϑ≠0) inclinando la macchina, si ottiene che
+ogni singolo atomo ha una probabilità <img class="eq-inline eq-axis" src="img/pandoc_ch2/image10.svg" style="width:0.569in;height:0.486in" /> di dare
+<em>m<sub>ϑ</sub>=+k,</em> ed una probabilità <img class="eq-inline eq-axis" src="img/pandoc_ch2/image11.svg" style="width:0.583in;height:0.486in" /> di dare
+<em>m<sub>ϑ</sub>=-k</em>.</p>
+<p>In altre parole la nostra interpretazione suona così:</p>
+<p>se, su un atomo che si trova nello stato <em>m<sub>0</sub>=+k</em>,
+si misura la grandezza <em>m<sub>ϑ</sub></em> (proiezione del momento
+magnetico nella direzione ϑ) si hanno due possibili risultati:
+<em>m<sub>ϑ</sub>=+k,</em> con probabilità <img class="eq-inline eq-axis" src="img/pandoc_ch2/image12.svg" style="width:0.583in;height:0.486in" /> ed
+<em>m<sub>ϑ</sub>=-k</em> con probabilità <img class="eq-inline eq-axis" src="img/pandoc_ch2/image13.svg" style="width:0.583in;height:0.486in" />.</p>
+<p>Secondo questa interpretazione il fascio uscente dalla prima macchina
+non è composto da una frazione di atomi con <em>m<sub>ϑ</sub>=+k</em> ed
+un’altra con <em>m<sub>ϑ</sub>=-k</em>, ma si tratta di atomi che si
+trovano tutti nello stato <em>m<sub>0</sub>=+k</em> ed ogni uno di loro,
+quando viene misurato <em>m<sub>ϑ</sub></em>, ha una certa probabilità
+di dare <em>m<sub>ϑ</sub>=+k</em> ed un’altra di dare
+<em>m<sub>ϑ</sub>=-k.</em></p>
+<p>Questo modo di vedere le cose, forse non è l’unico possibile, ma è
+sicuramente molto difficile immaginare un’altra visione che sia coerente
+con tutti i fatti che abbiamo descritto e che descriveremo.</p>
+<p>A questo punto siamo arrivati a delineare una prima importante
+caratteristica della Meccanica Quantistica, quella legata alla
+probabilità. Quando si esegue una misura su un sistema fisico sono
+possibili diversi risultati, nel nostro caso due, ma possono essere
+anche di più o anche infiniti. Ogni possibile risultato ha una certa
+probabilità di verificarsi e la Meccanica Quantistica ci permetterà di
+calcolare queste probabilità.</p>
+<h2 id="sovrapposizione-degli-stati.">Sovrapposizione degli stati.</h2>
+<figure>
+<img src="img/pandoc_ch2/image14.svg" style="width:4.010in;height:1.907in" />
+<figcaption><p>Fig.7</p></figcaption>
+</figure>
+<figure>
+<img src="img/pandoc_ch2/image15.svg" style="width:4.490in;height:1.313in" />
+<figcaption><p>La figura 7 mostra che con due macchine di Stern-Gerlach
+è possibile sovrapporre due fasci che sono stati precedentemente
+separati da una prima macchina. Gli esperimenti di questo paragrafo si
+basano sulla sovrapposizione di due fasci.</p></figcaption>
+</figure>
+<h3 id="esperimento-numero-3.">Esperimento numero 3.</h3>
+<p>Fig.8</p>
+<p>(Vedi fig.8) La prima macchina dispone gli atomi nello stato
+<em>m<sub>0</sub>=+k</em>, la seconda divide il fascio in due parti che
+hanno <em>m<sub>90</sub>=+k</em> ed <em>m<sub>90</sub>=-k</em>, le
+ultime due ricongiungono il fascio.</p>
+<p>Si eseguono tre misure di <em>m<sub>0</sub></em> (fig.9).</p>
+<p><img class="eq-figure" src="img/pandoc_ch2/image16.svg" style="width:6.113in;height:3.710in" />Nel caso 1
+misuriamo <em>m<sub>0</sub></em> su atomi nello stato
+<em>m<sub>90</sub>=+k</em>, quindi abbiamo le due possibilità
+<em>m<sub>0</sub>=+k</em> ed <em>m<sub>0</sub>=-k</em> con probabilità
+0,5 e 0,5.</p>
+<p>Nel caso 2 misuriamo <em>m<sub>0</sub></em> su atomi nello stato
+<em>m<sub>90</sub>=-k</em> abbiamo ancora le due possibilità
+<em>m<sub>0</sub>=+k</em> con probabilità 0,5 ed
+<em>m<sub>0</sub>=-k</em> con probabilità 0,5.</p>
+<p>Fig.9</p>
+<p>Nel caso 3 misuriamo <em>m<sub>0</sub></em> su atomi che si trovano
+in uno stato che è sovrapposizione degli stati
+<em>m<sub>90</sub>=+k</em> ed <em>m<sub>90</sub>=-k</em>. Il risultato è
+che si hanno le due possibilità <em>m<sub>0</sub>=+k</em> con
+probabilità 1 ed <em>m<sub>0</sub>=-k</em> con probabilità 0 zero,
+esattamente come se non ci fosse stata la scomposizione e la
+ricombinazione.</p>
+<p>Riassumendo abbiamo:</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image17.svg" style="width:3.167in;height:1.819in" /></div>
+<p>La cosa da osservare è che sovrapponendo due stati che hanno
+probabilità 0,5 di dare <em>m<sub>0</sub>=-k</em> si ottiene uno stato
+che ha probabilità nulla di avere <em>m<sub>0</sub>=-k</em>,</p>
+<p>0,5+0,5=0!</p>
+<p>Quindi sovrapponendo gli stati le probabilità non si sommano. Ci
+chiediamo se c’è qualche altra entità matematica legata agli stati
+fisici che, quando si sovrappongono gli stati, si componga secondo una
+legge semplice, magari una legge di somma.</p>
+<h3 id="esperimento-numero-4."><img src="img/pandoc_ch2/image18.svg" style="width:6.510in;height:3.363in" />Esperimento numero
+4.</h3>
+<p>Fig.10</p>
+<p>(Vedi fig.10) Questo esperimento è quasi identico al precedente, con
+l’unica differenza che il fascio con <em>m<sub>90</sub>=-k</em> percorre
+un cammino più lungo del fascio con <em>m<sub>90</sub>=+k.</em> Questo
+può essere realizzato con il sistema rappresentato schematicamente nella
+figura 11. Il fascio inferiore passa in una zona dove il gradiente di
+campo è più intenso, quindi curva di più e percorre un cammino più
+lungo.</p>
+<p><img class="eq-figure" src="img/pandoc_ch2/image19.svg" style="width:5.917in;height:1.907in" />Vediamo
+quali sono i risultati al variare dello sfasamento ∆ tra i due
+cammini.</p>
+<p>Fig.11</p>
+<p>Se lo sfasamento è nullo in uscita abbiamo lo stato
+<em>m<sub>0</sub>=+k</em> esattamente come nell’esperimento precedente,
+ma se lo sfasamento è diverso da zero abbiamo uno stato diverso. Se ∆
+diviene pari ad una certa lunghezza caratteristica λ, in uscita abbiamo
+di nuovo <em>m<sub>0</sub>=+k</em>, anche se ∆ è multiplo di λ, ∆=2λ,3λ,
+ecc. abbiamo ancora lo stato <em>m<sub>0</sub>=+k.</em> Se ∆ è pari a
+λ/2 in uscita abbiamo lo stato <em>m<sub>0</sub>=-k</em>!</p>
+<p>In generale per le probabilità abbiamo le seguenti formule:</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image20.svg" style="width:1.236in;height:1.014in" /></div>
+<p>dove abbiamo introdotto la variabile ϕ=2π∆/λ.</p>
+<p>Ora facciamo i seguenti calcoli matematici.</p>
+<p><img class="eq-inline eq-axis" src="img/pandoc_ch2/image21.svg" style="width:2.210in;height:0.813in" />Prendiamo
+due numeri nel campo complesso, ad esempio due volte il numero uno, 1 e
+1, rappresentiamoli vettorialmente</p>
+<p><img class="eq-figure" src="img/pandoc_ch2/image22.svg" style="width:1.710in;height:1.127in" />Ora
+sfasiamo il secondo numero moltiplicandolo per il fasore
+<em>e<sup>iϕ</sup></em> , abbiamo la coppia 1 e
+<em>e<sup>iϕ</sup></em></p>
+<p><img class="eq-figure" src="img/pandoc_ch2/image23.svg" style="width:4.113in;height:1.613in" />Sommiamo
+il risultato così ottenuto e prendiamone il modulo quadrato</p>
+<p>Otteniamo il risultato: <img class="eq-inline eq-axis" src="img/pandoc_ch2/image24.svg" style="width:2.472in;height:0.569in" /></p>
+<p><img class="eq-inline eq-axis" src="img/pandoc_ch2/image25.svg" style="width:3.490in;height:0.710in" />Ora
+ripetiamo il tutto partendo dai due numeri 1 e –1</p>
+<p>Sfasiamo il secondo numero di ϕ ottenendo 1 e -
+<em>e<sup>iϕ</sup></em></p>
+<p><img class="eq-inline eq-axis" src="img/pandoc_ch2/image26.svg" style="width:2.187in;height:0.877in" /><img class="eq-figure" src="img/pandoc_ch2/image27.svg" style="width:2.687in;height:1.113in" />Sommiamo e
+prendiamone il modulo quadrato</p>
+<p>Otteniamo il risultato: <img class="eq-inline eq-axis" src="img/pandoc_ch2/image28.svg" style="width:2.472in;height:0.569in" /></p>
+<p>A questo punto sembra abbastanza chiaro che le probabilità ottenute
+sperimentalmente si possono vedere come il quadrato della somma di due
+numeri complessi. Il fattore 4 presente nei risultati non conta perché
+si può eliminare normalizzando la distribuzione di probabilità.</p>
+<p>Ora possiamo organizzare le idee nel seguente modo.</p>
+<p>Allo stato con <em>m<sub>90</sub>=+k</em> associamo due numeri
+complessi, il numero 1 che prendiamo dal primo calcolo ed un altro
+numero 1 che prendiamo dal secondo calcolo. Allo stato
+<em>m<sub>90</sub>=-k</em> associamo il secondo numero 1 del primo
+calcolo ed il numero –1 del secondo calcolo.</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image29.svg" style="width:1.806in;height:1.181in" /></div>
+<p>quando sfasiamo lo stato <em>m<sub>90</sub>=-k</em> moltiplichiamo i
+suoi due numeri per <em>e<sup>iϕ</sup></em></p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image30.svg" style="width:1.430in;height:0.597in" /></div>
+<p>quando sovrapponiamo gli stati, sommiamo le corrispondenti coppie di
+numeri e lo stato risultante è rappresentato dalla somma</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image31.svg" style="width:1.917in;height:0.597in" /></div>
+<p>I moduli quadrati dei numeri trovati danno la distribuzione di
+probabilità di ottenere i valori <em>m<sub>0</sub>=+k</em> ed
+<em>m<sub>0</sub>=-k</em> quando si esegue una misura di
+<em>m<sub>0</sub>..</em></p>
+<p>Questi numeri si riferiscono ad una particolare grandezza fisica del
+sistema, nel nostro caso <em>m<sub>0</sub></em>. Ogni singolo numero
+complesso è associato ad uno dei possibili valori che può assumere la
+grandezza fisica ed il modulo quadrato di questi numeri dà la
+probabilità che, eseguendo la misura, esca il valore associato.</p>
+<p>Osserviamo che le coppie di numeri complessi che rappresentano lo
+stato del nostro sistema costituiscono uno spazio vettoriale, perché
+possono essere sommate e possono essere moltiplicate per un numero.</p>
+<p>Gli esperimenti che abbiamo descritto ci hanno portato a pensare che
+per rappresentare gli stati fisici sia conveniente usare dei vettori
+complessi, perché queste entità si sommano semplicemente quando
+sovrapponiamo gli stati.</p>
+<p>L’idea di usare dei vettori complessi per rappresentare gli stati si
+rivelerà molto fertile, infatti tutte le leggi della Meccanica
+Quantistica si scrivono come semplici equazioni lineari in termini di
+questi vettori. Prima di andare avanti con la teoria conviene dedicare
+un paragrafo all’algebra degli spazi vettoriali complessi.</p>
+<h2 id="richiami-di-algebra-degli-spazi-vettoriali-complessi.">Richiami
+di algebra degli spazi vettoriali complessi.</h2>
+<p>Preso un numero complesso <em>c=a+ib</em> indicheremo il suo
+complesso coniugato con il simbolo <em>c<sup>*</sup>=a-ib</em>
+(<em>c<sup>*</sup></em> si legge “ci star”). Il prodotto
+<em>cc<sup>*</sup>=a<sup>2</sup>+b<sup>2</sup></em> è un numero reale
+positivo e viene chiamato modulo quadro di <em>c</em>.</p>
+<p>Consideriamo ora un vettore colonna <img class="eq-inline eq-axis" src="img/pandoc_ch2/image32.svg" style="width:0.430in;height:0.597in" />, possiamo
+definire il suo duale con il vettore riga <img class="eq-inline" src="img/pandoc_ch2/image33.svg" style="width:0.611in;height:0.278in" />. In questo modo
+il prodotto tra il vettore ed il suo duale</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image34.svg" style="width:3.125in;height:0.597in" /></div>
+<p>da un numero reale positivo che viene chiamato modulo quadro del
+vettore.</p>
+<p>Se abbiamo uno stato fisico <em>α</em>, indicheremo il vettore ad
+esso associato con il simbolo <img class="eq-inline" src="img/pandoc_ch2/image35.svg" style="width:0.278in;height:0.291in" /></p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image36.svg" style="width:0.847in;height:0.597in" /></div>
+<p>ed indicheremo il suo duale con il simbolo <img class="eq-inline" src="img/pandoc_ch2/image37.svg" style="width:0.278in;height:0.291in" /></p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image38.svg" style="width:1.041in;height:0.292in" /></div>
+<p>I simboli <img class="eq-inline" src="img/pandoc_ch2/image39.svg" style="width:0.236in;height:0.291in" />
+e <img class="eq-inline" src="img/pandoc_ch2/image40.svg" style="width:0.236in;height:0.291in" /> vengono
+chiamati rispettivamente bra e ket perché unendo questi nomi si ottiene
+la parola “braket” che in inglese vuol dire parentesi. Li abbiamo
+introdotti perché ci permettono di distinguere tra righe e colonne, e ci
+rendono molto chiara la lettura di espressioni in cui compaiono prodotti
+matriciali.</p>
+<p>Ad esempio possiamo avere</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image41.svg" style="width:2.778in;height:0.597in" /></div>
+<p>oppure possiamo avere</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image42.svg" style="width:3.042in;height:0.597in" /></div>
+<p>Questi due prodotti sono completamente differenti, in un caso abbiamo
+un vettore riga per uno colonna ed otteniamo un numero, nell’altro caso
+abbiamo un vettore colonna per uno riga ed otteniamo una matrice.</p>
+<h3 id="prodotto-scalare.">Prodotto scalare.</h3>
+<p>Dati due vettori <img class="eq-inline" src="img/pandoc_ch2/image35.svg" style="width:0.278in;height:0.291in" /> e <img class="eq-inline" src="img/pandoc_ch2/image43.svg" style="width:0.291in;height:0.291in" /> il prodotto</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image41.svg" style="width:2.778in;height:0.597in" /></div>
+<p>viene chiamato prodotto scalare tra <img class="eq-inline" src="img/pandoc_ch2/image35.svg" style="width:0.278in;height:0.291in" /> e <img class="eq-inline" src="img/pandoc_ch2/image43.svg" style="width:0.291in;height:0.291in" />.</p>
+<p>Ricordiamo che nel campo reale il prodotto scalare tra due vettori
+reali <img class="eq-inline" src="img/pandoc_ch2/image44.svg" style="width:0.264in;height:0.291in" /> e <img class="eq-inline" src="img/pandoc_ch2/image45.svg" style="width:0.250in;height:0.292in" /> viene definito
+senza il complesso coniugato:</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image46.svg" style="width:2.458in;height:0.597in" /></div>
+<p>Osserviamo, prima di tutto, che le due definizioni sono compatibili,
+perché il complesso coniugato di un numero reale è il numero stesso
+<em>a<sup>*</sup>=a.</em> Quindi la definizione data nel campo complesso
+si riduce a quella data nel campo reale se i vettori a cui si applica
+sono reali.</p>
+<p>Tuttavia può rimanere un dubbio, perché nel campo complesso non
+definiamo il prodotto scalare semplicemente senza il complesso
+coniugato</p>
+<p><img class="eq-inline eq-axis" src="img/pandoc_ch2/image47.svg" style="width:2.736in;height:0.597in" /> ?</p>
+<p>La risposta è molto semplice, questa definizione non gode di alcune
+proprietà molto importanti. Ad esempio, con questa definizione il
+prodotto di un vettore per se stesso <img class="eq-inline" src="img/pandoc_ch2/image48.svg" style="width:0.486in;height:0.291in" /> non è detto che
+sia un numero reale quindi si perde il concetto di modulo. Inoltre in
+alcuni casi il prodotto <img class="eq-inline" src="img/pandoc_ch2/image48.svg" style="width:0.486in;height:0.291in" /> potrebbe essere
+nullo senza che il vettore <img class="eq-inline" src="img/pandoc_ch2/image35.svg" style="width:0.278in;height:0.291in" />sia nullo, ad
+esempio se</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image49.svg" style="width:0.708in;height:0.569in" /></div>
+<p>abbiamo</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image50.svg" style="width:2.583in;height:0.569in" /></div>
+<p>invece con la definizione corretta</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image51.svg" style="width:2.681in;height:0.569in" /></div>
+<p>Per concludere questa digressione vediamo quali sono le proprietà
+fondamentali del prodotto scalare in uno spazio complesso:</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image52.svg" style="width:3.222in;height:1.292in" /></div>
+<h3 id="decomposizione-di-vettori.">Decomposizione di vettori.</h3>
+<p>per definizione diremo che due vettori <img class="eq-inline" src="img/pandoc_ch2/image35.svg" style="width:0.278in;height:0.291in" /> e <img class="eq-inline" src="img/pandoc_ch2/image43.svg" style="width:0.291in;height:0.291in" /> sono ortogonali
+se è nullo il loro prodotto scalare</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image53.svg" style="width:2.458in;height:0.292in" /></div>
+<p>Teorema: se <em>n</em> vettori non nulli <img class="eq-inline" src="img/pandoc_ch2/image54.svg" style="width:0.833in;height:0.292in" /> sono a due a due
+ortogonali</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image55.svg" style="width:1.527in;height:0.347in" /></div>
+<p>allora questi <em>n</em> vettori sono linearmente indipendenti, cioè
+nessuno di loro può essere ottenuto come combinazione lineare degli
+altri.</p>
+<p>Dimostrazione: per assurdo supponiamo che un vettore, ad esempio il
+primo, è combinazione degli altri</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image56.svg" style="width:2.014in;height:0.292in" /></div>
+<p>moltiplichiamo scalarmente a destra per <img class="eq-inline" src="img/pandoc_ch2/image57.svg" style="width:0.333in;height:0.291in" /></p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image58.svg" style="width:2.792in;height:0.292in" /></div>
+<p>essendo i vettori per ipotesi ortogonali, abbiamo che tutti i termini
+al secondo membro sono nulli, quindi</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image59.svg" style="width:2.167in;height:0.292in" /></div>
+<p>ma questo è assurdo perché i vettori sono tutti non nulli.</p>
+<p>Ora supponiamo di avere uno spazio vettoriale <em>n</em>
+dimensionale, e di dover scegliere una base per questo spazio. Come è
+noto, si può scegliere una qualsiasi <em>n</em>-upla di vettori
+linearmente indipendenti, ma è molto comodo scegliere questi vettori in
+modo che siano ortogonali tra di loro ed in modo che abbiano modulo
+unitario <img class="eq-inline" src="img/pandoc_ch2/image60.svg" style="width:0.889in;height:0.292in" />.
+Infatti così facendo diventa molto semplice calcolare le componenti di
+un generico vettore <img class="eq-inline" src="img/pandoc_ch2/image61.svg" style="width:0.250in;height:0.292in" />. Vediamo
+come:</p>
+<p>Prendiamo un vettore <img class="eq-inline" src="img/pandoc_ch2/image61.svg" style="width:0.250in;height:0.292in" /> ed una base di
+vettori ortogonali di modulo unitario</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image62.svg" style="width:0.833in;height:0.292in" /></div>
+<p><img class="eq-inline" src="img/pandoc_ch2/image61.svg" style="width:0.250in;height:0.292in" /> può
+essere scritto come combinazione lineare dei vettori <img class="eq-inline" src="img/pandoc_ch2/image62.svg" style="width:0.833in;height:0.292in" /></p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image63.svg" style="width:1.846in;height:0.292in" /></div>
+<p>per calcolare il coefficiente <em>c<sub>k</sub></em> moltiplichiamo
+questa espressione a sinistra per <img class="eq-inline" src="img/pandoc_ch2/image64.svg" style="width:0.361in;height:0.292in" /></p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image65.svg" style="width:3.944in;height:0.292in" /></div>
+<p>essendo i vettori di base a due a due ortogonali si ha</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image66.svg" style="width:1.472in;height:0.292in" /></div>
+<p>essendo <img class="eq-inline" src="img/pandoc_ch2/image67.svg" style="width:0.361in;height:0.292in" />
+di modulo unitario abbiamo</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image68.svg" style="width:0.861in;height:0.292in" /></div>
+<p>Quindi ci rimane la formula per calcolare <em>c<sub>k</sub></em></p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image69.svg" style="width:0.875in;height:0.292in" /></div>
+<p>la componente di <img class="eq-inline" src="img/pandoc_ch2/image70.svg" style="width:0.250in;height:0.292in" /> lungo il vettore
+di base <img class="eq-inline" src="img/pandoc_ch2/image71.svg" style="width:0.361in;height:0.292in" /> è
+data dal prodotto scalare tra questi due vettori.</p>
+<p>L’algebra degli spazi vettoriali complessi ha molti altri sviluppi di
+cui ci occuperemo più avanti. Per ora abbiamo voluto introdurre il
+prodotto scalare perché ci è indispensabile per formulare una prima
+versione semplificata della Meccanica Quantistica.</p>
+<p>Ritorniamo al nostro semplice sistema.</p>
+<p>Lo stato <em>m<sub>0</sub>=+k</em> è caratterizzato dal fatto che se
+si esegue una misura di <em>m<sub>0</sub></em> si ottiene con certezza
+il valore <em>m<sub>0</sub>=+k</em>, cioè la probabilità di ottenere
+<em>m<sub>0</sub>=+k</em> è uno e la probabilità di ottenere
+<em>m<sub>0</sub>=-k</em> è zero.</p>
+<p>Quindi questo stato può essere rappresentato dal vettore ket</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image72.svg" style="width:1.250in;height:0.569in" /></div>
+<p>In questa scelta abbiamo un certo grado di libertà, infatti le
+probabilità sono il modulo quadrato delle componenti. Quindi anche i
+vettori <img class="eq-inline eq-axis" src="img/pandoc_ch2/image73.svg" style="width:0.333in;height:0.569in" />
+oppure <img class="eq-inline eq-axis" src="img/pandoc_ch2/image74.svg" style="width:0.444in;height:0.597in" /> vanno
+bene, perché <img class="eq-inline" src="img/pandoc_ch2/image75.svg" style="width:1.416in;height:0.347in" />. Questo grado di
+libertà deve essere visto come in meccanica classica si vede la scelta
+del sistema di riferimento, è del tutto indifferente quale scelta
+facciamo, quindi conviene fare quella più comoda.</p>
+<p>Per lo stato <em>m<sub>0</sub>=-k</em> vale un discorso analogo</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image76.svg" style="width:1.236in;height:0.569in" /></div>
+<p>Osserviamo che i vettori che abbiamo scelto sono ortogonali ed hanno
+modulo unitario</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image77.svg" style="width:3.347in;height:0.625in" /></div>
+<p>Consideriamo ora uno stato <em>α</em> ottenuto da una combinazione
+degli stati <em>m<sub>0</sub>=+k</em> ed <em>m<sub>0</sub>=-k</em></p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image78.svg" style="width:3.097in;height:0.597in" /></div>
+<p>Possiamo dire che questo stato ha proprietà intermedie a quelle degli
+stati componenti, nel senso che, se si misura <em>m<sub>0</sub></em> si
+hanno i due valori possibili <em>m<sub>0</sub>=+k</em> ed
+<em>m<sub>0</sub>=-k</em> con probabilità proporzionali ai termini <img class="eq-inline" src="img/pandoc_ch2/image79.svg" style="width:0.361in;height:0.319in" /> e <img class="eq-inline" src="img/pandoc_ch2/image80.svg" style="width:0.361in;height:0.319in" /></p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image81.svg" style="width:1.000in;height:0.708in" /></div>
+<p>Per ottenere le probabilità effettive dobbiamo normalizzare la
+distribuzione</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image82.svg" style="width:1.556in;height:1.319in" /></div>
+<p>Se moltiplichiamo i due numeri <em>α<sub>+</sub></em> ed
+<em>α<sub>-</sub></em> per uno stesso numero complesso <em>c</em></p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image83.svg" style="width:1.208in;height:0.597in" /></div>
+<p>abbiamo la distribuzione</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image84.svg" style="width:1.097in;height:0.708in" /></div>
+<p>normalizzando otteniamo esattamente le stesse probabilità di
+prima</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image85.svg" style="width:4.375in;height:1.319in" /></div>
+<p>Questo è coerente con il fatto che in Meccanica Quantistica i
+vettori</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image86.svg" style="width:1.180in;height:0.597in" /></div>
+<p>rappresentano la stessa combinazione degli stati base e, quindi, lo
+stesso stato fisico. Scegliere l’uno o l’altro vettore è del tutto
+indifferente.</p>
+<p>La scelta più comoda è quella di prendere vettori normalizzati, cioè
+vettori tali che <img class="eq-inline" src="img/pandoc_ch2/image87.svg" style="width:1.791in;height:0.319in" /> . In questo modo
+le probabilità si ottengono direttamente dai moduli quadri, senza dover
+normalizzare</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image88.svg" style="width:0.972in;height:0.708in" /></div>
+<p>Quindi d’ora in poi, rappresentiamo gli stati con vettori di modulo
+unitario. Ai coefficienti di un vettore di stato con modulo unitario
+viene dato un nome particolare, vengono chiamati “ampiezze di
+probabilità”, <em>α<sub>+</sub></em> è l’ampiezza di probabilità di
+ottenere <em>m<sub>0</sub>=+k</em> e <img class="eq-inline" src="img/pandoc_ch2/image79.svg" style="width:0.361in;height:0.319in" /> è la probabilità
+di ottenere <em>m<sub>0</sub>=+k</em>, analogamente per
+<em>α<sub>-</sub></em> e per <img class="eq-inline" src="img/pandoc_ch2/image89.svg" style="width:0.361in;height:0.319in" />.</p>
+<p>Consideriamo ora due stati <em>m<sub>ϑ</sub>=+k</em> e
+<em>m<sub>ϕ</sub>=+k</em>, e consideriamo i vettori che li
+rappresentano</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image90.svg" style="width:3.319in;height:0.625in" /></div>
+<p>le grandezze α<sub>ϑ+</sub>, α<sub>ϑ-</sub> e α<sub>ϕ+</sub>,
+α<sub>ϕ-</sub> sono, rispettivamente, le ampiezze di probabilità di
+trovare <em>m<sub>0</sub>=+k</em> ed <em>m<sub>0</sub>=-k</em> quando il
+sistema si trova negli stati <em>m<sub>ϑ</sub>=+k</em> e
+<em>m<sub>ϕ</sub>=-k.</em></p>
+<p>Ma quanto vale l’ampiezza di probabilità di trovare
+<em>m<sub>ϑ</sub>=+k</em> misurando <em>m<sub>ϑ</sub></em> su atomi che
+si trovano nello stato <em>m<sub>ϕ</sub>=+k</em>?</p>
+<p>L’ampiezza di probabilità cercata è pari al prodotto</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image91.svg" style="width:1.513in;height:0.347in" /></div>
+<p>cioè è pari alla componente del vettore <img class="eq-inline" src="img/pandoc_ch2/image92.svg" style="width:0.791in;height:0.347in" /> lungo il vettore
+<img class="eq-inline" src="img/pandoc_ch2/image93.svg" style="width:0.791in;height:0.292in" />.</p>
+<p>La probabilità, come al solito, è data dal modulo quadro</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image94.svg" style="width:1.625in;height:0.403in" /></div>
+<p>Questa regola era facile da intuire, ma non si può dimostrare in base
+alle cose che avevamo già detto. Si tratta di un principio fondamentale
+della Meccanica Quantistica, ed ha una validità generale:</p>
+<p>supponiamo di avere un sistema in uno stato <em>α</em> e di voler
+sapere la probabilità che, misurando una grandezza <em>g</em>, esca un
+particolare valore <img class="eq-inline" src="img/pandoc_ch2/image95.svg" style="width:0.486in;height:0.236in" />.</p>
+<p>Prima dobbiamo prendere il ket normalizzato <img class="eq-inline" src="img/pandoc_ch2/image35.svg" style="width:0.278in;height:0.291in" /> associato allo
+stato <em>α.</em></p>
+<p>Poi dobbiamo prendere il ket normalizzato <img class="eq-inline" src="img/pandoc_ch2/image96.svg" style="width:0.597in;height:0.291in" /> associato allo
+stato nel quale, se si misura <em>g</em>, si ottiene con certezza il
+valore <img class="eq-inline" src="img/pandoc_ch2/image95.svg" style="width:0.486in;height:0.236in" />.</p>
+<p>Infine dobbiamo calcolare la componente del ket <img class="eq-inline" src="img/pandoc_ch2/image35.svg" style="width:0.278in;height:0.291in" /> lungo il ket <img class="eq-inline" src="img/pandoc_ch2/image96.svg" style="width:0.597in;height:0.291in" /></p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image97.svg" style="width:0.805in;height:0.292in" /></div>
+<p>ottenendo così l’ampiezza di probabilità.</p>
+<p>La probabilità è data dal modulo quadrato</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image98.svg" style="width:0.916in;height:0.347in" /></div>
+<p>Ora siamo in grado di scegliere le giuste componenti dei vettori <img class="eq-inline" src="img/pandoc_ch2/image99.svg" style="width:0.791in;height:0.292in" /> e <img class="eq-inline" src="img/pandoc_ch2/image100.svg" style="width:0.791in;height:0.292in" /> per ogni angolo
+<em>ϑ</em>.</p>
+<p>Per le probabilità relative a <img class="eq-inline" src="img/pandoc_ch2/image99.svg" style="width:0.791in;height:0.292in" /> abbiamo i
+seguenti risultati sperimentali</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image101.svg" style="width:1.167in;height:1.014in" /></div>
+<p>che, ad esempio possono derivare dai vettori</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image102.svg" style="width:3.903in;height:1.042in" /></div>
+<p>Anche in questo caso abbiamo un certo grado di libertà, questo perché
+non possiamo misurare direttamente le ampiezze di probabilità, ma solo
+le probabilità. La scelta più semplice è la seguente</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image103.svg" style="width:1.638in;height:1.041in" /></div>
+<p>Per lo stato <img class="eq-inline" src="img/pandoc_ch2/image104.svg" style="width:0.791in;height:0.292in" /> possiamo
+scegliere</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image105.svg" style="width:1.735in;height:1.041in" /></div>
+<p>Il segno meno davanti al <img class="eq-inline eq-axis" src="img/pandoc_ch2/image106.svg" style="width:0.472in;height:0.486in" /> è necessario
+perché i due vettori devono essere ortogonali <img class="eq-inline" src="img/pandoc_ch2/image107.svg" style="width:1.791in;height:0.292in" />. Infatti
+sappiamo che la probabilità di ottenere <em>m<sub>ϑ</sub>=+k</em> nello
+stato <em>m<sub>ϑ</sub>=-k</em> è zero.</p>
+<p>A questo punto, per verificare la coerenza delle cose che abbiamo
+detto, proviamo a calcolare la probabilità di trovare
+<em>m<sub>ϑ</sub>=+k</em> in uno stato <em>m<sub>ϕ</sub>=+k.</em></p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image108.svg" style="width:4.917in;height:3.681in" /></div>
+<p>Analogamente si può calcolare</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image109.svg" style="width:2.667in;height:0.486in" /></div>
+<p>Esattamente in accordo con i risultati sperimentali.</p>
+<p>Come ultimo passo ci resta da studiare l’evoluzione temporale dei
+vettori di stato.</p>
+<h2 id="evoluzione-temporale.">Evoluzione temporale.</h2>
+<p>Dato un sistema, supponiamo di conoscere il ket di stato iniziale
+<img class="eq-inline" src="img/pandoc_ch2/image110.svg" style="width:0.389in;height:0.291in" /> e le
+“condizioni ambientali”. Ci chiediamo quale sarà il ket di stato <img class="eq-inline" src="img/pandoc_ch2/image111.svg" style="width:0.319in;height:0.291in" /> in un generico
+istante <em>t</em>.</p>
+<p>Possiamo organizzare un esperimento nel seguente modo:</p>
+<p>prendiamo un fascio di atomi di cui conosciamo lo stato, lo facciamo
+passare attraverso unna scatola contenente varie macchine di
+Stern-Gerlach e, all’uscita dopo il tempo <img class="eq-inline" src="img/pandoc_ch2/image112.svg" style="width:0.777in;height:0.264in" /> necessario
+all’attraversamento della scatola, osserviamo lo stato degli atomi (vedi
+fig.12).</p>
+<p>Fig.12</p>
+<figure>
+<img src="img/pandoc_ch2/image113.svg" style="width:2.333in;height:1.113in" />
+<figcaption><p>Scatola</p></figcaption>
+</figure>
+<p>Nel predisporre la scatola dobbiamo stare attenti, infatti noi stiamo
+studiando un sistema semplificato, abbiamo degli atomi dei quali
+osserviamo solo il momento magnetico, e nessun’altra grandezza come ad
+esempio la posizione. Quindi non si possono inserire setti che bloccano
+alcuni fasci, perché lo stato degli atomi che urtano questi setti si
+dovrebbe descrivere anche in termini di posizione oltre che di momento
+magnetico, e questo ci porterebbe fuori dallo schema semplice che stiamo
+studiando.</p>
+<p><img class="eq-figure" src="img/pandoc_ch2/image114.svg" style="width:6.760in;height:3.363in" />Possiamo
+considerare un esperimento che abbiamo già eseguito (Esperimento numero
+4) di cui riportiamo la figura.</p>
+<figure>
+<img src="img/pandoc_ch2/image115.svg" style="width:1.319in;height:0.292in" />
+<figcaption><p>Esperimento n.4</p></figcaption>
+</figure>
+<p>Supponiamo di poter ruotare la prima macchina di un angolo
+<em>ϑ</em>, così in ingresso abbiamo atomi nello stato . Quando questi
+atomi entrano nella scatola lo stato viene diviso in due componenti</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image116.svg" style="width:3.597in;height:0.292in" /></div>
+<p>dove i termini <em>c<sub>+</sub></em> e <em>c<sub>-</sub></em> sono
+dati dai prodotti scalari</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image117.svg" style="width:1.903in;height:0.625in" /></div>
+<p>Il fascio <img class="eq-inline" src="img/pandoc_ch2/image118.svg" style="width:0.819in;height:0.292in" /> viene sfasato di
+un fattore <em>e<sup>iϕ</sup></em> ed in uscita abbiamo lo stato
+composto</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image119.svg" style="width:4.500in;height:1.264in" /></div>
+<p>dove <em>U</em> è la matrice</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image120.svg" style="width:4.486in;height:2.458in" /></div>
+<p>Questa matrice viene detta matrice di evoluzione temporale tra gli
+istanti <em>t<sub>0</sub></em> e <em>t</em>, e si riferisce al
+particolare ambiente, cioè all’apparato che costituisce
+l’esperimento.</p>
+<p>In generale per qualsiasi fenomeno esiste una matrice <img class="eq-inline" src="img/pandoc_ch2/image121.svg" style="width:0.777in;height:0.264in" /> tale che dato
+<img class="eq-inline" src="img/pandoc_ch2/image110.svg" style="width:0.389in;height:0.291in" /> si calcola
+<img class="eq-inline" src="img/pandoc_ch2/image122.svg" style="width:0.319in;height:0.291in" /> con il
+prodotto <img class="eq-inline" src="img/pandoc_ch2/image123.svg" style="width:1.583in;height:0.292in" />.</p>
+<p>Un’importante proprietà della matrice di evoluzione temporale è che
+conserva i prodotti scalari. Cioè se prendiamo due vettori di stato <img class="eq-inline" src="img/pandoc_ch2/image110.svg" style="width:0.389in;height:0.291in" /> e <img class="eq-inline" src="img/pandoc_ch2/image124.svg" style="width:0.403in;height:0.292in" />, e prendiamo i
+vettori ottenuti dall’evoluzione di questi</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image125.svg" style="width:1.611in;height:0.625in" /></div>
+<p>i prodotti scalari tra i primi e tra i secondi sono uguali</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image126.svg" style="width:1.458in;height:0.292in" /></div>
+<p>Possiamo verificare questa proprietà per il caso particolare
+dell’esperimento 4, prima però vediamo un dettaglio di algebra:</p>
+<p>Se prendiamo un vettore <img class="eq-inline eq-axis" src="img/pandoc_ch2/image127.svg" style="width:0.847in;height:0.597in" /> il suo duale è
+<img class="eq-inline" src="img/pandoc_ch2/image128.svg" style="width:1.041in;height:0.292in" />. Se
+moltiplichiamo <img class="eq-inline" src="img/pandoc_ch2/image35.svg" style="width:0.278in;height:0.291in" /> per un numero
+<em>c</em> abbiamo <img class="eq-inline eq-axis" src="img/pandoc_ch2/image129.svg" style="width:1.694in;height:0.597in" />, ed il duale
+sarà <img class="eq-inline" src="img/pandoc_ch2/image130.svg" style="width:2.431in;height:0.292in" />.
+Dunque il duale di <img class="eq-inline" src="img/pandoc_ch2/image131.svg" style="width:0.375in;height:0.291in" /> è <img class="eq-inline" src="img/pandoc_ch2/image132.svg" style="width:0.444in;height:0.291in" />.</p>
+<p>Ora calcoliamo <img class="eq-inline" src="img/pandoc_ch2/image133.svg" style="width:0.583in;height:0.291in" /> e mostriamo che
+il risultato è uguale a <img class="eq-inline" src="img/pandoc_ch2/image134.svg" style="width:0.722in;height:0.292in" />.</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image135.svg" style="width:4.889in;height:0.653in" /></div>
+<p>eseguendo il prodotto scalare ed eliminando i termini nulli</p>
+<div class="equation"><img class="eq-block" src="img/pandoc_ch2/image136.svg" style="width:5.694in;height:1.292in" /></div>
+<p>Per concludere rivediamo i principi fondamentali che abbiamo
+individuato.</p>
+<h2
+id="principi-della-meccanica-quantistica-versione-semplificata.">Principi
+della Meccanica Quantistica (versione semplificata).</h2>
+<ul>
+<li><p>Un sistema fisico è caratterizzato dalle sue grandezze fisiche
+che possono essere misurate.</p></li>
+<li><p>Quando si misura una grandezza <em>g</em> sono possibili diversi
+risultati, ed ogni risultato ha una certa probabilità di uscire. Se
+dalla misura si ottiene un particolare risultato <img class="eq-inline" src="img/pandoc_ch2/image137.svg" style="width:0.486in;height:0.236in" />, il sistema si
+porta in uno stato tale che, se si ripete la misura di <em>g</em> si
+ottiene con certezza il valore <img class="eq-inline" src="img/pandoc_ch2/image137.svg" style="width:0.486in;height:0.236in" />. Un tale stato
+viene detto autostato di <em>g</em> con autovalore <img class="eq-inline" src="img/pandoc_ch2/image138.svg" style="width:0.180in;height:0.236in" />.</p></li>
+<li><p>Un qualsiasi altro stato <em>α</em> può essere considerato come
+una sovrapposizione degli autostati di una grandezza <em>g</em> e può
+essere rappresentato da un vettore di numeri complessi <img class="eq-inline eq-axis" src="img/pandoc_ch2/image139.svg" style="width:0.847in;height:0.875in" />. Ogni numero
+complesso è associato ad uno dei possibili valori che può assumere la
+grandezza <em>g</em>, <img class="eq-inline" src="img/pandoc_ch2/image140.svg" style="width:1.000in;height:0.264in" />Il modulo
+quadrato di ognuno di questi numeri complessi, ad esempio
+<em>α<sub>k</sub></em>, da la probabilità che misurando la grandezza
+<em>g</em> esca il particolare valore <img class="eq-inline" src="img/pandoc_ch2/image141.svg" style="width:0.222in;height:0.264in" /> associato al
+numero considerato.</p></li>
+<li><p>In generale se il sistema si trova in uno stato <em>α</em> e si
+misura una grandezza <img class="eq-inline" src="img/pandoc_ch2/image142.svg" style="width:0.222in;height:0.264in" />, la probabilità
+che esca <img class="eq-inline" src="img/pandoc_ch2/image143.svg" style="width:0.583in;height:0.264in" /> è
+data dal modulo quadro del prodotto scalare tra il vettore <img class="eq-inline" src="img/pandoc_ch2/image35.svg" style="width:0.278in;height:0.291in" /> ed il vettore
+<img class="eq-inline" src="img/pandoc_ch2/image144.svg" style="width:0.680in;height:0.292in" /> associato
+all’autostato <img class="eq-inline" src="img/pandoc_ch2/image143.svg" style="width:0.583in;height:0.264in" /> di <img class="eq-inline" src="img/pandoc_ch2/image142.svg" style="width:0.222in;height:0.264in" />. <img class="eq-inline" src="img/pandoc_ch2/image145.svg" style="width:1.555in;height:0.347in" /></p></li>
+<li><p>L’evoluzione nel tempo di uno stato <em>αt</em> segue una legge
+lineare <img class="eq-inline" src="img/pandoc_ch2/image146.svg" style="width:1.583in;height:0.292in" /></p></li>
+</ul>
+<blockquote>
+<p>dove <img class="eq-inline" src="img/pandoc_ch2/image121.svg" style="width:0.777in;height:0.264in" /> è
+una matrice che dipende dal sistema e dalle “condizioni ambientali”. La
+matrice <img class="eq-inline" src="img/pandoc_ch2/image121.svg" style="width:0.777in;height:0.264in" /> è
+detta matrice di evoluzione temporale e gode della proprietà di lasciare
+invariati i prodotti scalari <img class="eq-inline" src="img/pandoc_ch2/image147.svg" style="width:1.458in;height:0.292in" /></p>
+</blockquote>
+<p>Questi che abbiamo sintetizzato sono una versione semplificata dei
+principi fondamentali. In generale per descrivere lo stato di un sistema
+non è sufficiente usare una sola grandezza osservabile, ma bisognerà
+usarne più di una. Nel seguito mostreremo come si generalizza la teoria
+ai casi più complessi, ed affronteremo l’importante problema di
+determinare la matrice di evoluzione temporale per i vari sistemi che
+studieremo.</p>
+
+    <nav class="chapter-nav"><a class="prev" href="01-stern-gerlach.html"><span>Precedente</span>Esperimento di Stern-Gerlach</a><a class="next" href="03-elettroni.html"><span>Successivo</span>Esperimenti con gli Elettroni</a></nav>
+  </article>
+</main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

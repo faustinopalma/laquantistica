@@ -6,15 +6,27 @@ Pipelines:
                 figure gallery from original images.
   - 'authored': ch3 -> hand-reconstructed content (from the PDF scan) in ch3_content.
 """
-import re, html
+import re, html, json, shutil
 from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from build_content import doc_tokens
 
 ROOT = Path(__file__).resolve().parent.parent
-SITE = ROOT
+SITE = ROOT           # output dir (set per build)
+MODE = 'svg'          # 'svg' or 'mathml'
+MML = {}              # key -> list of <math> strings (mathml mode)
 EQ = ROOT / 'build' / 'eq'
+EQSVG = ROOT / 'build' / 'eqsvg'
+PANSVG = ROOT / 'build' / 'pandoc_svg'
+MMLDIR = ROOT / 'build' / 'mml'
+
+
+def load_mml():
+    MML.clear()
+    if MMLDIR.exists():
+        for f in MMLDIR.glob('*.json'):
+            MML[f.stem] = json.loads(f.read_text(encoding='utf-8'))
 
 # The introduction is shown on the home page (index). Chapters = 9 single pages.
 INTRO = dict(key='00_introduzione', title='Introduzione', src='Introduzione.docx')
@@ -74,20 +86,24 @@ SENT = re.compile('\u0001IMG\u0001(\\d+)\u0001/IMG\u0001')
 def build_ole_body(src_rel, key, ch=None):
     src = ROOT / src_rel
     tokens = doc_tokens(src)
-    imgdir = SITE / 'img' / f'eq_{key}'
     sizes = _load_manifest(f'eq_{key}')
+    maths = MML.get(key, [])
 
     def img_tag(idx, display):
         fn = f'obj{idx:03d}.png'
         w, h = sizes.get(fn, (0.3, 0.2))
         w *= EQ_SCALE
         h *= EQ_SCALE
-        src_attr = f'img/eq_{key}/{fn}'
+        # MathML mode: emit inline <math> when available for this formula index.
+        if MODE == 'mathml' and idx < len(maths) and maths[idx]:
+            m = maths[idx]
+            disp = 'block' if display else 'inline'
+            m = re.sub(r'<math\b', f'<math display="{disp}"', m, count=1)
+            return m
+        src_attr = f'img/eq_{key}/obj{idx:03d}.svg'
         if display:
             return (f'<img class="eq-block" src="{src_attr}" '
                     f'style="width:{w:.3f}in;height:{h:.3f}in" alt="formula">')
-        # tall inline math (fractions/roots) aligns to the math axis; short symbols
-        # sit on the text baseline.
         cls = 'eq-inline eq-axis' if h > 0.40 else 'eq-inline'
         return (f'<img class="{cls}" src="{src_attr}" '
                 f'style="height:{h:.3f}in" alt="formula">')
@@ -98,8 +114,8 @@ def build_ole_body(src_rel, key, ch=None):
     for typ, val in tokens:
         if typ == 'text':
             parts.append(esc(val))
-        else:  # inline object -> its original equation image (if extracted)
-            if (imgdir / f'obj{oi:03d}.png').exists():
+        else:  # inline object -> its formula (svg image or inline MathML)
+            if (EQSVG / key / f'obj{oi:03d}.svg').exists():
                 parts.append(f'\u0001IMG\u0001{oi}\u0001/IMG\u0001')
             oi += 1
     full = ''.join(parts)
@@ -189,7 +205,9 @@ def build_pandoc_body(ch):
         if wh:
             style = f' style="width:{wh[0]:.3f}in;height:{wh[1]:.3f}in"'
             h = wh[1]
-        return f'<img data-h="{h:.3f}" src="img/{ch["media"]}/{png}"{style} />'
+        # prefer the vector SVG when we produced one for this media file
+        fname = f'{base}.svg' if (PANSVG / ch['media'] / f'{base}.svg').exists() else png
+        return f'<img data-h="{h:.3f}" src="img/{ch["media"]}/{fname}"{style} />'
     txt = re.sub(r'<img[^>]*src="([^"]+)"[^>]*/?>', repl, txt)
     # give inline equation images a baseline, and centre block equations/figures,
     # so the pandoc chapters match the look of the rest of the site.
@@ -332,24 +350,118 @@ window.MathJax = {{
 </html>'''
 
 
-def main():
-    SITE.mkdir(parents=True, exist_ok=True)
+def _conv_latex(tex, disp):
+    import latex2mathml.converter as L
+    try:
+        mm = L.convert(tex.strip())
+    except Exception:
+        return None
+    return re.sub(r'display="[^"]*"', f'display="{disp}"', mm, count=1)
+
+
+def ch3_to_mathml(body):
+    """Convert the authored ch3 LaTeX (\\(..\\) inline, \\[..\\] block) to MathML."""
+    def blk(m):
+        r = _conv_latex(m.group(1), 'block')
+        return r if r else m.group(0)
+
+    def inl(m):
+        r = _conv_latex(m.group(1), 'inline')
+        return r if r else m.group(0)
+
+    body = re.sub(r'\\\[(.+?)\\\]', blk, body, flags=re.S)
+    body = re.sub(r'\\\((.+?)\\\)', inl, body, flags=re.S)
+    return body
+
+
+def _copy_assets(outdir):
+    outdir = Path(outdir)
+    outdir.mkdir(parents=True, exist_ok=True)
+    # css/js/mathjax
+    dst = outdir / 'assets'
+    if dst.exists():
+        shutil.rmtree(dst)
+    shutil.copytree(ROOT / 'assets', dst)
+    # all images (figure galleries + eq png+manifest + pandoc png+manifest)
+    imgdst = outdir / 'img'
+    if imgdst.exists():
+        shutil.rmtree(imgdst)
+    shutil.copytree(ROOT / 'img', imgdst)
+    # overlay equation SVGs
+    for kd in EQSVG.iterdir() if EQSVG.exists() else []:
+        if kd.is_dir():
+            d = imgdst / f'eq_{kd.name}'
+            d.mkdir(parents=True, exist_ok=True)
+            for svg in kd.glob('*.svg'):
+                shutil.copy2(svg, d / svg.name)
+    # overlay pandoc media SVGs
+    for kd in PANSVG.iterdir() if PANSVG.exists() else []:
+        if kd.is_dir():
+            d = imgdst / kd.name
+            d.mkdir(parents=True, exist_ok=True)
+            for svg in kd.glob('*.svg'):
+                shutil.copy2(svg, d / svg.name)
+
+
+def build(outdir, mode):
+    global SITE, MODE
+    SITE = Path(outdir)
+    MODE = mode
+    load_mml()
+    _copy_assets(SITE)
     from ch3_content import CH3_BODY
     for i, ch in enumerate(CHAPTERS):
-        prev_ch = CHAPTERS[i-1] if i > 0 else None
-        next_ch = CHAPTERS[i+1] if i < len(CHAPTERS)-1 else None
+        prev_ch = CHAPTERS[i - 1] if i > 0 else None
+        next_ch = CHAPTERS[i + 1] if i < len(CHAPTERS) - 1 else None
         if ch['pipe'] == 'pandoc':
             body = build_pandoc_body(ch)
         elif ch['pipe'] == 'authored':
-            body = CH3_BODY + figure_gallery(ch)
+            b = ch3_to_mathml(CH3_BODY) if mode == 'mathml' else CH3_BODY
+            body = b + figure_gallery(ch)
         else:
             body = build_ole_body(ch['src'], ch['key'], ch)
         (SITE / f'{ch["slug"]}.html').write_text(page_html(ch, body, prev_ch, next_ch), encoding='utf-8')
-        print('wrote', ch['slug'])
     intro_body = build_ole_body(INTRO['src'], INTRO['key'], None)
     (SITE / 'index.html').write_text(build_index(intro_body), encoding='utf-8')
-    print('wrote index.html')
+    print(f'built {mode} -> {SITE}')
+
+
+def build_chooser(site_dir):
+    site_dir = Path(site_dir)
+    site_dir.mkdir(parents=True, exist_ok=True)
+    (site_dir / 'index.html').write_text('''<!DOCTYPE html>
+<html lang="it"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tesi di Laurea — scegli versione</title>
+<style>
+ body{margin:0;min-height:100vh;display:flex;flex-direction:column;align-items:center;
+   justify-content:center;font-family:"Segoe UI",system-ui,sans-serif;background:#f5f3ee;color:#1f2328;gap:1.5rem}
+ h1{font-weight:600;text-align:center;max-width:40rem;padding:0 1rem}
+ .cards{display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center}
+ a.card{display:block;width:16rem;padding:1.6rem 1.4rem;background:#fff;border:1px solid #e0dccf;
+   border-radius:14px;text-decoration:none;color:inherit;box-shadow:0 8px 24px rgba(0,0,0,.06);transition:.15s}
+ a.card:hover{transform:translateY(-3px);border-color:#a8443b}
+ a.card h2{margin:.2rem 0 .5rem;color:#7b2d26}
+ a.card p{margin:0;color:#4a4f57;font-size:.95rem;line-height:1.5}
+</style></head>
+<body>
+ <h1>Esperimenti fondamentali della Meccanica Quantistica — Tesi di Laurea</h1>
+ <div class="cards">
+  <a class="card" href="svg/index.html"><h2>Versione SVG</h2>
+    <p>Formule come immagini vettoriali fedeli all'originale (Equation Editor → SVG).</p></a>
+  <a class="card" href="mathml/index.html"><h2>Versione MathML</h2>
+    <p>Formule come MathML nativo, selezionabile e accessibile (via LibreOffice).</p></a>
+ </div>
+</body></html>''', encoding='utf-8')
+    print(f'wrote chooser -> {site_dir / "index.html"}')
+
+
+def main():
+    build(ROOT / 'site' / 'svg', 'svg')
+    build(ROOT / 'site' / 'mathml', 'mathml')
+    build_chooser(ROOT / 'site')
 
 
 if __name__ == '__main__':
     main()
+
