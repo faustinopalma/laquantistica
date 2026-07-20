@@ -1,0 +1,26 @@
+[000] q_{e}ΔV
+[001] q_{e}
+[002] q_{e}ΔV
+[003] E_{e}
+[004] q_{e}ΔV\ge E_{e}
+[005] E_{e}=q_{e}ΔV
+[006] \begin{matrix}\left\langle giallo\right\rangle 5,19⋅10^{14}Hz \\ verde \\ \rightarrow 545nm \\ 5,49⋅10^{14}Hz \\ blu \\ \rightarrow 436nm \\ 6,88⋅10^{14}Hz \\ violetto \\ \rightarrow 405nm \\ 7,41⋅10^{14}Hz\end{matrix}
+[007] 5,76⋅10^{-34}Ws^{2}
+[008] 4,0⋅10^{-14}Hz
+[009] 3,6⋅10^{-15}eVs^{2}\equiv 5,8⋅10^{-34}Js^{2}
+[010] 3,6⋅10^{-15}eVs^{2}\equiv 5,8⋅10^{-34}Js^{2}
+[011] 6,6⋅10^{-34}Js^{2}
+[012] ν
+[013] E=hν
+[014] hν
+[015] w
+[016] E_{e}=hν-w
+[017] E_{e}=hν
+[018] hν<w
+[019] E=mc^{2}
+[020] p=mv
+[021] v=c
+[022] \left\{\begin{aligned}E=mc^{2} \\ p=mc\end{aligned}\}\right\}
+[023] E=hν
+[024] E=hν
+[025] p=\frac{E}{c}

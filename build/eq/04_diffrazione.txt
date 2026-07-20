@@ -1,0 +1,218 @@
+[000] δ_{1}=k_{1}V^{-{1}/{2}}
+[001] δ_{2}=k_{2}V^{-{1}/{2}}
+[002] d_{1}=0,213nm
+[003] d_{2}=0,123nm
+[004] δ_{1}
+[005] d_{1}
+[006] δ_{2}
+[007] d_{2}
+[008] pλ=h
+[009] pλ
+[010] p=\sqrt{2mqV}
+[011] {p^{2}}/{2m=qV}
+[012] senδ={λ}/{d}
+[013] λ=dsenδ
+[014] p\left(x\right)=\left|ψ\left(x\right)\right|^{2}
+[015] ψ\equiv ψ\left(x\right)
+[016] ψ\left(x,t\right)
+[017] ψt
+[018] ψt=U\left(t_{0}\rightarrow t\right)ψt_{0}
+[019] ψt_{0}
+[020] ψ\left(x,t_{0}\right)
+[021] U\left(t_{0}\rightarrow t\right)
+[022] ψ\left(t+dt\right)=U\left(t\rightarrow t+dt\right)ψt
+[023] \begin{aligned}\frac{ψ\left(t+dt\right)-ψt}{dt} \\ =\frac{U\left(t\rightarrow t+dt\right)ψt-ψt}{dt} \\ \Leftrightarrow \\ \frac{d}{dt} \\ ψt=\frac{U\left(t\rightarrow t+dt\right)-1}{dt} \\ ψt\end{aligned}
+[024] U\left(t\rightarrow t+dt\right)=\underbrace{U\left(t\rightarrow t\right)}
+[025] A\left(t\right)
+[026] \lim limdt\rightarrow 0
+[027] \begin{aligned}\frac{U\left(t\rightarrow t+dt\right)-1}{dt} \\ =\frac{U\left(t\rightarrow t\right)+A\left(t\right)dt+ο\left(dt^{2}\right)-1}{dt} \\ = \\ osservando che U\left(t\rightarrow t\right)=1 abbiamo \\ =\frac{A\left(t\right)dt+ο\left(dt^{2}\right)}{dt} \\ =A\left(t\right)\end{aligned}
+[028] \frac{d}{dt}
+[029] A\left(t\right)
+[030] αt
+[031] βt
+[032] α\left(t+dt\right)=αt+\frac{d}{dt}
+[033] β\left(t+dt\right)=βt+\frac{d}{dt}
+[034] α\left(t+dt\right)〈〉
+[035] α\left(t+dt\right)
+[036] β\left(t+dt\right)
+[037] αt\left(A^{+}\left(t\right)+A\left(t\right)\right)βt=0
+[038] \begin{aligned}αt\left(1+A^{+}\left(t\right)dt\right)\left(1+A\left(t\right)dt\right)βt+ο\left(dt^{2}\right)=αt〈〉 \\ \Leftrightarrow \\ \Leftrightarrow αt〈〉 \\ +αt\left(A^{+}\left(t\right)+A\left(t\right)\right)dtβt+αtA^{+}\left(t\right)dt^{2}A\left(t\right)βt+ο\left(dt^{2}\right)=αt〈〉 \\ \Leftrightarrow \\ \Leftrightarrow αt\left(A^{+}\left(t\right)+A\left(t\right)\right)dtβt+αtA^{+}\left(t\right)dt^{2}A\left(t\right)βt+ο\left(dt^{2}\right)=0\end{aligned}
+[039] A^{+}\left(t\right)+A\left(t\right)=0\Leftrightarrow A^{+}\left(t\right)=-A\left(t\right)
+[040] ψ\left(x,t\right)
+[041] \left\langle x\right\rangle
+[042] X\left(x,x'\right)()
+[043] X\left(x,x'\right)()
+[044] v=\left(v_{1}...v_{n}\right)
+[045] v=v\left(x\right)
+[046] A=A\left(x,x'\right)()
+[047] u=Av\Leftrightarrow u\left(x\right)=A\left(x,x'\right)()v\left(x'\right)() -\infty
+[048] u
+[049] v
+[050] u=Av
+[051] u
+[052] u=\left(\begin{aligned}u_{1} \\ u_{2}\end{aligned}()\right)()
+[053] \left(^{*}\right)
+[054] \left(^{t}\right)
+[055] u=u^{*t}=\left(Av\right)^{*t}=v^{*t}A^{*t}=vA^{*t}
+[056] u=Av\Leftrightarrow u=vA^{*t}
+[057] A^{*t}
+[058] A^{*t}
+[059] A^{+}
+[060] A^{*t}\equiv A^{+}
+[061] A=\left(\begin{matrix}Āa_{11} \\ a_{12} \\ a_{21} \\ a_{22}\end{matrix}\right)\Rightarrow A^{+}=A^{*t}=\left(\begin{matrix}Āa_{11}^{*}\end{matrix} a_{21}^{*}\right) a_{12}^{*}
+[062] Au
+[063] A=A^{+}
+[064] A=-A^{+}
+[065] AA^{+}=A^{+}A=I
+[066] v\vec{} R
+[067] w=Rv
+[068] v
+[069] v\left(x\right)\vec{D}\rightarrow
+[070] D↔-δ'
+[071] -δ'
+[072] \frac{d}{dx}
+[073] Dv
+[074] v\left(x\right)
+[075] \begin{aligned}-δ'\left(x'\right)()v\left(x'\right)() -\infty \\ +\infty \\ \int \\ dx' \\ =-\frac{dδ\left(x'\right)()}{} dx' \\ v\left(x'\right)()\end{aligned} -\infty
+[076] -δ'
+[077] D^{+}=-D
+[078] K=iD
+[079] K^{+}=\left(iD\right)^{+}=i^{*}D^{+}=\left(-i\right)\left(-D\right)=iD=K
+[080] AA=A^{2}
+[081] A^{3}
+[082] A^{4}
+[083] f\left(x\right)
+[084] f\left(A\right)
+[085] A^{0}=I
+[086] m\frac{d^{2}x}{dt^{2}}
+[087] x\left(t\right)
+[088] \left\langle x\right\rangle=p\left(x\right)-\infty +\infty \int xdx=ψ^{*}\left(x\right)xψ\left(x\right)dx-\infty +\infty \int =ψ^{*}\left(x\right)X\left(x,x'\right)()ψ\left(x\right)dx' -\infty +\infty \int dx-\infty +\infty \int =ψXψ
+[089] \frac{d}{dt}
+[090] \frac{d}{dt}
+[091] \frac{d}{dt}
+[092] \left[ , \right]
+[093] \left[A,B\right]=AB-BA
+[094] \frac{d^{2}}{dt^{2}}
+[095] \left\langle E\left(x\right)\right\rangle
+[096] ψtE\left(X\right)ψt
+[097] E\left(X\right)
+[098] E\left(x\right)
+[099] \frac{d^{2}}{dt^{2}}
+[100] ψt
+[101] \frac{d^{2}}{dt^{2}}
+[102] ψ\left(x\right)
+[103] xψ\left(x\right)
+[104] i\frac{d}{dx}
+[105] ψ\left(x\right)
+[106] \frac{d^{2}}{dt^{2}}
+[107] \frac{d^{2}}{dt^{2}}
+[108] \left[K,f\left(X\right)\right]=i\frac{df\left(X\right)}{dX}
+[109] \left[X,f\left(K\right)\right]=-i\frac{df\left(K\right)}{dK}
+[110] \left[X,f\left(X\right)\right]=0
+[111] \left[K,f\left(K\right)\right]=0
+[112] f\left(X\right)
+[113] \begin{aligned}\left[K,f_{n}X^{n}\right]=inf_{n}X^{n-1}\Leftrightarrow \left[K,X^{n}\right]=inX^{n-1} \\ \left[X,f_{n}K^{n}\right]=-inf_{n}K^{n-1}\Leftrightarrow \left[X,K^{n}\right]=-inK^{n-1}\end{aligned}
+[114] ∀n\in 1...\infty
+[115] \begin{aligned}\left[K,X\right]=iI \\ \left[X,K\right]=-iI\end{aligned}
+[116] ψ\left(x\right)
+[117] \begin{aligned}\left[K,X\right]ψ\left(x\right)=KXψ\left(x\right)-XKψ\left(x\right)=i\frac{d}{dx} \\ \left(xψ\left(x\right)\right)-x\frac{d}{dx} \\ ψ\left(x\right)= \\ =iψ\left(x\right)+x\frac{d}{dx} \\ ψ\left(x\right)-x\frac{d}{dx} \\ ψ\left(x\right)=iψ\left(x\right)\end{aligned}
+[118] \left[K,X\right]ψ\left(x\right)=iψ\left(x\right)
+[119] ψ\left(x\right)
+[120] \left[K,X\right]=iI
+[121] \left[X,K\right]=-\left[K,X\right]=-iI
+[122] \begin{aligned}\left[K,X^{n}\right]=inX^{n-1} \\ \left[X,K^{n}\right]=-inK^{n-1}\end{aligned}
+[123] \left[A,A^{n}\right]=AA^{n}-A^{n}A=A^{n+1}-A^{n+1}=0
+[124] E\left(X\right)
+[125] V\left(X\right)
+[126] E\left(X\right)=-\frac{dV\left(X\right)}{dX}
+[127] H=f\left(X\right)+g\left(K\right)
+[128] H\left(t\right)=iA\left(t\right)
+[129] H^{+}=\left(iA\right)^{+}=i^{*}A^{+}=\left(-i\right)\left(-A\right)=iA=H
+[130] i\frac{d}{dt}
+[131] i\frac{d}{dt}
+[132] \begin{aligned}\frac{d}{dt} \\ ψt=-iHψt \\ \frac{d}{dt} \\ ψt=iψtH^{+}=iψtH\end{aligned}
+[133] \dot{X}
+[134] \begin{aligned}\frac{d}{dt} \\ \left\langle x\right\rangle=iψtHXψt-iψtXHψt= \\ =ψti\left(HX-XH\right)ψt\end{aligned}
+[135] \begin{aligned}\frac{d^{2}}{dt^{2}} \\ \left\langle x\right\rangle=\frac{d}{dt} \\ \frac{d}{dt} \\ \left\langle x\right\rangle=\frac{d}{dt} \\ ψt\dot{X} \\ ψt=…= \\ =ψti\left(H\dot{X}\right)H \\ () \\ ψt\end{aligned}
+[136] \ddot{X}
+[137] \begin{aligned}\dot{X} \\ =i\left[H,X\right] \\ \ddot{X} \\ =i\left[H,\dot{X}\right][] \\ =-\left[H,\left[H,X\right]\right]\end{aligned}
+[138] \frac{d^{2}}{dt^{2}}
+[139] \frac{d^{2}}{dt^{2}}
+[140] -ψt\left[H,\left[H,X\right]\right]ψt=\frac{q}{m}
+[141] -\left[H,\left[H,X\right]\right]=\frac{q}{m}
+[142] -\left[H,\left[H,X\right]\right]=\frac{q}{m}
+[143] \begin{aligned}-\left[f\left(X\right)+g\left(K\right),\left[f\left(X\right)+g\left(K\right),X\right]\right]=\frac{q}{m} \\ E\left(X\right)\Leftrightarrow \\ In base alla formula 3^{a} \\ \Leftrightarrow -\left[f\left(X\right)+g\left(K\right),\left[g\left(K\right),X\right]\right]=\frac{q}{m} \\ E\left(X\right)\end{aligned}
+[144] \left[g\left(K\right),X\right]=icK
+[145] \begin{aligned}-\left[f\left(X\right)+g\left(K\right),icK\right]=\frac{q}{m} \\ E\left(X\right)\Leftrightarrow -\left[f\left(X\right),icK\right]=\frac{q}{m} \\ E\left(X\right)\Leftrightarrow \\ \Leftrightarrow \left[icK,f\left(X\right)\right]=\frac{q}{m} \\ E\left(X\right)\Leftrightarrow \lim In base alla 1^{a}\end{aligned}\Leftrightarrow -c\frac{df\left(X\right)}{dX}
+[146] -c\frac{df\left(X\right)}{dX}
+[147] f\left(X\right)=\frac{q}{cm}
+[148] \left[g\left(K\right),X\right]=icK
+[149] i\frac{dg\left(K\right)}{dK}
+[150] g\left(K\right)=\frac{1}{2}
+[151] V^{-{1}/{2}}
+[152] p\left(x\right)
+[153] ψ\left(x\right)
+[154] ψ\left(x\right)
+[155] uA^{+}
+[156] H=f\left(X\right)+g\left(K\right)
+[157] \left[K,X^{n+1}\right]=KX^{n+1}-X^{n+1}K=KX^{n+1}-X^{n}XK=
+[158] =KX^{n+1}+X^{n}\left(iI-KX\right)=KX^{n+1}+iX^{n}-X^{n}KX=iX^{n}+\left(KX^{n}-X^{n}K\right)X=
+[159] =iX^{n}+inX^{n-1}X=iX^{n}+inX^{n}=i\left(n+1\right)X^{n}
+[160] \begin{aligned}-\left[\frac{q}{cm}\right]cK^{2},\left[\frac{q}{cm}\right]cK^{2},X \\ []\end{aligned}[]
+[161] V\left(x\right)
+[162] H=f\left(X\right)+g\left(K\right)=\frac{q}{cm}
+[163] pλ=h
+[164] V\left(x\right)=0
+[165] ψ\left(x,t\right)=e^{i\left(kx-ωt\right)}=e^{i\left(\frac{2π}{λ}\right)()}
+[166] -\infty
+[167] +\infty
+[168] c\left(λ'\right)()
+[169] ψ\left(x,t\right)
+[170] \left\langle p\right\rangle=m\frac{d}{dx}
+[171] \left\langle x\right\rangle
+[172] \frac{d}{dx}
+[173] \dot{X}
+[174] \dot{X}
+[175] \begin{aligned}\dot{X} \\ =i\left[H,X\right]=i\left[\frac{q}{cm}\right]cK^{2},X \\ [] \\ =i\left[\frac{1}{2}\right][] \\ =-i\left[X,\frac{1}{2}\right][] \\ = \\ =-cK\end{aligned}
+[176] \left\langle p\right\rangle
+[177] \left\langle p\right\rangle=m\frac{d}{dx}
+[178] P=-cmK
+[179] \left\langle p\right\rangle=ψPψ
+[180] \left\langle p\right\rangle=cm\frac{2π}{λ}
+[181] pλ=h
+[182] 2πcm=h\Leftrightarrow c=\frac{h}{2πm}
+[183] \hbar =\frac{h}{2π}
+[184] c=\frac{\hbar }{m}
+[185] P=-cmK=-\hbar K=-i\hbar D
+[186] \begin{aligned}i\frac{d}{dt} \\ ψt=H\left(t\right)ψt=\left(\frac{q}{cm}\right)cK^{2} \\ () \\ ψt\Leftrightarrow \\ \Leftrightarrow i\frac{d}{dt} \\ ψ\left(x,t\right)=\frac{q}{cm} \\ V\left(x\right)ψ\left(x,t\right)-\frac{1}{2} \\ c\frac{d^{2}}{dx^{2}} \\ ψ\left(x,t\right)\end{aligned}
+[187] ω=c\frac{4π^{2}}{λ^{2}}
+[188] ψ\left(x,t\right)=c\left(λ'\right)()e^{i\left(\frac{2π}{λ'}\right)x-c\frac{4π^{2}}{λ'}^{2}}t()
+[189] ψ\left(x,t\right)=δ\left(λ'\right)()e^{i\left(\frac{2π}{λ'}\right)x-c\frac{4π^{2}}{λ'}^{2}}t()
+[190] \left|e^{i\left(\frac{2π}{λ}\right)t}\right|
+[191] ψ\left(x,t\right)=\frac{e^{i\left(\frac{2π}{λ}\right)t}}{}
+[192] i\frac{d}{dt}
+[193] ψ\left(x,t\right)=e^{i\left(\frac{2π}{λ}\right)t}
+[194] \left\langle p\right\rangle=ψPψ=ψ\left(Pψ\right)=\frac{e^{-i\left(\frac{2π}{λ}\right)t}}{}M\left(-icm\frac{d}{dx}\right) M
+[195] =cm\frac{2π}{λ}
+[196] i\frac{d}{dt}
+[197] i\hbar \frac{d}{dt}
+[198] \begin{aligned}i\frac{d}{dt} \\ ψ\left(x,t\right)=\frac{q}{\hbar } \\ V\left(x\right)ψ\left(x,t\right)-\frac{1}{2} \\ \frac{\hbar }{m} \\ \frac{d^{2}}{dx^{2}} \\ ψ\left(x,t\right)\Leftrightarrow \\ \Leftrightarrow i\hbar \frac{d}{dt} \\ ψ\left(x,t\right)=qV\left(x\right)ψ\left(x,t\right)-\frac{1}{2m} \\ \hbar ^{2}\frac{d^{2}}{dx^{2}} \\ ψ\left(x,t\right)\Leftrightarrow \\ \Leftrightarrow i\hbar \frac{d}{dt} \\ ψ\left(x,t\right)=\left(qV\left(X\right)+\frac{1}{2m}\right)() \\ ψ\left(x,t\right)\Leftrightarrow \\ \Leftrightarrow i\hbar \frac{d}{dt} \\ ψ=\left(qV\left(X\right)+\frac{1}{2m}\right)() \\ ψ\end{aligned}
+[199] H=qV\left(X\right)+\frac{1}{2m}
+[200] \Leftrightarrow ωe^{i\left(\frac{2π}{λ}\right)()}
+[201] \hbar
+[202] p\left(x,t\right)\propto \left|ψ\left(x,t\right)\right|^{2}=ψ^{*}\left(x,t\right)ψ\left(x,t\right)=e^{-i\left(\frac{2π}{λ}\right)t}
+[203] A^{-1}
+[204] A^{-1}A^{-1}=A^{-2}
+[205] A^{-3}
+[206] A^{-4}
+[207] p\left(x\right)=c_{n}x^{n}+…+c_{1}x+c_{0}+c_{-1}x^{-1}+…+c_{-m}x^{-m}
+[208] p\left(A\right)=c_{n}A^{n}+…+c_{1}A+c_{0}I+c_{-1}A^{-1}+…+c_{-m}A^{-m}
+[209] f\left(x\right)=\sum _{n}c_{n}x^{n}-\infty +\infty \sum
+[210] f\left(A\right)=\sum _{n}-\infty +\infty \sum c_{n}A^{n}
+[211] f\left(X\right)=\sum _{n}-\infty +\infty \sum f_{n}X^{n}
+[212] \frac{df\left(X\right)}{dX}
+[213] \left[K,\sum _{n}-\infty +\infty \sum f_{n}X^{n}[]=i\sum _{n}-\infty +\infty \sum nf_{n}X^{n-1}\right]
+[214] \left[X,\sum _{n}-\infty \infty \sum f_{n}K^{n}[]=-i\sum _{n}-\infty \infty \sum nf_{n}K^{n-1}\right]
+[215] \left[K,X^{n-1}\right]=KX^{n-1}-X^{n-1}K=X^{-1}XKX^{n-1}-X^{n-1}K=
+[216] \begin{aligned}=X^{-1}\left(-iI+KX\right)X^{n-1}-X^{n-1}K=-iX^{n-2}+X^{-1}KX^{n}-X^{-1}X^{n}K= \\ =-iX^{n-2}+X^{-1}\left(KX^{n}-X^{n}K\right)\end{aligned}
+[217] =-iX^{n-2}+X^{-1}inX^{n-1}=-iX^{n-2}+inX^{n-2}=i\left(n-1\right)X^{n-2}

@@ -1,0 +1,11 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# LibreOffice headless profile (locks/cache, regenerable)
+build/louser/
+
+# OS
+Thumbs.db
+.DS_Store

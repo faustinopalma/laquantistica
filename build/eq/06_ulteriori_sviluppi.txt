@@ -1,0 +1,172 @@
+[000] g=\bar{g}
+[001] g=\bar{g}
+[002] \bar{g}
+[003] \bar{g}
+[004] \bar{g}
+[005] g'
+[006] g'
+[007] α
+[008] g'
+[009] P_{g'}
+[010] αt=U\left(t_{0}\rightarrow t\right)αt_{0}
+[011] U\left(t_{0}\rightarrow t\right)
+[012] U\left(t_{0}\rightarrow t\right)
+[013] αt〈〉
+[014] α=\left(\begin{aligned}α_{1} \\ ⋮ \\ α_{n}\end{aligned}()\right)
+[015] ψ\left(x,y,z,t\right)
+[016] \left(x,y,z\right)
+[017] ψ\left(x,y,z\right)=δ\left(x-\bar{x}\right)()
+[018] x\ne \bar{x}
+[019] \bar{x}
+[020] x=\bar{x}
+[021] ψ\left(x,y,z\right)=δ\left(x-\bar{x}\right)()
+[022] \bar{x}
+[023] \bar{y}
+[024] \bar{z}
+[025] \bar{g}
+[026] \bar{g}
+[027] \bar{x}
+[028] x=\bar{x}
+[029] α_{k}
+[030] ψ\left(x\right)
+[031] ψ\left(x,y,z\right)
+[032] g_{1}…g_{n}
+[033] α_{k_{1}…k_{n}}
+[034] \bar{g}
+[035] \bar{x}
+[036] x=\bar{x},z=\bar{z}
+[037] x=\bar{x}
+[038] x=\bar{x}
+[039] \bar{x}\bar{z}
+[040] \bar{x}
+[041] \bar{y}
+[042] \bar{z}
+[043] ψ\left(x,y,z\right)=δ\left(x-\bar{x}\right)()
+[044] ψ
+[045] \bar{x}\bar{z}
+[046] \bar{x}
+[047] P_{x=\bar{x}}
+[048] \left|\bar{x}\bar{z}\right| ψ
+[049] \bar{x} 〈
+[050] \bar{x}
+[051] p\left(\bar{x}\right),\bar{z}
+[052] p\left(\bar{x}\right)()
+[053] \bar{p}
+[054] g_{1}…g_{n}
+[055] \bar{g}
+[056] α_{k_{1}…k_{n}}
+[057] \bar{g}
+[058] \bar{g}_{k_{n}}
+[059] g'
+[060] g'
+[061] g'
+[062] P_{g'}_{1}…g'
+[063] ψ\left(x_{1}…x_{n}\right)
+[064] ψ\left(x,y,z\right)
+[065] ψ
+[066] \left\langle p_{x}\right\rangle
+[067] p'
+[068] p_{x}
+[069] ρ
+[070] ρ\left(p_{x},ξ\right)=\left|p_{x},ξ〈〉\right|
+[071] P_{x}=-i\hbar D_{x}
+[072] \left\langle p_{x}\right\rangle=ψP_{x}ψ
+[073] ψ
+[074] P_{x}
+[075] \left\langle p_{x}\right\rangle=dξ\int ξ'ρ\left(p'\right)()p'_{x}-\infty +\infty \int dp'_{x}=dξ\int ξ'ψ_{x},ξ'〈〉p'_{x}p'ψ〈〉 -\infty +\infty \int dp'_{x}==ψ\left[dξ\int ξ'p'〉p'_{x}p'〈 -\infty +\infty \int dp'_{x}[]ψ\right]
+[076] p'
+[077] ξ'
+[078] ψP_{x}ψ=ψ\left[dξ\int ξ'p'〉p'_{x}p'〈 -\infty +\infty \int dp'_{x}[]ψ\right]
+[079] P_{x}=dξ\int ξp'〉p'_{x}p'〈 -\infty +\infty \int dp'_{x}
+[080] p'
+[081] p_{x},ξ
+[082] P_{x}p_{x},ξ=dξ\int ξp'〉p'_{x}p'〈 -\infty +\infty \int dp'_{x}p_{x},ξ=
+[083] =dξ\int ξp'〉p'_{x}p'p_{x},ξ〈〉 -\infty +\infty \int dp'_{x}=
+[084] P_{x}p_{x},ξ=p_{x}p_{x},ξ
+[085] p_{x}
+[086] p_{x}
+[087] ξ
+[088] p'〉
+[089] p_{x}
+[090] \bar{g}'_{n}
+[091] \bar{g}'_{n}
+[092] \bar{g}_{n}
+[093] \bar{g}
+[094] \bar{g}
+[095] \bar{g}
+[096] \left|\bar{g}_{n}\right|_{1}…\bar{g}'
+[097] \left\{\bar{g}_{n}\right\}
+[098] α
+[099] α\equiv \left(α_{k_{1}…k_{n}}\right)
+[100] \bar{g}_{n}
+[101] α_{k_{1}…k_{n}}=\bar{g}_{k_{n}}
+[102] \begin{aligned}α=\sum α_{k_{1}…k_{n}}\bar{g}_{k_{n}}〉 k_{1}…k_{n} \\ \sum \\ =\sum \bar{g}_{k_{n}}α〈〉\bar{g}_{k_{n}}〉 k_{1}…k_{n} \\ \sum \\ = \\ =\sum \bar{g}_{k_{n}}〉\bar{g}_{k_{n}}α〈〉=k_{1}…k_{n}\sum \left[\sum \bar{g}_{k_{n}}〉\bar{g}_{k_{n}}〈 k_{1}…k_{n}\right][]α\end{aligned}
+[103] \sum \bar{g}_{k_{n}}〉\bar{g}_{k_{n}}〈 k_{1}…k_{n}
+[104] ξ
+[105] \left\{ξ\right\}
+[106] ξξξ\int dξ=I
+[107] ψ
+[108] ξ〈〉
+[109] \left[ξξξ\int dξ[]ψ=ψ\right]
+[110] \left[ξξξ\int dξ[]ψ=ξξ〈〉 ξ\int dξ\right]
+[111] x
+[112] p_{x}
+[113] p_{x}
+[114] x
+[115] X
+[116] P_{x}
+[117] x,p_{x},ξ
+[118] ξ
+[119] XP_{x}x,p_{x},ξ=xp_{x}x,p_{x},ξ=P_{x}Xx,p_{x},ξ
+[120] \left(XP_{x}-P_{x}X\right)x,p_{x},ξ=0
+[121] \left(XP_{x}-P_{x}X\right)=-i\hbar I
+[122] -i\hbar Ix,p_{x},ξ=0\Leftrightarrow x,p_{x},ξ=0
+[123] p_{y}
+[124] 1 2 3
+[125] \bar{L}
+[126] \left\langle \bar{L}\right\rangle〈〉
+[127] \bar{L}
+[128] L_{z}
+[129] \left\{\begin{aligned}L_{x}=\left(yp_{z}-zp_{y}\right) \\ L_{y}=\left(zp_{x}-xp_{z}\right) \\ L_{z}=\left(xp_{y}-yp_{x}\right)\end{aligned}\{\right\}
+[130] \left\langle L_{z}\right\rangle=\left\langle xp_{y}\right\rangle-\left\langle yp_{x}\right\rangle
+[131] \left\langle xp_{y}\right\rangle
+[132] \left\langle xp_{y}\right\rangle=ρ\left(x,p_{y}\right)x,p_{y}\int xp_{y}dxdp_{y}
+[133] x,p_{y},ξ
+[134] p_{y}
+[135] ξ
+[136] x
+[137] ρ\left(x,p_{y},ξ\right)=\left|x,p_{y},ξ〈〉\right|
+[138] ρ\left(x,p_{y}\right)=ψ〈〉x,p_{y},ξ〈〉dξξ\int
+[139] \left\langle xp_{y}\right\rangle=\left[ψ〈〉x,p_{y},ξ〈〉dξξ\int []\right] x,p_{y}\int xp_{y}dxdp_{y}
+[140] XP_{y}x,p_{y},ξ=xp_{y}x,p_{y},ξ
+[141] \left\langle xp_{y}\right\rangle=ψXP_{y}x,p_{y},ξx,p_{y},ξ〈〉dξξ\int x,p_{y}\int dxdp_{y}==ψXP_{y}\left[x,p_{y},ξx,p_{y},ξdξξ\int x,p_{y}\int dxdp_{y}[]ψ\right]
+[142] x,p_{y},ξx,p_{y},ξdξξ\int x,p_{y}\int dxdp_{y}=I
+[143] \left\langle xp_{y}\right\rangle=ψXP_{y}ψ
+[144] \left\{\begin{aligned}\left\langle L_{x}\right\rangle=ψ\left(YP_{z}-ZP_{y}\right)ψ \\ \left\langle L_{y}\right\rangle=ψ\left(ZP_{x}-XP_{z}\right)ψ \\ \left\langle L_{z}\right\rangle=ψ\left(XP_{y}-YP_{x}\right)ψ\end{aligned}\{\right\}
+[145] L_{z}
+[146] L_{z}=XP_{y}-YP_{x}
+[147] E=qV+\frac{1}{2m}
+[148] \left\langle E\right\rangle=\left\langle qV+\frac{1}{2m}\right\rangle^{2}
+[149] \begin{aligned}ψHψ=ψ\left(qV\left(X\right)+\frac{1}{2m}\right)^{2} \\ () \\ ψ=qψV\left(X\right)ψ+\frac{1}{2m} \\ ψ\bar{P} \\ ^{2}ψ= \\ =q\left\langle V\right\rangle+\frac{1}{2m} \\ \left\langle \bar{P}\right\rangle〈〉\end{aligned}
+[150] Hψ=Eψ\Leftrightarrow \left(qV\left(X\right)+\frac{1}{2m}\right)^{2}
+[151] V\left(r\right)=\frac{1}{4πε_{0}}
+[152] E_{n}=-\frac{me^{4}}{8ε_{0}^{2}}h^{2}n^{2}
+[153] g
+[154] G
+[155] ψ
+[156] ψGψ
+[157] g'
+[158] g'
+[159] g'〉
+[160] ξ
+[161] G=g'〉g'g' 〈 ξ\int g'
+[162] P_{x}
+[163] L_{z}ψ=l_{z}ψ
+[164] p'
+[165] p'
+[166] p_{x}
+[167] p'
+[168] =dξ\int ξp'〉p_{x}p'p_{x},ξ〈〉 -\infty +\infty \int dp'_{x}=p_{x}dξ\int ξp'〉p'p_{x},ξ〈〉 -\infty +\infty \int dp'_{x}=
+[169] p_{x},ξ
+[170] p_{x},ξ
+[171] \left\{p'\right\}

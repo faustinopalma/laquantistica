@@ -1,0 +1,171 @@
+Ulteriori sviluppi della Teoria
+Nella scheda quattro abbiamo introdotto l’equazione di Schrödinger per una particella carica in un potenziale elettrico. Questa equazione ci permette di determinare  EMBED Equation.3  [OBJ], cioè la distribuzione di ampiezze di probabilità in funzione del tempo per la terna di grandezze misurabili  EMBED Equation.3  [OBJ]. Lo scopo centrale della presente scheda sarà quello di determinare la distribuzione di ampiezze di probabilità per altre grandezze osservabili, in particolare per la quantità di moto, per il momento angolare e per l’energia.
+Per raggiungere lo scopo è necessario rivedere e generalizzare i principi della Meccanica Quantistica che abbiamo postulato nella scheda due.
+Principi della Meccanica Quantistica.
+Per comodità di lettura riportiamo qui i principi che abbiamo postulato nella scheda due:
+Un sistema fisico è caratterizzato dalle sue grandezze fisiche che possono essere misurate.
+Quando si misura una grandezza g sono possibili diversi risultati, ed ogni risultato ha una certa probabilità di uscire. Se dalla misura si ottiene un particolare risultato  EMBED Equation.3  [OBJ], il sistema si porta in uno stato tale che, se si ripete la misura di g si ottiene con certezza il valore  EMBED Equation.3  [OBJ]. Un tale stato viene detto autostato di g con autovalore  EMBED Equation.3  [OBJ].
+Un qualsiasi altro stato ( può essere considerato come una sovrapposizione degli autostati di una grandezza g e può essere rappresentato da un vettore di numeri complessi  EMBED Equation.3  [OBJ]. Ogni numero complesso è associato ad uno dei possibili valori che può assumere la grandezza g,  EMBED Equation.3  [OBJ]Il modulo quadrato di ognuno di questi numeri complessi, ad esempio (k, da la probabilità che misurando la grandezza g esca il particolare valore  EMBED Equation.3  [OBJ] associato al numero considerato.
+In generale se il sistema si trova in uno stato ( e si misura una grandezza  EMBED Equation.3  [OBJ], la probabilità che esca  EMBED Equation.3  [OBJ] è data dal modulo quadro del prodotto scalare tra il vettore  EMBED Equation.3  [OBJ] ed il vettore  EMBED Equation.3  [OBJ] associato all’autostato  EMBED Equation.3  [OBJ] di  EMBED Equation.3  [OBJ].	 EMBED Equation.3  [OBJ]
+L’evoluzione nel tempo di uno stato (t segue una legge lineare			 EMBED Equation.3  [OBJ]
+dove  EMBED Equation.3  [OBJ]	 è una matrice che dipende dal sistema e dalle “condizioni ambientali”. La matrice  EMBED Equation.3  [OBJ] è detta matrice di evoluzione temporale e gode della proprietà di lasciare invariati i prodotti scalari				 EMBED Equation.3  [OBJ]
+
+Nel secondo principio si introduce il concetto di autostato cioè di uno stato tale che se si esegue una misura si ottiene con certezza un dato valore detto autovalore. Nel caso di una particella materiale gli autostati ad esempio della grandezza x sono quelli rappresentati da vettori del tipo
+ EMBED Equation.3  [OBJ]
+infatti con questo vettore si ottiene una distribuzione di probabilità che è nulla se  EMBED Equation.3  [OBJ], ed è non nulla solo se  EMBED Equation.3  [OBJ], quindi quando si esegue una misura di x si otterrà per forza il valore  EMBED Equation.3  [OBJ]. Un altro esempio è dato dallo stato rappresentato dal vettore
+ EMBED Equation.3  [OBJ]
+in questo caso se si esegue una misura di x, di y o di z, si otterranno con certezza i valori  EMBED Equation.3  [OBJ], EMBED Equation.3  [OBJ] e  EMBED Equation.3  [OBJ]; quindi questo che abbiamo considerato è contemporaneamente un autostato delle grandezze x, y e z.
+I principi che abbiamo dato in realtà sono una versione semplificata, perché si suppone che dato un valore  EMBED Equation.3  [OBJ] l’autostato associato a  EMBED Equation.3  [OBJ] sia unico, il ché in generale non è vero; ad esempio nel caso di una particella materiale nello spazio tridimensionale gli autostati associati ad un autovalore  EMBED Equation.3  [OBJ] di x sono infiniti:
+	 EMBED Equation.3  [OBJ]
+Quindi non possiamo parlare dello stato  EMBED Equation.3  [OBJ], perché non è uno solo, ma possiamo parlare dello stato  EMBED Equation.3  [OBJ], infatti questo stato è univocamente determinato e la relativa distribuzione di probabilità è
+	 EMBED Equation.3  [OBJ]
+Il terzo principio si deve generalizzare dicendo che un qualsiasi stato può essere considerato come la sovrapposizione degli “autostati simultanei” di un certo set di grandezze fisiche  EMBED Equation.3  [OBJ]. I coefficienti di questa sovrapposizione non avranno più un solo indice ma ne avranno tanti quante sono le grandezze osservabili delle quali si prendono gli autostati, quindi non avremo  EMBED Equation.3  [OBJ] ma avremo  EMBED Equation.3  [OBJ], oppure nel caso continuo non avremo  EMBED Equation.3  [OBJ] ma avremo  EMBED Equation.3  [OBJ].
+Un set di grandezze fisiche  EMBED Equation.3  [OBJ] tale che esiste un unico autostato simultaneo associato agli autovalori  EMBED Equation.3  [OBJ] si dirà “completo”. Ad esempio le tre variabili posizione x, y e z costituiscono un set completo, perché data una terna di valori  EMBED Equation.3  [OBJ], esiste un unico autostato simultaneo associato a questa terna.
+Il ket associato allo stato  EMBED Equation.3  [OBJ] potrà essere indicato con il simbolo
+	 EMBED Equation.3  [OBJ]
+tuttavia preferiremo fare un abuso di notazione e usare una notazione più compatta indicando il ket con il simbolo  EMBED Equation.3  [OBJ]. (C’è un abuso di notazione perché se volessimo sostituire dei numeri, ad esempio  EMBED Equation.3  [OBJ],  EMBED Equation.3  [OBJ] e  EMBED Equation.3  [OBJ], avremmo il simbolo  EMBED Equation.3  [OBJ] nel quale sono indicati dei valori, ma non sono indicate le relative grandezze).
+Ora consideriamo il quarto principio e supponiamo ad esempio di voler calcolare l’ampiezza di probabilità che, misurando x, y e z contemporaneamente su una particella in uno stato  EMBED Equation.3  [OBJ], vengano i valori  EMBED Equation.3  [OBJ]; allora l’ampiezza di probabilità cercata è data dal prodotto scalare  EMBED Equation.3  [OBJ] e la probabilità è data dal modulo quadro  EMBED Equation.3  [OBJ].
+Ma se vogliamo la probabilità che misurando solo x venga  EMBED Equation.3  [OBJ]? Possiamo scrivere  EMBED Equation.3  [OBJ]?
+No, perché il simbolo  EMBED Equation.3  [OBJ] non ha significato, infatti l’autovalore  EMBED Equation.3  [OBJ] non identifica un unico autostato.
+Se vogliamo la probabilità che misurando solo x venga  EMBED Equation.3  [OBJ] allora dobbiamo prima calcolare la probabilità 
+	 EMBED Equation.3  [OBJ]
+e poi calcolare l’integrale
+	 EMBED Equation.3  [OBJ]
+A questo punto scriviamo i principi generalizzati
+Un sistema fisico è caratterizzato dalle sue grandezze fisiche che possono essere misurate.
+Quando si misura una grandezza g sono possibili diversi risultati, ed ogni risultato ha una certa probabilità di uscire. Se dalla misura si ottiene un particolare risultato  EMBED Equation.3  [OBJ], il sistema si porta in uno stato tale che, se si ripete la misura di g si ottiene con certezza il valore  EMBED Equation.3  [OBJ]. Un tale stato viene detto autostato di g con autovalore  EMBED Equation.3  [OBJ].
+2.bis	In generale dato un valore  EMBED Equation.3  [OBJ] possono esistere infiniti autostati associati a questo valore. Tuttavia è sempre possibile trovare un set di variabili completo  EMBED Equation.3  [OBJ], tale che, dati gli n valori  EMBED Equation.3  [OBJ], esiste un unico autostato simultaneo associato a questi valori.
+Un qualsiasi altro stato ( può essere considerato come una sovrapposizione degli autostati simultanei di un set di grandezze  EMBED Equation.3  [OBJ], e può essere rappresentato da un vettore di numeri complessi con n indici  EMBED Equation.3  [OBJ]. Ogni numero complesso è associato ad una delle possibili combinazione di valori che può assumere la n-upla di grandezze  EMBED Equation.3  [OBJ]. Il modulo quadrato di ogni uno di questi numeri complessi, ad esempio  EMBED Equation.3  [OBJ], da la probabilità che misurando contemporaneamente le grandezze  EMBED Equation.3  [OBJ] escano il particolare set di valori   EMBED Equation.3  [OBJ] e che il sistema si porti nell’autostato simultaneo  EMBED Equation.3  [OBJ].
+In generale se il sistema si trova in uno stato ( e si misura contemporaneamente un set completo di grandezze  EMBED Equation.3  [OBJ], la probabilità che esca  EMBED Equation.3  [OBJ] è data dal modulo quadro del prodotto scalare tra il vettore  EMBED Equation.3  [OBJ] ed il vettore  EMBED Equation.3  [OBJ] associato all’autostato simultaneo  EMBED Equation.3  [OBJ]. Cioè  EMBED Equation.3  [OBJ].
+L’evoluzione nel tempo di uno stato (t segue una legge lineare			 EMBED Equation.3  [OBJ]
+dove  EMBED Equation.3  [OBJ]	 è una matrice che dipende dal sistema e dalle “condizioni ambientali”. La matrice  EMBED Equation.3  [OBJ] è detta matrice di evoluzione temporale e gode della proprietà di lasciare invariati i prodotti scalari				 EMBED Equation.3  [OBJ]
+La generalizzazione di questi principi al caso continuo è immediata, basta sostituire alla rappresentazione indiciale  EMBED Equation.3  [OBJ] la rappresentazione funzionale  EMBED Equation.3  [OBJ].
+Osserviamo che due ket  EMBED Equation.3  [OBJ] e  EMBED Equation.3  [OBJ] sono ortogonali, a meno che non abbiano tutti i valori uguali  EMBED Equation.3  [OBJ]. Infatti se supponiamo che uno dei valori, ad esempio il primo, è diverso  EMBED Equation.3  [OBJ] allora abbiamo che la probabilità di ottenere i valori  EMBED Equation.3  [OBJ] nello stato  EMBED Equation.3  [OBJ] è zero, dunque:
+	 EMBED Equation.3  [OBJ]
+Se i ket  EMBED Equation.3  [OBJ] oltre ad essere ortogonali sono anche normalizzati, allora le componenti di un generico ket  EMBED Equation.3  [OBJ] nella base  EMBED Equation.3  [OBJ] si potranno scrivere con il prodotto scalare  EMBED Equation.3  [OBJ], quindi avremo
+	 EMBED Equation.3  [OBJ]
+Queste identità devono essere vere per ogni scelta del ket  EMBED Equation.3  [OBJ], quindi possiamo dedurre la formula
+	 EMBED Equation.3  [OBJ]
+dove con I abbiamo indicato la matrice identità. Questa formula ci sarà utilissima in molte occasioni future.
+Ora supponiamo di voler calcolare la distribuzione di ampiezze di probabilità associata ad altre grandezze fisiche diverse dalla posizione, ad esempio la quantità di moto  EMBED Equation.3  [OBJ]. (D’ora in avanti con i simboli sopralineati indicheremo le grandezze vettoriali).
+Ampiezze di probabilità per la quantità di moto.
+Se conosciamo lo stato di una particella materiale, e conosciamo la distribuzione di ampiezze di probabilità per la variabile posizione  EMBED Equation.3  [OBJ], come possiamo determinare la distribuzione di ampiezze di probabilità per la grandezza quantità di moto?
+Se conoscessimo gli autostati della quantità di moto allora potremmo applicare il quarto postulato, ma questi autostati non li conosciamo e li dobbiamo determinare.
+Per trovare la soluzione al nostro problema dobbiamo prendere l’altro capo della matassa, cioè supponiamo di conoscere quali siano gli autostati della quantità di moto, e da questi cerchiamo di calcolare un valore che già conosciamo per altra via, così potremo avere un legame tra le cose che sappiamo e quelle che non abbiamo ancora determinato.
+Supponiamo ad esempio di voler calcolare il valore medio della componente lungo x della quantità di moto  EMBED Equation.3  [OBJ], supponendo di conoscere lo stato del sistema  EMBED Equation.3  [OBJ] e gli autostati della quantità di moto.
+Per mantenere la generalità non possiamo ipotizzare che la grandezza  EMBED Equation.3  [OBJ] da sola costituisca un set completo, quindi per “completare il set” introduciamo un insieme di grandezze ausiliarie che indicheremo brevemente con un unico simbolo contratto  EMBED Equation.3  [OBJ]. Per rappresentare un autostato associato ad un autovalore  EMBED Equation.3  [OBJ] useremo il ket  EMBED Equation.3  [OBJ], dove  EMBED Equation.3  [OBJ] è un multiindice relativo all’insieme delle grandezze ausiliarie  EMBED Equation.3  [OBJ].
+(Nota che sarebbe sbagliato scrivere il ket  EMBED Equation.3  [OBJ], perchè non è possibile identificare uno stato dando solo il valore  EMBED Equation.3  [OBJ] assunto dalla grandezza  EMBED Equation.3  [OBJ]).
+In base a queste notazioni possiamo scrivere la probabilità:
+	 EMBED Equation.3  [OBJ]
+Dove abbiamo indicato la probabilità con il simbolo  EMBED Equation.3  [OBJ] per non creare confusione con la p della quantità di moto.
+In base a questa formula possiamo calcolare il valore medio:
+	 EMBED Equation.3  [OBJ]
+ma noi sappiamo anche che
+	 EMBED Equation.3  [OBJ]
+dove  EMBED Equation.3  [OBJ] è l’operatore quantità di moto che abbiamo definito nella quarta scheda. In base a queste due uguaglianze possiamo scrivere
+	 EMBED Equation.3  [OBJ]
+visto che questa equazione è vera per ogni  EMBED Equation.3  [OBJ] possiamo dedurre che
+	 EMBED Equation.3  [OBJ]
+Questa formula ci mostra che l’operatore  EMBED Equation.3  [OBJ] “contiene in se” gli autostati che stiamo cercando  EMBED Equation.3  [OBJ], quindi dobbiamo trovare il modo di tirarli fuori.
+Proviamo a moltiplicare l’operatore  EMBED Equation.3  [OBJ] per un autostato  EMBED Equation.3  [OBJ]:
+	 EMBED Equation.3  [OBJ]
+	 EMBED Equation.3  [OBJ]
+Osservando che  EMBED Equation.3  [OBJ] è nullo se  EMBED Equation.3  [OBJ], all’interno dell’integrale possiamo sostituire il termine “centrale”  EMBED Equation.3  [OBJ] con  EMBED Equation.3  [OBJ].
+	 EMBED Equation.3  [OBJ] 
+essendo  EMBED Equation.3  [OBJ] le componenti del vettore  EMBED Equation.3  [OBJ] nella base  EMBED Equation.3  [OBJ], l’integrale non è altro che la combinazione che esprime il vettore  EMBED Equation.3  [OBJ] nella base  EMBED Equation.3  [OBJ], dunque abbiamo trovato
+	 EMBED Equation.3  [OBJ]
+cioè i vettori di stato  EMBED Equation.3  [OBJ] sono “autovettori” dell’operatore  EMBED Equation.3  [OBJ]. Questo è il motivo per cui gli autostati vengono chiamati così.
+A questo punto abbiamo determinato un quadro molto chiaro, alla grandezza osservabile  EMBED Equation.3  [OBJ] è associato un operatore  EMBED Equation.3  [OBJ], gli autostati della grandezza  EMBED Equation.3  [OBJ] sono associati agli autovettori dell’operatore  EMBED Equation.3  [OBJ], mentre i valori che può assumere la grandezza  EMBED Equation.3  [OBJ] sono gli autovalori dell’operatore  EMBED Equation.3  [OBJ].
+Se risolviamo il problema agli autovalori 
+	 EMBED Equation.3  [OBJ]
+determiniamo gli autostati dell’operatore  EMBED Equation.3  [OBJ] ed applicando il postulato quattro riusciamo a risolvere il nostro problema, cioè riusciamo a determinare la distribuzione di probabilità per la quantità di moto.
+Ora generalizziamo i risultati raggiunti per la quantità di moto con il seguente importantissimo teorema:
+Ad ogni grandezza fisica  EMBED Equation.3  [OBJ] è associato un operatore hermitiano  EMBED Equation.3  [OBJ] tale che:
+Il valore medio della grandezza  EMBED Equation.3  [OBJ], quando il sistema si trova in uno stato rappresentato dal ket  EMBED Equation.3  [OBJ], è dato dalla formula  EMBED Equation.3  [OBJ];
+Gli autovalori dell’operatore  EMBED Equation.3  [OBJ] sono tutti i possibili valori che può assumere la grandezza  EMBED Equation.3  [OBJ], e gli autovettori associati ad un autovalore  EMBED Equation.3  [OBJ] rappresentano gli autostati della grandezza  EMBED Equation.3  [OBJ] nei quali si ottiene con certezza il valore  EMBED Equation.3  [OBJ].
+Dimostrazione:
+Consideriamo una grandezza  EMBED Equation.3  [OBJ], siano  EMBED Equation.3  [OBJ] i possibili valori della grandezza  EMBED Equation.3  [OBJ], e siano  EMBED Equation.3  [OBJ] i ket rappresentativi degli autostati della grandezza  EMBED Equation.3  [OBJ] e del set di grandezze ausiliarie  EMBED Equation.3  [OBJ], allora l’operatore
+	 EMBED Equation.3  [OBJ]
+è hermitiano e soddisfa i due punti dell’asserto. Per verificarlo basta seguire esattamente gli stessi passi che abbiamo seguito per l’operatore  EMBED Equation.3  [OBJ].
+ Grandezze compatibili e grandezze incompatibili.
+Supponiamo di voler eseguire una misura contemporanea di  EMBED Equation.3  [OBJ] e di  EMBED Equation.3  [OBJ]. Dopo una tale misura il sistema si dovrebbe portare in un autostato simultaneo delle grandezze  EMBED Equation.3  [OBJ] e  EMBED Equation.3  [OBJ], ed il ket di stato risultante dovrebbe essere un autoket degli operatori  EMBED Equation.3  [OBJ] e  EMBED Equation.3  [OBJ], ma questo è impossibile. Infatti indicando con  EMBED Equation.3  [OBJ] un ipotetico autostato delle grandezze  EMBED Equation.3  [OBJ],  EMBED Equation.3  [OBJ] e di un opportuno set di grandezze ausiliarie  EMBED Equation.3  [OBJ], abbiamo
+	 EMBED Equation.3  [OBJ]
+da cui 
+	 EMBED Equation.3  [OBJ]
+ma noi sappiamo che  EMBED Equation.3  [OBJ], dunque abbiamo
+	 EMBED Equation.3  [OBJ]
+Concludiamo che l’autoket simultaneo degli operatori  EMBED Equation.3  [OBJ] e  EMBED Equation.3  [OBJ] non può esistere perché dovrebbe essere per forza nullo. Quindi non può essere possibile eseguire una misura precisa e contemporanea delle grandezze  EMBED Equation.3  [OBJ] e  EMBED Equation.3  [OBJ], mentre invece è perfettamente possibile in altri casi, ad esempio con le grandezze  EMBED Equation.3  [OBJ],  EMBED Equation.3  [OBJ].
+
+Prima di procedere con lo studio generalizzare al caso continuo la formula che abbiamo dimostrato alla fine del primo paragrafo:
+se  EMBED Equation.3  [OBJ] è un insieme completo di grandezze osservabili, e  EMBED Equation.3  [OBJ] è l’insieme ortonormale degli “autoket” associati ai suoi autostati, allora abbiamo
+	 EMBED Equation.3  [OBJ]
+Per chiarezza ripetiamo la dimostrazione: se moltiplichiamo l’integrale a sinistra per un generico ket  EMBED Equation.3  [OBJ] abbiamo
+	 EMBED Equation.3  [OBJ]
+essendo  EMBED Equation.3  [OBJ] le componenti del vettore  EMBED Equation.3  [OBJ] nella base  EMBED Equation.3  [OBJ] abbiamo
+	 EMBED Equation.3  [OBJ]
+che dovendo essere vera per ogni  EMBED Equation.3  [OBJ], prova l’asserto.
+Momento angolare.
+Nella Fisica Classica il momento angolare rispetto ad un polo O è definito dalla formula 
+	 EMBED Equation.3  [OBJ]
+Nello schema della Meccanica Quantistica la grandezza momento angolare dovrà essere coerente con la definizione classica.
+Dunque per i valori medi dovremo avere:
+	 EMBED Equation.3  [OBJ]
+Per semplificare il lavoro ci conviene considerare le singole componenti, inoltre per non appesantire le notazioni ometteremo il pedice O.
+	 EMBED Equation.3  [OBJ]
+Per le componenti abbiamo
+	 EMBED Equation.3  [OBJ]
+Consideriamo la componente  EMBED Equation.3  [OBJ]. Per avere accordo tra la Meccanica Classica e la Meccanica Quantistica dovremo avere:
+	 EMBED Equation.3  [OBJ]
+Concentriamo l’attenzione sul termine  EMBED Equation.3  [OBJ]
+	 EMBED Equation.3  [OBJ]
+Indichiamo con  EMBED Equation.3  [OBJ] un autoket rappresentativo di un autostato simultaneo delle grandezze  EMBED Equation.3  [OBJ],  EMBED Equation.3  [OBJ] e del set di grandezze ausiliarie  EMBED Equation.3  [OBJ].
+Usando questi ket abbiamo
+	 EMBED Equation.3  [OBJ]
+integrando rispetto alle variabili  EMBED Equation.3  [OBJ] abbiamo
+	 EMBED Equation.3  [OBJ]
+Quindi per il valore medio abbiamo
+	 EMBED Equation.3  [OBJ]
+ricordando che  EMBED Equation.3  [OBJ] possiamo scrivere
+	 EMBED Equation.3  [OBJ]
+essendo 
+	 EMBED Equation.3  [OBJ]
+abbiamo la formula finale
+	 EMBED Equation.3  [OBJ]
+I passaggi sono analoghi per tutti gli altri termini, quindi otteniamo:
+	 EMBED Equation.3  [OBJ]
+Dunque alla grandezza  EMBED Equation.3  [OBJ], per esempio, associamo l’operatore  EMBED Equation.3  [OBJ], e analogamente per le altre.
+A questo punto abbiamo trovato un operatore che ci dà una formula per calcolare il valore medio del momento angolare nel formalismo della Meccanica Quantistica e che è in accordo con la formula della Meccanica Classica.
+Questo stesso operatore ci può dare tutti i possibili valori che può assumere il momento magnetico e gli autostati corrispondenti; per ottenere queste informazioni basta risolvere il problema agli autovalori
+	 EMBED Equation.3  [OBJ]
+L’energia.
+Come ultima grandezza di studio consideriamo l’energia.
+Nel formalismo della Meccanica Classica, per una particella carica in un potenziale elettrico, abbiamo l’energia
+	 EMBED Equation.3  [OBJ]
+quindi dobbiamo cercare un operatore che ci dia un valore medio coerente con questa formula classica	
+	 EMBED Equation.3  [OBJ]
+Ma noi un operatore simile lo abbiamo già, ed è H, infatti
+	 EMBED Equation.3  [OBJ]
+Quindi se vogliamo trovare i valori che può assumere l’energia, e gli autostati in cui si porta la particella dopo una misura dell’energia, allora dobbiamo risolvere il seguente problema agli autovalori:
+	 EMBED Equation.3  [OBJ]
+Livelli energetici per l’atomo di idrogeno.
+L’atomo di idrogeno è costituito da un nucleo con carica pari a quella dell’elettrone, e da un unico elettrone orbitante.
+Per determinare il moto dell’elettrone attorno al nucleo si deve risolvere l’equazione si Schrödinger, mentre se si vogliono determinare i valori che può assumere l’energia dell’atomo, basta risolvere il problema agli autovalori che abbiamo posto nel precedente paragrafo nel caso in cui abbiamo un potenziale columbiano  EMBED Equation.3  [OBJ].
+In questa scheda non vogliamo risolvere questi complicati problemi matematici, e rimandiamo lo svolgimento ad una scheda futura, tuttavia vogliamo anticipare i risultati per i livelli energetici:
+L’energia può assumere solo dei valori discreti dati dalla formula
+	 EMBED Equation.3  [OBJ]
+PAGE  
+
+
+PAGE  6
+
+
+
+PAGE  10
+
+
+
+
+
+
+
+

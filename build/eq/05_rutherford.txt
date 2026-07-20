@@ -1,0 +1,145 @@
+[000] i\hbar \frac{d}{dt}
+[001] {N}/{Δt}
+[002] {N}/{Δt}
+[003] H=qV\left(X,Y,Z\right)+\frac{1}{2m}
+[004] ψ\equiv ψ\left(x,y,z,t\right)
+[005] P_{x}=-i\hbar D_{x}\equiv -i\hbar \frac{\partial }{\partial x}
+[006] V(X,Y,Z)
+[007] V(X,Y,Z)ψ↔V\left(x,y,z\right)ψ\left(x,y,z,t\right)
+[008] ψ\left(x,y,z,t\right)
+[009] \infty ^{3}
+[010] \left(x,y,z\right)
+[011] p\left(x,y,z,t\right)=\left|ψ\left(x,y,z,t\right)\right|^{2}=ψ^{*}\left(x,y,z,t\right)ψ\left(x,y,z,t\right)
+[012] p\left(x,y,z,t\right)Ω\int \int \int dxdydz=ψ^{*}\left(x,y,z,t\right)ψ\left(x,y,z,t\right)Ω\int \int \int dxdydz
+[013] \bar{s}
+[014] Σ_{Ω}
+[015] -\frac{\partial p}{\partial t}
+[016] -\frac{\partial }{\partial t}
+[017] Im\left\{ψ\nabla ^{2}ψ^{*}\right\}
+[018] \frac{\partial }{\partial t}
+[019] -\frac{\partial }{\partial t}
+[020] ψ
+[021] ψ=\sqrt{p}e^{iϕ}
+[022] \nabla ⋅\left(ψ^{*}\nabla ψ\right)=ψ^{*}\nabla ^{2}ψ+\nabla ψ^{*}⋅\nabla ψ=ψ^{*}\nabla ^{2}ψ+\left|\nabla ψ\right|^{2}
+[023] -\frac{\partial }{\partial t}
+[024] \bar{s}
+[025] \bar{s}
+[026] =\frac{\hbar }{m}
+[027] \begin{aligned}=\frac{\hbar }{m} \\ pIm\left\{e^{-iϕ}\nabla \left(e^{iϕ}\right)\right\}=\left(\begin{aligned}Applicando la \\ formula per la derivata \\ delle funzioni composte\end{aligned}()\right)pIm\left\{e^{-iϕ}\frac{de^{iϕ}}{dϕ}\right\}\{\} \\ = \\ =\frac{\hbar }{m} \\ pIm\left\{e^{-iϕ}\left(ie^{iϕ}\right)\nabla ϕ\right\}=\frac{\hbar }{m} \\ pIm\left\{i\nabla ϕ\right\}=\frac{\hbar }{m} \\ p\nabla ϕ\end{aligned}
+[028] \bar{s}
+[029] ϕ
+[030] p\left(ϑ\right)
+[031] pλ=h\Rightarrow λ=\frac{h}{p}
+[032] h=6,6⋅10^{-34}joule\times s
+[033] m=6,7⋅10^{-27}Kg
+[034] v=1,6⋅10^{7}{m}/{s}
+[035] λ=\frac{6,6⋅10^{-34}}{6,7⋅10^{-27}\times 1,6⋅10^{7}}
+[036] ψt_{0}=ψ\left(x,y,z,t_{0}\right)
+[037] V\left(x,y,z\right)
+[038] z=-\infty
+[039] e^{i\left(kz-ωt\right)}
+[040] e^{ikx}
+[041] e^{iky}
+[042] e^{ikz}
+[043] ψ\left(x,y,z,t\right)\vec{z\rightarrow -\infty }\rightarrow
+[044] z\rightarrow -\infty
+[045] V=0
+[046] e^{i\left(kz-ωt\right)}
+[047] ω=\frac{\hbar k^{2}}{2m}
+[048] ψ\left(x,y,z,t\right)=ψ\left(x,y,z\right)e^{-iωt}
+[049] \begin{aligned}i\hbar \frac{\partial }{\partial t} \\ e^{i\left(kz-ωt\right)}=-\frac{\hbar ^{2}}{2m} \\ \nabla ^{2}e^{i\left(kz-ωt\right)}\Leftrightarrow i\hbar \left(-iω\right)e^{i\left(kz-ωt\right)}=-\frac{\hbar ^{2}}{2m} \\ \left(ik\right)^{2}e^{i\left(kz-ωt\right)}\Leftrightarrow \\ \Leftrightarrow \hbar ω=\frac{\hbar ^{2}k^{2}}{2m} \\ \Leftrightarrow ω=\frac{\hbar k^{2}}{2m}\end{aligned}
+[050] ψ_{0}
+[051] ψ_{1}
+[052] ψ_{1}
+[053] ψ_{2}
+[054] ψ_{0}\left(x,y,z\right)=e^{ikz}
+[055] V\left(r'\right)()
+[056] \bar{r}
+[057] r>>r'
+[058] \left|\bar{r}\right|
+[059] \left|\bar{r}\right|
+[060] \left|\bar{r}\right|
+[061] z'
+[062] \hat{z}
+[063] \bar{r'}
+[064] \left|\hat{z}\right|
+[065] \left(α,β,r'\right)()
+[066] -\frac{d}{dt}
+[067] \begin{aligned}\frac{\partial ψ}{\partial t} \\ =-\frac{i}{\hbar } \\ Hψ=-\frac{i}{\hbar } \\ \left(qV+\frac{1}{2m}\right)^{2} \\ () \\ ψ=\lim \begin{aligned}Sostituendo \\ \bar{P} \\ =-i\hbar \nabla \end{aligned}=-\frac{i}{\hbar } \\ \left(qV-\frac{\hbar ^{2}}{2m}\right)() \\ ψ= \\ =-\frac{i}{\hbar } \\ qVψ+\frac{i\hbar }{2m} \\ \nabla ^{2}ψ\end{aligned}
+[068] \begin{aligned}-\frac{\partial }{\partial t} \\ \left(ψ^{*}ψ\right)=-ψ^{*}\left(-\frac{i}{\hbar }\right)\nabla ^{2}ψ \\ () \\ -ψ\left(-\frac{i}{\hbar }\right)\nabla ^{2}ψ \\ () \\ ^{*}= \\ =-ψ^{*}\left(-\frac{i}{\hbar }\right)\nabla ^{2}ψ \\ () \\ -ψ\left(\frac{i}{\hbar }\right)\nabla ^{2}ψ^{*} \\ () \\ = \\ =\underline{\frac{i}{\hbar }}ψ^{*}qVψ\end{aligned}-\frac{i\hbar }{2m}
+[069] \left\{\begin{aligned}\nabla ^{2}ψ+k^{2}ψ=\frac{2mq}{\hbar ^{2}} \\ Vψ \\ con ψ\left(x,y,z\right)\vec{z\rightarrow -\infty }\rightarrow \\ e^{ikz}\end{aligned}\{\right\}
+[070] Im\left\{\nabla ⋅\left(ψ^{*}\nabla ψ\right)\right\}=Im\left\{ψ^{*}\nabla ^{2}ψ\right\}+\underline{Im\left|\nabla ψ\right|^{2}}
+[071] \Leftrightarrow \nabla ^{2}ψ+\frac{2mω}{\hbar }
+[072] \Leftrightarrow i\hbar ψ\left(-iω\right)\underline{e^{-iωt}}
+[073] i\hbar \frac{\partial }{\partial t}
+[074] \nabla ^{2}ψ+k^{2}ψ=\frac{2mq}{\hbar ^{2}}
+[075] \left\{\begin{aligned}\nabla ^{2}ψ+k^{2}ψ=\frac{2mq}{\hbar ^{2}} \\ V\left(r\right)e^{ikz} \\ con ψ\left(x,y,z\right)\vec{z\rightarrow -\infty }\rightarrow \\ e^{ikz}\end{aligned}\{\right\}
+[076] ψ\left(\bar{r}\right)()
+[077] \bar{r}
+[078] \bar{r}'
+[079] \bar{r}
+[080] e^{ik\bar{r'}}()
+[081] y=cosα \Rightarrow dy=-cosα
+[082] \begin{aligned}-2πdye^{2ikr'}V\left(r'\right)() 0 \\ +\infty \\ \int \end{aligned} 1
+[083] \left(\frac{1}{a}\right)(
+[084] ψ
+[085] \begin{aligned}ψ\left(\bar{r}\right)() \\ =e^{ikz}-\frac{1}{4π} \\ \frac{e^{ik\left(r-\bar{r}'\right)}}{}r\frac{2mq}{\hbar ^{2}} \\ V\left(r'\right)() \\ e^{ik\bar{r'}}\end{aligned}
+[086] z=-\infty
+[087] z=+\infty
+[088] \bar{s}
+[089] e^{ikr}
+[090] 
+[091] ϕ=kr
+[092] \nabla ϕ=\hat{r}
+[093] e^{ikz}
+[094] s_{i}=\frac{}{}
+[095] dS=r^{2}
+[096] k=\frac{2π}{λ}
+[097] ϑ=0
+[098] \frac{1}{sen^{4}\frac{ϑ}{2}}
+[099] w_{Effettiva}=\left(\begin{aligned}Densità di \\ flusso effettiva\end{aligned}()\right)
+[100] w_{Effettiva}=\left(\begin{aligned}Densità di \\ flusso effettiva\end{aligned}()\right)
+[101] F=\left(\begin{aligned}Particelle per unità \\ di tempo in dΩ\end{aligned}()\right)
+[102] 10^{-10}m
+[103] \nabla ^{2}ψ+k^{2}ψ=f\left(\bar{r}\right)()
+[104] ψ\rightarrow e^{ikz}
+[105] z\rightarrow -\infty
+[106] \left\{\begin{aligned}\nabla ^{2}ψ+k^{2}ψ=0 \\ con ψ\vec{z\rightarrow -\infty }\rightarrow \\ e^{ikz}\end{aligned}\{\right\}
+[107] \left\{\nabla ^{2}ψ+k^{2}ψ=f\left(\bar{r}\right)() ψ\left(\bar{r}\right)()\right\}
+[108] \nabla ^{2}ψ+k^{2}ψ=δ\left(\bar{r}\right)
+[109] ψ=-\frac{1}{4π}
+[110] f\left(\bar{r}\right)()
+[111] ψ=e^{ikz}-\frac{1}{4π}
+[112] ψ=-\frac{1}{4π}
+[113] \bar{r}
+[114] δ\left(\bar{r}\right)
+[115] \nabla ^{2}ψ+k^{2}ψ=0
+[116] \bar{r}'
+[117] ψ=-\frac{1}{4π}
+[118] \nabla ^{2}ψ+k^{2}ψ=0\Leftrightarrow \nabla ^{2}\left(-\frac{1}{4π}\right) \left|\bar{r}\right|
+[119] \begin{aligned}\Leftrightarrow \frac{1}{r^{2}} \\ \frac{d}{dr} \\ \left(r^{2}\frac{d}{dr}\right) \\ () \\ +k^{2}\frac{e^{ikr}}{r} \\ =0\Leftrightarrow \frac{1}{r^{2}} \\ \frac{d}{dr} \\ \left(r^{2}\left(ik\frac{e^{ikr}}{r}\right)\right) \\ () \\ +k^{2}\frac{e^{ikr}}{r} \\ =0\Leftrightarrow \\ \Leftrightarrow \frac{1}{r^{2}} \\ \frac{d}{dr} \\ \left(ikre^{ikr}-e^{ikr}\right)+k^{2}\frac{e^{ikr}}{r} \\ =0\Leftrightarrow \frac{1}{r^{2}} \\ \left(ike^{ikr}-rk^{2}e^{ikr}-ike^{ikr}\right)+k^{2}\frac{e^{ikr}}{r} \\ =0\Leftrightarrow \\ \Leftrightarrow -\frac{1}{r^{2}} \\ rk^{2}e^{ikr}+k^{2}\frac{e^{ikr}}{r} \\ =0  Verificata.\end{aligned}
+[120] \nabla ^{2}ψ+k^{2}ψ=δ\left(\bar{r}\right)
+[121] ψ=-\frac{1}{4π}
+[122] \bar{r}
+[123] \left(\nabla ^{2}ψ+k^{2}ψ\right)\begin{aligned}Sfera \\ centrata \\ in \bar{r}\end{aligned}\int \int \int dΩ'=1
+[124] \left(\nabla ^{2}\left(-\frac{1}{4π}\right) \left|\bar{r}\right|\right)
+[125] \begin{aligned}=-\frac{1}{4π} \\ \left(\nabla ^{2}\frac{e^{ikr'}}{} r'\right)+k^{2}\frac{e^{ikr'}}{} r'\end{aligned}()
+[126] =-\frac{1}{4π}
+[127] \left(k^{2}\frac{e^{ikr'}}{} r'\right)()
+[128] ψ\left(\bar{r}\right)()
+[129] s_{d}=\frac{}{}
+[130] \frac{s_{d}}{s}
+[131] wdΩ=\frac{m}{}
+[132] w=\frac{q^{2}Q^{2}}{64π^{2}ε_{0}^{2}}m^{2}v^{4}
+[133] w=\frac{q^{2}Q^{2}}{64π^{2}ε_{0}^{2}}m^{2}v^{4}
+[134] w_{Effettiva}=F\times s\times n\times w_{Unitaria}=Fsn\frac{q^{2}Q^{2}}{64π^{2}ε_{0}^{2}}m^{2}v^{4}
+[135] \frac{N}{Δt}
+[136] \left(\begin{aligned}Angolo solido \\ totale\end{aligned}()\right)=\frac{π\left(rsen10^{\circ}\right)^{2}}{r^{2}}
+[137] F=\left(\begin{aligned}Particelle per unità \\ di tempo in dΩ\end{aligned}()\right)=27\times \frac{πsen^{2}10^{\circ}}{dΩ}
+[138] \frac{N}{Δt}
+[139] \left(2⋅10^{-10}m\right)^{3}=8⋅10^{-30}m^{3}
+[140] n\approx \left(8⋅10^{-30}\right)^{-1}\approx 10^{29}
+[141] \begin{aligned}n\approx 10^{29} atomi a m^{3} \\ s≅2μm=2⋅10^{-6}m \\ q≅2⋅1,6⋅10^{-19}C≅3,2⋅10^{-19}C \\ m≅6,7⋅10^{-27}Kg \\ v≅1,6⋅10^{7}{m}/{s}\end{aligned} ε_{0}≅8,8⋅10^{-12}{F}/{m}
+[142] \begin{aligned}\frac{N}{Δt} \\ =2,5\left(2⋅10^{-6}\right)10^{29}\frac{\left(3,2⋅10^{-19}\right)^{2}Q^{2}}{64⋅3,14^{2}⋅\left(8,8⋅10^{-12}\right)^{2}\left(6,7⋅10^{-27}\right)^{2}\left(1,6⋅10^{7}\right)^{4}} \\ \frac{1}{sen^{4}\frac{ϑ}{2}}\end{aligned}≅
+[143] Q=135⋅10^{-19}C
+[144] \frac{135}{1,6}
