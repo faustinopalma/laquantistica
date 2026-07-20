@@ -19,11 +19,18 @@
   });
 })();
 
-// Hover previews: references show the target figure; formulas zoom in.
+// Hover previews for references only; click jumps and offers a "return" button.
 (function () {
   var pop = document.createElement('div');
   pop.className = 'ref-pop';
   document.body.appendChild(pop);
+
+  var backBtn = document.createElement('button');
+  backBtn.className = 'ref-return';
+  backBtn.type = 'button';
+  backBtn.innerHTML = '↩ Torna al punto di lettura';
+  document.body.appendChild(backBtn);
+  var returnY = null;
 
   function position(x, y) {
     var r = pop.getBoundingClientRect();
@@ -37,7 +44,7 @@
   }
   function hide() { pop.classList.remove('show'); pop.innerHTML = ''; }
 
-  // References -> preview the referenced figure/object
+  // References -> preview on hover, jump + return button on click
   document.querySelectorAll('a.ref[data-ref]').forEach(function (a) {
     a.addEventListener('mouseenter', function (e) {
       var t = document.getElementById(a.getAttribute('data-ref'));
@@ -54,27 +61,22 @@
     a.addEventListener('mouseleave', hide);
     a.addEventListener('click', function (e) {
       var t = document.getElementById(a.getAttribute('data-ref'));
-      if (t) {
-        t.classList.remove('flash');
-        void t.offsetWidth;
-        t.classList.add('flash');
-      }
+      if (!t) return;
+      e.preventDefault();
+      hide();
+      returnY = window.pageYOffset;
+      t.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      t.classList.remove('flash');
+      void t.offsetWidth;
+      t.classList.add('flash');
+      backBtn.classList.add('show');
     });
   });
 
-  // Formulas -> zoom on hover
-  document.querySelectorAll('.content .eq-inline, .content .eq-block, .content math').forEach(function (el) {
-    if (el.closest('a.ref')) return;
-    el.style.cursor = 'zoom-in';
-    el.addEventListener('mouseenter', function (e) {
-      var clone = el.cloneNode(true);
-      if (clone.removeAttribute) { clone.removeAttribute('style'); }
-      if (el.tagName.toLowerCase() === 'img') { clone.style.height = '1.25in'; }
-      pop.innerHTML = '<div class="pv zoom">' + clone.outerHTML + '</div>';
-      pop.classList.add('show');
-      position(e.clientX, e.clientY);
-    });
-    el.addEventListener('mousemove', function (e) { position(e.clientX, e.clientY); });
-    el.addEventListener('mouseleave', hide);
+  backBtn.addEventListener('click', function () {
+    if (returnY !== null) {
+      window.scrollTo({ top: returnY, behavior: 'smooth' });
+    }
+    backBtn.classList.remove('show');
   });
 })();

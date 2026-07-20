@@ -270,8 +270,6 @@ figure.fig-inline.flash img { animation: figflash 1.8s ease; }
   margin: 0 auto;
   background: #fff;
 }
-.ref-pop .pv.zoom img { max-height: 200px; }
-.ref-pop .pv.zoom math { font-size: 2.1em; }
 .ref-pop .cap {
   font-family: var(--font-sans);
   font-size: .74rem;
@@ -280,6 +278,29 @@ figure.fig-inline.flash img { animation: figflash 1.8s ease; }
   margin-top: 6px;
   font-style: italic;
 }
+/* Floating "return to reading position" button after a reference jump */
+.ref-return {
+  position: fixed;
+  right: 1.2rem;
+  bottom: 1.4rem;
+  z-index: 1001;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: .65rem 1.1rem;
+  font-family: var(--font-sans);
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .28);
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.ref-return.show { opacity: 1; transform: none; pointer-events: auto; }
+.ref-return:hover { background: var(--accent-soft); }
 
 /* Data tables */
 table.data {
