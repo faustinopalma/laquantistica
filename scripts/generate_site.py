@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT           # output dir (set per build)
 MODE = 'svg'          # 'svg' or 'mathml'
 MML = {}              # key -> list of <math> strings (mathml mode)
+DOCX = ROOT / 'originale-docx'   # source .docx tree (new version)
 EQ = ROOT / 'build' / 'eq'
 EQSVG = ROOT / 'build' / 'eqsvg'
 PANSVG = ROOT / 'build' / 'pandoc_svg'
@@ -84,7 +85,7 @@ SENT = re.compile('\u0001IMG\u0001(\\d+)\u0001/IMG\u0001')
 
 
 def build_ole_body(src_rel, key, ch=None):
-    src = ROOT / src_rel
+    src = DOCX / src_rel
     tokens = doc_tokens(src)
     sizes = _load_manifest(f'eq_{key}')
     maths = MML.get(key, [])
