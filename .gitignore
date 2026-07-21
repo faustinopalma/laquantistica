@@ -9,3 +9,8 @@ build/louser/
 # OS
 Thumbs.db
 .DS_Store
+
+# Editor / CAD backup files (regenerable)
+*.BAK
+*.bak
+*~
