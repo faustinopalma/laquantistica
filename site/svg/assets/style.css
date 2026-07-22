@@ -250,32 +250,35 @@ figure.fig-inline.flash img { animation: figflash 1.8s ease; }
 .ref-pop {
   position: fixed;
   z-index: 1000;
-  max-width: 380px;
+  max-width: 560px;
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 10px;
   box-shadow: 0 14px 44px rgba(0, 0, 0, .24);
-  padding: 10px;
+  padding: 12px;
   pointer-events: none;
   opacity: 0;
   transition: opacity .12s ease;
 }
 .ref-pop.show { opacity: 1; }
 .ref-pop .pv { text-align: center; }
-.ref-pop .pv img {
-  max-width: 360px;
-  max-height: 320px;
+.ref-pop .pv img,
+.ref-pop .pv svg {
+  max-width: 540px;
+  max-height: 460px;
+  width: auto;
   height: auto;
   display: block;
   margin: 0 auto;
   background: #fff;
 }
+.ref-pop .pv math { font-size: 1.15rem; }
 .ref-pop .cap {
   font-family: var(--font-sans);
-  font-size: .74rem;
+  font-size: .8rem;
   color: var(--ink-soft);
   text-align: center;
-  margin-top: 6px;
+  margin-top: 8px;
   font-style: italic;
 }
 /* Floating "return to reading position" button after a reference jump */
@@ -301,6 +304,63 @@ figure.fig-inline.flash img { animation: figflash 1.8s ease; }
 }
 .ref-return.show { opacity: 1; transform: none; pointer-events: auto; }
 .ref-return:hover { background: var(--accent-soft); }
+
+/* Lightbox: click a figure image to see it enlarged */
+figure img.zoomable { cursor: zoom-in; }
+.zoom-link {
+  display: inline-block;
+  margin-top: .35rem;
+  font-family: var(--font-sans);
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  cursor: zoom-in;
+}
+.zoom-link:hover { text-decoration: underline; }
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 3vh 3vw;
+  background: rgba(0, 0, 0, .82);
+  cursor: zoom-out;
+}
+.lightbox.show { display: flex; }
+body.lightbox-open { overflow: hidden; }
+.lightbox-inner {
+  max-width: 94vw;
+  max-height: 94vh;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.lightbox-inner img {
+  display: block;
+  max-width: 94vw;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, .5);
+}
+.lightbox-close {
+  position: fixed;
+  top: 1rem;
+  right: 1.2rem;
+  z-index: 2001;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .92);
+  color: #111;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .4);
+}
+.lightbox-close:hover { background: #fff; }
 
 /* Data tables */
 table.data {

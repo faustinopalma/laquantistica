@@ -31,6 +31,7 @@
   backBtn.innerHTML = '↩ Torna al punto di lettura';
   document.body.appendChild(backBtn);
   var returnY = null;
+  var scrollHideHandler = null;
 
   function position(x, y) {
     var r = pop.getBoundingClientRect();
@@ -44,8 +45,31 @@
   }
   function hide() { pop.classList.remove('show'); pop.innerHTML = ''; }
 
+  function hideBack() {
+    backBtn.classList.remove('show');
+    if (scrollHideHandler) {
+      window.removeEventListener('scroll', scrollHideHandler);
+      scrollHideHandler = null;
+    }
+  }
+
+  // Semantic figure labels (Italian + English, singular/plural) that should be
+  // absorbed into the reference link so the whole "figura 1" / "fig. 1" /
+  // "Figure 1" is hoverable & clickable, not just the bare number.
+  var LABEL = /(\b(?:figure|figura|figg|fig)\.?)([ \u00a0\t]*)$/i;
+
   // References -> preview on hover, jump + return button on click
   document.querySelectorAll('a.ref[data-ref]').forEach(function (a) {
+    // Extend the interactive region to include the preceding label word.
+    var prev = a.previousSibling;
+    if (prev && prev.nodeType === 3) {
+      var m = prev.nodeValue.match(LABEL);
+      if (m) {
+        prev.nodeValue = prev.nodeValue.slice(0, prev.nodeValue.length - m[0].length);
+        a.insertBefore(document.createTextNode(m[1] + '\u00a0'), a.firstChild);
+      }
+    }
+
     a.addEventListener('mouseenter', function (e) {
       var t = document.getElementById(a.getAttribute('data-ref'));
       if (!t) return;
@@ -70,6 +94,22 @@
       void t.offsetWidth;
       t.classList.add('flash');
       backBtn.classList.add('show');
+
+      // Auto-hide the "return" button once the reader has kept scrolling well
+      // past the target: only arm hiding after the target first reaches center
+      // (so the smooth-scroll itself never triggers it prematurely).
+      if (scrollHideHandler) window.removeEventListener('scroll', scrollHideHandler);
+      var reached = false;
+      scrollHideHandler = function () {
+        var rect = t.getBoundingClientRect();
+        var offCenter = rect.top + rect.height / 2 - window.innerHeight / 2;
+        if (!reached) {
+          if (Math.abs(offCenter) < window.innerHeight * 0.5) reached = true;
+          return;
+        }
+        if (Math.abs(offCenter) > window.innerHeight * 1.15) hideBack();
+      };
+      window.addEventListener('scroll', scrollHideHandler, { passive: true });
     });
   });
 
@@ -77,6 +117,53 @@
     if (returnY !== null) {
       window.scrollTo({ top: returnY, behavior: 'smooth' });
     }
-    backBtn.classList.remove('show');
+    hideBack();
+  });
+})();
+
+// Lightbox: click a figure image (or a ".zoom-link") to open it enlarged in an
+// overlay. Click the overlay or press Esc to close. Gives a compact inline
+// figure plus an on-demand large version.
+(function () {
+  var box = document.createElement('div');
+  box.className = 'lightbox';
+  box.innerHTML = '<button class="lightbox-close" type="button" aria-label="Chiudi">\u00d7</button><div class="lightbox-inner"></div>';
+  document.body.appendChild(box);
+  var inner = box.querySelector('.lightbox-inner');
+
+  function open(src, alt) {
+    inner.innerHTML = '';
+    var img = document.createElement('img');
+    img.src = src;
+    if (alt) img.alt = alt;
+    inner.appendChild(img);
+    box.classList.add('show');
+    document.body.classList.add('lightbox-open');
+  }
+  function close() {
+    box.classList.remove('show');
+    document.body.classList.remove('lightbox-open');
+    inner.innerHTML = '';
+  }
+
+  // Any image inside a figure becomes zoomable.
+  document.querySelectorAll('figure img').forEach(function (img) {
+    img.classList.add('zoomable');
+    img.addEventListener('click', function () { open(img.getAttribute('src'), img.getAttribute('alt')); });
+  });
+
+  // Explicit "enlarge" links: <a class="zoom-link" data-zoom="path.svg">.
+  document.querySelectorAll('a.zoom-link[data-zoom]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      open(a.getAttribute('data-zoom'), a.getAttribute('data-alt'));
+    });
+  });
+
+  box.addEventListener('click', function (e) {
+    if (e.target === box || e.target.classList.contains('lightbox-close') || e.target === inner) close();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && box.classList.contains('show')) close();
   });
 })();

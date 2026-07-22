@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>⟨ Elementi interattivi ⟩ — proposte</title>
+<link rel="stylesheet" href="braket.css">
+<style>
+  .exp{margin:1rem 0}
+  .exp .head{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
+  .exp .num{font-family:var(--mono);color:var(--accent);font-weight:800;font-size:1.1rem}
+  .exp dl{display:grid;grid-template-columns:8.5rem 1fr;gap:.2rem .8rem;margin:.7rem 0 0}
+  .exp dt{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:.15rem}
+  .exp dd{margin:0}
+  @media(max-width:620px){.exp dl{grid-template-columns:1fr}.exp dt{padding-top:.5rem}}
+</style>
+</head>
+<body>
+<div class="bar">
+  <div class="mark"><span class="b">⟨</span>&nbsp;ΨQM&nbsp;<span class="b">⟩</span>
+    <small class="it">Proposta · elementi didattici interattivi</small>
+    <small class="en">Proposal · interactive didactic elements</small>
+  </div>
+  <div class="langsw" role="group" aria-label="Lingua / Language">
+    <button class="langbtn" data-l="it" aria-pressed="true">IT</button>
+    <button class="langbtn" data-l="en" aria-pressed="false">EN</button>
+  </div>
+</div>
+
+<main class="wrap">
+  <p class="eyebrow" style="margin-top:1.6rem"><a href="index.html" style="text-decoration:none">⟵ Home</a></p>
+  <h1 style="margin-top:.5rem"><span class="it">Elementi interattivi<br>proposti per ogni scheda</span><span class="en">Interactive elements<br>proposed for each card</span></h1>
+  <div class="rule" style="height:3px;background:var(--ink);margin:.8rem 0 1.2rem"></div>
+
+  <p class="lead"><span class="it">Idea: ogni scheda ospita <b>almeno un esperimento giocabile online</b>, fedele alla fisica della tesi (stesse equazioni, stessi numeri). Si costruiscono <b>uno alla volta</b>, in HTML5 Canvas/SVG, senza librerie pesanti, bilingui. Qui sotto le proposte, capitolo per capitolo.</span>
+    <span class="en">Idea: each card hosts <b>at least one experiment you can play online</b>, faithful to the physics of the thesis (same equations, same numbers). They are built <b>one at a time</b>, in HTML5 Canvas/SVG, no heavy libraries, bilingual. Below, the proposals chapter by chapter.</span></p>
+
+  <div class="exp panel">
+    <div class="head"><span class="num">01</span><h2 class="brk" style="margin:0">Stern-Gerlach</h2></div>
+    <dl>
+      <dt><span class="it">Controlli</span><span class="en">You control</span></dt>
+      <dd><span class="it">Gradiente del campo, orientazione dello spin, angolo dell'analizzatore.</span><span class="en">Field gradient, spin orientation, analyzer angle.</span></dd>
+      <dt><span class="it">Fisica</span><span class="en">Physics</span></dt>
+      <dd><span class="it">Forza ∝ gradiente·μ. Previsione classica = macchia continua; quantistica = <b>due</b> spot (+m₀/−m₀).</span><span class="en">Force ∝ gradient·μ. Classical prediction = a continuous smear; quantum = <b>two</b> spots (+m₀/−m₀).</span></dd>
+      <dt><span class="it">Impari</span><span class="en">Takeaway</span></dt>
+      <dd><span class="it">La quantizzazione del momento angolare e l'esito discreto della misura.</span><span class="en">Quantization of angular momentum and the discrete outcome of measurement.</span></dd>
+    </dl>
+  </div>
+
+  <div class="exp panel">
+    <div class="head"><span class="num">02</span><h2 class="brk" style="margin:0"><span class="it">Stern-Gerlach in cascata</span><span class="en">Stern-Gerlach in cascade</span></h2></div>
+    <dl>
+      <dt><span class="it">Controlli</span><span class="en">You control</span></dt>
+      <dd><span class="it">Numero di stadi, angolo relativo ϑ, quale uscita bloccare.</span><span class="en">Number of stages, relative angle ϑ, which output to block.</span></dd>
+      <dt><span class="it">Fisica</span><span class="en">Physics</span></dt>
+      <dd><span class="it">Probabilità cos²(ϑ/2) e sin²(ϑ/2); preparazione dello stato, collasso, interferenza se si ricombina.</span><span class="en">Probabilities cos²(ϑ/2) and sin²(ϑ/2); state preparation, collapse, interference on recombination.</span></dd>
+      <dt><span class="it">Impari</span><span class="en">Takeaway</span></dt>
+      <dd><span class="it">Ampiezze contro probabilità; collasso; complementarità.</span><span class="en">Amplitudes versus probabilities; collapse; complementarity.</span></dd>
+    </dl>
+  </div>
+
+  <div class="exp panel">
+    <div class="head"><span class="num">03</span><h2 class="brk" style="margin:0"><span class="it">Elettroni — Millikan</span><span class="en">Electrons — Millikan</span></h2></div>
+    <dl>
+      <dt><span class="it">Controlli</span><span class="en">You control</span></dt>
+      <dd><span class="it">Tensione tra le armature per bilanciare una goccia d'olio; ripeti su tante gocce.</span><span class="en">Plate voltage to balance an oil drop; repeat over many drops.</span></dd>
+      <dt><span class="it">Fisica</span><span class="en">Physics</span></dt>
+      <dd><span class="it">Equilibrio peso − spinta = qE, con attrito di Stokes in caduta (le stesse formule del Cap. 3). Le cariche cadono su <b>multipli di e</b>.</span><span class="en">Balance of weight − buoyancy = qE, with Stokes drag during fall (the same formulas as Ch. 3). Charges land on <b>multiples of e</b>.</span></dd>
+      <dt><span class="it">Impari</span><span class="en">Takeaway</span></dt>
+      <dd><span class="it">La carica è quantizzata: misuri <b>e ≈ 1,6·10⁻¹⁹ C</b> con le tue mani. (Variante: e/m di Thomson.)</span><span class="en">Charge is quantized: you measure <b>e ≈ 1.6·10⁻¹⁹ C</b> yourself. (Variant: Thomson's e/m.)</span></dd>
+    </dl>
+  </div>
+
+  <div class="exp panel">
+    <div class="head"><span class="num">04</span><h2 class="brk" style="margin:0"><span class="it">Diffrazione degli elettroni</span><span class="en">Electron diffraction</span></h2></div>
+    <dl>
+      <dt><span class="it">Controlli</span><span class="en">You control</span></dt>
+      <dd><span class="it">Tensione di accelerazione V.</span><span class="en">Accelerating voltage V.</span></dd>
+      <dt><span class="it">Fisica</span><span class="en">Physics</span></dt>
+      <dd><span class="it">p = √(2mqV), λ = h/p; i due anelli si stringono come V<sup>−1/2</sup> (due spaziature della grafite).</span><span class="en">p = √(2mqV), λ = h/p; the two rings shrink as V<sup>−1/2</sup> (two graphite spacings).</span></dd>
+      <dt><span class="it">Impari</span><span class="en">Takeaway</span></dt>
+      <dd><span class="it">L'onda di materia: verifichi <b>pλ = h</b>.</span><span class="en">The matter wave: you verify <b>pλ = h</b>.</span></dd>
+    </dl>
+  </div>
+
+  <div class="exp panel">
+    <div class="head"><span class="num">05</span><h2 class="brk" style="margin:0">Rutherford</h2></div>
+    <dl>
+      <dt><span class="it">Controlli</span><span class="en">You control</span></dt>
+      <dd><span class="it">Energia delle α, parametro d'urto (o «spari» molte particelle), carica del nucleo Z.</span><span class="en">α energy, impact parameter (or “fire” many particles), nuclear charge Z.</span></dd>
+      <dt><span class="it">Fisica</span><span class="en">Physics</span></dt>
+      <dd><span class="it">Traiettorie iperboliche di Coulomb; l'istogramma degli angoli costruisce la legge 1/sin⁴(ϑ/2).</span><span class="en">Coulomb hyperbolic trajectories; the angle histogram builds the 1/sin⁴(ϑ/2) law.</span></dd>
+      <dt><span class="it">Impari</span><span class="en">Takeaway</span></dt>
+      <dd><span class="it">Il nucleo piccolo e massiccio: quasi tutto passa, pochi rimbalzano.</span><span class="en">The small, massive nucleus: almost everything passes, a few bounce back.</span></dd>
+    </dl>
+  </div>
+
+  <div class="exp panel">
+    <div class="head"><span class="num">06</span><h2 class="brk" style="margin:0"><span class="it">Sviluppi della teoria</span><span class="en">Further theory</span></h2></div>
+    <dl>
+      <dt><span class="it">Controlli</span><span class="en">You control</span></dt>
+      <dd><span class="it">Scala dei livelli dell'idrogeno; scegli una transizione.</span><span class="en">The hydrogen level ladder; pick a transition.</span></dd>
+      <dt><span class="it">Fisica</span><span class="en">Physics</span></dt>
+      <dd><span class="it">E<sub>n</sub> = −13,6/n² eV; commutatore [x,p] = iℏ e incompatibilità.</span><span class="en">E<sub>n</sub> = −13.6/n² eV; commutator [x,p] = iℏ and incompatibility.</span></dd>
+      <dt><span class="it">Impari</span><span class="en">Takeaway</span></dt>
+      <dd><span class="it">Energia quantizzata; perché x e p non si misurano insieme.</span><span class="en">Quantized energy; why x and p can't be measured together.</span></dd>
+    </dl>
+  </div>
+
+  <div class="exp panel">
+    <div class="head"><span class="num">07</span><h2 class="brk" style="margin:0">Franck-Hertz</h2></div>
+    <dl>
+      <dt><span class="it">Controlli</span><span class="en">You control</span></dt>
+      <dd><span class="it">Tensione di accelerazione (spazzata); gas (neon/mercurio).</span><span class="en">Accelerating voltage (sweep); gas (neon/mercury).</span></dd>
+      <dt><span class="it">Fisica</span><span class="en">Physics</span></dt>
+      <dd><span class="it">Urti anelastici alla soglia di eccitazione → cali di corrente a multipli; bande luminose che si spostano.</span><span class="en">Inelastic collisions at the excitation threshold → current dips at multiples; luminous bands that move.</span></dd>
+      <dt><span class="it">Impari</span><span class="en">Takeaway</span></dt>
+      <dd><span class="it">I livelli energetici atomici sono discreti.</span><span class="en">Atomic energy levels are discrete.</span></dd>
+    </dl>
+  </div>
+
+  <div class="exp panel">
+    <div class="head"><span class="num">08</span><h2 class="brk" style="margin:0"><span class="it">Effetto fotoelettrico</span><span class="en">Photoelectric effect</span></h2></div>
+    <dl>
+      <dt><span class="it">Controlli</span><span class="en">You control</span></dt>
+      <dd><span class="it">Frequenza e intensità della luce; tensione di arresto.</span><span class="en">Light frequency and intensity; stopping voltage.</span></dd>
+      <dt><span class="it">Fisica</span><span class="en">Physics</span></dt>
+      <dd><span class="it">E<sub>e</sub> = hν − W; l'energia non dipende dall'intensità; soglia ν₀ = W/h.</span><span class="en">E<sub>e</sub> = hν − W; the energy does not depend on intensity; threshold ν₀ = W/h.</span></dd>
+      <dt><span class="it">Impari</span><span class="en">Takeaway</span></dt>
+      <dd><span class="it">Il fotone: dalla pendenza della retta E(ν) <b>misuri h</b>.</span><span class="en">The photon: from the slope of the line E(ν) <b>you measure h</b>.</span></dd>
+    </dl>
+  </div>
+
+  <div class="exp panel">
+    <div class="head"><span class="num">09</span><h2 class="brk" style="margin:0"><span class="it">Spettri atomici</span><span class="en">Atomic spectra</span></h2></div>
+    <dl>
+      <dt><span class="it">Controlli</span><span class="en">You control</span></dt>
+      <dd><span class="it">Sorgente/gas; reticolo di diffrazione; zoom sullo spettro.</span><span class="en">Source/gas; diffraction grating; zoom the spectrum.</span></dd>
+      <dt><span class="it">Fisica</span><span class="en">Physics</span></dt>
+      <dd><span class="it">ν = c/(d·senϑ); serie di Balmer/Lyman/Paschen dai livelli; clic su una riga → transizione n→m e λ.</span><span class="en">ν = c/(d·sinϑ); Balmer/Lyman/Paschen series from the levels; click a line → transition n→m and λ.</span></dd>
+      <dt><span class="it">Impari</span><span class="en">Takeaway</span></dt>
+      <dd><span class="it">Le righe spettrali sono transizioni quantizzate.</span><span class="en">Spectral lines are quantized transitions.</span></dd>
+    </dl>
+  </div>
+
+  <h2 class="brk" style="margin-top:2.4rem"><span class="it">Come li costruiamo</span><span class="en">How we build them</span></h2>
+  <div class="panel flat">
+    <p style="margin:.1rem 0">
+      <span class="it">HTML5 Canvas/SVG, nessuna libreria pesante, <b>fisica accurata</b> (le stesse equazioni della tesi), responsive e bilingue. Ognuno diventa l'«elemento interattivo» del suo capitolo. Proposta di priorità: <b>Millikan</b> e <b>Franck-Hertz</b> per primi (grande impatto didattico, fisica pulita).</span>
+      <span class="en">HTML5 Canvas/SVG, no heavy libraries, <b>accurate physics</b> (the same equations as the thesis), responsive and bilingual. Each becomes the “interactive element” of its chapter. Suggested priority: <b>Millikan</b> and <b>Franck-Hertz</b> first (high didactic impact, clean physics).</span>
+    </p>
+  </div>
+
+  <div class="cta">
+    <a class="btn ghost" href="index.html"><span class="it">Torna alla home</span><span class="en">Back to home</span></a>
+  </div>
+  <div class="foot"><span class="it">Documento di proposta · <span class="mono">da concordare</span>.</span><span class="en">Proposal document · <span class="mono">to be agreed</span>.</span></div>
+</main>
+
+<script src="braket.js"></script>
+</body>
+</html>

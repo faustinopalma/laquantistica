@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="it"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stile 10 — Slab</title>
+<style>
+  :root{--bg:#ffffff;--ink:#1a1a1a;--muted:#6a6a6a;--accent:#0f766e;--line:#e6e6e6;
+    --slab:"Rockwell","Roboto Slab",Georgia,serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:1.07rem;line-height:1.72}
+  .top{display:flex;justify-content:space-between;align-items:center;max-width:43rem;margin:0 auto;padding:1rem 1.2rem;border-bottom:1px solid var(--line)}
+  .mark{font-family:var(--slab);font-weight:700}
+  .topnote{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  main{max-width:43rem;margin:0 auto;padding:1.5rem 1.2rem 4rem}
+  .eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:.6rem 0 .3rem}
+  h1{font-family:var(--slab);font-size:clamp(2rem,6.6vw,3rem);line-height:1.08;font-weight:700;margin:.2rem 0 .6rem}
+  .lede{font-size:1.15rem;color:#3a3a3a;margin:.4rem 0 1.6rem}
+  h2{font-family:var(--slab);font-size:1.02rem;font-weight:700;color:#fff;background:var(--accent);display:inline-block;padding:.35rem .7rem;margin:2rem 0 .6rem;border-radius:3px}
+  p{margin:.7rem 0}
+  .hl{background:#e9f4f2;border-left:5px solid var(--accent);padding:.9rem 1.1rem;margin:1.4rem 0;border-radius:0 6px 6px 0}
+  .hlk{font-family:var(--slab);font-size:.78rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);margin:0 0 .3rem}
+  .btn{display:inline-block;font-family:var(--slab);font-size:.92rem;font-weight:700;text-decoration:none;color:#fff;background:var(--ink);padding:.6rem 1.1rem;border-radius:3px;margin-top:.5rem}
+  .eq{background:#f5f5f5;border:1px solid var(--line);padding:1rem;margin:1.3rem 0;overflow-x:auto;font-size:1.12rem;text-align:center;border-radius:6px}
+  .foot{color:var(--muted);font-size:.82rem;margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem}
+  a{color:var(--accent)}
+</style></head>
+<body>
+<header class="top"><span class="mark">ΨQM</span><span class="topnote">Stile 10 · Slab</span></header>
+<main>
+  <p class="eyebrow">Presentato al 85° Congresso Nazionale SIF · Pavia · 24 settembre 1999</p>
+  <h1>Esperimenti fondamentali della Meccanica Quantistica</h1>
+  <p class="lede">Nove schede che costruiscono la teoria quantistica a partire dagli esperimenti cruciali. Di Faustino Palma — Università di Napoli «Federico II».</p>
+  <div class="hl">
+    <p class="hlk">In evidenza</p>
+    <p>L'equazione di Schrödinger è <b>dedotta da pochi postulati e dalla meccanica classica</b>: dalla coerenza con la legge di Newton e da de Broglie per fissare ℏ.</p>
+    <a class="btn" href="#">Vai al teorema →</a>
+  </div>
+  <h2>Dagli esperimenti alla teoria</h2>
+  <p>La parte teorica è un'introduzione alla Meccanica Quantistica, trattata fin dall'inizio con le notazioni di Dirac. L'equazione di Schrödinger non è postulata, ma dedotta da principi elementari e dalla condizione che la legge fondamentale sia coerente con l'equazione di Newton.</p>
+  <p>Tutta la trattazione è indipendente dalla Meccanica Analitica: si appoggia solo su Newton e sull'elettromagnetismo, ed è quindi accessibile agli studenti del terzo anno di Ingegneria.</p>
+  <div class="eq"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>i</mi><mi>ℏ</mi><mfrac><mrow><mi>∂</mi><mi>ψ</mi></mrow><mrow><mi>∂</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mrow><mo fence="true">(</mo><mrow><mo>−</mo><mfrac><mrow><msup><mi>ℏ</mi><mn>2</mn></msup></mrow><mrow><mn>2</mn><mi>m</mi></mrow></mfrac><mfrac><mrow><msup><mi>∂</mi><mn>2</mn></msup><mi>ψ</mi></mrow><mrow><mi>∂</mi><msup><mi>x</mi><mn>2</mn></msup></mrow></mfrac><mo>+</mo><mi>q</mi><mi>V</mi></mrow><mo fence="true">)</mo></mrow><mi>ψ</mi></mrow></math></div>
+  <p class="foot">© Faustino Palma, 1999 · edizione web · esempio di stile 10</p>
+</main>
+</body></html>

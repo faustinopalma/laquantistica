@@ -1,0 +1,15 @@
+{
+  "once": [
+    ["<h2>A questo punto scriviamo i principi generalizzati</h2>", "<p>A questo punto scriviamo i principi generalizzati</p>"],
+    ["<h2>Se risolviamo il problema agli autovalori</h2>", "<p>Se risolviamo il problema agli autovalori</p>"],
+    ["<h2>Per le componenti abbiamo</h2>", "<p>Per le componenti abbiamo</p>"],
+    ["<h2>Usando questi ket abbiamo</h2>", "<p>Usando questi ket abbiamo</p>"],
+    ["<h2>Quindi per il valore medio abbiamo</h2>", "<p>Quindi per il valore medio abbiamo</p>"],
+    ["ad esempio (k, da la probabilit\u00e0", "ad esempio \u03b1<sub>k</sub>, d\u00e0 la probabilit\u00e0"]
+  ],
+  "all": [
+    ["stato ( pu\u00f2 essere considerato", "stato \u03b1 pu\u00f2 essere considerato"],
+    ["stato ( e si misura", "stato \u03b1 e si misura"],
+    ["stato (t segue una legge", "stato \u03b1t segue una legge"]
+  ]
+}

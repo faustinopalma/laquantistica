@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="it"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stile 02 — Svizzero</title>
+<style>
+  :root{--bg:#ffffff;--ink:#111;--muted:#666;--accent:#e10600;--line:#111}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.06rem;line-height:1.65}
+  .top{display:flex;justify-content:space-between;align-items:center;max-width:44rem;margin:0 auto;
+    padding:.9rem 1.2rem;border-bottom:2px solid var(--line)}
+  .mark{font-weight:800;letter-spacing:-.01em}
+  .topnote{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  main{max-width:44rem;margin:0 auto;padding:1.4rem 1.2rem 4rem}
+  .eyebrow{font-size:.76rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:.6rem 0 .2rem}
+  h1{font-size:clamp(2rem,7vw,3.2rem);line-height:1.02;font-weight:800;letter-spacing:-.03em;margin:.2rem 0 .6rem}
+  .lede{font-size:1.16rem;color:#333;margin:.4rem 0 1.6rem;max-width:34rem}
+  h2{font-size:.86rem;letter-spacing:.08em;text-transform:uppercase;font-weight:800;margin:2rem 0 .5rem;padding-top:.6rem;border-top:2px solid var(--line)}
+  p{margin:.7rem 0}
+  .hl{border-left:6px solid var(--accent);padding:.2rem 0 .2rem 1rem;margin:1.3rem 0}
+  .hlk{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 .3rem}
+  .btn{display:inline-block;font-size:.86rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;text-decoration:none;
+    color:#fff;background:var(--accent);padding:.7rem 1.1rem;margin-top:.5rem}
+  .eq{background:#f2f2f2;padding:1rem;margin:1.3rem 0;overflow-x:auto;font-size:1.1rem;text-align:center}
+  .foot{color:var(--muted);font-size:.82rem;margin-top:2.4rem;border-top:2px solid var(--line);padding-top:1rem}
+  a{color:var(--accent)}
+</style></head>
+<body>
+<header class="top"><span class="mark">ΨQM</span><span class="topnote">Stile 02 · Svizzero</span></header>
+<main>
+  <p class="eyebrow">Presentato al 85° Congresso Nazionale SIF · Pavia · 24 settembre 1999</p>
+  <h1>Esperimenti fondamentali della Meccanica Quantistica</h1>
+  <p class="lede">Nove schede che costruiscono la teoria quantistica a partire dagli esperimenti cruciali. Di Faustino Palma — Università di Napoli «Federico II».</p>
+  <div class="hl">
+    <p class="hlk">In evidenza</p>
+    <p>L'equazione di Schrödinger è <b>dedotta da pochi postulati e dalla meccanica classica</b>: dalla coerenza con la legge di Newton e da de Broglie per fissare ℏ.</p>
+    <a class="btn" href="#">Vai al teorema →</a>
+  </div>
+  <h2>Dagli esperimenti alla teoria</h2>
+  <p>La parte teorica è un'introduzione alla Meccanica Quantistica, trattata fin dall'inizio con le notazioni di Dirac. L'equazione di Schrödinger non è postulata, ma dedotta da principi elementari e dalla condizione che la legge fondamentale sia coerente con l'equazione di Newton.</p>
+  <p>Tutta la trattazione è indipendente dalla Meccanica Analitica: si appoggia solo su Newton e sull'elettromagnetismo, ed è quindi accessibile agli studenti del terzo anno di Ingegneria.</p>
+  <div class="eq"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>i</mi><mi>ℏ</mi><mfrac><mrow><mi>∂</mi><mi>ψ</mi></mrow><mrow><mi>∂</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mrow><mo fence="true">(</mo><mrow><mo>−</mo><mfrac><mrow><msup><mi>ℏ</mi><mn>2</mn></msup></mrow><mrow><mn>2</mn><mi>m</mi></mrow></mfrac><mfrac><mrow><msup><mi>∂</mi><mn>2</mn></msup><mi>ψ</mi></mrow><mrow><mi>∂</mi><msup><mi>x</mi><mn>2</mn></msup></mrow></mfrac><mo>+</mo><mi>q</mi><mi>V</mi></mrow><mo fence="true">)</mo></mrow><mi>ψ</mi></mrow></math></div>
+  <p class="foot">© Faustino Palma, 1999 · edizione web · esempio di stile 02</p>
+</main>
+</body></html>

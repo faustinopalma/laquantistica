@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deduzione dell'equazione di Schrödinger — pagina ex novo</title>
+<style>
+  :root{--bg:#f7f4ec;--ink:#26241f;--muted:#736c5e;--accent:#2f5d50;--line:#e0d9c9}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;font-size:1.13rem;line-height:1.76}
+  body math{font-family:"Palatino Linotype","Book Antiqua",Palatino,Georgia,serif}
+  .top{display:flex;justify-content:space-between;align-items:center;max-width:44rem;margin:0 auto;padding:1rem 1.2rem;border-bottom:1px solid var(--line)}
+  .mark{font-weight:700}
+  .mark .bk{color:var(--accent);font-weight:400}
+  .topnote{font-family:system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  main{max-width:44rem;margin:0 auto;padding:1.4rem 1.2rem 4rem}
+  .back{font-family:system-ui,sans-serif;font-size:.85rem;color:var(--accent);text-decoration:none;display:inline-block;margin:.6rem 0 .2rem}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);line-height:1.16;margin:.2rem 0 .5rem}
+  .lede{font-size:1.16rem;font-style:italic;color:#4a453d;margin:.4rem 0 1.4rem}
+  .note{background:#eef2ee;border:1px solid #cfe0d9;border-left:4px solid var(--accent);padding:.85rem 1.05rem;border-radius:4px;margin:1.2rem 0;font-size:.98rem}
+  .note .k{font-family:system-ui,sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:.3rem}
+  h2{font-size:1.4rem;margin:2rem 0 .5rem}
+  h2 .bk{color:var(--accent);font-size:.8em;margin-right:.35rem}
+  h3{font-size:1.12rem;margin:1.5rem 0 .3rem;color:#33302a}
+  p{margin:.7rem 0;text-align:justify;hyphens:auto}
+  .intro>p:first-of-type::first-letter{font-size:3.2rem;line-height:.82;float:left;font-weight:700;padding:.1rem .5rem .1rem 0;color:var(--accent)}
+  ol.prem{margin:.6rem 0;padding-left:0;list-style:none;counter-reset:pr}
+  ol.prem>li{counter-increment:pr;position:relative;padding:.25rem 0 .25rem 2.3rem;margin:.6rem 0;text-align:justify}
+  ol.prem>li::before{content:counter(pr);position:absolute;left:0;top:.2rem;font-family:system-ui,sans-serif;font-size:.8rem;font-weight:700;color:#fff;background:var(--accent);width:1.5rem;height:1.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center}
+  .eq{background:#fff;border:1px solid var(--line);border-radius:6px;padding:.9rem;margin:1rem 0;overflow-x:auto;text-align:center}
+  .box{background:#fff;border:2px solid var(--accent);border-radius:8px;padding:1rem;margin:1.3rem 0;overflow-x:auto;text-align:center}
+  .cta{display:flex;flex-wrap:wrap;gap:.7rem;margin:2rem 0 0}
+  .btn{font-family:system-ui,sans-serif;font-size:.92rem;font-weight:600;text-decoration:none;padding:.6rem 1.1rem;border-radius:4px}
+  .btn.solid{background:var(--accent);color:#fff}
+  .btn.ghost{border:1px solid var(--line);color:var(--ink)}
+  .foot{font-family:system-ui,sans-serif;color:var(--muted);font-size:.84rem;margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem}
+  a{color:var(--accent)}
+</style>
+</head>
+<body>
+<header class="top">
+  <span class="mark"><span class="bk">⟨</span>ΨQM<span class="bk">⟩</span></span>
+  <span class="topnote">Pagina ex novo</span>
+</header>
+
+<main>
+  <a class="back" href="index.html">⟵ Home</a>
+
+  <h1>Deduzione dell'equazione di Schrödinger</h1>
+  <p class="lede">L'equazione di Schrödinger e la sua origine fisica, in forma sintetica. La derivazione completa è nel Capitolo 4.</p>
+
+  <div class="note">
+    <span class="k">Nota</span>
+    Questa pagina non fa parte della tesi originale del 1999: riassume in forma breve il risultato del Capitolo 4.
+  </div>
+
+  <h2>Enunciato</h2>
+  <div class="intro">
+  <p>Per una particella di massa <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>m</mi></math> e carica <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>q</mi></math> in un potenziale elettrico <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>V</mi><mo>(</mo><mi>x</mi><mo>)</mo></math>, la funzione d'onda <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>ψ</mi><mo>(</mo><mi>x</mi><mo>,</mo><mi>t</mi><mo>)</mo></math> che la descrive obbedisce all'equazione:</p>
+  </div>
+  <div class="box"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>i</mi><mi>ℏ</mi><mfrac><mrow><mi>∂</mi><mi>ψ</mi></mrow><mrow><mi>∂</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mrow><mo fence="true">(</mo><mrow><mo>−</mo><mfrac><mrow><msup><mi>ℏ</mi><mn>2</mn></msup></mrow><mrow><mn>2</mn><mi>m</mi></mrow></mfrac><mfrac><mrow><msup><mi>∂</mi><mn>2</mn></msup></mrow><mrow><mi>∂</mi><msup><mi>x</mi><mn>2</mn></msup></mrow></mfrac><mo>+</mo><mi>q</mi><mi>V</mi></mrow><mo fence="true">)</mo></mrow><mi>ψ</mi></mrow></math></div>
+
+  <h2>Le idee da cui deriva</h2>
+  <p>L'equazione non è un postulato a sé: discende da tre richieste semplici sullo stato della particella.</p>
+  <ol class="prem">
+    <li><b>Funzione complessa e linearità.</b> Lo stato della particella è descritto da una funzione complessa <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>ψ</mi><mo>(</mo><mi>x</mi><mo>,</mo><mi>t</mi><mo>)</mo></math>, e la sua evoluzione nel tempo è lineare: la somma di due stati evolve come la somma delle loro evoluzioni.</li>
+    <li><b>Interpretazione probabilistica.</b> Il modulo quadro <math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mrow><mo>|</mo><mi>ψ</mi><mo>(</mo><mi>x</mi><mo>,</mo><mi>t</mi><mo>)</mo><mo>|</mo></mrow><mn>2</mn></msup></math> è la densità di probabilità di trovare la particella nel punto <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi></math>; l'evoluzione conserva la probabilità totale.</li>
+    <li><b>Corrispondenza con Newton.</b> Nel limite classico i valori medi della posizione e della quantità di moto obbediscono alla seconda legge di Newton.</li>
+  </ol>
+  <p>Prese insieme, queste tre richieste individuano la forma dell'equazione qui sopra; il valore delle costanti si fissa con le osservazioni. La derivazione completa è nel Capitolo 4.</p>
+
+  <div class="cta">
+    <a class="btn solid" href="capitolo.html">La derivazione estesa (Cap. 4)</a>
+    <a class="btn ghost" href="index.html">Torna alla home</a>
+  </div>
+
+  <div class="foot">Pagina ex novo · sintesi didattica · non presente nell'originale 1999. © Faustino Palma, 1999 · edizione web.</div>
+</main>
+</body>
+</html>

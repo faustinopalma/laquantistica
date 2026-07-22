@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="it"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Galleria stili — Tesi MQ</title>
+<style>
+  :root{--bg:#f4f4f2;--ink:#1c1c1c;--muted:#666;--accent:#7c1d1d;--line:#e2e0d8}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:1.05rem;line-height:1.65}
+  header{max-width:60rem;margin:0 auto;padding:1.6rem 1.2rem .6rem}
+  h1{font-size:clamp(1.6rem,5vw,2.2rem);margin:.2rem 0 .4rem}
+  .sub{color:var(--muted);max-width:44rem}
+  .note{max-width:44rem;background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);
+    padding:.8rem 1rem;margin:1rem 0;border-radius:6px;font-size:.95rem;color:#444}
+  .grid{max-width:60rem;margin:1rem auto;padding:0 1.2rem 4rem;
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:1rem}
+  .card{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;text-decoration:none;color:inherit;
+    display:flex;flex-direction:column;transition:transform .1s,box-shadow .1s}
+  .card:hover{transform:translateY(-2px);box-shadow:0 6px 18px #0000001a}
+  .sw{height:5.2rem;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.4rem;letter-spacing:.02em}
+  .cbody{padding:.8rem .9rem 1rem}
+  .cnum{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .cname{font-weight:700;font-size:1.05rem;margin:.1rem 0 .25rem}
+  .cdesc{font-size:.86rem;color:#555}
+  footer{max-width:60rem;margin:0 auto;padding:0 1.2rem 3rem;color:var(--muted);font-size:.85rem}
+</style></head>
+<body>
+<header>
+  <h1>Galleria di stili — leggibilità massima</h1>
+  <p class="sub">Dieci direzioni grafiche diverse per la stessa scheda campione. Sfondo sempre pieno dietro il testo (niente reticolo), caratteri variati, ⟨ ⟩ usati solo come marchio decorativo. Tutte le pagine sono ottimizzate anche per smartphone.</p>
+  <p class="note">Gli esempi sono in italiano per il confronto. Una volta scelto lo stile (o una combinazione), lo applico al sito reale e procedo con la traduzione bilingue dei 9 capitoli.</p>
+  <p class="note" style="border-left-color:#1f5fbf"><b>Equazioni in linea &amp; schemi:</b> <a href="inline-confronto.html">confronto font ↔ matematica in linea</a> · <a href="demo-serif-inline.html">demo serif (in contesto)</a> · <a href="demo-sans-inline.html">demo sans (in contesto)</a>.</p>
+  <p class="note" style="border-left-color:#7c1d1d"><b>Varianti serif (direzione scelta) con braket sporadico:</b> <a href="11-serif-editoriale-braket.html">A · Editoriale braket</a> · <a href="12-serif-capolettera.html">B · Capolettera</a> · <a href="13-serif-numeri.html">C · Numeri ⟨NN⟩</a> · <a href="14-serif-classica.html">D · Classica</a>.</p>
+</header>
+<div class="grid">
+  <a class="card" href="01-editoriale.html"><div class="sw" style="background:#fbfaf6;color:#7c1d1d;font-family:Georgia,serif">Aa</div><div class="cbody"><div class="cnum">Stile 01</div><div class="cname">Editoriale</div><div class="cdesc">Serif accademico, misura stretta, accento bordeaux. Da rivista scientifica.</div></div></a>
+  <a class="card" href="02-svizzero.html"><div class="sw" style="background:#fff;color:#e10600;font-family:Arial,sans-serif">Aa</div><div class="cbody"><div class="cnum">Stile 02</div><div class="cname">Svizzero</div><div class="cdesc">Helvetica/Arial, titoli grandi in grassetto, rosso segnale. Rigoroso.</div></div></a>
+  <a class="card" href="03-umanista.html"><div class="sw" style="background:#faf9f7;color:#1f5fbf;font-family:'Segoe UI',sans-serif">Aa</div><div class="cbody"><div class="cnum">Stile 03</div><div class="cname">Umanista</div><div class="cdesc">Sans di sistema, sfondo caldo, accento blu. Morbido e moderno.</div></div></a>
+  <a class="card" href="04-taccuino.html"><div class="sw" style="background:#f6f6f3;color:#c2410c;font-family:Consolas,monospace">⟨A⟩</div><div class="cbody"><div class="cnum">Stile 04</div><div class="cname">Taccuino tecnico</div><div class="cdesc">Testo sans + etichette monospaziate, arancio bruciato. Da quaderno di laboratorio.</div></div></a>
+  <a class="card" href="05-notturno.html"><div class="sw" style="background:#131417;color:#f5b642;font-family:'Segoe UI',sans-serif">Aa</div><div class="cbody"><div class="cnum">Stile 05</div><div class="cname">Notturno</div><div class="cdesc">Tema scuro ad alto contrasto (non nero puro), accento ambra. Elegante.</div></div></a>
+  <a class="card" href="06-geometrico.html"><div class="sw" style="background:#fff;color:#1d3557;font-family:'Century Gothic',sans-serif">Aa</div><div class="cbody"><div class="cnum">Stile 06</div><div class="cname">Geometrico</div><div class="cdesc">Sans geometrico, forme primarie ai margini. Ispirazione Bauhaus.</div></div></a>
+  <a class="card" href="07-essenziale.html"><div class="sw" style="background:#fff;color:#2a2a2a;font-family:system-ui,sans-serif;font-weight:300">Aa</div><div class="cbody"><div class="cnum">Stile 07</div><div class="cname">Essenziale</div><div class="cdesc">Minimale, molto respiro, una sola linea sottile. Zen.</div></div></a>
+  <a class="card" href="08-libro.html"><div class="sw" style="background:#fbf7ef;color:#6b4f2a;font-family:'Palatino Linotype',serif">Aa</div><div class="cbody"><div class="cnum">Stile 08</div><div class="cname">Libro</div><div class="cdesc">Serif da lettura lunga, crema, capolettera. Comodo e classico.</div></div></a>
+  <a class="card" href="09-blueprint.html"><div class="sw" style="background:#14243a;color:#7fd6e6;font-family:Consolas,monospace">⟨A⟩</div><div class="cbody"><div class="cnum">Stile 09</div><div class="cname">Blueprint leggibile</div><div class="cdesc">Identità tecnica: reticolo solo nella fascia in alto, testo su scheda bianca.</div></div></a>
+  <a class="card" href="10-slab.html"><div class="sw" style="background:#fff;color:#0f766e;font-family:Rockwell,Georgia,serif">Aa</div><div class="cbody"><div class="cnum">Stile 10</div><div class="cname">Slab</div><div class="cdesc">Titoli slab-serif + testo sans pulito, blocco colore solo sui titoli. Da magazine.</div></div></a>
+</div>
+<footer>© Faustino Palma, 1999 · edizione web · galleria di confronto stili</footer>
+</body></html>

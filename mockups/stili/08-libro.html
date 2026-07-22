@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="it"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stile 08 — Libro</title>
+<style>
+  :root{--bg:#fbf7ef;--ink:#2c2925;--muted:#7a7266;--accent:#6b4f2a;--line:#e3dccc}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;font-size:1.14rem;line-height:1.78}
+  .top{display:flex;justify-content:space-between;align-items:center;max-width:40rem;margin:0 auto;padding:1rem 1.3rem;border-bottom:1px solid var(--line)}
+  .mark{font-weight:700;letter-spacing:.02em}
+  .topnote{font-family:system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  main{max-width:40rem;margin:0 auto;padding:1.6rem 1.3rem 5rem}
+  .eyebrow{font-family:system-ui,sans-serif;font-size:.76rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:.8rem 0 .4rem}
+  h1{font-size:clamp(1.9rem,6vw,2.7rem);line-height:1.16;font-weight:700;margin:.2rem 0 .6rem}
+  .lede{font-size:1.18rem;font-style:italic;color:#4a453d;margin:.4rem 0 1.8rem}
+  h2{font-size:1.4rem;font-weight:700;margin:2.2rem 0 .5rem}
+  p{margin:.8rem 0;text-align:justify;hyphens:auto}
+  p+p{text-indent:1.4rem}
+  .body>p:first-of-type::first-letter{font-size:3.1rem;line-height:.8;float:left;font-weight:700;padding:.1rem .5rem .1rem 0;color:var(--accent)}
+  .hl{background:#f3ecdd;border-left:3px solid var(--accent);padding:1rem 1.2rem;margin:1.6rem 0}
+  .hl p{text-align:left;text-indent:0}
+  .hlk{font-family:system-ui,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 .3rem}
+  .btn{display:inline-block;font-family:system-ui,sans-serif;font-size:.9rem;font-weight:600;text-decoration:none;color:#fff;background:var(--accent);padding:.6rem 1.1rem;margin-top:.5rem;border-radius:3px}
+  .eq{background:#fff;border:1px solid var(--line);padding:1rem;margin:1.4rem 0;overflow-x:auto;font-size:1.14rem;text-align:center}
+  .foot{font-family:system-ui,sans-serif;color:var(--muted);font-size:.82rem;margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem}
+  a{color:var(--accent)}
+</style></head>
+<body>
+<header class="top"><span class="mark">ΨQM</span><span class="topnote">Stile 08 · Libro</span></header>
+<main>
+  <p class="eyebrow">Presentato al 85° Congresso Nazionale SIF · Pavia · 24 settembre 1999</p>
+  <h1>Esperimenti fondamentali della Meccanica Quantistica</h1>
+  <p class="lede">Nove schede che costruiscono la teoria quantistica a partire dagli esperimenti cruciali. Di Faustino Palma — Università di Napoli «Federico II».</p>
+  <div class="hl">
+    <p class="hlk">In evidenza</p>
+    <p>L'equazione di Schrödinger è <b>dedotta da pochi postulati e dalla meccanica classica</b>: dalla coerenza con la legge di Newton e da de Broglie per fissare ℏ.</p>
+    <a class="btn" href="#">Vai al teorema →</a>
+  </div>
+  <h2>Dagli esperimenti alla teoria</h2>
+  <div class="body">
+  <p>La parte teorica è un'introduzione alla Meccanica Quantistica, trattata fin dall'inizio con le notazioni di Dirac. L'equazione di Schrödinger non è postulata, ma dedotta da principi elementari e dalla condizione che la legge fondamentale sia coerente con l'equazione di Newton.</p>
+  <p>Tutta la trattazione è indipendente dalla Meccanica Analitica: si appoggia solo su Newton e sull'elettromagnetismo, ed è quindi accessibile agli studenti del terzo anno di Ingegneria.</p>
+  </div>
+  <div class="eq"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>i</mi><mi>ℏ</mi><mfrac><mrow><mi>∂</mi><mi>ψ</mi></mrow><mrow><mi>∂</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mrow><mo fence="true">(</mo><mrow><mo>−</mo><mfrac><mrow><msup><mi>ℏ</mi><mn>2</mn></msup></mrow><mrow><mn>2</mn><mi>m</mi></mrow></mfrac><mfrac><mrow><msup><mi>∂</mi><mn>2</mn></msup><mi>ψ</mi></mrow><mrow><mi>∂</mi><msup><mi>x</mi><mn>2</mn></msup></mrow></mfrac><mo>+</mo><mi>q</mi><mi>V</mi></mrow><mo fence="true">)</mo></mrow><mi>ψ</mi></mrow></math></div>
+  <p class="foot">© Faustino Palma, 1999 · edizione web · esempio di stile 08</p>
+</main>
+</body></html>

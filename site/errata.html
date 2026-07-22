@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Errata corrige — Tesi di Laurea</title>
+<style>
+  :root{ --bg:#f5f3ee; --card:#ffffff; --ink:#1f2328; --muted:#4a4f57;
+         --accent:#7b2d26; --accent2:#a8443b; --line:#e0dccf; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font-family:"Segoe UI",system-ui,-apple-system,sans-serif;line-height:1.65}
+  .wrap{max-width:52rem;margin:0 auto;padding:2.5rem 1.2rem 4rem}
+  .kicker{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent2);
+          font-weight:600;margin:0 0 .3rem}
+  h1{font-weight:650;margin:.1rem 0 .6rem;font-size:2rem}
+  p.lead{color:var(--muted);margin:.2rem 0 1.6rem}
+  h2{font-size:1.15rem;margin:2rem 0 .6rem;color:var(--accent);
+     border-bottom:1px solid var(--line);padding-bottom:.35rem}
+  ol{margin:.4rem 0 0;padding-left:1.2rem}
+  li{margin:.55rem 0}
+  .cap{display:inline-block;min-width:3.6rem;font-weight:600;color:var(--accent2)}
+  code, .m{background:#efece4;border:1px solid var(--line);border-radius:5px;
+           padding:.05rem .35rem;font-family:"Cascadia Code",Consolas,monospace;font-size:.92em}
+  .arrow{color:var(--accent2);font-weight:700;padding:0 .25rem}
+  .note{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent2);
+        border-radius:10px;padding:.9rem 1.1rem;margin:.8rem 0;color:var(--muted);font-size:.96rem}
+  sup{font-size:.72em}
+  .foot{margin-top:2.4rem;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padding-top:1rem}
+  a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Edizione web · nota redazionale</p>
+  <h1>Errata corrige</h1>
+  <p class="lead">Durante una revisione fisica della tesi, condotta capitolo per capitolo,
+  sono stati individuati alcuni errori minori (refusi, sviste numeriche e di segno).
+  Questa pagina elenca le correzioni applicate a questa edizione web. Le derivazioni
+  centrali (equazione di Schrödinger, diffusione di Rutherford, Millikan, livelli
+  dell’idrogeno, effetto fotoelettrico) sono risultate corrette e non sono state modificate.</p>
+
+  <h2>Correzioni al testo (versioni SVG e MathML)</h2>
+  <ol>
+    <li><span class="cap">Cap. 5</span> «un atomo d’oro è circa <em>venti</em> volte più pesante
+      di una particella α» <span class="arrow">→</span> «circa <em>cinquanta</em> volte».
+      <br><small>Il rapporto delle masse è 197/4 ≈ 49 (~50×), non 20×.</small></li>
+    <li><span class="cap">Cap. 6</span> «valori che può assumere il momento <em>magnetico</em>»
+      <span class="arrow">→</span> «momento <em>angolare</em>».
+      <br><small>Il paragrafo tratta il momento angolare <span class="m">L = r ∧ p</span>, non quello magnetico.</small></li>
+    <li><span class="cap">Cap. 9</span> «quelli che formano un gas <em>inerte</em>»
+      <span class="arrow">→</span> «quelli che formano un gas».
+      <br><small>Nell’elenco compaiono ossigeno e azoto, che non sono gas inerti/nobili.</small></li>
+  </ol>
+
+  <h2>Correzioni alle formule (solo versione MathML)</h2>
+  <div class="note">Nella versione <b>SVG</b> le formule sono immagini vettoriali fedeli
+  all’originale: gli errori 4–6 vi restano quindi visibili, per fedeltà documentale.
+  Sono stati corretti nella sola versione <b>MathML</b>, dove le formule sono testo nativo.</div>
+  <ol start="4">
+    <li><span class="cap">Cap. 8</span> Frequenza di soglia dell’effetto fotoelettrico:
+      <span class="m">4,0·10<sup>−14</sup> Hz</span> <span class="arrow">→</span>
+      <span class="m">4,0·10<sup>14</sup> Hz</span>.
+      <br><small>L’esponente era negativo per errore; il valore è coerente con le frequenze in
+      tabella (5–7·10<sup>14</sup> Hz) e con l’estrapolazione della retta E(ν) a E = 0 (ν₀ ≈ 4,0·10<sup>14</sup> Hz).</small></li>
+    <li><span class="cap">Cap. 8</span> Unità della pendenza della retta E(ν):
+      <span class="m">eV·s<sup>2</sup></span> / <span class="m">J·s<sup>2</sup></span>
+      <span class="arrow">→</span> <span class="m">eV·s</span> / <span class="m">J·s</span>.
+      <br><small>La pendenza ΔE/Δν ha dimensioni energia × tempo (è la costante di Planck h);
+      il valore numerico (3,6·10<sup>−15</sup> eV·s = 5,8·10<sup>−34</sup> J·s) era invece corretto.</small></li>
+    <li><span class="cap">Cap. 6</span> Commutatore canonico:
+      <span class="m">(XP<sub>x</sub> − P<sub>x</sub>X) = −iℏI</span>
+      <span class="arrow">→</span> <span class="m">+iℏI</span>.
+      <br><small>Segno corretto della relazione di commutazione posizione–impulso
+      (con P<sub>x</sub> = −iℏ ∂/∂x). La conclusione — incompatibilità di x e p<sub>x</sub> — resta valida in entrambi i casi.</small></li>
+  </ol>
+
+  <h2>Segnalazioni non modificate</h2>
+  <div class="note">
+    <b>Cap. 7 (Franck-Hertz).</b> La distanza tra i massimi per il mercurio è indicata come
+    «≈ 6 V»; il valore accettato della prima eccitazione del mercurio è 4,9 eV. Trattandosi di
+    una lettura sperimentale del banco didattico, il dato non è stato alterato.
+  </div>
+  <div class="note">
+    <b>Prosa.</b> Alcuni caratteri speciali (α, ϑ, μ, Ω, °) e il refuso «m<sub>ϑ</sub> = −k» del
+    Cap. 2 derivano dall’estrazione automatica dai font Symbol del documento originale e possono
+    apparire come «(»: sono artefatti di conversione, non errori della tesi, e non sono stati toccati.
+  </div>
+
+  <p class="foot">Pagina non collegata dal menù; raggiungibile solo tramite indirizzo diretto.
+  Revisione: 2026.</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Esperimento di Stern-Gerlach · Stern–Gerlach Experiment</title>
+<link rel="stylesheet" href="assets/style.css?v=6">
+<link rel="stylesheet" href="assets/lang.css?v=3">
+<script defer src="assets/lang.js?v=3"></script>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  svg: { fontCache: 'global' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script defer src="assets/mathjax/tex-mml-svg.js"></script>
+</head>
+<body>
+<button class="menu-toggle" aria-label="Menu">☰ Indice</button>
+<div class="scrim"></div>
+<div class="layout">
+<aside class="sidebar">
+  <a class="brand" href="index.html"><span class="mark"><span class="bk">⟨</span>ΨQM<span class="bk">⟩</span></span> Fisica Atomica<small class="it">Esperimenti fondamentali di Meccanica Quantistica — Tesi di Laurea</small><small class="en">Fundamental Experiments of Quantum Mechanics — Master's Thesis</small></a>
+  <div class="langsw" role="group" aria-label="Lingua / Language">
+    <button class="langbtn" type="button" data-l="it" aria-pressed="true">IT</button>
+    <button class="langbtn" type="button" data-l="en" aria-pressed="false">EN</button>
+  </div>
+  <nav><a href="index.html"><span class="num"></span><span class="it">Introduzione</span><span class="en">Introduction</span></a>
+<a href="01-stern-gerlach.html"><span class="num">1</span><span class="it">Esperimento di Stern-Gerlach</span><span class="en">The Stern–Gerlach Experiment</span></a>
+<a href="02-stern-gerlach-cascata.html"><span class="num">2</span><span class="it">Esperimenti di Stern-Gerlach in cascata</span><span class="en">Cascaded Stern–Gerlach Experiments</span></a>
+<a href="03-elettroni.html"><span class="num">3</span><span class="it">Esperimenti con gli Elettroni</span><span class="en">Experiments with Electrons</span></a>
+<a href="04-diffrazione.html"><span class="num">4</span><span class="it">Diffrazione degli Elettroni</span><span class="en">Electron Diffraction</span></a>
+<a href="05-rutherford.html"><span class="num">5</span><span class="it">Esperimento di Rutherford</span><span class="en">The Rutherford Experiment</span></a>
+<a href="06-ulteriori-sviluppi.html"><span class="num">6</span><span class="it">Ulteriori sviluppi della Teoria</span><span class="en">Further Developments of the Theory</span></a>
+<a href="07-franck-hertz.html"><span class="num">7</span><span class="it">Esperimento di Franck-Hertz</span><span class="en">The Franck–Hertz Experiment</span></a>
+<a href="08-effetto-fotoelettrico.html"><span class="num">8</span><span class="it">Effetto Fotoelettrico</span><span class="en">The Photoelectric Effect</span></a>
+<a href="09-spettri-atomici.html"><span class="num">9</span><span class="it">Spettri atomici di emissione</span><span class="en">Atomic Emission Spectra</span></a></nav>
+  <p class="sidenote">
+    <span class="it">Edizione web lievemente rivista rispetto all’originale del 1999 (refusi e punteggiatura).</span>
+    <span class="en">Web edition lightly revised from the 1999 original (typos and punctuation).</span>
+    <a class="ghlink" href="https://github.com/faustinopalma/laquantistica" target="_blank" rel="noopener"><span class="it">Testo originale su GitHub ↗</span><span class="en">Original text on GitHub ↗</span></a>
+  </p>
+</aside>
+<main class="content">
+  <article class="page">
+    <p class="eyebrow"><span class="it">Capitolo 1</span><span class="en">Chapter 1</span></p>
+    <h1 class="title"><span class="it">Esperimento di Stern-Gerlach</span><span class="en">The Stern–Gerlach Experiment</span></h1>
+    
+<p class="opening"><span class="it">Questo esperimento fu ideato da Stern e da Gerlach nel 1921 con lo
+scopo di misurare il momento magnetico dei singoli atomi. Le prime prove
+furono effettuate con atomi di argento. I risultati andarono al di là
+delle aspettative, e noi oggi li possiamo usare come punto di partenza
+per lo studio della Meccanica Quantistica.</span><span class="en">This experiment was devised by Stern and Gerlach in 1921 with the aim of measuring the magnetic moment of individual atoms. The first trials were carried out with silver atoms. The results went beyond every expectation, and today we can use them as a starting point for the study of Quantum Mechanics.</span></p>
+<h2 id="descrizione-dellesperimento."><span class="it">Descrizione
+dell’esperimento.</span><span class="en">Description of the experiment.</span></h2>
+<p><span class="it">Un atomo con il suo
+momento magnetico <em><strong>m</strong></em>, può essere immaginato
+come una piccola calamita (fig. <a class="ref" href="#fig-01_stern_gerlach-1" data-ref="fig-01_stern_gerlach-1">1</a>). Se la calamita viene immersa in un
+campo magnetico sui suoi poli si esercitano delle forze opposte. Se il
+campo è disuniforme le forze non sono bilanciate e la calamita accelera.
+La direzione verso la quale la calamita accelera dipende dal gradiente
+del campo e dall’orientazione del momento magnetico
+<em><strong>m</strong></em>, ad esempio nella figura la calamita
+accelera verso l’alto.</span><span class="en">An atom with its magnetic moment <em><strong>m</strong></em> can be pictured as a small magnet (fig. <a class="ref" href="#fig-01_stern_gerlach-1" data-ref="fig-01_stern_gerlach-1">1</a>). If the magnet is placed in a magnetic field, opposite forces act on its poles. If the field is non-uniform the forces are not balanced and the magnet accelerates. The direction in which the magnet accelerates depends on the field gradient and on the orientation of the magnetic moment <em><strong>m</strong></em>; for example, in the figure the magnet accelerates upwards.</span></p>
+<figure id="fig-01_stern_gerlach-1" class="fig-inline"><img loading="lazy" src="img/pandoc_ch1/fig1.svg" alt="Un atomo come piccola calamita in un campo disuniforme."><figcaption><b>Fig. 1</b> — <span class="it">Un atomo come piccola calamita in un campo magnetico disuniforme.</span><span class="en">An atom as a small magnet in a non-uniform magnetic field.</span></figcaption></figure>
+<p><span class="it">La figura <a class="ref" href="#fig-01_stern_gerlach-2" data-ref="fig-01_stern_gerlach-2">2</a> mostra il circuito magnetico che permette di realizzare
+un campo disomogeneo nel traferro.</span><span class="en">Figure <a class="ref" href="#fig-01_stern_gerlach-2" data-ref="fig-01_stern_gerlach-2">2</a> shows the magnetic circuit that produces a non-uniform field in the air gap.</span></p>
+<figure id="fig-01_stern_gerlach-2" class="fig-inline"><img loading="lazy" src="img/pandoc_ch1/fig2.svg" alt="Il circuito magnetico che produce un campo disomogeneo nel traferro."><figcaption><b>Fig. 2</b> — <span class="it">Il circuito magnetico che produce un campo disomogeneo nel traferro.</span><span class="en">The magnetic circuit producing a non-uniform field in the air gap.</span></figcaption></figure>
+<p><span class="it">L’esperimento di Stern-Gerlach si realizza facendo passare un fascio
+di atomi di argento, con una determinata velocità
+<em><strong>v</strong></em>, attraverso il traferro sagomato
+(fig. <a class="ref" href="#fig-01_stern_gerlach-3" data-ref="fig-01_stern_gerlach-3">3</a>).</span><span class="en">The Stern–Gerlach experiment is carried out by sending a beam of silver atoms, with a given velocity <em><strong>v</strong></em>, through the shaped air gap (fig. <a class="ref" href="#fig-01_stern_gerlach-3" data-ref="fig-01_stern_gerlach-3">3</a>).</span></p>
+<figure id="fig-01_stern_gerlach-3" class="fig-inline"><img loading="lazy" src="img/pandoc_ch1/fig3.svg" alt="Il fascio di atomi attraverso il traferro sagomato."><figcaption><b>Fig. 3</b> — <span class="it">Il fascio di atomi attraverso il traferro sagomato.</span><span class="en">The atomic beam through the shaped air gap.</span></figcaption></figure>
+<p><span class="it">Sotto l’azione del campo magnetico gli atomi vengono deflessi e alla
+fine del percorso si depositano su un vetrino. Dall’entità della
+deflessione misurata e dal gradiente del campo si può risalire al
+momento magnetico.</span><span class="en">Under the action of the magnetic field the atoms are deflected and, at the end of their path, are deposited on a glass slide. From the measured amount of deflection and the field gradient one can determine the magnetic moment.</span></p>
+<figure id="fig-01_stern_gerlach-4" class="fig-inline"><img loading="lazy" src="img/pandoc_ch1/fig4.svg" alt="Il percorso del fascio: fornetto, fenditure, vetrino."><figcaption><b>Fig. 4</b> — <span class="it">Il percorso del fascio: fornetto, fenditure di collimazione, vetrino.</span><span class="en">The beam path: furnace, collimating slits, glass slide.</span></figcaption></figure>
+<p><span class="it">Il fascio di atomi viene generato vaporizzando dell’argento
+all’interno di un fornetto sul quale è praticato un piccolo foro. Gli
+atomi che fuoriescono dal foro passano attraverso una coppia di
+fenditure che servono a focalizzare il fascio. Tutto il percorso, dal
+fornetto fino al vetrino, viene realizzato nel vuoto, per impedire che
+gli atomi urtino contro le molecole di cui è costituita l’aria
+fermandosi prima di arrivare al vetrino.</span><span class="en">The atomic beam is generated by vaporising silver inside a small furnace with a tiny hole; the atoms that escape through the hole pass through a pair of slits that focus the beam. The whole path, from the furnace to the glass slide, is kept under vacuum, to prevent the atoms from colliding with the molecules that make up the air and stopping before they reach the slide.</span></p>
+<h2 id="descrizione-dellapparato-sperimentale."><span class="it">Descrizione
+dell’apparato sperimentale.</span><span class="en">Description of the experimental apparatus.</span></h2>
+<p><span class="it">Le figure che seguono riportano alcuni disegni di un apparato
+sperimentale progettato e costruito nel laboratorio didattico
+LAFIDIN.</span><span class="en">The following figures show some drawings of an experimental apparatus designed and built in the LAFIDIN teaching laboratory.</span></p>
+<p><span class="it">Nella figura <a class="ref" href="#fig-01_stern_gerlach-5" data-ref="fig-01_stern_gerlach-5">5</a> sono rappresentati la camera dove viene vaporizzato
+l’argento e un tubo sul quale viene montata la prima fenditura di
+collimazione del fascio. La camera di vaporizzazione è realizzata in
+quarzo perché deve resistere alla temperatura di fusione dell’argento
+che è di circa mille gradi centigradi. Il riscaldamento avviene mediante
+un fornetto elettrico a resistenza all’interno del quale è disposta la
+camera di quarzo.</span><span class="en">Figure <a class="ref" href="#fig-01_stern_gerlach-5" data-ref="fig-01_stern_gerlach-5">5</a> shows the chamber where the silver is vaporised and a tube on which the first beam-collimating slit is mounted. The vaporisation chamber is made of quartz, because it must withstand the melting temperature of silver, which is about one thousand degrees Celsius. Heating is provided by an electric resistance furnace inside which the quartz chamber is placed.</span></p>
+<figure id="fig-01_stern_gerlach-5" class="fig-inline"><img loading="lazy" src="img/pandoc_ch1/app3.svg" alt="Camera di vaporizzazione in quarzo e tubo con la prima fenditura."><figcaption><b>Fig. 5</b> — <span class="it">camera di vaporizzazione in quarzo e tubo con la prima fenditura di collimazione.</span><span class="en">quartz vaporisation chamber and tube with the first collimating slit.</span></figcaption></figure>
+<p><span class="it">Nella figura <a class="ref" href="#fig-01_stern_gerlach-6" data-ref="fig-01_stern_gerlach-6">6</a> si rappresenta la camera che racchiude le espansioni
+polari. Questa camera è stata progettata in modo da ridurre al minimo il
+volume di vuoto per poter usare una pompa da vuoto di piccole
+dimensioni. La lunghezza delle espansioni polari è stata scelta di
+sessanta centimetri, perché la pompa che abbiamo a disposizione permette
+di raggiungere un vuoto tale che il cammino libero medio degli atomi di
+argento è di circa un metro, quindi la lunghezza totale del fascio
+atomico, dal fornetto al vetrino non può superare il metro. All’ingresso
+della camera è montata la seconda fenditura di collimazione, ed
+all’uscita è disposto il vetrino. La distanza tra le due fenditure ed il
+loro spessore sono stati scelti in modo che l’angolo di apertura del
+fascio sia molto più piccolo dell’angolo di deflessione. La sagoma delle
+espansioni polari è progettata in modo da ottenere la massima
+deflessione possibile.</span><span class="en">Figure <a class="ref" href="#fig-01_stern_gerlach-6" data-ref="fig-01_stern_gerlach-6">6</a> shows the chamber enclosing the pole pieces. This chamber was designed to minimise the vacuum volume, so that a small vacuum pump could be used. The pole pieces were chosen to be sixty centimetres long, because the pump we have available reaches a vacuum such that the mean free path of the silver atoms is about one metre; therefore the total length of the atomic beam, from the furnace to the slide, cannot exceed one metre. The second collimating slit is mounted at the entrance of the chamber, and the glass slide is placed at the exit. The distance between the two slits and their thickness were chosen so that the beam’s angle of divergence is much smaller than the angle of deflection. The shape of the pole pieces is designed to obtain the greatest possible deflection.</span></p>
+<figure id="fig-01_stern_gerlach-6" class="fig-inline"><img loading="lazy" src="img/pandoc_ch1/app4.svg" alt="Camera delle espansioni polari con la seconda fenditura e il vetrino."><figcaption><b>Fig. 6</b> — <span class="it">camera delle espansioni polari con la seconda fenditura e il vetrino (espansioni lunghe 600 mm).</span><span class="en">pole-piece chamber with the second slit and the glass slide (pole pieces 600 mm long).</span></figcaption></figure>
+<p><span class="it">Nella figura <a class="ref" href="#fig-01_stern_gerlach-7" data-ref="fig-01_stern_gerlach-7">7</a> è riportato il circuito magnetico completo che
+permette di realizzare la configurazione di campo. Si osservi che la
+camera che contiene le espansioni è fatta di acciaio inox, questo
+materiale non è ferromagnetico e quindi non costituisce un corto
+circuito per il flusso magnetico.</span><span class="en">Figure <a class="ref" href="#fig-01_stern_gerlach-7" data-ref="fig-01_stern_gerlach-7">7</a> shows the complete magnetic circuit that produces the field configuration. Note that the chamber containing the pole pieces is made of stainless steel; this material is not ferromagnetic and therefore does not short-circuit the magnetic flux.</span></p>
+<figure id="fig-01_stern_gerlach-7" class="fig-inline"><img loading="lazy" src="img/pandoc_ch1/app5.svg" alt="Circuito magnetico completo in acciaio inox con le spire."><figcaption><b>Fig. 7</b> — <span class="it">circuito magnetico completo; la camera delle espansioni è in acciaio inox (non ferromagnetico).</span><span class="en">complete magnetic circuit; the pole-piece chamber is stainless steel (non-ferromagnetic).</span></figcaption></figure>
+<p><span class="it">Nella figura <a class="ref" href="#fig-01_stern_gerlach-8" data-ref="fig-01_stern_gerlach-8">8</a> si mostrano tutti gli oggetti assemblati e si descrivono
+le varie operazioni che compongono l’esperienza.</span><span class="en">Figure <a class="ref" href="#fig-01_stern_gerlach-8" data-ref="fig-01_stern_gerlach-8">8</a> shows all the parts assembled and describes the various steps of the experiment.</span></p>
+<figure id="fig-01_stern_gerlach-8" class="fig-inline"><img loading="lazy" src="img/pandoc_ch1/app6.svg" alt="Apparato completo assemblato." style="max-height:520px;width:auto"><figcaption><b>Fig. 8</b> — <span class="it">tutti gli oggetti assemblati.</span><span class="en">all the parts assembled.</span> <a class="zoom-link" href="img/pandoc_ch1/app6.svg" data-zoom="img/pandoc_ch1/app6.svg" data-alt="Apparato completo assemblato."><span class="it">⤢ Ingrandisci</span><span class="en">⤢ Enlarge</span></a></figcaption></figure>
+<p><span class="it">Una polvere
+di argento viene depositata nella camera di quarzo, la quale viene poi
+agganciata al resto dell’apparecchiatura mediante un raccordo
+sferico.</span><span class="en">Silver powder is placed in the quartz chamber, which is then connected to the rest of the apparatus by a spherical joint.</span></p>
+<p><span class="it">Viene attivata la pompa da vuoto che porta la pressione a circa
+2⋅10<sup>-5</sup> bar, in modo da avere un cammino libero medio per gli
+atomi di argento di circa un metro.</span><span class="en">The vacuum pump is switched on and brings the pressure down to about
+2⋅10<sup>-5</sup> bar, so that the mean free path of the silver atoms is about one metre.</span></p>
+<p><span class="it">Si alimenta il fornetto e dopo un po’ di tempo la camera di quarzo
+raggiunge la temperatura di fusione dell’argento, circa mille gradi
+centigradi.</span><span class="en">The furnace is powered and, after some time, the quartz chamber reaches the melting temperature of silver, about one thousand degrees Celsius.</span></p>
+<p><span class="it">L’argento fonde e, trovandosi a pressione quasi zero, bolle. Gli
+atomi vengono proiettati in tutte le direzioni, alcuni attraversano le
+due fenditure e formano un fascio ben collimato.</span><span class="en">The silver melts and, being at almost zero pressure, boils. The atoms are ejected in all directions; some pass through the two slits and form a well-collimated beam.</span></p>
+<p><span class="it">Gli atomi che hanno attraversato le due fenditure passano sotto le
+espansioni polari, vengono deflessi, e alla fine del loro cammino si
+depositano su un disco di vetro che è posto all’estremità
+dell’apparato.</span><span class="en">The atoms that have passed through the two slits travel beneath the pole pieces, are deflected, and at the end of their path are deposited on a glass disc placed at the far end of the apparatus.</span></p>
+<p><span class="it">Dopo un certo tempo si spegne il fornetto, si fa entrare aria nelle
+camere e si preleva il vetrino sul quale è possibile misurare la
+deflessione dovuta al momento magnetico degli atomi.</span><span class="en">After a certain time the furnace is switched off, air is let into the chambers, and the glass slide is removed, on which the deflection caused by the atoms’ magnetic moment can be measured.</span></p>
+<h2 id="risultati-sperimentali."><span class="it">Risultati sperimentali.</span><span class="en">Experimental results.</span></h2>
+<p><span class="it">Osservando il vetrino si nota che il fascio atomico si è diviso in
+due parti, una parte deflessa verso il basso ed un’altra verso l’alto.
+Lo spostamento dei due fasci è di circa sette millimetri rispetto alla
+posizione centrale. Dai valori del gradiente di campo e dello
+spostamento si risale al momento magnetico dei singoli atomi.</span><span class="en">Looking at the slide, one sees that the atomic beam has split into two parts, one deflected downwards and the other upwards. The displacement of the two beams is about seven millimetres from the central position. From the values of the field gradient and of the displacement, the magnetic moment of the individual atoms is obtained.</span></p>
+<h2 id="interpretazione-dei-risultati."><span class="it">Interpretazione dei
+risultati.</span><span class="en">Interpretation of the results.</span></h2>
+<p><span class="it">Il fatto che il fascio si divide in due fasci distinti appare molto
+strano dal punto di vista della meccanica classica.</span><span class="en">The fact that the beam splits into two distinct beams appears very strange from the point of view of classical mechanics.</span></p>
+<p><span class="it">Gli atomi che escono dal fornetto dovrebbero avere un momento
+magnetico orientato in modo casuale, alcuni verso l’alto altri verso il
+basso, a sinistra, a destra, a quarantacinque gradi ed in tutte le
+possibili angolazioni. Gli atomi che hanno momento magnetico inclinato
+rispetto alla verticale dovrebbero essere deflessi di meno, quelli con
+momento magnetico orizzontale non dovrebbero essere deflessi affatto, ed
+in definitiva sul vetrino si sarebbe dovuto ottenere una macchia
+distribuita. Il fascio si sarebbe dovuto solo allargare e non
+dividere.</span><span class="en">The atoms leaving the furnace should have magnetic moments oriented at random — some upwards, some downwards, to the left, to the right, at forty-five degrees and at every possible angle. Atoms whose magnetic moment is tilted with respect to the vertical should be deflected less, those with a horizontal magnetic moment should not be deflected at all, and in the end a spread-out smear should have appeared on the slide. The beam should merely have broadened, not split.</span></p>
+<p><span class="it">L’osservazione sperimentale ci mostra che, quando misuriamo la
+componente zeta del momento magnetico di un atomo di argento, possiamo
+ottenere solo due valori <em>+m<sub>0</sub></em> e
+<em>–m<sub>0</sub></em>. Non esiste nessuna buona spiegazione di questo
+fatto in termini della meccanica classica, per capire questo fenomeno
+bisogna studiare la Meccanica Quantistica.</span><span class="en">The experimental observation shows us that, when we measure the z-component of the magnetic moment of a silver atom, we can obtain only two values, <em>+m<sub>0</sub></em> and
+<em>–m<sub>0</sub></em>. There is no good explanation of this fact in terms of classical mechanics; to understand this phenomenon one must study Quantum Mechanics.</span></p>
+
+    <nav class="chapter-nav"><a class="prev" href="index.html"><span class="it">Precedente</span><span class="en">Previous</span><span class="ttl it">Introduzione</span><span class="ttl en">Introduction</span></a><a class="next" href="02-stern-gerlach-cascata.html"><span class="it">Successivo</span><span class="en">Next</span><span class="ttl it">Esperimenti di Stern-Gerlach in cascata</span><span class="ttl en">Cascaded Stern–Gerlach Experiments</span></a></nav>
+  </article>
+</main>
+</div>
+<script src="assets/app.js?v=6"></script>
+</body>
+</html>

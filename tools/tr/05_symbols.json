@@ -1,0 +1,39 @@
+{
+  "once": [
+    ["1\u00c5 (1 Angstrom ( 10(10m", "1 \u00c5 (1 \u00c5ngstr\u00f6m = 10\u207b\u00b9\u2070 m)"],
+    ["1\u00c5 = 10\u20134(m", "1 \u00c5 = 10\u207b\u2074 \u03bcm"],
+    ["raggio di base di 10( ed", "raggio di base di 10\u00b0 ed"],
+    ["maggiori di 10(.", "maggiori di 10\u00b0."],
+    ["la variabile (, quindi", "la variabile \u03b2, quindi"],
+    ["rispetto a ( \u00e8 banale e da un termine 2(.", "rispetto a \u03b2 \u00e8 banale e da un termine 2\u03c0."],
+    ["rispetto ad ( si esegue", "rispetto ad \u03b1 si esegue"],
+    ["<h2>In base all\u2019equazione di Schr\u00f6dinger possiamo scrivere</h2>", "<p>In base all\u2019equazione di Schr\u00f6dinger possiamo scrivere</p>"],
+    ["<h2>Sostituendo abbiamo</h2>", "<p>Sostituendo abbiamo</p>"],
+    ["<h2>Dunque possiamo scrivere</h2>", "<p>Dunque possiamo scrivere</p>"]
+  ],
+  "all": [
+    ["particelle (", "particelle \u03b1"],
+    ["particella (", "particella \u03b1"],
+    ["raggi (", "raggi \u03b1"],
+    ["radiazioni (.", "radiazioni \u03b1."],
+    ["angoli (", "angoli \u03d1"],
+    ["diffusione (", "diffusione \u03d1"],
+    ["funzione di (", "funzione di \u03d1"],
+    ["angolo (", "angolo \u03d1"],
+    ["2(m", "2 \u03bcm"],
+    ["15(", "15\u00b0"],
+    ["1,2(", "1,2\u00b0"],
+    ["d( ", "d\u03a9 "],
+    ["d(,", "d\u03a9,"],
+    ["d(.", "d\u03a9."],
+    ["d(:", "d\u03a9:"],
+    ["La fase (", "La fase \u03c6"],
+    ["volume (", "volume \u03a9"],
+    ["contenuta in (", "contenuta in \u03a9"],
+    ["un onda", "un\u2019onda"],
+    ["un unit\u00e0", "un\u2019unit\u00e0"],
+    ["un equazione", "un\u2019equazione"],
+    ["un\u2019integrale", "un integrale"],
+    ["A Questo punto", "A questo punto"]
+  ]
+}

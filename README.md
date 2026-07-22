@@ -1,4 +1,69 @@
-# Esperimenti fondamentali della Meccanica Quantistica
+# Fundamental Experiments of Quantum Mechanics · Esperimenti fondamentali della Meccanica Quantistica
+
+> 🌐 **This README is bilingual.** English comes first — **[Italiano più sotto ↓](#-italiano)**.
+
+Digital edition of the 1999 degree thesis by **Faustino Palma**: a didactic path
+that introduces Quantum Mechanics starting from the fundamental experiments and
+that **derives** the Schrödinger equation instead of postulating it.
+
+> Work presented at the 85th National Congress of the **Italian Physical Society
+> (SIF)**, Pavia, September 1999. LAFIDIN teaching laboratory — University of
+> Naples «Federico II».
+
+🌐 **Web edition (IT/EN):** [laquantistica.com](https://laquantistica.com)
+
+---
+
+## What it is
+
+The thesis performs nine historic experiments of atomic physics and, from their
+analysis, builds a complete introduction to quantum theory, treated from the
+outset with Dirac notation. The derivation of the Schrödinger equation does not
+require Analytical Mechanics: it rests only on Newtonian mechanics and
+electromagnetism.
+
+The nine “cards”:
+
+1. The Stern-Gerlach experiment
+2. Cascaded Stern-Gerlach experiments
+3. Experiments with electrons
+4. Electron diffraction — *derivation of the Schrödinger equation*
+5. The Rutherford experiment
+6. Further developments of the theory
+7. The Franck-Hertz experiment
+8. The photoelectric effect
+9. Atomic emission spectra
+
+## Repository structure
+
+| Folder | Contents |
+|---|---|
+| `originale-doc/`, `originale-docx/`, `originale-moderno/` | Original sources of the 1999 thesis (documents and technical drawings), kept as an archive |
+| `site/` | HTML edition with native MathML formulas |
+| `publish/` | Bilingual web edition (Italian + English), ready to publish |
+| `build/` | Intermediate artifacts generated from the sources |
+| `img/` | Figures and images |
+| `scripts/` | Site-generation tools |
+
+## Note on the web edition
+
+The web edition has been **lightly revised** with respect to the original 1999
+thesis, limited to the correction of typos and punctuation; the contents and the
+technical terminology have not been altered. The original, unrevised text is
+preserved in this repository in the `originale-*` folders.
+
+## License
+
+- **Content** (thesis text, figures, teaching material): [Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE) — freely reusable with attribution to Faustino Palma.
+- **Code** (scripts, site HTML/CSS/JavaScript): [MIT](LICENSE-CODE).
+
+© 1999 Faustino Palma. Web edition 2026.
+
+---
+
+<a id="-italiano"></a>
+
+# 🇮🇹 Italiano
 
 Edizione digitale della tesi di laurea di **Faustino Palma** (1999): un percorso
 didattico che introduce la Meccanica Quantistica a partire dagli esperimenti

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="it"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo sans — inline + schemi</title>
+<style>
+  :root{--bg:#faf9f7;--ink:#23262b;--muted:#666e78;--accent:#1f5fbf;--line:#e6e3dd}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,sans-serif;font-size:1.08rem;line-height:1.72}
+  body math{font-family:"Segoe UI",system-ui,sans-serif}
+  .top{display:flex;justify-content:space-between;align-items:center;max-width:43rem;margin:0 auto;padding:1rem 1.2rem;border-bottom:1px solid var(--line)}
+  .mark{font-weight:700;color:var(--accent)}
+  .topnote{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  main{max-width:43rem;margin:0 auto;padding:1.5rem 1.2rem 4rem}
+  .eyebrow{font-size:.76rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:.6rem 0 .2rem}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);line-height:1.15;margin:.2rem 0 .6rem}
+  h2{font-size:1.35rem;margin:2rem 0 .4rem}
+  p{margin:.7rem 0}
+  .eq{background:#fff;border:1px solid var(--line);border-radius:6px;padding:1rem;margin:1.2rem 0;overflow-x:auto;text-align:center}
+  figure{margin:1.4rem 0;text-align:center}
+  figure svg{max-width:100%;height:auto;color:var(--accent)}
+  figcaption{font-size:.85rem;color:var(--muted);margin-top:.5rem}
+  .foot{color:var(--muted);font-size:.84rem;margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem}
+  a{color:var(--accent)}
+  .callout{background:#eef3fb;border:1px solid #d6e2f6;border-left:4px solid var(--accent);padding:.7rem .9rem;border-radius:6px;font-size:.92rem;color:#33415a;margin:1.2rem 0}
+</style></head>
+<body>
+<header class="top"><span class="mark">ΨQM</span><span class="topnote">Demo sans · inline + schemi</span></header>
+<main>
+  <p class="eyebrow">Esempio di lettura con formule nel testo</p>
+  <h1>Livelli atomici e spettri</h1>
+
+  <p>Nell'atomo di idrogeno l'energia dei livelli è <math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>E</mi><mi>n</mi></msub><mo>=</mo><mo>−</mo><mfrac><mrow><mn>13.6</mn><mspace width="0.15em"/><mi>eV</mi></mrow><msup><mi>n</mi><mn>2</mn></msup></mfrac></math>, con <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mn>3</mn><mo>…</mo></math>. Nella transizione da un livello <math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>E</mi><mn>2</mn></msub></math> a uno <math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>E</mi><mn>1</mn></msub></math> l'atomo emette un fotone di energia <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>h</mi><mi>ν</mi><mo>=</mo><msub><mi>E</mi><mn>2</mn></msub><mo>−</mo><msub><mi>E</mi><mn>1</mn></msub></math>.</p>
+
+  <div class="callout">Nota: nel testo sans le variabili (<math xmlns="http://www.w3.org/1998/Math/MathML"><mi>E</mi></math>, <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math>, <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>ν</mi></math>) restano in corsivo matematico serif: è il comportamento standard del browser. Valuta se lo stacco ti disturba o se lo trovi accettabile.</div>
+
+  <p>La lunghezza d'onda emessa è quindi <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>λ</mi><mo>=</mo><mfrac><mrow><mi>h</mi><mi>c</mi></mrow><mrow><msub><mi>E</mi><mn>2</mn></msub><mo>−</mo><msub><mi>E</mi><mn>1</mn></msub></mrow></mfrac></math>, che spiega le righe discrete dello spettro.</p>
+
+  <h2>Schema — livelli energetici e transizione</h2>
+  <figure>
+    <svg viewBox="0 0 420 240" role="img" aria-label="Diagramma dei livelli energetici">
+      <line x1="60" y1="200" x2="360" y2="200" stroke="currentColor" stroke-width="2"/>
+      <line x1="60" y1="140" x2="360" y2="140" stroke="currentColor" stroke-width="2"/>
+      <line x1="60" y1="90"  x2="360" y2="90"  stroke="currentColor" stroke-width="2"/>
+      <line x1="60" y1="55"  x2="360" y2="55"  stroke="currentColor" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <text x="372" y="205" font-size="13" fill="currentColor">n=1</text>
+      <text x="372" y="145" font-size="13" fill="currentColor">n=2</text>
+      <text x="372" y="95"  font-size="13" fill="currentColor">n=3</text>
+      <text x="372" y="59"  font-size="13" fill="currentColor">…</text>
+      <line x1="150" y1="140" x2="150" y2="200" stroke="currentColor" stroke-width="2"/>
+      <polygon points="150,200 145,186 155,186" fill="currentColor"/>
+      <text x="120" y="175" font-size="14" text-anchor="end" fill="currentColor">hν</text>
+    </svg>
+    <figcaption>Fig. 1 — un elettrone che diseccita da n=2 a n=1 emette un fotone hν = E₂ − E₁.</figcaption>
+  </figure>
+
+  <p class="foot">© Faustino Palma, 1999 · edizione web · demo sans con equazioni in linea e schemi</p>
+</main>
+</body></html>

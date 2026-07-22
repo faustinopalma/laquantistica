@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="it"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo serif — inline + schemi</title>
+<style>
+  :root{--bg:#fbfaf6;--ink:#211f1b;--muted:#6b665c;--accent:#7c1d1d;--line:#ddd7ca}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Iowan Old Style",Georgia,Cambria,serif;font-size:1.12rem;line-height:1.75}
+  body math{font-family:"Iowan Old Style",Georgia,Cambria,serif}
+  .top{display:flex;justify-content:space-between;align-items:center;max-width:42rem;margin:0 auto;padding:1rem 1.2rem;border-bottom:1px solid var(--line)}
+  .mark{font-weight:700;color:var(--accent)}
+  .topnote{font-family:system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  main{max-width:42rem;margin:0 auto;padding:1.5rem 1.2rem 4rem}
+  .eyebrow{font-family:system-ui,sans-serif;font-size:.76rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:.6rem 0 .2rem}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);line-height:1.15;margin:.2rem 0 .6rem}
+  h2{font-size:1.5rem;margin:2rem 0 .4rem}
+  p{margin:.7rem 0}
+  .eq{background:#fff;border:1px solid var(--line);border-radius:6px;padding:1rem;margin:1.2rem 0;overflow-x:auto;text-align:center}
+  figure{margin:1.4rem 0;text-align:center}
+  figure svg{max-width:100%;height:auto;color:var(--accent)}
+  figcaption{font-family:system-ui,sans-serif;font-size:.85rem;color:var(--muted);margin-top:.5rem}
+  .foot{font-family:system-ui,sans-serif;color:var(--muted);font-size:.84rem;margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem}
+  a{color:var(--accent)}
+</style></head>
+<body>
+<header class="top"><span class="mark">ΨQM</span><span class="topnote">Demo serif · inline + schemi</span></header>
+<main>
+  <p class="eyebrow">Esempio di lettura con formule nel testo</p>
+  <h1>De Broglie e l'operatore impulso</h1>
+
+  <p>A ogni particella di impulso <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>p</mi></math> si associa un'onda di lunghezza <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>λ</mi><mo>=</mo><mfrac><mi>h</mi><mi>p</mi></mfrac></math>; introducendo <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>ℏ</mi><mo>=</mo><mfrac><mi>h</mi><mrow><mn>2</mn><mi>π</mi></mrow></mfrac></math> si scrive il numero d'onda come <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>k</mi><mo>=</mo><mfrac><mi>p</mi><mi>ℏ</mi></mfrac></math>. Cercando l'operatore che, applicato all'onda piana <math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>e</mi><mrow><mi>i</mi><mi>k</mi><mi>x</mi></mrow></msup></math>, restituisce <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>p</mi></math>, si trova subito l'operatore impulso.</p>
+
+  <div class="eq"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mover><mi>p</mi><mo>^</mo></mover><mo>=</mo><mo>−</mo><mi>i</mi><mi>ℏ</mi><mfrac><mrow><mi>∂</mi></mrow><mrow><mi>∂</mi><mi>x</mi></mrow></mfrac></mrow></math></div>
+
+  <p>Da qui la regola di commutazione fondamentale <math xmlns="http://www.w3.org/1998/Math/MathML"><mo>[</mo><mi>x</mi><mo>,</mo><mover><mi>p</mi><mo>^</mo></mover><mo>]</mo><mo>=</mo><mi>i</mi><mi>ℏ</mi></math>, che a sua volta implica il principio di indeterminazione <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>Δ</mi><mi>x</mi><mspace width="0.2em"/><mi>Δ</mi><mi>p</mi><mo>≥</mo><mfrac><mi>ℏ</mi><mn>2</mn></mfrac></math>.</p>
+
+  <h2>Schema — esperimento di Stern-Gerlach</h2>
+  <p>Un fascio di atomi neutri con momento magnetico attraversa un campo disomogeneo e si divide in due, a seconda della componente di spin <math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>s</mi><mi>z</mi></msub><mo>=</mo><mo>±</mo><mfrac><mi>ℏ</mi><mn>2</mn></mfrac></math>.</p>
+  <figure>
+    <svg viewBox="0 0 600 200" role="img" aria-label="Schema di Stern-Gerlach">
+      <rect x="12" y="82" width="70" height="36" rx="4" fill="none" stroke="currentColor" stroke-width="2"/>
+      <text x="47" y="105" font-size="13" text-anchor="middle" fill="currentColor" font-family="system-ui,sans-serif">forno</text>
+      <line x1="82" y1="100" x2="150" y2="100" stroke="currentColor" stroke-width="2"/>
+      <rect x="150" y="92" width="10" height="16" fill="currentColor"/>
+      <rect x="162" y="92" width="10" height="16" fill="currentColor"/>
+      <polygon points="250,55 420,55 400,80 270,80" fill="none" stroke="currentColor" stroke-width="2"/>
+      <polygon points="270,120 400,120 420,145 250,145" fill="none" stroke="currentColor" stroke-width="2"/>
+      <text x="335" y="48" font-size="13" text-anchor="middle" fill="currentColor" font-family="system-ui,sans-serif">N</text>
+      <text x="335" y="165" font-size="13" text-anchor="middle" fill="currentColor" font-family="system-ui,sans-serif">S</text>
+      <line x1="172" y1="100" x2="250" y2="86" stroke="currentColor" stroke-width="1.5"/>
+      <line x1="172" y1="100" x2="250" y2="114" stroke="currentColor" stroke-width="1.5"/>
+      <line x1="420" y1="68" x2="540" y2="60" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <line x1="420" y1="132" x2="540" y2="140" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <line x1="540" y1="40" x2="540" y2="160" stroke="currentColor" stroke-width="2"/>
+      <circle cx="540" cy="60" r="6" fill="currentColor"/>
+      <circle cx="540" cy="140" r="6" fill="currentColor"/>
+      <text x="565" y="64" font-size="13" fill="currentColor" font-family="system-ui,sans-serif">+</text>
+      <text x="565" y="144" font-size="13" fill="currentColor" font-family="system-ui,sans-serif">−</text>
+    </svg>
+    <figcaption>Fig. 1 — forno, collimatore, magnete disomogeneo (N/S) e schermo con le due macchie.</figcaption>
+  </figure>
+
+  <p class="foot">© Faustino Palma, 1999 · edizione web · demo serif con equazioni in linea e schemi</p>
+</main>
+</body></html>

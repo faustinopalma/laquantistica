@@ -1,0 +1,73 @@
+/* ==========================================================================
+   Bilingue IT/EN — toggle di lingua + tocchi d'identità «capolettera»
+   ========================================================================== */
+
+/* Mostra/nascondi in base alla lingua attiva sull'elemento <html> */
+html[data-lang="it"] .en { display: none !important; }
+html[data-lang="en"] .it { display: none !important; }
+
+/* Selettore di lingua nella sidebar */
+.langsw {
+  display: inline-flex;
+  margin-top: 1rem;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255,255,255,.05);
+}
+.langbtn {
+  border: 0;
+  background: transparent;
+  padding: .34rem .85rem;
+  font-family: var(--font-sans);
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--sidebar-ink-soft);
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.langbtn[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.langbtn:not([aria-pressed="true"]):hover { color: #fff; }
+
+/* Marchio ΨQM nel brand della sidebar */
+.brand .mark { font-family: var(--font-serif); letter-spacing: .015em; }
+.brand .mark .bk { color: var(--accent-soft); }
+
+/* Capolettera sul paragrafo d'apertura del capitolo */
+.page p.opening::first-letter {
+  float: left;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 3.1rem;
+  line-height: .78;
+  padding: .12rem .5rem .05rem 0;
+  color: var(--accent);
+}
+
+/* Il titolo nel piede di navigazione non deve ereditare lo stile «etichetta» */
+.chapter-nav a span.ttl {
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 1em;
+  color: inherit;
+}
+
+/* Nota di revisione + link all'originale su GitHub, in fondo alla sidebar */
+.sidebar .sidenote {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,.12);
+  font-family: var(--font-sans);
+  font-size: .76rem;
+  line-height: 1.5;
+  color: var(--sidebar-ink-soft);
+}
+.sidebar .sidenote .ghlink {
+  display: inline-block;
+  margin-top: .5rem;
+  color: var(--sidebar-ink);
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 1px solid var(--accent-soft);
+}
+.sidebar .sidenote .ghlink:hover { color: #fff; }

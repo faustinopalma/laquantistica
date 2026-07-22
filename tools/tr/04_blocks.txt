@@ -1,0 +1,206 @@
+[p n=0] Descrizione dell'esperimento e previsioni classiche.
+[p n=1] La figura 1 mostra uno schema di principio dell'esperimento. Abbiamo un fas
+[figcaption n=0] Fig. 1 — Schema di principio dell'esperimento.
+[p n=1] La struttura di un cristallo verrà studiata più avanti nella scheda sull'es
+[figcaption n=0] Fig. 2 — Struttura cristallina: reticolo tridimensionale di nuclei.
+[p n=1] Da un punto di vista classico ci aspettiamo che un elettrone, quando attrav
+[figcaption n=0] Fig. 3 — Previsione classica: deflessione dell'elettrone nel cristallo.
+[p n=0] L'angolo di deflessione δ è una variabile aleatoria, cioè è una grandezza c
+[p n=0] Descrizione dell'apparato sperimentale.
+[p n=0] Il cannone elettronico, la lamina di materiale cristallino e lo schermo ai 
+[p n=3] La figura 5 mostra una foto di quest'ampolla, mentre le figure 6 e 7 mostra
+[figcaption n=0] Fig. 5 — Foto dell'ampolla di vetro sotto vuoto.
+[figcaption n=0] Fig. 6 — Dettaglio del cannone elettronico.
+[figcaption n=0] Fig. 7 — Dettaglio del cannone elettronico.
+[p n=1] Uno schema è rappresentato in figura 8.
+[figcaption n=0] Fig. 8 — Schema dell'ampolla con cannone e lamina.
+[p n=2] Come si vede dalla foto di figura 6 e dallo schema di figura 8, la lamina d
+[p n=1] Il sistema si alimenta come mostrato in figura 9.
+[figcaption n=0] Fig. 9 — Schema di alimentazione del sistema.
+[p n=1] Gli alimentatori utilizzati sono due, uno per l'alta tensione di 0÷5000 V e
+[figcaption n=0] Fig. 10 — L'intero sistema alimentato.
+[p n=0] Risultati sperimentali.
+[p n=1] La foto di figura 11 mostra in dettagli l'immagine ottenuta sullo schermo.
+[figcaption n=0] Fig. 11 — Immagine ottenuta sullo schermo: punto centrale e due cerchi.
+[p n=0] Si osservano un punto centrale e due cerchi concentrici. La distribuzione d
+[p n=0] Se variamo la tensione di accelerazione si osserva che variano i raggi dei 
+[p n=0] Sono state effettuate le seguenti misure:
+[p n=3] La figura 13 riporta due grafici delle misure effettuate, uno con la tensio
+[p n=0] Interpretazione dei risultati.
+[p n=0] La figura ottenuta sullo schermo non può essere spiegata se si pensa che il
+[p n=2] La grafite ha una struttura cristallina piana rappresentata nella figura 14
+[figcaption n=0] Fig. 14 — Struttura cristallina piana della grafite.
+[figcaption n=0] Fig. 15 — Scomposizione del reticolo in sottoreticoli a linee parallele.
+[p n=6] Nel cristallo si individuano due tipi di reticoli a linee parallele, una co
+[p n=1] I cerchi della figura 11 si formano perché la lamina è formata da tanti cri
+[figcaption n=0] Formazione dei cerchi: diffrazione dal reticolo.
+[p n=0] Ogni singolo cristallo forma un'immagine costituita da alcuni punti:
+[figcaption n=0] Immagine prodotta da un singolo cristallo.
+[p n=0] La sovrapposizione di tante immagini ruotate di un angolo casuale forma i c
+[figcaption n=0] Sovrapposizione di cristalli orientati a caso: si formano i cerchi.
+[p n=0] Il fatto che gli angoli di diffrazione del primo ordine dipendono dalla ten
+[p n=0] Dualismo onda particella e relazione di De Broglie.
+[p n=0] Il cannone elettronico spara una raffica di particelle oppure genera un fas
+[p n=0] L'elettrone ha un comportamento corpuscolare, nel senso che quando interagi
+[p n=0] L'elettrone ha anche un comportamento ondulatorio, perché può produrre diff
+[p n=6] Si conclude che quando pensiamo ad un elettrone dovremmo immaginare una par
+[p n=0] Interpretazione probabilistica.
+[p n=0] In questo paragrafo riprenderemo i concetti introdotti nella seconda scheda
+[p n=3] Una particella materiale, dal punto di vista della Meccanica Quantistica, è
+[p n=2] La funzione ψ(x) è una distribuzione di ampiezze di probabilità e caratteri
+[p n=2] Quando lo stato della particella evolve la funzione ψ cambia con il tempo, 
+[p n=6] Come abbiamo visto nella scheda due, l'evoluzione temporale è descritta da 
+[p n=3] A questo punto si pone il problema di determinare la matrice di evoluzione 
+[p n=0] Per chiarezza ricapitoliamo i punti importanti che abbiamo introdotto:
+[p n=0] Una particella materiale è caratterizzata dalla variabile posizione, cioè d
+[p n=2] Lo stato di una particella materiale in un istante t è rappresentato dalla 
+[p n=0] L'evoluzione dello stato è descritta dalla seguente equazione:
+[p n=1] dove U(t0→t) è una matrice di ∞×∞ componenti.
+[p n=0] Equazione di evoluzione temporale in forma differenziale.
+[p n=0] L'equazione di evoluzione temporale che abbiamo scritto consente di fare un
+[p n=1] sottraendo ad ambo i membri |ψt⟩ e dividendo per dt otteniamo
+[p n=1] Per semplificare il secondo membro possiamo scrivere la matrice U(t0→t) con
+[p n=2] dove A(t) è la derivata limdt→0U(t→t+dt)−U(t→t)dt.
+[p n=0] Sostituendo questa approssimazione del primo ordine abbiamo
+[p n=0] Quindi in definitiva otteniamo l'equazione
+[p n=2] Il problema di determinare U(t0→t) è cambiato nel problema di determinare l
+[p n=0] Prima di procedere è necessario soffermarci su alcuni argomenti di caratter
+[p n=0] Algebra degli operatori.
+[h2 n=0] Vettori e matrici a dimensione infinita
+[p n=3] In questa scheda abbiamo introdotto vettori e matrici a dimensione infinita
+[p n=0] Il prodotto tra una matrice ed un vettore, ad esempio, si può scrivere medi
+[p n=0] In modo analogo si possono scrivere altri tipi di prodotti tra matrici o tr
+[p n=0] Matrice aggiunta e matrici hermitiane, antihermitiane ed unitarie.
+[p n=2] Supponiamo di avere un vettore ket |u⟩ dato dal prodotto tra una matrice A 
+[p n=1] e supponiamo di dover determinare il bra coniugato ⟨u|. Consideriamo ad ese
+[p n=4] Dunque il bra ⟨u| si ottiene coniugando &#x00028;&#x0002A;&#x00029; e trasp
+[p n=0] In definitiva possiamo scrivere
+[p n=1] dove la matrice A&#x0002A;t si ottiene coniugando e trasponendo la matrice 
+[p n=2] Per definizione diremo che la matrice A&#x0002A;t è la aggiunta della matri
+[p n=0] Ad esempio, per una matrice a dimensione due
+[p n=2] In base a questa definizione possiamo scrivere che il bra coniugato del ket
+[p n=3] Per definizione se una matrice è uguale alla sua aggiunta A=A+, allora si d
+[p n=0] L'operazione di prendere la matrice aggiunta nel campo dellle matrici assum
+[p n=0] Le matrici hermitiane, le antihermitiane e le unitarie hanno delle propriet
+[p n=0] Rapporto tra matrici ed operatori.
+[p n=2] Nel caso di vettori a dimensione finita sappiamo, dagli studi di algebra li
+[p n=0] Questa proprietà resta valida anche nel caso di vettori a dimensione infini
+[p n=4] Consideriamo ad esempio l'operatore derivata che indicheremo con D. L'opera
+[p n=0] Ci chiediamo: qual è la matrice, cioè la funzione di due variabili, che rap
+[p n=0] infatti eseguendo il prodotto matriciale abbiamo
+[p n=1] L'operatore D↔−δ&apos;(x&apos;−x) è antihermitiano, infatti
+[p n=1] cioè coniugando e trasponendo la matrice associata a D si ottiene una matri
+[p n=1] In genere si preferisce usare l'operatore K=iD che è hermitiano, infatti
+[p n=0] D'ora in avanti parleremo indifferentemente di operatori oppure di matrici.
+[p n=0] Funzioni di operatori o funzioni di matrici.
+[p n=3] Se prendiamo un operatore A e lo applichiamo due volte otteniamo l'operator
+[p n=4] Se prendiamo l'operatore inverso A−1 e lo applichiamo due volte definiamo l
+[p n=0] Se consideriamo un polinomio
+[p n=0] da esso possiamo costruire l'operatore
+[p n=1] p(A)=cnAn+…+c1A+c0I+c−1A−1+…+c−mA−m.
+[p n=1] In generale da una funzione f(x) sviluppabile in serie di potenze
+[p n=1] possiamo costruire l'operatore f(A)
+[p n=1] (si pone A0=I dove I è l'operatore identità)
+[p n=0] Ritorniamo ora allo studio dell'equazione di evoluzione temporale.
+[p n=0] Conservazione del prodotto scalare.
+[p n=0] Nella seconda scheda abbiamo visto un'importante proprietà del processo di 
+[p n=2] Consideriamo due ket |αt⟩ e |βt⟩, calcoliamo l'evoluzione di questi ket nel
+[p n=0] In base alla proprietà di conservazione del prodotto scalare, deve essere
+[p n=2] sostituendo le formule trovate per |α(t+dt)⟩ e |β(t+dt)⟩ abbiamo
+[p n=1] ⟨αt|(1+A+(t)dt)(1+A(t)dt)|βt⟩+ο(dt2)=⟨αt|βt⟩⇔⇔⟨αt|βt⟩+⟨αt|(A+(t)+A(t))dt|βt
+[p n=2] Questa equazione è valida per ogni |αt⟩ e |βt⟩, quindi deve essere
+[p n=1] Dunque la matrice A è antihermitiana. Per una questione di convenzione si p
+[p n=0] La matrice H è detta hamiltoniana ed è hermitiana, infatti
+[p n=0] L'equazione di evoluzione scritta in termini della matrice H appare così
+[p n=0] Quest'equazione viene chiamata equazione di Schrödinger.
+[p n=0] Determinazione della matrice hamiltoniana.
+[p n=0] Per determinare la matrice H sfrutteremo le informazioni che conosciamo dal
+[p n=0] Per semplicità consideriamo un caso non molto complicato, determiniamo la m
+[p n=0] La legge di Newton si può scrivere nella forma
+[p n=0] La legge della Meccanica Quantistica è sicuramente molto diversa
+[p n=2] La diversità tra le due equazioni è dovuta al modo in cui rappresentiamo l'
+[p n=2] Per fare un confronto possiamo derivare dall'equazione di Schrödinger per l
+[p n=0] Il valore medio della variabile x può essere scritto nel seguente modo
+[p n=1] Dove abbiamo introdotto l'operatore X rappresentato dalla funzione X(x,x&ap
+[p n=0] L'operatore X così definito viene chiamato operatore posizione.
+[p n=2] Calcoliamo ora la derivata ddt⟨x⟩ ddt⟨x⟩=ddt⟨ψt|X|ψt⟩=(ddt⟨ψt|)X|ψt⟩+⟨ψt|X(
+[p n=0] In base all'equazione di Schrödinger possiamo scrivere
+[p n=0] Sostituendo abbiamo
+[p n=1] Definendo l'operatore velocità X˙=i(HX−XH) possiamo scrivere
+[p n=0] con passaggi identici calcoliamo la derivata seconda
+[p n=1] definendo l'operatore accelerazione X¨=i(HX˙−X˙H) possiamo scrivere
+[p n=2] Per comodità si definiscono le parentesi di commutazione [ , ] con il segue
+[p n=0] Con l'uso di queste parentesi possiamo scrivere
+[p n=0] Quindi in definitiva abbiamo:
+[p n=0] Per aver accordo con l'equazione di Newton ci aspettiamo che sia
+[p n=2] d2dt2⟨x⟩=qm⟨E(x)⟩ che equivale a d2dt2x=qmE(x)
+[p n=4] Il valore medio ⟨E(x)⟩ può essere scritto nella forma ⟨ψt|E(X)|ψt⟩ dove E(X
+[p n=1] Ora confrontiamo le due equazioni per d2dt2⟨x⟩, quella ottenuta dall'equazi
+[p n=0] Per avere accordo deve valere l'uguaglianza tra i secondi membri
+[p n=1] Quest'ultima deve essere vera per ogni scelta di |ψt⟩ quindi possiamo sempl
+[p n=5] A questo punto dobbiamo trovare la matrice H che soddisfa quest'equazione. 
+[p n=0] Per trovare la soluzione abbiamo bisogno di alcuni risultati matematici mol
+[p n=1] 1a [K,f(X)]=idf(X)dX
+[p n=1] 2a [X,f(K)]=−idf(K)dK
+[p n=1] 3a [X,f(X)]=0
+[p n=1] 4a [K,f(K)]=0
+[p n=0] Dimostriamo prima queste formule, dopo di che risolveremo l'equazione nell'
+[p n=0] Dimostrazione delle formule 1a, 2a, 3a e 4a.
+[p n=1] Supponiamo che la funzione f(X) sia sviluppabile in serie di polinomi
+[p n=0] La derivata di questa funzione è
+[p n=0] Quindi per dimostrare la 1a dobbiamo verificare la seguente identità
+[p n=0] Analogamente per la 2a dobbiamo verificare la seguente identità
+[p n=0] Noi dimostreremo che i termini delle sommatorie ai primi membri sono uguali
+[p n=0] Eseguiamo una dimostrazione per induzione.
+[p n=0] Per n=1 dobbiamo verificare che
+[p n=1] Cominciamo dalla prima. Consideriamo una generica funzione ψ(x)
+[p n=3] quindi [K,X]ψ(x)=iψ(x). Essendo vera per ogni ψ(x) possiamo dedurre [K,X]=i
+[p n=1] La seconda a questo punto è ovvia, infatti [X,K]=−[K,X]=−iI.
+[p n=0] Ora dimostriamo che se le formule
+[p n=0] sono vere per n allora sono vere anche per n+1 e per n−1.
+[p n=0] Cominciamo dalla prima e dimostriamo che se è vera per n allora è vera anch
+[p n=0] applicando la formula valida per n=1
+[p n=0] applicando la formula valida per n
+[p n=0] Ora dimostriamo che se è vera per n allora è vera anche per n–1
+[p n=0] applicando la formula valida per n=1
+[p n=0] applicando la formula valida per n
+[p n=0] Per la 2a i passaggi sono identici.
+[p n=0] La 3a e la 4a sono praticamente ovvie, è valgono per qualsiasi operatore A 
+[p n=0] Cerchiamo ora la soluzione dell'equazione
+[p n=1] Come abbiamo detto proviamo con funzioni del tipo H=f(X)+g(K), sostituendo 
+[p n=1] Supponiamo per un momento che [g(K),X]=icK, dove c è una costante. Secondo 
+[p n=3] Ricordiamo che l'operatore E(X) può essere scritto in forma di derivata E(X
+[p n=1] Questa equazione è risolta se si sceglie f(X)=qcmV(X).
+[p n=3] Ricordiamoci dell'ipotesi che abbiamo fatto [g(K),X]=icK, questa equazione 
+[p n=0] Dunque per la matrice H abbiamo
+[p n=0] Per chiarezza verifichiamo che questa matrice soddisfa l'equazione di parte
+[p n=1] A questo punto possiamo dire di aver determinato l'equazione di Schrödinger
+[p n=0] Questa equazione è stata derivata in modo tale da essere in accordo con l'e
+[p n=0] In realtà dobbiamo ancora determinare la costante c. Per determinare questa
+[p n=1] Per determinare c useremo la relazione di De Broglie pλ=h che abbiamo verif
+[p n=1] Consideriamo l'equazione di Schrödinger scritta per il caso in cui il poten
+[p n=0] Questa equazione ammette soluzioni di tipo esponenziale complesso
+[p n=0] Sostituendo abbiamo
+[p n=1] Che è verificata se ω=c4π2λ2. Quindi abbiamo le soluzioni
+[p n=2] Queste distribuzioni di ampiezze di probabilità non sono accettabili da un 
+[p n=0] Tuttavia l'equazione di Schrödinger è lineare e quindi si possono costruire
+[p n=1] Se ad esempio scegliamo c(λ&apos;)=δ(λ&apos;−λ) riotteniamo la funzione esp
+[p n=0] Questo significa che la distribuzione esponenziale rappresenta un pacchetto
+[p n=0] In generale sappiamo che ogni distribuzione di ampiezze di probabilità deve
+[p n=0] Tuttavia, pur di salvare le soluzioni esponenziali, useremo un artificio: q
+[p n=3] Supponiamo di conoscere lo stato di una particella e la relativa distribuzi
+[p n=2] dove X˙=i[H,X] è un operatore che abbiamo chiamato operatore velocità. Vedi
+[p n=1] Dunque possiamo scrivere la formula per ⟨p⟩
+[p n=2] Definendo l'operatore quantità di moto P=−cmK abbiamo ⟨p⟩=⟨ψ|P|ψ⟩.
+[p n=0] Calcoliamo ora la quantità di moto per una ampiezza di probabilità a distri
+[p n=0] Dove con M abbiamo indicato il modulo della distribuzione esponenziale non 
+[p n=1] Dunque abbiamo trovato ⟨p⟩=cm2πλ⇔⟨p⟩λ=2πcm.
+[p n=4] Ricordando la relazione di De Broglie pλ=h possiamo concludere che deve ess
+[p n=1] Dove abbiamo usato la definizione P=−cmK=−ℏK=−iℏD.
+[p n=1] Nei testi di Meccanica Quantistica generalmente si trova l'equazione di Sch
+[p n=0] con
+[p n=0] D'ora in avanti anche noi useremo questa forma.
+[p n=0] Conclusioni.
+[p n=0] In questa scheda abbiamo trovato un'equazione che rappresenta la legge di e
+[h2 n=0] Altre immagini del capitolo
+[figcaption n=0] IMG5BN

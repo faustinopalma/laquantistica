@@ -1,0 +1,107 @@
+[0] Capitolo 6
+[1] Nella scheda quattro abbiamo introdotto l'equazione di Schrödinger per una particella carica in un potenziale elettrico. Questa eq
+[2] Per raggiungere lo scopo è necessario rivedere e generalizzare i principi della Meccanica Quantistica che abbiamo postulato nella 
+[3] Principi della Meccanica Quantistica.
+[4] Per comodità di lettura riportiamo qui i principi che abbiamo postulato nella scheda due:
+[5] Un sistema fisico è caratterizzato dalle sue grandezze fisiche che possono essere misurate.
+[6] Quando si misura una grandezza g sono possibili diversi risultati, ed ogni risultato ha una certa probabilità di uscire. Se dalla 
+[7] Un qualsiasi altro stato α può essere considerato come una sovrapposizione degli autostati di una grandezza g e può essere rappres
+[8] In generale se il sistema si trova in uno stato α e si misura una grandezza g', la probabilità che esca g'=g¯' è data dal modulo q
+[9] L'evoluzione nel tempo di uno stato αt segue una legge lineare |αt⟩=U(t0→t)|αt0⟩
+[10] dove U(t0→t) è una matrice che dipende dal sistema e dalle “condizioni ambientali”. La matrice U(t0→t) è detta matrice di evoluzio
+[11] Nel secondo principio si introduce il concetto di autostato cioè di uno stato tale che se si esegue una misura si ottiene con cert
+[12] infatti con questo vettore si ottiene una distribuzione di probabilità che è nulla se x≠x¯, ed è non nulla solo se x=x¯, quindi qu
+[13] in questo caso se si esegue una misura di x, di y o di z, si otterranno con certezza i valori x¯,y¯ e z¯; quindi questo che abbiam
+[14] I principi che abbiamo dato in realtà sono una versione semplificata, perché si suppone che dato un valore g¯ l'autostato associat
+[15] Quindi non possiamo parlare dello stato x=x¯, perché non è uno solo, ma possiamo parlare dello stato x=x¯,y=y¯,z=z¯, infatti quest
+[16] Il terzo principio si deve generalizzare dicendo che un qualsiasi stato può essere considerato come la sovrapposizione degli “auto
+[17] Un set di grandezze fisiche g1…gn tale che esiste un unico autostato simultaneo associato agli autovalori g¯1…g¯n si dirà “complet
+[18] Il ket associato allo stato x=x¯,y=y¯,z=z¯ potrà essere indicato con il simbolo
+[19] tuttavia preferiremo fare un abuso di notazione e usare una notazione più compatta indicando il ket con il simbolo |x¯y¯z¯⟩. (C'è 
+[20] Ora consideriamo il quarto principio e supponiamo ad esempio di voler calcolare l'ampiezza di probabilità che, misurando x, y e z 
+[21] Ma se vogliamo la probabilità che misurando solo x venga x¯? Possiamo scrivere Px=x¯=|⟨x¯|ψ⟩|2?
+[22] No, perché il simbolo ⟨x¯| non ha significato, infatti l'autovalore x¯ non identifica un unico autostato.
+[23] Se vogliamo la probabilità che misurando solo x venga x¯ allora dobbiamo prima calcolare la probabilità
+[24] e poi calcolare l'integrale
+[25] A questo punto scriviamo i principi generalizzati
+[26] Un sistema fisico è caratterizzato dalle sue grandezze fisiche che possono essere misurate.
+[27] Quando si misura una grandezza g sono possibili diversi risultati, ed ogni risultato ha una certa probabilità di uscire. Se dalla 
+[28] 2.bis In generale dato un valore g¯ possono esistere infiniti autostati associati a questo valore. Tuttavia è sempre possibile tro
+[29] Un qualsiasi altro stato α può essere considerato come una sovrapposizione degli autostati simultanei di un set di grandezze g1…gn
+[30] In generale se il sistema si trova in uno stato α e si misura contemporaneamente un set completo di grandezze g1'…gn', la probabil
+[31] L'evoluzione nel tempo di uno stato αt segue una legge lineare |αt⟩=U(t0→t)|αt0⟩
+[32] dove U(t0→t) è una matrice che dipende dal sistema e dalle “condizioni ambientali”. La matrice U(t0→t) è detta matrice di evoluzio
+[33] La generalizzazione di questi principi al caso continuo è immediata, basta sostituire alla rappresentazione indiciale αk1…kn la ra
+[34] Osserviamo che due ket |g¯1…g¯n⟩ e |g¯1'…g¯n'⟩ sono ortogonali, a meno che non abbiano tutti i valori uguali g¯1=g¯1'…g¯n=g¯n'. In
+[35] Se i ket |g¯1…g¯n⟩ oltre ad essere ortogonali sono anche normalizzati, allora le componenti di un generico ket |α⟩ nella base {|g¯
+[36] Queste identità devono essere vere per ogni scelta del ket |α⟩, quindi possiamo dedurre la formula
+[37] dove con I abbiamo indicato la matrice identità. Questa formula ci sarà utilissima in molte occasioni future.
+[38] Ora supponiamo di voler calcolare la distribuzione di ampiezze di probabilità associata ad altre grandezze fisiche diverse dalla p
+[39] Ampiezze di probabilità per la quantità di moto.
+[40] Se conosciamo lo stato di una particella materiale, e conosciamo la distribuzione di ampiezze di probabilità per la variabile posi
+[41] Se conoscessimo gli autostati della quantità di moto allora potremmo applicare il quarto postulato, ma questi autostati non li con
+[42] Per trovare la soluzione al nostro problema dobbiamo prendere l'altro capo della matassa, cioè supponiamo di conoscere quali siano
+[43] Supponiamo ad esempio di voler calcolare il valore medio della componente lungo x della quantità di moto ⟨px⟩, supponendo di conos
+[44] Per mantenere la generalità non possiamo ipotizzare che la grandezza px da sola costituisca un set completo, quindi per “completar
+[45] (Nota che sarebbe sbagliato scrivere il ket |px'⟩, perchè non è possibile identificare uno stato dando solo il valore px' assunto 
+[46] In base a queste notazioni possiamo scrivere la probabilità:
+[47] Dove abbiamo indicato la probabilità con il simbolo ρ per non creare confusione con la p della quantità di moto.
+[48] In base a questa formula possiamo calcolare il valore medio:
+[49] ma noi sappiamo anche che
+[50] dove Px=−iℏDx è l'operatore quantità di moto che abbiamo definito nella quarta scheda. In base a queste due uguaglianze possiamo s
+[51] visto che questa equazione è vera per ogni ψ possiamo dedurre che
+[52] Questa formula ci mostra che l'operatore Px “contiene in se” gli autostati che stiamo cercando |px',ξ'⟩, quindi dobbiamo trovare i
+[53] Proviamo a moltiplicare l'operatore Px per un autostato |px,ξ⟩:
+[54] Osservando che ⟨px',ξ'|px,ξ⟩ è nullo se px'≠px, all'interno dell'integrale possiamo sostituire il termine “centrale” px' con px.
+[55] essendo ⟨px',ξ'|px,ξ⟩ le componenti del vettore |px,ξ⟩ nella base {|px',ξ'⟩}, l'integrale non è altro che la combinazione che espr
+[56] cioè i vettori di stato |px,ξ⟩ sono “autovettori” dell'operatore Px. Questo è il motivo per cui gli autostati vengono chiamati cos
+[57] A questo punto abbiamo determinato un quadro molto chiaro, alla grandezza osservabile px è associato un operatore Px, gli autostat
+[58] Se risolviamo il problema agli autovalori
+[59] determiniamo gli autostati dell'operatore |px,ξ⟩ ed applicando il postulato quattro riusciamo a risolvere il nostro problema, cioè
+[60] Ora generalizziamo i risultati raggiunti per la quantità di moto con il seguente importantissimo teorema:
+[61] Ad ogni grandezza fisica g è associato un operatore hermitiano G tale che:
+[62] Il valore medio della grandezza g, quando il sistema si trova in uno stato rappresentato dal ket |ψ⟩, è dato dalla formula ⟨ψ|G|ψ⟩
+[63] Gli autovalori dell'operatore G sono tutti i possibili valori che può assumere la grandezza g, e gli autovettori associati ad un a
+[64] Dimostrazione:
+[65] Consideriamo una grandezza g, siano g' i possibili valori della grandezza g, e siano |g',ξ⟩ i ket rappresentativi degli autostati 
+[66] è hermitiano e soddisfa i due punti dell'asserto. Per verificarlo basta seguire esattamente gli stessi passi che abbiamo seguito p
+[67] Grandezze compatibili e grandezze incompatibili.
+[68] Supponiamo di voler eseguire una misura contemporanea di x e di px. Dopo una tale misura il sistema si dovrebbe portare in un auto
+[69] da cui
+[70] ma noi sappiamo che (XPx−PxX)=+iℏI, dunque abbiamo
+[71] Concludiamo che l'autoket simultaneo degli operatori X e Px non può esistere perché dovrebbe essere per forza nullo. Quindi non pu
+[72] Prima di procedere con lo studio generalizzare al caso continuo la formula che abbiamo dimostrato alla fine del primo paragrafo:
+[73] se ξ è un insieme completo di grandezze osservabili, e {|ξ⟩} è l'insieme ortonormale degli “autoket” associati ai suoi autostati, 
+[74] Per chiarezza ripetiamo la dimostrazione: se moltiplichiamo l'integrale a sinistra per un generico ket |ψ⟩ abbiamo
+[75] essendo ⟨ξ|ψ⟩ le componenti del vettore |ψ⟩ nella base {|ξ⟩} abbiamo
+[76] che dovendo essere vera per ogni |ψ⟩, prova l'asserto.
+[77] Momento angolare.
+[78] Nella Fisica Classica il momento angolare rispetto ad un polo O è definito dalla formula
+[79] Nello schema della Meccanica Quantistica la grandezza momento angolare dovrà essere coerente con la definizione classica.
+[80] Dunque per i valori medi dovremo avere:
+[81] Per semplificare il lavoro ci conviene considerare le singole componenti, inoltre per non appesantire le notazioni ometteremo il p
+[82] Per le componenti abbiamo
+[83] Consideriamo la componente Lz. Per avere accordo tra la Meccanica Classica e la Meccanica Quantistica dovremo avere:
+[84] Concentriamo l'attenzione sul termine ⟨xpy⟩
+[85] Indichiamo con |x,py,ξ⟩ un autoket rappresentativo di un autostato simultaneo delle grandezze x, py e del set di grandezze ausilia
+[86] Usando questi ket abbiamo
+[87] integrando rispetto alle variabili ξ abbiamo
+[88] Quindi per il valore medio abbiamo
+[89] ricordando che XPy|x,py,ξ⟩=xpy|x,py,ξ⟩ possiamo scrivere
+[90] essendo
+[91] abbiamo la formula finale
+[92] I passaggi sono analoghi per tutti gli altri termini, quindi otteniamo:
+[93] Dunque alla grandezza Lz, per esempio, associamo l'operatore Lz=XPy−YPx, e analogamente per le altre.
+[94] A questo punto abbiamo trovato un operatore che ci dà una formula per calcolare il valore medio del momento angolare nel formalism
+[95] Questo stesso operatore ci può dare tutti i possibili valori che può assumere il momento angolare e gli autostati corrispondenti; 
+[96] L'energia.
+[97] Come ultima grandezza di studio consideriamo l'energia.
+[98] Nel formalismo della Meccanica Classica, per una particella carica in un potenziale elettrico, abbiamo l'energia
+[99] quindi dobbiamo cercare un operatore che ci dia un valore medio coerente con questa formula classica
+[100] Ma noi un operatore simile lo abbiamo già, ed è H, infatti
+[101] Quindi se vogliamo trovare i valori che può assumere l'energia, e gli autostati in cui si porta la particella dopo una misura dell
+[102] Livelli energetici per l'atomo di idrogeno.
+[103] L'atomo di idrogeno è costituito da un nucleo con carica pari a quella dell'elettrone, e da un unico elettrone orbitante.
+[104] Per determinare il moto dell'elettrone attorno al nucleo si deve risolvere l'equazione si Schrödinger, mentre se si vogliono deter
+[105] In questa scheda non vogliamo risolvere questi complicati problemi matematici, e rimandiamo lo svolgimento ad una scheda futura, t
+[106] L'energia può assumere solo dei valori discreti dati dalla formula

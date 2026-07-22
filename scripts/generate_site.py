@@ -178,6 +178,32 @@ EQ_SCALE = 1.15  # scale original physical size up slightly to match web body te
 SENT = re.compile('\u0001IMG\u0001(\\d+)\u0001/IMG\u0001')
 
 
+# --- Prose corrections (errata) ------------------------------------------------
+# Small factual/terminology fixes to the extracted prose, applied to BOTH the
+# SVG and MathML versions. Formula-level fixes live in build/mml (MathML only).
+# The full changelog is on the (unlinked) errata.html page.
+PROSE_FIX = {
+    '05_rutherford': [
+        ('circa venti volte più pesante', 'circa cinquanta volte più pesante'),
+    ],
+    '06_ulteriori_sviluppi': [
+        ('assumere il momento magnetico', 'assumere il momento angolare'),
+    ],
+    '09_spettri_atomici': [
+        ('quelli che formano un gas inerte', 'quelli che formano un gas'),
+    ],
+}
+
+
+def apply_prose_fixes(body, key):
+    for old, new in PROSE_FIX.get(key, []):
+        if old in body:
+            body = body.replace(old, new)
+        else:
+            print(f'  [WARN] prose fix not found in {key}: {old!r}')
+    return body
+
+
 def build_ole_body(src_rel, key, ch=None):
     src = DOCX / src_rel
     tokens = doc_tokens(src)
@@ -635,6 +661,7 @@ def build(outdir, mode):
         else:
             body = build_ole_body(ch['src'], ch['key'], ch)
         body = add_ref_system(body, ch['key'])
+        body = apply_prose_fixes(body, ch['key'])
         (SITE / f'{ch["slug"]}.html').write_text(page_html(ch, body, prev_ch, next_ch), encoding='utf-8')
     intro_body = add_ref_system(build_ole_body(INTRO['src'], INTRO['key'], None), INTRO['key'])
     (SITE / 'index.html').write_text(build_index(intro_body), encoding='utf-8')

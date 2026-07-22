@@ -1,0 +1,125 @@
+# 100 domini VERIFICATI liberi (RDAP autoritativo, 2026-07-21) — prezzo annuo ≤ €15
+# Metodo: query agli RDAP dei registri (Verisign .com/.net, PIR .org, Identity Digital .info,
+#         CentralNic .xyz, Google .dev/.app). 404 = libero, 200 = registrato.
+# Prezzi annui indicativi (registrar economico tipo Cloudflare/Porkbun, senza markup):
+#   .com ~€10  ·  .org ~€10  ·  .dev ~€12  ·  .xyz ~€2–12   (tutti ≤ €15)
+# NB: la disponibilità può cambiare in qualsiasi momento; conferma al registrar prima dell'acquisto.
+
+## Identità Ψ / ΨQM (marchio della tesi)
+psiqm.com
+psiqm.dev
+psiqm.org
+psiqm.xyz
+qmpsi.com
+psiwave.dev
+psiket.dev
+psiket.xyz
+psifield.dev
+psiqubit.com
+psiphysics.com
+psiquanta.org
+psiverse.dev
+psiology.dev
+psinotes.dev
+
+## Quantum — brandabili
+quantessenza.com
+quantessence.dev
+quantoteca.com
+quantario.org
+quantiverso.com
+quantesimo.com
+quantoscopio.com
+quantaidea.com
+quantaidee.com
+quantabook.org
+quantafisica.org
+quantatlas.dev
+quantazero.dev
+quantaverse.dev
+quantcasa.com
+quantnotes.dev
+quantaria.org
+quantalia.org
+evoquanta.org
+viaquanta.org
+zeroquanta.dev
+
+## Quantum — "nove esperimenti" e percorso
+ninequanta.org
+quantumnine.org
+quantummap.dev
+quantumpath.dev
+pathtoquanta.com
+quantaroad.com
+quantaway.org
+
+## Quantum — descrittivi (EN)
+purequantum.org
+plainquantum.com
+cleanquantum.dev
+essentialquantum.org
+quantumessentials.dev
+intuitivequantum.org
+quantumintuition.dev
+quantumfoundations.dev
+firstquantum.dev
+quantumfirst.dev
+quantumfromexperiments.com
+quantumthesis.org
+thequantumthesis.com
+
+## Meccanica quantistica (IT) — identità italiana
+meccanicaquantistica.com
+meccanicaquantistica.org
+laquantistica.com
+laquantistica.org
+quantisticamente.com
+fisicaquantistica.org
+esperimentiquantistici.com
+esperimentiquantistici.org
+esperimentimq.com
+novesperimenti.com
+capirelaquantistica.com
+capirequanti.com
+quantisticadanewton.com
+tesiquantistica.com
+
+## Fisici ed esperimenti
+schrodingerlab.org
+schrodingernotes.com
+deriveschrodinger.com
+deducingschrodinger.com
+newtontoquanta.com
+fromnewtontoquanta.org
+debrogliewave.com
+planckstep.com
+planckbar.com
+sterngerlachlab.com
+franckhertzlab.com
+
+## Onda / ampiezza / probabilità (i mattoni della derivazione)
+complexpsi.com
+complexwave.org
+complexamplitude.com
+probabilityamplitude.org
+linearwave.org
+ampiezzaonda.com
+waveandprobability.com
+thewavefunction.xyz
+ondaquanta.com
+
+## Bra-ket / spin / ℏ (sapore fisico, decorativo)
+braketlab.com
+braketnote.org
+braketbook.com
+ketbra.xyz
+qbitlab.dev
+qubitnote.dev
+hbarnote.com
+spinhalf.org
+
+## Autore
+faustinopalma.com
+palmaquantum.com
+palmaphysics.com

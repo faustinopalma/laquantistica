@@ -1,0 +1,340 @@
+--- [0] p n=0 ---
+□ In questa scheda descriveremo una serie di esperimenti realizzati disponendo più macchine di Stern-Gerlach in cascata. I risultati di questi esperimenti ci porteranno ad introdurre le caratteristiche fondamentali della Meccanica Quantistica, e, nella parte finale, daremo una prima formulazione semplificata di questa teoria.
+--- [1] p n=0 ---
+Fig.1
+--- [2] p n=0 ---
+(Vedi fig.1) Abbiamo due macchine di Stern-Gerlach in fila, una ha l'asse magnetico verticale, l'altra è inclinata rispetto alla verticale di un angolo ϑ.
+--- [3] p n=0 ---
+□ La prima macchina divide il fascio atomico in due parti, scriveremo che una parte ha momento magnetico m0=+k e l'altra m0=-k. Il pedice zero nel simbolo m0 rappresenta l'angolo di inclinazione della macchina, ad esempio se l'angolo è di 45° scriveremo m45. Il simbolo k rappresenta il valore assoluto del momento magnetico misurato che, come abbiamo visto nella scheda precedente è sempre uguale in ogni esperimento.
+--- [4] p n=0 ---
+La figura 2 mostra uno schema che rappresenta la disposizione delle macchine ed il percorso degli atomi. All'uscita della prima macchina viene bloccato il fascio con m0=-k e viene lasciato passare solo il fascio con m0=+k, diremo quindi che la prima macchina seleziona atomi con m0=+k.
+--- [5] p n=0 ---
+Fig.2
+--- [6] p n=0 ---
+Il fascio con m0=+k, viene fatto passare nella seconda macchina e qui si divide di nuovo in due parti, mϑ=+k ed mϑ=-k. Le due frazioni in generale non sono uguali e si vede sperimentalmente che sono proporzionali ai termini .
+--- [7] figcaption n=0 ---
+Fig.3
+--- [8] p n=1 ---
+Ad esempio se anche la seconda macchina è disposta verticalmente (fig. □ ϑ=0°) allora abbiamo che i fasci mϑ=+k ed mϑ=-k hanno intensità proporzionali ai termini 1 e 0, cioè il fascio mϑ=+k ha tutta l'intensità ed il fascio mϑ=-k ha intensità zero. Se invece la seconda macchina è disposta a novanta gradi (fig.4 ϑ=90°) allora i fasci m90=+k e m90=-k hanno intensità proporzionali ai termini ½ ed ½, cioè sono uguali.
+--- [9] p n=0 ---
+Fig.4
+--- [10] p n=0 ---
+E' interessante osservare che già questi primi risultati non si possono spiegare mediante i concetti della meccanica classica.
+--- [11] p n=0 ---
+Se ruotiamo anche la prima macchina (fig.5) osserviamo che i risultati non cambiano sostanzialmente e, come era facile immaginare, i due fasci uscenti hanno intensità proporzionali ai termini
+--- [12] p n=1 ---
+□ □ .
+--- [13] p n=0 ---
+Questo vuol dire che ciò che conta è solo l'inclinazione relativa tra le due macchine e non l'inclinazione assoluta rispetto al filo a piombo.
+--- [14] p n=0 ---
+Fig.5
+--- [15] figcaption n=0 ---
+Fig.6
+--- [16] figcaption n=0 ---
+(Vedi fig.6) Abbiamo tre macchine. Consideriamo il fascio uscente dalla macchina due, questo fascio viene diviso dalla macchina tre in due parti di intensità proporzionali ai termini . Se si varia l'inclinazione della prima macchina osserviamo che varia l'intensità del fascio uscente dalla seconda macchina, ma non varia il modo in cui la terza macchina divide questo fascio, cioè non variano i rapporti tra le intensità dei fasci uscenti e l'intensità del fascio entrante alla terza macchina. Questo esperimento ci porta a concludere che gli atomi che escono dalla macchina due si trovano in uno stato fisico che è indipendente dall'orientamento della macchina uno. Indicheremo questo stato fisico dicendo che gli atomi si trovano nello stato mϑ2=+k.
+--- [17] h2 n=0 ---
+Interpretazione probabilistica dei risultati.
+--- [18] p n=0 ---
+In questo paragrafo daremo una possibile interpretazione di queste prime esperienza che abbiamo descritto.
+--- [19] p n=2 ---
+□ Consideriamo il primo esperimento, la cui figura è riportata qui per comodità. Possiamo pensare che la macchina uno dispone gli atomi in un particolare stato fisico, che indicheremo con m0=+k. Se si esegue una misura di m0 su questi atomi, orientando la macchina due verticalmente, si ottiene con certezza il valore m0=+k. Se invece si esegue una misura di mϑ (con ϑ≠0) inclinando la macchina, si ottiene che ogni singolo atomo ha una probabilità □ di dare mϑ=+k, ed una probabilità □ di dare mϑ=-k.
+--- [20] p n=0 ---
+In altre parole la nostra interpretazione suona così:
+--- [21] p n=2 ---
+se, su un atomo che si trova nello stato m0=+k, si misura la grandezza mϑ (proiezione del momento magnetico nella direzione ϑ) si hanno due possibili risultati: mϑ=+k, con probabilità □ ed mϑ=-k con probabilità □ .
+--- [22] p n=0 ---
+Secondo questa interpretazione il fascio uscente dalla prima macchina non è composto da una frazione di atomi con mϑ=+k ed un'altra con mϑ=-k, ma si tratta di atomi che si trovano tutti nello stato m0=+k ed ogni uno di loro, quando viene misurato mϑ, ha una certa probabilità di dare mϑ=+k ed un'altra di dare mϑ=-k.
+--- [23] p n=0 ---
+Questo modo di vedere le cose, forse non è l'unico possibile, ma è sicuramente molto difficile immaginare un'altra visione che sia coerente con tutti i fatti che abbiamo descritto e che descriveremo.
+--- [24] p n=0 ---
+A questo punto siamo arrivati a delineare una prima importante caratteristica della Meccanica Quantistica, quella legata alla probabilità. Quando si esegue una misura su un sistema fisico sono possibili diversi risultati, nel nostro caso due, ma possono essere anche di più o anche infiniti. Ogni possibile risultato ha una certa probabilità di verificarsi e la Meccanica Quantistica ci permetterà di calcolare queste probabilità.
+--- [25] h2 n=0 ---
+Sovrapposizione degli stati.
+--- [26] figcaption n=0 ---
+Fig.7
+--- [27] figcaption n=0 ---
+La figura 7 mostra che con due macchine di Stern-Gerlach è possibile sovrapporre due fasci che sono stati precedentemente separati da una prima macchina. Gli esperimenti di questo paragrafo si basano sulla sovrapposizione di due fasci.
+--- [28] p n=0 ---
+Fig.8
+--- [29] p n=0 ---
+(Vedi fig.8) La prima macchina dispone gli atomi nello stato m0=+k, la seconda divide il fascio in due parti che hanno m90=+k ed m90=-k, le ultime due ricongiungono il fascio.
+--- [30] p n=0 ---
+Si eseguono tre misure di m0 (fig.9).
+--- [31] p n=0 ---
+□ Nel caso 1 misuriamo m0 su atomi nello stato m90=+k, quindi abbiamo le due possibilità m0=+k ed m0=-k con probabilità 0,5 e 0,5.
+--- [32] p n=0 ---
+Nel caso 2 misuriamo m0 su atomi nello stato m90=-k abbiamo ancora le due possibilità m0=+k con probabilità 0,5 ed m0=-k con probabilità 0,5.
+--- [33] p n=0 ---
+Fig.9
+--- [34] p n=0 ---
+Nel caso 3 misuriamo m0 su atomi che si trovano in uno stato che è sovrapposizione degli stati m90=+k ed m90=-k. Il risultato è che si hanno le due possibilità m0=+k con probabilità 1 ed m0=-k con probabilità 0 zero, esattamente come se non ci fosse stata la scomposizione e la ricombinazione.
+--- [35] p n=0 ---
+Riassumendo abbiamo:
+--- [36] p n=0 ---
+La cosa da osservare è che sovrapponendo due stati che hanno probabilità 0,5 di dare m0=-k si ottiene uno stato che ha probabilità nulla di avere m0=-k,
+--- [37] p n=0 ---
+0,5+0,5=0!
+--- [38] p n=0 ---
+Quindi sovrapponendo gli stati le probabilità non si sommano. Ci chiediamo se c'è qualche altra entità matematica legata agli stati fisici che, quando si sovrappongono gli stati, si componga secondo una legge semplice, magari una legge di somma.
+--- [39] p n=0 ---
+Fig.10
+--- [40] p n=0 ---
+(Vedi fig.10) Questo esperimento è quasi identico al precedente, con l'unica differenza che il fascio con m90=-k percorre un cammino più lungo del fascio con m90=+k. Questo può essere realizzato con il sistema rappresentato schematicamente nella figura 11. Il fascio inferiore passa in una zona dove il gradiente di campo è più intenso, quindi curva di più e percorre un cammino più lungo.
+--- [41] p n=0 ---
+□ Vediamo quali sono i risultati al variare dello sfasamento ∆ tra i due cammini.
+--- [42] p n=0 ---
+Fig.11
+--- [43] p n=0 ---
+Se lo sfasamento è nullo in uscita abbiamo lo stato m0=+k esattamente come nell'esperimento precedente, ma se lo sfasamento è diverso da zero abbiamo uno stato diverso. Se ∆ diviene pari ad una certa lunghezza caratteristica λ, in uscita abbiamo di nuovo m0=+k, anche se ∆ è multiplo di λ, ∆=2λ,3λ, ecc. abbiamo ancora lo stato m0=+k. Se ∆ è pari a λ/2 in uscita abbiamo lo stato m0=-k!
+--- [44] p n=0 ---
+In generale per le probabilità abbiamo le seguenti formule:
+--- [45] p n=0 ---
+dove abbiamo introdotto la variabile ϕ=2π∆/λ.
+--- [46] p n=0 ---
+Ora facciamo i seguenti calcoli matematici.
+--- [47] p n=1 ---
+□ Prendiamo due numeri nel campo complesso, ad esempio due volte il numero uno, 1 e 1, rappresentiamoli vettorialmente
+--- [48] p n=0 ---
+□ Ora sfasiamo il secondo numero moltiplicandolo per il fasore eiϕ , abbiamo la coppia 1 e eiϕ
+--- [49] p n=0 ---
+□ Sommiamo il risultato così ottenuto e prendiamone il modulo quadrato
+--- [50] p n=1 ---
+Otteniamo il risultato: □
+--- [51] p n=1 ---
+□ Ora ripetiamo il tutto partendo dai due numeri 1 e –1
+--- [52] p n=0 ---
+Sfasiamo il secondo numero di ϕ ottenendo 1 e - eiϕ
+--- [53] p n=1 ---
+□ □ Sommiamo e prendiamone il modulo quadrato
+--- [54] p n=1 ---
+Otteniamo il risultato: □
+--- [55] p n=0 ---
+A questo punto sembra abbastanza chiaro che le probabilità ottenute sperimentalmente si possono vedere come il quadrato della somma di due numeri complessi. Il fattore 4 presente nei risultati non conta perché si può eliminare normalizzando la distribuzione di probabilità.
+--- [56] p n=0 ---
+Ora possiamo organizzare le idee nel seguente modo.
+--- [57] p n=0 ---
+Allo stato con m90=+k associamo due numeri complessi, il numero 1 che prendiamo dal primo calcolo ed un altro numero 1 che prendiamo dal secondo calcolo. Allo stato m90=-k associamo il secondo numero 1 del primo calcolo ed il numero –1 del secondo calcolo.
+--- [58] p n=0 ---
+quando sfasiamo lo stato m90=-k moltiplichiamo i suoi due numeri per eiϕ
+--- [59] p n=0 ---
+quando sovrapponiamo gli stati, sommiamo le corrispondenti coppie di numeri e lo stato risultante è rappresentato dalla somma
+--- [60] p n=0 ---
+I moduli quadrati dei numeri trovati danno la distribuzione di probabilità di ottenere i valori m0=+k ed m0=-k quando si esegue una misura di m0..
+--- [61] p n=0 ---
+Questi numeri si riferiscono ad una particolare grandezza fisica del sistema, nel nostro caso m0. Ogni singolo numero complesso è associato ad uno dei possibili valori che può assumere la grandezza fisica ed il modulo quadrato di questi numeri dà la probabilità che, eseguendo la misura, esca il valore associato.
+--- [62] p n=0 ---
+Osserviamo che le coppie di numeri complessi che rappresentano lo stato del nostro sistema costituiscono uno spazio vettoriale, perché possono essere sommate e possono essere moltiplicate per un numero.
+--- [63] p n=0 ---
+Gli esperimenti che abbiamo descritto ci hanno portato a pensare che per rappresentare gli stati fisici sia conveniente usare dei vettori complessi, perché queste entità si sommano semplicemente quando sovrapponiamo gli stati.
+--- [64] p n=0 ---
+L'idea di usare dei vettori complessi per rappresentare gli stati si rivelerà molto fertile, infatti tutte le leggi della Meccanica Quantistica si scrivono come semplici equazioni lineari in termini di questi vettori. Prima di andare avanti con la teoria conviene dedicare un paragrafo all'algebra degli spazi vettoriali complessi.
+--- [65] h2 n=0 ---
+Richiami di algebra degli spazi vettoriali complessi.
+--- [66] p n=0 ---
+Preso un numero complesso c=a+ib indicheremo il suo complesso coniugato con il simbolo c*=a-ib (c* si legge “ci star”). Il prodotto cc*=a2+b2 è un numero reale positivo e viene chiamato modulo quadro di c.
+--- [67] p n=2 ---
+Consideriamo ora un vettore colonna □ , possiamo definire il suo duale con il vettore riga □ . In questo modo il prodotto tra il vettore ed il suo duale
+--- [68] p n=0 ---
+da un numero reale positivo che viene chiamato modulo quadro del vettore.
+--- [69] p n=1 ---
+Se abbiamo uno stato fisico α, indicheremo il vettore ad esso associato con il simbolo □
+--- [70] p n=1 ---
+ed indicheremo il suo duale con il simbolo □
+--- [71] p n=2 ---
+I simboli □ e □ vengono chiamati rispettivamente bra e ket perché unendo questi nomi si ottiene la parola “braket” che in inglese vuol dire parentesi. Li abbiamo introdotti perché ci permettono di distinguere tra righe e colonne, e ci rendono molto chiara la lettura di espressioni in cui compaiono prodotti matriciali.
+--- [72] p n=0 ---
+Ad esempio possiamo avere
+--- [73] p n=0 ---
+oppure possiamo avere
+--- [74] p n=0 ---
+Questi due prodotti sono completamente differenti, in un caso abbiamo un vettore riga per uno colonna ed otteniamo un numero, nell'altro caso abbiamo un vettore colonna per uno riga ed otteniamo una matrice.
+--- [75] p n=2 ---
+Dati due vettori □ e □ il prodotto
+--- [76] p n=2 ---
+viene chiamato prodotto scalare tra □ e □ .
+--- [77] p n=2 ---
+Ricordiamo che nel campo reale il prodotto scalare tra due vettori reali □ e □ viene definito senza il complesso coniugato:
+--- [78] p n=0 ---
+Osserviamo, prima di tutto, che le due definizioni sono compatibili, perché il complesso coniugato di un numero reale è il numero stesso a*=a. Quindi la definizione data nel campo complesso si riduce a quella data nel campo reale se i vettori a cui si applica sono reali.
+--- [79] p n=0 ---
+Tuttavia può rimanere un dubbio, perché nel campo complesso non definiamo il prodotto scalare semplicemente senza il complesso coniugato
+--- [80] p n=1 ---
+□ ?
+--- [81] p n=3 ---
+La risposta è molto semplice, questa definizione non gode di alcune proprietà molto importanti. Ad esempio, con questa definizione il prodotto di un vettore per se stesso □ non è detto che sia un numero reale quindi si perde il concetto di modulo. Inoltre in alcuni casi il prodotto □ potrebbe essere nullo senza che il vettore □ sia nullo, ad esempio se
+--- [82] p n=0 ---
+abbiamo
+--- [83] p n=0 ---
+invece con la definizione corretta
+--- [84] p n=0 ---
+Per concludere questa digressione vediamo quali sono le proprietà fondamentali del prodotto scalare in uno spazio complesso:
+--- [85] p n=2 ---
+per definizione diremo che due vettori □ e □ sono ortogonali se è nullo il loro prodotto scalare
+--- [86] p n=1 ---
+Teorema: se n vettori non nulli □ sono a due a due ortogonali
+--- [87] p n=0 ---
+allora questi n vettori sono linearmente indipendenti, cioè nessuno di loro può essere ottenuto come combinazione lineare degli altri.
+--- [88] p n=0 ---
+Dimostrazione: per assurdo supponiamo che un vettore, ad esempio il primo, è combinazione degli altri
+--- [89] p n=1 ---
+moltiplichiamo scalarmente a destra per □
+--- [90] p n=0 ---
+essendo i vettori per ipotesi ortogonali, abbiamo che tutti i termini al secondo membro sono nulli, quindi
+--- [91] p n=0 ---
+ma questo è assurdo perché i vettori sono tutti non nulli.
+--- [92] p n=2 ---
+Ora supponiamo di avere uno spazio vettoriale n dimensionale, e di dover scegliere una base per questo spazio. Come è noto, si può scegliere una qualsiasi n-upla di vettori linearmente indipendenti, ma è molto comodo scegliere questi vettori in modo che siano ortogonali tra di loro ed in modo che abbiano modulo unitario □ . Infatti così facendo diventa molto semplice calcolare le componenti di un generico vettore □ . Vediamo come:
+--- [93] p n=1 ---
+Prendiamo un vettore □ ed una base di vettori ortogonali di modulo unitario
+--- [94] p n=2 ---
+□ può essere scritto come combinazione lineare dei vettori □
+--- [95] p n=1 ---
+per calcolare il coefficiente ck moltiplichiamo questa espressione a sinistra per □
+--- [96] p n=0 ---
+essendo i vettori di base a due a due ortogonali si ha
+--- [97] p n=1 ---
+essendo □ di modulo unitario abbiamo
+--- [98] p n=0 ---
+Quindi ci rimane la formula per calcolare ck
+--- [99] p n=2 ---
+la componente di □ lungo il vettore di base □ è data dal prodotto scalare tra questi due vettori.
+--- [100] p n=0 ---
+L'algebra degli spazi vettoriali complessi ha molti altri sviluppi di cui ci occuperemo più avanti. Per ora abbiamo voluto introdurre il prodotto scalare perché ci è indispensabile per formulare una prima versione semplificata della Meccanica Quantistica.
+--- [101] p n=0 ---
+Ritorniamo al nostro semplice sistema.
+--- [102] p n=0 ---
+Lo stato m0=+k è caratterizzato dal fatto che se si esegue una misura di m0 si ottiene con certezza il valore m0=+k, cioè la probabilità di ottenere m0=+k è uno e la probabilità di ottenere m0=-k è zero.
+--- [103] p n=0 ---
+Quindi questo stato può essere rappresentato dal vettore ket
+--- [104] p n=3 ---
+In questa scelta abbiamo un certo grado di libertà, infatti le probabilità sono il modulo quadrato delle componenti. Quindi anche i vettori □ oppure □ vanno bene, perché □ . Questo grado di libertà deve essere visto come in meccanica classica si vede la scelta del sistema di riferimento, è del tutto indifferente quale scelta facciamo, quindi conviene fare quella più comoda.
+--- [105] p n=0 ---
+Per lo stato m0=-k vale un discorso analogo
+--- [106] p n=0 ---
+Osserviamo che i vettori che abbiamo scelto sono ortogonali ed hanno modulo unitario
+--- [107] p n=0 ---
+Consideriamo ora uno stato α ottenuto da una combinazione degli stati m0=+k ed m0=-k
+--- [108] p n=2 ---
+Possiamo dire che questo stato ha proprietà intermedie a quelle degli stati componenti, nel senso che, se si misura m0 si hanno i due valori possibili m0=+k ed m0=-k con probabilità proporzionali ai termini □ e □
+--- [109] p n=0 ---
+Per ottenere le probabilità effettive dobbiamo normalizzare la distribuzione
+--- [110] p n=0 ---
+Se moltiplichiamo i due numeri α+ ed α- per uno stesso numero complesso c
+--- [111] p n=0 ---
+abbiamo la distribuzione
+--- [112] p n=0 ---
+normalizzando otteniamo esattamente le stesse probabilità di prima
+--- [113] p n=0 ---
+Questo è coerente con il fatto che in Meccanica Quantistica i vettori
+--- [114] p n=0 ---
+rappresentano la stessa combinazione degli stati base e, quindi, lo stesso stato fisico. Scegliere l'uno o l'altro vettore è del tutto indifferente.
+--- [115] p n=1 ---
+La scelta più comoda è quella di prendere vettori normalizzati, cioè vettori tali che □ . In questo modo le probabilità si ottengono direttamente dai moduli quadri, senza dover normalizzare
+--- [116] p n=2 ---
+Quindi d'ora in poi, rappresentiamo gli stati con vettori di modulo unitario. Ai coefficienti di un vettore di stato con modulo unitario viene dato un nome particolare, vengono chiamati “ampiezze di probabilità”, α+ è l'ampiezza di probabilità di ottenere m0=+k e □ è la probabilità di ottenere m0=+k, analogamente per α- e per □ .
+--- [117] p n=0 ---
+Consideriamo ora due stati mϑ=+k e mϕ=+k, e consideriamo i vettori che li rappresentano
+--- [118] p n=0 ---
+le grandezze αϑ+, αϑ- e αϕ+, αϕ- sono, rispettivamente, le ampiezze di probabilità di trovare m0=+k ed m0=-k quando il sistema si trova negli stati mϑ=+k e mϕ=-k.
+--- [119] p n=0 ---
+Ma quanto vale l'ampiezza di probabilità di trovare mϑ=+k misurando mϑ su atomi che si trovano nello stato mϕ=+k?
+--- [120] p n=0 ---
+L'ampiezza di probabilità cercata è pari al prodotto
+--- [121] p n=2 ---
+cioè è pari alla componente del vettore □ lungo il vettore □ .
+--- [122] p n=0 ---
+La probabilità, come al solito, è data dal modulo quadro
+--- [123] p n=0 ---
+Questa regola era facile da intuire, ma non si può dimostrare in base alle cose che avevamo già detto. Si tratta di un principio fondamentale della Meccanica Quantistica, ed ha una validità generale:
+--- [124] p n=1 ---
+supponiamo di avere un sistema in uno stato α e di voler sapere la probabilità che, misurando una grandezza g, esca un particolare valore □ .
+--- [125] p n=1 ---
+Prima dobbiamo prendere il ket normalizzato □ associato allo stato α.
+--- [126] p n=2 ---
+Poi dobbiamo prendere il ket normalizzato □ associato allo stato nel quale, se si misura g, si ottiene con certezza il valore □ .
+--- [127] p n=2 ---
+Infine dobbiamo calcolare la componente del ket □ lungo il ket □
+--- [128] p n=0 ---
+ottenendo così l'ampiezza di probabilità.
+--- [129] p n=0 ---
+La probabilità è data dal modulo quadrato
+--- [130] p n=2 ---
+Ora siamo in grado di scegliere le giuste componenti dei vettori □ e □ per ogni angolo ϑ.
+--- [131] p n=1 ---
+Per le probabilità relative a □ abbiamo i seguenti risultati sperimentali
+--- [132] p n=0 ---
+che, ad esempio possono derivare dai vettori
+--- [133] p n=0 ---
+Anche in questo caso abbiamo un certo grado di libertà, questo perché non possiamo misurare direttamente le ampiezze di probabilità, ma solo le probabilità. La scelta più semplice è la seguente
+--- [134] p n=1 ---
+Per lo stato □ possiamo scegliere
+--- [135] p n=2 ---
+Il segno meno davanti al □ è necessario perché i due vettori devono essere ortogonali □ . Infatti sappiamo che la probabilità di ottenere mϑ=+k nello stato mϑ=-k è zero.
+--- [136] p n=0 ---
+A questo punto, per verificare la coerenza delle cose che abbiamo detto, proviamo a calcolare la probabilità di trovare mϑ=+k in uno stato mϕ=+k.
+--- [137] p n=0 ---
+Analogamente si può calcolare
+--- [138] p n=0 ---
+Esattamente in accordo con i risultati sperimentali.
+--- [139] p n=0 ---
+Come ultimo passo ci resta da studiare l'evoluzione temporale dei vettori di stato.
+--- [140] h2 n=0 ---
+Evoluzione temporale.
+--- [141] p n=2 ---
+Dato un sistema, supponiamo di conoscere il ket di stato iniziale □ e le “condizioni ambientali”. Ci chiediamo quale sarà il ket di stato □ in un generico istante t.
+--- [142] p n=0 ---
+Possiamo organizzare un esperimento nel seguente modo:
+--- [143] p n=1 ---
+prendiamo un fascio di atomi di cui conosciamo lo stato, lo facciamo passare attraverso unna scatola contenente varie macchine di Stern-Gerlach e, all'uscita dopo il tempo □ necessario all'attraversamento della scatola, osserviamo lo stato degli atomi (vedi fig.12).
+--- [144] p n=0 ---
+Fig.12
+--- [145] figcaption n=0 ---
+Scatola
+--- [146] p n=0 ---
+Nel predisporre la scatola dobbiamo stare attenti, infatti noi stiamo studiando un sistema semplificato, abbiamo degli atomi dei quali osserviamo solo il momento magnetico, e nessun'altra grandezza come ad esempio la posizione. Quindi non si possono inserire setti che bloccano alcuni fasci, perché lo stato degli atomi che urtano questi setti si dovrebbe descrivere anche in termini di posizione oltre che di momento magnetico, e questo ci porterebbe fuori dallo schema semplice che stiamo studiando.
+--- [147] p n=0 ---
+□ Possiamo considerare un esperimento che abbiamo già eseguito (Esperimento numero 4) di cui riportiamo la figura.
+--- [148] figcaption n=0 ---
+Esperimento n.4
+--- [149] p n=0 ---
+Supponiamo di poter ruotare la prima macchina di un angolo ϑ, così in ingresso abbiamo atomi nello stato . Quando questi atomi entrano nella scatola lo stato viene diviso in due componenti
+--- [150] p n=0 ---
+dove i termini c+ e c- sono dati dai prodotti scalari
+--- [151] p n=1 ---
+Il fascio □ viene sfasato di un fattore eiϕ ed in uscita abbiamo lo stato composto
+--- [152] p n=0 ---
+dove U è la matrice
+--- [153] p n=0 ---
+Questa matrice viene detta matrice di evoluzione temporale tra gli istanti t0 e t, e si riferisce al particolare ambiente, cioè all'apparato che costituisce l'esperimento.
+--- [154] p n=4 ---
+In generale per qualsiasi fenomeno esiste una matrice □ tale che dato □ si calcola □ con il prodotto □ .
+--- [155] p n=2 ---
+Un'importante proprietà della matrice di evoluzione temporale è che conserva i prodotti scalari. Cioè se prendiamo due vettori di stato □ e □ , e prendiamo i vettori ottenuti dall'evoluzione di questi
+--- [156] p n=0 ---
+i prodotti scalari tra i primi e tra i secondi sono uguali
+--- [157] p n=0 ---
+Possiamo verificare questa proprietà per il caso particolare dell'esperimento 4, prima però vediamo un dettaglio di algebra:
+--- [158] p n=7 ---
+Se prendiamo un vettore □ il suo duale è □ . Se moltiplichiamo □ per un numero c abbiamo □ , ed il duale sarà □ . Dunque il duale di □ è □ .
+--- [159] p n=2 ---
+Ora calcoliamo □ e mostriamo che il risultato è uguale a □ .
+--- [160] p n=0 ---
+eseguendo il prodotto scalare ed eliminando i termini nulli
+--- [161] p n=0 ---
+Per concludere rivediamo i principi fondamentali che abbiamo individuato.
+--- [162] h2 n=0 ---
+Principi della Meccanica Quantistica (versione semplificata).
+--- [163] p n=0 ---
+Un sistema fisico è caratterizzato dalle sue grandezze fisiche che possono essere misurate.
+--- [164] p n=3 ---
+Quando si misura una grandezza g sono possibili diversi risultati, ed ogni risultato ha una certa probabilità di uscire. Se dalla misura si ottiene un particolare risultato □ , il sistema si porta in uno stato tale che, se si ripete la misura di g si ottiene con certezza il valore □ . Un tale stato viene detto autostato di g con autovalore □ .
+--- [165] p n=3 ---
+Un qualsiasi altro stato α può essere considerato come una sovrapposizione degli autostati di una grandezza g e può essere rappresentato da un vettore di numeri complessi □ . Ogni numero complesso è associato ad uno dei possibili valori che può assumere la grandezza g, □ Il modulo quadrato di ognuno di questi numeri complessi, ad esempio αk, da la probabilità che misurando la grandezza g esca il particolare valore □ associato al numero considerato.
+--- [166] p n=7 ---
+In generale se il sistema si trova in uno stato α e si misura una grandezza □ , la probabilità che esca □ è data dal modulo quadro del prodotto scalare tra il vettore □ ed il vettore □ associato all'autostato □ di □ . □
+--- [167] p n=1 ---
+L'evoluzione nel tempo di uno stato αt segue una legge lineare □
+--- [168] p n=3 ---
+dove □ è una matrice che dipende dal sistema e dalle “condizioni ambientali”. La matrice □ è detta matrice di evoluzione temporale e gode della proprietà di lasciare invariati i prodotti scalari □
+--- [169] p n=0 ---
+Questi che abbiamo sintetizzato sono una versione semplificata dei principi fondamentali. In generale per descrivere lo stato di un sistema non è sufficiente usare una sola grandezza osservabile, ma bisognerà usarne più di una. Nel seguito mostreremo come si generalizza la teoria ai casi più complessi, ed affronteremo l'importante problema di determinare la matrice di evoluzione temporale per i vari sistemi che studieremo.

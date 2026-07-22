@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Esperimenti fondamentali della Meccanica Quantistica — Faustino Palma (1999)</title>
+<meta name="description" content="Edizione web di una tesi di laurea del 1999 che introduce la Meccanica Quantistica a partire dagli esperimenti fondamentali, con una derivazione originale dell'equazione di Schrödinger. Bilingue IT/EN.">
+<style>
+  :root{
+    --bg:#f5f3ee; --card:#ffffff; --ink:#1f2328; --muted:#4a4f57;
+    --accent:#7b2d26; --accent2:#a8443b; --line:#e0dccf; --soft:#efece4;
+  }
+  /* language switching */
+  html[data-lang="it"] .en{display:none !important;}
+  html[data-lang="en"] .it{display:none !important;}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",sans-serif;line-height:1.65;
+    -webkit-font-smoothing:antialiased}
+  a{color:var(--accent)}
+  .topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;
+    gap:1rem;padding:.6rem 1.2rem;background:rgba(245,243,238,.9);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line)}
+  .topbar .site{font-weight:650;font-size:.95rem;color:var(--accent);letter-spacing:.01em}
+  .topbar .site small{display:block;font-weight:400;color:var(--muted);font-size:.72rem;letter-spacing:.04em}
+  .langsw{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:#fff}
+  .langbtn{border:0;background:transparent;padding:.35rem .8rem;font:inherit;font-size:.82rem;font-weight:600;
+    color:var(--muted);cursor:pointer}
+  .langbtn[aria-pressed="true"]{background:var(--accent);color:#fff}
+  .wrap{max-width:60rem;margin:0 auto;padding:0 1.2rem}
+  /* hero */
+  .hero{padding:3.4rem 0 1.2rem;text-align:center}
+  .kicker{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);font-weight:700;margin:0 0 .5rem}
+  h1{font-weight:680;font-size:clamp(1.7rem,4.2vw,2.7rem);line-height:1.15;margin:.1rem 0 .5rem}
+  .subtitle{color:var(--muted);font-size:1.08rem;max-width:40rem;margin:.4rem auto 0}
+  .byline{margin:1.1rem 0 0;color:var(--muted);font-size:.95rem}
+  .byline b{color:var(--ink)}
+  .cta{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;margin:1.8rem 0 .4rem}
+  .btn{display:inline-block;padding:.72rem 1.3rem;border-radius:10px;text-decoration:none;font-weight:600;
+    border:1px solid var(--accent);transition:.15s}
+  .btn.primary{background:var(--accent);color:#fff}
+  .btn.primary:hover{background:var(--accent2);border-color:var(--accent2)}
+  .btn.ghost{background:transparent;color:var(--accent)}
+  .btn.ghost:hover{background:var(--soft)}
+  .lede{font-size:1.12rem;color:#33383f;max-width:44rem;margin:2.4rem auto 0;text-align:center}
+  hr.sep{border:0;border-top:1px solid var(--line);max-width:6rem;margin:2.4rem auto}
+  /* cards */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1.1rem;margin:1.4rem 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.25rem 1.3rem;
+    box-shadow:0 6px 20px rgba(0,0,0,.04)}
+  .card h3{margin:.1rem 0 .5rem;font-size:1.08rem;color:var(--accent)}
+  .card p{margin:0;color:var(--muted);font-size:.97rem}
+  .card .ico{font-size:1.3rem;line-height:1;display:block;margin-bottom:.5rem}
+  h2.sec{font-size:1.05rem;letter-spacing:.02em;color:var(--ink);margin:2.6rem 0 .3rem;text-align:center}
+  h2.sec .en,h2.sec .it{display:inline}
+  /* provenance */
+  .prov{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent2);
+    border-radius:12px;padding:1.1rem 1.3rem;margin:1.2rem 0;color:var(--muted);font-size:.95rem}
+  .prov b{color:var(--ink)}
+  .prov .cite{font-style:italic}
+  .foot{margin:3rem 0 2.4rem;padding-top:1.2rem;border-top:1px solid var(--line);
+    color:var(--muted);font-size:.85rem;text-align:center}
+  .note{font-size:.86rem;color:var(--muted);text-align:center;margin-top:.6rem}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="site">Fisica Atomica
+    <small class="it">Esperimenti fondamentali di Meccanica Quantistica</small>
+    <small class="en">Fundamental Experiments of Quantum Mechanics</small>
+  </div>
+  <div class="langsw" role="group" aria-label="Lingua / Language">
+    <button class="langbtn" data-l="it" aria-pressed="true">IT</button>
+    <button class="langbtn" data-l="en" aria-pressed="false">EN</button>
+  </div>
+</div>
+
+<header class="hero wrap">
+  <p class="kicker">
+    <span class="it">Tesi di Laurea · 1999</span>
+    <span class="en">Master's Thesis · 1999</span>
+  </p>
+  <h1>
+    <span class="it">Esperimenti fondamentali della Meccanica Quantistica</span>
+    <span class="en">Fundamental Experiments of Quantum Mechanics</span>
+  </h1>
+  <p class="subtitle">
+    <span class="it">Un percorso didattico che introduce la teoria quantistica partendo dagli esperimenti cruciali — e che <b>deduce</b> l'equazione di Schrödinger invece di postularla.</span>
+    <span class="en">A didactic path that introduces quantum theory starting from the crucial experiments — and that <b>derives</b> the Schrödinger equation instead of postulating it.</span>
+  </p>
+  <p class="byline">
+    <span class="it">di <b>Faustino Palma</b> · Università di Napoli «Federico II» — Laboratorio LAFIDIN</span>
+    <span class="en">by <b>Faustino Palma</b> · University of Naples “Federico II” — LAFIDIN Laboratory</span>
+  </p>
+  <div class="cta">
+    <a class="btn primary" href="leggi/index.html">
+      <span class="it">Leggi la tesi →</span><span class="en">Read the thesis →</span>
+    </a>
+  </div>
+  <p class="note">
+    <span class="it">Formule in MathML nativo: testo selezionabile, accessibile e ridimensionabile.</span>
+    <span class="en">Formulas in native MathML: selectable, accessible and scalable text.</span>
+  </p>
+</header>
+
+<main class="wrap">
+  <p class="lede">
+    <span class="it">Lo scopo di questo lavoro è eseguire gli esperimenti fondamentali della Meccanica Quantistica e, a partire dalla loro analisi, costruire un'introduzione completa alla teoria. Il lavoro è organizzato in nove «schede», ciascuna con una parte sperimentale e una parte teorica.</span>
+    <span class="en">The aim of this work is to perform the fundamental experiments of Quantum Mechanics and, from their analysis, to build a complete introduction to the theory. It is organised into nine “cards”, each pairing an experiment with its theory.</span>
+  </p>
+
+  <hr class="sep">
+
+  <h2 class="sec"><span class="it">Perché vale la pena guardarlo</span><span class="en">Why it is worth a look</span></h2>
+  <section class="grid">
+    <article class="card">
+      <span class="ico">🧪</span>
+      <h3><span class="it">Dagli esperimenti alla teoria</span><span class="en">From experiments to theory</span></h3>
+      <p>
+        <span class="it">Ogni concetto nasce da un esperimento reale: Stern-Gerlach, diffrazione degli elettroni, Millikan, Rutherford, Franck-Hertz, effetto fotoelettrico, spettri atomici.</span>
+        <span class="en">Every concept arises from a real experiment: Stern-Gerlach, electron diffraction, Millikan, Rutherford, Franck-Hertz, the photoelectric effect, atomic spectra.</span>
+      </p>
+    </article>
+    <article class="card">
+      <span class="ico">✒️</span>
+      <h3><span class="it">Una derivazione originale di Schrödinger</span><span class="en">An original derivation of Schrödinger</span></h3>
+      <p>
+        <span class="it">L'equazione di Schrödinger non è postulata: è dedotta imponendo la coerenza con la legge di Newton (principio di corrispondenza) e fissando ℏ con la relazione di de Broglie. Un percorso indipendente dalla Meccanica Analitica, all'epoca giudicato originale da fisici teorici.</span>
+        <span class="en">The Schrödinger equation is not postulated: it is derived by requiring consistency with Newton's law (the correspondence principle) and fixing ℏ through the de Broglie relation. A route independent of Analytical Mechanics — judged original by theoretical physicists at the time.</span>
+      </p>
+    </article>
+    <article class="card">
+      <span class="ico">🎓</span>
+      <h3><span class="it">Accessibile</span><span class="en">Accessible</span></h3>
+      <p>
+        <span class="it">La teoria si appoggia solo su meccanica newtoniana ed elettromagnetismo, con le notazioni di Dirac fin dall'inizio: pensata per studenti del terzo anno di Ingegneria.</span>
+        <span class="en">The theory rests only on Newtonian mechanics and electromagnetism, using Dirac notation from the very start: designed for third-year Engineering students.</span>
+      </p>
+    </article>
+    <article class="card">
+      <span class="ico">🔬</span>
+      <h3><span class="it">Verificato e restaurato</span><span class="en">Reviewed and restored</span></h3>
+      <p>
+        <span class="it">Edizione digitale dell'originale del 1999: le derivazioni sono state riverificate e le poche correzioni minori (refusi e punteggiatura) sono state applicate. Fedele all'originale, ma leggibile oggi.</span>
+        <span class="en">A digital edition of the 1999 original: the derivations have been re-verified and the few minor corrections (typos and punctuation) have been applied. Faithful to the original, yet readable today.</span>
+      </p>
+    </article>
+  </section>
+
+  <div class="cta">
+    <a class="btn primary" href="leggi/index.html">
+      <span class="it">Comincia dall'introduzione →</span><span class="en">Start from the introduction →</span>
+    </a>
+  </div>
+
+  <h2 class="sec"><span class="it">Provenienza e come citare</span><span class="en">Provenance &amp; how to cite</span></h2>
+  <div class="prov">
+    <p style="margin:.1rem 0 .7rem">
+      <span class="it"><b>Comunicazione al congresso.</b> Presentata al 85° Congresso Nazionale della <b>Società Italiana di Fisica (SIF)</b>, Pavia, 24 settembre 1999.</span>
+      <span class="en"><b>Conference communication.</b> Presented at the 85th National Congress of the <b>Italian Physical Society (SIF)</b>, Pavia, 24 September 1999.</span>
+    </p>
+    <p class="cite" style="margin:.1rem 0 .7rem">
+      C. Luponio, G. Mastrocinque, F. Palma
+      <span class="it">(oratore)</span><span class="en">(speaker)</span>,
+      «La formulazione della fisica quantistica attraverso esperimenti eseguiti ed interpretati teoricamente».
+    </p>
+    <p style="margin:.1rem 0 0">
+      <span class="it"><b>Tesi.</b> F. Palma, «Esperimenti fondamentali della Meccanica Quantistica», Tesi di Laurea, Università degli Studi di Napoli «Federico II» — Facoltà di Ingegneria, Laboratorio LAFIDIN. Esperimenti eseguiti al LAFIDIN (Napoli) e alla «Sala Dimostrazioni» LEYBOLD (Milano).</span>
+      <span class="en"><b>Thesis.</b> F. Palma, “Fundamental Experiments of Quantum Mechanics”, master's thesis, University of Naples “Federico II” — Faculty of Engineering, LAFIDIN Laboratory. Experiments performed at LAFIDIN (Naples) and at the LEYBOLD “demonstration hall” (Milan).</span>
+    </p>
+  </div>
+
+  <div class="foot">
+    <p style="margin:.2rem 0">
+      <span class="it">© Faustino Palma, 1999. Edizione web fedele all'originale.</span>
+      <span class="en">© Faustino Palma, 1999. Web edition faithful to the original.</span>
+    </p>
+  </div>
+</main>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  function set(l){
+    l = (l==='en') ? 'en' : 'it';
+    root.setAttribute('data-lang',l);
+    root.setAttribute('lang',l);
+    try{ localStorage.setItem('site-lang',l); }catch(e){}
+    var btns=document.querySelectorAll('.langbtn');
+    for(var i=0;i<btns.length;i++){ btns[i].setAttribute('aria-pressed', btns[i].getAttribute('data-l')===l ? 'true':'false'); }
+  }
+  var saved=null; try{ saved=localStorage.getItem('site-lang'); }catch(e){}
+  if(!saved){ var nav=(navigator.language||'it').toLowerCase(); saved = nav.indexOf('it')===0 ? 'it' : 'en'; }
+  set(saved);
+  document.addEventListener('click',function(e){
+    var b=e.target.closest && e.target.closest('.langbtn');
+    if(b){ set(b.getAttribute('data-l')); }
+  });
+})();
+</script>
+</body>
+</html>

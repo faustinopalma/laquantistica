@@ -1,0 +1,214 @@
+--- [0] p n=0 ---
+Capitolo 6
+--- [1] p n=2 ---
+Nella scheda quattro abbiamo introdotto l'equazione di Schrödinger per una particella carica in un potenziale elettrico. Questa equazione ci permette di determinare □ , cioè la distribuzione di ampiezze di probabilità in funzione del tempo per la terna di grandezze misurabili □ . Lo scopo centrale della presente scheda sarà quello di determinare la distribuzione di ampiezze di probabilità per altre grandezze osservabili, in particolare per la quantità di moto, per il momento angolare e per l'energia.
+--- [2] p n=0 ---
+Per raggiungere lo scopo è necessario rivedere e generalizzare i principi della Meccanica Quantistica che abbiamo postulato nella scheda due.
+--- [3] p n=0 ---
+Principi della Meccanica Quantistica.
+--- [4] p n=0 ---
+Per comodità di lettura riportiamo qui i principi che abbiamo postulato nella scheda due:
+--- [5] p n=0 ---
+Un sistema fisico è caratterizzato dalle sue grandezze fisiche che possono essere misurate.
+--- [6] p n=3 ---
+Quando si misura una grandezza g sono possibili diversi risultati, ed ogni risultato ha una certa probabilità di uscire. Se dalla misura si ottiene un particolare risultato □ , il sistema si porta in uno stato tale che, se si ripete la misura di g si ottiene con certezza il valore □ . Un tale stato viene detto autostato di g con autovalore □ .
+--- [7] p n=3 ---
+Un qualsiasi altro stato α può essere considerato come una sovrapposizione degli autostati di una grandezza g e può essere rappresentato da un vettore di numeri complessi □ . Ogni numero complesso è associato ad uno dei possibili valori che può assumere la grandezza g, □ Il modulo quadrato di ognuno di questi numeri complessi, ad esempio αk, dà la probabilità che misurando la grandezza g esca il particolare valore □ associato al numero considerato.
+--- [8] p n=7 ---
+In generale se il sistema si trova in uno stato α e si misura una grandezza □ , la probabilità che esca □ è data dal modulo quadro del prodotto scalare tra il vettore □ ed il vettore □ associato all'autostato □ di □ . □
+--- [9] p n=1 ---
+L'evoluzione nel tempo di uno stato αt segue una legge lineare □
+--- [10] p n=3 ---
+dove □ è una matrice che dipende dal sistema e dalle “condizioni ambientali”. La matrice □ è detta matrice di evoluzione temporale e gode della proprietà di lasciare invariati i prodotti scalari □
+--- [11] p n=0 ---
+Nel secondo principio si introduce il concetto di autostato cioè di uno stato tale che se si esegue una misura si ottiene con certezza un dato valore detto autovalore. Nel caso di una particella materiale gli autostati ad esempio della grandezza x sono quelli rappresentati da vettori del tipo
+--- [12] p n=3 ---
+infatti con questo vettore si ottiene una distribuzione di probabilità che è nulla se □ , ed è non nulla solo se □ , quindi quando si esegue una misura di x si otterrà per forza il valore □ . Un altro esempio è dato dallo stato rappresentato dal vettore
+--- [13] p n=3 ---
+in questo caso se si esegue una misura di x, di y o di z, si otterranno con certezza i valori □ , □ e □ ; quindi questo che abbiamo considerato è contemporaneamente un autostato delle grandezze x, y e z.
+--- [14] p n=3 ---
+I principi che abbiamo dato in realtà sono una versione semplificata, perché si suppone che dato un valore □ l'autostato associato a □ sia unico, il ché in generale non è vero; ad esempio nel caso di una particella materiale nello spazio tridimensionale gli autostati associati ad un autovalore □ di x sono infiniti:
+--- [15] p n=2 ---
+Quindi non possiamo parlare dello stato □ , perché non è uno solo, ma possiamo parlare dello stato □ , infatti questo stato è univocamente determinato e la relativa distribuzione di probabilità è
+--- [16] p n=5 ---
+Il terzo principio si deve generalizzare dicendo che un qualsiasi stato può essere considerato come la sovrapposizione degli “autostati simultanei” di un certo set di grandezze fisiche □ . I coefficienti di questa sovrapposizione non avranno più un solo indice ma ne avranno tanti quante sono le grandezze osservabili delle quali si prendono gli autostati, quindi non avremo □ ma avremo □ , oppure nel caso continuo non avremo □ ma avremo □ .
+--- [17] p n=3 ---
+Un set di grandezze fisiche □ tale che esiste un unico autostato simultaneo associato agli autovalori □ si dirà “completo”. Ad esempio le tre variabili posizione x, y e z costituiscono un set completo, perché data una terna di valori □ , esiste un unico autostato simultaneo associato a questa terna.
+--- [18] p n=1 ---
+Il ket associato allo stato □ potrà essere indicato con il simbolo
+--- [19] p n=5 ---
+tuttavia preferiremo fare un abuso di notazione e usare una notazione più compatta indicando il ket con il simbolo □ . (C'è un abuso di notazione perché se volessimo sostituire dei numeri, ad esempio □ , □ e □ , avremmo il simbolo □ nel quale sono indicati dei valori, ma non sono indicate le relative grandezze).
+--- [20] p n=4 ---
+Ora consideriamo il quarto principio e supponiamo ad esempio di voler calcolare l'ampiezza di probabilità che, misurando x, y e z contemporaneamente su una particella in uno stato □ , vengano i valori □ ; allora l'ampiezza di probabilità cercata è data dal prodotto scalare □ e la probabilità è data dal modulo quadro □ .
+--- [21] p n=2 ---
+Ma se vogliamo la probabilità che misurando solo x venga □ ? Possiamo scrivere □ ?
+--- [22] p n=2 ---
+No, perché il simbolo □ non ha significato, infatti l'autovalore □ non identifica un unico autostato.
+--- [23] p n=1 ---
+Se vogliamo la probabilità che misurando solo x venga □ allora dobbiamo prima calcolare la probabilità
+--- [24] p n=0 ---
+e poi calcolare l'integrale
+--- [25] p n=0 ---
+A questo punto scriviamo i principi generalizzati
+--- [26] p n=0 ---
+Un sistema fisico è caratterizzato dalle sue grandezze fisiche che possono essere misurate.
+--- [27] p n=3 ---
+Quando si misura una grandezza g sono possibili diversi risultati, ed ogni risultato ha una certa probabilità di uscire. Se dalla misura si ottiene un particolare risultato □ , il sistema si porta in uno stato tale che, se si ripete la misura di g si ottiene con certezza il valore □ . Un tale stato viene detto autostato di g con autovalore □ .
+--- [28] p n=3 ---
+2.bis In generale dato un valore □ possono esistere infiniti autostati associati a questo valore. Tuttavia è sempre possibile trovare un set di variabili completo □ , tale che, dati gli n valori □ , esiste un unico autostato simultaneo associato a questi valori.
+--- [29] p n=7 ---
+Un qualsiasi altro stato α può essere considerato come una sovrapposizione degli autostati simultanei di un set di grandezze □ , e può essere rappresentato da un vettore di numeri complessi con n indici □ . Ogni numero complesso è associato ad una delle possibili combinazione di valori che può assumere la n-upla di grandezze □ . Il modulo quadrato di ogni uno di questi numeri complessi, ad esempio □ , da la probabilità che misurando contemporaneamente le grandezze □ escano il particolare set di valori □ e che il sistema si porti nell'autostato simultaneo □ .
+--- [30] p n=6 ---
+In generale se il sistema si trova in uno stato α e si misura contemporaneamente un set completo di grandezze □ , la probabilità che esca □ è data dal modulo quadro del prodotto scalare tra il vettore □ ed il vettore □ associato all'autostato simultaneo □ . Cioè □ .
+--- [31] p n=1 ---
+L'evoluzione nel tempo di uno stato αt segue una legge lineare □
+--- [32] p n=3 ---
+dove □ è una matrice che dipende dal sistema e dalle “condizioni ambientali”. La matrice □ è detta matrice di evoluzione temporale e gode della proprietà di lasciare invariati i prodotti scalari □
+--- [33] p n=2 ---
+La generalizzazione di questi principi al caso continuo è immediata, basta sostituire alla rappresentazione indiciale □ la rappresentazione funzionale □ .
+--- [34] p n=6 ---
+Osserviamo che due ket □ e □ sono ortogonali, a meno che non abbiano tutti i valori uguali □ . Infatti se supponiamo che uno dei valori, ad esempio il primo, è diverso □ allora abbiamo che la probabilità di ottenere i valori □ nello stato □ è zero, dunque:
+--- [35] p n=4 ---
+Se i ket □ oltre ad essere ortogonali sono anche normalizzati, allora le componenti di un generico ket □ nella base □ si potranno scrivere con il prodotto scalare □ , quindi avremo
+--- [36] p n=1 ---
+Queste identità devono essere vere per ogni scelta del ket □ , quindi possiamo dedurre la formula
+--- [37] p n=0 ---
+dove con I abbiamo indicato la matrice identità. Questa formula ci sarà utilissima in molte occasioni future.
+--- [38] p n=1 ---
+Ora supponiamo di voler calcolare la distribuzione di ampiezze di probabilità associata ad altre grandezze fisiche diverse dalla posizione, ad esempio la quantità di moto □ . (D'ora in avanti con i simboli sopralineati indicheremo le grandezze vettoriali).
+--- [39] p n=0 ---
+Ampiezze di probabilità per la quantità di moto.
+--- [40] p n=1 ---
+Se conosciamo lo stato di una particella materiale, e conosciamo la distribuzione di ampiezze di probabilità per la variabile posizione □ , come possiamo determinare la distribuzione di ampiezze di probabilità per la grandezza quantità di moto?
+--- [41] p n=0 ---
+Se conoscessimo gli autostati della quantità di moto allora potremmo applicare il quarto postulato, ma questi autostati non li conosciamo e li dobbiamo determinare.
+--- [42] p n=0 ---
+Per trovare la soluzione al nostro problema dobbiamo prendere l'altro capo della matassa, cioè supponiamo di conoscere quali siano gli autostati della quantità di moto, e da questi cerchiamo di calcolare un valore che già conosciamo per altra via, così potremo avere un legame tra le cose che sappiamo e quelle che non abbiamo ancora determinato.
+--- [43] p n=2 ---
+Supponiamo ad esempio di voler calcolare il valore medio della componente lungo x della quantità di moto □ , supponendo di conoscere lo stato del sistema □ e gli autostati della quantità di moto.
+--- [44] p n=6 ---
+Per mantenere la generalità non possiamo ipotizzare che la grandezza □ da sola costituisca un set completo, quindi per “completare il set” introduciamo un insieme di grandezze ausiliarie che indicheremo brevemente con un unico simbolo contratto □ . Per rappresentare un autostato associato ad un autovalore □ useremo il ket □ , dove □ è un multiindice relativo all'insieme delle grandezze ausiliarie □ .
+--- [45] p n=3 ---
+(Nota che sarebbe sbagliato scrivere il ket □ , perchè non è possibile identificare uno stato dando solo il valore □ assunto dalla grandezza □ ).
+--- [46] p n=0 ---
+In base a queste notazioni possiamo scrivere la probabilità:
+--- [47] p n=1 ---
+Dove abbiamo indicato la probabilità con il simbolo □ per non creare confusione con la p della quantità di moto.
+--- [48] p n=0 ---
+In base a questa formula possiamo calcolare il valore medio:
+--- [49] p n=0 ---
+ma noi sappiamo anche che
+--- [50] p n=1 ---
+dove □ è l'operatore quantità di moto che abbiamo definito nella quarta scheda. In base a queste due uguaglianze possiamo scrivere
+--- [51] p n=1 ---
+visto che questa equazione è vera per ogni □ possiamo dedurre che
+--- [52] p n=2 ---
+Questa formula ci mostra che l'operatore □ “contiene in se” gli autostati che stiamo cercando □ , quindi dobbiamo trovare il modo di tirarli fuori.
+--- [53] p n=2 ---
+Proviamo a moltiplicare l'operatore □ per un autostato □ :
+--- [54] p n=4 ---
+Osservando che □ è nullo se □ , all'interno dell'integrale possiamo sostituire il termine “centrale” □ con □ .
+--- [55] p n=5 ---
+essendo □ le componenti del vettore □ nella base □ , l'integrale non è altro che la combinazione che esprime il vettore □ nella base □ , dunque abbiamo trovato
+--- [56] p n=2 ---
+cioè i vettori di stato □ sono “autovettori” dell'operatore □ . Questo è il motivo per cui gli autostati vengono chiamati così.
+--- [57] p n=6 ---
+A questo punto abbiamo determinato un quadro molto chiaro, alla grandezza osservabile □ è associato un operatore □ , gli autostati della grandezza □ sono associati agli autovettori dell'operatore □ , mentre i valori che può assumere la grandezza □ sono gli autovalori dell'operatore □ .
+--- [58] p n=0 ---
+Se risolviamo il problema agli autovalori
+--- [59] p n=1 ---
+determiniamo gli autostati dell'operatore □ ed applicando il postulato quattro riusciamo a risolvere il nostro problema, cioè riusciamo a determinare la distribuzione di probabilità per la quantità di moto.
+--- [60] p n=0 ---
+Ora generalizziamo i risultati raggiunti per la quantità di moto con il seguente importantissimo teorema:
+--- [61] p n=2 ---
+Ad ogni grandezza fisica □ è associato un operatore hermitiano □ tale che:
+--- [62] p n=3 ---
+Il valore medio della grandezza □ , quando il sistema si trova in uno stato rappresentato dal ket □ , è dato dalla formula □ ;
+--- [63] p n=5 ---
+Gli autovalori dell'operatore □ sono tutti i possibili valori che può assumere la grandezza □ , e gli autovettori associati ad un autovalore □ rappresentano gli autostati della grandezza □ nei quali si ottiene con certezza il valore □ .
+--- [64] p n=0 ---
+Dimostrazione:
+--- [65] p n=6 ---
+Consideriamo una grandezza □ , siano □ i possibili valori della grandezza □ , e siano □ i ket rappresentativi degli autostati della grandezza □ e del set di grandezze ausiliarie □ , allora l'operatore
+--- [66] p n=1 ---
+è hermitiano e soddisfa i due punti dell'asserto. Per verificarlo basta seguire esattamente gli stessi passi che abbiamo seguito per l'operatore □ .
+--- [67] p n=0 ---
+Grandezze compatibili e grandezze incompatibili.
+--- [68] p n=10 ---
+Supponiamo di voler eseguire una misura contemporanea di □ e di □ . Dopo una tale misura il sistema si dovrebbe portare in un autostato simultaneo delle grandezze □ e □ , ed il ket di stato risultante dovrebbe essere un autoket degli operatori □ e □ , ma questo è impossibile. Infatti indicando con □ un ipotetico autostato delle grandezze □ , □ e di un opportuno set di grandezze ausiliarie □ , abbiamo
+--- [69] p n=0 ---
+da cui
+--- [70] p n=1 ---
+ma noi sappiamo che □ , dunque abbiamo
+--- [71] p n=6 ---
+Concludiamo che l'autoket simultaneo degli operatori □ e □ non può esistere perché dovrebbe essere per forza nullo. Quindi non può essere possibile eseguire una misura precisa e contemporanea delle grandezze □ e □ , mentre invece è perfettamente possibile in altri casi, ad esempio con le grandezze □ , □ .
+--- [72] p n=0 ---
+Prima di procedere con lo studio generalizzare al caso continuo la formula che abbiamo dimostrato alla fine del primo paragrafo:
+--- [73] p n=2 ---
+se □ è un insieme completo di grandezze osservabili, e □ è l'insieme ortonormale degli “autoket” associati ai suoi autostati, allora abbiamo
+--- [74] p n=1 ---
+Per chiarezza ripetiamo la dimostrazione: se moltiplichiamo l'integrale a sinistra per un generico ket □ abbiamo
+--- [75] p n=3 ---
+essendo □ le componenti del vettore □ nella base □ abbiamo
+--- [76] p n=1 ---
+che dovendo essere vera per ogni □ , prova l'asserto.
+--- [77] p n=0 ---
+Momento angolare.
+--- [78] p n=0 ---
+Nella Fisica Classica il momento angolare rispetto ad un polo O è definito dalla formula
+--- [79] p n=0 ---
+Nello schema della Meccanica Quantistica la grandezza momento angolare dovrà essere coerente con la definizione classica.
+--- [80] p n=0 ---
+Dunque per i valori medi dovremo avere:
+--- [81] p n=0 ---
+Per semplificare il lavoro ci conviene considerare le singole componenti, inoltre per non appesantire le notazioni ometteremo il pedice O.
+--- [82] p n=0 ---
+Per le componenti abbiamo
+--- [83] p n=1 ---
+Consideriamo la componente □ . Per avere accordo tra la Meccanica Classica e la Meccanica Quantistica dovremo avere:
+--- [84] p n=1 ---
+Concentriamo l'attenzione sul termine □
+--- [85] p n=4 ---
+Indichiamo con □ un autoket rappresentativo di un autostato simultaneo delle grandezze □ , □ e del set di grandezze ausiliarie □ .
+--- [86] p n=0 ---
+Usando questi ket abbiamo
+--- [87] p n=1 ---
+integrando rispetto alle variabili □ abbiamo
+--- [88] p n=0 ---
+Quindi per il valore medio abbiamo
+--- [89] p n=1 ---
+ricordando che □ possiamo scrivere
+--- [90] p n=0 ---
+essendo
+--- [91] p n=0 ---
+abbiamo la formula finale
+--- [92] p n=0 ---
+I passaggi sono analoghi per tutti gli altri termini, quindi otteniamo:
+--- [93] p n=2 ---
+Dunque alla grandezza □ , per esempio, associamo l'operatore □ , e analogamente per le altre.
+--- [94] p n=0 ---
+A questo punto abbiamo trovato un operatore che ci dà una formula per calcolare il valore medio del momento angolare nel formalismo della Meccanica Quantistica e che è in accordo con la formula della Meccanica Classica.
+--- [95] p n=0 ---
+Questo stesso operatore ci può dare tutti i possibili valori che può assumere il momento angolare e gli autostati corrispondenti; per ottenere queste informazioni basta risolvere il problema agli autovalori
+--- [96] p n=0 ---
+L'energia.
+--- [97] p n=0 ---
+Come ultima grandezza di studio consideriamo l'energia.
+--- [98] p n=0 ---
+Nel formalismo della Meccanica Classica, per una particella carica in un potenziale elettrico, abbiamo l'energia
+--- [99] p n=0 ---
+quindi dobbiamo cercare un operatore che ci dia un valore medio coerente con questa formula classica
+--- [100] p n=0 ---
+Ma noi un operatore simile lo abbiamo già, ed è H, infatti
+--- [101] p n=0 ---
+Quindi se vogliamo trovare i valori che può assumere l'energia, e gli autostati in cui si porta la particella dopo una misura dell'energia, allora dobbiamo risolvere il seguente problema agli autovalori:
+--- [102] p n=0 ---
+Livelli energetici per l'atomo di idrogeno.
+--- [103] p n=0 ---
+L'atomo di idrogeno è costituito da un nucleo con carica pari a quella dell'elettrone, e da un unico elettrone orbitante.
+--- [104] p n=1 ---
+Per determinare il moto dell'elettrone attorno al nucleo si deve risolvere l'equazione si Schrödinger, mentre se si vogliono determinare i valori che può assumere l'energia dell'atomo, basta risolvere il problema agli autovalori che abbiamo posto nel precedente paragrafo nel caso in cui abbiamo un potenziale columbiano □ .
+--- [105] p n=0 ---
+In questa scheda non vogliamo risolvere questi complicati problemi matematici, e rimandiamo lo svolgimento ad una scheda futura, tuttavia vogliamo anticipare i risultati per i livelli energetici:
+--- [106] p n=0 ---
+L'energia può assumere solo dei valori discreti dati dalla formula

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="it"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confronto — equazioni in linea e font</title>
+<style>
+  :root{--bg:#f4f4f2;--ink:#1c1c1c;--muted:#666;--accent:#7c1d1d;--line:#e2e0d8}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",system-ui,sans-serif;font-size:1.05rem;line-height:1.6}
+  header{max-width:48rem;margin:0 auto;padding:1.6rem 1.2rem .4rem}
+  h1{font-size:clamp(1.5rem,5vw,2.1rem);margin:.2rem 0 .4rem}
+  .sub{color:var(--muted);max-width:42rem}
+  .note{max-width:42rem;background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);padding:.8rem 1rem;margin:1rem 0;border-radius:6px;font-size:.95rem;color:#444}
+  main{max-width:48rem;margin:0 auto;padding:0 1.2rem 4rem}
+  .blk{background:#fff;border:1px solid var(--line);border-radius:10px;padding:1rem 1.1rem;margin:1rem 0}
+  .blk .tag{font-family:"Segoe UI",system-ui,sans-serif;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 .5rem}
+  .blk p{margin:.4rem 0}
+  /* ogni blocco impone il proprio font ANCHE alla matematica in linea */
+  .serif-times{font-family:"Times New Roman",Times,serif}
+  .serif-times math{font-family:"Times New Roman",Times,serif}
+  .serif-georgia{font-family:Georgia,Cambria,serif}
+  .serif-georgia math{font-family:Georgia,Cambria,serif}
+  .serif-palatino{font-family:"Palatino Linotype","Book Antiqua",Palatino,serif}
+  .serif-palatino math{font-family:"Palatino Linotype","Book Antiqua",Palatino,serif}
+  .sans-segoe{font-family:"Segoe UI",system-ui,sans-serif}
+  .sans-segoe math{font-family:"Segoe UI",system-ui,sans-serif}
+  .sans-helv{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+  .sans-helv math{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+  .slab{font-family:"Rockwell","Roboto Slab",Georgia,serif}
+  .slab math{font-family:"Rockwell","Roboto Slab",Georgia,serif}
+  .mono{font-family:ui-monospace,Consolas,"Cascadia Mono",monospace}
+  .mono math{font-family:ui-monospace,Consolas,"Cascadia Mono",monospace}
+  .foot{color:var(--muted);font-size:.84rem;margin-top:2rem}
+</style></head>
+<body>
+<header>
+  <h1>Equazioni in linea &amp; font</h1>
+  <p class="sub">Lo stesso paragrafo, con le stesse formule <em>in linea</em>, reso in caratteri diversi. Serve a decidere quale font convive meglio con la matematica inserita nel testo.</p>
+  <p class="note">Nota tecnica: nella matematica il browser usa il proprio <b>corsivo matematico</b> per le variabili (una forma serif), anche quando il testo è sans. Per questo i caratteri <b>serif</b> (Times, Georgia, Palatino) si fondono meglio con le formule in linea; con un sans si nota un piccolo stacco. Qui sotto lo vedi dal vivo.</p>
+</header>
+<main>
+
+  <div class="blk serif-times">
+    <p class="tag">Serif · Times New Roman (riferimento classico)</p>
+    <p>Dalla relazione di de Broglie la lunghezza d'onda è <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>λ</mi><mo>=</mo><mfrac><mi>h</mi><mi>p</mi></mfrac></math>, quindi a un impulso <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>p</mi></math> corrisponde il numero d'onda <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>k</mi><mo>=</mo><mfrac><mi>p</mi><mi>ℏ</mi></mfrac></math>. L'operatore impulso è <math xmlns="http://www.w3.org/1998/Math/MathML"><mover><mi>p</mi><mo>^</mo></mover><mo>=</mo><mo>−</mo><mi>i</mi><mi>ℏ</mi><mfrac><mi>∂</mi><mrow><mi>∂</mi><mi>x</mi></mrow></mfrac></math> e vale <math xmlns="http://www.w3.org/1998/Math/MathML"><mo>[</mo><mi>x</mi><mo>,</mo><mi>p</mi><mo>]</mo><mo>=</mo><mi>i</mi><mi>ℏ</mi></math>. L'energia del fotone è <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>E</mi><mo>=</mo><mi>ℏ</mi><mi>ω</mi></math>.</p>
+  </div>
+
+  <div class="blk serif-georgia">
+    <p class="tag">Serif · Georgia</p>
+    <p>Dalla relazione di de Broglie la lunghezza d'onda è <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>λ</mi><mo>=</mo><mfrac><mi>h</mi><mi>p</mi></mfrac></math>, quindi a un impulso <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>p</mi></math> corrisponde il numero d'onda <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>k</mi><mo>=</mo><mfrac><mi>p</mi><mi>ℏ</mi></mfrac></math>. L'operatore impulso è <math xmlns="http://www.w3.org/1998/Math/MathML"><mover><mi>p</mi><mo>^</mo></mover><mo>=</mo><mo>−</mo><mi>i</mi><mi>ℏ</mi><mfrac><mi>∂</mi><mrow><mi>∂</mi><mi>x</mi></mrow></mfrac></math> e vale <math xmlns="http://www.w3.org/1998/Math/MathML"><mo>[</mo><mi>x</mi><mo>,</mo><mi>p</mi><mo>]</mo><mo>=</mo><mi>i</mi><mi>ℏ</mi></math>. L'energia del fotone è <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>E</mi><mo>=</mo><mi>ℏ</mi><mi>ω</mi></math>.</p>
+  </div>
+
+  <div class="blk serif-palatino">
+    <p class="tag">Serif · Palatino</p>
+    <p>Dalla relazione di de Broglie la lunghezza d'onda è <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>λ</mi><mo>=</mo><mfrac><mi>h</mi><mi>p</mi></mfrac></math>, quindi a un impulso <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>p</mi></math> corrisponde il numero d'onda <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>k</mi><mo>=</mo><mfrac><mi>p</mi><mi>ℏ</mi></mfrac></math>. L'operatore impulso è <math xmlns="http://www.w3.org/1998/Math/MathML"><mover><mi>p</mi><mo>^</mo></mover><mo>=</mo><mo>−</mo><mi>i</mi><mi>ℏ</mi><mfrac><mi>∂</mi><mrow><mi>∂</mi><mi>x</mi></mrow></mfrac></math> e vale <math xmlns="http://www.w3.org/1998/Math/MathML"><mo>[</mo><mi>x</mi><mo>,</mo><mi>p</mi><mo>]</mo><mo>=</mo><mi>i</mi><mi>ℏ</mi></math>. L'energia del fotone è <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>E</mi><mo>=</mo><mi>ℏ</mi><mi>ω</mi></math>.</p>
+  </div>
+
+  <div class="blk sans-segoe">
+    <p class="tag">Sans · Segoe UI</p>
+    <p>Dalla relazione di de Broglie la lunghezza d'onda è <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>λ</mi><mo>=</mo><mfrac><mi>h</mi><mi>p</mi></mfrac></math>, quindi a un impulso <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>p</mi></math> corrisponde il numero d'onda <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>k</mi><mo>=</mo><mfrac><mi>p</mi><mi>ℏ</mi></mfrac></math>. L'operatore impulso è <math xmlns="http://www.w3.org/1998/Math/MathML"><mover><mi>p</mi><mo>^</mo></mover><mo>=</mo><mo>−</mo><mi>i</mi><mi>ℏ</mi><mfrac><mi>∂</mi><mrow><mi>∂</mi><mi>x</mi></mrow></mfrac></math> e vale <math xmlns="http://www.w3.org/1998/Math/MathML"><mo>[</mo><mi>x</mi><mo>,</mo><mi>p</mi><mo>]</mo><mo>=</mo><mi>i</mi><mi>ℏ</mi></math>. L'energia del fotone è <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>E</mi><mo>=</mo><mi>ℏ</mi><mi>ω</mi></math>.</p>
+  </div>
+
+  <div class="blk sans-helv">
+    <p class="tag">Sans · Helvetica / Arial</p>
+    <p>Dalla relazione di de Broglie la lunghezza d'onda è <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>λ</mi><mo>=</mo><mfrac><mi>h</mi><mi>p</mi></mfrac></math>, quindi a un impulso <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>p</mi></math> corrisponde il numero d'onda <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>k</mi><mo>=</mo><mfrac><mi>p</mi><mi>ℏ</mi></mfrac></math>. L'operatore impulso è <math xmlns="http://www.w3.org/1998/Math/MathML"><mover><mi>p</mi><mo>^</mo></mover><mo>=</mo><mo>−</mo><mi>i</mi><mi>ℏ</mi><mfrac><mi>∂</mi><mrow><mi>∂</mi><mi>x</mi></mrow></mfrac></math> e vale <math xmlns="http://www.w3.org/1998/Math/MathML"><mo>[</mo><mi>x</mi><mo>,</mo><mi>p</mi><mo>]</mo><mo>=</mo><mi>i</mi><mi>ℏ</mi></math>. L'energia del fotone è <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>E</mi><mo>=</mo><mi>ℏ</mi><mi>ω</mi></math>.</p>
+  </div>
+
+  <div class="blk slab">
+    <p class="tag">Slab · Rockwell</p>
+    <p>Dalla relazione di de Broglie la lunghezza d'onda è <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>λ</mi><mo>=</mo><mfrac><mi>h</mi><mi>p</mi></mfrac></math>, quindi a un impulso <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>p</mi></math> corrisponde il numero d'onda <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>k</mi><mo>=</mo><mfrac><mi>p</mi><mi>ℏ</mi></mfrac></math>. L'operatore impulso è <math xmlns="http://www.w3.org/1998/Math/MathML"><mover><mi>p</mi><mo>^</mo></mover><mo>=</mo><mo>−</mo><mi>i</mi><mi>ℏ</mi><mfrac><mi>∂</mi><mrow><mi>∂</mi><mi>x</mi></mrow></mfrac></math> e vale <math xmlns="http://www.w3.org/1998/Math/MathML"><mo>[</mo><mi>x</mi><mo>,</mo><mi>p</mi><mo>]</mo><mo>=</mo><mi>i</mi><mi>ℏ</mi></math>. L'energia del fotone è <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>E</mi><mo>=</mo><mi>ℏ</mi><mi>ω</mi></math>.</p>
+  </div>
+
+  <div class="blk mono">
+    <p class="tag">Monospace · Consolas (solo per etichette, non per il corpo)</p>
+    <p>Dalla relazione di de Broglie la lunghezza d'onda è <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>λ</mi><mo>=</mo><mfrac><mi>h</mi><mi>p</mi></mfrac></math>, quindi a un impulso <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>p</mi></math> corrisponde il numero d'onda <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>k</mi><mo>=</mo><mfrac><mi>p</mi><mi>ℏ</mi></mfrac></math>. L'operatore impulso è <math xmlns="http://www.w3.org/1998/Math/MathML"><mover><mi>p</mi><mo>^</mo></mover><mo>=</mo><mo>−</mo><mi>i</mi><mi>ℏ</mi><mfrac><mi>∂</mi><mrow><mi>∂</mi><mi>x</mi></mrow></mfrac></math> e vale <math xmlns="http://www.w3.org/1998/Math/MathML"><mo>[</mo><mi>x</mi><mo>,</mo><mi>p</mi><mo>]</mo><mo>=</mo><mi>i</mi><mi>ℏ</mi></math>. L'energia del fotone è <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>E</mi><mo>=</mo><mi>ℏ</mi><mi>ω</mi></math>.</p>
+  </div>
+
+  <p class="foot">© Faustino Palma, 1999 · edizione web · confronto font / matematica in linea</p>
+</main>
+</body></html>

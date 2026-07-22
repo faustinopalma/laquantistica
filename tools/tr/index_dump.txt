@@ -1,0 +1,122 @@
+--- [0] p n=0 ---
+Lo scopo del presente lavoro di tesi è stato quello di eseguire gli esperimenti fondamentali della Meccanica Quantistica, e di preparare del materiale didattico che, partendo dall'analisi di questi esperimenti, introduca le basi concettuali della teoria.
+--- [1] p n=0 ---
+Il primo esperimento è quello di Stern e Gerlach; l'apparato sperimentale che realizza quest'esperienza è stato progettato internamente al laboratorio didattico LAFIDIN, ed abbiamo iniziato a costruirlo; purtroppo al momento di presentazione della tesi non è ancora pronto, ma sarà completato entro pochi mesi.
+--- [2] p n=0 ---
+Tutti gli altri esperimenti sono stati realizzati con apparecchiature della LEYBOLD, e sono stati eseguiti in parte presso il laboratorio LAFIDIN, in parte a Milano nella “sala dimostrazioni” della LEYBOLD DIDACTIC.
+--- [3] p n=0 ---
+La parte teorica della tesi costituisce un'introduzione alla Meccanica Quantistica; la teoria è stata trattata fin dall'inizio con le notazioni di Dirac. L'equazione di Schrödinger non è stata postulata, ma è stata dedotta partendo da un set di principi più elementari e dalla condizione che la legge fondamentale della teoria quantistica deve essere coerente con l'equazione di Newton, nel campo di applicabilità di quest'ultima.
+--- [4] p n=0 ---
+Tutta la trattazione è indipendente dalla Meccanica Analitica, quindi si è raggiunto lo scopo di fornire un'introduzione alla Meccanica Quantistica che si appoggi solo sulla teoria di Newton e sull'elettromagnetismo, e che quindi sia facilmente accessibile agli studenti del terzo anno di Ingegneria.
+--- [5] p n=0 ---
+Il lavoro è stato diviso in nove “schede”, ogni scheda contiene una parte sperimentale accompagnata da una parte teorica.
+--- [6] p n=0 ---
+Sommario delle schede:
+--- [7] p n=0 ---
+Prima scheda, esperimento di Stern e Gerlach.
+--- [8] p n=0 ---
+Costituisce il punto di partenza; si introduce un sistema molto semplice, una “particella con spin ½”, che servirà da prototipo per lo studio e la verifica delle leggi fondamentali, che poi saranno generalizzate ai sistemi più complessi.
+--- [9] p n=0 ---
+Seconda scheda, esperimenti di Stern e Gerlach in cascata.
+--- [10] p n=0 ---
+Si complica l'esperimento fondamentale disponendo più apparecchi di Stern e Gerlach in serie; in questo modo si osserva il comportamento della particella con spin ½ in diverse condizioni, il che permette di “intuire” i principi fondamentali della Meccanica Quantistica, che vengono poi formulati in una prima versione semplificata.
+--- [11] p n=0 ---
+Terza scheda, esperimenti con gli elettroni.
+--- [12] p n=0 ---
+Si prende familiarità con la particella elettrone; lo scopo della scheda non è quello di introdurre le proprietà fondamentali dell'elettrone, che sono ben note, ma è quello di mostrare come queste proprietà siano state determinate; inoltre in questa scheda si descrive un importante esperimento che divide l'atomo in elettroni negativi ed in uno ione positivo, avanzando un primo passo verso la comprensione della struttura atomica.
+--- [13] p n=0 ---
+Quarta scheda, diffrazione degli elettroni.
+--- [14] p n=0 ---
+In questo esperimento gli elettroni si comportano in un modo che non può essere spiegato mediante la teoria classica. Per dare un'interpretazione ai risultati sperimentali si sono richiamati i principi postulati nella seconda scheda; in base a questi principi, ed in base al fatto che l'equazione fondamentale della Meccanica Quantistica deve essere coerente con l'equazione di Newton, nell'ambito in cui quest'ultima e applicabile, si è dedotta l'equazione di Schrödinger. Questa deduzione costituisce il cuore della parte teorica, e ci ha permesso di introdurre la Meccanica Quantistica senza dover far riferimento alla Meccanica Analitica. Quindi si è raggiunto lo scopo di rendere accessibile la teoria a studenti che hanno la preparazione di base normalmente fornita nel biennio di Ingegneria. Inoltre questo modo di trattare la teoria ci permette di vedere più chiaramente i concetti basilari della Meccanica Quantistica.
+--- [15] p n=0 ---
+Quinta scheda, esperimento di Rutherford.
+--- [16] p n=0 ---
+Qui si affronta lo studio della struttura atomica; i risultati dell'esperimento ci forniscono delle informazioni essenziali ed inimmaginabili su come è fatto un atomo. Nella seconda parte della scheda si applica l'equazione di Schrödinger per dedurre la formula di diffusione di Rutherford, in base a questa formula ed alle misure effettuate, si determina il numero atomico dell'atomo d'oro.
+--- [17] p n=0 ---
+Sesta scheda, ulteriori sviluppi della teoria.
+--- [18] p n=0 ---
+Si generalizzano i principi fondamentali introdotti nella seconda scheda e, si introducono una serie di conseguenze di questi principi. In particolare si prendono in considerazione le grandezze quantità di moto, momento angolare ed energia; si dimostra che ad ognuna di queste grandezze è associato un operatore lineare hermitiano che contiene tutte le informazioni relative alla grandezza. In base al fatto che le definizioni date nello schema della Meccanica Quantistica devono, al limite, essere coerenti con quelle date nell'ambito classico, si trova la formulazione esplicita per gli operatori associati alla quantità di moto, al momento angolare e all'energia; infine si dimostra la quantizzazione delle varie grandezze fisiche, caratteristica che dà il nome alla Meccanica Quantistica. Inoltre si determinano i livelli energetici dell'atomo di idrogeno.
+--- [19] p n=0 ---
+Settima scheda, esperimento di Franck-Hertz.
+--- [20] p n=0 ---
+Questo esperimento costituisce la più semplice e diretta prova sperimentale del fatto che l'energia interna di un atomo è quantizzata.
+--- [21] p n=0 ---
+Ottava scheda, effetto fotoelettrico.
+--- [22] p n=1 ---
+In questo esperimento la luce si comporta in un modo che non è spiegabile mediante nell'ambito della teoria elettromagnetica classica. Si osserva la natura quantistica della luce e si introduce la relazione di Einstein □ . Nella parte finale si discute il fatto che i fotoni non possono essere studiati mediante l'equazione di Schrödinger perché non è coerente con la Teoria della Relatività, e si indica la strada verso la Meccanica Quantistica Relativistica.
+--- [23] p n=0 ---
+Nona ed ultima scheda, spettri atomici di emissione.
+--- [24] p n=1 ---
+Si misurano le frequenze delle radiazioni elettromagnetiche emesse dagli atomi quando vengono “eccitati”, ed in base alla relazione di Eistein □ si ricavano le differenze tra i vari livelli energetici degli atomi; infine si confrontano questi risultati sperimentali con i risultati teorici dedotti nella sesta scheda per l'atomo di idrogeno e si osserva un accordo molto stretto.
+--- [25] p n=0 ---
+Conclusioni.
+--- [26] p n=0 ---
+Il percorso che abbiamo scelto, in una materia vasta come la Meccanica Quantistica, risulta facile da seguire e non richiede sforzi eccessivi. La parte teorica è rigorosa e completa, e non lascia l'insoddisfazione che può derivare dall'impressione di non aver capito a fondo i concetti di base.
+--- [27] p n=0 ---
+Il lavoro raggiunge il suo scopo didattico e, se opportunamente raffinato ed integrato può costituire il materiale didattico per un corso introduttivo di Meccanica Quantistica. Un tale corso, se sarà attivato, sarà pienamente appoggiato dal laboratorio didattico LAFIDIN, presso il quale si potranno eseguire una buona parte delle esperienze di laboratorio.
+--- [28] h2 n=0 ---
+Prima scheda
+--- [29] h2 n=0 ---
+Esperimento di Stern e Gerlach
+--- [30] h2 n=0 ---
+Seconda scheda
+--- [31] h2 n=0 ---
+Esperimento di Stern e Gerlach in cascata
+--- [32] h2 n=0 ---
+Terza scheda
+--- [33] h2 n=0 ---
+Esperimenti con gli elettroni
+--- [34] h2 n=0 ---
+Quarta scheda
+--- [35] h2 n=0 ---
+Diffrazione degli elettroni
+--- [36] h2 n=0 ---
+Quinta scheda
+--- [37] h2 n=0 ---
+Esperimento di Rutherford
+--- [38] h2 n=0 ---
+Sesta scheda
+--- [39] h2 n=0 ---
+Ulteriori sviluppi della teoria
+--- [40] h2 n=0 ---
+Settima scheda
+--- [41] h2 n=0 ---
+Esperimento di Franck-Hertz
+--- [42] h2 n=0 ---
+Ottava scheda
+--- [43] h2 n=0 ---
+Effetto fotoelettrico
+--- [44] h2 n=0 ---
+Nona scheda
+--- [45] h2 n=0 ---
+Spettri atomici di emissione
+--- [46] h2 n=0 ---
+Conclusioni
+--- [47] p n=0 ---
+Questa tesi vuole essere una breve introduzione alla Meccanica Quantistica.
+--- [48] p n=0 ---
+Il percorso che abbiamo scelto mi sembra abbastanza buono anche se deve essere molto migliorato; la seconda scheda deve essere spiegata con maggiore chiarezza, e la sesta scheda deve essere almeno riordinata; l'esperimento di Stern e Gerlach e quello degli spettri atomici non si sono potuti eseguire per ritardi nelle spedizioni delle apparecchiature, quindi quando gli esperimenti saranno pronti le relative schede dovranno essere riscritte.
+--- [49] p n=0 ---
+Personalmente mi sono impegnato a sistemare il possibile anche dopo la Laurea, e spero con tutto il cuore di aver reso un servizio che in qualche modo possa essere utile a questa bellissima Università.
+--- [50] h2 n=0 ---
+Università degli Studi di Napoli
+--- [51] p n=0 ---
+“Federico II”
+--- [52] h2 n=0 ---
+Laboratorio didattico “LAFIDIN”
+--- [53] p n=0 ---
+(LAboratorio, FIsico, Didattico, INgegneria)
+--- [54] h2 n=0 ---
+Tesi di Laurea in Ingegneria Elettrica
+--- [55] h2 n=0 ---
+Esperimenti fondamentali della
+--- [56] h2 n=0 ---
+Meccanica Quantistica
+--- [57] p n=0 ---
+Relatori: Candidato:
+--- [58] h2 n=0 ---
+Chiarissimo Prof. Scipione Bobbio Faustino Palma
+--- [59] h2 n=0 ---
+Chiarissimo Prof. Carlo Luponio Matricola 44/956
+--- [60] p n=0 ---
+Anno accademico 1998/1999

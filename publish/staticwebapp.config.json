@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json.schemastore.org/staticwebapp.config.json",
+  "trailingSlash": "auto",
+  "globalHeaders": {
+    "cache-control": "public, max-age=3600"
+  },
+  "routes": [
+    {
+      "route": "/",
+      "redirect": "/leggi/",
+      "statusCode": 302
+    },
+    {
+      "route": "/leggi/img/*",
+      "headers": { "cache-control": "public, max-age=604800, immutable" }
+    },
+    {
+      "route": "/leggi/assets/*",
+      "headers": { "cache-control": "public, max-age=604800, immutable" }
+    }
+  ],
+  "responseOverrides": {
+    "404": { "rewrite": "/leggi/index.html", "statusCode": 404 }
+  },
+  "mimeTypes": {
+    ".json": "application/json",
+    ".svg": "image/svg+xml"
+  }
+}

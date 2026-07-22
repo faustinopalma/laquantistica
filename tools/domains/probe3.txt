@@ -1,0 +1,7 @@
+web.app
+cloudflare.dev
+firebase.app
+zzq-free-name-check-9271.app
+zzq-free-name-check-9271.dev
+abc.xyz
+zzq-free-name-check-9271.xyz

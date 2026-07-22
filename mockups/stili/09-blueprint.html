@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="it"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stile 09 — Blueprint leggibile</title>
+<style>
+  :root{--bg:#eef1f4;--card:#ffffff;--ink:#14243a;--muted:#5b6b7d;--accent:#0e7490;--line:#d3dae2;
+    --mono:ui-monospace,Consolas,"Cascadia Mono",monospace}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Segoe UI",system-ui,sans-serif;font-size:1.06rem;line-height:1.7}
+  .band{background:#14243a;background-image:linear-gradient(#ffffff14 1px,transparent 1px),linear-gradient(90deg,#ffffff14 1px,transparent 1px);background-size:22px 22px}
+  .band .inner{max-width:44rem;margin:0 auto;padding:1.1rem 1.2rem;display:flex;justify-content:space-between;align-items:center;color:#dbe6f0}
+  .mark{font-family:var(--mono);font-weight:700;color:#7fd6e6}
+  .topnote{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;color:#9db4c9}
+  .wrap{max-width:44rem;margin:1.2rem auto;padding:0 1rem}
+  main{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:1.6rem 1.3rem 3rem}
+  .eyebrow{font-family:var(--mono);font-size:.76rem;letter-spacing:.05em;color:var(--accent);margin:.2rem 0 .3rem}
+  h1{font-size:clamp(1.9rem,6vw,2.7rem);line-height:1.12;font-weight:800;margin:.2rem 0 .5rem;letter-spacing:-.01em}
+  .lede{font-size:1.14rem;color:#3a4b5e;margin:.4rem 0 1.6rem}
+  h2{font-family:var(--mono);font-size:.9rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:2rem 0 .4rem}
+  p{margin:.7rem 0}
+  .hl{background:#e7f6f8;border:1px solid #c3e6ec;border-left:4px solid var(--accent);padding:.9rem 1.1rem;margin:1.4rem 0;border-radius:6px}
+  .hlk{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 .3rem}
+  .btn{display:inline-block;font-size:.9rem;font-weight:700;text-decoration:none;color:#fff;background:var(--accent);padding:.6rem 1.1rem;border-radius:6px;margin-top:.5rem}
+  .eq{background:#14243a;padding:1rem;margin:1.3rem 0;overflow-x:auto;font-size:1.12rem;text-align:center;border-radius:6px}
+  .eq math{color:#e6eff7}
+  .foot{font-family:var(--mono);color:var(--muted);font-size:.78rem;margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem}
+  a{color:var(--accent)}
+</style></head>
+<body>
+<div class="band"><div class="inner"><span class="mark">⟨ΨQM⟩</span><span class="topnote">stile 09 · blueprint</span></div></div>
+<div class="wrap"><main>
+  <p class="eyebrow">Presentato al 85° Congresso Nazionale SIF · Pavia · 24 settembre 1999</p>
+  <h1>Esperimenti fondamentali della Meccanica Quantistica</h1>
+  <p class="lede">Nove schede che costruiscono la teoria quantistica a partire dagli esperimenti cruciali. Di Faustino Palma — Università di Napoli «Federico II».</p>
+  <div class="hl">
+    <p class="hlk">In evidenza</p>
+    <p>L'equazione di Schrödinger è <b>dedotta da pochi postulati e dalla meccanica classica</b>: dalla coerenza con la legge di Newton e da de Broglie per fissare ℏ.</p>
+    <a class="btn" href="#">Vai al teorema →</a>
+  </div>
+  <h2>Dagli esperimenti alla teoria</h2>
+  <p>La parte teorica è un'introduzione alla Meccanica Quantistica, trattata fin dall'inizio con le notazioni di Dirac. L'equazione di Schrödinger non è postulata, ma dedotta da principi elementari e dalla condizione che la legge fondamentale sia coerente con l'equazione di Newton.</p>
+  <p>Tutta la trattazione è indipendente dalla Meccanica Analitica: si appoggia solo su Newton e sull'elettromagnetismo, ed è quindi accessibile agli studenti del terzo anno di Ingegneria.</p>
+  <div class="eq"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>i</mi><mi>ℏ</mi><mfrac><mrow><mi>∂</mi><mi>ψ</mi></mrow><mrow><mi>∂</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mrow><mo fence="true">(</mo><mrow><mo>−</mo><mfrac><mrow><msup><mi>ℏ</mi><mn>2</mn></msup></mrow><mrow><mn>2</mn><mi>m</mi></mrow></mfrac><mfrac><mrow><msup><mi>∂</mi><mn>2</mn></msup><mi>ψ</mi></mrow><mrow><mi>∂</mi><msup><mi>x</mi><mn>2</mn></msup></mrow></mfrac><mo>+</mo><mi>q</mi><mi>V</mi></mrow><mo fence="true">)</mo></mrow><mi>ψ</mi></mrow></math></div>
+  <p class="foot">© Faustino Palma, 1999 · edizione web · esempio di stile 09</p>
+</main></div>
+</body></html>
