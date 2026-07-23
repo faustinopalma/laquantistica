@@ -1,6 +1,6 @@
 import pathlib
 ovr = pathlib.Path('build/ch2_overrides')
-rows = ['image47','image28','image50','image103','image129','image90']
+rows = ['image120']
 parts = ["""<!doctype html><html><head><meta charset='utf-8'><style>
 body{font-family:sans-serif;background:#fff;margin:16px}
 table{border-collapse:collapse;width:100%}
