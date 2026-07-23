@@ -29,7 +29,7 @@ html[data-lang="en"] .it { display: none !important; }
 .langbtn[aria-pressed="true"] { background: var(--accent); color: #fff; }
 .langbtn:not([aria-pressed="true"]):hover { color: #fff; }
 
-/* Marchio ΨQM nel brand della sidebar */
+/* Marchio ΛQ nel brand della sidebar */
 .brand .mark { font-family: var(--font-serif); letter-spacing: .015em; }
 .brand .mark .bk { color: var(--accent-soft); }
 
