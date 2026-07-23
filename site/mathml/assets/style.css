@@ -197,6 +197,7 @@ figcaption {
 .equation {
   text-align: center;
   overflow-x: auto;
+  overflow-y: hidden;
   padding: .4rem 0;
 }
 /* Original Equation-Editor images extracted from the thesis */
