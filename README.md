@@ -38,7 +38,8 @@ The nine “cards”:
 
 | Folder | Contents |
 |---|---|
-| `originale-doc/`, `originale-docx/`, `originale-moderno/` | Original sources of the 1999 thesis (documents and technical drawings), kept as an archive |
+| `originale-doc/` | The authentic 1999 original: legacy `.doc` files and technical drawings (`.DWG`/`.WMF`), kept as an archive |
+| `originale-docx/` | Modern, openable `.docx` conversion of the thesis; the subfolders `da-doc-originale/` and `da-docx-originale/` record which source each conversion came from |
 | `site/` | HTML edition with native MathML formulas |
 | `publish/` | Bilingual web edition (Italian + English), ready to publish |
 | `build/` | Intermediate artifacts generated from the sources |
@@ -101,7 +102,8 @@ Le nove «schede»:
 
 | Cartella | Contenuto |
 |---|---|
-| `originale-doc/`, `originale-docx/`, `originale-moderno/` | Sorgenti originali della tesi del 1999 (documenti e disegni tecnici), conservati come archivio |
+| `originale-doc/` | Il vero originale del 1999: file `.doc` legacy e disegni tecnici (`.DWG`/`.WMF`), conservato come archivio |
+| `originale-docx/` | Conversione moderna e apribile in `.docx` della tesi; le sottocartelle `da-doc-originale/` e `da-docx-originale/` indicano la fonte di ciascuna conversione |
 | `site/` | Edizione HTML con formule in MathML nativo |
 | `publish/` | Edizione web bilingue (italiano + inglese), pronta per la pubblicazione |
 | `build/` | Artefatti intermedi generati dai sorgenti |
