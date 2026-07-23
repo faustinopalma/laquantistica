@@ -192,13 +192,13 @@ figcaption {
 
 /* Display equations */
 .equation, mjx-container[display="true"] {
-  margin: 1.4rem 0 !important;
+  margin: .7rem 0 !important;
 }
 .equation {
   text-align: center;
   overflow-x: auto;
   overflow-y: hidden;
-  padding: .4rem 0;
+  padding: .15rem 0;
 }
 /* Original Equation-Editor images extracted from the thesis */
 .eq-block {
