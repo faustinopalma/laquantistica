@@ -1,0 +1,130 @@
+image3.svg	eq-block	->072	r=0.39	…<img class="eq-block" src="img/pandoc_ch2/im
+image4.svg	eq-block	->115	r=0.43	…Il fascio con m 0 =+k , viene fatto passare 
+image7.svg	eq-inline eq-axis	->002	r=0.97	…. Questo vuol dire che ciò che conta è solo 
+image10.svg	eq-inline eq-axis	->004	r=1.0	…di dare m ϑ =+k, ed una probabilità <img cla
+image11.svg	eq-inline eq-axis	->005	r=0.56	…di dare m ϑ =-k . <img class="eq-figure" src
+image12.svg	eq-inline eq-axis	->006	r=0.94	…ed m ϑ =-k con probabilità <img class="eq-in
+image13.svg	eq-inline eq-axis	->007	r=0.43	…. if, on an atom in the state m0=+k, the qua
+image17.svg	eq-block	->008	r=0.95	…La cosa da osservare è che sovrapponendo due
+image20.svg	eq-block	->009	r=0.74	…dove abbiamo introdotto la variabile ϕ=2π∆/λ
+image21.svg	eq-inline eq-axis	->142	r=0.51	…Prendiamo due numeri nel campo complesso, ad
+image24.svg	eq-inline eq-axis	->010	r=0.62	…We obtain the result: <img class="eq-inline 
+image25.svg	eq-inline eq-axis	->010	r=0.85	…Ora ripetiamo il tutto partendo dai due nume
+image26.svg	eq-inline eq-axis	->110	r=0.35	…<img class="eq-figure" src="img/pandoc_ch2/i
+image28.svg	eq-inline eq-axis	->010	r=0.59	…We obtain the result: <img class="eq-inline 
+image29.svg	eq-block	->012	r=0.75	…quando sfasiamo lo stato m 90 =-k moltiplich
+image30.svg	eq-block	->013	r=0.95	…quando sovrapponiamo gli stati, sommiamo le 
+image31.svg	eq-block	->014	r=0.94	…I moduli quadrati dei numeri trovati danno l
+image32.svg	eq-inline eq-axis	->015	r=0.79	…, possiamo definire il suo duale con il vett
+image33.svg	eq-inline	->016	r=0.91	…. In questo modo il prodotto tra il vettore 
+image34.svg	eq-block	->017	r=0.95	…da un numero reale positivo che viene chiama
+image35.svg	eq-inline	->018	r=0.97	…If we have a physical state α, we will denot
+image36.svg	eq-block	->018	r=0.74	…ed indicheremo il suo duale con il simbolo <
+image37.svg	eq-inline	->020	r=0.69	…and we will denote its dual by the symbol <i
+image38.svg	eq-block	->020	r=0.35	…I simboli <img class="eq-inline" src="img/pa
+image39.svg	eq-inline	->003	r=0.3	…e <img class="eq-inline" src="img/pandoc_ch2
+image40.svg	eq-inline	->023	r=1.0	…vengono chiamati rispettivamente bra e ket p
+image41.svg	eq-block	->024	r=0.55	…oppure possiamo avere or we can have</sp
+image42.svg	eq-block	->025	r=0.95	…Questi due prodotti sono completamente diffe
+image43.svg	eq-inline	->065	r=0.43	…il prodotto Given two vectors <img class="eq
+image44.svg	eq-inline	->031	r=1.0	…e <img class="eq-inline" src="img/pandoc_ch2
+image45.svg	eq-inline	->032	r=0.75	…viene definito senza il complesso coniugato:
+image46.svg	eq-block	->033	r=0.95	…Osserviamo, prima di tutto, che le due defin
+image47.svg	eq-inline eq-axis	->034	r=0.96	…? La risposta è molto semplice, questa defin
+image48.svg	eq-inline	->035	r=1.0	…non è detto che sia un numero reale quindi s
+image49.svg	eq-block	->100	r=0.38	…abbiamo we have <div class="e
+image50.svg	eq-block	->038	r=0.69	…invece con la definizione corretta where
+image51.svg	eq-block	->040	r=0.95	…Per concludere questa digressione vediamo qu
+image52.svg	eq-block	->041	r=0.54	…Decomposizione di vettori.</sp
+image53.svg	eq-block	->044	r=0.6	…Teorema: se n vettori non nulli <img class="
+image54.svg	eq-inline	->045	r=0.66	…sono a due a due ortogonali Theorem: if n no
+image55.svg	eq-block	->046	r=0.87	…allora questi n vettori sono linearmente ind
+image56.svg	eq-block	->047	r=0.7	…moltiplichiamo scalarmente a destra per <img
+image57.svg	eq-inline	->048	r=0.69	…we multiply scalarly on the right by <img cl
+image58.svg	eq-block	->048	r=0.95	…essendo i vettori per ipotesi ortogonali, ab
+image59.svg	eq-block	->050	r=0.9	…ma questo è assurdo perché i vettori sono tu
+image60.svg	eq-inline	->051	r=1.0	…. Infatti così facendo diventa molto semplic
+image61.svg	eq-inline	->052	r=1.0	…. Vediamo come: Now suppose we have an n-dim
+image62.svg	eq-block	->054	r=0.48	…<img class="eq-inline" src="img/pandoc_ch2/i
+image63.svg	eq-block	->056	r=0.75	…per calcolare il coefficiente c k moltiplich
+image64.svg	eq-inline	->058	r=0.99	…to compute the coefficient ck we multiply th
+image65.svg	eq-block	->058	r=0.88	…essendo i vettori di base a due a due ortogo
+image66.svg	eq-block	->060	r=0.49	…essendo <img class="eq-inline" src="img/pand
+image67.svg	eq-inline	->061	r=0.59	…di modulo unitario abbiamo since <img class=
+image68.svg	eq-block	->062	r=0.77	…Quindi ci rimane la formula per calcolare c 
+image69.svg	eq-block	->064	r=0.41	…la componente di <img class="eq-inline" src=
+image70.svg	eq-inline	->064	r=0.46	…lungo il vettore di base <img class="eq-inli
+image71.svg	eq-inline	->065	r=0.81	…è data dal prodotto scalare tra questi due v
+image72.svg	eq-block	->066	r=0.94	…In questa scelta abbiamo un certo grado di l
+image73.svg	eq-inline eq-axis	->067	r=1.0	…oppure <img class="eq-inline eq-axis" src="i
+image74.svg	eq-inline eq-axis	->067	r=0.39	…vanno bene, perché <img class="eq-inline" sr
+image75.svg	eq-inline	->069	r=1.0	…. Questo grado di libertà deve essere visto 
+image76.svg	eq-block	->070	r=0.94	…Osserviamo che i vettori che abbiamo scelto 
+image77.svg	eq-block	->071	r=0.84	…Consideriamo ora uno stato α ottenuto da una
+image78.svg	eq-block	->072	r=0.95	…Possiamo dire che questo stato ha proprietà 
+image79.svg	eq-inline	->073	r=0.85	…e <img class="eq-inline" src="img/pandoc_ch2
+image80.svg	eq-inline	->072	r=0.54	…We can say that this state has properties in
+image81.svg	eq-block	->073	r=0.94	…Per ottenere le probabilità effettive dobbia
+image82.svg	eq-block	->076	r=0.65	…Se moltiplichiamo i due numeri α + ed α<
+image83.svg	eq-block	->077	r=0.58	…abbiamo la distribuzione we have the dis
+image84.svg	eq-block	->078	r=0.95	…normalizzando otteniamo esattamente le stess
+image85.svg	eq-block	->079	r=0.95	…Questo è coerente con il fatto che in Meccan
+image86.svg	eq-block	->080	r=0.95	…rappresentano la stessa combinazione degli s
+image87.svg	eq-inline	->081	r=1.0	…. In questo modo le probabilità si ottengono
+image88.svg	eq-block	->082	r=0.95	…Quindi d’ora in poi, rappresentiamo gli stat
+image89.svg	eq-inline	->084	r=0.78	…. So from now on we represent states with un
+image90.svg	eq-block	->085	r=0.51	…le grandezze α ϑ+ , α ϑ- e α ϕ+ , α
+image91.svg	eq-block	->086	r=0.65	…cioè è pari alla componente del vettore <img
+image92.svg	eq-inline	->087	r=0.66	…lungo il vettore <img class="eq-inline" src=
+image93.svg	eq-inline	->097	r=0.44	…. that is, it equals the component of the ve
+image94.svg	eq-block	->089	r=0.95	…Questa regola era facile da intuire, ma non 
+image95.svg	eq-inline	->090	r=0.99	…. suppose we have a system in a state α and 
+image96.svg	eq-inline	->092	r=0.99	…associato allo stato nel quale, se si misura
+image97.svg	eq-block	->095	r=0.72	…ottenendo così l’ampiezza di probabilità. <s
+image98.svg	eq-block	->097	r=0.95	…Ora siamo in grado di scegliere le giuste co
+image99.svg	eq-inline	->098	r=0.95	…e <img class="eq-inline" src="img/pandoc_ch2
+image100.svg	eq-inline	->099	r=0.53	…per ogni angolo ϑ . Now we are able to choos
+image101.svg	eq-block	->101	r=0.79	…che, ad esempio possono derivare dai vettori
+image102.svg	eq-block	->102	r=0.94	…Anche in questo caso abbiamo un certo grado 
+image103.svg	eq-block	->104	r=0.48	…Per lo stato <img class="eq-inline" src="img
+image104.svg	eq-inline	->097	r=0.43	…possiamo scegliere For the state <img class=
+image105.svg	eq-block	->105	r=0.56	…Il segno meno davanti al <img class="eq-inli
+image106.svg	eq-inline eq-axis	->106	r=0.89	…è necessario perché i due vettori devono ess
+image107.svg	eq-inline	->107	r=0.96	…. Infatti sappiamo che la probabilità di ott
+image108.svg	eq-block	->108	r=0.62	…Analogamente si può calcolare Analogousl
+image109.svg	eq-block	->109	r=0.87	…Esattamente in accordo con i risultati speri
+image110.svg	eq-inline	->110	r=1.0	…e le “condizioni ambientali”. Ci chiediamo q
+image111.svg	eq-inline	->111	r=1.0	…in un generico istante t . Given a system, s
+image112.svg	eq-inline	->112	r=1.0	…necessario all’attraversamento della scatola
+image116.svg	eq-block	->114	r=0.54	…dove i termini c + e c -
+image117.svg	eq-block	->116	r=0.44	…Il fascio <img class="eq-inline" src="img/pa
+image118.svg	eq-inline	->116	r=0.97	…viene sfasato di un fattore e iϕ ed in uscit
+image119.svg	eq-block	->117	r=0.52	…dove U è la matrice where U is
+image120.svg	eq-block	->118	r=0.94	…Questa matrice viene detta matrice di evoluz
+image121.svg	eq-inline	->119	r=0.91	…tale che dato <img class="eq-inline" src="im
+image122.svg	eq-inline	->121	r=0.4	…con il prodotto <img class="eq-inline" src="
+image123.svg	eq-inline	->069	r=0.39	…. In general, for any phenomenon there exist
+image124.svg	eq-inline	->123	r=0.91	…, e prendiamo i vettori ottenuti dall’evoluz
+image125.svg	eq-block	->125	r=0.9	…i prodotti scalari tra i primi e tra i secon
+image126.svg	eq-block	->126	r=0.95	…Possiamo verificare questa proprietà per il 
+image127.svg	eq-inline eq-axis	->127	r=0.67	…il suo duale è <img class="eq-inline" src="i
+image128.svg	eq-inline	->128	r=0.43	…. Se moltiplichiamo <img class="eq-inline" s
+image129.svg	eq-inline eq-axis	->131	r=0.47	…, ed il duale sarà <img class="eq-inline" sr
+image130.svg	eq-inline	->131	r=0.53	…. Dunque il duale di <img class="eq-inline" 
+image131.svg	eq-inline	->132	r=0.34	…è <img class="eq-inline" src="img/pandoc_ch2
+image132.svg	eq-inline	->123	r=0.38	…. If we take a vector <img class="eq-inline 
+image133.svg	eq-inline	->134	r=0.66	…e mostriamo che il risultato è uguale a <img
+image134.svg	eq-inline	->135	r=0.61	…. Now we compute <img class="eq-inline" src=
+image135.svg	eq-block	->135	r=0.89	…eseguendo il prodotto scalare ed eliminando 
+image136.svg	eq-block	->137	r=0.95	…Per concludere rivediamo i principi fondamen
+image137.svg	eq-inline	->138	r=1.0	…, il sistema si porta in uno stato tale che,
+image138.svg	eq-inline	->140	r=0.84	…. When a quantity g is measured, several out
+image139.svg	eq-inline eq-axis	->141	r=1.0	…. Ogni numero complesso è associato ad uno d
+image140.svg	eq-inline	->142	r=0.99	…Il modulo quadrato di ognuno di questi numer
+image141.svg	eq-inline	->143	r=1.0	…associato al numero considerato. Any other s
+image142.svg	eq-inline	->144	r=0.97	…, la probabilità che esca <img class="eq-inl
+image143.svg	eq-inline	->145	r=0.9	…è data dal modulo quadro del prodotto scalar
+image144.svg	eq-inline	->147	r=0.47	…associato all’autostato <img class="eq-inlin
+image145.svg	eq-inline	->138	r=0.43	…In general, if the system is in a state α an
+image146.svg	eq-inline	->151	r=0.93	…The time evolution of a state αt follows a l
+image147.svg	eq-inline	->154	r=1.0	…where <img class="eq-inline" src="img/pandoc

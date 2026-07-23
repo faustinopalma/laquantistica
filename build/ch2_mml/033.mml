@@ -1,0 +1,4 @@
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">⟨</mo><mi>a</mi><mo stretchy="true" form="infix">|</mo><mi>b</mi><mo stretchy="true" form="postfix">⟩</mo></mrow><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>a</mi><mn>1</mn></msub><mo>,</mo><msub><mi>a</mi><mn>2</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mtable><mtr><mtd columnalign="right" style="text-align: right"><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>b</mi><mn>1</mn></msub><mo stretchy="true" form="infix">|</mo><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd></mtr></mtable></mrow><annotation encoding="application/x-tex">\left\langle a \middle| b \right\rangle = \left( a_{1},a_{2} \right)\begin{array}{r}
+\left( b_{1} \middle| \right) \\
+
+\end{array}</annotation></semantics></math>

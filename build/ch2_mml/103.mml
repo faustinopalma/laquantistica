@@ -1,0 +1,4 @@
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><msub><mi>m</mi><mi>ϑ</mi></msub><mtext mathvariant="normal">=+</mtext><mi>k</mi><mo stretchy="false" form="postfix">⟩</mo><mo>=</mo><mtable><mtr><mtd columnalign="right" style="text-align: right"><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="normal">cos</mtext><mfrac><mi>ϑ</mi><mn>2</mn></mfrac><mo stretchy="true" form="infix">|</mo><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd></mtr></mtable></mrow><annotation encoding="application/x-tex">|m_{\vartheta}\text{=+}k\rangle = \begin{array}{r}
+\left( \text{cos}\frac{\vartheta}{2} \middle| \right) \\
+
+\end{array}</annotation></semantics></math>

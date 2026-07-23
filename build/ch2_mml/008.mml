@@ -1,0 +1,6 @@
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mtext mathvariant="normal">caso 1</mtext><mo>→</mo><mtable><mtr><mtd columnalign="right" style="text-align: right"><mrow><mo stretchy="true" form="prefix">{</mo><msub><mi>m</mi><mn>0</mn></msub><mtext mathvariant="normal">=+</mtext><mi>k</mi><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> con probabilità 0,5</mtext></mrow><mo stretchy="true" form="infix">|</mo></mrow><mspace width="0.222em"></mspace></mtd></mtr></mtable></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{array}{r}
+\text{caso 1} \rightarrow \begin{array}{r}
+\left\{ m_{0}\text{=+}k\text{    con probabilità 0,5} \middle| \right.\ 
+\end{array} \\
+
+\end{array}</annotation></semantics></math>

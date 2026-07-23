@@ -1,0 +1,154 @@
+001	inline	…sperimentalmente che sono proporzionali ai termini ⟦MATH⟧ . Fig.3 Ad esempio se anche la seconda macchina è …	\text{cos}^{2}\frac{\vartheta}{2}\text{ e sen}^{2}\frac{\vartheta}{2}
+002	inline	…i hanno intensità proporzionali ai termini ⟦MATH⟧ . Questo vuol dire che ciò che conta è solo l’incl…	\text{cos}^{2}\frac{\vartheta_{2} - \vartheta_{1}}{2}\text{ e sen}^{2}\frac{\vartheta_{2} - \vartheta_{1}}{2}
+003	inline	…in due parti di intensità proporzionali ai termini ⟦MATH⟧ . Se si varia l’inclinazione della prima macchina …	\text{cos}^{2}\frac{\vartheta_{3} - \vartheta_{2}}{2}\text{ e sen}^{2}\frac{\vartheta_{3} - \vartheta_{2}}{2}
+004	inline	… ottiene che ogni singolo atomo ha una probabilità ⟦MATH⟧ di dare mϑ=+k, ed una probabilità <math display="i…	\text{cos}^{2}\frac{\vartheta}{2}
+005	inline	…ation> di dare mϑ=+k, ed una probabilità ⟦MATH⟧ di dare mϑ=-k. In altre parole la nostra interpret…	\text{sen}^{2}\frac{\vartheta}{2}
+006	inline	…no due possibili risultati: mϑ=+k, con probabilità ⟦MATH⟧ ed mϑ=-k con probabilità <math display="inline" xm…	\text{cos}^{2}\frac{\vartheta}{2}
+007	inline	…2} ed mϑ=-k con probabilità ⟦MATH⟧ . Secondo questa interpretazione il fascio uscente…	\text{sen}^{2}\frac{\vartheta}{2}
+008	block	…osizione e la ricombinazione. Riassumendo abbiamo: ⟦MATH⟧ La cosa da osservare è che sovrapponendo due stati…	\begin{array}{r} \text{caso 1} \rightarrow \begin{array}{r} \left\{ m_{0}\text{=+}k\text{ con probabilità 0,5} \middle| \right.\ \end{array} \\ \end{array}
+009	inline	…le per le probabilità abbiamo le seguenti formule: ⟦MATH⟧ dove abbiamo introdotto la variabile ϕ=2π∆/λ. Ora …	\begin{array}{r} P_{m_{0}\text{=+}k} = \text{cos}^{2}\frac{\phi}{2} \\ P_{m_{0} = - k} = \text{sen}^{2}\frac{\phi}{2} \end{array}
+010	inline	…diamone il modulo quadrato Otteniamo il risultato: ⟦MATH⟧ Ora ripetiamo il tutto partendo dai due n…	\left| 1 + e^{i\phi} \right|^{2} = \left( 2\text{cos}\frac{\phi}{2} \right)^{2} = 4\text{cos}^{2}\frac{\phi}{2}
+011	inline	…diamone il modulo quadrato Otteniamo il risultato: ⟦MATH⟧ A questo punto sembra abbastanza chiaro che le pro…	\left| 1 - e^{i\phi} \right|^{2} = \left( 2\text{sen}\frac{\phi}{2} \right)^{2} = 4\text{sen}^{2}\frac{\phi}{2}
+012	inline	…primo calcolo ed il numero –1 del secondo calcolo. ⟦MATH⟧ quando sfasiamo lo stato m90=-k moltiplichiamo i s…	\begin{array}{r} \text{stato }m_{\text{90}}\text{=+}k \rightarrow \begin{array}{r} \left( 1 \middle| \right) \\ \end{array} \\ \end{array}
+013	inline	…ub>=-k moltiplichiamo i suoi due numeri per eiϕ ⟦MATH⟧ quando sovrapponiamo gli stati, sommiamo le corris…	e^{i\phi}\begin{array}{r} \left( 1 \middle| \right) \\ \end{array}
+014	inline	… e lo stato risultante è rappresentato dalla somma ⟦MATH⟧ I moduli quadrati dei numeri trovati danno la dist…	\begin{array}{r} \left( 1 \middle| \right) \\ \end{array}
+015	inline	…o quadro di c. Consideriamo ora un vettore colonna ⟦MATH⟧ , possiamo definire il suo duale con il vettore ri…	\begin{array}{r} \left( \alpha_{1} \middle| \right) \\ \end{array}
+016	inline	…possiamo definire il suo duale con il vettore riga ⟦MATH⟧ . In questo modo il prodotto tra il vettore ed il …	\left( \alpha_{1}^{},\alpha_{2}^{} \right)
+017	block	…to modo il prodotto tra il vettore ed il suo duale ⟦MATH⟧ da un numero reale positivo che viene chiamato mod…	\left( \alpha_{1}^{},\alpha_{2}^{} \right)\begin{array}{r} \left( \alpha_{1} \middle| \right) \\ \end{array}
+018	inline	…heremo il vettore ad esso associato con il simbolo ⟦MATH⟧ <semant…	|\alpha\rangle
+019	block	…oding="application/x-tex">|\alpha\rangle ⟦MATH⟧ ed indicheremo il suo duale con il simbolo <math d…	|\alpha\rangle = \begin{array}{r} \left( \alpha_{1} \middle| \right) \\ \end{array}
+020	inline	…tation> ed indicheremo il suo duale con il simbolo ⟦MATH⟧ <seman…	\langle\alpha|
+021	inline	…oding="application/x-tex">\langle\alpha| ⟦MATH⟧ I simboli <math display="inline" xmlns="http://www…	\langle\alpha| = \left( \alpha_{1}^{},\alpha_{2}^{} \right)
+022	inline	…a_{1}^{},\alpha_{2}^{} \right) I simboli ⟦MATH⟧ e…	\langle|
+023	inline	…otation encoding="application/x-tex">\langle| e ⟦MATH⟧ vengono chiamati rispettivamente bra e ket perché …	|\rangle
+024	inline	…ono prodotti matriciali. Ad esempio possiamo avere ⟦MATH⟧ oppure possiamo avere <math display="inline" xmlns…	\left\langle \alpha \middle| \beta \right\rangle = \left( \alpha_{1}^{},\alpha_{2}^{} \right)\begin{array}{r} \left( \beta_{1} \middle| \right) \\ \end{array}
+025	inline	…\end{array} oppure possiamo avere ⟦MATH⟧ Questi due prodotti sono completamente differenti,…	|\alpha\rangle\langle\beta| = \begin{array}{r} \left( \alpha_{1} \middle| \right) \\ \end{array}
+026	inline	…rice. Prodotto scalare. Dati due vettori ⟦MATH⟧ e…	|\alpha\rangle
+027	inline	…n encoding="application/x-tex">|\alpha\rangle e ⟦MATH⟧ il prodotto <math display="inline" xmlns="http://w…	|\beta\rangle
+028	inline	…ication/x-tex">|\beta\rangle il prodotto ⟦MATH⟧ viene chiamato prodotto scalare tra <math display=…	\left\langle \alpha \middle| \beta \right\rangle = \left( \alpha_{1}^{},\alpha_{2}^{} \right)\begin{array}{r} \left( \beta_{1} \middle| \right) \\ \end{array}
+029	inline	…ray} viene chiamato prodotto scalare tra ⟦MATH⟧ e…	|\alpha\rangle
+030	inline	…n encoding="application/x-tex">|\alpha\rangle e ⟦MATH⟧ . Ricordiamo che nel campo reale il prodotto scala…	|\beta\rangle
+031	inline	…po reale il prodotto scalare tra due vettori reali ⟦MATH⟧ e…	|a\rangle
+032	inline	…tation encoding="application/x-tex">|a\rangle e ⟦MATH⟧ viene definito senza il complesso coniugato: <math…	|b\rangle
+033	inline	…tion> viene definito senza il complesso coniugato: ⟦MATH⟧ Osserviamo, prima di tutto, che le due definizioni…	\left\langle a \middle| b \right\rangle = \left( a_{1},a_{2} \right)\begin{array}{r} \left( b_{1} \middle| \right) \\ \end{array}
+034	inline	…scalare semplicemente senza il complesso coniugato ⟦MATH⟧ ? La risposta è molto semplice, questa definizione…	\left\langle \alpha \middle| \beta \right\rangle = \left( \alpha_{1},\alpha_{2} \right)\begin{array}{r} \left( \beta_{1} \middle| \right) \\ \end{array}
+035	inline	…efinizione il prodotto di un vettore per se stesso ⟦MATH⟧ non è detto che sia un numero reale quindi si perd…	\left\langle \alpha \middle| \alpha \right\rangle
+036	inline	…etto di modulo. Inoltre in alcuni casi il prodotto ⟦MATH⟧ potrebbe essere nullo senza che il vettore <math d…	\left\langle \alpha \middle| \alpha \right\rangle
+037	inline	…ngle potrebbe essere nullo senza che il vettore ⟦MATH⟧ sia nullo, ad esempio se <math display="inline" xm…	|\alpha\rangle
+038	inline	…">|\alpha\ranglesia nullo, ad esempio se ⟦MATH⟧ abbiamo <math display="inline" xmlns="http://www.w…	|\alpha\rangle = \begin{array}{r} \left( 1 \middle| \right) \\ \end{array}
+039	inline	…| \right) \\ \end{array} abbiamo ⟦MATH⟧ invece con la definizione corretta <math display="…	\left\langle \alpha \middle| \alpha \right\rangle = (1,i)\begin{array}{r} \left( 1 \middle| \right) \\ \end{array}
+040	inline	…annotation> invece con la definizione corretta ⟦MATH⟧ Per concludere questa digressione vediamo quali so…	\left\langle \alpha \middle| \alpha \right\rangle = (1, - i)\begin{array}{r} \left( 1 \middle| \right) \\ \end{array}
+041	inline	…tali del prodotto scalare in uno spazio complesso: ⟦MATH⟧ Decomposizione di vettori. per…	\begin{array}{r} \left\langle \alpha \middle| \alpha \right\rangle\text{ è reale ed è } \geq 0 \\ \left\langle \alpha \middle| \alpha \right\rangle = 0\text{ se e solo se }|\alpha\rangle\text{ è il vettore nullo} \\ \left\langle \alpha \middle| \beta \right\rangle = \left\langle \beta \middle| \alpha \right\rangle^{} \\ \left\langle \alpha \middle| \beta_{1} + \beta_{2} \right\rangle = \left\langle \alpha \middle| \beta_{1} \right\rangle + \left\langle \alpha \middle| \beta_{2} \right\rangle \end{array}
+042	inline	…di vettori. per definizione diremo che due vettori ⟦MATH⟧ e…	|\alpha\rangle
+043	inline	…n encoding="application/x-tex">|\alpha\rangle e ⟦MATH⟧ sono ortogonali se è nullo il loro prodotto scalar…	|\beta\rangle
+044	inline	…ono ortogonali se è nullo il loro prodotto scalare ⟦MATH⟧ Teorema: se n vettori non nulli <math display="inl…	\left\langle \alpha \middle| \beta \right\rangle = 0\text{ } \Leftrightarrow \text{ sono ortogonali}
+045	inline	…/annotation> Teorema: se n vettori non nulli ⟦MATH⟧ sono a due a due ortogonali <math display="inline"…	|\alpha_{1}\rangle\text{...}|\alpha_{n}\rangle
+046	inline	…a_{n}\rangle sono a due a due ortogonali ⟦MATH⟧ allora questi n vettori sono linearmente indipende…	\left\langle \alpha_{j} \middle| \alpha_{k} \right\rangle = 0\text{ }\forall j \neq k
+047	inline	…e, ad esempio il primo, è combinazione degli altri ⟦MATH⟧ moltiplichiamo scalarmente a destra per <math disp…	|\alpha_{1}\rangle = \lambda_{2}|\alpha_{2}\rangle + \text{...} + \lambda_{n}|\alpha_{n}\rangle
+048	inline	…moltiplichiamo scalarmente a destra per ⟦MATH⟧ <seman…	\langle\alpha_{1}|
+049	inline	…g="application/x-tex">\langle\alpha_{1}| ⟦MATH⟧ essendo i vettori per ipotesi ortogonali, abbiamo …	\left\langle \alpha_{1} \middle| \alpha_{1} \right\rangle = \lambda_{2}\left\langle \alpha_{1} \middle| \alpha_{2} \right\rangle + \text{...} + \lambda_{n}\left\langle \alpha_{1} \middle| \alpha_{n} \right\rangle
+050	inline	…tti i termini al secondo membro sono nulli, quindi ⟦MATH⟧ ma questo è assurdo perché i vettori sono tutti no…	\left\langle \alpha_{1} \middle| \alpha_{1} \right\rangle = 0\text{ } \Rightarrow \text{ }|\alpha_{1}\rangle\text{ è nullo}
+051	inline	…tra di loro ed in modo che abbiano modulo unitario ⟦MATH⟧ . Infatti così facendo diventa molto semplice calc…	\left\langle \alpha_{k} \middle| \alpha_{k} \right\rangle = 1
+052	inline	…ice calcolare le componenti di un generico vettore ⟦MATH⟧ . Vediamo come: Prendiamo un vettore <math display…	|v\rangle
+053	inline	…ngle. Vediamo come: Prendiamo un vettore ⟦MATH⟧ ed una base di vettori ortogonali di modulo unitar…	|v\rangle
+054	inline	… una base di vettori ortogonali di modulo unitario ⟦MATH⟧ <seman…	|\alpha_{1}\rangle\text{...}|\alpha_{n}\rangle
+055	inline	…a_{1}\rangle\text{...}|\alpha_{n}\rangle ⟦MATH⟧ può essere scritto come combinazione lineare dei v…	|v\rangle
+056	inline	…sere scritto come combinazione lineare dei vettori ⟦MATH⟧ <seman…	|\alpha_{1}\rangle\text{...}|\alpha_{n}\rangle
+057	inline	…a_{1}\rangle\text{...}|\alpha_{n}\rangle ⟦MATH⟧ per calcolare il coefficiente ck moltiplichiamo qu…	|v\rangle = c_{1}|\alpha_{1}\rangle + \text{...} + c_{n}|\alpha_{n}\rangle
+058	inline	…k moltiplichiamo questa espressione a sinistra per ⟦MATH⟧ <seman…	\langle\alpha_{k}|
+059	inline	…g="application/x-tex">\langle\alpha_{k}| ⟦MATH⟧ essendo i vettori di base a due a due ortogonali s…	\left\langle \alpha_{k} \middle| v \right\rangle = c_{1}\left\langle \alpha_{k} \middle| \alpha_{1} \right\rangle + \text{...} + c_{k}\left\langle \alpha_{k} \middle| \alpha_{k} \right\rangle + \text{...} + c_{n}\left\langle \alpha_{k} \middle| \alpha_{n} \right\rangle
+060	inline	…ndo i vettori di base a due a due ortogonali si ha ⟦MATH⟧ essendo <math display="inline" xmlns="http://www.w…	\left\langle \alpha_{k} \middle| v \right\rangle = c_{k}\left\langle \alpha_{k} \middle| \alpha_{k} \right\rangle
+061	inline	…middle| \alpha_{k} \right\rangle essendo ⟦MATH⟧ di modulo unitario abbiamo <math display="inline" …	|\alpha_{k}\rangle
+062	inline	…ha_{k}\rangle di modulo unitario abbiamo ⟦MATH⟧ Quindi ci rimane la formula per calcolare ck…	\left\langle \alpha_{k} \middle| v \right\rangle = c_{k}
+063	inline	…Quindi ci rimane la formula per calcolare ck ⟦MATH⟧ la componente di <math display="inline" xmlns="htt…	c_{k} = \left\langle \alpha_{k} \middle| v \right\rangle
+064	inline	…middle| v \right\rangle la componente di ⟦MATH⟧ lungo il vettore di base <math display="inline" xm…	|v\rangle
+065	inline	…ation/x-tex">|v\rangle lungo il vettore di base ⟦MATH⟧ è data dal prodotto scalare tra questi due vettori…	|\alpha_{k}\rangle
+066	inline	…sto stato può essere rappresentato dal vettore ket ⟦MATH⟧ In questa scelta abbiamo un certo grado di libertà…	|m_{0}\text{=+}k\rangle = \begin{array}{r} \left( 1 \middle| \right) \\ \end{array}
+067	inline	… quadrato delle componenti. Quindi anche i vettori ⟦MATH⟧ oppure <seman…	\begin{array}{r} \left( i \middle| \right) \\ \end{array}
+068	inline	…left( i \middle| \right) \\ \end{array} oppure ⟦MATH⟧ vanno bene, perché <math display="inline" xmlns="h…	\begin{array}{r} \left( e^{i\phi} \middle| \right) \\ \end{array}
+069	inline	…dle| \right) \\ \end{array} vanno bene, perché ⟦MATH⟧ . Questo grado di libertà deve essere visto come i…	|1|^{2} = |i|^{2} = \left| e^{i\phi} \right|^{2} = 1
+070	inline	…. Per lo stato m0=-k vale un discorso analogo ⟦MATH⟧ Osserviamo che i vettori che abbiamo scelto sono o…	|m_{0} = - k\rangle = \begin{array}{r} \left( 0 \middle| \right) \\ \end{array}
+071	inline	…mo scelto sono ortogonali ed hanno modulo unitario ⟦MATH⟧ Consideriamo ora uno stato α ottenuto da una combi…	\begin{array}{r} \left\langle m_{0}\text{=+}k \middle| m_{0} = - k \right\rangle = 0 \\ \left\langle m_{0}\text{=+}k \middle| m_{0}\text{=+}k \right\rangle = \left\langle m_{0} = - k \middle| m_{0} = - k \right\rangle = 1 \end{array}
+072	inline	…zione degli stati m0=+k ed m0=-k ⟦MATH⟧ Possiamo dire che questo stato ha proprietà interm…	|\alpha\rangle = \alpha_{+}|m_{0}\text{=+}k\rangle + \alpha_{-}|m_{0} = - k\rangle = \begin{array}{r} \left( \alpha_{+} \middle| \right) \\ \end{array}
+073	inline	… ed m0=-k con probabilità proporzionali ai termini ⟦MATH⟧ e…	\left| \alpha_{+} \right|^{2}
+074	inline	…lication/x-tex">\left| \alpha_{+} \right|^{2} e ⟦MATH⟧ <seman…	\left| \alpha_{-} \right|^{2}
+075	inline	…ion/x-tex">\left| \alpha_{-} \right|^{2} ⟦MATH⟧ Per ottenere le probabilità effettive dobbiamo nor…	\begin{array}{r} P_{m_{0}\text{=+}k} \propto \left| \alpha_{+} \right|^{2} \\ P_{m_{0} = - k} \propto \left| \alpha_{-} \right|^{2} \end{array}
+076	inline	…à effettive dobbiamo normalizzare la distribuzione ⟦MATH⟧ Se moltiplichiamo i due numeri α+ ed α-</su…	\begin{array}{r} P_{m_{0}\text{=+}k} = \frac{\left| \alpha_{+} \right|^{2}}{\left| \alpha_{+} \right|^{2} + \left| \alpha_{-} \right|^{2}} \\ P_{m_{0} = - k} = \frac{\left| \alpha_{-} \right|^{2}}{\left| \alpha_{+} \right|^{2} + \left| \alpha_{-} \right|^{2}} \end{array}
+077	inline	…em> ed α- per uno stesso numero complesso c ⟦MATH⟧ abbiamo la distribuzione <math display="inline" xm…	calignl\begin{array}{r} \left( \alpha_{+} \middle| \right) \\ \end{array}
+078	inline	…d{array} abbiamo la distribuzione ⟦MATH⟧ normalizzando otteniamo esattamente le stesse prob…	\begin{array}{r} P_{m_{0}\text{=+}k} \propto \left| {c\alpha}_{+} \right|^{2} \\ P_{m_{0} = - k} \propto \left| {c\alpha}_{-} \right|^{2} \end{array}
+079	inline	…teniamo esattamente le stesse probabilità di prima ⟦MATH⟧ Questo è coerente con il fatto che in Meccanica Qu…	\begin{array}{r} P_{m_{0}\text{=+}k} = \frac{\left| {c\alpha}_{+} \right|^{2}}{\left| {c\alpha}_{+} \right|^{2} + \left| {c\alpha}_{-} \right|^{2}} = \frac{|c|^{2}\left| \alpha_{+} \right|^{2}}{|c|^{2}\left| \alpha_{+} \right|^{2} + |c|^{2}\left| \alpha_{-} \right|^{2}} = \frac{\left| \alpha_{+} \right|^{2}}{\left| \alpha_{+} \right|^{2} + \left| \alpha_{-} \right|^{2}} \\ P_{m_{0} = - k} = \frac{\left| \alpha_{-} \right|^{2}}{\left| {c\alpha}_{+} \right|^{2} + \left| {c\alpha}_{-} \right|^{2}} = \frac{|c|^{2}\left| \alpha_{-} \right|^{2}}{|c|^{2}\left| \alpha_{+} \right|^{2} + |c|^{2}\left| \alpha_{-} \right|^{2}} = \frac{\left| \alpha_{-} \right|^{2}}{\left| \alpha_{+} \right|^{2} + \left| \alpha_{-} \right|^{2}} \end{array}
+080	inline	…on il fatto che in Meccanica Quantistica i vettori ⟦MATH⟧ rappresentano la stessa combinazione degli stati b…	\begin{array}{r} \left( \alpha_{+} \middle| \right) \\ \end{array}
+081	inline	…endere vettori normalizzati, cioè vettori tali che ⟦MATH⟧ . In questo modo le probabilità si ottengono diret…	\left\langle \alpha \middle| \alpha \right\rangle = \left| \alpha_{+} \right|^{2} + \left| \alpha_{-} \right|^{2} = 1
+082	inline	…amente dai moduli quadri, senza dover normalizzare ⟦MATH⟧ Quindi d’ora in poi, rappresentiamo gli stati con …	\begin{array}{r} P_{m_{0}\text{=+}k} = \left| \alpha_{+} \right|^{2} \\ P_{m_{0} = - k} = \left| \alpha_{-} \right|^{2} \end{array}
+083	inline	…è l’ampiezza di probabilità di ottenere m0=+k e ⟦MATH⟧ è la probabilità di ottenere m0=+k, analogamente p…	\left| \alpha_{+} \right|^{2}
+084	inline	…tenere m0=+k, analogamente per α- e per ⟦MATH⟧ . Consideriamo ora due stati mϑ=+k e mϕ</sub…	\left| \alpha_{-} \right|^{2}
+085	inline	…=+k, e consideriamo i vettori che li rappresentano ⟦MATH⟧ le grandezze αϑ+, αϑ- e αϕ+, αϕ-</…	|m_{\vartheta}\text{=+}k\rangle = \begin{array}{r} \left( \alpha_{\vartheta +} \middle| \right) \\ \end{array}
+086	inline	…ampiezza di probabilità cercata è pari al prodotto ⟦MATH⟧ cioè è pari alla componente del vettore <math disp…	\left\langle m_{\vartheta}\text{=+}k \middle| m_{\phi}\text{=+}k \right\rangle
+087	inline	…cioè è pari alla componente del vettore ⟦MATH⟧ lungo il vettore <math display="inline" xmlns="htt…	|m_{\phi}\text{=+}k\rangle
+088	inline	…ex">|m_{\phi}\text{=+}k\rangle lungo il vettore ⟦MATH⟧ . La probabilità, come al solito, è data dal modul…	|m_{\vartheta}\text{=+}k\rangle
+089	inline	…babilità, come al solito, è data dal modulo quadro ⟦MATH⟧ Questa regola era facile da intuire, ma non si può…	\left| \left\langle m_{\vartheta}\text{=+}k \middle| m_{\phi}\text{=+}k \right\rangle \right|^{2}
+090	inline	…urando una grandezza g, esca un particolare valore ⟦MATH⟧ . Prima dobbiamo prendere il ket normalizzato <mat…	g = \overline{g}
+091	inline	…tion>. Prima dobbiamo prendere il ket normalizzato ⟦MATH⟧ associato allo stato α. Poi dobbiamo prendere il k…	|\alpha\rangle
+092	inline	…stato α. Poi dobbiamo prendere il ket normalizzato ⟦MATH⟧ associato allo stato nel quale, se si misura g, si…	|g = \overline{g}\rangle
+093	inline	… se si misura g, si ottiene con certezza il valore ⟦MATH⟧ . Infine dobbiamo calcolare la componente del ket …	g = \overline{g}
+094	inline	…>. Infine dobbiamo calcolare la componente del ket ⟦MATH⟧ lungo il ket…	|\alpha\rangle
+095	inline	…"application/x-tex">|\alpha\rangle lungo il ket ⟦MATH⟧ <seman…	|g = \overline{g}\rangle
+096	inline	…lication/x-tex">|g = \overline{g}\rangle ⟦MATH⟧ ottenendo così l’ampiezza di probabilità. La proba…	\left\langle g = \overline{g} \middle| \alpha \right\rangle
+097	inline	…abilità. La probabilità è data dal modulo quadrato ⟦MATH⟧ Ora siamo in grado di scegliere le giuste componen…	\left| \left\langle g = \overline{g} \middle| \alpha \right\rangle \right|^{2}
+098	inline	…rado di scegliere le giuste componenti dei vettori ⟦MATH⟧ e…	|m_{\vartheta}\text{=+}k\rangle
+099	inline	…cation/x-tex">|m_{\vartheta}\text{=+}k\rangle e ⟦MATH⟧ per ogni angolo ϑ. Per le probabilità relative a <…	|m_{\vartheta} = - k\rangle
+100	inline	…> per ogni angolo ϑ. Per le probabilità relative a ⟦MATH⟧ abbiamo i seguenti risultati sperimentali <math di…	|m_{\vartheta}\text{=+}k\rangle
+101	inline	…otation> abbiamo i seguenti risultati sperimentali ⟦MATH⟧ che, ad esempio possono derivare dai vettori <math…	\begin{array}{r} P_{m_{0}\text{=+}k} = \text{cos}^{2}\frac{\vartheta}{2} \\ P_{m_{0} = - k} = \text{sen}^{2}\frac{\vartheta}{2} \end{array}
+102	inline	…> che, ad esempio possono derivare dai vettori ⟦MATH⟧ Anche in questo caso abbiamo un certo grado di lib…	\begin{array}{r} \left( \text{cos}\frac{\vartheta}{2} \middle| \right) \\ \end{array}
+103	inline	… probabilità. La scelta più semplice è la seguente ⟦MATH⟧ Per lo stato <math display="inline" xmlns="http://…	|m_{\vartheta}\text{=+}k\rangle = \begin{array}{r} \left( \text{cos}\frac{\vartheta}{2} \middle| \right) \\ \end{array}
+104	inline	…le| \right) \\ \end{array} Per lo stato ⟦MATH⟧ possiamo scegliere <math display="inline" xmlns="h…	|m_{\vartheta} = - k\rangle
+105	inline	…artheta} = - k\rangle possiamo scegliere ⟦MATH⟧ Il segno meno davanti al <math display="inline" xm…	|m_{\vartheta} = - k\rangle = \begin{array}{r} \left( \text{sen}\frac{\vartheta}{2} \middle| \right) \\ \end{array}
+106	inline	…\\ \end{array} Il segno meno davanti al ⟦MATH⟧ è necessario perché i due vettori devono essere or…	\text{cos}\frac{\vartheta}{2}
+107	inline	…ario perché i due vettori devono essere ortogonali ⟦MATH⟧ . Infatti sappiamo che la probabilità di ottenere …	\left\langle m_{\vartheta}\text{=+}k \middle| m_{\vartheta} = - k \right\rangle = 0
+108	inline	…rovare mϑ=+k in uno stato mϕ=+k. ⟦MATH⟧ Analogamente si può calcolare <math display="inlin…	\begin{array}{r} P = \left| \left\langle m_{\phi}\text{=+}k \middle| m_{\vartheta}\text{=+}k \right\rangle \right|^{2} = \\ \end{array}
+109	inline	…ay} Analogamente si può calcolare ⟦MATH⟧ Esattamente in accordo con i risultati sperimental…	\left| \left\langle m_{\phi} = - k \middle| m_{\vartheta}\text{=+}k \right\rangle \right|^{2} = \text{sen}^{2}\frac{\phi - \vartheta}{2}
+110	inline	…, supponiamo di conoscere il ket di stato iniziale ⟦MATH⟧ e le “condizioni ambientali”. Ci chiediamo quale s…	|{\alpha t}_{0}\rangle
+111	inline	…bientali”. Ci chiediamo quale sarà il ket di stato ⟦MATH⟧ in un generico istante t. Possiamo organizzare un …	|\alpha t\rangle
+112	inline	…chine di Stern-Gerlach e, all’uscita dopo il tempo ⟦MATH⟧ necessario all’attraversamento della scatola, osse…	\Delta t = t - t_{0}
+113	inline	…golo ϑ, così in ingresso abbiamo atomi nello stato ⟦MATH⟧ . Quando questi atomi entrano nella scatola lo sta…	|{\alpha t}_{0}\rangle = |m_{\vartheta}\text{=+}k\rangle
+114	inline	…la scatola lo stato viene diviso in due componenti ⟦MATH⟧ dove i termini c+ e c- sono dati…	|{\alpha t}_{0}\rangle = |m_{\vartheta}\text{=+}k\rangle = c_{+}|m_{\text{90}}\text{=+}k\rangle + c_{-}|m_{\text{90}} = - k\rangle
+115	inline	…sub>+ e c- sono dati dai prodotti scalari ⟦MATH⟧ Il fascio <math display="inline" xmlns="http://www…	\begin{array}{r} c_{+} = \left\langle m_{\text{90}}\text{=+}k \middle| m_{\vartheta}\text{=+}k \right\rangle \\ c_{-} = \left\langle m_{\text{90}} = - k \middle| m_{\vartheta}\text{=+}k \right\rangle \end{array}
+116	inline	…=+}k \right\rangle \end{array} Il fascio ⟦MATH⟧ viene sfasato di un fattore eiϕ ed in uscita abbia…	|m_{\text{90}} = - k\rangle
+117	inline	…fattore eiϕ ed in uscita abbiamo lo stato composto ⟦MATH⟧ dove U è la matrice <math display="inline" xmlns="…	\begin{array}{r} |\alpha t\rangle = c_{+}|m_{\text{90}}\text{=+}k\rangle + e^{i\phi}c_{-}|m_{\text{90}} = - k\rangle = \\ \left\langle m_{\text{90}}\text{=+}k \middle| {\alpha t}_{0} \right\rangle|m_{\text{90}}\text{=+}k\rangle + e^{i\phi}\left\langle m_{\text{90}} = - k \middle| {\alpha t}_{0} \right\rangle|m_{\text{90}} = - k\rangle = \\ \left( |m_{\text{90}}\text{=+}k\rangle\langle m_{\text{90}}\text{=+}k| + e^{i\phi}|m_{\text{90}} = - k\rangle\langle m_{\text{90}} = - k| \right)|{\alpha t}_{0}\rangle = \\ U|{\alpha t}_{0}\rangle \end{array}
+118	inline	…ray} dove U è la matrice ⟦MATH⟧ Questa matrice viene detta matrice di evoluzione t…	\begin{array}{r} U = |m_{\text{90}}\text{=+}k\rangle\langle m_{\text{90}}\text{=+}k| + e^{i\phi}|m_{\text{90}} = - k\rangle\langle m_{\text{90}} = - k| = \\ \\ \end{array}\begin{array}{r} \left( \text{cos}\frac{\phi}{2} \middle| \right) \\ \end{array}
+119	inline	…generale per qualsiasi fenomeno esiste una matrice ⟦MATH⟧ tale che dato <math display="inline" xmlns="http:/…	U\left( t_{0} \rightarrow t \right)
+120	inline	…left( t_{0} \rightarrow t \right) tale che dato ⟦MATH⟧ si calcola <s…	|{\alpha t}_{0}\rangle
+121	inline	…cation/x-tex">|{\alpha t}_{0}\rangle si calcola ⟦MATH⟧ con il prodotto <math display="inline" xmlns="http…	|\alpha t\rangle
+122	inline	…ication/x-tex">|\alpha t\rangle con il prodotto ⟦MATH⟧ . Un’importante proprietà della matrice di evoluzi…	|\alpha t\rangle = U\left( t_{0} \rightarrow t \right)|{\alpha t}_{0}\rangle
+123	inline	…ti scalari. Cioè se prendiamo due vettori di stato ⟦MATH⟧ e…	|{\alpha t}_{0}\rangle
+124	inline	…ng="application/x-tex">|{\alpha t}_{0}\rangle e ⟦MATH⟧ , e prendiamo i vettori ottenuti dall’evoluzione d…	|{\beta t}_{0}\rangle
+125	inline	…diamo i vettori ottenuti dall’evoluzione di questi ⟦MATH⟧ i prodotti scalari tra i primi e tra i secondi son…	\begin{array}{r} |\alpha t\rangle = U\left( t_{0} \rightarrow t \right)|{\alpha t}_{0}\rangle \\ |\beta t\rangle = U\left( t_{0} \rightarrow t \right)|{\beta t}_{0}\rangle \end{array}
+126	inline	…ti scalari tra i primi e tra i secondi sono uguali ⟦MATH⟧ Possiamo verificare questa proprietà per il caso p…	\left\langle \alpha t \middle| \beta t \right\rangle = \left\langle {\alpha t}_{0} \middle| {\beta t}_{0} \right\rangle
+127	inline	…o un dettaglio di algebra: Se prendiamo un vettore ⟦MATH⟧ il suo duale è <math display="inline" xmlns="http:…	|\alpha\rangle = \begin{array}{r} \left( \alpha_{1} \middle| \right) \\ \end{array}
+128	inline	…\middle| \right) \\ \end{array} il suo duale è ⟦MATH⟧ . Se moltiplichiamo <math display="inline" xmlns="…	\langle\alpha| = \left( \alpha_{1}^{},\alpha_{2}^{} \right)
+129	inline	…{1}^{},\alpha_{2}^{} \right). Se moltiplichiamo ⟦MATH⟧ per un numero c abbiamo <math display="inline" xml…	|\alpha\rangle
+130	inline	…|\alpha\rangle per un numero c abbiamo ⟦MATH⟧ , ed il duale sarà <math display="inline" xmlns="h…	c|\alpha\rangle = calignl\begin{array}{r} \left( \alpha_{1} \middle| \right) \\ \end{array}
+131	inline	…ddle| \right) \\ \end{array}, ed il duale sarà ⟦MATH⟧ . Dunque il duale di <math display="inline" xmlns=…	\left( c^{}\alpha_{1}^{},c^{}\alpha_{2}^{} \right) = c^{}\left( \alpha_{1}^{},\alpha_{2}^{} \right) = c^{}\langle\alpha|
+132	inline	…right) = c^{}\langle\alpha|. Dunque il duale di ⟦MATH⟧ è…	c|\alpha\rangle
+133	inline	…encoding="application/x-tex">c|\alpha\rangle è ⟦MATH⟧ . Ora calcoliamo <math display="inline" xmlns="htt…	c^{}\langle\alpha|
+134	inline	…-tex">c^{}\langle\alpha|. Ora calcoliamo ⟦MATH⟧ e mostriamo che il risultato è uguale a <math disp…	\left\langle \alpha t \middle| \beta t \right\rangle
+135	inline	…\rangle e mostriamo che il risultato è uguale a ⟦MATH⟧ . <sema…	\left\langle {\alpha t}_{0} \middle| {\beta t}_{0} \right\rangle
+136	inline	…0} \middle| {\beta t}_{0} \right\rangle. ⟦MATH⟧ eseguendo il prodotto scalare ed eliminando i term…	\begin{array}{r} |\beta t\rangle = \left\langle m_{\text{90}}\text{=+}k \middle| {\beta t}_{0} \right\rangle|m_{\text{90}}\text{=+}k\rangle + e^{i\phi}\left\langle m_{\text{90}} = - k \middle| {\beta t}_{0} \right\rangle|m_{\text{90}} = - k\rangle \\ \langle\alpha t| = \left\langle m_{\text{90}}\text{=+}k \middle| {\beta t}_{0} \right\rangle^{}\langle m_{\text{90}}\text{=+}k| + e^{- i\phi}\left\langle m_{\text{90}} = - k \middle| {\beta t}_{0} \right\rangle^{}\langle m_{\text{90}} = - k| \end{array}
+137	inline	… il prodotto scalare ed eliminando i termini nulli ⟦MATH⟧ Per concludere rivediamo i principi fondamentali c…	\begin{array}{r} \left\langle \alpha t \middle| \beta t \right\rangle = \left\langle m_{\text{90}}\text{=+}k \middle| {\beta t}_{0} \right\rangle\left\langle m_{\text{90}}\text{=+}k \middle| {\beta t}_{0} \right\rangle^{} + \left\langle m_{\text{90}} = - k \middle| {\beta t}_{0} \right\rangle\left\langle m_{\text{90}} = - k \middle| {\beta t}_{0} \right\rangle^{} = \\ \left\langle m_{\text{90}}\text{=+}k \middle| {\beta t}_{0} \right\rangle\left\langle {\beta t}_{0} \middle| m_{\text{90}}\text{=+}k \right\rangle + \left\langle m_{\text{90}} = - k \middle| {\beta t}_{0} \right\rangle\left\langle {\beta t}_{0} \middle| m_{\text{90}} = - k \right\rangle = \\ \langle{\beta t}_{0}|\left( \left\langle m_{\text{90}}\text{=+}k \middle| {\beta t}_{0} \right\rangle|m_{\text{90}}\text{=+}k\rangle + \left\langle m_{\text{90}} = - k \middle| {\beta t}_{0} \right\rangle|m_{\text{90}} = - k\rangle \right) = \\ \left\langle {\beta t}_{0} \middle| {\beta t}_{0} \right\rangle \end{array}
+138	inline	…e dalla misura si ottiene un particolare risultato ⟦MATH⟧ , il sistema si porta in uno stato tale che, se si…	g = \overline{g}
+139	inline	…e la misura di g si ottiene con certezza il valore ⟦MATH⟧ . Un tale stato viene detto autostato di g con aut…	g = \overline{g}
+140	inline	…le stato viene detto autostato di g con autovalore ⟦MATH⟧ . Un qualsiasi altro stato α può essere considerat…	\overline{g}
+141	inline	…re rappresentato da un vettore di numeri complessi ⟦MATH⟧ . Ogni numero complesso è associato ad uno dei pos…	|\alpha\rangle = \begin{array}{r} \left( \alpha_{1} \middle| \right)\left( \vdots \middle| \right) \\ \end{array}
+142	inline	… possibili valori che può assumere la grandezza g, ⟦MATH⟧ Il modulo quadrato di ognuno di questi numeri comp…	{\overline{g}}_{1},{\overline{g}}_{2},\text{...}{\overline{g}}_{n}\text{.}
+143	inline	…isurando la grandezza g esca il particolare valore ⟦MATH⟧ associato al numero considerato. In generale se il…	{\overline{g}}_{k}
+144	inline	… si trova in uno stato α e si misura una grandezza ⟦MATH⟧ , la probabilità che esca <math display="inline" x…	g&#39;
+145	inline	…lication/x-tex">g&#39;, la probabilità che esca ⟦MATH⟧ è data dal modulo quadro del prodotto scalare tra …	g&#39; = {\overline{g}}&#39;
+146	inline	… modulo quadro del prodotto scalare tra il vettore ⟦MATH⟧ ed il vettore <math display="inline" xmlns="http:/…	|\alpha\rangle
+147	inline	…application/x-tex">|\alpha\rangle ed il vettore ⟦MATH⟧ associato all’autostato <math display="inline" xml…	|g&#39; = {\overline{g}}&#39;\rangle
+148	inline	…verline{g}}&#39;\rangle associato all’autostato ⟦MATH⟧ di <semantics…	g&#39; = {\overline{g}}&#39;
+149	inline	…lication/x-tex">g&#39; = {\overline{g}}&#39; di ⟦MATH⟧ . <…	g&#39;
+150	inline	…annotation encoding="application/x-tex">g&#39;. ⟦MATH⟧ L’evoluzione nel tempo di uno stato αt segue una l…	P_{g&#39; = {\overline{g}}&#39;} = \left| \left\langle g&#39; = {\overline{g}}&#39; \middle| \alpha \right\rangle \right|^{2}
+151	inline	… nel tempo di uno stato αt segue una legge lineare ⟦MATH⟧ dove <math display="inline" xmlns="http://www.w3…	|\alpha t\rangle = U\left( t_{0} \rightarrow t \right)|{\alpha t}_{0}\rangle
+152	inline	…_{0}\rangle dove ⟦MATH⟧ è una matrice che dipende dal sistema e dalle “con…	U\left( t_{0} \rightarrow t \right)
+153	inline	…istema e dalle “condizioni ambientali”. La matrice ⟦MATH⟧ è detta matrice di evoluzione temporale e gode del…	U\left( t_{0} \rightarrow t \right)
+154	inline	…proprietà di lasciare invariati i prodotti scalari ⟦MATH⟧ Questi che abbiamo sintetizzato sono una versione …	\left\langle \alpha t \middle| \beta t \right\rangle = \left\langle {\alpha t}_{0} \middle| {\beta t}_{0} \right\rangle

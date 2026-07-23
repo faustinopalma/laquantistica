@@ -1,0 +1,4 @@
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>α</mi><mo stretchy="false" form="postfix">⟩</mo><mo>=</mo><mtable><mtr><mtd columnalign="right" style="text-align: right"><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>α</mi><mn>1</mn></msub><mo stretchy="true" form="infix">|</mo><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd></mtr></mtable></mrow><annotation encoding="application/x-tex">|\alpha\rangle = \begin{array}{r}
+\left( \alpha_{1} \middle| \right) \\
+
+\end{array}</annotation></semantics></math>

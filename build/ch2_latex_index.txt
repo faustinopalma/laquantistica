@@ -1,0 +1,155 @@
+1	\text{cos}^{2}\frac{\vartheta}{2}\text{ e sen}^{2}\frac{\vartheta}{2}
+2	\text{cos}^{2}\frac{\vartheta_{2} - \vartheta_{1}}{2}\text{ e sen}^{2}\frac{\vartheta_{2} - \vartheta_{1}}{2}
+3	\text{cos}^{2}\frac{\vartheta_{3} - \vartheta_{2}}{2}\text{ e sen}^{2}\frac{\vartheta_{3} - \vartheta_{2}}{2}
+4	\text{cos}^{2}\frac{\vartheta}{2}
+5	\text{sen}^{2}\frac{\vartheta}{2}
+6	\text{cos}^{2}\frac{\vartheta}{2}
+7	\text{sen}^{2}\frac{\vartheta}{2}
+8	\begin{array}{r} \text{caso 1} \rightarrow \begin{array}{r} \left\{ m_{0}\text{=+}k\text{ con probabilità 0,5} \middle| \right.\ \end{array} \\ \end{array}
+9	\begin{array}{r} P_{m_{0}\text{=+}k} = \text{cos}^{2}\frac{\phi}{2} \\ P_{m_{0} = - k} = \text{sen}^{2}\frac{\phi}{2} \end{array}
+10	\left| 1 + e^{i\phi} \right|^{2} = \left( 2\text{cos}\frac{\phi}{2} \right)^{2} = 4\text{cos}^{2}\frac{\phi}{2}
+11	\left| 1 - e^{i\phi} \right|^{2} = \left( 2\text{sen}\frac{\phi}{2} \right)^{2} = 4\text{sen}^{2}\frac{\phi}{2}
+12	\begin{array}{r} \text{stato }m_{\text{90}}\text{=+}k \rightarrow \begin{array}{r} \left( 1 \middle| \right) \\ \end{array} \\ \end{array}
+13	e^{i\phi}\begin{array}{r} \left( 1 \middle| \right) \\ \end{array}
+14	\begin{array}{r} \left( 1 \middle| \right) \\ \end{array}
+15	\begin{array}{r} \left( \alpha_{1} \middle| \right) \\ \end{array}
+16	\left( \alpha_{1}^{},\alpha_{2}^{} \right)
+17	\left( \alpha_{1}^{},\alpha_{2}^{} \right)\begin{array}{r} \left( \alpha_{1} \middle| \right) \\ \end{array}
+18	|\alpha\rangle
+19	|\alpha\rangle = \begin{array}{r} \left( \alpha_{1} \middle| \right) \\ \end{array}
+20	\langle\alpha|
+21	\langle\alpha| = \left( \alpha_{1}^{},\alpha_{2}^{} \right)
+22	\langle|
+23	|\rangle
+24	\left\langle \alpha \middle| \beta \right\rangle = \left( \alpha_{1}^{},\alpha_{2}^{} \right)\begin{array}{r} \left( \beta_{1} \middle| \right) \\ \end{array}
+25	|\alpha\rangle\langle\beta| = \begin{array}{r} \left( \alpha_{1} \middle| \right) \\ \end{array}
+26	|\alpha\rangle
+27	|\beta\rangle
+28	\left\langle \alpha \middle| \beta \right\rangle = \left( \alpha_{1}^{},\alpha_{2}^{} \right)\begin{array}{r} \left( \beta_{1} \middle| \right) \\ \end{array}
+29	|\alpha\rangle
+30	|\beta\rangle
+31	|a\rangle
+32	|b\rangle
+33	\left\langle a \middle| b \right\rangle = \left( a_{1},a_{2} \right)\begin{array}{r} \left( b_{1} \middle| \right) \\ \end{array}
+34	\left\langle \alpha \middle| \beta \right\rangle = \left( \alpha_{1},\alpha_{2} \right)\begin{array}{r} \left( \beta_{1} \middle| \right) \\ \end{array}
+35	\left\langle \alpha \middle| \alpha \right\rangle
+36	\left\langle \alpha \middle| \alpha \right\rangle
+37	|\alpha\rangle
+38	|\alpha\rangle = \begin{array}{r} \left( 1 \middle| \right) \\ \end{array}
+39	\left\langle \alpha \middle| \alpha \right\rangle = (1,i)\begin{array}{r} \left( 1 \middle| \right) \\ \end{array}
+40	\left\langle \alpha \middle| \alpha \right\rangle = (1, - i)\begin{array}{r} \left( 1 \middle| \right) \\ \end{array}
+41	\begin{array}{r} \left\langle \alpha \middle| \alpha \right\rangle\text{ è reale ed è } \geq 0 \\ \left\langle \alpha \middle| \alpha \right\rangle = 0\text{ se e solo se }|\alpha\rangle\text{ è il vettore nullo} \\ \left\langle \alpha \middle| \beta \right\rangle = \left\langle \beta \middle| \alpha \right\rangle^{} \\ \left\langle \alpha \middle| \beta_{1} + \beta_{2} \right\rangle = \left\langle \alpha \middle| \beta_{1} \right\rangle + \left\langle \alpha \middle| \beta_{2} \right\rangle \end{array}
+42	|\alpha\rangle
+43	|\beta\rangle
+44	\left\langle \alpha \middle| \beta \right\rangle = 0\text{ } \Leftrightarrow \text{ sono ortogonali}
+45	|\alpha_{1}\rangle\text{...}|\alpha_{n}\rangle
+46	\left\langle \alpha_{j} \middle| \alpha_{k} \right\rangle = 0\text{ }\forall j \neq k
+47	|\alpha_{1}\rangle = \lambda_{2}|\alpha_{2}\rangle + \text{...} + \lambda_{n}|\alpha_{n}\rangle
+48	\langle\alpha_{1}|
+49	\left\langle \alpha_{1} \middle| \alpha_{1} \right\rangle = \lambda_{2}\left\langle \alpha_{1} \middle| \alpha_{2} \right\rangle + \text{...} + \lambda_{n}\left\langle \alpha_{1} \middle| \alpha_{n} \right\rangle
+50	\left\langle \alpha_{1} \middle| \alpha_{1} \right\rangle = 0\text{ } \Rightarrow \text{ }|\alpha_{1}\rangle\text{ è nullo}
+51	\left\langle \alpha_{k} \middle| \alpha_{k} \right\rangle = 1
+52	|v\rangle
+53	|v\rangle
+54	|\alpha_{1}\rangle\text{...}|\alpha_{n}\rangle
+55	|v\rangle
+56	|\alpha_{1}\rangle\text{...}|\alpha_{n}\rangle
+57	|v\rangle = c_{1}|\alpha_{1}\rangle + \text{...} + c_{n}|\alpha_{n}\rangle
+58	\langle\alpha_{k}|
+59	\left\langle \alpha_{k} \middle| v \right\rangle = c_{1}\left\langle \alpha_{k} \middle| \alpha_{1} \right\rangle + \text{...} + c_{k}\left\langle \alpha_{k} \middle| \alpha_{k} \right\rangle + \text{...} + c_{n}\left\langle \alpha_{k} \middle| \alpha_{n} \right\rangle
+60	\left\langle \alpha_{k} \middle| v \right\rangle = c_{k}\left\langle \alpha_{k} \middle| \alpha_{k} \right\rangle
+61	|\alpha_{k}\rangle
+62	\left\langle \alpha_{k} \middle| v \right\rangle = c_{k}
+63	c_{k} = \left\langle \alpha_{k} \middle| v \right\rangle
+64	|v\rangle
+65	|\alpha_{k}\rangle
+66	|m_{0}\text{=+}k\rangle = \begin{array}{r} \left( 1 \middle| \right) \\ \end{array}
+67	\begin{array}{r} \left( i \middle| \right) \\ \end{array}
+68	\begin{array}{r} \left( e^{i\phi} \middle| \right) \\ \end{array}
+69	|1|^{2} = |i|^{2} = \left| e^{i\phi} \right|^{2} = 1
+70	|m_{0} = - k\rangle = \begin{array}{r} \left( 0 \middle| \right) \\ \end{array}
+71	\begin{array}{r} \left\langle m_{0}\text{=+}k \middle| m_{0} = - k \right\rangle = 0 \\ \left\langle m_{0}\text{=+}k \middle| m_{0}\text{=+}k \right\rangle = \left\langle m_{0} = - k \middle| m_{0} = - k \right\rangle = 1 \end{array}
+72	|\alpha\rangle = \alpha_{+}|m_{0}\text{=+}k\rangle + \alpha_{-}|m_{0} = - k\rangle = \begin{array}{r} \left( \alpha_{+} \middle| \right) \\ \end{array}
+73	\left| \alpha_{+} \right|^{2}
+74	\left| \alpha_{-} \right|^{2}
+75	\begin{array}{r} P_{m_{0}\text{=+}k} \propto \left| \alpha_{+} \right|^{2} \\ P_{m_{0} = - k} \propto \left| \alpha_{-} \right|^{2} \end{array}
+76	\begin{array}{r} P_{m_{0}\text{=+}k} = \frac{\left| \alpha_{+} \right|^{2}}{\left| \alpha_{+} \right|^{2} + \left| \alpha_{-} \right|^{2}} \\ P_{m_{0} = - k} = \frac{\left| \alpha_{-} \right|^{2}}{\left| \alpha_{+} \right|^{2} + \left| \alpha_{-} \right|^{2}} \end{array}
+77	calignl\begin{array}{r} \left( \alpha_{+} \middle| \right) \\ \end{array}
+78	\begin{array}{r} P_{m_{0}\text{=+}k} \propto \left| {c\alpha}_{+} \right|^{2} \\ P_{m_{0} = - k} \propto \left| {c\alpha}_{-} \right|^{2} \end{array}
+79	\begin{array}{r} P_{m_{0}\text{=+}k} = \frac{\left| {c\alpha}_{+} \right|^{2}}{\left| {c\alpha}_{+} \right|^{2} + \left| {c\alpha}_{-} \right|^{2}} = \frac{|c|^{2}\left| \alpha_{+} \right|^{2}}{|c|^{2}\left| \alpha_{+} \right|^{2} + |c|^{2}\left| \alpha_{-} \right|^{2}} = \frac{\left| \alpha_{+} \right|^{2}}{\left| \alpha_{+} \right|^{2} + \left| \alpha_{-} \right|^{2}} \\ P_{m_{0} = - k} = \frac{\left| \alpha_{-} \right|^{2}}{\left| {c\alpha}_{+} \right|^{2} + \left| {c\alpha}_{-} \right|^{2}} = \frac{|c|^{2}\left| \alpha_{-} \right|^{2}}{|c|^{2}\left| \alpha_{+} \right|^{2} + |c|^{2}\left| \alpha_{-} \right|^{2}} = \frac{\left| \alpha_{-} \right|^{2}}{\left| \alpha_{+} \right|^{2} + \left| \alpha_{-} \right|^{2}} \end{array}
+80	\begin{array}{r} \left( \alpha_{+} \middle| \right) \\ \end{array}
+81	\left\langle \alpha \middle| \alpha \right\rangle = \left| \alpha_{+} \right|^{2} + \left| \alpha_{-} \right|^{2} = 1
+82	\begin{array}{r} P_{m_{0}\text{=+}k} = \left| \alpha_{+} \right|^{2} \\ P_{m_{0} = - k} = \left| \alpha_{-} \right|^{2} \end{array}
+83	\left| \alpha_{+} \right|^{2}
+84	\left| \alpha_{-} \right|^{2}
+85	|m_{\vartheta}\text{=+}k\rangle = \begin{array}{r} \left( \alpha_{\vartheta +} \middle| \right) \\ \end{array}
+86	\left\langle m_{\vartheta}\text{=+}k \middle| m_{\phi}\text{=+}k \right\rangle
+87	|m_{\phi}\text{=+}k\rangle
+88	|m_{\vartheta}\text{=+}k\rangle
+89	\left| \left\langle m_{\vartheta}\text{=+}k \middle| m_{\phi}\text{=+}k \right\rangle \right|^{2}
+90	g = \overline{g}
+91	|\alpha\rangle
+92	|g = \overline{g}\rangle
+93	g = \overline{g}
+94	|\alpha\rangle
+95	|g = \overline{g}\rangle
+96	\left\langle g = \overline{g} \middle| \alpha \right\rangle
+97	\left| \left\langle g = \overline{g} \middle| \alpha \right\rangle \right|^{2}
+98	|m_{\vartheta}\text{=+}k\rangle
+99	|m_{\vartheta} = - k\rangle
+100	|m_{\vartheta}\text{=+}k\rangle
+101	\begin{array}{r} P_{m_{0}\text{=+}k} = \text{cos}^{2}\frac{\vartheta}{2} \\ P_{m_{0} = - k} = \text{sen}^{2}\frac{\vartheta}{2} \end{array}
+102	\begin{array}{r} \left( \text{cos}\frac{\vartheta}{2} \middle| \right) \\ \end{array}
+103	|m_{\vartheta}\text{=+}k\rangle = \begin{array}{r} \left( \text{cos}\frac{\vartheta}{2} \middle| \right) \\ \end{array}
+104	|m_{\vartheta} = - k\rangle
+105	|m_{\vartheta} = - k\rangle = \begin{array}{r} \left( \text{sen}\frac{\vartheta}{2} \middle| \right) \\ \end{array}
+106	\text{cos}\frac{\vartheta}{2}
+107	\left\langle m_{\vartheta}\text{=+}k \middle| m_{\vartheta} = - k \right\rangle = 0
+108	\begin{array}{r} P = \left| \left\langle m_{\phi}\text{=+}k \middle| m_{\vartheta}\text{=+}k \right\rangle \right|^{2} = \\ \end{array}
+109	\left| \left\langle m_{\phi} = - k \middle| m_{\vartheta}\text{=+}k \right\rangle \right|^{2} = \text{sen}^{2}\frac{\phi - \vartheta}{2}
+110	|{\alpha t}_{0}\rangle
+111	|\alpha t\rangle
+112	\Delta t = t - t_{0}
+113	|{\alpha t}_{0}\rangle = |m_{\vartheta}\text{=+}k\rangle
+114	|{\alpha t}_{0}\rangle = |m_{\vartheta}\text{=+}k\rangle = c_{+}|m_{\text{90}}\text{=+}k\rangle + c_{-}|m_{\text{90}} = - k\rangle
+115	\begin{array}{r} c_{+} = \left\langle m_{\text{90}}\text{=+}k \middle| m_{\vartheta}\text{=+}k \right\rangle \\ c_{-} = \left\langle m_{\text{90}} = - k \middle| m_{\vartheta}\text{=+}k \right\rangle \end{array}
+116	|m_{\text{90}} = - k\rangle
+117	\begin{array}{r} |\alpha t\rangle = c_{+}|m_{\text{90}}\text{=+}k\rangle + e^{i\phi}c_{-}|m_{\text{90}} = - k\rangle = \\ \left\langle m_{\text{90}}\text{=+}k \middle| {\alpha t}_{0} \right\rangle|m_{\text{90}}\text{=+}k\rangle + e^{i\phi}\left\langle m_{\text{90}} = - k \middle| {\alpha t}_{0} \right\rangle|m_{\text{90}} = - k\rangle = \\ \left( |m_{\text{90}}\text{=+}k\rangle\langle m_{\text{90}}\text{=+}k| + e^{i\phi}|m_{\text{90}} = - k\rangle\langle m_{\text{90}} = - k| \right)|{\alpha t}_{0}\rangle = \\ U|{\alpha t}_{0}\rangle \end{array}
+118	\begin{array}{r} U = |m_{\text{90}}\text{=+}k\rangle\langle m_{\text{90}}\text{=+}k| + e^{i\phi}|m_{\text{90}} = - k\rangle\langle m_{\text{90}} = - k| = \\ \\ \end{array}\begin{array}{r} \left( \text{cos}\frac{\phi}{2} \middle| \right) \\ \end{array}
+119	U\left( t_{0} \rightarrow t \right)
+120	|{\alpha t}_{0}\rangle
+121	|\alpha t\rangle
+122	|\alpha t\rangle = U\left( t_{0} \rightarrow t \right)|{\alpha t}_{0}\rangle
+123	|{\alpha t}_{0}\rangle
+124	|{\beta t}_{0}\rangle
+125	\begin{array}{r} |\alpha t\rangle = U\left( t_{0} \rightarrow t \right)|{\alpha t}_{0}\rangle \\ |\beta t\rangle = U\left( t_{0} \rightarrow t \right)|{\beta t}_{0}\rangle \end{array}
+126	\left\langle \alpha t \middle| \beta t \right\rangle = \left\langle {\alpha t}_{0} \middle| {\beta t}_{0} \right\rangle
+127	|\alpha\rangle = \begin{array}{r} \left( \alpha_{1} \middle| \right) \\ \end{array}
+128	\langle\alpha| = \left( \alpha_{1}^{},\alpha_{2}^{} \right)
+129	|\alpha\rangle
+130	c|\alpha\rangle = calignl\begin{array}{r} \left( \alpha_{1} \middle| \right) \\ \end{array}
+131	\left( c^{}\alpha_{1}^{},c^{}\alpha_{2}^{} \right) = c^{}\left( \alpha_{1}^{},\alpha_{2}^{} \right) = c^{}\langle\alpha|
+132	c|\alpha\rangle
+133	c^{}\langle\alpha|
+134	\left\langle \alpha t \middle| \beta t \right\rangle
+135	\left\langle {\alpha t}_{0} \middle| {\beta t}_{0} \right\rangle
+136	\begin{array}{r} |\beta t\rangle = \left\langle m_{\text{90}}\text{=+}k \middle| {\beta t}_{0} \right\rangle|m_{\text{90}}\text{=+}k\rangle + e^{i\phi}\left\langle m_{\text{90}} = - k \middle| {\beta t}_{0} \right\rangle|m_{\text{90}} = - k\rangle \\ \langle\alpha t| = \left\langle m_{\text{90}}\text{=+}k \middle| {\beta t}_{0} \right\rangle^{}\langle m_{\text{90}}\text{=+}k| + e^{- i\phi}\left\langle m_{\text{90}} = - k \middle| {\beta t}_{0} \right\rangle^{}\langle m_{\text{90}} = - k| \end{array}
+137	\begin{array}{r} \left\langle \alpha t \middle| \beta t \right\rangle = \left\langle m_{\text{90}}\text{=+}k \middle| {\beta t}_{0} \right\rangle\left\langle m_{\text{90}}\text{=+}k \middle| {\beta t}_{0} \right\rangle^{} + \left\langle m_{\text{90}} = - k \middle| {\beta t}_{0} \right\rangle\left\langle m_{\text{90}} = - k \middle| {\beta t}_{0} \right\rangle^{} = \\ \left\langle m_{\text{90}}\text{=+}k \middle| {\beta t}_{0} \right\rangle\left\langle {\beta t}_{0} \middle| m_{\text{90}}\text{=+}k \right\rangle + \left\langle m_{\text{90}} = - k \middle| {\beta t}_{0} \right\rangle\left\langle {\beta t}_{0} \middle| m_{\text{90}} = - k \right\rangle = \\ \langle{\beta t}_{0}|\left( \left\langle m_{\text{90}}\text{=+}k \middle| {\beta t}_{0} \right\rangle|m_{\text{90}}\text{=+}k\rangle + \left\langle m_{\text{90}} = - k \middle| {\beta t}_{0} \right\rangle|m_{\text{90}} = - k\rangle \right) = \\ \left\langle {\beta t}_{0} \middle| {\beta t}_{0} \right\rangle \end{array}
+138	g = \overline{g}
+139	g = \overline{g}
+140	\overline{g}
+141	|\alpha\rangle = \begin{array}{r} \left( \alpha_{1} \middle| \right)\left( \vdots \middle| \right) \\ \end{array}
+142	{\overline{g}}_{1},{\overline{g}}_{2},\text{...}{\overline{g}}_{n}\text{.}
+143	{\overline{g}}_{k}
+144	g&#39;
+145	g&#39; = {\overline{g}}&#39;
+146	|\alpha\rangle
+147	|g&#39; = {\overline{g}}&#39;\rangle
+148	g&#39; = {\overline{g}}&#39;
+149	g&#39;
+150	P_{g&#39; = {\overline{g}}&#39;} = \left| \left\langle g&#39; = {\overline{g}}&#39; \middle| \alpha \right\rangle \right|^{2}
+151	|\alpha t\rangle = U\left( t_{0} \rightarrow t \right)|{\alpha t}_{0}\rangle
+152	U\left( t_{0} \rightarrow t \right)
+153	U\left( t_{0} \rightarrow t \right)
+154	\left\langle \alpha t \middle| \beta t \right\rangle = \left\langle {\alpha t}_{0} \middle| {\beta t}_{0} \right\rangle
+

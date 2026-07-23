@@ -1,0 +1,4 @@
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">⟨</mo><mi>α</mi><mo stretchy="true" form="infix">|</mo><mi>α</mi><mo stretchy="true" form="postfix">⟩</mo></mrow><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>,</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo><mtable><mtr><mtd columnalign="right" style="text-align: right"><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="infix">|</mo><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd></mtr></mtable></mrow><annotation encoding="application/x-tex">\left\langle \alpha \middle| \alpha \right\rangle = (1,i)\begin{array}{r}
+\left( 1 \middle| \right) \\
+
+\end{array}</annotation></semantics></math>
