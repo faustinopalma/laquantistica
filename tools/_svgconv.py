@@ -17,7 +17,9 @@ Uso:  python tools/_svgconv.py 09-spettri-atomici [--apply]
 import re, sys, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-IMG_RE = re.compile(r'<img class="eq-[^"]*"[^>]*>')
+# solo le immagini-FORMULA (eq-inline / eq-block); le eq-figure sono illustrazioni
+# gia presenti come immagini in entrambe le edizioni, non vanno trattate come formule.
+IMG_RE = re.compile(r'<img class="eq-(?:inline|block)[^"]*"[^>]*>')
 MATH_RE = re.compile(r'<math\b.*?</math>', re.DOTALL)
 BLOCK_RE = re.compile(
     r'<div class="equation">.*?</div>'
