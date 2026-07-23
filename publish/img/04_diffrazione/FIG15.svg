@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.2" width="199.56mm" height="129.82mm" viewBox="804 7466 19956 12982" preserveAspectRatio="xMidYMid" fill-rule="evenodd" stroke-width="12.615" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" xmlns:ooo="http://xml.openoffice.org/svg/export" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:presentation="http://sun.com/xmlns/staroffice/presentation" xmlns:smil="http://www.w3.org/2001/SMIL20/" xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xml:space="preserve">
+<svg version="1.2" width="225.56mm" height="129.82mm" viewBox="-1796 7466 22556 12982" preserveAspectRatio="xMidYMid" fill-rule="evenodd" stroke-width="12.615" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" xmlns:ooo="http://xml.openoffice.org/svg/export" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:presentation="http://sun.com/xmlns/staroffice/presentation" xmlns:smil="http://www.w3.org/2001/SMIL20/" xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xml:space="preserve">
  <defs class="ClipPathGroup">
   <clipPath id="presentation_clip_path" clipPathUnits="userSpaceOnUse">
    <rect x="0" y="0" width="21590" height="27940"/>
@@ -2101,4 +2101,4 @@
    </g>
   </g>
  </g>
-</svg>
+<text x="-350" y="10450" font-family="Georgia,'Times New Roman',serif" font-style="italic" font-size="1200" fill="#000000">d<tspan font-size="820" dy="300">1</tspan></text><text x="-500" y="15650" font-family="Georgia,'Times New Roman',serif" font-style="italic" font-size="1200" fill="#000000">d<tspan font-size="820" dy="300">2</tspan></text></svg>
