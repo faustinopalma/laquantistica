@@ -31,7 +31,7 @@ BLOCK_RE = re.compile(
 
 def convert(ch, apply=False):
     svg = (ROOT / f'site/svg/{ch}.html').read_text(encoding='utf-8')
-    pub_path = ROOT / f'publish/leggi/{ch}.html'
+    pub_path = ROOT / f'publish/{ch}.html'
     pub = pub_path.read_text(encoding='utf-8')
 
     imgs = IMG_RE.findall(svg)
