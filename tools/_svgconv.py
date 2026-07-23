@@ -22,7 +22,8 @@ MATH_RE = re.compile(r'<math\b.*?</math>', re.DOTALL)
 BLOCK_RE = re.compile(
     r'<div class="equation">.*?</div>'
     r'|<span class="it">.*?</span>'
-    r'|<span class="en">.*?</span>',
+    r'|<span class="en">.*?</span>'
+    r'|<math\b.*?</math>',
     re.DOTALL,
 )
 
@@ -36,47 +37,39 @@ def convert(ch, apply=False):
     pub_math = len(MATH_RE.findall(pub))
     print(f'[{ch}] site/svg img formule = {M} · publish math = {pub_math}')
 
-    st = {'p': 0, 'it_start': 0, 'err': []}
+    st = {'p': 0, 'it_start': 0, 'err': [], 'warn': []}
 
-    def take_block():
+    def take(kind):
+        """consuma una img in ordine; kind e' 'block'/'inline'/'std' solo per avviso."""
         if st['p'] >= M:
-            st['err'].append(f'display: finite le img (p={st["p"]}, M={M})')
+            st['err'].append(f'{kind}: finite le img (p={st["p"]}, M={M})')
             return '<img alt="MISSING">'
         img = imgs[st['p']]
-        if 'eq-block' not in img:
-            st['err'].append(f'display #{st["p"]} non e eq-block: {img[:60]}')
+        exp = 'eq-block' if kind == 'block' else 'eq-inline'
+        if exp not in img:
+            st['warn'].append(f'{kind} #{st["p"]}: atteso {exp}, trovato {img[:50]}')
         st['p'] += 1
         return img
 
     def repl(m):
         s = m.group(0)
         if s.startswith('<div class="equation">'):
-            nmath = len(MATH_RE.findall(s))
-            if nmath != 1:
-                # div senza math (gia img) -> lascia intatto
-                if nmath == 0:
-                    return s
-                st['err'].append(f'div con {nmath} math')
-            return f'<div class="equation">{take_block()}</div>'
+            if not MATH_RE.search(s):
+                return s  # div gia' con img: lascia intatto
+            return '<div class="equation">' + MATH_RE.sub(lambda mm: take('block'), s[len('<div class="equation">'):-len('</div>')]) + '</div>'
         if s.startswith('<span class="it">'):
             st['it_start'] = st['p']
-            def r2(mm):
-                if st['p'] >= M:
-                    st['err'].append('it: finite le img'); return '<img alt="MISSING">'
-                img = imgs[st['p']]
-                if 'eq-inline' not in img:
-                    st['err'].append(f'inline #{st["p"]} non e eq-inline: {img[:60]}')
-                st['p'] += 1
+            return re.sub(MATH_RE, lambda mm: take('inline'), s)
+        if s.startswith('<span class="en">'):
+            loc = {'q': st['it_start']}
+            def r3(mm):
+                if loc['q'] >= M:
+                    st['err'].append('en: indice fuori range'); return '<img alt="MISSING">'
+                img = imgs[loc['q']]; loc['q'] += 1
                 return img
-            return re.sub(MATH_RE, r2, s)
-        # en-span: riusa le img del it-span accoppiato
-        loc = {'q': st['it_start']}
-        def r3(mm):
-            if loc['q'] >= M:
-                st['err'].append('en: indice fuori range'); return '<img alt="MISSING">'
-            img = imgs[loc['q']]; loc['q'] += 1
-            return img
-        return re.sub(MATH_RE, r3, s)
+            return re.sub(MATH_RE, r3, s)
+        # <math> standalone (fuori dagli span): una sola slot
+        return take('std')
 
     out = BLOCK_RE.sub(repl, pub)
     remaining = len(MATH_RE.findall(out))
@@ -85,6 +78,8 @@ def convert(ch, apply=False):
         print('  ERRORI:')
         for e in st['err'][:20]:
             print('   -', e)
+    if st['warn']:
+        print(f'  avvisi classe (cosmetici) = {len(st["warn"])}')
     ok = (not st['err']) and remaining == 0 and st['p'] == M
     print(f'[{ch}] OK = {ok}')
     if apply and ok:
