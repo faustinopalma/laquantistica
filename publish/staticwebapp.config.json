@@ -6,21 +6,16 @@
   },
   "routes": [
     {
-      "route": "/",
-      "redirect": "/leggi/",
-      "statusCode": 302
-    },
-    {
-      "route": "/leggi/img/*",
+      "route": "/img/*",
       "headers": { "cache-control": "public, max-age=604800, immutable" }
     },
     {
-      "route": "/leggi/assets/*",
+      "route": "/assets/*",
       "headers": { "cache-control": "public, max-age=604800, immutable" }
     }
   ],
   "responseOverrides": {
-    "404": { "rewrite": "/leggi/index.html", "statusCode": 404 }
+    "404": { "rewrite": "/index.html", "statusCode": 404 }
   },
   "mimeTypes": {
     ".json": "application/json",
