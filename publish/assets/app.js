@@ -167,3 +167,18 @@
     if (e.key === 'Escape' && box.classList.contains('show')) close();
   });
 })();
+
+// --- Statistiche di accesso: Cloudflare Web Analytics (cookieless, GDPR-friendly) ---
+// Per attivarle: su dash.cloudflare.com apri Analytics → Web Analytics, aggiungi il
+// sito, copia il token e incollalo qui sotto al posto del segnaposto.
+// Funziona con qualunque hosting (GitHub Pages, Azure SWA, ...). Finché resta il
+// segnaposto NON viene caricato/inviato nulla.
+(function () {
+  var CF_TOKEN = 'REPLACE_WITH_CLOUDFLARE_TOKEN';
+  if (!CF_TOKEN || CF_TOKEN.indexOf('REPLACE_') === 0) return;
+  var s = document.createElement('script');
+  s.defer = true;
+  s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+  s.setAttribute('data-cf-beacon', JSON.stringify({ token: CF_TOKEN }));
+  document.head.appendChild(s);
+})();
