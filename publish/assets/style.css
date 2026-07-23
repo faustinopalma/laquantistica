@@ -340,7 +340,9 @@ body.lightbox-open { overflow: hidden; }
 }
 .lightbox-inner img {
   display: block;
-  max-width: 94vw;
+  width: min(92vw, 980px);
+  height: auto;
+  max-height: 90vh;
   background: #fff;
   border-radius: 6px;
   box-shadow: 0 12px 40px rgba(0, 0, 0, .5);
