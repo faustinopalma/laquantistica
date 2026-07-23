@@ -1,0 +1,115 @@
+/* ==========================================================================
+   note.css — Formato "SCHEDA TECNICA" per le note editoriali del sito
+   (onestà intellettuale, dietro le quinte, aneddoti storici, ecc.)
+   Stile: industriale / ingegneristico. Riusabile per tutte le note future.
+   Convenzione file:  nota-NN-slug.html   (es. nota-01-stern-gerlach.html)
+   Vedi docs/formato-note.md per l'uso.
+   ========================================================================== */
+
+:root{
+  --n-bg:#eceae3;
+  --n-paper:#faf9f6;
+  --n-ink:#1b1e23;
+  --n-ink-soft:#54595f;
+  --n-accent:#7b2d26;      /* rosso mattone del sito */
+  --n-amber:#b06a12;       /* ambra "safety" per evidenze */
+  --n-blue:#1a5276;        /* blu blueprint (link) */
+  --n-line:#c9c4b6;
+  --n-grid:rgba(27,30,35,.05);
+  --n-mono:"Cascadia Code","JetBrains Mono","Consolas",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --n-sans:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  --n-serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,"Times New Roman",serif;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background-color:var(--n-bg);
+  background-image:
+    linear-gradient(var(--n-grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--n-grid) 1px,transparent 1px);
+  background-size:24px 24px;
+  color:var(--n-ink);
+  font-family:var(--n-sans);
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---- Foglio / scheda ---- */
+.sheet{
+  max-width:780px;
+  margin:3rem auto;
+  background:var(--n-paper);
+  border:1px solid var(--n-line);
+  box-shadow:0 1px 2px rgba(0,0,0,.06),0 18px 50px rgba(0,0,0,.10);
+  position:relative;
+}
+.sheet::before{ /* barra accento a sinistra */
+  content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--n-accent);
+}
+.sheet::after{ /* cornice tratteggiata interna, da disegno tecnico */
+  content:"";position:absolute;inset:10px;border:1px dashed var(--n-line);pointer-events:none;
+}
+.sheet-inner{padding:2.4rem 2.6rem;position:relative;z-index:1;}
+
+/* ---- Barra metadati (intestazione documento) ---- */
+.doc-meta{
+  font-family:var(--n-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--n-ink-soft);
+  display:flex;flex-wrap:wrap;gap:.45rem 1rem;align-items:center;
+  border-bottom:2px solid var(--n-ink);padding-bottom:.7rem;margin-bottom:1.7rem;
+}
+.doc-meta .tag{background:var(--n-ink);color:#fff;padding:.16rem .5rem;border-radius:2px;letter-spacing:.08em;}
+.doc-meta .tag.amber{background:var(--n-amber);}
+.doc-meta .sep{color:var(--n-line);}
+.doc-back-top{margin-left:auto;text-decoration:none;color:var(--n-blue);}
+.doc-back-top:hover{text-decoration:underline;}
+
+/* ---- Titolo ---- */
+h1.doc-title{
+  font-family:var(--n-serif);font-size:2.05rem;line-height:1.2;
+  margin:.2rem 0 1.6rem;color:var(--n-ink);
+}
+h1.doc-title .lead{
+  display:block;font-family:var(--n-mono);font-size:.8rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--n-accent);margin-bottom:.55rem;
+}
+
+/* ---- Sezioni ---- */
+.sheet-inner h2{
+  font-family:var(--n-mono);font-size:1.02rem;letter-spacing:.01em;color:var(--n-ink);
+  margin:2.3rem 0 .85rem;padding-top:1.1rem;border-top:1px solid var(--n-line);
+}
+.sheet-inner h2::before{content:"// ";color:var(--n-accent);}
+
+/* ---- Corpo ---- */
+.sheet-inner p{
+  font-family:var(--n-serif);font-size:1.07rem;margin:0 0 1.05rem;color:#24272c;
+}
+.sheet-inner p.lede{font-size:1.15rem;color:var(--n-ink);}
+.sheet-inner strong{color:var(--n-accent);font-weight:700;}
+.sheet-inner em{color:#000;}
+
+/* ---- Pulsante di ritorno ---- */
+.doc-return{margin:2.6rem 0 0;padding-top:1.4rem;border-top:2px solid var(--n-ink);}
+.doc-return a{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-family:var(--n-mono);font-size:.9rem;text-decoration:none;
+  background:var(--n-ink);color:#fff;padding:.7rem 1.1rem;border-radius:3px;transition:.15s ease;
+}
+.doc-return a:hover{background:var(--n-accent);transform:translateX(-2px);}
+
+/* ---- Piè di pagina tecnico ---- */
+.doc-foot{
+  font-family:var(--n-mono);font-size:.66rem;color:var(--n-ink-soft);letter-spacing:.06em;
+  text-transform:uppercase;margin-top:1.5rem;
+  display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+}
+
+@media (max-width:640px){
+  .sheet{margin:0;border-left:none;}
+  .sheet-inner{padding:1.6rem 1.2rem;}
+  .sheet::after{inset:6px;}
+  h1.doc-title{font-size:1.7rem;}
+}

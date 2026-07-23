@@ -385,6 +385,34 @@ table.data thead th {
 }
 table.data tbody tr:nth-child(even) { background: #faf8f2; }
 
+/* ----- Callout verso una NOTA (formato scheda tecnica, vedi note.css) ----- */
+.nota-link {
+  font-family: var(--font-sans);
+  display: flex;
+  gap: .8rem;
+  align-items: baseline;
+  margin: 1.6rem 0;
+  padding: .75rem 1rem;
+  background: #fbf6f0;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 3px;
+  font-size: .95rem;
+  line-height: 1.55;
+  text-align: left;
+}
+.nota-link .k {
+  font-family: ui-monospace, "Cascadia Code", "Consolas", monospace;
+  font-size: .68rem;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--accent);
+  white-space: nowrap;
+  padding-top: .18rem;
+}
+.nota-link a { font-weight: 600; border-bottom: 1px solid transparent; }
+.nota-link a:hover { border-bottom-color: currentColor; text-decoration: none; }
+
 /* ----- Chapter navigation footer ----- */
 .chapter-nav {
   display: flex;
