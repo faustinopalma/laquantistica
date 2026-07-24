@@ -19,6 +19,33 @@
   });
 })();
 
+// Hash-landing fix (iOS Safari): when arriving at "page.html#anchor", the browser
+// scrolls to the anchor BEFORE MathJax re-renders the <math> elements into SVG.
+// That rendering reflows the equations above the anchor (and can even reset the
+// scroll to the top), so the reader is left far from where they intended (the
+// "torna indietro" from a note landed too high). After typesetting settles we
+// re-scroll to the anchor.
+(function () {
+  if (!location.hash) return;
+  var id;
+  try { id = decodeURIComponent(location.hash.slice(1)); } catch (e) { id = location.hash.slice(1); }
+  if (!id) return;
+  function go() {
+    var el = document.getElementById(id);
+    if (el) el.scrollIntoView();
+  }
+  function fix() {
+    if (window.MathJax && MathJax.startup && MathJax.startup.promise) {
+      MathJax.startup.promise.then(function () { go(); setTimeout(go, 90); setTimeout(go, 350); })
+        .catch(function () { setTimeout(go, 150); });
+    } else {
+      setTimeout(go, 150);
+    }
+  }
+  if (document.readyState === 'complete') fix();
+  else window.addEventListener('load', fix);
+})();
+
 // Hover previews for references only; click jumps and offers a "return" button.
 (function () {
   var pop = document.createElement('div');

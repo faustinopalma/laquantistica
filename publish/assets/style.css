@@ -470,6 +470,18 @@ table.data tbody tr:nth-child(even) { background: #faf8f2; }
   margin: 2.75rem auto;
 }
 
+/* Intro: derivation stated one principle at a time, with explanatory glosses */
+.intro-facts > li { margin: 0 0 1.15rem; padding-left: .25rem; }
+.intro-gloss {
+  display: block;
+  margin-top: .4rem;
+  padding-left: .9rem;
+  border-left: 2px solid var(--accent-soft);
+  color: var(--ink-soft);
+  font-style: italic;
+}
+.intro-gloss + .intro-gloss { margin-top: .35rem; }
+
 /* ----- Mobile ----- */
 .menu-toggle { display: none; }
 
