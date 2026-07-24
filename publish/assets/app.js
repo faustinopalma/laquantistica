@@ -58,6 +58,10 @@
   // "Figure 1" is hoverable & clickable, not just the bare number.
   var LABEL = /(\b(?:figure|figura|figg|fig)\.?)([ \u00a0\t]*)$/i;
 
+  // On touch devices (no true hover) the preview popup is more annoying than
+  // useful and can overflow a small screen, so we only attach it on real pointers.
+  var canHover = !!(window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches);
+
   // References -> preview on hover, jump + return button on click
   document.querySelectorAll('a.ref[data-ref]').forEach(function (a) {
     // Extend the interactive region to include the preceding label word.
@@ -70,19 +74,21 @@
       }
     }
 
-    a.addEventListener('mouseenter', function (e) {
-      var t = document.getElementById(a.getAttribute('data-ref'));
-      if (!t) return;
-      var media = t.querySelector('img, math, svg');
-      var capEl = t.querySelector('figcaption');
-      var inner = media ? media.outerHTML : t.innerHTML;
-      var cap = capEl ? '<div class="cap">' + capEl.textContent + '</div>' : '';
-      pop.innerHTML = '<div class="pv">' + inner + '</div>' + cap;
-      pop.classList.add('show');
-      position(e.clientX, e.clientY);
-    });
-    a.addEventListener('mousemove', function (e) { position(e.clientX, e.clientY); });
-    a.addEventListener('mouseleave', hide);
+    if (canHover) {
+      a.addEventListener('mouseenter', function (e) {
+        var t = document.getElementById(a.getAttribute('data-ref'));
+        if (!t) return;
+        var media = t.querySelector('img, math, svg');
+        var capEl = t.querySelector('figcaption');
+        var inner = media ? media.outerHTML : t.innerHTML;
+        var cap = capEl ? '<div class="cap">' + capEl.textContent + '</div>' : '';
+        pop.innerHTML = '<div class="pv">' + inner + '</div>' + cap;
+        pop.classList.add('show');
+        position(e.clientX, e.clientY);
+      });
+      a.addEventListener('mousemove', function (e) { position(e.clientX, e.clientY); });
+      a.addEventListener('mouseleave', hide);
+    }
     a.addEventListener('click', function (e) {
       var t = document.getElementById(a.getAttribute('data-ref'));
       if (!t) return;

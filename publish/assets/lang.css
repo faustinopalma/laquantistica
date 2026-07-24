@@ -78,7 +78,7 @@ html[data-lang="en"] .it { display: none !important; }
   .langsw-mobile {
     display: inline-flex;
     align-items: center;
-    position: fixed;
+    position: absolute;
     top: .8rem;
     right: .8rem;
     z-index: 45;
