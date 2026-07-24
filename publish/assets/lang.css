@@ -71,3 +71,36 @@ html[data-lang="en"] .it { display: none !important; }
   border-bottom: 1px solid var(--accent-soft);
 }
 .sidebar .sidenote .ghlink:hover { color: #fff; }
+
+/* Selettore di lingua fisso su mobile (nella sidebar è nascosto dentro il menù) */
+.langsw-mobile { display: none; }
+@media (max-width: 900px) {
+  .langsw-mobile {
+    display: inline-flex;
+    align-items: center;
+    position: fixed;
+    top: .8rem;
+    right: .8rem;
+    z-index: 45;
+    padding: .12rem .18rem .12rem .5rem;
+    border-radius: 999px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    font-family: var(--font-sans);
+  }
+  .langsw-mobile .lg { font-size: .82rem; opacity: .6; margin-right: .2rem; }
+  .langsw-mobile .langbtn {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    padding: .3rem .55rem;
+    font-size: .8rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink-soft);
+    border-radius: 999px;
+  }
+  .langsw-mobile .langbtn[aria-pressed="true"] { background: var(--accent); color: #fff; }
+  body.nav-open .langsw-mobile { display: none; }
+}
