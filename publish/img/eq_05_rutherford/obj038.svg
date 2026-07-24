@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.2" width="20.320mm" height="25.400mm" viewBox="9779 12700 2032 2540" preserveAspectRatio="xMidYMid" fill-rule="evenodd" stroke-width="28.222" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" xmlns:ooo="http://xml.openoffice.org/svg/export" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:presentation="http://sun.com/xmlns/staroffice/presentation" xmlns:smil="http://www.w3.org/2001/SMIL20/" xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xml:space="preserve">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ooo="http://xml.openoffice.org/svg/export" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:presentation="http://sun.com/xmlns/staroffice/presentation" xmlns:smil="http://www.w3.org/2001/SMIL20/" xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" version="1.2" width="20.320mm" height="25.400mm" viewBox="9779 12700 2032 2540" preserveAspectRatio="xMidYMid" fill-rule="evenodd" stroke-width="28.222" stroke-linejoin="round" xml:space="preserve">
  <defs class="ClipPathGroup">
   <clipPath id="presentation_clip_path" clipPathUnits="userSpaceOnUse">
    <rect x="0" y="0" width="21590" height="27940"/>
@@ -10,12 +10,7 @@
   </clipPath>
  </defs>
  <defs>
-  <font id="EmbeddedFont_1" horiz-adv-x="2048">
-   <font-face font-family="Symbol embedded" units-per-em="2048" font-weight="normal" font-style="italic" ascent="2074" descent="445"/>
-   <missing-glyph horiz-adv-x="2048" d="M 0,0 L 2047,0 2047,2047 0,2047 0,0 Z "/>
-   <glyph unicode="" horiz-adv-x="1213" d="M 566,28 L 780,660 C 815,762 859,835 913,878 967,921 1028,943 1098,943 1200,943 1275,899 1324,812 1373,724 1376,615 1331,484 1302,397 1251,312 1180,229 1109,146 1032,84 950,45 868,5 770,-19 655,-28 L 515,-442 406,-442 546,-28 C 447,-19 371,5 316,45 261,85 226,146 211,228 196,310 203,395 233,482 258,556 295,625 345,688 395,751 446,801 498,838 550,875 599,901 646,917 693,932 747,941 808,943 L 796,905 C 734,900 669,866 602,803 534,740 477,639 430,500 396,399 382,314 389,243 397,172 418,118 453,83 476,60 514,42 566,28 Z M 675,30 C 745,37 805,53 854,77 923,110 982,157 1033,219 1084,280 1124,354 1153,439 1194,560 1198,660 1164,739 1140,796 1099,825 1042,825 1014,825 986,813 960,788 933,763 906,709 878,628 L 675,30 Z "/>
-  </font>
- </defs>
+  </defs>
  <defs class="TextShapeIndex">
   <g ooo:slide="id1" ooo:id-list="id3"/>
  </defs>
@@ -65,8 +60,7 @@
       <g class="Graphic">
        <g id="id3">
         <rect class="BoundingBox" stroke="none" fill="none" x="9779" y="12700" width="2032" height="2540"/>
-        <text class="SVGTextShape"><tspan class="TextParagraph"><tspan class="TextPosition" x="9895" y="14224"><tspan font-family="Symbol" font-size="2371px" font-style="italic" font-weight="400" lengthAdjust="spacingAndGlyphs" textLength="1430" fill="rgb(0,0,0)" stroke="none" style="white-space: pre"></tspan></tspan></tspan></text>
-       </g>
+        <g class="OutlinedText"><path d="M 566,28 L 780,660 C 815,762 859,835 913,878 967,921 1028,943 1098,943 1200,943 1275,899 1324,812 1373,724 1376,615 1331,484 1302,397 1251,312 1180,229 1109,146 1032,84 950,45 868,5 770,-19 655,-28 L 515,-442 406,-442 546,-28 C 447,-19 371,5 316,45 261,85 226,146 211,228 196,310 203,395 233,482 258,556 295,625 345,688 395,751 446,801 498,838 550,875 599,901 646,917 693,932 747,941 808,943 L 796,905 C 734,900 669,866 602,803 534,740 477,639 430,500 396,399 382,314 389,243 397,172 418,118 453,83 476,60 514,42 566,28 Z M 675,30 C 745,37 805,53 854,77 923,110 982,157 1033,219 1084,280 1124,354 1153,439 1194,560 1198,660 1164,739 1140,796 1099,825 1042,825 1014,825 986,813 960,788 933,763 906,709 878,628 L 675,30 Z " transform="translate(9895,14224) scale(1.158,-1.158)" fill="rgb(0,0,0)" stroke="none"/></g></g>
       </g>
      </g>
     </g>

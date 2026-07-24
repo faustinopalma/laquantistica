@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.2" width="25.400mm" height="14.190mm" viewBox="9525 13260 2540 1419" preserveAspectRatio="xMidYMid" fill-rule="evenodd" stroke-width="28.222" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" xmlns:ooo="http://xml.openoffice.org/svg/export" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:presentation="http://sun.com/xmlns/staroffice/presentation" xmlns:smil="http://www.w3.org/2001/SMIL20/" xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xml:space="preserve">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ooo="http://xml.openoffice.org/svg/export" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:presentation="http://sun.com/xmlns/staroffice/presentation" xmlns:smil="http://www.w3.org/2001/SMIL20/" xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" version="1.2" width="25.400mm" height="14.190mm" viewBox="9525 13260 2540 1419" preserveAspectRatio="xMidYMid" fill-rule="evenodd" stroke-width="28.222" stroke-linejoin="round" xml:space="preserve">
  <defs class="ClipPathGroup">
   <clipPath id="presentation_clip_path" clipPathUnits="userSpaceOnUse">
    <rect x="0" y="0" width="21590" height="27940"/>
@@ -10,20 +10,9 @@
   </clipPath>
  </defs>
  <defs>
-  <font id="EmbeddedFont_1" horiz-adv-x="2048">
-   <font-face font-family="Symbol embedded" units-per-em="2048" font-weight="normal" font-style="normal" ascent="2074" descent="445"/>
-   <missing-glyph horiz-adv-x="2048" d="M 0,0 L 2047,0 2047,2047 0,2047 0,0 Z "/>
-   <glyph unicode="" horiz-adv-x="1205" d="M 1226,0 L 26,0 654,1387 1226,0 Z M 990,82 L 591,1049 151,82 990,82 Z "/>
-  </font>
- </defs>
+  </defs>
  <defs>
-  <font id="EmbeddedFont_2" horiz-adv-x="2048">
-   <font-face font-family="Times New Roman embedded" units-per-em="2048" font-weight="normal" font-style="italic" ascent="1820" descent="445"/>
-   <missing-glyph horiz-adv-x="2048" d="M 0,0 L 2047,0 2047,2047 0,2047 0,0 Z "/>
-   <glyph unicode="t" horiz-adv-x="530" d="M 532,1153 L 454,881 611,881 594,818 438,818 266,228 C 247,165 238,124 238,105 238,94 241,85 246,79 251,73 258,70 265,70 282,70 304,82 331,105 347,118 383,159 438,228 L 471,203 C 410,114 352,51 297,14 260,-11 222,-24 184,-24 155,-24 131,-15 112,4 93,22 84,45 84,74 84,110 95,165 116,239 L 283,818 132,818 142,857 C 215,877 276,907 325,947 374,986 428,1055 488,1153 L 532,1153 Z "/>
-   <glyph unicode="N" horiz-adv-x="1623" d="M 587,1356 L 1006,293 1233,1087 C 1252,1152 1261,1203 1261,1239 1261,1264 1252,1283 1235,1297 1218,1311 1185,1318 1138,1318 1130,1318 1122,1318 1113,1319 L 1124,1356 1560,1356 1548,1319 C 1503,1320 1469,1315 1447,1305 1416,1291 1392,1273 1377,1251 1356,1220 1334,1165 1312,1087 L 993,-31 957,-31 506,1113 265,268 C 247,204 238,155 238,121 238,96 246,77 263,64 279,51 318,42 379,37 L 369,0 -57,0 -43,37 C 10,38 46,43 64,51 91,63 112,79 125,98 144,127 166,184 190,268 L 459,1211 C 433,1251 405,1279 376,1294 346,1309 300,1317 237,1319 L 248,1356 587,1356 Z "/>
-  </font>
- </defs>
+  </defs>
  <defs class="TextShapeIndex">
   <g ooo:slide="id1" ooo:id-list="id3"/>
  </defs>
@@ -76,8 +65,7 @@
         <path fill="none" stroke="rgb(0,0,0)" stroke-width="37" stroke-linejoin="round" stroke-linecap="round" d="M 10837,13430 L 10503,14476 "/>
         <text class="SVGTextShape"><tspan class="TextParagraph"><tspan class="TextPosition" x="11558" y="14231"><tspan font-family="Times New Roman, serif" font-size="1046px" font-style="italic" font-weight="400" lengthAdjust="spacingAndGlyphs" textLength="288" fill="rgb(0,0,0)" stroke="none" style="white-space: pre">t</tspan></tspan></tspan></text>
         <text class="SVGTextShape"><tspan class="TextParagraph"><tspan class="TextPosition" x="9707" y="14231"><tspan font-family="Times New Roman, serif" font-size="1046px" font-style="italic" font-weight="400" lengthAdjust="spacingAndGlyphs" textLength="692" fill="rgb(0,0,0)" stroke="none" style="white-space: pre">N</tspan></tspan></tspan></text>
-        <text class="SVGTextShape"><tspan class="TextParagraph"><tspan class="TextPosition" x="10921" y="14231"><tspan font-family="Symbol" font-size="1046px" font-weight="400" lengthAdjust="spacingAndGlyphs" textLength="635" fill="rgb(0,0,0)" stroke="none" style="white-space: pre"></tspan></tspan></tspan></text>
-       </g>
+        <g class="OutlinedText"><path d="M 1226,0 L 26,0 654,1387 1226,0 Z M 990,82 L 591,1049 151,82 990,82 Z " transform="translate(10921,14231) scale(0.511,-0.511)" fill="rgb(0,0,0)" stroke="none"/></g></g>
       </g>
      </g>
     </g>

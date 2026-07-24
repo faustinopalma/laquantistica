@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.2" width="19.960mm" height="25.400mm" viewBox="9797 12700 1996 2540" preserveAspectRatio="xMidYMid" fill-rule="evenodd" stroke-width="28.222" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" xmlns:ooo="http://xml.openoffice.org/svg/export" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:presentation="http://sun.com/xmlns/staroffice/presentation" xmlns:smil="http://www.w3.org/2001/SMIL20/" xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xml:space="preserve">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ooo="http://xml.openoffice.org/svg/export" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:presentation="http://sun.com/xmlns/staroffice/presentation" xmlns:smil="http://www.w3.org/2001/SMIL20/" xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" version="1.2" width="19.960mm" height="25.400mm" viewBox="9797 12700 1996 2540" preserveAspectRatio="xMidYMid" fill-rule="evenodd" stroke-width="28.222" stroke-linejoin="round" xml:space="preserve">
  <defs class="ClipPathGroup">
   <clipPath id="presentation_clip_path" clipPathUnits="userSpaceOnUse">
    <rect x="0" y="0" width="21590" height="27940"/>
@@ -10,12 +10,7 @@
   </clipPath>
  </defs>
  <defs>
-  <font id="EmbeddedFont_1" horiz-adv-x="2048">
-   <font-face font-family="MT Extra embedded" units-per-em="2048" font-weight="normal" font-style="normal" ascent="1630" descent="445"/>
-   <missing-glyph horiz-adv-x="2048" d="M 0,0 L 2047,0 2047,2047 0,2047 0,0 Z "/>
-   <glyph unicode="" horiz-adv-x="926" d="M 356,1126 L 379,1210 C 392,1262 393,1292 381,1300 369,1309 332,1313 270,1313 L 270,1350 567,1401 C 567,1368 563,1335 555,1303 L 506,1126 799,1126 799,1044 483,1044 326,471 C 465,699 605,843 745,903 815,933 868,917 903,856 928,815 932,768 917,716 L 782,223 C 764,163 756,121 756,97 756,73 775,68 815,82 838,90 864,115 892,156 920,196 936,219 942,223 957,237 965,237 966,224 968,211 961,194 946,174 909,122 876,82 848,52 819,23 784,1 741,-14 699,-29 662,-23 631,5 599,33 594,84 614,158 L 766,701 C 781,755 777,790 754,805 728,820 699,818 667,799 591,752 509,664 423,533 336,401 275,274 240,150 L 199,0 47,0 334,1044 123,1044 129,1126 356,1126 Z "/>
-  </font>
- </defs>
+  </defs>
  <defs class="TextShapeIndex">
   <g ooo:slide="id1" ooo:id-list="id3"/>
  </defs>
@@ -65,8 +60,7 @@
       <g class="Graphic">
        <g id="id3">
         <rect class="BoundingBox" stroke="none" fill="none" x="9797" y="12700" width="1996" height="2540"/>
-        <text class="SVGTextShape"><tspan class="TextParagraph"><tspan class="TextPosition" x="10081" y="14877"><tspan font-family="MT Extra" font-size="2540px" font-weight="400" lengthAdjust="spacingAndGlyphs" textLength="1270" fill="rgb(0,0,0)" stroke="none" style="white-space: pre"></tspan></tspan></tspan></text>
-       </g>
+        <g class="OutlinedText"><path d="M 356,1126 L 379,1210 C 392,1262 393,1292 381,1300 369,1309 332,1313 270,1313 L 270,1350 567,1401 C 567,1368 563,1335 555,1303 L 506,1126 799,1126 799,1044 483,1044 326,471 C 465,699 605,843 745,903 815,933 868,917 903,856 928,815 932,768 917,716 L 782,223 C 764,163 756,121 756,97 756,73 775,68 815,82 838,90 864,115 892,156 920,196 936,219 942,223 957,237 965,237 966,224 968,211 961,194 946,174 909,122 876,82 848,52 819,23 784,1 741,-14 699,-29 662,-23 631,5 599,33 594,84 614,158 L 766,701 C 781,755 777,790 754,805 728,820 699,818 667,799 591,752 509,664 423,533 336,401 275,274 240,150 L 199,0 47,0 334,1044 123,1044 129,1126 356,1126 Z " transform="translate(10081,14877) scale(1.24,-1.24)" fill="rgb(0,0,0)" stroke="none"/></g></g>
       </g>
      </g>
     </g>

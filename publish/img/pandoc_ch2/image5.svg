@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.2" width="51.050mm" height="41.570mm" viewBox="8242 11891 5105 4157" preserveAspectRatio="xMidYMid" fill-rule="evenodd" stroke-width="28.222" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" xmlns:ooo="http://xml.openoffice.org/svg/export" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:presentation="http://sun.com/xmlns/staroffice/presentation" xmlns:smil="http://www.w3.org/2001/SMIL20/" xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xml:space="preserve">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ooo="http://xml.openoffice.org/svg/export" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:presentation="http://sun.com/xmlns/staroffice/presentation" xmlns:smil="http://www.w3.org/2001/SMIL20/" xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" version="1.2" width="51.050mm" height="41.570mm" viewBox="8242 11891 5105 4157" preserveAspectRatio="xMidYMid" fill-rule="evenodd" stroke-width="28.222" stroke-linejoin="round" xml:space="preserve">
  <defs class="ClipPathGroup">
   <clipPath id="presentation_clip_path" clipPathUnits="userSpaceOnUse">
    <rect x="0" y="0" width="21590" height="27940"/>
@@ -10,14 +10,7 @@
   </clipPath>
  </defs>
  <defs>
-  <font id="EmbeddedFont_1" horiz-adv-x="2048">
-   <font-face font-family="Symbol embedded" units-per-em="2048" font-weight="normal" font-style="normal" ascent="2074" descent="445"/>
-   <missing-glyph horiz-adv-x="2048" d="M 0,0 L 2047,0 2047,2047 0,2047 0,0 Z "/>
-   <glyph unicode="" horiz-adv-x="618" d="M 717,1079 C 717,994 687,922 627,862 567,802 495,772 410,772 325,772 252,802 192,862 132,922 102,994 102,1079 102,1164 132,1236 192,1296 252,1356 325,1386 410,1386 495,1386 567,1356 627,1296 687,1236 717,1164 717,1079 Z M 632,1080 C 632,1141 610,1194 567,1238 524,1281 471,1303 409,1303 348,1303 295,1281 252,1238 208,1194 186,1141 186,1080 186,1018 208,965 252,922 295,879 348,857 409,857 471,857 524,879 567,922 610,965 632,1018 632,1080 Z "/>
-   <glyph unicode="" horiz-adv-x="859" d="M 108,-28 L 108,9 C 195,10 275,31 350,70 425,109 497,177 567,274 636,371 685,478 712,595 660,562 610,537 563,520 516,503 471,494 428,494 333,494 251,531 183,605 115,679 81,777 81,898 81,1038 123,1154 208,1246 292,1338 391,1384 504,1384 615,1384 710,1338 789,1246 887,1132 936,991 936,824 936,673 899,533 826,403 752,272 649,164 517,78 409,7 292,-28 165,-28 L 108,-28 Z M 728,669 C 740,756 746,824 746,873 746,940 735,1012 713,1087 691,1162 660,1219 619,1259 578,1299 533,1319 482,1319 423,1319 371,1292 326,1239 281,1186 259,1106 259,1000 259,860 289,750 349,671 392,614 445,585 508,585 539,585 575,592 617,607 659,622 696,642 728,669 Z "/>
-   <glyph unicode="" horiz-adv-x="881" d="M 74,667 C 74,772 86,872 111,968 136,1063 174,1146 226,1216 265,1269 311,1311 362,1340 413,1369 464,1384 515,1384 620,1384 713,1331 796,1225 899,1093 951,914 951,689 951,532 928,398 883,287 838,176 780,96 710,47 639,-3 571,-28 506,-28 377,-28 269,49 183,202 110,331 74,486 74,667 Z M 270,664 C 270,414 302,237 365,133 404,70 452,39 509,39 545,39 582,55 621,88 660,121 689,175 709,251 740,366 755,529 755,742 755,893 739,1021 707,1124 683,1199 652,1253 614,1285 587,1307 554,1318 515,1318 470,1318 429,1298 394,1257 347,1202 314,1115 297,998 279,880 270,769 270,664 Z "/>
-  </font>
- </defs>
+  </defs>
  <defs class="TextShapeIndex">
   <g ooo:slide="id1" ooo:id-list="id3"/>
  </defs>
@@ -193,8 +186,7 @@
          </clipPath>
         </defs>
         <g clip-path="url(#clip_path_2)">
-         <text class="SVGTextShape"><tspan class="TextParagraph"><tspan class="TextPosition" x="10680" y="12527"><tspan font-family="Symbol" font-size="279px" font-weight="400" lengthAdjust="spacingAndGlyphs" textLength="398" fill="rgb(0,0,0)" stroke="none" style="white-space: pre"></tspan></tspan></tspan></text>
-        </g>
+         <g class="OutlinedText"><path d="M 108,-28 L 108,9 C 195,10 275,31 350,70 425,109 497,177 567,274 636,371 685,478 712,595 660,562 610,537 563,520 516,503 471,494 428,494 333,494 251,531 183,605 115,679 81,777 81,898 81,1038 123,1154 208,1246 292,1338 391,1384 504,1384 615,1384 710,1338 789,1246 887,1132 936,991 936,824 936,673 899,533 826,403 752,272 649,164 517,78 409,7 292,-28 165,-28 L 108,-28 Z M 728,669 C 740,756 746,824 746,873 746,940 735,1012 713,1087 691,1162 660,1219 619,1259 578,1299 533,1319 482,1319 423,1319 371,1292 326,1239 281,1186 259,1106 259,1000 259,860 289,750 349,671 392,614 445,585 508,585 539,585 575,592 617,607 659,622 696,642 728,669 Z " transform="translate(10680,12527) scale(0.136,-0.136)" fill="rgb(0,0,0)" stroke="none"/><path d="M 74,667 C 74,772 86,872 111,968 136,1063 174,1146 226,1216 265,1269 311,1311 362,1340 413,1369 464,1384 515,1384 620,1384 713,1331 796,1225 899,1093 951,914 951,689 951,532 928,398 883,287 838,176 780,96 710,47 639,-3 571,-28 506,-28 377,-28 269,49 183,202 110,331 74,486 74,667 Z M 270,664 C 270,414 302,237 365,133 404,70 452,39 509,39 545,39 582,55 621,88 660,121 689,175 709,251 740,366 755,529 755,742 755,893 739,1021 707,1124 683,1199 652,1253 614,1285 587,1307 554,1318 515,1318 470,1318 429,1298 394,1257 347,1202 314,1115 297,998 279,880 270,769 270,664 Z " transform="translate(10824.988,12527) scale(0.136,-0.136)" fill="rgb(0,0,0)" stroke="none"/><path d="M 717,1079 C 717,994 687,922 627,862 567,802 495,772 410,772 325,772 252,802 192,862 132,922 102,994 102,1079 102,1164 132,1236 192,1296 252,1356 325,1386 410,1386 495,1386 567,1356 627,1296 687,1236 717,1164 717,1079 Z M 632,1080 C 632,1141 610,1194 567,1238 524,1281 471,1303 409,1303 348,1303 295,1281 252,1238 208,1194 186,1141 186,1080 186,1018 208,965 252,922 295,879 348,857 409,857 471,857 524,879 567,922 610,965 632,1018 632,1080 Z " transform="translate(10973.69,12527) scale(0.136,-0.136)" fill="rgb(0,0,0)" stroke="none"/></g></g>
         <g clip-path="url(#clip_path_1)">
          <path fill="none" stroke="rgb(0,0,0)" stroke-width="25" stroke-linejoin="round" stroke-linecap="round" d="M 10680,13390 L 10646,13381 10663,13474 10680,13390 Z "/>
          <path fill="none" stroke="rgb(0,0,0)" stroke-width="25" stroke-linejoin="round" stroke-linecap="round" d="M 12263,15235 L 12136,15134 11976,15066 11815,15040 11815,15040 "/>

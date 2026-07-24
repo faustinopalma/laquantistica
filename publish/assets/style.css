@@ -521,3 +521,15 @@ table.data tbody tr:nth-child(even) { background: #faf8f2; }
   .page { box-shadow: none; max-width: none; }
   body { background: #fff; }
 }
+
+/* ----- Mobile: nothing may exceed the screen width ----- */
+@media (max-width: 900px) {
+  /* Images (figures, equations) must fit the screen even when they carry an
+     inline max-width/width in px (LibreOffice/pandoc sizing). */
+  .page img { max-width: 100% !important; }
+  .page figure img, .page .equation img, .page img.eq-figure { height: auto !important; }
+  /* Wide data tables scroll horizontally instead of widening the whole page. */
+  .page table { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  /* Very wide display equations scroll within their block rather than overflow. */
+  .page .equation { max-width: 100%; overflow-x: auto; }
+}
