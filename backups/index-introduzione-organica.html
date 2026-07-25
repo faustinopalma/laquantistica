@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://laquantistica.com/">
+<title>Tesi di Laurea · Fundamental Experiments of Quantum Mechanics</title>
+<link rel="stylesheet" href="assets/style.css?v=11">
+<link rel="stylesheet" href="assets/lang.css?v=5">
+<script defer src="assets/lang.js?v=4"></script>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  svg: { fontCache: 'global' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script defer src="assets/mathjax/tex-mml-svg.js"></script>
+</head>
+<body>
+<button class="menu-toggle" aria-label="Menu">☰</button>
+<div class="scrim"></div>
+<div class="layout">
+<aside class="sidebar">
+  <a class="brand" href="index.html"><span class="mark"><span class="bk">⟨</span>ΛQ<span class="bk">⟩</span></span> La Quantistica<small class="it">Esperimenti fondamentali di Meccanica Quantistica — Tesi di Laurea</small><small class="en">Fundamental Experiments of Quantum Mechanics — Master's Thesis</small></a>
+  <div class="langsw" role="group" aria-label="Lingua / Language">
+    <button class="langbtn" type="button" data-l="it" aria-pressed="true">IT</button>
+    <button class="langbtn" type="button" data-l="en" aria-pressed="false">EN</button>
+  </div>
+  <nav><a href="index.html"><span class="num"></span><span class="it">Introduzione</span><span class="en">Introduction</span></a>
+<a href="01-stern-gerlach.html"><span class="num">1</span><span class="it">Esperimento di Stern-Gerlach</span><span class="en">The Stern–Gerlach Experiment</span></a>
+<a href="02-stern-gerlach-cascata.html"><span class="num">2</span><span class="it">Esperimenti di Stern-Gerlach in cascata</span><span class="en">Cascaded Stern–Gerlach Experiments</span></a>
+<a href="03-elettroni.html"><span class="num">3</span><span class="it">Esperimenti con gli Elettroni</span><span class="en">Experiments with Electrons</span></a>
+<a href="04-diffrazione.html"><span class="num">4</span><span class="it">Diffrazione degli Elettroni</span><span class="en">Electron Diffraction</span></a>
+<a href="05-rutherford.html"><span class="num">5</span><span class="it">Esperimento di Rutherford</span><span class="en">The Rutherford Experiment</span></a>
+<a href="06-ulteriori-sviluppi.html"><span class="num">6</span><span class="it">Ulteriori sviluppi della Teoria</span><span class="en">Further Developments of the Theory</span></a>
+<a href="07-franck-hertz.html"><span class="num">7</span><span class="it">Esperimento di Franck-Hertz</span><span class="en">The Franck–Hertz Experiment</span></a>
+<a href="08-effetto-fotoelettrico.html"><span class="num">8</span><span class="it">Effetto Fotoelettrico</span><span class="en">The Photoelectric Effect</span></a>
+<a href="09-spettri-atomici.html"><span class="num">9</span><span class="it">Spettri atomici di emissione</span><span class="en">Atomic Emission Spectra</span></a></nav>
+  <p class="sidenote">
+    <span class="it">Edizione web lievemente rivista rispetto all’originale del 1999 (refusi e punteggiatura).</span>
+    <span class="en">Web edition lightly revised from the 1999 original (typos and punctuation).</span>
+    <a class="ghlink" href="https://github.com/faustinopalma/laquantistica" target="_blank" rel="noopener"><span class="it">Testo originale su GitHub ↗</span><span class="en">Original text on GitHub ↗</span></a>
+  </p>
+</aside>
+<main class="content">
+  <article class="page" id="introduzione">
+    <p class="kicker"><span class="it">Tesi di Laurea</span><span class="en">Master's Thesis</span></p>
+    <h1 class="cover-title"><span class="it">Esperimenti fondamentali della Meccanica Quantistica</span><span class="en">Fundamental Experiments of Quantum Mechanics</span></h1>
+    <p class="subtitle"><span class="it">Materiale didattico per la comprensione della fisica atomica e quantistica</span><span class="en">Teaching material for understanding atomic and quantum physics</span></p>
+    <hr class="intro-sep">
+    <p class="eyebrow"><span class="it">Introduzione</span><span class="en">Introduction</span></p>
+    <p><span class="it">Questo lavoro propone una trattazione organica dei fondamenti della Meccanica Quantistica attraverso l’esecuzione e l’interpretazione teorica di alcuni esperimenti fondamentali della fisica atomica.</span><span class="en">This work offers an organic treatment of the foundations of Quantum Mechanics through the performance and theoretical interpretation of some fundamental experiments of atomic physics.</span></p>
+<p><span class="it">L’obiettivo è costruire un percorso didattico progressivo che introduca i principali concetti della teoria, utilizzando fin dall’inizio la notazione di Dirac e senza richiedere conoscenze preliminari di Meccanica Analitica.</span><span class="en">The aim is to build a progressive didactic path that introduces the main concepts of the theory, using Dirac notation from the outset and without requiring any prior knowledge of Analytical Mechanics.</span></p>
+<p><span class="it">Nell’ambito di questa trattazione, l’equazione di Schrödinger non viene assunta come postulato fondamentale, ma viene derivata a partire dai principi introdotti nel corso del lavoro, dalla corrispondenza con la meccanica di Newton e dalla determinazione sperimentale della costante di Planck mediante la diffrazione degli elettroni.</span><span class="en">Within this treatment, the Schrödinger equation is not assumed as a fundamental postulate, but is derived from the principles introduced along the way, from the correspondence with Newton’s mechanics, and from the experimental determination of Planck’s constant through electron diffraction.</span></p>
+<p><span class="it">Il lavoro è articolato in nove schede, organizzate secondo una progressione logica e concettuale. Ogni scheda comprende una parte sperimentale, accompagnata dalla relativa interpretazione teorica, e introduce elementi necessari alla comprensione delle successive. Il percorso va quindi seguito nell’ordine proposto.</span><span class="en">The work is organised into nine cards, arranged in a logical and conceptual progression. Each card comprises an experimental part, accompanied by its theoretical interpretation, and introduces elements needed to understand the following ones. The path should therefore be followed in the order proposed.</span></p>
+<p><span class="it">Il primo esperimento, quello di Stern e Gerlach, non è stato eseguito: l’apparato è stato progettato nel laboratorio didattico LAFIDIN ma, per ragioni di costo, non costruito, e la relativa scheda lo presenta come progetto. Tutti gli altri esperimenti sono stati realizzati con apparecchiature LEYBOLD, in parte al LAFIDIN e in parte nella “sala dimostrazioni” della LEYBOLD DIDACTIC a Milano.</span><span class="en">The first experiment, that of Stern and Gerlach, was not performed: the apparatus was designed in the LAFIDIN teaching laboratory but, for cost reasons, not built, and the corresponding card presents it as a design. All the other experiments were carried out with LEYBOLD equipment, partly at LAFIDIN and partly in the “demonstration hall” of LEYBOLD DIDACTIC in Milan.</span></p>
+<p><span class="it">La costruzione teorica si fonda su quattro principi.</span><span class="en">The theoretical construction rests on four principles.</span></p>
+<ol class="intro-facts">
+<li><span class="it"><b>Ampiezze di probabilità.</b> Lo stato di una particella è descritto da una funzione complessa che associa un’ampiezza a ogni possibile posizione. La probabilità di trovarla in una determinata regione è il rapporto tra la somma dei moduli quadrati delle ampiezze di quella regione e la somma estesa a tutte le posizioni. La funzione non indica dunque direttamente dove si trovi la particella, ma permette di calcolare le probabilità dei possibili esiti di una misura.</span><span class="en"><b>Probability amplitudes.</b> The state of a particle is described by a complex function that assigns an amplitude to each possible position. The probability of finding it in a given region is the ratio between the sum of the squared moduli of the amplitudes over that region and the sum extended to all positions. The function therefore does not directly indicate where the particle is, but allows the probabilities of the possible outcomes of a measurement to be calculated.</span></li>
+<li><span class="it"><b>Sovrapposizione e linearità.</b> Una combinazione lineare di stati possibili, ottenuta assegnando a ciascuno un coefficiente complesso, rappresenta ancora uno stato possibile. Durante l’evoluzione temporale ogni componente evolve come se fosse considerata separatamente, mantenendo il proprio coefficiente, e lo stato risultante è la combinazione degli stati evoluti: l’evoluzione dello stato è pertanto lineare.</span><span class="en"><b>Superposition and linearity.</b> A linear combination of possible states, obtained by assigning a complex coefficient to each, is itself a possible state. During time evolution each component evolves as if it were taken separately, keeping its own coefficient, and the resulting state is the combination of the evolved states: the evolution of the state is therefore linear.</span></li>
+<li><span class="it"><b>Conservazione della norma.</b> Durante l’evoluzione temporale la somma dei moduli quadrati delle ampiezze, estesa a tutte le possibili posizioni, rimane costante: uno stato inizialmente normalizzato rimane quindi normalizzato nel tempo.</span><span class="en"><b>Conservation of the norm.</b> During time evolution the sum of the squared moduli of the amplitudes, extended over all possible positions, remains constant: a state that is initially normalised therefore stays normalised in time.</span>
+<span class="intro-gloss"><span class="it">→ La linearità e la conservazione della norma determinano la struttura generale della legge di evoluzione, ma non stabiliscono ancora in quale modo vi entrino le forze.</span><span class="en">→ Linearity and conservation of the norm determine the general structure of the evolution law, but do not yet establish how the forces enter it.</span></span></li>
+<li><span class="it"><b>Corrispondenza con la meccanica di Newton.</b> Nelle condizioni in cui la meccanica classica è valida, la teoria quantistica deve condurre agli stessi risultati previsti dalla seconda legge di Newton (F = ma). Questo principio determina il modo in cui le forze e l’energia potenziale entrano nella legge di evoluzione.</span><span class="en"><b>Correspondence with Newton’s mechanics.</b> Under the conditions in which classical mechanics is valid, quantum theory must lead to the same results predicted by Newton’s second law (F = ma). This principle determines the way in which forces and potential energy enter the evolution law.</span>
+<span class="intro-gloss"><span class="it">→ Dai quattro principi si ricava la forma dell’equazione che descrive l’evoluzione dello stato; in essa compare una costante universale il cui valore va determinato sperimentalmente. La diffrazione di un fascio di elettroni attraverso un sottile strato cristallino mostra che questa costante coincide con la costante di Planck.</span><span class="en">→ From the four principles one obtains the form of the equation describing the evolution of the state; in it appears a universal constant whose value must be determined experimentally. The diffraction of an electron beam through a thin crystalline layer shows that this constant coincides with Planck’s constant.</span></span></li>
+</ol>
+<p><span class="it">L’equazione di Schrödinger emerge così come uno dei risultati della trattazione: non un punto di partenza da accettare, ma la conseguenza di una costruzione teorica e sperimentale sviluppata progressivamente.</span><span class="en">The Schrödinger equation thus emerges as one of the results of the treatment: not a starting point to be accepted, but the consequence of a theoretical and experimental construction developed step by step.</span></p>
+<p><span class="it">L’introduzione ai numeri complessi e ai principi fondamentali della Meccanica Quantistica, condotta attraverso gli esperimenti di Stern e Gerlach in cascata, si ispira alla trattazione proposta da R. P. Feynman nel terzo volume di <i>The Feynman Lectures on Physics</i>. In questo lavoro l’ho però riformulata adottando un formalismo parzialmente diverso e introducendo rappresentazioni grafiche originali, concepite per rendere più intuitivi i passaggi concettuali.</span><span class="en">The introduction to complex numbers and to the fundamental principles of Quantum Mechanics, carried out through the cascaded Stern–Gerlach experiments, draws on the treatment proposed by R. P. Feynman in the third volume of <i>The Feynman Lectures on Physics</i>. Here, however, I have recast it, adopting a partly different formalism and introducing original graphical representations, conceived to make the conceptual steps more intuitive.</span></p>
+<p><span class="it">L’indipendenza dalla Meccanica Analitica ha permesso di costruire un’introduzione alla Meccanica Quantistica fondata sulla meccanica di Newton, sull’elettromagnetismo e sull’interpretazione degli esperimenti fondamentali. Pur affrontando un argomento inevitabilmente complesso, il percorso è stato pensato per risultare accessibile anche agli studenti del terzo anno di Ingegneria.</span><span class="en">The independence from Analytical Mechanics made it possible to build an introduction to Quantum Mechanics founded on Newton’s mechanics, on electromagnetism, and on the interpretation of the fundamental experiments. Although it deals with an inevitably complex subject, the path was designed to be accessible even to third-year Engineering students.</span></p>
+<hr class="intro-sep">
+<p class="eyebrow"><span class="it">Crediti</span><span class="en">Credits</span></p>
+<p><span class="it"><b>Tesi di Laurea in Ingegneria Elettrica</b> — Università degli Studi di Napoli «Federico II», Facoltà di Ingegneria. Laboratorio didattico <b>LAFIDIN</b> (LAboratorio FIsico Didattico INgegneria). Anno accademico 1998/1999.</span><span class="en"><b>Degree Thesis in Electrical Engineering</b> — University of Naples “Federico II”, Faculty of Engineering. LAFIDIN teaching laboratory (Laboratory, Physics, Teaching, Engineering). Academic year 1998/1999.</span></p>
+<p><span class="it"><b>Relatori:</b> Prof. Scipione Bobbio, Prof. Carlo Luponio · <b>Candidato:</b> Faustino Palma (matricola 44/956).</span><span class="en"><b>Supervisors:</b> Prof. Scipione Bobbio, Prof. Carlo Luponio · <b>Candidate:</b> Faustino Palma (student no. 44/956).</span></p>
+<p><span class="it">Lavoro presentato all’85° Congresso Nazionale della <b>Società Italiana di Fisica (SIF)</b>, Pavia, settembre 1999 (prof. C. Luponio, prof. G. Mastrocinque, F. Palma [<i>autore</i>], «La formulazione della fisica quantistica attraverso esperimenti eseguiti ed interpretati teoricamente»).</span><span class="en">Work presented at the 85th National Congress of the <b>Italian Physical Society (SIF)</b>, Pavia, September 1999 (Prof. C. Luponio, Prof. G. Mastrocinque, F. Palma [<i>author</i>], “The formulation of quantum physics through experiments performed and theoretically interpreted”).</span></p>
+<nav class="chapter-nav"><a class="next" href="01-stern-gerlach.html"><span class="it">Successivo</span><span class="en">Next</span><span class="ttl it">Esperimento di Stern-Gerlach</span><span class="ttl en">The Stern–Gerlach Experiment</span></a></nav>
+  </article>
+</main>
+</div>
+<script src="assets/app.js?v=8"></script>
+</body>
+</html>
