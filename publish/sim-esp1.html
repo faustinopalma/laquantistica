@@ -36,6 +36,7 @@
           <button class="plot-clr" type="button" id="clr1">CLR</button></div>
         <div class="plot-screen"><svg id="plot1" viewBox="0 0 660 210" role="img" aria-label="grafico delle misure"></svg></div>
         <div class="plot-status" id="stat1"></div>
+        <div class="fumetto" id="bubble"><span class="it">Legge <b>cos²</b>: conta solo l'angolo relativo ϑ₂−ϑ₁.</span><span class="en"><b>cos²</b> law: only the relative angle ϑ₂−ϑ₁ matters.</span></div>
       </div>
     </div>
     <aside class="ctrlcol">
@@ -124,8 +125,11 @@ function drawExp1(){
 }
 
 /* plotter: P(+k) al variare di ϑ₂ (per lo stato preparato corrente) */
+var bubbleT=null;
 var plot1=makePlotter({svg:'plot1',stat:'stat1',rec:'rec1',fit:'fit1',xmin:0,xmax:360,xlabel:'ϑ₂ (°)',color:'#ff9d4d',
-  fn:function(x){ var st=ketVec(+t1El.value,SEL); var a=amp(st,x,1); return a*a; }});
+  fn:function(x){ var st=ketVec(+t1El.value,SEL); var a=amp(st,x,1); return a*a; },
+  onDone:function(){ clearTimeout(bubbleT); bubbleT=setTimeout(function(){ document.getElementById('bubble').classList.add('show'); }, 1050); },
+  onReset:function(){ clearTimeout(bubbleT); document.getElementById('bubble').classList.remove('show'); }});
 
 function setSel(s){ SEL=s; [].forEach.call(document.getElementById('sel').children,function(c){c.classList.toggle('on',+c.getAttribute('data-s')===s);}); }
 

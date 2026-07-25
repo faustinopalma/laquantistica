@@ -114,8 +114,8 @@ body{
 .hint{color:#6f8f80;}
 .con-foot{color:#5a7d6a;}
 
-/* ---- cursore che pilota il plotter: evidenziazione sobria ---- */
-.ctl.driver{border-left:3px solid #b06a12;padding-left:.55rem;}
+/* ---- cursore che pilota il plotter: evidenziazione sobria (linea sopra) ---- */
+.ctl.driver{border-top:1px solid #7a5210;padding-top:.55rem;margin-top:.2rem;}
 .ctl.driver label{color:#e0a24d;}
 .ctl.driver input[type=range]{accent-color:#ffb000;}
 .drives-cap{font-family:var(--n-mono);font-size:.68rem;color:#e0a24d;margin:-.15rem 0 0;letter-spacing:.02em;}
