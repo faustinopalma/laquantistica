@@ -336,15 +336,16 @@ function stopInvite(){
   clearInterval(inviteTimer); clearTimeout(invitePulseT);
   var g=document.getElementById('invitePulseG'); if(g) while(g.firstChild) g.removeChild(g.firstChild);
 }
-// posiziona il fumetto accanto al gauge (nello spazio vuoto del diagramma)
+// posiziona il fumetto a destra del gauge, alla sua stessa altezza (senza toccarlo né l'hint)
 function positionBubble(){
-  var panel=document.querySelector('.panel'), a=document.getElementById('gaugeAnchor'), b=document.getElementById('bubble');
+  var panel=document.querySelector('.panel'), a=document.getElementById('gaugeAnchor'), b=document.getElementById('bubble'), hint=document.querySelector('.hint');
   if(!panel||!a||!b) return;
   var pr=panel.getBoundingClientRect(), ar=a.getBoundingClientRect();
   var gx=ar.left+ar.width/2-pr.left, gy=ar.top+ar.height/2-pr.top;
-  b.style.left='auto'; b.style.top='auto'; b.style.right='auto';
-  b.style.left=(gx+22)+'px';
-  b.style.bottom='16px';
+  var hb=hint?hint.getBoundingClientRect().bottom-pr.top:0;
+  b.style.left='auto'; b.style.top='auto'; b.style.right='auto'; b.style.bottom='auto';
+  b.style.left=(gx+44)+'px';
+  b.style.top=Math.max(hb+6, gy-34)+'px';
 }
 
 function setBlock(bu,bd){
