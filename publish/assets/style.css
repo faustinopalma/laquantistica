@@ -517,6 +517,7 @@ table.data tbody tr:nth-child(even) { background: #faf8f2; }
     cursor: pointer;
     box-shadow: var(--shadow);
   }
+  body.nav-open .menu-toggle { left: auto; right: .8rem; }
   .scrim { display: none; }
   body.nav-open .scrim {
     display: block;

@@ -2,15 +2,24 @@
 (function () {
   var body = document.body;
   var toggle = document.querySelector('.menu-toggle');
+  var scrim = document.querySelector('.scrim');
+  function syncToggle() {
+    if (!toggle) return;
+    var open = body.classList.contains('nav-open');
+    toggle.textContent = open ? '\u2715' : '\u2630';
+    toggle.setAttribute('aria-label', open ? 'Chiudi menu / Close menu' : 'Menu');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
   if (toggle) {
     toggle.addEventListener('click', function () {
       body.classList.toggle('nav-open');
+      syncToggle();
     });
   }
-  var scrim = document.querySelector('.scrim');
   if (scrim) {
-    scrim.addEventListener('click', function () { body.classList.remove('nav-open'); });
+    scrim.addEventListener('click', function () { body.classList.remove('nav-open'); syncToggle(); });
   }
+  syncToggle();
   // Mark active nav link based on current file name
   var current = location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.sidebar nav a').forEach(function (a) {
