@@ -245,7 +245,7 @@
   <!-- ===================== PANEL 2 ===================== -->
   <section class="panel" id="p2" role="tabpanel" hidden>
     <div class="stagecol">
-      <div class="sim-stage"><svg id="svg2" viewBox="0 0 660 320" role="img" aria-label="Three-magnet interferometer"></svg></div>
+      <div class="sim-stage"><svg id="svg2" viewBox="0 0 660 430" role="img" aria-label="Three-magnet interferometer"></svg></div>
       <div class="plotter">
         <div class="plot-head"><span class="plot-title">Plotter</span><span class="plot-sub">P(+k) — φ</span>
           <span class="leds"><span class="led rec" id="rec2">● REC</span><span class="led fit" id="fit2">● FIT</span></span>
@@ -427,15 +427,20 @@ function drawM2(){
   var S=m2State(phi,mode); var nu=mag2(S.up), nd=mag2(S.dn), tot=nu+nd||1;
   var Pp=nu/tot, Pm=nd/tot;
   var showUp = mode!=='blockUpper', showDn = mode!=='blockLower', both=showUp&&showDn;
-  var yC=160;
 
-  // four machines (side view), all with the SAME transverse orientation
-  sgSide(72, 'S',  'up',       48,72, 248,272, svg2);
-  sgSide(205,'M1', 'up',       48,72, 248,272, svg2);
-  sgSide(340,'M2', 'downdown', 96,118,202,224, svg2);
-  sgSide(472,'M3', 'up',       48,72, 248,272, svg2);
-  txt(72,32,'seleziona',{'text-anchor':'middle','font-family':'monospace','font-size':9,fill:'#999'},svg2);
-  txt(338,32,'divergono → convergono → paralleli',{'text-anchor':'middle','font-family':'monospace','font-size':9,fill:'#999'},svg2);
+  /* ---- TRANSVERSE view (cross-sections, showing the machine orientations) ---- */
+  txt(330,20,'— sezione trasversale (viste di taglio) —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#8a8778'},svg2);
+  sgMagnet(150,96,0, 'selettore  ϑ=0°', svg2);
+  sgMagnet(370,96,90,'interferometro  ϑ=90°  (×3)', svg2);
+
+  /* ---- LONGITUDINAL view (beam path, bends as φ changes) ---- */
+  var yC=300;
+  txt(330,182,'— schema longitudinale (percorso dei fasci) —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#8a8778'},svg2);
+  // four machines seen from the side (all with the SAME transverse orientation)
+  sgSide(72, 'S',  'up',       yC-112,yC-88, yC+88,yC+112, svg2);
+  sgSide(205,'M1', 'up',       yC-112,yC-88, yC+88,yC+112, svg2);
+  sgSide(340,'M2', 'downdown', yC-64, yC-42, yC+42, yC+64,  svg2);
+  sgSide(472,'M3', 'up',       yC-112,yC-88, yC+88,yC+112, svg2);
 
   // source + selector: only |m0=+k> passes, the other output is stopped
   txt(2,yC-4,'⟶',{'font-size':16,fill:INK},svg2);
@@ -446,7 +451,7 @@ function drawM2(){
   txt(150,yC-10,'|m₀=+k⟩',{'font-size':10,fill:ACC,'font-family':'monospace','text-anchor':'middle'},svg2);
 
   // interferometer arms M1 -> M3: upper stays shallow, lower bows deeper (stronger gradient) => longer path
-  var Dc=34+Math.round(phi/360*22);
+  var Dc=34+Math.round(phi/360*30);
   el('path',{d:'M205 '+yC+' C 300 '+(yC-16)+' 392 '+(yC-16)+' 472 '+yC,
     fill:'none',stroke:showUp?ACC:DIM,'stroke-width':showUp?4:2,opacity:showUp?1:.18,'stroke-linecap':'round'},svg2);
   el('path',{d:'M205 '+yC+' C 300 '+(yC+Dc)+' 392 '+(yC+Dc)+' 472 '+yC,
@@ -605,6 +610,22 @@ document.querySelectorAll('.tab').forEach(function(tab){
     if(id==='p1'){ drawM1(); plot1.draw(); } else { drawM2(); plot2.draw(); }
   });
 });
+
+/* single-experiment routing (?exp=1..4): una pagina per esperimento */
+(function(){
+  var exp=parseInt(new URLSearchParams(location.search).get('exp'),10);
+  if(!(exp>=1&&exp<=4)) return; // senza ?exp: resta la console a due tab
+  var interf=exp>=3;
+  var tabs=document.querySelector('.tabs'); if(tabs) tabs.style.display='none';
+  document.getElementById('p1').hidden=interf;
+  document.getElementById('p2').hidden=!interf;
+  var tag=document.querySelector('.con-brand .tag'); if(tag) tag.textContent='Esperimento '+exp;
+  if(exp===1){ t1.value=0; t2.value=90; setSel1(1); }
+  else if(exp===2){ t1.value=45; t2.value=30; setSel1(1); }
+  else if(exp===3){ phi.value=0; setMode2('both'); }
+  else if(exp===4){ phi.value=180; setMode2('both'); }
+  document.title='Esperimento '+exp+' · Simulatore — La Quantistica';
+})();
 
 drawM1(); drawM2(); plot1.record(+t2.value); plot2.record(+phi.value);
 </script>
