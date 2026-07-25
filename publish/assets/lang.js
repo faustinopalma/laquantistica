@@ -7,8 +7,7 @@
     var s = null;
     try { s = localStorage.getItem(KEY); } catch (e) {}
     if (s === 'it' || s === 'en') return s;
-    var n = (navigator.language || navigator.userLanguage || 'it').toLowerCase();
-    return n.indexOf('it') === 0 ? 'it' : 'en';
+    return 'en';
   }
 
   function apply(l) {
@@ -27,8 +26,8 @@
     m.setAttribute('role', 'group');
     m.setAttribute('aria-label', 'Lingua / Language');
     m.innerHTML = '<span class="lg" aria-hidden="true">\uD83C\uDF10</span>' +
-      '<button class="langbtn" type="button" data-l="it">IT</button>' +
-      '<button class="langbtn" type="button" data-l="en">EN</button>';
+      '<button class="langbtn" type="button" data-l="it">Italiano</button>' +
+      '<button class="langbtn" type="button" data-l="en">English</button>';
     document.body.appendChild(m);
   }
 
