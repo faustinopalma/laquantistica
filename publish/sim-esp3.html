@@ -32,7 +32,7 @@
   .tblwrap{position:relative;}
   #bubble{left:auto;right:auto;top:auto;bottom:auto;max-width:225px;z-index:7;transform:translateY(8px) scale(.92);}
   #bubble.show{transform:translateY(0) scale(1);}
-  #bubble::after{left:auto;right:-13px;top:50%;bottom:auto;transform:translateY(-50%);border:7px solid transparent;border-left-color:#ffb000;border-bottom-color:transparent;}
+  #bubble::after{left:-13px;right:auto;top:50%;bottom:auto;transform:translateY(-50%);border:7px solid transparent;border-right-color:#ffb000;border-bottom-color:transparent;}
   /* linea dal gauge (nel disegno) alla colonna della tabella, sovrapposta al pannello */
   .link{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:5;}
   #linkpath{fill:none;stroke:#e0a24d;stroke-width:1.9;opacity:0;filter:drop-shadow(0 0 3px rgba(224,162,77,.6));}
@@ -342,9 +342,9 @@ function positionBubble(){
   if(!panel||!a||!b) return;
   var pr=panel.getBoundingClientRect(), ar=a.getBoundingClientRect();
   var gx=ar.left+ar.width/2-pr.left, gy=ar.top+ar.height/2-pr.top;
-  b.style.left='auto'; b.style.bottom='auto';
-  b.style.right=(pr.width-gx+72)+'px';
-  b.style.top=(gy-42)+'px';
+  b.style.left='auto'; b.style.top='auto'; b.style.right='auto';
+  b.style.left=(gx+22)+'px';
+  b.style.bottom='16px';
 }
 
 function setBlock(bu,bd){
