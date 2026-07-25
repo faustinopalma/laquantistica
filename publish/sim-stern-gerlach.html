@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://laquantistica.com/sim-stern-gerlach.html">
+<title>Simulatore · Stern-Gerlach in cascata — La Quantistica</title>
+<meta name="description" content="Simulatore interattivo e didattico degli esperimenti di Stern-Gerlach in cascata: probabilità di deflessione, sovrapposizione e interferenza, con la matematica mostrata in tempo reale. Companion del Capitolo 2.">
+<link rel="stylesheet" href="assets/lang.css?v=5">
+<link rel="stylesheet" href="assets/note.css?v=2">
+<script defer src="assets/lang.js?v=5"></script>
+<style id="sim-css">
+  .sim-lede{font-size:1.12rem;}
+  .sim-card{
+    background:#fff;border:1px solid var(--n-line);border-left:4px solid var(--n-blue);
+    border-radius:3px;margin:1.5rem 0 1.9rem;padding:1.1rem 1.15rem 1.25rem;
+    box-shadow:0 1px 2px rgba(0,0,0,.05);
+  }
+  .sim-card h3{
+    font-family:var(--n-mono);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--n-blue);margin:.1rem 0 .9rem;
+  }
+  .sim-stage{width:100%;background:#f7f6f2;border:1px solid var(--n-line);border-radius:3px;overflow:hidden;}
+  .sim-stage svg{display:block;width:100%;height:auto;}
+  /* presets */
+  .sim-presets{display:flex;flex-wrap:wrap;gap:.4rem;margin:.9rem 0 .2rem;}
+  .sim-preset{
+    font-family:var(--n-mono);font-size:.72rem;letter-spacing:.03em;
+    background:#eee9df;border:1px solid var(--n-line);border-radius:999px;
+    padding:.32rem .7rem;color:var(--n-ink-soft);cursor:pointer;transition:.15s;
+  }
+  .sim-preset:hover{background:var(--n-ink);color:#fff;border-color:var(--n-ink);}
+  /* controls */
+  .sim-controls{margin-top:1rem;display:grid;gap:.9rem;}
+  .ctl{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:.7rem;}
+  .ctl label{font-family:var(--n-mono);font-size:.78rem;color:var(--n-ink);white-space:nowrap;}
+  .ctl input[type=range]{width:100%;accent-color:var(--n-accent);}
+  .ctl .val{font-family:var(--n-mono);font-size:.82rem;font-weight:700;color:var(--n-accent);min-width:3.4em;text-align:right;}
+  .seg{display:inline-flex;border:1px solid var(--n-line);border-radius:999px;overflow:hidden;background:#fff;}
+  .seg button{
+    border:0;background:transparent;cursor:pointer;font-family:var(--n-mono);font-size:.76rem;font-weight:700;
+    padding:.3rem .7rem;color:var(--n-ink-soft);transition:.15s;
+  }
+  .seg button.on{background:var(--n-accent);color:#fff;}
+  .ctl-row{display:flex;flex-wrap:wrap;gap:.6rem 1.1rem;align-items:center;}
+  .ctl-row > span.lbl{font-family:var(--n-mono);font-size:.78rem;color:var(--n-ink);}
+  /* math readout */
+  .sim-math{
+    margin-top:1.1rem;background:#1b1e23;color:#e9e6df;border-radius:3px;
+    padding:1rem 1.1rem;font-family:var(--n-mono);font-size:.82rem;line-height:1.65;
+    overflow-x:auto;
+  }
+  .sim-math .mrow{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem .6rem;margin:.15rem 0;}
+  .sim-math .lab{color:#8fb7d6;}
+  .sim-math b{color:#fff;}
+  .sim-math .num{color:#e0a04b;font-weight:700;}
+  .sim-math .ket{color:#e9e6df;}
+  .vec{display:inline-grid;grid-auto-rows:1fr;border-left:2px solid #6b6f77;border-right:2px solid #6b6f77;
+    padding:.05rem .5rem;margin:0 .1rem;text-align:center;vertical-align:middle;}
+  .vec span{padding:.02rem .2rem;}
+  .pbars{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:1rem;}
+  .pbar{background:#f7f6f2;border:1px solid var(--n-line);border-radius:3px;padding:.6rem .7rem;}
+  .pbar .pk{font-family:var(--n-mono);font-size:.72rem;color:var(--n-ink-soft);text-transform:uppercase;letter-spacing:.05em;}
+  .pbar .pv{font-family:var(--n-serif);font-size:1.7rem;font-weight:700;line-height:1.1;color:var(--n-accent);}
+  .pbar.minus .pv{color:var(--n-blue);}
+  .pbar .track{height:8px;background:#e3ded2;border-radius:99px;margin-top:.4rem;overflow:hidden;}
+  .pbar .fill{height:100%;width:0;background:var(--n-accent);transition:width .18s ease;}
+  .pbar.minus .fill{background:var(--n-blue);}
+  .hint{font-family:var(--n-sans);font-size:.92rem;color:var(--n-ink-soft);margin:.7rem 0 0;font-style:italic;}
+  .takeaway{background:#fbf3e5;border:1px solid var(--n-amber);border-left:4px solid var(--n-amber);
+    border-radius:3px;padding:.7rem .9rem;margin:1.4rem 0;font-family:var(--n-serif);font-size:1.02rem;color:#3a2c14;}
+  .takeaway b{color:var(--n-amber);}
+  @media (max-width:640px){
+    .ctl{grid-template-columns:1fr;gap:.35rem;}
+    .ctl .val{text-align:left;}
+    .pbars{grid-template-columns:1fr;}
+    .sim-math{font-size:.76rem;}
+  }
+</style>
+</head>
+<body>
+<main class="sheet" id="top">
+  <div class="sheet-inner">
+
+    <div class="doc-meta">
+      <span class="tag amber">Simulatore</span>
+      <span class="it">Cap. 02 · Stern-Gerlach in cascata</span><span class="en">Ch. 02 · Cascaded Stern-Gerlach</span>
+      <div class="langsw" role="group" aria-label="Lingua / Language">
+        <button class="langbtn" type="button" data-l="it" aria-pressed="false">Italiano</button>
+        <button class="langbtn" type="button" data-l="en" aria-pressed="true">English</button>
+      </div>
+      <a class="doc-back-top" id="backTop" href="02-stern-gerlach-cascata.html"><span class="it">← Indietro</span><span class="en">← Back</span></a>
+    </div>
+
+    <h1 class="doc-title">
+      <span class="lead"><span class="it">Simulatore interattivo</span><span class="en">Interactive simulator</span></span>
+      <span class="it">Stern-Gerlach in cascata</span><span class="en">Cascaded Stern-Gerlach</span>
+    </h1>
+
+    <p class="lede sim-lede"><span class="it">Muovi i comandi e osserva come si comportano gli atomi — e la matematica che lo descrive — nei quattro esperimenti del Capitolo 2. Ogni analizzatore di Stern-Gerlach è una «macchina» che misura il momento magnetico lungo il proprio asse, inclinato di un angolo <b>ϑ</b>, e divide il fascio in due.</span><span class="en">Move the controls and watch how the atoms behave — and the mathematics that describes them — in the four experiments of Chapter 2. Each Stern-Gerlach analyzer is a “machine” that measures the magnetic moment along its own axis, tilted by an angle <b>ϑ</b>, and splits the beam in two.</span></p>
+
+    <!-- ===================== MODULE 1 ===================== -->
+    <h2><span class="it">Deflessione e probabilità</span><span class="en">Deflection and probability</span></h2>
+    <p><span class="it">Una prima macchina, inclinata di <b>ϑ₁</b>, prepara gli atomi in uno stato ben definito: scegliamo di lasciar passare solo il fascio <b>+k</b> (oppure <b>−k</b>) e blocchiamo l'altro. Una seconda macchina, inclinata di <b>ϑ₂</b>, misura di nuovo e divide il fascio. La probabilità dipende <em>solo</em> dall'angolo relativo tra le due macchine.</span><span class="en">A first machine, tilted by <b>ϑ₁</b>, prepares the atoms in a well-defined state: we let only the <b>+k</b> beam through (or <b>−k</b>) and block the other. A second machine, tilted by <b>ϑ₂</b>, measures again and splits the beam. The probability depends <em>only</em> on the relative angle between the two machines.</span></p>
+
+    <div class="sim-card">
+      <h3><span class="it">Modulo 1 — Cascata di due analizzatori</span><span class="en">Module 1 — Cascade of two analyzers</span></h3>
+      <div class="sim-stage">
+        <svg id="svg1" viewBox="0 0 660 260" role="img" aria-label="Cascade of two Stern-Gerlach analyzers"></svg>
+      </div>
+
+      <div class="sim-presets" id="presets1"></div>
+
+      <div class="sim-controls">
+        <div class="ctl">
+          <label><span class="it">Macchina 1&nbsp; ϑ₁</span><span class="en">Machine 1&nbsp; ϑ₁</span></label>
+          <input type="range" id="t1" min="0" max="360" step="1" value="0">
+          <span class="val" id="t1v">0°</span>
+        </div>
+        <div class="ctl-row">
+          <span class="lbl"><span class="it">Fascio selezionato dalla Macchina 1:</span><span class="en">Beam selected by Machine 1:</span></span>
+          <span class="seg" id="sel1">
+            <button type="button" data-s="1" class="on">+k</button>
+            <button type="button" data-s="-1">−k</button>
+          </span>
+        </div>
+        <div class="ctl">
+          <label><span class="it">Macchina 2&nbsp; ϑ₂</span><span class="en">Machine 2&nbsp; ϑ₂</span></label>
+          <input type="range" id="t2" min="0" max="360" step="1" value="90">
+          <span class="val" id="t2v">90°</span>
+        </div>
+      </div>
+
+      <div class="pbars">
+        <div class="pbar" id="m1plus">
+          <div class="pk">P( m<sub>ϑ₂</sub> = +k )</div>
+          <div class="pv" id="m1pv">50%</div>
+          <div class="track"><div class="fill" id="m1pf"></div></div>
+        </div>
+        <div class="pbar minus" id="m1minus">
+          <div class="pk">P( m<sub>ϑ₂</sub> = −k )</div>
+          <div class="pv" id="m1mv">50%</div>
+          <div class="track"><div class="fill" id="m1mf"></div></div>
+        </div>
+      </div>
+
+      <div class="sim-math" id="math1">
+        <div class="mrow"><span class="lab it">Stato preparato:</span><span class="lab en">Prepared state:</span>
+          <span class="ket" id="m1state"></span></div>
+        <div class="mrow"><span class="lab it">Ampiezza:</span><span class="lab en">Amplitude:</span>
+          <span id="m1amp"></span></div>
+        <div class="mrow"><span class="lab it">Probabilità:</span><span class="lab en">Probability:</span>
+          <span id="m1prob"></span></div>
+      </div>
+      <p class="hint"><span class="it">Prova: con ϑ₂ = ϑ₁ la seconda macchina ritrova lo stesso stato (100%); a 90° il fascio si divide a metà; a 180° si inverte. Solo l'angolo <em>relativo</em> conta.</span><span class="en">Try: with ϑ₂ = ϑ₁ the second machine recovers the same state (100%); at 90° the beam splits in half; at 180° it flips. Only the <em>relative</em> angle matters.</span></p>
+    </div>
+
+    <!-- ===================== MODULE 2 ===================== -->
+    <h2><span class="it">Sovrapposizione e interferenza</span><span class="en">Superposition and interference</span></h2>
+    <p><span class="it">Prepariamo gli atomi in <b>|m₀ = +k⟩</b> e li mandiamo in una macchina a 90°, che li divide nei due stati <b>|m₉₀ = +k⟩</b> e <b>|m₉₀ = −k⟩</b>. Poi <em>ricombiniamo</em> i due rami e misuriamo di nuovo lungo la verticale. Sul ramo inferiore possiamo introdurre uno sfasamento <b>φ</b> (un cammino più lungo). Il risultato non è la somma delle probabilità dei due rami: a sommarsi sono le <strong>ampiezze</strong>.</span><span class="en">We prepare the atoms in <b>|m₀ = +k⟩</b> and send them into a 90° machine, which splits them into the two states <b>|m₉₀ = +k⟩</b> and <b>|m₉₀ = −k⟩</b>. Then we <em>recombine</em> the two branches and measure again along the vertical. On the lower branch we can introduce a phase shift <b>φ</b> (a longer path). The result is not the sum of the two branches' probabilities: what add up are the <strong>amplitudes</strong>.</span></p>
+
+    <div class="sim-card">
+      <h3><span class="it">Modulo 2 — Divisione, sfasamento, ricombinazione</span><span class="en">Module 2 — Split, phase shift, recombine</span></h3>
+      <div class="sim-stage">
+        <svg id="svg2" viewBox="0 0 660 300" role="img" aria-label="Interference apparatus"></svg>
+      </div>
+
+      <div class="sim-presets" id="presets2"></div>
+
+      <div class="sim-controls">
+        <div class="ctl-row">
+          <span class="lbl"><span class="it">Rami:</span><span class="en">Branches:</span></span>
+          <span class="seg" id="mode2">
+            <button type="button" data-m="both" class="on"><span class="it">Ricombina entrambi</span><span class="en">Recombine both</span></button>
+            <button type="button" data-m="blockLower"><span class="it">Blocca inferiore</span><span class="en">Block lower</span></button>
+            <button type="button" data-m="blockUpper"><span class="it">Blocca superiore</span><span class="en">Block upper</span></button>
+          </span>
+        </div>
+        <div class="ctl">
+          <label><span class="it">Sfasamento&nbsp; φ</span><span class="en">Phase shift&nbsp; φ</span></label>
+          <input type="range" id="phi" min="0" max="360" step="1" value="0">
+          <span class="val" id="phiv">0°</span>
+        </div>
+      </div>
+
+      <div class="pbars">
+        <div class="pbar" id="m2plus">
+          <div class="pk">P( m<sub>0</sub> = +k )</div>
+          <div class="pv" id="m2pv">100%</div>
+          <div class="track"><div class="fill" id="m2pf"></div></div>
+        </div>
+        <div class="pbar minus" id="m2minus">
+          <div class="pk">P( m<sub>0</sub> = −k )</div>
+          <div class="pv" id="m2mv">0%</div>
+          <div class="track"><div class="fill" id="m2mf"></div></div>
+        </div>
+      </div>
+
+      <div class="sim-math" id="math2">
+        <div class="mrow"><span class="lab it">Stato ricombinato:</span><span class="lab en">Recombined state:</span>
+          <span class="ket" id="m2psi"></span></div>
+        <div class="mrow"><span class="lab it">Ampiezze (piano complesso):</span><span class="lab en">Amplitudes (complex plane):</span></div>
+        <div class="mrow"><svg id="phasor" viewBox="-60 -60 120 120" width="120" height="120" style="background:#12151a;border-radius:3px"></svg>
+          <span id="m2note" style="max-width:22rem;white-space:normal"></span></div>
+      </div>
+      <p class="hint"><span class="it">Con φ = 0 la ricombinazione ricostruisce esattamente |m₀ = +k⟩ (100%). Bloccando un ramo otterresti 50% + 50%: ma 50% + 50% qui darebbe 100% + 0%, non 100% ciascuno — è la firma dell'interferenza.</span><span class="en">With φ = 0 the recombination reconstructs exactly |m₀ = +k⟩ (100%). Blocking one branch would give 50% + 50%: but 50% + 50% here yields 100% + 0%, not 100% each — the signature of interference.</span></p>
+    </div>
+
+    <div class="takeaway">
+      <span class="it"><b>In una frase.</b> Le macchine di Stern-Gerlach non «vedono» un momento magnetico già deciso: preparano stati, e ciò che si somma quando i cammini si ricombinano sono <b>ampiezze di probabilità</b> (numeri complessi), non probabilità. Da qui nasce tutto il formalismo del Capitolo 2.</span>
+      <span class="en"><b>In one sentence.</b> Stern-Gerlach machines do not “read” an already-decided magnetic moment: they prepare states, and what adds up when the paths recombine are <b>probability amplitudes</b> (complex numbers), not probabilities. This is the seed of the whole formalism of Chapter 2.</span>
+    </div>
+
+    <div class="doc-return">
+      <a id="backBottom" href="02-stern-gerlach-cascata.html"><span class="it">← Torna al capitolo</span><span class="en">← Back to the chapter</span></a>
+    </div>
+
+    <div class="doc-foot">
+      <span>La Quantistica · Simulatore · Cap. 02 · Rev. 2026</span>
+      <span>F. Palma</span>
+    </div>
+
+  </div>
+</main>
+
+<script>
+/* ============ return link (?ret=) ============ */
+(function () {
+  function safeRet(v){ if(!v) return null; try{v=decodeURIComponent(v);}catch(e){return null;}
+    if(v.indexOf('..')!==-1||v.indexOf('//')!==-1) return null;
+    if(/^[A-Za-z0-9._\/-]+\.html(#[A-Za-z0-9._-]+)?$/.test(v)) return v; return null; }
+  var ret = safeRet(new URLSearchParams(location.search).get('ret')) || '02-stern-gerlach-cascata.html';
+  ['backTop','backBottom'].forEach(function(id){ var a=document.getElementById(id); if(a) a.setAttribute('href',ret); });
+})();
+
+/* ============ helpers ============ */
+var SVGNS='http://www.w3.org/2000/svg';
+function el(tag,attrs,parent){ var e=document.createElementNS(SVGNS,tag);
+  for(var k in attrs) e.setAttribute(k,attrs[k]); if(parent) parent.appendChild(e); return e; }
+function txt(x,y,s,attrs,parent){ var t=el('text',Object.assign({x:x,y:y},attrs||{}),parent); t.textContent=s; return t; }
+function fmtPct(p){ return (Math.round(p*1000)/10)+'%'; }
+function num(x){ var r=Math.round(x*1000)/1000; return (r===0?0:r).toString(); }
+var ACC='#7b2d26', BLU='#1a5276', INK='#1b1e23', DIM='#c9c4b6', PAPER='#f7f6f2';
+
+/* ============ MODULE 1 ============ */
+var svg1=document.getElementById('svg1');
+function ketVec(theta,sign){ var t=theta*Math.PI/360; return sign>0?[Math.cos(t),Math.sin(t)]:[Math.sin(t),-Math.cos(t)]; }
+function amp(state,phi,sign){ var p=phi*Math.PI/360;
+  return sign>0 ? Math.cos(p)*state[0]+Math.sin(p)*state[1] : Math.sin(p)*state[0]-Math.cos(p)*state[1]; }
+
+function analyzerBox(cx,cy,label,angle,parent){
+  var g=el('g',{},parent);
+  el('rect',{x:cx-26,y:cy-30,width:52,height:60,rx:4,fill:'#fff',stroke:INK,'stroke-width':2},g);
+  // tilted magnet axis
+  var a=angle*Math.PI/180, L=20;
+  el('line',{x1:cx-Math.sin(a)*L,y1:cy-Math.cos(a)*L,x2:cx+Math.sin(a)*L,y2:cy+Math.cos(a)*L,
+    stroke:ACC,'stroke-width':3,'stroke-linecap':'round'},g);
+  el('circle',{cx:cx+Math.sin(a)*L,cy:cy+Math.cos(a)*L,r:3,fill:ACC},g);
+  txt(cx,cy+46,label,{'text-anchor':'middle','font-family':'monospace','font-size':12,fill:INK},g);
+  return g;
+}
+function beam(x1,y1,x2,y2,w,op,color,parent){
+  return el('line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:color,'stroke-width':w,opacity:op,'stroke-linecap':'round'},parent);
+}
+
+function drawM1(){
+  while(svg1.firstChild) svg1.removeChild(svg1.firstChild);
+  var t1=+document.getElementById('t1').value, t2=+document.getElementById('t2').value, s1=SEL1;
+  var st=ketVec(t1,s1);
+  var Pp=amp(st,t2,1); Pp=Pp*Pp; var Pm=1-Pp;
+
+  // source
+  txt(24,132,'⟶',{'font-size':22,fill:INK});
+  txt(24,152,'atoms',{'font-size':10,fill:'#777','font-family':'monospace'});
+  beam(40,128,120,128,3,1,INK,svg1);
+  // machine 1
+  analyzerBox(150,128,'ϑ₁ = '+t1+'°',t1,svg1);
+  // two outputs of M1
+  var upSel=(s1>0);
+  beam(176,128,300,80,upSel?5:2, upSel?1:.25, upSel?ACC:DIM, svg1);
+  beam(176,128,300,176,!upSel?5:2, !upSel?1:.25, !upSel?ACC:DIM, svg1);
+  // stop marker on blocked branch
+  var by=upSel?176:80;
+  el('rect',{x:296,y:by-11,width:8,height:22,fill:'#b03535'},svg1);
+  txt(322,by+4,'blocked',{'font-size':9,fill:'#b03535','font-family':'monospace'});
+  // selected beam to machine 2
+  var sy=upSel?80:176;
+  beam(300,sy,392,128,5,1,ACC,svg1);
+  txt(346,sy+(upSel?-8:20),'|m'+'ϑ₁'+'='+(s1>0?'+':'−')+'k⟩',{'font-size':11,fill:ACC,'font-family':'monospace','text-anchor':'middle'});
+  // machine 2
+  analyzerBox(420,128,'ϑ₂ = '+t2+'°',t2,svg1);
+  // outputs of M2, thickness ∝ P
+  beam(446,128,600,72, 1.5+Pp*7, .35+Pp*.65, ACC, svg1);
+  beam(446,128,600,184, 1.5+Pm*7, .35+Pm*.65, BLU, svg1);
+  txt(612,74,'+k',{'font-size':12,fill:ACC,'font-family':'monospace'});
+  txt(612,188,'−k',{'font-size':12,fill:BLU,'font-family':'monospace'});
+  txt(566,60,fmtPct(Pp),{'font-size':12,fill:ACC,'font-family':'monospace','font-weight':'bold','text-anchor':'end'});
+  txt(566,206,fmtPct(Pm),{'font-size':12,fill:BLU,'font-family':'monospace','font-weight':'bold','text-anchor':'end'});
+
+  // readouts
+  document.getElementById('m1pv').textContent=fmtPct(Pp);
+  document.getElementById('m1mv').textContent=fmtPct(Pm);
+  document.getElementById('m1pf').style.width=(Pp*100)+'%';
+  document.getElementById('m1mf').style.width=(Pm*100)+'%';
+  document.getElementById('t1v').textContent=t1+'°';
+  document.getElementById('t2v').textContent=t2+'°';
+  // math
+  document.getElementById('m1state').innerHTML='|m<sub>ϑ₁</sub>='+(s1>0?'+':'−')+'k⟩ = <span class="vec"><span>'+num(st[0])+'</span><span>'+num(st[1])+'</span></span>';
+  var rel=(t2-t1);
+  document.getElementById('m1amp').innerHTML='⟨m<sub>ϑ₂</sub>=+k | m<sub>ϑ₁</sub>='+(s1>0?'+':'−')+'k⟩ = cos( (ϑ₁−ϑ₂)/2 ) = <span class="num">'+num(amp(st,t2,1))+'</span>';
+  document.getElementById('m1prob').innerHTML='P = |amp|² = cos²( '+rel+'°/2 ) = <b class="num">'+fmtPct(Pp)+'</b>';
+}
+
+/* ============ MODULE 2 ============ */
+var svg2=document.getElementById('svg2'), phasor=document.getElementById('phasor');
+var MODE2='both';
+function cadd(a,b){return {re:a.re+b.re,im:a.im+b.im};}
+function cmul(a,b){return {re:a.re*b.re-a.im*b.im,im:a.re*b.im+a.im*b.re};}
+function mag2(z){return z.re*z.re+z.im*z.im;}
+function m2State(phi,mode){
+  var c=Math.SQRT1_2, ph={re:Math.cos(phi*Math.PI/180),im:Math.sin(phi*Math.PI/180)};
+  var up,dn;
+  if(mode==='both'){ up=cadd({re:c,im:0},cmul(ph,{re:c,im:0})); dn=cadd({re:c,im:0},cmul(ph,{re:-c,im:0})); }
+  else if(mode==='blockLower'){ up={re:c,im:0}; dn={re:c,im:0}; }
+  else { up={re:c,im:0}; dn={re:-c,im:0}; }
+  return {up:up,dn:dn};
+}
+function cstr(z){ var r=Math.round(z.re*100)/100, i=Math.round(z.im*100)/100;
+  if(Math.abs(i)<0.005) return r.toString();
+  return r+(i>=0?' + ':' − ')+Math.abs(i)+'i'; }
+
+function drawM2(){
+  while(svg2.firstChild) svg2.removeChild(svg2.firstChild);
+  var phi=+document.getElementById('phi').value, mode=MODE2;
+  var S=m2State(phi,mode); var nu=mag2(S.up), nd=mag2(S.dn), tot=nu+nd||1;
+  var Pp=nu/tot, Pm=nd/tot;
+  var showUp = mode!=='blockUpper', showDn = mode!=='blockLower';
+
+  // source + prep
+  txt(20,158,'⟶',{'font-size':20,fill:INK}); txt(16,176,'|m₀=+k⟩',{'font-size':10,fill:'#777','font-family':'monospace'});
+  beam(38,150,96,150,3,1,INK,svg2);
+  analyzerBox(120,150,'SG 90°',90,svg2);
+  // split: upper (+) and lower (−)
+  beam(146,150,250,86, showUp?4:2, showUp?1:.2, showUp?ACC:DIM, svg2);
+  beam(146,150,250,214, showDn?4:2, showDn?1:.2, showDn?BLU:DIM, svg2);
+  txt(210,78,'|m₉₀=+k⟩',{'font-size':10,fill:ACC,'font-family':'monospace'});
+  txt(210,232,'|m₉₀=−k⟩',{'font-size':10,fill:BLU,'font-family':'monospace'});
+  // straight segments
+  beam(250,86,430,86, showUp?4:2, showUp?1:.2, showUp?ACC:DIM, svg2);
+  beam(250,214,360,214, showDn?4:2, showDn?1:.2, showDn?BLU:DIM, svg2);
+  // phase box on lower branch
+  el('rect',{x:360,y:198,width:44,height:32,rx:3,fill:'#fff',stroke:BLU,'stroke-width':2,opacity:showDn?1:.3},svg2);
+  txt(382,219,'φ='+phi+'°',{'font-size':10,fill:BLU,'font-family':'monospace','text-anchor':'middle',opacity:showDn?1:.3});
+  beam(404,214,430,214, showDn?4:2, showDn?1:.2, showDn?BLU:.2, svg2);
+  // recombine to a junction at x=470
+  beam(430,86,470,150, showUp?4:2, showUp?1:.2, showUp?ACC:DIM, svg2);
+  beam(430,214,470,150, showDn?4:2, showDn?1:.2, showDn?BLU:DIM, svg2);
+  // block markers
+  if(!showUp){ el('rect',{x:340,y:75,width:8,height:22,fill:'#b03535'},svg2); }
+  if(!showDn){ el('rect',{x:340,y:203,width:8,height:22,fill:'#b03535'},svg2); }
+  // final SG0 measure
+  analyzerBox(500,150,'SG 0°',0,svg2);
+  beam(526,150,624,96, 1.5+Pp*7, .35+Pp*.65, ACC, svg2);
+  beam(526,150,624,206, 1.5+Pm*7, .35+Pm*.65, BLU, svg2);
+  txt(632,98,'+k',{'font-size':12,fill:ACC,'font-family':'monospace'});
+  txt(632,210,'−k',{'font-size':12,fill:BLU,'font-family':'monospace'});
+  txt(600,84,fmtPct(Pp),{'font-size':12,fill:ACC,'font-family':'monospace','font-weight':'bold','text-anchor':'end'});
+  txt(600,228,fmtPct(Pm),{'font-size':12,fill:BLU,'font-family':'monospace','font-weight':'bold','text-anchor':'end'});
+
+  // readouts
+  document.getElementById('m2pv').textContent=fmtPct(Pp);
+  document.getElementById('m2mv').textContent=fmtPct(Pm);
+  document.getElementById('m2pf').style.width=(Pp*100)+'%';
+  document.getElementById('m2mf').style.width=(Pm*100)+'%';
+  document.getElementById('phiv').textContent=phi+'°';
+  document.getElementById('m2psi').innerHTML='|Ψ⟩ ∝ <span class="vec"><span>'+cstr(S.up)+'</span><span>'+cstr(S.dn)+'</span></span>'
+    + ' &nbsp; P₊=|Ψ₊|²/N';
+  // note
+  var note=document.getElementById('m2note');
+  if(mode==='both'){
+    note.innerHTML='<span class="it">1 + e<sup>iφ</sup> (rosso) e 1 − e<sup>iφ</sup> (blu): le loro lunghezze² danno le probabilità. P₊ = cos²(φ/2).</span>'
+      +'<span class="en">1 + e<sup>iφ</sup> (red) and 1 − e<sup>iφ</sup> (blue): their squared lengths give the probabilities. P₊ = cos²(φ/2).</span>';
+  } else {
+    note.innerHTML='<span class="it">Un solo ramo: la fase non conta più, 50% / 50%.</span><span class="en">Only one branch: the phase no longer matters, 50% / 50%.</span>';
+  }
+  drawPhasor(phi,mode);
+}
+function drawPhasor(phi,mode){
+  while(phasor.firstChild) phasor.removeChild(phasor.firstChild);
+  el('line',{x1:-55,y1:0,x2:55,y2:0,stroke:'#3a3f47','stroke-width':1},phasor);
+  el('line',{x1:0,y1:-55,x2:0,y2:55,stroke:'#3a3f47','stroke-width':1},phasor);
+  var R=40, a=phi*Math.PI/180;
+  function arrow(x,y,col,w){ el('line',{x1:0,y1:0,x2:x,y2:-y,stroke:col,'stroke-width':w,'stroke-linecap':'round'},phasor);
+    el('circle',{cx:x,cy:-y,r:3,fill:col},phasor); }
+  // 1 (unit along +x), e^{iphi}
+  arrow(R,0,'#6b6f77',2);
+  arrow(R*Math.cos(a),R*Math.sin(a),'#8fb7d6',2);
+  if(mode==='both'){
+    // sum 1+e^{iphi} (red), 1-e^{iphi} (blue)
+    arrow(R*(1+Math.cos(a)),R*Math.sin(a),ACC,2.5);
+    arrow(R*(1-Math.cos(a)),-R*Math.sin(a),'#5aa0d6',2.5);
+  }
+}
+
+/* ============ wiring ============ */
+var SEL1=1;
+document.getElementById('t1').addEventListener('input',drawM1);
+document.getElementById('t2').addEventListener('input',drawM1);
+document.getElementById('sel1').addEventListener('click',function(e){
+  var b=e.target.closest('button'); if(!b) return; SEL1=+b.getAttribute('data-s');
+  [].forEach.call(this.children,function(c){c.classList.toggle('on',c===b);}); drawM1(); });
+document.getElementById('phi').addEventListener('input',drawM2);
+document.getElementById('mode2').addEventListener('click',function(e){
+  var b=e.target.closest('button'); if(!b) return; MODE2=b.getAttribute('data-m');
+  [].forEach.call(this.children,function(c){c.classList.toggle('on',c===b);}); drawM2(); });
+
+/* presets */
+function setSel1(s){ SEL1=s; [].forEach.call(document.getElementById('sel1').children,function(c){c.classList.toggle('on',+c.getAttribute('data-s')===s);}); }
+function setMode2(m){ MODE2=m; [].forEach.call(document.getElementById('mode2').children,function(c){c.classList.toggle('on',c.getAttribute('data-m')===m);}); }
+var P1=[
+  ['Esp. 1 · ϑ₂=ϑ₁ (100%)',function(){t1.value=0;t2.value=0;setSel1(1);}],
+  ['Esp. 1 · 90° (50/50)',function(){t1.value=0;t2.value=90;setSel1(1);}],
+  ['Esp. 1 · 180° (flip)',function(){t1.value=0;t2.value=180;setSel1(1);}],
+  ['Esp. 2 · 45°→30°',function(){t1.value=45;t2.value=30;setSel1(1);}]
+];
+var P2=[
+  ['Esp. 3 · φ=0 (100%)',function(){phi.value=0;setMode2('both');}],
+  ['Esp. 4 · φ=180° (flip)',function(){phi.value=180;setMode2('both');}],
+  ['Esp. 4 · φ=90°',function(){phi.value=90;setMode2('both');}],
+  ['blocca un ramo (50/50)',function(){phi.value=90;setMode2('blockLower');}]
+];
+var t1=document.getElementById('t1'),t2=document.getElementById('t2'),phi=document.getElementById('phi');
+function mkPresets(host,list,redraw){ list.forEach(function(p){ var b=document.createElement('button');
+  b.className='sim-preset'; b.type='button'; b.textContent=p[0];
+  b.addEventListener('click',function(){p[1]();redraw();}); host.appendChild(b); }); }
+mkPresets(document.getElementById('presets1'),P1,drawM1);
+mkPresets(document.getElementById('presets2'),P2,drawM2);
+
+drawM1(); drawM2();
+</script>
+</body>
+</html>
