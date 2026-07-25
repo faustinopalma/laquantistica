@@ -1,7 +1,21 @@
-/* Simulatore Stern-Gerlach — stile condiviso (console a pannello singolo, una schermata per esperimento) */
+/* Simulatore Stern-Gerlach — tema "laboratorio di elettronica"
+   (indipendente dallo stile accademico del sito: font e colori propri). */
 
-/* apparato su "carta da disegno" chiara */
-.sim-stage{width:100%;background:#f2f0ea;border:1px solid #0c0e13;box-shadow:inset 0 0 0 1px #cbc7bb;border-radius:3px;overflow:hidden;}
+/* tema: font tecnici + fondo da banco strumenti */
+body{
+  --n-mono:"Cascadia Code","JetBrains Mono","SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --n-sans:"Cascadia Code","JetBrains Mono",ui-monospace,Consolas,monospace;
+  --n-serif:"Cascadia Code","JetBrains Mono",ui-monospace,Consolas,monospace;
+  background:#080b0a;color:#c3d1c8;
+  background-image:linear-gradient(rgba(60,180,120,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(60,180,120,.05) 1px,transparent 1px);
+  background-size:30px 30px;
+}
+
+/* apparato = schermo oscilloscopio (graticola verde su fondo scuro) */
+.sim-stage{width:100%;background:#07120e;border:1px solid #04120c;border-radius:3px;overflow:hidden;
+  box-shadow:inset 0 0 0 1px #16302a, inset 0 0 40px rgba(0,0,0,.6);
+  background-image:linear-gradient(rgba(70,200,140,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(70,200,140,.07) 1px,transparent 1px);
+  background-size:26px 26px;}
 .sim-stage svg{display:block;width:100%;height:auto;}
 
 /* preset */
@@ -35,11 +49,11 @@
 .pbars{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;}
 .pbar{background:#12151a;border:1px solid #2d333d;border-radius:3px;padding:.6rem .7rem;}
 .pbar .pk{font-family:var(--n-mono);font-size:.72rem;color:#8b929c;text-transform:uppercase;letter-spacing:.05em;}
-.pbar .pv{font-family:var(--n-serif);font-size:1.35rem;font-weight:700;line-height:1.1;color:#e08a3c;}
-.pbar.minus .pv{color:#6cb6ee;}
+.pbar .pv{font-family:var(--n-mono);font-size:1.35rem;font-weight:700;line-height:1.1;color:#ffb000;text-shadow:0 0 10px rgba(255,176,0,.3);}
+.pbar.minus .pv{color:#35c8ff;text-shadow:0 0 10px rgba(53,200,255,.28);}
 .pbar .track{height:8px;background:#05070a;border-radius:99px;margin-top:.4rem;overflow:hidden;}
-.pbar .fill{height:100%;width:0;background:#e08a3c;transition:width .18s ease;}
-.pbar.minus .fill{background:#6cb6ee;}
+.pbar .fill{height:100%;width:0;background:#ffb000;transition:width .18s ease;}
+.pbar.minus .fill{background:#35c8ff;}
 
 /* plotter (registratore) */
 .plotter{border:1px solid #0c0e13;border-radius:3px;background:#161a20;overflow:hidden;}
@@ -60,7 +74,7 @@
 .console{max-width:1560px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;padding:0 clamp(.6rem,2vw,1.4rem) .4rem;}
 .con-head{flex:none;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;padding:.5rem 0 .45rem;}
 .con-brand{display:flex;align-items:center;gap:.6rem;}
-.con-title{font-family:var(--n-serif);font-weight:700;font-size:1.02rem;color:#1b1e23;}
+.con-title{font-family:var(--n-mono);font-weight:700;font-size:1rem;letter-spacing:.02em;color:#dfeee6;}
 .con-actions{display:flex;align-items:center;gap:.8rem;}
 .panel{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 372px;gap:.9rem;background:#1e232b;border:1px solid #0c0e13;border-radius:4px;box-shadow:inset 0 0 0 1px #2a303a,0 3px 12px rgba(0,0,0,.35);padding:.9rem;}
 .stagecol{display:flex;flex-direction:column;gap:.65rem;min-height:0;}
@@ -84,3 +98,18 @@
   .panel-lede{font-size:.82rem;line-height:1.45;}
   .con-title{font-size:.95rem;}
 }
+
+/* ---- header / cornice in stile strumento ---- */
+.con-brand .tag{background:#111a16;border:1px solid #2a5a48;color:#ffb000;font-family:var(--n-mono);
+  text-transform:uppercase;letter-spacing:.08em;padding:.2rem .55rem;border-radius:3px;font-size:.7rem;
+  font-weight:700;box-shadow:0 0 8px rgba(255,176,0,.18);}
+.langsw{background:#0f1613;border:1px solid #24463a;border-radius:4px;}
+.langbtn{color:#8fb7a4;font-family:var(--n-mono);}
+.langbtn[aria-pressed="true"]{background:#173a2c;color:#7fffc4;}
+.doc-back-top{color:#8fb7a4;font-family:var(--n-mono);}
+.doc-back-top:hover{color:#7fffc4;}
+.panel{background:#0f1512;border:1px solid #04120c;box-shadow:inset 0 0 0 1px #17302a,0 4px 18px rgba(0,0,0,.5);}
+.panel-lede{color:#9fbcac;}
+.panel-lede b{color:#ffb000;}
+.hint{color:#6f8f80;}
+.con-foot{color:#5a7d6a;}

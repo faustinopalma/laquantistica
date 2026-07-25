@@ -29,7 +29,7 @@
 
   <section class="panel">
     <div class="stagecol">
-      <div class="sim-stage"><svg id="svg1" viewBox="0 0 660 340" role="img" aria-label="Esperimento 1: due macchine di Stern-Gerlach in cascata"></svg></div>
+      <div class="sim-stage"><svg id="svg1" viewBox="0 0 660 360" role="img" aria-label="Esperimento 1: due macchine di Stern-Gerlach in cascata"></svg></div>
       <div class="plotter">
         <div class="plot-head"><span class="plot-title">Plotter</span><span class="plot-sub">P(+k) — ϑ₂</span>
           <span class="leds"><span class="led rec" id="rec1">● REC</span><span class="led fit" id="fit1">● FIT</span></span>
@@ -68,6 +68,7 @@
 var svg1 = document.getElementById('svg1');
 var t1El = document.getElementById('t1'), t2El = document.getElementById('t2');
 var SEL = 1;
+function fw(f){ return 0.6 + f * 8; }   // larghezza linea ∝ flusso
 
 function drawExp1(){
   while(svg1.firstChild) svg1.removeChild(svg1.firstChild);
@@ -76,37 +77,38 @@ function drawExp1(){
   var Pp=amp(st,t2,1); Pp=Pp*Pp; var Pm=1-Pp;
 
   // ---- banda trasversale: le due macchine in sezione, con l'orientamento ϑ ----
-  txt(330,18,'— sezione trasversale —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#8a8778'},svg1);
+  txt(330,18,'— sezione trasversale —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
   sgMagnet(200,96,t1,'Macchina 1  ϑ₁='+t1+'°',svg1);
   sgMagnet(470,96,t2,'Macchina 2  ϑ₂='+t2+'°',svg1);
 
-  // ---- banda longitudinale: percorso degli atomi ----
-  var yL=262;
-  txt(330,170,'— schema longitudinale (percorso degli atomi) —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#8a8778'},svg1);
-  el('line',{x1:200,y1:150,x2:200,y2:yL-16,stroke:'#c9c4b6','stroke-width':1,'stroke-dasharray':'3 4'},svg1);
-  el('line',{x1:470,y1:150,x2:470,y2:yL-16,stroke:'#c9c4b6','stroke-width':1,'stroke-dasharray':'3 4'},svg1);
+  // ---- banda longitudinale: percorso degli atomi (larghezza ∝ flusso) ----
+  var yIn=250, ss=upSel?-1:1, yPlat=yIn+ss*34;
+  var selCol=upSel?ACC:BLU, blkCol=upSel?BLU:ACC;
+  txt(330,172,'— schema longitudinale (larghezza linea ∝ flusso) —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
+  el('line',{x1:200,y1:150,x2:200,y2:yIn-16,stroke:'#3f5c4d','stroke-width':1,'stroke-dasharray':'3 4'},svg1);
+  el('line',{x1:470,y1:150,x2:470,y2:yPlat-16,stroke:'#3f5c4d','stroke-width':1,'stroke-dasharray':'3 4'},svg1);
 
-  txt(20,yL-4,'⟶',{'font-size':18,fill:INK},svg1);
-  txt(16,yL+16,'Ag',{'font-size':9,fill:'#777','font-family':'monospace'},svg1);
-  beam(40,yL,200,yL,4,1,ACC,svg1);
-  // Macchina 1: il fascio selezionato prosegue; l'altro devia ed è fermato
-  var bd = upSel? 1 : -1;
-  curveBeam(200,yL,252,yL+bd*44,2,.55,DIM,svg1);
-  hatchStop(264,yL+bd*44,svg1);
-  txt(282,yL+bd*44+4,upSel?'−k':'+k',{'font-size':9,fill:'#999','font-family':'monospace'},svg1);
-  // fascio selezionato Macchina 1 -> Macchina 2
-  beam(200,yL,470,yL,4,1,ACC,svg1);
-  txt(335,yL-9,'|m'+'ϑ₁'+'='+(upSel?'+':'−')+'k⟩',{'font-size':10,fill:ACC,'font-family':'monospace','text-anchor':'middle'},svg1);
-  // Macchina 2: si divide di nuovo -> due rivelatori, spessore ∝ probabilità
-  curveBeam(470,yL,560,yL-40, 1.5+Pp*7,.35+Pp*.65, ACC, svg1);
-  curveBeam(470,yL,560,yL+40, 1.5+Pm*7,.35+Pm*.65, BLU, svg1);
-  beam(560,yL-40,610,yL-40, 1.5+Pp*7,.35+Pp*.65, ACC, svg1);
-  beam(560,yL+40,610,yL+40, 1.5+Pm*7,.35+Pm*.65, BLU, svg1);
-  detector(616,yL-40,ACC,svg1); detector(616,yL+40,BLU,svg1);
-  txt(628,yL-36,'+k',{'font-size':11,fill:ACC,'font-family':'monospace'},svg1);
-  txt(628,yL+44,'−k',{'font-size':11,fill:BLU,'font-family':'monospace'},svg1);
-  txt(596,yL-52,fmtPct(Pp),{'font-size':11,fill:ACC,'font-family':'monospace','font-weight':'bold','text-anchor':'end'},svg1);
-  txt(596,yL+62,fmtPct(Pm),{'font-size':11,fill:BLU,'font-family':'monospace','font-weight':'bold','text-anchor':'end'},svg1);
+  txt(18,yIn-4,'⟶',{'font-size':18,fill:INK},svg1);
+  txt(14,yIn+18,'Ag',{'font-size':9,fill:'#6f8f80','font-family':'monospace'},svg1);
+  // fascio in ingresso: flusso pieno (linea spessa)
+  beam(40,yIn,200,yIn, fw(1), 1, INK, svg1);
+  // Macchina 1 divide il fascio in due (50/50): entrambi i rami visibili, metà spessore
+  curveBeam(200,yIn,272,yPlat, fw(0.5),1, selCol, svg1);
+  beam(272,yPlat,470,yPlat, fw(0.5),1, selCol, svg1);
+  curveBeam(200,yIn,258,yIn-ss*42, fw(0.5),.85, blkCol, svg1);
+  hatchStop(270,yIn-ss*42,svg1);
+  txt(288,yIn-ss*42+4,upSel?'−k':'+k',{'font-size':9,fill:'#6f8f80','font-family':'monospace'},svg1);
+  txt(360,yPlat-10,'|m'+'ϑ₁'+'='+(upSel?'+':'−')+'k⟩',{'font-size':10,fill:selCol,'font-family':'monospace','text-anchor':'middle'},svg1);
+  // Macchina 2 divide il fascio selezionato: spessore ∝ flusso (∝ probabilità)
+  curveBeam(470,yPlat,560,yPlat-36, fw(0.5*Pp),1, ACC, svg1);
+  curveBeam(470,yPlat,560,yPlat+36, fw(0.5*Pm),1, BLU, svg1);
+  beam(560,yPlat-36,610,yPlat-36, fw(0.5*Pp),1, ACC, svg1);
+  beam(560,yPlat+36,610,yPlat+36, fw(0.5*Pm),1, BLU, svg1);
+  detector(616,yPlat-36,ACC,svg1); detector(616,yPlat+36,BLU,svg1);
+  txt(628,yPlat-32,'+k',{'font-size':11,fill:ACC,'font-family':'monospace'},svg1);
+  txt(628,yPlat+40,'−k',{'font-size':11,fill:BLU,'font-family':'monospace'},svg1);
+  txt(596,yPlat-46,fmtPct(Pp),{'font-size':11,fill:ACC,'font-family':'monospace','font-weight':'bold','text-anchor':'end'},svg1);
+  txt(596,yPlat+54,fmtPct(Pm),{'font-size':11,fill:BLU,'font-family':'monospace','font-weight':'bold','text-anchor':'end'},svg1);
 
   // ---- readout ----
   document.getElementById('m1pv').textContent=fmtPct(Pp);
