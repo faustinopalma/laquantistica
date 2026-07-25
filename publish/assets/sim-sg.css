@@ -113,3 +113,28 @@ body{
 .panel-lede b{color:#ffb000;}
 .hint{color:#6f8f80;}
 .con-foot{color:#5a7d6a;}
+
+/* ---- cursore che pilota il plotter (per non confondere l'utente) ---- */
+.ctl.driver{border:1px solid #7a5210;border-radius:5px;padding:.5rem .6rem;
+  background:rgba(255,176,0,.07);box-shadow:inset 0 0 0 1px rgba(255,176,0,.18),0 0 16px rgba(255,176,0,.07);}
+.ctl.driver label{color:#ffb000;}
+.ctl.driver input[type=range]{accent-color:#ffb000;}
+.drives{display:inline-block;font-family:var(--n-mono);font-size:.58rem;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;color:#0f1512;background:#ffb000;border-radius:3px;padding:.08rem .4rem;margin-left:.45rem;
+  box-shadow:0 0 8px rgba(255,176,0,.45);vertical-align:middle;animation:drivesPulse 1.8s ease-in-out infinite;}
+@keyframes drivesPulse{0%,100%{box-shadow:0 0 6px rgba(255,176,0,.35);}50%{box-shadow:0 0 13px rgba(255,176,0,.7);}}
+.drives-cap{font-family:var(--n-mono);font-size:.68rem;color:#e0a24d;margin:-.15rem 0 0;letter-spacing:.02em;}
+.drives-cap::before{content:"\21b3 ";color:#ffb000;}
+.drives-cap b{color:#ffb000;}
+
+/* ---- fumetto: annuncia il risultato sorprendente quando esce la linea ---- */
+.stagecol .plotter{position:relative;}
+.fumetto{position:absolute;z-index:6;left:50%;top:32%;transform:translate(-50%,-8px) scale(.7);
+  max-width:80%;background:#fff7e6;color:#1a1200;border:2px solid #ffb000;border-radius:12px;
+  padding:.5rem .85rem;font-family:var(--n-mono);font-size:.82rem;font-weight:700;line-height:1.35;text-align:center;
+  box-shadow:0 8px 22px rgba(0,0,0,.55),0 0 20px rgba(255,176,0,.45);opacity:0;pointer-events:none;
+  transition:opacity .4s ease, transform .45s cubic-bezier(.2,1.5,.4,1);}
+.fumetto b{color:#9a4a00;}
+.fumetto::after{content:"";position:absolute;left:50%;top:-13px;transform:translateX(-50%);
+  border:7px solid transparent;border-bottom-color:#ffb000;}
+.fumetto.show{opacity:1;transform:translate(-50%,0) scale(1);}

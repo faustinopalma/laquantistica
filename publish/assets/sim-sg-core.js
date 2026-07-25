@@ -84,7 +84,7 @@ function makePlotter(o) {
   function X(x) { return mL + (x - o.xmin) / (o.xmax - o.xmin) * (W - mL - mR); }
   function Y(p) { return H - mB - p * (H - mT - mB); }
   function full() { while (svg.firstChild) svg.removeChild(svg.firstChild); gDyn = el('g', {}, svg); curveDrawn = false; }
-  function reset() { data = {}; full(); draw(); }
+  function reset() { data = {}; full(); if (o.onReset) o.onReset(); draw(); }
   function record(x) {
     var b = Math.round((x - o.xmin) / (o.xmax - o.xmin) * BINS);
     var y = o.fn(x) + (Math.random() - 0.5) * 0.03;
@@ -131,7 +131,7 @@ function makePlotter(o) {
       el('line', { x1: px - 3, y1: py, x2: px + 3, y2: py, stroke: '#e6ece8', 'stroke-width': 1.2 }, gDyn);
       el('line', { x1: px, y1: py - 3, x2: px, y2: py + 3, stroke: '#e6ece8', 'stroke-width': 1.2 }, gDyn);
     });
-    if (done && !curveDrawn) { drawCurveAnimated(); curveDrawn = true; }
+    if (done && !curveDrawn) { drawCurveAnimated(); curveDrawn = true; if (o.onDone) o.onDone(); }
     if (fit) fit.classList.toggle('on', curveDrawn);
     if (stat) stat.textContent = 'n = ' + keys.length + '   ·   ' + (curveDrawn ? 'interpolante tracciata' : 'copertura ' + Math.round(cov * 100) + '%');
   }
