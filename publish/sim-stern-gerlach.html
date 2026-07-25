@@ -88,6 +88,62 @@
   /* le schede interattive e i diagrammi usano tutta la larghezza disponibile */
   .sim-card{max-width:none;}
   .sim-stage{max-width:1040px;margin-inline:auto;}
+
+  /* ============ Skin: pannello di controllo da laboratorio (industriale) ============ */
+  .sim-card{
+    background:#1e232b;border:1px solid #0c0e13;border-left:5px solid #b06a12;
+    box-shadow:inset 0 0 0 1px #2a303a, 0 3px 10px rgba(0,0,0,.35);
+    color:#c7ccd4;padding:1rem 1.15rem 1.3rem;
+  }
+  .sim-card h3{
+    color:#e2a24d;border-bottom:1px dashed #39414c;padding-bottom:.55rem;
+    display:flex;align-items:center;gap:.5rem;
+  }
+  .sim-card h3::before{content:"▮";color:#b06a12;font-size:.7em;}
+  /* apparato su "carta da disegno" chiara */
+  .sim-stage{background:#f2f0ea;border:1px solid #0c0e13;box-shadow:inset 0 0 0 1px #cbc7bb;}
+  .sim-preset{background:#2a2f38;border:1px solid #3d444f;color:#c7ccd4;}
+  .sim-preset:hover{background:#e2a24d;color:#1e232b;border-color:#e2a24d;}
+  .ctl label,.ctl-row > span.lbl{color:#aeb4bd;}
+  .ctl .val{color:#e2a24d;}
+  .seg{background:#12151a;border-color:#3d444f;}
+  .seg button{color:#aeb4bd;}
+  .seg button.on{background:#b06a12;color:#fff;}
+  .sim-card input[type=range]{accent-color:#e2a24d;}
+  .pbar{background:#12151a;border:1px solid #2d333d;}
+  .pbar .pk{color:#8b929c;}
+  .pbar .pv{color:#e08a3c;}
+  .pbar.minus .pv{color:#6cb6ee;}
+  .pbar .track{background:#05070a;}
+  .pbar .fill{background:#e08a3c;}
+  .pbar.minus .fill{background:#6cb6ee;}
+  .sim-math{background:#12151a;border:1px solid #2a303a;}
+  .hint{color:#9aa0aa;}
+  /* ---- Plotter (registratore a carta) ---- */
+  .plotter{margin-top:1.1rem;border:1px solid #0c0e13;border-radius:3px;background:#161a20;overflow:hidden;}
+  .plot-head{
+    display:flex;align-items:center;gap:.7rem;padding:.45rem .7rem;background:#0f1216;
+    border-bottom:1px solid #2a303a;font-family:var(--n-mono);font-size:.72rem;
+    letter-spacing:.05em;text-transform:uppercase;color:#8b929c;
+  }
+  .plot-title{color:#e2a24d;font-weight:700;}
+  .plot-sub{color:#9aa0aa;}
+  .leds{display:flex;gap:.7rem;margin-left:auto;}
+  .led{color:#3a434e;font-weight:700;transition:.18s;font-size:.7rem;}
+  .led.rec.on{color:#ff5b52;text-shadow:0 0 7px rgba(255,91,82,.85);}
+  .led.fit.on{color:#57d98a;text-shadow:0 0 7px rgba(87,217,138,.75);}
+  .plot-clr{
+    font-family:var(--n-mono);font-size:.68rem;font-weight:700;letter-spacing:.06em;
+    background:#2a2f38;border:1px solid #3d444f;color:#c7ccd4;border-radius:3px;
+    padding:.2rem .55rem;cursor:pointer;transition:.15s;
+  }
+  .plot-clr:hover{background:#b06a12;color:#fff;border-color:#b06a12;}
+  .plot-screen{background:#08120d;}
+  .plot-screen svg{display:block;width:100%;height:auto;}
+  .plot-status{
+    padding:.4rem .7rem;background:#0f1216;border-top:1px solid #2a303a;
+    font-family:var(--n-mono);font-size:.72rem;color:#8b929c;letter-spacing:.03em;
+  }
 </style>
 </head>
 <body>
@@ -118,7 +174,7 @@
     <div class="sim-card">
       <h3><span class="it">Modulo 1 — Cascata di due analizzatori</span><span class="en">Module 1 — Cascade of two analyzers</span></h3>
       <div class="sim-stage">
-        <svg id="svg1" viewBox="0 0 660 260" role="img" aria-label="Cascade of two Stern-Gerlach analyzers"></svg>
+        <svg id="svg1" viewBox="0 0 660 340" role="img" aria-label="Cascade of two Stern-Gerlach analyzers"></svg>
       </div>
 
       <div class="sim-presets" id="presets1"></div>
@@ -141,6 +197,17 @@
           <input type="range" id="t2" min="0" max="360" step="1" value="90">
           <span class="val" id="t2v">90°</span>
         </div>
+      </div>
+
+      <div class="plotter">
+        <div class="plot-head">
+          <span class="plot-title">Plotter</span>
+          <span class="plot-sub">P(+k) — ϑ₂</span>
+          <span class="leds"><span class="led rec" id="rec1">● REC</span><span class="led fit" id="fit1">● FIT</span></span>
+          <button class="plot-clr" type="button" id="clr1">CLR</button>
+        </div>
+        <div class="plot-screen"><svg id="plot1" viewBox="0 0 660 210" role="img" aria-label="measurement plot"></svg></div>
+        <div class="plot-status" id="stat1"></div>
       </div>
 
       <div class="pbars">
@@ -174,7 +241,7 @@
     <div class="sim-card">
       <h3><span class="it">Modulo 2 — Divisione, sfasamento, ricombinazione</span><span class="en">Module 2 — Split, phase shift, recombine</span></h3>
       <div class="sim-stage">
-        <svg id="svg2" viewBox="0 0 660 300" role="img" aria-label="Interference apparatus"></svg>
+        <svg id="svg2" viewBox="0 0 660 360" role="img" aria-label="Interference apparatus"></svg>
       </div>
 
       <div class="sim-presets" id="presets2"></div>
@@ -193,6 +260,17 @@
           <input type="range" id="phi" min="0" max="360" step="1" value="0">
           <span class="val" id="phiv">0°</span>
         </div>
+      </div>
+
+      <div class="plotter">
+        <div class="plot-head">
+          <span class="plot-title">Plotter</span>
+          <span class="plot-sub">P(+k) — φ</span>
+          <span class="leds"><span class="led rec" id="rec2">● REC</span><span class="led fit" id="fit2">● FIT</span></span>
+          <button class="plot-clr" type="button" id="clr2">CLR</button>
+        </div>
+        <div class="plot-screen"><svg id="plot2" viewBox="0 0 660 210" role="img" aria-label="measurement plot"></svg></div>
+        <div class="plot-status" id="stat2"></div>
       </div>
 
       <div class="pbars">
@@ -254,87 +332,19 @@ function fmtPct(p){ return (Math.round(p*1000)/10)+'%'; }
 function num(x){ var r=Math.round(x*1000)/1000; return (r===0?0:r).toString(); }
 var ACC='#7b2d26', BLU='#1a5276', INK='#1b1e23', DIM='#c9c4b6', PAPER='#f7f6f2';
 
-/* ============ MODULE 1 ============ */
+/* ============ physics (shared) ============ */
 var svg1=document.getElementById('svg1');
+var svg2=document.getElementById('svg2'), phasor=document.getElementById('phasor');
+var SEL1=1, MODE2='both';
 function ketVec(theta,sign){ var t=theta*Math.PI/360; return sign>0?[Math.cos(t),Math.sin(t)]:[Math.sin(t),-Math.cos(t)]; }
 function amp(state,phi,sign){ var p=phi*Math.PI/360;
   return sign>0 ? Math.cos(p)*state[0]+Math.sin(p)*state[1] : Math.sin(p)*state[0]-Math.cos(p)*state[1]; }
-
-function analyzerBox(cx,cy,label,angle,parent){
-  var g=el('g',{},parent);
-  el('rect',{x:cx-26,y:cy-30,width:52,height:60,rx:4,fill:'#fff',stroke:INK,'stroke-width':2},g);
-  // tilted magnet axis
-  var a=angle*Math.PI/180, L=20;
-  el('line',{x1:cx-Math.sin(a)*L,y1:cy-Math.cos(a)*L,x2:cx+Math.sin(a)*L,y2:cy+Math.cos(a)*L,
-    stroke:ACC,'stroke-width':3,'stroke-linecap':'round'},g);
-  el('circle',{cx:cx+Math.sin(a)*L,cy:cy+Math.cos(a)*L,r:3,fill:ACC},g);
-  txt(cx,cy+46,label,{'text-anchor':'middle','font-family':'monospace','font-size':12,fill:INK},g);
-  return g;
-}
-function beam(x1,y1,x2,y2,w,op,color,parent){
-  return el('line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:color,'stroke-width':w,opacity:op,'stroke-linecap':'round'},parent);
-}
-// smooth S-bend with horizontal tangents at both ends (matches the hand-drawn beam paths)
-function curveBeam(x1,y1,x2,y2,w,op,color,parent){
-  var mx=(x1+x2)/2;
-  var d='M'+x1+' '+y1+' C '+mx+' '+y1+' '+mx+' '+y2+' '+x2+' '+y2;
-  return el('path',{d:d,fill:'none',stroke:color,'stroke-width':w,opacity:op,'stroke-linecap':'round'},parent);
-}
-
-function drawM1(){
-  while(svg1.firstChild) svg1.removeChild(svg1.firstChild);
-  var t1=+document.getElementById('t1').value, t2=+document.getElementById('t2').value, s1=SEL1;
-  var st=ketVec(t1,s1);
-  var Pp=amp(st,t2,1); Pp=Pp*Pp; var Pm=1-Pp;
-
-  // source
-  txt(24,132,'⟶',{'font-size':22,fill:INK});
-  txt(24,152,'atoms',{'font-size':10,fill:'#777','font-family':'monospace'});
-  beam(40,128,120,128,3,1,INK,svg1);
-  // machine 1
-  analyzerBox(150,128,'ϑ₁ = '+t1+'°',t1,svg1);
-  // two outputs of M1
-  var upSel=(s1>0);
-  beam(176,128,300,80,upSel?5:2, upSel?1:.25, upSel?ACC:DIM, svg1);
-  beam(176,128,300,176,!upSel?5:2, !upSel?1:.25, !upSel?ACC:DIM, svg1);
-  // stop marker on blocked branch
-  var by=upSel?176:80;
-  el('rect',{x:296,y:by-11,width:8,height:22,fill:'#b03535'},svg1);
-  txt(322,by+4,'blocked',{'font-size':9,fill:'#b03535','font-family':'monospace'});
-  // selected beam to machine 2
-  var sy=upSel?80:176;
-  beam(300,sy,392,128,5,1,ACC,svg1);
-  txt(346,sy+(upSel?-8:20),'|m'+'ϑ₁'+'='+(s1>0?'+':'−')+'k⟩',{'font-size':11,fill:ACC,'font-family':'monospace','text-anchor':'middle'});
-  // machine 2
-  analyzerBox(420,128,'ϑ₂ = '+t2+'°',t2,svg1);
-  // outputs of M2, thickness ∝ P
-  beam(446,128,600,72, 1.5+Pp*7, .35+Pp*.65, ACC, svg1);
-  beam(446,128,600,184, 1.5+Pm*7, .35+Pm*.65, BLU, svg1);
-  txt(612,74,'+k',{'font-size':12,fill:ACC,'font-family':'monospace'});
-  txt(612,188,'−k',{'font-size':12,fill:BLU,'font-family':'monospace'});
-  txt(566,60,fmtPct(Pp),{'font-size':12,fill:ACC,'font-family':'monospace','font-weight':'bold','text-anchor':'end'});
-  txt(566,206,fmtPct(Pm),{'font-size':12,fill:BLU,'font-family':'monospace','font-weight':'bold','text-anchor':'end'});
-
-  // readouts
-  document.getElementById('m1pv').textContent=fmtPct(Pp);
-  document.getElementById('m1mv').textContent=fmtPct(Pm);
-  document.getElementById('m1pf').style.width=(Pp*100)+'%';
-  document.getElementById('m1mf').style.width=(Pm*100)+'%';
-  document.getElementById('t1v').textContent=t1+'°';
-  document.getElementById('t2v').textContent=t2+'°';
-  // math
-  document.getElementById('m1state').innerHTML='|m<sub>ϑ₁</sub>='+(s1>0?'+':'−')+'k⟩ = <span class="vec"><span>'+num(st[0])+'</span><span>'+num(st[1])+'</span></span>';
-  var rel=(t2-t1);
-  document.getElementById('m1amp').innerHTML='⟨m<sub>ϑ₂</sub>=+k | m<sub>ϑ₁</sub>='+(s1>0?'+':'−')+'k⟩ = cos( (ϑ₁−ϑ₂)/2 ) = <span class="num">'+num(amp(st,t2,1))+'</span>';
-  document.getElementById('m1prob').innerHTML='P = |amp|² = cos²( '+rel+'°/2 ) = <b class="num">'+fmtPct(Pp)+'</b>';
-}
-
-/* ============ MODULE 2 ============ */
-var svg2=document.getElementById('svg2'), phasor=document.getElementById('phasor');
-var MODE2='both';
 function cadd(a,b){return {re:a.re+b.re,im:a.im+b.im};}
 function cmul(a,b){return {re:a.re*b.re-a.im*b.im,im:a.re*b.im+a.im*b.re};}
 function mag2(z){return z.re*z.re+z.im*z.im;}
+function cstr(z){ var r=Math.round(z.re*100)/100, i=Math.round(z.im*100)/100;
+  if(Math.abs(i)<0.005) return r.toString();
+  return r+(i>=0?' + ':' − ')+Math.abs(i)+'i'; }
 function m2State(phi,mode){
   var c=Math.SQRT1_2, ph={re:Math.cos(phi*Math.PI/180),im:Math.sin(phi*Math.PI/180)};
   var up,dn;
@@ -343,49 +353,154 @@ function m2State(phi,mode){
   else { up={re:c,im:0}; dn={re:-c,im:0}; }
   return {up:up,dn:dn};
 }
-function cstr(z){ var r=Math.round(z.re*100)/100, i=Math.round(z.im*100)/100;
-  if(Math.abs(i)<0.005) return r.toString();
-  return r+(i>=0?' + ':' − ')+Math.abs(i)+'i'; }
 
+/* ============ drawing helpers ============ */
+function beam(x1,y1,x2,y2,w,op,color,parent){
+  return el('line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:color,'stroke-width':w,opacity:op,'stroke-linecap':'round'},parent);
+}
+function curveBeam(x1,y1,x2,y2,w,op,color,parent){
+  var mx=(x1+x2)/2;
+  var d='M'+x1+' '+y1+' C '+mx+' '+y1+' '+mx+' '+y2+' '+x2+' '+y2;
+  return el('path',{d:d,fill:'none',stroke:color,'stroke-width':w,opacity:op,'stroke-linecap':'round'},parent);
+}
+function detector(x,y,col,parent){ el('circle',{cx:x,cy:y,r:6,fill:col,stroke:'#111','stroke-width':1},parent); }
+function gate(x,y,label,parent){
+  el('line',{x1:x,y1:y-17,x2:x,y2:y+17,stroke:'#b06a12','stroke-width':2},parent);
+  txt(x,y-23,label,{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#b06a12'},parent);
+}
+function hatchStop(x,y,parent){
+  var g=el('g',{},parent);
+  el('rect',{x:x-4,y:y-15,width:8,height:30,fill:'#fff',stroke:INK,'stroke-width':1.4},g);
+  for(var i=-13;i<=13;i+=5){ el('line',{x1:x-4,y1:y+i+8,x2:x+4,y2:y+i,stroke:INK,'stroke-width':1},g); }
+  return g;
+}
+// Stern-Gerlach magnet in cross-section (rotates about the gap at cx,cy)
+function sgMagnet(cx,cy,angle,label,parent){
+  if(Math.abs(((angle%360)+360)%360) > 0.5){
+    el('line',{x1:cx,y1:cy-58,x2:cx,y2:cy-28,stroke:'#9a978c','stroke-width':1,'stroke-dasharray':'5 3 1 3'},parent);
+  }
+  var g=el('g',{transform:'rotate('+angle+' '+cx+' '+cy+')'},parent);
+  var uw=14;
+  el('polygon',{points:(cx-uw)+','+(cy-46)+' '+(cx+uw)+','+(cy-46)+' '+(cx+uw)+','+(cy-30)+' '+cx+','+(cy-8)+' '+(cx-uw)+','+(cy-30),
+    fill:'#fff',stroke:INK,'stroke-width':1.6,'stroke-linejoin':'round'},g);
+  var lw=17;
+  var d='M'+(cx-lw)+' '+(cy+40)+' L'+(cx+lw)+' '+(cy+40)+' L'+(cx+lw)+' '+(cy+8)
+    +' L'+(cx+9)+' '+(cy+8)+' Q'+cx+' '+(cy+20)+' '+(cx-9)+' '+(cy+8)+' L'+(cx-lw)+' '+(cy+8)+' Z';
+  el('path',{d:d,fill:'#fff',stroke:INK,'stroke-width':1.6,'stroke-linejoin':'round'},g);
+  el('line',{x1:cx,y1:cy-54,x2:cx,y2:cy+48,stroke:INK,'stroke-width':1,'stroke-dasharray':'7 3 1.5 3'},g);
+  txt(cx,cy+62,label,{'text-anchor':'middle','font-family':'monospace','font-size':12,fill:INK},parent);
+  return g;
+}
+
+/* ============ MODULE 1 ============ */
+function drawM1(){
+  while(svg1.firstChild) svg1.removeChild(svg1.firstChild);
+  var t1=+document.getElementById('t1').value, t2=+document.getElementById('t2').value, s1=SEL1;
+  var st=ketVec(t1,s1);
+  var Pp=amp(st,t2,1); Pp=Pp*Pp; var Pm=1-Pp;
+
+  // --- top band: the two magnets in cross-section (they rotate with ϑ) ---
+  txt(210,24,'M1',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#888'},svg1);
+  txt(470,24,'M2',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#888'},svg1);
+  sgMagnet(210,94,t1,'ϑ₁ = '+t1+'°',svg1);
+  sgMagnet(470,94,t2,'ϑ₂ = '+t2+'°',svg1);
+
+  // --- bottom band: beam-path schematic ---
+  var y0=252, upSel=(s1>0);
+  txt(22,y0-4,'⟶',{'font-size':20,fill:INK},svg1);
+  txt(18,y0+16,'Ag',{'font-size':10,fill:'#777','font-family':'monospace'},svg1);
+  beam(40,y0,150,y0,3,1,INK,svg1);
+  gate(150,y0,'M1',svg1);
+  // selected beam goes straight through; the other is stopped
+  beam(150,y0,300,y0,5,1,ACC,svg1);
+  var boffY = upSel? y0+50 : y0-50;
+  curveBeam(150,y0,236,boffY,2,.55,DIM,svg1);
+  hatchStop(256,boffY,svg1);
+  txt(272,boffY+4,upSel?'−k':'+k',{'font-size':10,fill:'#999','font-family':'monospace'},svg1);
+  txt(300,y0-11,'|m'+'ϑ₁'+'='+(upSel?'+':'−')+'k⟩',{'font-size':11,fill:ACC,'font-family':'monospace','text-anchor':'middle'},svg1);
+  beam(300,y0,380,y0,5,1,ACC,svg1);
+  gate(380,y0,'M2',svg1);
+  // M2 outputs -> detectors, thickness ∝ probability
+  curveBeam(380,y0,470,y0-42, 1.5+Pp*7,.35+Pp*.65, ACC, svg1);
+  curveBeam(380,y0,470,y0+42, 1.5+Pm*7,.35+Pm*.65, BLU, svg1);
+  beam(470,y0-42,600,y0-42, 1.5+Pp*7,.35+Pp*.65, ACC, svg1);
+  beam(470,y0+42,600,y0+42, 1.5+Pm*7,.35+Pm*.65, BLU, svg1);
+  detector(608,y0-42,ACC,svg1); detector(608,y0+42,BLU,svg1);
+  txt(620,y0-38,'+k',{'font-size':12,fill:ACC,'font-family':'monospace'},svg1);
+  txt(620,y0+46,'−k',{'font-size':12,fill:BLU,'font-family':'monospace'},svg1);
+  txt(590,y0-54,fmtPct(Pp),{'font-size':12,fill:ACC,'font-family':'monospace','font-weight':'bold','text-anchor':'end'},svg1);
+  txt(590,y0+66,fmtPct(Pm),{'font-size':12,fill:BLU,'font-family':'monospace','font-weight':'bold','text-anchor':'end'},svg1);
+
+  // readouts
+  document.getElementById('m1pv').textContent=fmtPct(Pp);
+  document.getElementById('m1mv').textContent=fmtPct(Pm);
+  document.getElementById('m1pf').style.width=(Pp*100)+'%';
+  document.getElementById('m1mf').style.width=(Pm*100)+'%';
+  document.getElementById('t1v').textContent=t1+'°';
+  document.getElementById('t2v').textContent=t2+'°';
+  document.getElementById('m1state').innerHTML='|m<sub>ϑ₁</sub>='+(s1>0?'+':'−')+'k⟩ = <span class="vec"><span>'+num(st[0])+'</span><span>'+num(st[1])+'</span></span>';
+  var rel=(t2-t1);
+  document.getElementById('m1amp').innerHTML='⟨m<sub>ϑ₂</sub>=+k | m<sub>ϑ₁</sub>='+(s1>0?'+':'−')+'k⟩ = cos( (ϑ₁−ϑ₂)/2 ) = <span class="num">'+num(amp(st,t2,1))+'</span>';
+  document.getElementById('m1prob').innerHTML='P = |amp|² = cos²( '+rel+'°/2 ) = <b class="num">'+fmtPct(Pp)+'</b>';
+}
+
+/* ============ MODULE 2 ============ */
 function drawM2(){
   while(svg2.firstChild) svg2.removeChild(svg2.firstChild);
   var phi=+document.getElementById('phi').value, mode=MODE2;
   var S=m2State(phi,mode); var nu=mag2(S.up), nd=mag2(S.dn), tot=nu+nd||1;
   var Pp=nu/tot, Pm=nd/tot;
-  var showUp = mode!=='blockUpper', showDn = mode!=='blockLower';
+  var showUp = mode!=='blockUpper', showDn = mode!=='blockLower', both=showUp&&showDn;
 
-  // source + prep
-  txt(20,158,'⟶',{'font-size':20,fill:INK}); txt(16,176,'|m₀=+k⟩',{'font-size':10,fill:'#777','font-family':'monospace'});
-  beam(38,150,96,150,3,1,INK,svg2);
-  analyzerBox(120,150,'SG 90°',90,svg2);
-  // fork stub, then a symmetric smooth split (mirror image of the recombination)
-  var yUp=94, yDn=206, xF=178, xR=243, xL=428, xM=493;
-  beam(146,150,xF,150, 3, 1, INK, svg2);
-  curveBeam(xF,150,xR,yUp, showUp?4:2, showUp?1:.2, showUp?ACC:DIM, svg2);
-  curveBeam(xF,150,xR,yDn, showDn?4:2, showDn?1:.2, showDn?BLU:DIM, svg2);
-  txt(250,84,'|m₉₀=+k⟩',{'font-size':10,fill:ACC,'font-family':'monospace'});
-  txt(250,236,'|m₉₀=−k⟩',{'font-size':10,fill:BLU,'font-family':'monospace'});
-  // parallel horizontal rails
-  beam(xR,yUp,xL,yUp, showUp?4:2, showUp?1:.2, showUp?ACC:DIM, svg2);
-  beam(xR,yDn,xL,yDn, showDn?4:2, showDn?1:.2, showDn?BLU:DIM, svg2);
-  // phase box sits on the lower rail
-  el('rect',{x:308,y:yDn-16,width:44,height:32,rx:3,fill:'#fff',stroke:BLU,'stroke-width':2,opacity:showDn?1:.3},svg2);
-  txt(330,yDn+5,'φ='+phi+'°',{'font-size':10,fill:BLU,'font-family':'monospace','text-anchor':'middle',opacity:showDn?1:.3});
-  // symmetric smooth recombination (mirror image of the split)
-  curveBeam(xL,yUp,xM,150, showUp?4:2, showUp?1:.2, showUp?ACC:DIM, svg2);
-  curveBeam(xL,yDn,xM,150, showDn?4:2, showDn?1:.2, showDn?BLU:DIM, svg2);
-  beam(xM,150,499,150, 3, 1, INK, svg2);
-  // block markers on a closed branch
-  if(!showUp){ el('rect',{x:266,y:yUp-11,width:8,height:22,fill:'#b03535'},svg2); }
-  if(!showDn){ el('rect',{x:266,y:yDn-11,width:8,height:22,fill:'#b03535'},svg2); }
-  // final SG0 measure
-  analyzerBox(525,150,'SG 0°',0,svg2);
-  beam(551,150,624,98, 1.5+Pp*7, .35+Pp*.65, ACC, svg2);
-  beam(551,150,624,202, 1.5+Pm*7, .35+Pm*.65, BLU, svg2);
-  txt(632,98,'+k',{'font-size':12,fill:ACC,'font-family':'monospace'});
-  txt(632,210,'−k',{'font-size':12,fill:BLU,'font-family':'monospace'});
-  txt(600,84,fmtPct(Pp),{'font-size':12,fill:ACC,'font-family':'monospace','font-weight':'bold','text-anchor':'end'});
-  txt(600,228,fmtPct(Pm),{'font-size':12,fill:BLU,'font-family':'monospace','font-weight':'bold','text-anchor':'end'});
+  // --- top band: the two machines in cross-section (fixed at 90° and 0°) ---
+  txt(200,24,'SG A',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#888'},svg2);
+  txt(470,24,'SG B',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#888'},svg2);
+  sgMagnet(200,96,90,'SG 90°',svg2);
+  sgMagnet(470,96,0,'SG 0°',svg2);
+
+  // --- bottom band: beam path with path-length phase ---
+  var y0=270, yUp=y0-46, yDn=y0+46, xR=210, xUE=418;
+  var dphi = both? Math.round(phi/360*72) : 0, xLE=xUE+dphi;
+  txt(16,y0-4,'⟶',{'font-size':18,fill:INK},svg2);
+  txt(12,y0+16,'|m₀=+k⟩',{'font-size':9,fill:'#777','font-family':'monospace'},svg2);
+  beam(38,y0,120,y0,3,1,INK,svg2);
+  gate(120,y0,'SG90',svg2);
+  // split into two rails
+  curveBeam(120,y0,xR,yUp, showUp?4:2, showUp?1:.2, showUp?ACC:DIM, svg2);
+  curveBeam(120,y0,xR,yDn, showDn?4:2, showDn?1:.2, showDn?BLU:DIM, svg2);
+  txt(xR+6,yUp-8,'|m₉₀=+k⟩',{'font-size':10,fill:ACC,'font-family':'monospace'},svg2);
+  txt(xR+6,yDn+18,'|m₉₀=−k⟩',{'font-size':10,fill:BLU,'font-family':'monospace'},svg2);
+  // rails — the lower one is LONGER by dphi (the phase = extra path length)
+  beam(xR,yUp,xUE,yUp, showUp?4:2, showUp?1:.2, showUp?ACC:DIM, svg2);
+  beam(xR,yDn,xLE,yDn, showDn?4:2, showDn?1:.2, showDn?BLU:DIM, svg2);
+  // recombine toward a joint that is slightly inclined longitudinally (cause of Δℓ)
+  var xJ=520;
+  curveBeam(xUE,yUp,xJ,y0, showUp?4:2, showUp?1:.2, showUp?ACC:DIM, svg2);
+  curveBeam(xLE,yDn,xJ,y0, showDn?4:2, showDn?1:.2, showDn?BLU:DIM, svg2);
+  // Δℓ indicator on the lower (longer) branch
+  if(both && dphi>3){
+    el('line',{x1:xUE,y1:yDn+13,x2:xLE,y2:yDn+13,stroke:'#b06a12','stroke-width':1},svg2);
+    el('line',{x1:xUE,y1:yDn+9,x2:xUE,y2:yDn+17,stroke:'#b06a12','stroke-width':1},svg2);
+    el('line',{x1:xLE,y1:yDn+9,x2:xLE,y2:yDn+17,stroke:'#b06a12','stroke-width':1},svg2);
+    txt((xUE+xLE)/2,yDn+28,'Δℓ → φ',{'text-anchor':'middle','font-size':10,fill:'#b06a12','font-family':'monospace'},svg2);
+  }
+  // the inclined joint (longitudinal tilt ∝ φ) just before SG0
+  var al = phi/360*16;
+  var jg=el('g',{transform:'rotate('+al+' '+xJ+' '+y0+')'},svg2);
+  el('line',{x1:xJ,y1:y0-15,x2:xJ,y2:y0+15,stroke:'#b06a12','stroke-width':2.5,'stroke-linecap':'round'},jg);
+  // blocked branch -> beam stop (correct for atoms: it is a physical stop, not a phase plate)
+  if(!showUp) hatchStop(300,yUp,svg2);
+  if(!showDn) hatchStop(300,yDn,svg2);
+  // into SG0 and out to detectors
+  beam(xJ,y0,548,y0,3,1,INK,svg2);
+  gate(548,y0,'SG0',svg2);
+  curveBeam(548,y0,614,y0-40, 1.5+Pp*7,.35+Pp*.65, ACC, svg2);
+  curveBeam(548,y0,614,y0+40, 1.5+Pm*7,.35+Pm*.65, BLU, svg2);
+  detector(620,y0-40,ACC,svg2); detector(620,y0+40,BLU,svg2);
+  txt(630,y0-36,'+k',{'font-size':11,fill:ACC,'font-family':'monospace'},svg2);
+  txt(630,y0+44,'−k',{'font-size':11,fill:BLU,'font-family':'monospace'},svg2);
+  txt(600,y0-50,fmtPct(Pp),{'font-size':12,fill:ACC,'font-family':'monospace','font-weight':'bold','text-anchor':'end'},svg2);
+  txt(600,y0+62,fmtPct(Pm),{'font-size':12,fill:BLU,'font-family':'monospace','font-weight':'bold','text-anchor':'end'},svg2);
 
   // readouts
   document.getElementById('m2pv').textContent=fmtPct(Pp);
@@ -395,13 +510,12 @@ function drawM2(){
   document.getElementById('phiv').textContent=phi+'°';
   document.getElementById('m2psi').innerHTML='|Ψ⟩ ∝ <span class="vec"><span>'+cstr(S.up)+'</span><span>'+cstr(S.dn)+'</span></span>'
     + ' &nbsp; P₊=|Ψ₊|²/N';
-  // note
   var note=document.getElementById('m2note');
   if(mode==='both'){
-    note.innerHTML='<span class="it">1 + e<sup>iφ</sup> (rosso) e 1 − e<sup>iφ</sup> (blu): le loro lunghezze² danno le probabilità. P₊ = cos²(φ/2).</span>'
-      +'<span class="en">1 + e<sup>iφ</sup> (red) and 1 − e<sup>iφ</sup> (blue): their squared lengths give the probabilities. P₊ = cos²(φ/2).</span>';
+    note.innerHTML='<span class="it">Il ramo inferiore è più lungo (Δℓ): l\'inclinazione del giunto sfasa di φ. 1 + e<sup>iφ</sup> (rosso) e 1 − e<sup>iφ</sup> (blu): le loro lunghezze² danno le probabilità. P₊ = cos²(φ/2).</span>'
+      +'<span class="en">The lower branch is longer (Δℓ): the joint tilt shifts the phase by φ. 1 + e<sup>iφ</sup> (red) and 1 − e<sup>iφ</sup> (blue): their squared lengths give the probabilities. P₊ = cos²(φ/2).</span>';
   } else {
-    note.innerHTML='<span class="it">Un solo ramo: la fase non conta più, 50% / 50%.</span><span class="en">Only one branch: the phase no longer matters, 50% / 50%.</span>';
+    note.innerHTML='<span class="it">Un ramo è fermato dal blocco: niente ricombinazione, 50% / 50%.</span><span class="en">One branch is stopped: no recombination, 50% / 50%.</span>';
   }
   drawPhasor(phi,mode);
 }
@@ -412,31 +526,79 @@ function drawPhasor(phi,mode){
   var R=40, a=phi*Math.PI/180;
   function arrow(x,y,col,w){ el('line',{x1:0,y1:0,x2:x,y2:-y,stroke:col,'stroke-width':w,'stroke-linecap':'round'},phasor);
     el('circle',{cx:x,cy:-y,r:3,fill:col},phasor); }
-  // 1 (unit along +x), e^{iphi}
   arrow(R,0,'#6b6f77',2);
   arrow(R*Math.cos(a),R*Math.sin(a),'#8fb7d6',2);
   if(mode==='both'){
-    // sum 1+e^{iphi} (red), 1-e^{iphi} (blue)
     arrow(R*(1+Math.cos(a)),R*Math.sin(a),ACC,2.5);
     arrow(R*(1-Math.cos(a)),-R*Math.sin(a),'#5aa0d6',2.5);
   }
 }
 
-/* ============ wiring ============ */
-var SEL1=1;
-document.getElementById('t1').addEventListener('input',drawM1);
-document.getElementById('t2').addEventListener('input',drawM1);
-document.getElementById('sel1').addEventListener('click',function(e){
-  var b=e.target.closest('button'); if(!b) return; SEL1=+b.getAttribute('data-s');
-  [].forEach.call(this.children,function(c){c.classList.toggle('on',c===b);}); drawM1(); });
-document.getElementById('phi').addEventListener('input',drawM2);
-document.getElementById('mode2').addEventListener('click',function(e){
-  var b=e.target.closest('button'); if(!b) return; MODE2=b.getAttribute('data-m');
-  [].forEach.call(this.children,function(c){c.classList.toggle('on',c===b);}); drawM2(); });
+/* ============ plotter (chart recorder) ============ */
+function makePlotter(o){
+  var svg=document.getElementById(o.svg), stat=document.getElementById(o.stat),
+      rec=document.getElementById(o.rec), fit=document.getElementById(o.fit);
+  var BINS=32, W=660, H=210, mL=42, mR=16, mT=14, mB=28;
+  var data={}, recTimer=null;
+  function X(x){ return mL+(x-o.xmin)/(o.xmax-o.xmin)*(W-mL-mR); }
+  function Y(p){ return H-mB-p*(H-mT-mB); }
+  function reset(){ data={}; draw(); }
+  function record(x){
+    var b=Math.round((x-o.xmin)/(o.xmax-o.xmin)*BINS);
+    var y=o.fn(x)+(Math.random()-0.5)*0.03;
+    data[b]={x:x,y:Math.max(0,Math.min(1,y))};
+    if(rec){ rec.classList.add('on'); clearTimeout(recTimer); recTimer=setTimeout(function(){rec.classList.remove('on');},340); }
+    draw();
+  }
+  function draw(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var p,i;
+    for(p=0;p<=1.0001;p+=0.25){ var gy=Y(p);
+      el('line',{x1:mL,y1:gy,x2:W-mR,y2:gy,stroke:'#123026','stroke-width':1},svg);
+      txt(mL-6,gy+3,Math.round(p*100)+'',{'text-anchor':'end','font-size':9,fill:'#3e6b58','font-family':'monospace'},svg); }
+    var span=o.xmax-o.xmin, step=span/6;
+    for(i=0;i<=6;i++){ var xv=o.xmin+step*i, gx=X(xv);
+      el('line',{x1:gx,y1:mT,x2:gx,y2:H-mB,stroke:'#0d241b','stroke-width':1},svg);
+      txt(gx,H-mB+14,Math.round(xv)+'',{'text-anchor':'middle','font-size':9,fill:'#3e6b58','font-family':'monospace'},svg); }
+    txt(mL-30,Y(0.5),'P',{'font-size':10,fill:'#57d98a','font-family':'monospace'},svg);
+    txt(W-mR,H-4,o.xlabel,{'text-anchor':'end','font-size':9,fill:'#3e6b58','font-family':'monospace'},svg);
+    var keys=Object.keys(data), cov=keys.length/(BINS+1), done=cov>=0.82;
+    if(done){
+      var d=''; for(i=0;i<=170;i++){ var xx=o.xmin+span*i/170; d+=(i?'L':'M')+X(xx).toFixed(1)+' '+Y(o.fn(xx)).toFixed(1)+' '; }
+      el('path',{d:d,fill:'none',stroke:o.color,'stroke-width':2,opacity:.92},svg);
+    }
+    if(fit) fit.classList.toggle('on',done);
+    keys.forEach(function(k){ var pt=data[k], px=X(pt.x), py=Y(pt.y);
+      el('line',{x1:px-3,y1:py,x2:px+3,y2:py,stroke:'#e6ece8','stroke-width':1.2},svg);
+      el('line',{x1:px,y1:py-3,x2:px,y2:py+3,stroke:'#e6ece8','stroke-width':1.2},svg); });
+    if(stat) stat.textContent='n = '+keys.length+'   ·   '+(done?'interpolante tracciata':'copertura '+Math.round(cov*100)+'%');
+  }
+  return {record:record,reset:reset,draw:draw};
+}
 
-/* presets */
+/* ============ wiring ============ */
+var t1=document.getElementById('t1'), t2=document.getElementById('t2'), phi=document.getElementById('phi');
+var plot1=makePlotter({svg:'plot1',stat:'stat1',rec:'rec1',fit:'fit1',xmin:0,xmax:360,xlabel:'ϑ₂ (°)',color:'#ff9d4d',
+  fn:function(x){ var st=ketVec(+t1.value,SEL1); var a=amp(st,x,1); return a*a; }});
+var plot2=makePlotter({svg:'plot2',stat:'stat2',rec:'rec2',fit:'fit2',xmin:0,xmax:360,xlabel:'φ (°)',color:'#6cc0ff',
+  fn:function(x){ if(MODE2!=='both') return 0.5; var c=Math.cos(x*Math.PI/360); return c*c; }});
+
 function setSel1(s){ SEL1=s; [].forEach.call(document.getElementById('sel1').children,function(c){c.classList.toggle('on',+c.getAttribute('data-s')===s);}); }
 function setMode2(m){ MODE2=m; [].forEach.call(document.getElementById('mode2').children,function(c){c.classList.toggle('on',c.getAttribute('data-m')===m);}); }
+
+t2.addEventListener('input',function(){ drawM1(); plot1.record(+t2.value); });
+t1.addEventListener('input',function(){ drawM1(); plot1.reset(); plot1.record(+t2.value); });
+document.getElementById('sel1').addEventListener('click',function(e){
+  var b=e.target.closest('button'); if(!b) return; SEL1=+b.getAttribute('data-s');
+  [].forEach.call(this.children,function(c){c.classList.toggle('on',c===b);}); drawM1(); plot1.reset(); plot1.record(+t2.value); });
+phi.addEventListener('input',function(){ drawM2(); plot2.record(+phi.value); });
+document.getElementById('mode2').addEventListener('click',function(e){
+  var b=e.target.closest('button'); if(!b) return; MODE2=b.getAttribute('data-m');
+  [].forEach.call(this.children,function(c){c.classList.toggle('on',c===b);}); drawM2(); plot2.reset(); plot2.record(+phi.value); });
+document.getElementById('clr1').addEventListener('click',function(){ plot1.reset(); });
+document.getElementById('clr2').addEventListener('click',function(){ plot2.reset(); });
+
+/* presets */
 var P1=[
   ['Esp. 1 · ϑ₂=ϑ₁ (100%)',function(){t1.value=0;t2.value=0;setSel1(1);}],
   ['Esp. 1 · 90° (50/50)',function(){t1.value=0;t2.value=90;setSel1(1);}],
@@ -449,14 +611,13 @@ var P2=[
   ['Esp. 4 · φ=90°',function(){phi.value=90;setMode2('both');}],
   ['blocca un ramo (50/50)',function(){phi.value=90;setMode2('blockLower');}]
 ];
-var t1=document.getElementById('t1'),t2=document.getElementById('t2'),phi=document.getElementById('phi');
-function mkPresets(host,list,redraw){ list.forEach(function(p){ var b=document.createElement('button');
+function mkPresets(host,list,redraw,after){ list.forEach(function(p){ var b=document.createElement('button');
   b.className='sim-preset'; b.type='button'; b.textContent=p[0];
-  b.addEventListener('click',function(){p[1]();redraw();}); host.appendChild(b); }); }
-mkPresets(document.getElementById('presets1'),P1,drawM1);
-mkPresets(document.getElementById('presets2'),P2,drawM2);
+  b.addEventListener('click',function(){p[1]();redraw();after&&after();}); host.appendChild(b); }); }
+mkPresets(document.getElementById('presets1'),P1,drawM1,function(){ plot1.reset(); plot1.record(+t2.value); });
+mkPresets(document.getElementById('presets2'),P2,drawM2,function(){ plot2.reset(); plot2.record(+phi.value); });
 
-drawM1(); drawM2();
+drawM1(); drawM2(); plot1.record(+t2.value); plot2.record(+phi.value);
 </script>
 </body>
 </html>
