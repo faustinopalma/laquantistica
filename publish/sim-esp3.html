@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://laquantistica.com/sim-esp3.html">
+<title>Esperimento 3 · Simulatore — La Quantistica</title>
+<meta name="description" content="Simulatore interattivo dell'Esperimento 3 (Stern-Gerlach in cascata): scomposizione e ricombinazione. Bloccando a turno i rami si misura m₀; ricombinando entrambi si ricostruisce lo stato: le probabilità non si sommano, si sommano le ampiezze.">
+<link rel="stylesheet" href="assets/lang.css?v=5">
+<link rel="stylesheet" href="assets/note.css?v=2">
+<link rel="stylesheet" href="assets/sim-sg.css?v=2">
+<script defer src="assets/lang.js?v=5"></script>
+</head>
+<body>
+<main class="console" id="top">
+  <header class="con-head">
+    <div class="con-brand">
+      <span class="tag amber">Esperimento 3</span>
+      <span class="con-title"><span class="it">Stern-Gerlach in cascata</span><span class="en">Cascaded Stern-Gerlach</span></span>
+    </div>
+    <div class="con-actions">
+      <div class="langsw" role="group" aria-label="Lingua / Language">
+        <button class="langbtn" type="button" data-l="it" aria-pressed="false">Italiano</button>
+        <button class="langbtn" type="button" data-l="en" aria-pressed="true">English</button>
+      </div>
+      <a class="doc-back-top" id="backTop" href="02-stern-gerlach-cascata.html"><span class="it">← Indietro</span><span class="en">← Back</span></a>
+    </div>
+  </header>
+
+  <section class="panel">
+    <div class="stagecol">
+      <div class="sim-stage"><svg id="svg1" viewBox="0 0 720 440" role="img" aria-label="Esperimento 3: scomposizione e ricombinazione del fascio"></svg></div>
+      <div class="plotter">
+        <div class="plot-head"><span class="plot-title">I tre casi</span><span class="plot-sub">P(m₀=−k)</span>
+          <span class="leds"><span class="led fit" id="fit1">● INTERF.</span></span>
+        </div>
+        <div class="plot-screen"><svg id="plot1" viewBox="0 0 660 210" role="img" aria-label="confronto dei tre casi"></svg></div>
+        <div class="plot-status" id="stat1"></div>
+        <div class="fumetto" id="bubble"><span class="it">50% + 50% → <b>0%</b>: si sommano le <b>ampiezze</b>, non le probabilità.</span><span class="en">50% + 50% → <b>0%</b>: <b>amplitudes</b> add, not probabilities.</span></div>
+      </div>
+    </div>
+    <aside class="ctrlcol">
+      <p class="panel-lede"><span class="it">Quattro macchine: la <b>prima seleziona</b> lo stato <b>m₀=+k</b>, le altre <b>tre</b> lo <b>dividono</b> (in m₉₀=+k e m₉₀=−k) e lo <b>ricongiungono</b>. Alla fine si misura di nuovo <b>m₀</b>. L'esperimento consiste nel <b>bloccare a turno</b> i rami.</span><span class="en">Four machines: the <b>first selects</b> the state <b>m₀=+k</b>, the other <b>three split</b> it (into m₉₀=+k and m₉₀=−k) and <b>recombine</b> it. At the end <b>m₀</b> is measured again. The experiment consists in <b>blocking the branches in turn</b>.</span></p>
+      <div class="ctl-row">
+        <span class="lbl"><span class="it">Configurazione:</span><span class="en">Configuration:</span></span>
+        <span class="seg" id="caseSeg">
+          <button type="button" data-c="1" class="on"><span class="it">Caso 1 · blocca −k</span><span class="en">Case 1 · block −k</span></button>
+          <button type="button" data-c="2"><span class="it">Caso 2 · blocca +k</span><span class="en">Case 2 · block +k</span></button>
+          <button type="button" data-c="3"><span class="it">Caso 3 · ricombina</span><span class="en">Case 3 · recombine</span></button>
+        </span>
+      </div>
+      <div class="pbars">
+        <div class="pbar" id="m0plus"><div class="pk">P( m<sub>0</sub> = +k )</div><div class="pv" id="p0v">50%</div><div class="track"><div class="fill" id="p0f"></div></div></div>
+        <div class="pbar minus" id="m0minus"><div class="pk">P( m<sub>0</sub> = −k )</div><div class="pv" id="p0mv">50%</div><div class="track"><div class="fill" id="p0mf"></div></div></div>
+      </div>
+      <div class="sim-math" id="math1">
+        <div class="mrow"><span class="lab it">Scomposizione:</span><span class="lab en">Decomposition:</span><span id="mdecomp">|m₀=+k⟩ = (1/√2)|m₉₀=+k⟩ + (1/√2)|m₉₀=−k⟩</span></div>
+        <div class="mrow"><span class="lab it">Caso:</span><span class="lab en">Case:</span><span id="mcase"></span></div>
+        <div class="mrow"><span class="lab it">Misura di m₀:</span><span class="lab en">Measuring m₀:</span><span id="mres"></span></div>
+      </div>
+      <p class="hint"><span class="it">Caso 1 e Caso 2 danno entrambi 50% / 50%. Verrebbe da pensare che aprendo entrambi i rami (Caso 3) si ottenga ancora 50/50: invece si ottiene <b>100% / 0%</b>.</span><span class="en">Case 1 and Case 2 both give 50% / 50%. One would think that opening both branches (Case 3) still gives 50/50: instead it gives <b>100% / 0%</b>.</span></p>
+    </aside>
+  </section>
+
+  <div class="con-foot"><span>La Quantistica · Simulatore · Cap. 02 · Esperimento 3</span><span>F. Palma</span></div>
+</main>
+
+<script src="assets/sim-sg-core.js?v=2"></script>
+<script>
+var svg1 = document.getElementById('svg1');
+var plot1 = document.getElementById('plot1');
+var CASE = 1;
+var bubbleT = null;
+function fw(f){ return 0.6 + f * 8; }
+
+/* ---- risultati per caso ---- */
+function results(c){
+  // ratio misurando m0 e flusso ricombinato
+  if(c===3) return { Pp:1, Pm:0, recFlux:0.5 };
+  return { Pp:0.5, Pm:0.5, recFlux:0.25 };
+}
+
+function drawExp3(){
+  while(svg1.firstChild) svg1.removeChild(svg1.firstChild);
+  var r = results(CASE);
+  var showUp = CASE!==2;   // ramo m₉₀=+k (superiore) bloccato nel Caso 2
+  var showDn = CASE!==1;   // ramo m₉₀=−k (inferiore) bloccato nel Caso 1
+  var fUp = r.recFlux*r.Pp, fDn = r.recFlux*r.Pm;
+
+  // ---- banda trasversale ----
+  txt(360,18,'— sezione trasversale —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
+  sgMagnet(110,96,0, 'selettore  ϑ=0°', svg1);
+  sgMagnet(370,96,90,'interferometro  ϑ=90°  (×3)', svg1);
+
+  // ---- banda longitudinale (schema a occhio delle 3 macchine) ----
+  var yIn=352, yPlat=312, up=yPlat-34, dn=yPlat+34;
+  txt(360,168,'— schema longitudinale (larghezza linea ∝ flusso) —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
+  el('line',{x1:110,y1:136,x2:110,y2:yIn-16,stroke:'#3f5c4d','stroke-width':1,'stroke-dasharray':'3 4'},svg1);
+  el('line',{x1:370,y1:136,x2:370,y2:up-40,stroke:'#3f5c4d','stroke-width':1,'stroke-dasharray':'3 4'},svg1);
+
+  // le tre macchine dell'interferometro (viste di lato) con i gradienti ↑ ↓↓ ↑
+  sgSide(250,'', 'up',       up-40,up-18, dn+18,dn+40, svg1);
+  sgSide(370,'', 'downdown', up-26,up-8,  dn+8, dn+26, svg1);
+  sgSide(490,'', 'up',       up-40,up-18, dn+18,dn+40, svg1);
+
+  // sorgente + selettore (blocca m₀=−k)
+  txt(16,yIn-4,'⟶',{'font-size':18,fill:INK},svg1);
+  txt(12,yIn+18,'Ag',{'font-size':9,fill:'#6f8f80','font-family':'monospace'},svg1);
+  beam(40,yIn,110,yIn, fw(1),1, INK, svg1);
+  curveBeam(110,yIn,176,yPlat, fw(0.5),1, ACC, svg1);
+  beam(176,yPlat,250,yPlat, fw(0.5),1, ACC, svg1);
+  curveBeam(110,yIn,160,yIn+40, fw(0.5),.85, BLU, svg1);
+  hatchStop(172,yIn+40,svg1);
+  txt(190,yIn+44,'m₀=−k',{'font-size':9,fill:'#6f8f80','font-family':'monospace'},svg1);
+  txt(150,yPlat-8,'|m₀=+k⟩',{'font-size':9,fill:ACC,'font-family':'monospace','text-anchor':'middle'},svg1);
+
+  // scomposizione a M-A (x=250): due rami m₉₀=±k
+  curveBeam(250,yPlat,320,up, fw(0.25), showUp?1:.35, showUp?ACC:DIM, svg1);
+  curveBeam(250,yPlat,320,dn, fw(0.25), showDn?1:.35, showDn?BLU:DIM, svg1);
+  txt(300,up-8,'m₉₀=+k',{'font-size':8.5,fill:ACC,'font-family':'monospace'},svg1);
+  txt(300,dn+16,'m₉₀=−k',{'font-size':8.5,fill:BLU,'font-family':'monospace'},svg1);
+  // rami orizzontali fino alla barriera o alla ricombinazione
+  var upEnd = showUp?420:370, dnEnd = showDn?420:370;
+  beam(320,up,upEnd,up, fw(0.25), showUp?1:.35, showUp?ACC:DIM, svg1);
+  beam(320,dn,dnEnd,dn, fw(0.25), showDn?1:.35, showDn?BLU:DIM, svg1);
+  // barriere (Fig.9): bloccano il ramo -k (Caso 1) o +k (Caso 2)
+  if(!showDn) hatchStop(370,dn,svg1);
+  if(!showUp) hatchStop(370,up,svg1);
+  // ricombinazione a M-C (x=490) dei rami sopravvissuti
+  if(showUp) curveBeam(420,up,490,yPlat, fw(0.25),1, ACC, svg1);
+  if(showDn) curveBeam(420,dn,490,yPlat, fw(0.25),1, BLU, svg1);
+
+  // fascio ricombinato -> misura di m₀ -> due rivelatori
+  beam(490,yPlat,556,yPlat, fw(r.recFlux),1, INK, svg1);
+  curveBeam(556,yPlat,626,yPlat-30, fw(fUp),1, ACC, svg1);
+  curveBeam(556,yPlat,626,yPlat+30, fw(fDn),1, BLU, svg1);
+  beam(626,yPlat-30,672,yPlat-30, fw(fUp),1, ACC, svg1);
+  beam(626,yPlat+30,672,yPlat+30, fw(fDn),1, BLU, svg1);
+  detector(678,yPlat-30,ACC,svg1); detector(678,yPlat+30,BLU,svg1);
+  txt(690,yPlat-26,'+k',{'font-size':11,fill:ACC,'font-family':'monospace'},svg1);
+  txt(690,yPlat+34,'−k',{'font-size':11,fill:BLU,'font-family':'monospace'},svg1);
+  txt(666,yPlat-42,fmtPct(r.Pp),{'font-size':11,fill:ACC,'font-family':'monospace','font-weight':'bold','text-anchor':'end'},svg1);
+  txt(666,yPlat+50,fmtPct(r.Pm),{'font-size':11,fill:BLU,'font-family':'monospace','font-weight':'bold','text-anchor':'end'},svg1);
+  txt(556,yPlat-12,'misura m₀',{'font-size':8.5,fill:'#6f8f80','font-family':'monospace','text-anchor':'middle'},svg1);
+
+  // ---- readout ----
+  document.getElementById('p0v').textContent=fmtPct(r.Pp);
+  document.getElementById('p0mv').textContent=fmtPct(r.Pm);
+  document.getElementById('p0f').style.width=(r.Pp*100)+'%';
+  document.getElementById('p0mf').style.width=(r.Pm*100)+'%';
+  var caseTxt = { 1:{it:'blocco il ramo m₉₀=−k, passa solo m₉₀=+k',en:'block the m₉₀=−k branch, only m₉₀=+k passes'},
+                  2:{it:'blocco il ramo m₉₀=+k, passa solo m₉₀=−k',en:'block the m₉₀=+k branch, only m₉₀=−k passes'},
+                  3:{it:'nessun blocco: i due rami si ricombinano',en:'no block: the two branches recombine'} }[CASE];
+  document.getElementById('mcase').innerHTML='<span class="it">'+caseTxt.it+'</span><span class="en">'+caseTxt.en+'</span>';
+  document.getElementById('mres').innerHTML='P(m₀=+k) = <b class="num">'+fmtPct(r.Pp)+'</b> · P(m₀=−k) = <b class="num">'+fmtPct(r.Pm)+'</b>';
+}
+
+/* ---- confronto dei tre casi: P(m₀=−k) = 50%, 50%, 0% ---- */
+function drawBoard(){
+  while(plot1.firstChild) plot1.removeChild(plot1.firstChild);
+  var W=660,H=210, base=176, maxh=120;
+  var vals=[0.5,0.5,0], cx=[150,330,510], bw=78;
+  // assi/griglia
+  for(var p=0;p<=1.0001;p+=0.5){ var gy=base-p*maxh;
+    el('line',{x1:60,y1:gy,x2:W-20,y2:gy,stroke:'#123026','stroke-width':1},plot1);
+    txt(54,gy+3,Math.round(p*100)+'',{'text-anchor':'end','font-size':9,fill:'#3e6b58','font-family':'monospace'},plot1); }
+  txt(20,base-maxh/2,'P(−k)',{'font-size':9,fill:'#57d98a','font-family':'monospace'},plot1);
+  for(var i=0;i<3;i++){
+    var v=vals[i], top=base-v*maxh, cur=(CASE===i+1);
+    el('rect',{x:cx[i]-bw/2,y:top,width:bw,height:base-top,rx:2,
+      fill:cur?'#ffb000':'#22423a',stroke:cur?'#ffd57a':'#2f5a4c','stroke-width':cur?2:1,
+      filter:cur?'drop-shadow(0 0 6px rgba(255,176,0,.5))':'none'},plot1);
+    txt(cx[i],top-7,fmtPct(v),{'text-anchor':'middle','font-size':13,fill:cur?'#ffd57a':'#7fae9a','font-family':'monospace','font-weight':'bold'},plot1);
+    txt(cx[i],base+16,'Caso '+(i+1),{'text-anchor':'middle','font-size':10,fill:cur?'#ffb000':'#6f8f80','font-family':'monospace'},plot1);
+  }
+  // freccia paradosso 50 + 50 -> 0
+  txt(330,26,'50%  +  50%  →  0%',{'text-anchor':'middle','font-size':12,fill:'#e0a24d','font-family':'monospace','font-weight':'bold'},plot1);
+  document.getElementById('fit1').classList.toggle('on',CASE===3);
+  var st=document.getElementById('stat1');
+  st.textContent = CASE===3 ? 'ricombinando i due rami: 100% / 0% (interferenza)' : 'Caso '+CASE+': un ramo bloccato → 50% / 50%';
+}
+
+function setCase(c){
+  CASE=c;
+  [].forEach.call(document.getElementById('caseSeg').children,function(b){ b.classList.toggle('on',+b.getAttribute('data-c')===c); });
+  drawExp3(); drawBoard();
+  clearTimeout(bubbleT);
+  var bub=document.getElementById('bubble');
+  if(c===3){ bubbleT=setTimeout(function(){ bub.classList.add('show'); }, 450); }
+  else bub.classList.remove('show');
+}
+
+document.getElementById('caseSeg').addEventListener('click',function(e){
+  var b=e.target.closest('button'); if(!b) return; setCase(+b.getAttribute('data-c'));
+});
+
+initBackLink('02-stern-gerlach-cascata.html');
+drawExp3(); drawBoard();
+</script>
+</body>
+</html>

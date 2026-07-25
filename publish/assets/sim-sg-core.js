@@ -40,6 +40,21 @@ function hatchStop(x, y, parent) {
   return g;
 }
 
+// freccia di gradiente di campo (per le macchine viste di lato)
+function gradArrow(x, y0, y1, parent) {
+  el('line', { x1: x, y1: y0, x2: x, y2: y1, stroke: '#e0a04b', 'stroke-width': 1.6 }, parent);
+  var d = (y1 > y0) ? 1 : -1;
+  el('polygon', { points: x + ',' + y1 + ' ' + (x - 3.2) + ',' + (y1 - 6 * d) + ' ' + (x + 3.2) + ',' + (y1 - 6 * d), fill: '#e0a04b' }, parent);
+}
+// macchina di Stern-Gerlach vista di LATO (longitudinale): coppia di poli + gradiente
+function sgSide(cx, label, grad, upTop, upBot, loTop, loBot, parent) {
+  el('rect', { x: cx - 32, y: upTop, width: 64, height: (upBot - upTop), fill: PANEL, stroke: INK, 'stroke-width': 1.4 }, parent);
+  el('rect', { x: cx - 32, y: loTop, width: 64, height: (loBot - loTop), fill: PANEL, stroke: INK, 'stroke-width': 1.4 }, parent);
+  if (grad === 'up') { gradArrow(cx, loTop - 4, upBot + 4, parent); }
+  else if (grad === 'downdown') { gradArrow(cx - 7, upBot + 4, loTop - 4, parent); gradArrow(cx + 7, upBot + 4, loTop - 4, parent); }
+  if (label) txt(cx, loBot + 15, label, { 'text-anchor': 'middle', 'font-family': 'monospace', 'font-size': 10, fill: '#6f8f80' }, parent);
+}
+
 /* ---- macchina di Stern-Gerlach in SEZIONE TRASVERSALE ----
    polo superiore a lama (▽) + polo inferiore con gola (⊃), asse a tratto-punto,
    ruota di `angle` gradi; se angle≠0 disegna il riferimento verticale + arco dell'angolo. */
