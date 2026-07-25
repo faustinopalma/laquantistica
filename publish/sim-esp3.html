@@ -88,20 +88,15 @@ function drawExp3(){
   var fUp = r.recFlux*r.Pp, fDn = r.recFlux*r.Pm;
 
   // ---- banda trasversale ----
-  txt(360,18,'— sezione trasversale —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
+  txt(360,18,'— vista trasversale · sezione delle macchine —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
   sgMagnet(110,96,0, 'selettore  ϑ=0°', svg1);
   sgMagnet(370,96,90,'interferometro  ϑ=90°  (×3)', svg1);
 
-  // ---- banda longitudinale (schema a occhio delle 3 macchine) ----
+  // ---- separatore: le due viste sono distinte e non vanno sovrapposte ----
+  el('line',{x1:40,y1:150,x2:680,y2:150,stroke:'#1c3a30','stroke-width':1},svg1);
+  // ---- vista longitudinale: SCHEMA semplificato (Fig.8/9), fork a "occhio" ----
   var yIn=352, yPlat=312, up=yPlat-34, dn=yPlat+34;
-  txt(360,168,'— schema longitudinale (larghezza linea ∝ flusso) —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
-  el('line',{x1:110,y1:136,x2:110,y2:yIn-16,stroke:'#3f5c4d','stroke-width':1,'stroke-dasharray':'3 4'},svg1);
-  el('line',{x1:370,y1:136,x2:370,y2:up-40,stroke:'#3f5c4d','stroke-width':1,'stroke-dasharray':'3 4'},svg1);
-
-  // le tre macchine dell'interferometro (viste di lato) con i gradienti ↑ ↓↓ ↑
-  sgSide(250,'', 'up',       up-40,up-18, dn+18,dn+40, svg1);
-  sgSide(370,'', 'downdown', up-26,up-8,  dn+8, dn+26, svg1);
-  sgSide(490,'', 'up',       up-40,up-18, dn+18,dn+40, svg1);
+  txt(360,168,'— vista longitudinale · percorso e blocchi  (larghezza ∝ flusso) —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
 
   // sorgente + selettore (blocca m₀=−k)
   txt(16,yIn-4,'⟶',{'font-size':18,fill:INK},svg1);

@@ -82,17 +82,16 @@ function drawExp2(){
   var fUp=flux2*P3, fDn=flux2*P3m;         // flussi ai rivelatori
 
   // ---- banda trasversale: le tre macchine in sezione ----
-  txt(360,18,'— sezione trasversale —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
+  txt(360,18,'— vista trasversale · sezione delle macchine —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
   sgMagnet(150,92,t1,'M1  ϑ₁='+t1+'°',svg1);
   sgMagnet(360,92,t2,'M2  ϑ₂='+t2+'°',svg1);
   sgMagnet(570,92,t3,'M3  ϑ₃='+t3+'°',svg1);
 
   // ---- banda longitudinale: percorso (larghezza ∝ flusso), a gradini ----
   var yIn=332, plat1=yIn-30, plat2=yIn-60;
-  txt(360,168,'— schema longitudinale (larghezza linea ∝ flusso) —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
-  el('line',{x1:150,y1:134,x2:150,y2:yIn-16,stroke:'#3f5c4d','stroke-width':1,'stroke-dasharray':'3 4'},svg1);
-  el('line',{x1:360,y1:134,x2:360,y2:plat1-16,stroke:'#3f5c4d','stroke-width':1,'stroke-dasharray':'3 4'},svg1);
-  el('line',{x1:570,y1:134,x2:570,y2:plat2-16,stroke:'#3f5c4d','stroke-width':1,'stroke-dasharray':'3 4'},svg1);
+  // ---- separatore: le due viste sono distinte e non vanno sovrapposte ----
+  el('line',{x1:40,y1:150,x2:680,y2:150,stroke:'#1c3a30','stroke-width':1},svg1);
+  txt(360,168,'— vista longitudinale · percorso  (larghezza ∝ flusso) —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
 
   txt(16,yIn-4,'⟶',{'font-size':18,fill:INK},svg1);
   txt(12,yIn+18,'Ag',{'font-size':9,fill:'#6f8f80','font-family':'monospace'},svg1);

@@ -79,16 +79,15 @@ function drawExp1(){
   var Pp=amp(st,t2,1); Pp=Pp*Pp; var Pm=1-Pp;
 
   // ---- banda trasversale: le due macchine in sezione, con l'orientamento ϑ ----
-  txt(330,18,'— sezione trasversale —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
+  txt(330,18,'— vista trasversale · sezione delle macchine —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
   sgMagnet(200,96,t1,'Macchina 1  ϑ₁='+t1+'°',svg1);
   sgMagnet(470,96,t2,'Macchina 2  ϑ₂='+t2+'°',svg1);
 
   // ---- banda longitudinale: percorso degli atomi (larghezza ∝ flusso) ----
   var yIn=250, ss=upSel?-1:1, yPlat=yIn+ss*34;
   var selCol=upSel?ACC:BLU, blkCol=upSel?BLU:ACC;
-  txt(330,172,'— schema longitudinale (larghezza linea ∝ flusso) —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
-  el('line',{x1:200,y1:150,x2:200,y2:yIn-16,stroke:'#3f5c4d','stroke-width':1,'stroke-dasharray':'3 4'},svg1);
-  el('line',{x1:470,y1:150,x2:470,y2:yPlat-16,stroke:'#3f5c4d','stroke-width':1,'stroke-dasharray':'3 4'},svg1);
+  el('line',{x1:30,y1:152,x2:630,y2:152,stroke:'#1c3a30','stroke-width':1},svg1);
+  txt(330,172,'— vista longitudinale · percorso degli atomi  (larghezza ∝ flusso) —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
 
   txt(18,yIn-4,'⟶',{'font-size':18,fill:INK},svg1);
   txt(14,yIn+18,'Ag',{'font-size':9,fill:'#6f8f80','font-family':'monospace'},svg1);
