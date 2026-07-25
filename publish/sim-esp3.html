@@ -40,7 +40,7 @@
       </div>
     </div>
     <aside class="ctrlcol">
-      <p class="panel-lede"><span class="it">Quattro macchine: la <b>prima seleziona</b> lo stato <b>m₀=+k</b>, le altre <b>tre</b> lo <b>dividono</b> (in m₉₀=+k e m₉₀=−k) e lo <b>ricongiungono</b>. Alla fine si misura di nuovo <b>m₀</b>. L'esperimento consiste nel <b>bloccare a turno</b> i rami.</span><span class="en">Four machines: the <b>first selects</b> the state <b>m₀=+k</b>, the other <b>three split</b> it (into m₉₀=+k and m₉₀=−k) and <b>recombine</b> it. At the end <b>m₀</b> is measured again. The experiment consists in <b>blocking the branches in turn</b>.</span></p>
+      <p class="panel-lede"><span class="it">Cinque macchine: la prima <b>(1)</b> <b>seleziona</b> lo stato <b>m₀=+k</b>, le tre centrali <b>(2·3·4)</b> lo <b>dividono</b> (in m₉₀=+k e m₉₀=−k) e lo <b>ricongiungono</b>, l'ultima <b>(5)</b> <b>misura</b> di nuovo <b>m₀</b>. L'esperimento consiste nel <b>bloccare a turno</b> i rami.</span><span class="en">Five machines: the first <b>(1)</b> <b>selects</b> the state <b>m₀=+k</b>, the three central ones <b>(2·3·4)</b> <b>split</b> it (into m₉₀=+k and m₉₀=−k) and <b>recombine</b> it, the last <b>(5)</b> <b>measures</b> <b>m₀</b> again. The experiment consists in <b>blocking the branches in turn</b>.</span></p>
       <div class="ctl-row">
         <span class="lbl"><span class="it">Configurazione:</span><span class="en">Configuration:</span></span>
         <span class="seg" id="caseSeg">
@@ -72,6 +72,12 @@ var plot1 = document.getElementById('plot1');
 var CASE = 1;
 var bubbleT = null;
 function fw(f){ return 0.6 + f * 8; }
+// marcatore schematico di una macchina: due montanti sopra/sotto il fascio + numero
+function machineMark(x, yTop, yBot, label){
+  el('line',{x1:x,y1:yTop-15,x2:x,y2:yTop,stroke:'#8fbfa8','stroke-width':3,'stroke-linecap':'round'},svg1);
+  el('line',{x1:x,y1:yBot,x2:x,y2:yBot+15,stroke:'#8fbfa8','stroke-width':3,'stroke-linecap':'round'},svg1);
+  txt(x,yTop-21,label,{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#bcd8c9','font-weight':'bold'},svg1);
+}
 
 /* ---- risultati per caso ---- */
 function results(c){
@@ -96,7 +102,7 @@ function drawExp3(){
   el('line',{x1:40,y1:150,x2:680,y2:150,stroke:'#1c3a30','stroke-width':1},svg1);
   // ---- vista longitudinale: SCHEMA semplificato (Fig.8/9), fork a "occhio" ----
   var yIn=352, yPlat=312, up=yPlat-34, dn=yPlat+34;
-  txt(360,168,'— vista longitudinale · percorso e blocchi  (larghezza ∝ flusso) —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
+  txt(360,168,'— vista longitudinale · 1 seleziona, 2·3·4 separano/ricongiungono, 5 misura  (larghezza ∝ flusso) —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
 
   // sorgente + selettore (blocca m₀=−k)
   txt(16,yIn-4,'⟶',{'font-size':18,fill:INK},svg1);
@@ -115,12 +121,12 @@ function drawExp3(){
   txt(300,up-8,'m₉₀=+k',{'font-size':8.5,fill:ACC,'font-family':'monospace'},svg1);
   txt(300,dn+16,'m₉₀=−k',{'font-size':8.5,fill:BLU,'font-family':'monospace'},svg1);
   // rami orizzontali fino alla barriera o alla ricombinazione
-  var upEnd = showUp?420:370, dnEnd = showDn?420:370;
+  var upEnd = showUp?420:345, dnEnd = showDn?420:345;
   beam(320,up,upEnd,up, fw(0.25), showUp?1:.35, showUp?ACC:DIM, svg1);
   beam(320,dn,dnEnd,dn, fw(0.25), showDn?1:.35, showDn?BLU:DIM, svg1);
   // barriere (Fig.9): bloccano il ramo -k (Caso 1) o +k (Caso 2)
-  if(!showDn) hatchStop(370,dn,svg1);
-  if(!showUp) hatchStop(370,up,svg1);
+  if(!showDn) hatchStop(345,dn,svg1);
+  if(!showUp) hatchStop(345,up,svg1);
   // ricombinazione a M-C (x=490) dei rami sopravvissuti
   if(showUp) curveBeam(420,up,490,yPlat, fw(0.25),1, ACC, svg1);
   if(showDn) curveBeam(420,dn,490,yPlat, fw(0.25),1, BLU, svg1);
@@ -136,7 +142,12 @@ function drawExp3(){
   txt(690,yPlat+34,'−k',{'font-size':11,fill:BLU,'font-family':'monospace'},svg1);
   txt(666,yPlat-42,fmtPct(r.Pp),{'font-size':11,fill:ACC,'font-family':'monospace','font-weight':'bold','text-anchor':'end'},svg1);
   txt(666,yPlat+50,fmtPct(r.Pm),{'font-size':11,fill:BLU,'font-family':'monospace','font-weight':'bold','text-anchor':'end'},svg1);
-  txt(556,yPlat-12,'misura m₀',{'font-size':8.5,fill:'#6f8f80','font-family':'monospace','text-anchor':'middle'},svg1);
+  // ---- 5 macchine (marcatori schematici): 1 seleziona · 2·3·4 separano e ricongiungono · 5 misura ----
+  machineMark(110, yIn-13, yIn+13, '1');
+  machineMark(250, yPlat-13, yPlat+13, '2');
+  machineMark(370, up-15, dn+15, '3');
+  machineMark(490, yPlat-13, yPlat+13, '4');
+  machineMark(556, yPlat-13, yPlat+13, '5');
 
   // ---- readout ----
   document.getElementById('p0v').textContent=fmtPct(r.Pp);
