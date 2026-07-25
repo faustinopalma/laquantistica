@@ -76,6 +76,18 @@
     .pbars{grid-template-columns:1fr;}
     .sim-math{font-size:.76rem;}
   }
+  /* ---- Layout a larghezza piena (per il simulatore niente "foglio" stretto con cornice) ---- */
+  .sheet{max-width:none;margin:0;border:0;box-shadow:none;background:transparent;}
+  .sheet::before,.sheet::after{display:none;}
+  .sheet-inner{max-width:1360px;margin:0 auto;padding:2.2rem clamp(1rem,4vw,3.5rem) 3rem;}
+  /* il testo discorsivo resta su una misura leggibile anche a schermo largo */
+  .sheet-inner > h1,
+  .sheet-inner > h2,
+  .sheet-inner > p,
+  .sheet-inner > .takeaway{max-width:62rem;}
+  /* le schede interattive e i diagrammi usano tutta la larghezza disponibile */
+  .sim-card{max-width:none;}
+  .sim-stage{max-width:1040px;margin-inline:auto;}
 </style>
 </head>
 <body>
@@ -262,6 +274,12 @@ function analyzerBox(cx,cy,label,angle,parent){
 function beam(x1,y1,x2,y2,w,op,color,parent){
   return el('line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:color,'stroke-width':w,opacity:op,'stroke-linecap':'round'},parent);
 }
+// smooth S-bend with horizontal tangents at both ends (matches the hand-drawn beam paths)
+function curveBeam(x1,y1,x2,y2,w,op,color,parent){
+  var mx=(x1+x2)/2;
+  var d='M'+x1+' '+y1+' C '+mx+' '+y1+' '+mx+' '+y2+' '+x2+' '+y2;
+  return el('path',{d:d,fill:'none',stroke:color,'stroke-width':w,opacity:op,'stroke-linecap':'round'},parent);
+}
 
 function drawM1(){
   while(svg1.firstChild) svg1.removeChild(svg1.firstChild);
@@ -340,28 +358,30 @@ function drawM2(){
   txt(20,158,'⟶',{'font-size':20,fill:INK}); txt(16,176,'|m₀=+k⟩',{'font-size':10,fill:'#777','font-family':'monospace'});
   beam(38,150,96,150,3,1,INK,svg2);
   analyzerBox(120,150,'SG 90°',90,svg2);
-  // split: upper (+) and lower (−)
-  beam(146,150,250,86, showUp?4:2, showUp?1:.2, showUp?ACC:DIM, svg2);
-  beam(146,150,250,214, showDn?4:2, showDn?1:.2, showDn?BLU:DIM, svg2);
-  txt(210,78,'|m₉₀=+k⟩',{'font-size':10,fill:ACC,'font-family':'monospace'});
-  txt(210,232,'|m₉₀=−k⟩',{'font-size':10,fill:BLU,'font-family':'monospace'});
-  // straight segments
-  beam(250,86,430,86, showUp?4:2, showUp?1:.2, showUp?ACC:DIM, svg2);
-  beam(250,214,360,214, showDn?4:2, showDn?1:.2, showDn?BLU:DIM, svg2);
-  // phase box on lower branch
-  el('rect',{x:360,y:198,width:44,height:32,rx:3,fill:'#fff',stroke:BLU,'stroke-width':2,opacity:showDn?1:.3},svg2);
-  txt(382,219,'φ='+phi+'°',{'font-size':10,fill:BLU,'font-family':'monospace','text-anchor':'middle',opacity:showDn?1:.3});
-  beam(404,214,430,214, showDn?4:2, showDn?1:.2, showDn?BLU:.2, svg2);
-  // recombine to a junction at x=470
-  beam(430,86,470,150, showUp?4:2, showUp?1:.2, showUp?ACC:DIM, svg2);
-  beam(430,214,470,150, showDn?4:2, showDn?1:.2, showDn?BLU:DIM, svg2);
-  // block markers
-  if(!showUp){ el('rect',{x:340,y:75,width:8,height:22,fill:'#b03535'},svg2); }
-  if(!showDn){ el('rect',{x:340,y:203,width:8,height:22,fill:'#b03535'},svg2); }
+  // fork stub, then a symmetric smooth split (mirror image of the recombination)
+  var yUp=94, yDn=206, xF=178, xR=243, xL=428, xM=493;
+  beam(146,150,xF,150, 3, 1, INK, svg2);
+  curveBeam(xF,150,xR,yUp, showUp?4:2, showUp?1:.2, showUp?ACC:DIM, svg2);
+  curveBeam(xF,150,xR,yDn, showDn?4:2, showDn?1:.2, showDn?BLU:DIM, svg2);
+  txt(250,84,'|m₉₀=+k⟩',{'font-size':10,fill:ACC,'font-family':'monospace'});
+  txt(250,236,'|m₉₀=−k⟩',{'font-size':10,fill:BLU,'font-family':'monospace'});
+  // parallel horizontal rails
+  beam(xR,yUp,xL,yUp, showUp?4:2, showUp?1:.2, showUp?ACC:DIM, svg2);
+  beam(xR,yDn,xL,yDn, showDn?4:2, showDn?1:.2, showDn?BLU:DIM, svg2);
+  // phase box sits on the lower rail
+  el('rect',{x:308,y:yDn-16,width:44,height:32,rx:3,fill:'#fff',stroke:BLU,'stroke-width':2,opacity:showDn?1:.3},svg2);
+  txt(330,yDn+5,'φ='+phi+'°',{'font-size':10,fill:BLU,'font-family':'monospace','text-anchor':'middle',opacity:showDn?1:.3});
+  // symmetric smooth recombination (mirror image of the split)
+  curveBeam(xL,yUp,xM,150, showUp?4:2, showUp?1:.2, showUp?ACC:DIM, svg2);
+  curveBeam(xL,yDn,xM,150, showDn?4:2, showDn?1:.2, showDn?BLU:DIM, svg2);
+  beam(xM,150,499,150, 3, 1, INK, svg2);
+  // block markers on a closed branch
+  if(!showUp){ el('rect',{x:266,y:yUp-11,width:8,height:22,fill:'#b03535'},svg2); }
+  if(!showDn){ el('rect',{x:266,y:yDn-11,width:8,height:22,fill:'#b03535'},svg2); }
   // final SG0 measure
-  analyzerBox(500,150,'SG 0°',0,svg2);
-  beam(526,150,624,96, 1.5+Pp*7, .35+Pp*.65, ACC, svg2);
-  beam(526,150,624,206, 1.5+Pm*7, .35+Pm*.65, BLU, svg2);
+  analyzerBox(525,150,'SG 0°',0,svg2);
+  beam(551,150,624,98, 1.5+Pp*7, .35+Pp*.65, ACC, svg2);
+  beam(551,150,624,202, 1.5+Pm*7, .35+Pm*.65, BLU, svg2);
   txt(632,98,'+k',{'font-size':12,fill:ACC,'font-family':'monospace'});
   txt(632,210,'−k',{'font-size':12,fill:BLU,'font-family':'monospace'});
   txt(600,84,fmtPct(Pp),{'font-size':12,fill:ACC,'font-family':'monospace','font-weight':'bold','text-anchor':'end'});
