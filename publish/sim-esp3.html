@@ -30,10 +30,14 @@
   /* header tabella + fumetto */
   .tbl-head{display:flex;justify-content:space-between;align-items:center;font-family:var(--n-mono);font-size:.66rem;color:#8fbfa8;}
   .tblwrap{position:relative;}
-  .tblwrap .fumetto{left:6px;right:6px;top:auto;bottom:2px;}
+  #bubble{left:auto;right:auto;top:auto;bottom:auto;max-width:225px;z-index:7;transform:translateY(8px) scale(.92);}
+  #bubble.show{transform:translateY(0) scale(1);}
+  #bubble::after{left:auto;right:-13px;top:50%;bottom:auto;transform:translateY(-50%);border:7px solid transparent;border-left-color:#ffb000;border-bottom-color:transparent;}
   /* linea dal gauge (nel disegno) alla colonna della tabella, sovrapposta al pannello */
   .link{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:5;}
   #linkpath{fill:none;stroke:#e0a24d;stroke-width:1.9;opacity:0;filter:drop-shadow(0 0 3px rgba(224,162,77,.6));}
+  @keyframes gatePulse{0%{transform:scale(.55);opacity:.9}70%{opacity:.28}100%{transform:scale(1.75);opacity:0}}
+  .gate-pulse{transform-box:fill-box;transform-origin:center;animation:gatePulse 1.4s ease-out 3;}
 </style>
 <script defer src="assets/lang.js?v=5"></script>
 </head>
@@ -75,7 +79,6 @@
             <tr data-up="1" data-dn="1"><td><span class="dot cl"></span><span class="it">chiusa</span><span class="en">closed</span></td><td><span class="dot cl"></span><span class="it">chiusa</span><span class="en">closed</span></td><td class="res pcol">?</td></tr>
           </tbody>
         </table>
-        <div class="fumetto" id="bubble"><span class="it">50% + 50% → <b>0%</b>: si sommano le <b>ampiezze</b>, non le probabilità.</span><span class="en">50% + 50% → <b>0%</b>: <b>amplitudes</b> add, not probabilities.</span></div>
       </div>
       <div class="plot-status" id="stat1"></div>
       <div class="sim-math" id="math1">
@@ -86,6 +89,7 @@
       <p class="hint"><span class="it">Ogni ramo <b>da solo</b> dà <b>P(m₀=−k)=50%</b>. Verrebbe da pensare che aprendo <b>entrambi</b> i rami si sommi a 100%: invece si <b>annulla a 0%</b> (si ricostruisce |m₀=+k⟩). Bloccando <b>entrambi</b> i rami, ovviamente, non arriva nulla: 0%.</span><span class="en">Each branch <b>alone</b> gives <b>P(m₀=−k)=50%</b>. One would think opening <b>both</b> branches adds up to 100%: instead it <b>cancels to 0%</b> (|m₀=+k⟩ is rebuilt). Blocking <b>both</b> branches, obviously, lets nothing through: 0%.</span></p>
     </aside>
     <svg class="link" id="linksvg" aria-hidden="true"><path id="linkpath"></path></svg>
+    <div class="fumetto" id="bubble"><span class="it">50% + 50% → <b>0%</b>: si sommano le <b>ampiezze</b>, non le probabilità.</span><span class="en">50% + 50% → <b>0%</b>: <b>amplitudes</b> add, not probabilities.</span></div>
   </section>
 
   <div class="con-foot"><span>La Quantistica · Simulatore · Cap. 02 · Esperimento 3</span><span>F. Palma</span></div>
@@ -96,14 +100,31 @@
 var svg1 = document.getElementById('svg1');
 var blockUp=false, blockDn=true;   // blocco del ramo +k / del ramo −k (default: blocca −k)
 var bubbleT = null;
-function fw(f){ return 0.6 + f * 8; }
-// una PORTA cliccabile sul fascio: si apre e chiude come una porta (pulse = invito a cliccare)
-function gate(x, y, closed, which, pulse){
-  if(pulse){
-    var ring=el('circle',{cx:x,cy:y,r:12,fill:'none',stroke:'#ffb000','stroke-width':1.6,opacity:0.75},svg1);
-    el('animate',{attributeName:'r',values:'10;18;10',dur:'1.5s',repeatCount:'indefinite'},ring);
-    el('animate',{attributeName:'opacity',values:'0.85;0.12;0.85',dur:'1.5s',repeatCount:'indefinite'},ring);
+var touchedUp=false, touchedDn=false, inviteTimer=null, invitePulseT=null;
+var needleCur=0, needleRAF=null;
+// muove la lancetta da needleCur al valore target con leggero overshoot (moto realistico)
+function tweenNeedle(target, cx, cy){
+  var nn=document.getElementById('gaugeNeedle'); if(!nn) return;
+  cancelAnimationFrame(needleRAF);
+  var start=needleCur;
+  nn.setAttribute('transform','rotate('+target+' '+cx+' '+cy+')');   // stato finale: corretto anche senza animazione
+  needleCur=target;
+  if(Math.abs(target-start)<0.5) return;
+  var t0=null, dur=850, c=1.5;
+  function ease(p){ p-=1; return 1 + p*p*((c+1)*p + c); }            // back-out (rimbalzo da lancetta)
+  function step(ts){
+    if(t0===null) t0=ts;
+    var p=(ts-t0)/dur;
+    if(p>=1){ nn.setAttribute('transform','rotate('+target+' '+cx+' '+cy+')'); return; }
+    var a=start+(target-start)*ease(p);
+    nn.setAttribute('transform','rotate('+a.toFixed(2)+' '+cx+' '+cy+')');
+    needleRAF=requestAnimationFrame(step);
   }
+  needleRAF=requestAnimationFrame(step);
+}
+function fw(f){ return 0.6 + f * 8; }
+// una PORTA cliccabile sul fascio: si apre e chiude come una porta
+function gate(x, y, closed, which){
   var hy=y-14, L=28, ang=(closed?0:78)*Math.PI/180;
   var ex=x+L*Math.sin(ang), ey=hy+L*Math.cos(ang);
   el('line',{x1:x-7,y1:hy,x2:x+7,y2:hy,stroke:'#4a6b59','stroke-width':1},svg1);                 // telaio
@@ -112,8 +133,9 @@ function gate(x, y, closed, which, pulse){
   var hit=el('rect',{x:x-15,y:y-20,width:30,height:42,fill:'transparent'},svg1);
   hit.style.cursor='pointer';
   hit.addEventListener('click',function(){
-    if(which==='up') setBlock(blockUp?0:1, blockDn?1:0);
-    else setBlock(blockUp?1:0, blockDn?0:1);
+    if(which==='up'){ touchedUp=true; setBlock(blockUp?0:1, blockDn?1:0); }
+    else { touchedDn=true; setBlock(blockUp?1:0, blockDn?0:1); }
+    if(touchedUp&&touchedDn) stopInvite();
   });
 }
 // piccolo sensore quadrato posto sul fascio, a valle della macchina 5
@@ -141,12 +163,11 @@ function results(bu,bd){
 }
 
 function drawExp3(){
-  [].slice.call(svg1.childNodes).forEach(function(nd){ if(nd.id!=='gaugeNeedleG') svg1.removeChild(nd); });
+  [].slice.call(svg1.childNodes).forEach(function(nd){ if(nd.id!=='gaugeNeedleG' && nd.id!=='invitePulseG') svg1.removeChild(nd); });
   var r = results(blockUp, blockDn);
   var showUp = !blockUp;   // il ramo m₉₀=+k (superiore) passa se non bloccato
   var showDn = !blockDn;   // il ramo m₉₀=−k (inferiore) passa se non bloccato
   var fUp = r.recFlux*r.Pp, fDn = r.recFlux*r.Pm;
-  var invite = document.querySelectorAll('#ttab tbody tr.done').length < 4;
 
   // ===== BANDA 1: viste di taglio delle 5 macchine =====
   txt(360,16,'— vista trasversale · le 5 macchine SG  (1 e 5 a ϑ=0°, 2·3·4 a ϑ=90°) —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
@@ -209,10 +230,10 @@ function drawExp3(){
   // freccia dal gauge (misura −k) verso la tabella (a destra)
   el('line',{x1:700,y1:yPlat+30,x2:710,y2:yPlat+30,stroke:'#e0a24d','stroke-width':1.3,'stroke-dasharray':'4 3'},svg1);
   el('path',{d:'M705 '+(yPlat+26)+' L712 '+(yPlat+30)+' L705 '+(yPlat+34),fill:'none',stroke:'#e0a24d','stroke-width':1.3,'stroke-linejoin':'round'},svg1);
-  // porte cliccabili (con anello pulsante finché la tabella non è completa)
-  gate(gx, up, blockUp, 'up', invite);
-  gate(gx, dn, blockDn, 'dn', invite);
-  txt(gx, up-30, invite ? '☝ clicca le porte per aprirle / chiuderle' : 'porte: clic per aprire / chiudere', {'text-anchor':'middle','font-size':9,fill: invite?'#ffb000':'#8fbfa8','font-family':'monospace','font-weight': invite?'bold':'normal'},svg1);
+  // porte cliccabili sui due rami
+  gate(gx, up, blockUp, 'up');
+  gate(gx, dn, blockDn, 'dn');
+  txt(gx, up-30, 'porte: clic per aprire / chiudere', {'text-anchor':'middle','font-size':8.5,fill:'#8fbfa8','font-family':'monospace'},svg1);
 
   // ---- readout ----
   var recomb=!blockUp&&!blockDn, none=blockUp&&blockDn;
@@ -240,25 +261,24 @@ function drawGauge(cx,cy,R,val,live){
   var g=document.getElementById('gaugeNeedleG');
   if(!g){
     g=el('g',{id:'gaugeNeedleG'},svg1);
-    var nl=el('line',{id:'gaugeNeedle',x1:cx,y1:cy,x2:cx,y2:cy-R+5,'stroke-width':2.5,'stroke-linecap':'round'},g);
-    nl.style.transformBox='view-box'; nl.style.transformOrigin=cx+'px '+cy+'px';
-    nl.style.transition='transform .6s cubic-bezier(.34,1.15,.4,1)';
+    el('line',{id:'gaugeNeedle',x1:cx,y1:cy,x2:cx,y2:cy-R+5,'stroke-width':2.5,'stroke-linecap':'round',transform:'rotate(0 '+cx+' '+cy+')'},g);
     el('circle',{id:'gaugeHub',cx:cx,cy:cy,r:3.8},g);
   }
-  svg1.appendChild(g);                    // tiene la lancetta sopra il quadrante
   var rot=(val-0.5)*180;
-  var nn=document.getElementById('gaugeNeedle'); nn.setAttribute('stroke',col); nn.style.transform='rotate('+rot+'deg)';
+  document.getElementById('gaugeNeedle').setAttribute('stroke',col);
   document.getElementById('gaugeHub').setAttribute('fill',col);
+  tweenNeedle(rot, cx, cy);
 }
 
 // linea gauge → colonna della tabella: si «disegna» a ogni misura (trasporto) e poi sparisce
 var linkFadeT=null;
 function linkGeom(){
-  var panel=document.querySelector('.panel'), a=document.getElementById('gaugeAnchor'), th=document.querySelector('#ttab thead th.pcol');
-  if(!panel||!a||!th) return null;
-  var pr=panel.getBoundingClientRect(), ar=a.getBoundingClientRect(), tr=th.getBoundingClientRect();
+  var panel=document.querySelector('.panel'), a=document.getElementById('gaugeAnchor'),
+      cell=document.querySelector('#ttab tbody tr.active .res') || document.querySelector('#ttab thead th.pcol');
+  if(!panel||!a||!cell) return null;
+  var pr=panel.getBoundingClientRect(), ar=a.getBoundingClientRect(), cr=cell.getBoundingClientRect();
   return { x1:ar.left+ar.width/2-pr.left, y1:ar.top+ar.height/2-pr.top,
-           x2:tr.left+tr.width/2-pr.left, y2:tr.top-pr.top, W:pr.width, H:pr.height };
+           x2:cr.left+10-pr.left, y2:cr.top+cr.height/2-pr.top, W:pr.width, H:pr.height };
 }
 function animateLink(){
   var g=linkGeom(), lsvg=document.getElementById('linksvg'), lp=document.getElementById('linkpath');
@@ -299,12 +319,40 @@ function fillTable(){
     : 'tabella completa: 50% + 50% dei rami singoli, ma insieme 0% — è questo l\'assurdo';
 }
 
+// invito a toccare le porte: 3 pulsazioni, poi sparisce; riappare ogni 15s finché non si toccano entrambe
+function pulseGates(){
+  if(touchedUp&&touchedDn) return;
+  var g=document.getElementById('invitePulseG');
+  if(!g) g=el('g',{id:'invitePulseG'},svg1);
+  while(g.firstChild) g.removeChild(g.firstChild);
+  [[340,404],[340,472]].forEach(function(p){
+    el('circle',{cx:p[0],cy:p[1],r:11,fill:'none',stroke:'#ffb000','stroke-width':1.9,'class':'gate-pulse'},g);
+  });
+  svg1.appendChild(g);
+  clearTimeout(invitePulseT);
+  invitePulseT=setTimeout(function(){ while(g.firstChild) g.removeChild(g.firstChild); }, 4300);
+}
+function stopInvite(){
+  clearInterval(inviteTimer); clearTimeout(invitePulseT);
+  var g=document.getElementById('invitePulseG'); if(g) while(g.firstChild) g.removeChild(g.firstChild);
+}
+// posiziona il fumetto accanto al gauge (nello spazio vuoto del diagramma)
+function positionBubble(){
+  var panel=document.querySelector('.panel'), a=document.getElementById('gaugeAnchor'), b=document.getElementById('bubble');
+  if(!panel||!a||!b) return;
+  var pr=panel.getBoundingClientRect(), ar=a.getBoundingClientRect();
+  var gx=ar.left+ar.width/2-pr.left, gy=ar.top+ar.height/2-pr.top;
+  b.style.left='auto'; b.style.bottom='auto';
+  b.style.right=(pr.width-gx+72)+'px';
+  b.style.top=(gy-42)+'px';
+}
+
 function setBlock(bu,bd){
   blockUp=!!bu; blockDn=!!bd;
   drawExp3(); fillTable(); animateLink();
   clearTimeout(bubbleT);
   var bub=document.getElementById('bubble');
-  if(!blockUp&&!blockDn){ bubbleT=setTimeout(function(){ bub.classList.add('show'); }, 450); }
+  if(!blockUp&&!blockDn){ bubbleT=setTimeout(function(){ positionBubble(); bub.classList.add('show'); }, 450); }
   else bub.classList.remove('show');
 }
 
@@ -315,6 +363,8 @@ document.getElementById('ttab').addEventListener('click',function(e){
 
 initBackLink('02-stern-gerlach-cascata.html');
 drawExp3(); fillTable();
+pulseGates();
+inviteTimer=setInterval(pulseGates, 15000);
 requestAnimationFrame(function(){ setTimeout(animateLink, 80); });
 </script>
 </body>
