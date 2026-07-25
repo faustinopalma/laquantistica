@@ -144,175 +144,138 @@
     padding:.4rem .7rem;background:#0f1216;border-top:1px solid #2a303a;
     font-family:var(--n-mono);font-size:.72rem;color:#8b929c;letter-spacing:.03em;
   }
+
+  /* ============ Console a pannelli — una schermata per esperimento ============ */
+  .console{max-width:1560px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;padding:0 clamp(.6rem,2vw,1.4rem) .4rem;}
+  .con-head{flex:none;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;padding:.5rem 0 .45rem;}
+  .con-brand{display:flex;align-items:center;gap:.6rem;}
+  .con-title{font-family:var(--n-serif);font-weight:700;font-size:1.02rem;color:#1b1e23;}
+  .con-actions{display:flex;align-items:center;gap:.8rem;}
+  .tabs{flex:none;display:flex;gap:.3rem;border-bottom:1px solid #2a303a;}
+  .tab{font-family:var(--n-mono);font-size:.77rem;font-weight:700;letter-spacing:.02em;background:transparent;
+    border:1px solid transparent;border-bottom:none;color:#6b6f77;padding:.5rem .85rem;cursor:pointer;border-radius:5px 5px 0 0;}
+  .tab.on{background:#1e232b;color:#e2a24d;border-color:#0c0e13;box-shadow:0 -2px 0 #b06a12 inset;}
+  .tab:hover:not(.on){color:#1b1e23;}
+  .panel{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 372px;gap:.9rem;
+    background:#1e232b;border:1px solid #0c0e13;border-radius:0 4px 4px 4px;
+    box-shadow:inset 0 0 0 1px #2a303a,0 3px 12px rgba(0,0,0,.35);padding:.9rem;}
+  .panel[hidden]{display:none;}
+  .stagecol{display:flex;flex-direction:column;gap:.65rem;min-height:0;}
+  .stagecol .sim-stage{flex:1 1 58%;min-height:0;margin:0;}
+  .stagecol .sim-stage svg{width:100%;height:100%;}
+  .stagecol .plotter{flex:1 1 42%;min-height:0;margin:0;display:flex;flex-direction:column;}
+  .stagecol .plot-screen{flex:1 1 auto;min-height:0;}
+  .stagecol .plot-screen svg{width:100%;height:100%;}
+  .ctrlcol{display:flex;flex-direction:column;gap:.55rem;min-height:0;overflow:auto;}
+  .ctrlcol .sim-controls,.ctrlcol .sim-presets,.ctrlcol .pbars,.ctrlcol .sim-math{margin:0;}
+  .panel-lede{font-family:var(--n-sans);font-size:.9rem;line-height:1.5;color:#aeb4bd;margin:0;}
+  .panel-lede b{color:#e2a24d;font-weight:700;}
+  .panel input[type=range]{accent-color:#e2a24d;}
+  .ctrlcol .sim-math{font-size:.75rem;padding:.7rem .8rem;}
+  .ctrlcol .pbar .pv{font-size:1.35rem;}
+  .con-foot{flex:none;display:flex;justify-content:space-between;font-family:var(--n-mono);
+    font-size:.66rem;color:#8b929c;padding:.35rem .1rem 0;}
+  @media (min-width:821px){ html,body{height:100%;overflow:hidden;} .console{height:100vh;overflow:hidden;} }
+  @media (max-width:820px){
+    .panel{grid-template-columns:1fr;padding:.7rem;}
+    .stagecol .sim-stage{flex:none;height:31vh;}
+    .stagecol .plotter{flex:none;height:25vh;}
+    .ctrlcol{overflow:visible;}
+    .ctrlcol .sim-math{display:none;}
+    .panel-lede{font-size:.82rem;line-height:1.45;}
+    .con-title{font-size:.95rem;}
+    .tab{font-size:.72rem;padding:.45rem .6rem;}
+  }
 </style>
 </head>
 <body>
-<main class="sheet" id="top">
-  <div class="sheet-inner">
-
-    <div class="doc-meta">
+<main class="console" id="top">
+  <header class="con-head">
+    <div class="con-brand">
       <span class="tag amber">Simulatore</span>
-      <span class="it">Cap. 02 · Stern-Gerlach in cascata</span><span class="en">Ch. 02 · Cascaded Stern-Gerlach</span>
+      <span class="con-title"><span class="it">Stern-Gerlach in cascata</span><span class="en">Cascaded Stern-Gerlach</span></span>
+    </div>
+    <div class="con-actions">
       <div class="langsw" role="group" aria-label="Lingua / Language">
         <button class="langbtn" type="button" data-l="it" aria-pressed="false">Italiano</button>
         <button class="langbtn" type="button" data-l="en" aria-pressed="true">English</button>
       </div>
       <a class="doc-back-top" id="backTop" href="02-stern-gerlach-cascata.html"><span class="it">← Indietro</span><span class="en">← Back</span></a>
     </div>
+  </header>
 
-    <h1 class="doc-title">
-      <span class="lead"><span class="it">Simulatore interattivo</span><span class="en">Interactive simulator</span></span>
-      <span class="it">Stern-Gerlach in cascata</span><span class="en">Cascaded Stern-Gerlach</span>
-    </h1>
+  <nav class="tabs" role="tablist">
+    <button class="tab on" type="button" data-panel="p1" role="tab" aria-selected="true"><span class="it">Esp. 1–2 · Deflessione &amp; probabilità</span><span class="en">Exp. 1–2 · Deflection &amp; probability</span></button>
+    <button class="tab" type="button" data-panel="p2" role="tab" aria-selected="false"><span class="it">Esp. 3–4 · Sovrapposizione &amp; interferenza</span><span class="en">Exp. 3–4 · Superposition &amp; interference</span></button>
+  </nav>
 
-    <p class="lede sim-lede"><span class="it">Muovi i comandi e osserva come si comportano gli atomi — e la matematica che lo descrive — nei quattro esperimenti del Capitolo 2. Ogni analizzatore di Stern-Gerlach è una «macchina» che misura il momento magnetico lungo il proprio asse, inclinato di un angolo <b>ϑ</b>, e divide il fascio in due.</span><span class="en">Move the controls and watch how the atoms behave — and the mathematics that describes them — in the four experiments of Chapter 2. Each Stern-Gerlach analyzer is a “machine” that measures the magnetic moment along its own axis, tilted by an angle <b>ϑ</b>, and splits the beam in two.</span></p>
-
-    <!-- ===================== MODULE 1 ===================== -->
-    <h2><span class="it">Deflessione e probabilità</span><span class="en">Deflection and probability</span></h2>
-    <p><span class="it">Una prima macchina, inclinata di <b>ϑ₁</b>, prepara gli atomi in uno stato ben definito: scegliamo di lasciar passare solo il fascio <b>+k</b> (oppure <b>−k</b>) e blocchiamo l'altro. Una seconda macchina, inclinata di <b>ϑ₂</b>, misura di nuovo e divide il fascio. La probabilità dipende <em>solo</em> dall'angolo relativo tra le due macchine.</span><span class="en">A first machine, tilted by <b>ϑ₁</b>, prepares the atoms in a well-defined state: we let only the <b>+k</b> beam through (or <b>−k</b>) and block the other. A second machine, tilted by <b>ϑ₂</b>, measures again and splits the beam. The probability depends <em>only</em> on the relative angle between the two machines.</span></p>
-
-    <div class="sim-card">
-      <h3><span class="it">Modulo 1 — Cascata di due analizzatori</span><span class="en">Module 1 — Cascade of two analyzers</span></h3>
-      <div class="sim-stage">
-        <svg id="svg1" viewBox="0 0 660 340" role="img" aria-label="Cascade of two Stern-Gerlach analyzers"></svg>
-      </div>
-
-      <div class="sim-presets" id="presets1"></div>
-
-      <div class="sim-controls">
-        <div class="ctl">
-          <label><span class="it">Macchina 1&nbsp; ϑ₁</span><span class="en">Machine 1&nbsp; ϑ₁</span></label>
-          <input type="range" id="t1" min="0" max="360" step="1" value="0">
-          <span class="val" id="t1v">0°</span>
-        </div>
-        <div class="ctl-row">
-          <span class="lbl"><span class="it">Fascio selezionato dalla Macchina 1:</span><span class="en">Beam selected by Machine 1:</span></span>
-          <span class="seg" id="sel1">
-            <button type="button" data-s="1" class="on">+k</button>
-            <button type="button" data-s="-1">−k</button>
-          </span>
-        </div>
-        <div class="ctl">
-          <label><span class="it">Macchina 2&nbsp; ϑ₂</span><span class="en">Machine 2&nbsp; ϑ₂</span></label>
-          <input type="range" id="t2" min="0" max="360" step="1" value="90">
-          <span class="val" id="t2v">90°</span>
-        </div>
-      </div>
-
+  <!-- ===================== PANEL 1 ===================== -->
+  <section class="panel" id="p1" role="tabpanel">
+    <div class="stagecol">
+      <div class="sim-stage"><svg id="svg1" viewBox="0 0 660 340" role="img" aria-label="Cascade of two Stern-Gerlach analyzers"></svg></div>
       <div class="plotter">
-        <div class="plot-head">
-          <span class="plot-title">Plotter</span>
-          <span class="plot-sub">P(+k) — ϑ₂</span>
+        <div class="plot-head"><span class="plot-title">Plotter</span><span class="plot-sub">P(+k) — ϑ₂</span>
           <span class="leds"><span class="led rec" id="rec1">● REC</span><span class="led fit" id="fit1">● FIT</span></span>
-          <button class="plot-clr" type="button" id="clr1">CLR</button>
-        </div>
+          <button class="plot-clr" type="button" id="clr1">CLR</button></div>
         <div class="plot-screen"><svg id="plot1" viewBox="0 0 660 210" role="img" aria-label="measurement plot"></svg></div>
         <div class="plot-status" id="stat1"></div>
       </div>
-
-      <div class="pbars">
-        <div class="pbar" id="m1plus">
-          <div class="pk">P( m<sub>ϑ₂</sub> = +k )</div>
-          <div class="pv" id="m1pv">50%</div>
-          <div class="track"><div class="fill" id="m1pf"></div></div>
-        </div>
-        <div class="pbar minus" id="m1minus">
-          <div class="pk">P( m<sub>ϑ₂</sub> = −k )</div>
-          <div class="pv" id="m1mv">50%</div>
-          <div class="track"><div class="fill" id="m1mf"></div></div>
-        </div>
-      </div>
-
-      <div class="sim-math" id="math1">
-        <div class="mrow"><span class="lab it">Stato preparato:</span><span class="lab en">Prepared state:</span>
-          <span class="ket" id="m1state"></span></div>
-        <div class="mrow"><span class="lab it">Ampiezza:</span><span class="lab en">Amplitude:</span>
-          <span id="m1amp"></span></div>
-        <div class="mrow"><span class="lab it">Probabilità:</span><span class="lab en">Probability:</span>
-          <span id="m1prob"></span></div>
-      </div>
-      <p class="hint"><span class="it">Prova: con ϑ₂ = ϑ₁ la seconda macchina ritrova lo stesso stato (100%); a 90° il fascio si divide a metà; a 180° si inverte. Solo l'angolo <em>relativo</em> conta.</span><span class="en">Try: with ϑ₂ = ϑ₁ the second machine recovers the same state (100%); at 90° the beam splits in half; at 180° it flips. Only the <em>relative</em> angle matters.</span></p>
     </div>
-
-    <!-- ===================== MODULE 2 ===================== -->
-    <h2><span class="it">Sovrapposizione e interferenza</span><span class="en">Superposition and interference</span></h2>
-    <p><span class="it">Prepariamo gli atomi in <b>|m₀ = +k⟩</b> e li mandiamo in una macchina a 90°, che li divide nei due stati <b>|m₉₀ = +k⟩</b> e <b>|m₉₀ = −k⟩</b>. Poi <em>ricombiniamo</em> i due rami e misuriamo di nuovo lungo la verticale. Sul ramo inferiore possiamo introdurre uno sfasamento <b>φ</b> (un cammino più lungo). Il risultato non è la somma delle probabilità dei due rami: a sommarsi sono le <strong>ampiezze</strong>.</span><span class="en">We prepare the atoms in <b>|m₀ = +k⟩</b> and send them into a 90° machine, which splits them into the two states <b>|m₉₀ = +k⟩</b> and <b>|m₉₀ = −k⟩</b>. Then we <em>recombine</em> the two branches and measure again along the vertical. On the lower branch we can introduce a phase shift <b>φ</b> (a longer path). The result is not the sum of the two branches' probabilities: what add up are the <strong>amplitudes</strong>.</span></p>
-
-    <div class="sim-card">
-      <h3><span class="it">Modulo 2 — Divisione, sfasamento, ricombinazione</span><span class="en">Module 2 — Split, phase shift, recombine</span></h3>
-      <div class="sim-stage">
-        <svg id="svg2" viewBox="0 0 660 360" role="img" aria-label="Interference apparatus"></svg>
-      </div>
-
-      <div class="sim-presets" id="presets2"></div>
-
+    <aside class="ctrlcol">
+      <p class="panel-lede"><span class="it">Due macchine in cascata: la prima (<b>ϑ₁</b>) prepara lo stato, la seconda (<b>ϑ₂</b>) misura. La probabilità dipende solo dall'angolo <b>relativo</b> tra le due.</span><span class="en">Two machines in cascade: the first (<b>ϑ₁</b>) prepares the state, the second (<b>ϑ₂</b>) measures. The probability depends only on the <b>relative</b> angle between them.</span></p>
+      <div class="sim-presets" id="presets1"></div>
       <div class="sim-controls">
-        <div class="ctl-row">
-          <span class="lbl"><span class="it">Rami:</span><span class="en">Branches:</span></span>
-          <span class="seg" id="mode2">
-            <button type="button" data-m="both" class="on"><span class="it">Ricombina entrambi</span><span class="en">Recombine both</span></button>
-            <button type="button" data-m="blockLower"><span class="it">Blocca inferiore</span><span class="en">Block lower</span></button>
-            <button type="button" data-m="blockUpper"><span class="it">Blocca superiore</span><span class="en">Block upper</span></button>
-          </span>
-        </div>
-        <div class="ctl">
-          <label><span class="it">Sfasamento&nbsp; φ</span><span class="en">Phase shift&nbsp; φ</span></label>
-          <input type="range" id="phi" min="0" max="360" step="1" value="0">
-          <span class="val" id="phiv">0°</span>
-        </div>
+        <div class="ctl"><label><span class="it">Macchina 1&nbsp; ϑ₁</span><span class="en">Machine 1&nbsp; ϑ₁</span></label><input type="range" id="t1" min="0" max="360" step="1" value="0"><span class="val" id="t1v">0°</span></div>
+        <div class="ctl-row"><span class="lbl"><span class="it">Fascio selezionato:</span><span class="en">Selected beam:</span></span>
+          <span class="seg" id="sel1"><button type="button" data-s="1" class="on">+k</button><button type="button" data-s="-1">−k</button></span></div>
+        <div class="ctl"><label><span class="it">Macchina 2&nbsp; ϑ₂</span><span class="en">Machine 2&nbsp; ϑ₂</span></label><input type="range" id="t2" min="0" max="360" step="1" value="90"><span class="val" id="t2v">90°</span></div>
       </div>
+      <div class="pbars">
+        <div class="pbar" id="m1plus"><div class="pk">P( m<sub>ϑ₂</sub> = +k )</div><div class="pv" id="m1pv">50%</div><div class="track"><div class="fill" id="m1pf"></div></div></div>
+        <div class="pbar minus" id="m1minus"><div class="pk">P( m<sub>ϑ₂</sub> = −k )</div><div class="pv" id="m1mv">50%</div><div class="track"><div class="fill" id="m1mf"></div></div></div>
+      </div>
+      <div class="sim-math" id="math1">
+        <div class="mrow"><span class="lab it">Stato:</span><span class="lab en">State:</span><span class="ket" id="m1state"></span></div>
+        <div class="mrow"><span class="lab it">Ampiezza:</span><span class="lab en">Amplitude:</span><span id="m1amp"></span></div>
+        <div class="mrow"><span class="lab it">Probabilità:</span><span class="lab en">Probability:</span><span id="m1prob"></span></div>
+      </div>
+    </aside>
+  </section>
 
+  <!-- ===================== PANEL 2 ===================== -->
+  <section class="panel" id="p2" role="tabpanel" hidden>
+    <div class="stagecol">
+      <div class="sim-stage"><svg id="svg2" viewBox="0 0 660 320" role="img" aria-label="Three-magnet interferometer"></svg></div>
       <div class="plotter">
-        <div class="plot-head">
-          <span class="plot-title">Plotter</span>
-          <span class="plot-sub">P(+k) — φ</span>
+        <div class="plot-head"><span class="plot-title">Plotter</span><span class="plot-sub">P(+k) — φ</span>
           <span class="leds"><span class="led rec" id="rec2">● REC</span><span class="led fit" id="fit2">● FIT</span></span>
-          <button class="plot-clr" type="button" id="clr2">CLR</button>
-        </div>
+          <button class="plot-clr" type="button" id="clr2">CLR</button></div>
         <div class="plot-screen"><svg id="plot2" viewBox="0 0 660 210" role="img" aria-label="measurement plot"></svg></div>
         <div class="plot-status" id="stat2"></div>
       </div>
-
+    </div>
+    <aside class="ctrlcol">
+      <p class="panel-lede"><span class="it">Interferometro a tre macchine (più una che <b>seleziona</b> lo stato). I due fasci <b>divergono</b>, <b>riconvergono</b> e vengono <b>risovrapposti</b>; quello inferiore attraversa un gradiente più intenso, curva di più e fa un <b>cammino più lungo</b> → sfasamento <b>φ</b>.</span><span class="en">A three-machine interferometer (plus one that <b>selects</b> the state). The two beams <b>diverge</b>, <b>reconverge</b> and are <b>re-superimposed</b>; the lower one crosses a stronger gradient, curves more and travels a <b>longer path</b> → phase <b>φ</b>.</span></p>
+      <div class="sim-presets" id="presets2"></div>
+      <div class="sim-controls">
+        <div class="ctl-row"><span class="lbl"><span class="it">Rami:</span><span class="en">Branches:</span></span>
+          <span class="seg" id="mode2"><button type="button" data-m="both" class="on"><span class="it">Entrambi</span><span class="en">Both</span></button><button type="button" data-m="blockLower"><span class="it">Blocca inf.</span><span class="en">Block lower</span></button><button type="button" data-m="blockUpper"><span class="it">Blocca sup.</span><span class="en">Block upper</span></button></span></div>
+        <div class="ctl"><label><span class="it">Sfasamento&nbsp; φ</span><span class="en">Phase&nbsp; φ</span></label><input type="range" id="phi" min="0" max="360" step="1" value="0"><span class="val" id="phiv">0°</span></div>
+      </div>
       <div class="pbars">
-        <div class="pbar" id="m2plus">
-          <div class="pk">P( m<sub>0</sub> = +k )</div>
-          <div class="pv" id="m2pv">100%</div>
-          <div class="track"><div class="fill" id="m2pf"></div></div>
-        </div>
-        <div class="pbar minus" id="m2minus">
-          <div class="pk">P( m<sub>0</sub> = −k )</div>
-          <div class="pv" id="m2mv">0%</div>
-          <div class="track"><div class="fill" id="m2mf"></div></div>
-        </div>
+        <div class="pbar" id="m2plus"><div class="pk">P( m<sub>0</sub> = +k )</div><div class="pv" id="m2pv">100%</div><div class="track"><div class="fill" id="m2pf"></div></div></div>
+        <div class="pbar minus" id="m2minus"><div class="pk">P( m<sub>0</sub> = −k )</div><div class="pv" id="m2mv">0%</div><div class="track"><div class="fill" id="m2mf"></div></div></div>
       </div>
-
       <div class="sim-math" id="math2">
-        <div class="mrow"><span class="lab it">Stato ricombinato:</span><span class="lab en">Recombined state:</span>
-          <span class="ket" id="m2psi"></span></div>
-        <div class="mrow"><span class="lab it">Ampiezze (piano complesso):</span><span class="lab en">Amplitudes (complex plane):</span></div>
-        <div class="mrow"><svg id="phasor" viewBox="-60 -60 120 120" width="120" height="120" style="background:#12151a;border-radius:3px"></svg>
-          <span id="m2note" style="max-width:22rem;white-space:normal"></span></div>
+        <div class="mrow"><span class="lab it">Stato:</span><span class="lab en">State:</span><span class="ket" id="m2psi"></span></div>
+        <div class="mrow"><svg id="phasor" viewBox="-60 -60 120 120" width="92" height="92" style="background:#0d0f14;border-radius:3px"></svg>
+          <span id="m2note" style="flex:1;min-width:9rem;white-space:normal"></span></div>
       </div>
-      <p class="hint"><span class="it">Con φ = 0 la ricombinazione ricostruisce esattamente |m₀ = +k⟩ (100%). Bloccando un ramo otterresti 50% + 50%: ma 50% + 50% qui darebbe 100% + 0%, non 100% ciascuno — è la firma dell'interferenza.</span><span class="en">With φ = 0 the recombination reconstructs exactly |m₀ = +k⟩ (100%). Blocking one branch would give 50% + 50%: but 50% + 50% here yields 100% + 0%, not 100% each — the signature of interference.</span></p>
-    </div>
+    </aside>
+  </section>
 
-    <div class="takeaway">
-      <span class="it"><b>In una frase.</b> Le macchine di Stern-Gerlach non «vedono» un momento magnetico già deciso: preparano stati, e ciò che si somma quando i cammini si ricombinano sono <b>ampiezze di probabilità</b> (numeri complessi), non probabilità. Da qui nasce tutto il formalismo del Capitolo 2.</span>
-      <span class="en"><b>In one sentence.</b> Stern-Gerlach machines do not “read” an already-decided magnetic moment: they prepare states, and what adds up when the paths recombine are <b>probability amplitudes</b> (complex numbers), not probabilities. This is the seed of the whole formalism of Chapter 2.</span>
-    </div>
-
-    <div class="doc-return">
-      <a id="backBottom" href="02-stern-gerlach-cascata.html"><span class="it">← Torna al capitolo</span><span class="en">← Back to the chapter</span></a>
-    </div>
-
-    <div class="doc-foot">
-      <span>La Quantistica · Simulatore · Cap. 02 · Rev. 2026</span>
-      <span>F. Palma</span>
-    </div>
-
-  </div>
+  <div class="con-foot"><span>La Quantistica · Simulatore · Cap. 02</span><span>F. Palma</span></div>
 </main>
-
 <script>
 /* ============ return link (?ret=) ============ */
 (function () {
@@ -391,6 +354,19 @@ function sgMagnet(cx,cy,angle,label,parent){
   txt(cx,cy+62,label,{'text-anchor':'middle','font-family':'monospace','font-size':12,fill:INK},parent);
   return g;
 }
+// SG machine seen from the SIDE: an upper and a lower pole piece with a field-gradient arrow between them
+function gradArrow(x,y0,y1,parent){
+  el('line',{x1:x,y1:y0,x2:x,y2:y1,stroke:'#b06a12','stroke-width':1.6},parent);
+  var d=(y1>y0)?1:-1;
+  el('polygon',{points:x+','+(y1)+' '+(x-3.2)+','+(y1-6*d)+' '+(x+3.2)+','+(y1-6*d),fill:'#b06a12'},parent);
+}
+function sgSide(cx,label,grad,upTop,upBot,loTop,loBot,parent){
+  el('rect',{x:cx-32,y:upTop,width:64,height:(upBot-upTop),fill:'#fff',stroke:INK,'stroke-width':1.4},parent);
+  el('rect',{x:cx-32,y:loTop,width:64,height:(loBot-loTop),fill:'#fff',stroke:INK,'stroke-width':1.4},parent);
+  if(grad==='up'){ gradArrow(cx, loTop-4, upBot+4, parent); }
+  else if(grad==='downdown'){ gradArrow(cx-7, upBot+4, loTop-4, parent); gradArrow(cx+7, upBot+4, loTop-4, parent); }
+  txt(cx,loBot+15,label,{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#555'},parent);
+}
 
 /* ============ MODULE 1 ============ */
 function drawM1(){
@@ -451,56 +427,47 @@ function drawM2(){
   var S=m2State(phi,mode); var nu=mag2(S.up), nd=mag2(S.dn), tot=nu+nd||1;
   var Pp=nu/tot, Pm=nd/tot;
   var showUp = mode!=='blockUpper', showDn = mode!=='blockLower', both=showUp&&showDn;
+  var yC=160;
 
-  // --- top band: the two machines in cross-section (fixed at 90° and 0°) ---
-  txt(200,24,'SG A',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#888'},svg2);
-  txt(470,24,'SG B',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#888'},svg2);
-  sgMagnet(200,96,90,'SG 90°',svg2);
-  sgMagnet(470,96,0,'SG 0°',svg2);
+  // four machines (side view), all with the SAME transverse orientation
+  sgSide(72, 'S',  'up',       48,72, 248,272, svg2);
+  sgSide(205,'M1', 'up',       48,72, 248,272, svg2);
+  sgSide(340,'M2', 'downdown', 96,118,202,224, svg2);
+  sgSide(472,'M3', 'up',       48,72, 248,272, svg2);
+  txt(72,32,'seleziona',{'text-anchor':'middle','font-family':'monospace','font-size':9,fill:'#999'},svg2);
+  txt(338,32,'divergono → convergono → paralleli',{'text-anchor':'middle','font-family':'monospace','font-size':9,fill:'#999'},svg2);
 
-  // --- bottom band: beam path with path-length phase ---
-  var y0=270, yUp=y0-46, yDn=y0+46, xR=210, xUE=418;
-  var dphi = both? Math.round(phi/360*72) : 0, xLE=xUE+dphi;
-  txt(16,y0-4,'⟶',{'font-size':18,fill:INK},svg2);
-  txt(12,y0+16,'|m₀=+k⟩',{'font-size':9,fill:'#777','font-family':'monospace'},svg2);
-  beam(38,y0,120,y0,3,1,INK,svg2);
-  gate(120,y0,'SG90',svg2);
-  // split into two rails
-  curveBeam(120,y0,xR,yUp, showUp?4:2, showUp?1:.2, showUp?ACC:DIM, svg2);
-  curveBeam(120,y0,xR,yDn, showDn?4:2, showDn?1:.2, showDn?BLU:DIM, svg2);
-  txt(xR+6,yUp-8,'|m₉₀=+k⟩',{'font-size':10,fill:ACC,'font-family':'monospace'},svg2);
-  txt(xR+6,yDn+18,'|m₉₀=−k⟩',{'font-size':10,fill:BLU,'font-family':'monospace'},svg2);
-  // rails — the lower one is LONGER by dphi (the phase = extra path length)
-  beam(xR,yUp,xUE,yUp, showUp?4:2, showUp?1:.2, showUp?ACC:DIM, svg2);
-  beam(xR,yDn,xLE,yDn, showDn?4:2, showDn?1:.2, showDn?BLU:DIM, svg2);
-  // recombine toward a joint that is slightly inclined longitudinally (cause of Δℓ)
-  var xJ=520;
-  curveBeam(xUE,yUp,xJ,y0, showUp?4:2, showUp?1:.2, showUp?ACC:DIM, svg2);
-  curveBeam(xLE,yDn,xJ,y0, showDn?4:2, showDn?1:.2, showDn?BLU:DIM, svg2);
-  // Δℓ indicator on the lower (longer) branch
-  if(both && dphi>3){
-    el('line',{x1:xUE,y1:yDn+13,x2:xLE,y2:yDn+13,stroke:'#b06a12','stroke-width':1},svg2);
-    el('line',{x1:xUE,y1:yDn+9,x2:xUE,y2:yDn+17,stroke:'#b06a12','stroke-width':1},svg2);
-    el('line',{x1:xLE,y1:yDn+9,x2:xLE,y2:yDn+17,stroke:'#b06a12','stroke-width':1},svg2);
-    txt((xUE+xLE)/2,yDn+28,'Δℓ → φ',{'text-anchor':'middle','font-size':10,fill:'#b06a12','font-family':'monospace'},svg2);
-  }
-  // the inclined joint (longitudinal tilt ∝ φ) just before SG0
-  var al = phi/360*16;
-  var jg=el('g',{transform:'rotate('+al+' '+xJ+' '+y0+')'},svg2);
-  el('line',{x1:xJ,y1:y0-15,x2:xJ,y2:y0+15,stroke:'#b06a12','stroke-width':2.5,'stroke-linecap':'round'},jg);
-  // blocked branch -> beam stop (correct for atoms: it is a physical stop, not a phase plate)
-  if(!showUp) hatchStop(300,yUp,svg2);
-  if(!showDn) hatchStop(300,yDn,svg2);
-  // into SG0 and out to detectors
-  beam(xJ,y0,548,y0,3,1,INK,svg2);
-  gate(548,y0,'SG0',svg2);
-  curveBeam(548,y0,614,y0-40, 1.5+Pp*7,.35+Pp*.65, ACC, svg2);
-  curveBeam(548,y0,614,y0+40, 1.5+Pm*7,.35+Pm*.65, BLU, svg2);
-  detector(620,y0-40,ACC,svg2); detector(620,y0+40,BLU,svg2);
-  txt(630,y0-36,'+k',{'font-size':11,fill:ACC,'font-family':'monospace'},svg2);
-  txt(630,y0+44,'−k',{'font-size':11,fill:BLU,'font-family':'monospace'},svg2);
-  txt(600,y0-50,fmtPct(Pp),{'font-size':12,fill:ACC,'font-family':'monospace','font-weight':'bold','text-anchor':'end'},svg2);
-  txt(600,y0+62,fmtPct(Pm),{'font-size':12,fill:BLU,'font-family':'monospace','font-weight':'bold','text-anchor':'end'},svg2);
+  // source + selector: only |m0=+k> passes, the other output is stopped
+  txt(2,yC-4,'⟶',{'font-size':16,fill:INK},svg2);
+  beam(12,yC,40,yC,3,1,INK,svg2);
+  beam(104,yC,173,yC,4,1,ACC,svg2);
+  curveBeam(104,yC,150,yC+44,2,.5,DIM,svg2); hatchStop(160,yC+44,svg2);
+  txt(150,yC+62,'−k',{'font-size':9,fill:'#999','font-family':'monospace'},svg2);
+  txt(150,yC-10,'|m₀=+k⟩',{'font-size':10,fill:ACC,'font-family':'monospace','text-anchor':'middle'},svg2);
+
+  // interferometer arms M1 -> M3: upper stays shallow, lower bows deeper (stronger gradient) => longer path
+  var Dc=34+Math.round(phi/360*22);
+  el('path',{d:'M205 '+yC+' C 300 '+(yC-16)+' 392 '+(yC-16)+' 472 '+yC,
+    fill:'none',stroke:showUp?ACC:DIM,'stroke-width':showUp?4:2,opacity:showUp?1:.18,'stroke-linecap':'round'},svg2);
+  el('path',{d:'M205 '+yC+' C 300 '+(yC+Dc)+' 392 '+(yC+Dc)+' 472 '+yC,
+    fill:'none',stroke:showDn?BLU:DIM,'stroke-width':showDn?4:2,opacity:showDn?1:.18,'stroke-linecap':'round'},svg2);
+  txt(232,yC-22,'|m₉₀=+k⟩',{'font-size':9,fill:ACC,'font-family':'monospace'},svg2);
+  txt(232,yC+Dc+20,'|m₉₀=−k⟩',{'font-size':9,fill:BLU,'font-family':'monospace'},svg2);
+  if(both){ txt(340,yC+Math.round(Dc*0.75)+16,'Δℓ ∝ φ',{'text-anchor':'middle','font-size':10,fill:'#b06a12','font-family':'monospace','font-weight':'bold'},svg2); }
+  // block a branch (physical beam stop)
+  if(!showUp) hatchStop(300,yC-12,svg2);
+  if(!showDn) hatchStop(300,yC+Math.round(Dc*0.72),svg2);
+
+  // recombined beam re-superimposed at M3, then final measurement -> detectors (thickness ∝ P)
+  curveBeam(504,yC,566,yC-30, 1.5+Pp*7,.35+Pp*.65, ACC, svg2);
+  curveBeam(504,yC,566,yC+30, 1.5+Pm*7,.35+Pm*.65, BLU, svg2);
+  beam(566,yC-30,612,yC-30, 1.5+Pp*7,.35+Pp*.65, ACC, svg2);
+  beam(566,yC+30,612,yC+30, 1.5+Pm*7,.35+Pm*.65, BLU, svg2);
+  detector(618,yC-30,ACC,svg2); detector(618,yC+30,BLU,svg2);
+  txt(630,yC-26,'+k',{'font-size':11,fill:ACC,'font-family':'monospace'},svg2);
+  txt(630,yC+34,'−k',{'font-size':11,fill:BLU,'font-family':'monospace'},svg2);
+  txt(598,yC-40,fmtPct(Pp),{'font-size':11,fill:ACC,'font-family':'monospace','font-weight':'bold','text-anchor':'end'},svg2);
+  txt(598,yC+50,fmtPct(Pm),{'font-size':11,fill:BLU,'font-family':'monospace','font-weight':'bold','text-anchor':'end'},svg2);
 
   // readouts
   document.getElementById('m2pv').textContent=fmtPct(Pp);
@@ -512,10 +479,10 @@ function drawM2(){
     + ' &nbsp; P₊=|Ψ₊|²/N';
   var note=document.getElementById('m2note');
   if(mode==='both'){
-    note.innerHTML='<span class="it">Il ramo inferiore è più lungo (Δℓ): l\'inclinazione del giunto sfasa di φ. 1 + e<sup>iφ</sup> (rosso) e 1 − e<sup>iφ</sup> (blu): le loro lunghezze² danno le probabilità. P₊ = cos²(φ/2).</span>'
-      +'<span class="en">The lower branch is longer (Δℓ): the joint tilt shifts the phase by φ. 1 + e<sup>iφ</sup> (red) and 1 − e<sup>iφ</sup> (blue): their squared lengths give the probabilities. P₊ = cos²(φ/2).</span>';
+    note.innerHTML='<span class="it">Il fascio inferiore fa un cammino più lungo (Δℓ) → sfasamento φ. Si sommano le ampiezze 1 + e<sup>iφ</sup> (rosso) e 1 − e<sup>iφ</sup> (blu): le loro lunghezze² danno le probabilità, P₊ = cos²(φ/2).</span>'
+      +'<span class="en">The lower beam travels a longer path (Δℓ) → phase φ. The amplitudes add: 1 + e<sup>iφ</sup> (red) and 1 − e<sup>iφ</sup> (blue); their squared lengths give the probabilities, P₊ = cos²(φ/2).</span>';
   } else {
-    note.innerHTML='<span class="it">Un ramo è fermato dal blocco: niente ricombinazione, 50% / 50%.</span><span class="en">One branch is stopped: no recombination, 50% / 50%.</span>';
+    note.innerHTML='<span class="it">Un ramo è fermato: niente ricombinazione, 50% / 50%.</span><span class="en">One branch is stopped: no recombination, 50% / 50%.</span>';
   }
   drawPhasor(phi,mode);
 }
@@ -539,10 +506,10 @@ function makePlotter(o){
   var svg=document.getElementById(o.svg), stat=document.getElementById(o.stat),
       rec=document.getElementById(o.rec), fit=document.getElementById(o.fit);
   var BINS=32, W=660, H=210, mL=42, mR=16, mT=14, mB=28;
-  var data={}, recTimer=null;
+  var data={}, recTimer=null, animatedDone=false;
   function X(x){ return mL+(x-o.xmin)/(o.xmax-o.xmin)*(W-mL-mR); }
   function Y(p){ return H-mB-p*(H-mT-mB); }
-  function reset(){ data={}; draw(); }
+  function reset(){ data={}; animatedDone=false; draw(); }
   function record(x){
     var b=Math.round((x-o.xmin)/(o.xmax-o.xmin)*BINS);
     var y=o.fn(x)+(Math.random()-0.5)*0.03;
@@ -565,7 +532,17 @@ function makePlotter(o){
     var keys=Object.keys(data), cov=keys.length/(BINS+1), done=cov>=0.82;
     if(done){
       var d=''; for(i=0;i<=170;i++){ var xx=o.xmin+span*i/170; d+=(i?'L':'M')+X(xx).toFixed(1)+' '+Y(o.fn(xx)).toFixed(1)+' '; }
-      el('path',{d:d,fill:'none',stroke:o.color,'stroke-width':2,opacity:.92},svg);
+      var path=el('path',{d:d,fill:'none',stroke:o.color,'stroke-width':2,opacity:.95},svg);
+      path.style.filter='drop-shadow(0 0 3px '+o.color+')';
+      if(!animatedDone){
+        try{ var L=path.getTotalLength(); if(L>0){
+          path.style.strokeDasharray=L; path.style.strokeDashoffset=L;
+          path.getBoundingClientRect();
+          path.style.transition='stroke-dashoffset .9s cubic-bezier(.2,.7,.25,1)';
+          path.style.strokeDashoffset='0';
+        } }catch(e){}
+        animatedDone=true;
+      }
     }
     if(fit) fit.classList.toggle('on',done);
     keys.forEach(function(k){ var pt=data[k], px=X(pt.x), py=Y(pt.y);
@@ -616,6 +593,18 @@ function mkPresets(host,list,redraw,after){ list.forEach(function(p){ var b=docu
   b.addEventListener('click',function(){p[1]();redraw();after&&after();}); host.appendChild(b); }); }
 mkPresets(document.getElementById('presets1'),P1,drawM1,function(){ plot1.reset(); plot1.record(+t2.value); });
 mkPresets(document.getElementById('presets2'),P2,drawM2,function(){ plot2.reset(); plot2.record(+phi.value); });
+
+/* tabs: one experiment per screen */
+document.querySelectorAll('.tab').forEach(function(tab){
+  tab.addEventListener('click',function(){
+    var id=tab.getAttribute('data-panel');
+    document.querySelectorAll('.tab').forEach(function(t){
+      var on=(t===tab); t.classList.toggle('on',on); t.setAttribute('aria-selected',on?'true':'false');
+    });
+    document.querySelectorAll('.panel').forEach(function(p){ p.hidden=(p.id!==id); });
+    if(id==='p1'){ drawM1(); plot1.draw(); } else { drawM2(); plot2.draw(); }
+  });
+});
 
 drawM1(); drawM2(); plot1.record(+t2.value); plot2.record(+phi.value);
 </script>
