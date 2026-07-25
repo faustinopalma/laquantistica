@@ -190,8 +190,8 @@ function drawExp3(){
   vArrow(340, 242, 274, '#e0a24d');   // macchina 3: gradiente giù (disfa la separazione)
   vArrow(465, 274, 242, '#e0a24d');   // macchina 4: gradiente su (ricombina)
   txt(150,mc-8,'|m₀=+k⟩',{'font-size':8.5,fill:INK,'font-family':'monospace'},svg1);
-  txt(300,240,'m₉₀=+k',{'font-size':8,fill:ACC,'font-family':'monospace'},svg1);
-  txt(300,283,'m₉₀=−k',{'font-size':8,fill:BLU,'font-family':'monospace'},svg1);
+  txt(275,230,'m₉₀=+k',{'text-anchor':'middle','font-size':8,fill:ACC,'font-family':'monospace'},svg1);
+  txt(275,290,'m₉₀=−k',{'text-anchor':'middle','font-size':8,fill:BLU,'font-family':'monospace'},svg1);
   el('line',{x1:40,y1:316,x2:680,y2:316,stroke:'#1c3a30','stroke-width':1},svg1);
 
   // ===== BANDA 3: diagramma a flussi interattivo (porte, sensore, misura) =====
@@ -224,8 +224,8 @@ function drawExp3(){
     curveBeam(560,yPlat,614,yPlat+30, fw(fDn), fDn>0?1:.55, fDn>0?BLU:DIM, svg1);
     beam(614,yPlat+30,638,yPlat+30, fw(fDn), fDn>0?1:.55, fDn>0?BLU:DIM, svg1);
   }
-  txt(654,yPlat-28,'+k',{'font-size':9,fill:DIM,'font-family':'monospace'},svg1);
-  txt(636,yPlat-4,'−k',{'text-anchor':'end','font-size':9,fill:BLU,'font-family':'monospace'},svg1);
+  txt(650,yPlat-38,'+k',{'text-anchor':'middle','font-size':9,fill:DIM,'font-family':'monospace'},svg1);
+  txt(610,yPlat+42,'−k',{'text-anchor':'middle','font-size':9,fill:BLU,'font-family':'monospace'},svg1);
   drawGauge(668, yPlat+30, 30, r.Pm, !r.none);
   // freccia dal gauge (misura −k) verso la tabella (a destra)
   el('line',{x1:700,y1:yPlat+30,x2:710,y2:yPlat+30,stroke:'#e0a24d','stroke-width':1.3,'stroke-dasharray':'4 3'},svg1);
