@@ -147,19 +147,17 @@ function drawExp3(){
   // ===== BANDA 2: come le macchine 2·3·4 separano e poi ricombinano (allineata a 2·3·4) =====
   txt(360,172,'— come le macchine 2·3·4 separano e poi ricombinano il fascio —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
   var mc=258, uT=214,uB=236, lT=280,lB=302;
-  var bowA = curveVal*1.2;                                   // ampiezza della curvatura (illustrativa) ∝ slider
-  function bY(x){ return bowA * (1 - Math.pow((x-345)/195, 2)); }   // 0 ai bordi, max al centro
-  [215,340,465].forEach(function(mx){ var o=bY(mx); poleBox(mx,uT+o,uB+o); poleBox(mx,lT+o,lB+o); });
-  beam(150,mc+bY(150),195,mc+bY(195), 2.2,1, INK, svg1);
-  curveBeam(195,mc+bY(195),300,244+bY(300), 2,1, ACC, svg1); beam(300,244+bY(300),380,244+bY(380), 2,1, ACC, svg1); curveBeam(380,244+bY(380),485,mc+bY(485), 2,1, ACC, svg1);
-  curveBeam(195,mc+bY(195),300,272+bY(300), 2,1, BLU, svg1); beam(300,272+bY(300),380,272+bY(380), 2,1, BLU, svg1); curveBeam(380,272+bY(380),485,mc+bY(485), 2,1, BLU, svg1);
-  beam(485,mc+bY(485),540,mc+bY(540), 2.2,1, INK, svg1);
-  vArrow(215, 274+bY(215), 242+bY(215), '#e0a24d');   // macchina 2
-  vArrow(340, 242+bY(340), 274+bY(340), '#e0a24d');   // macchina 3
-  vArrow(465, 274+bY(465), 242+bY(465), '#e0a24d');   // macchina 4
-  txt(150,mc-8+bY(150),'|m₀=+k⟩',{'font-size':8.5,fill:INK,'font-family':'monospace'},svg1);
-  txt(275,230+bY(275),'m₉₀=+k',{'text-anchor':'middle','font-size':8,fill:ACC,'font-family':'monospace'},svg1);
-  txt(275,290+bY(275),'m₉₀=−k',{'text-anchor':'middle','font-size':8,fill:BLU,'font-family':'monospace'},svg1);
+  [215,340,465].forEach(function(mx){ poleBox(mx,uT,uB); poleBox(mx,lT,lB); });
+  beam(150,mc,195,mc, 2.2,1, INK, svg1);
+  curveBeam(195,mc,300,244, 2,1, ACC, svg1); beam(300,244,380,244, 2,1, ACC, svg1); curveBeam(380,244,485,mc, 2,1, ACC, svg1);
+  curveBeam(195,mc,300,272, 2,1, BLU, svg1); beam(300,272,380,272, 2,1, BLU, svg1); curveBeam(380,272,485,mc, 2,1, BLU, svg1);
+  beam(485,mc,540,mc, 2.2,1, INK, svg1);
+  vArrow(215, 274, 242, '#e0a24d');   // macchina 2
+  vArrow(340, 242, 274, '#e0a24d');   // macchina 3
+  vArrow(465, 274, 242, '#e0a24d');   // macchina 4
+  txt(150,mc-8,'|m₀=+k⟩',{'font-size':8.5,fill:INK,'font-family':'monospace'},svg1);
+  txt(275,230,'m₉₀=+k',{'text-anchor':'middle','font-size':8,fill:ACC,'font-family':'monospace'},svg1);
+  txt(275,290,'m₉₀=−k',{'text-anchor':'middle','font-size':8,fill:BLU,'font-family':'monospace'},svg1);
   el('line',{x1:40,y1:316,x2:680,y2:316,stroke:'#1c3a30','stroke-width':1},svg1);
 
   // ===== BANDA 3: diagramma a flussi interattivo (porte, sensore, misura) =====
