@@ -148,6 +148,8 @@ function drawExp3(){
   txt(360,172,'— come le macchine 2·3·4 separano e poi ricombinano il fascio —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
   var mc=258, uT=214,uB=236, lT=280,lB=302;
   [215,340,465].forEach(function(mx){ poleBox(mx,uT,uB); poleBox(mx,lT,lB); });
+  // blocco addizionale sulla macchina 3: intensifica il gradiente nel percorso inferiore (Fig. 11)
+  el('rect',{x:340-24,y:252,width:48,height:16,rx:2,fill:PANEL,stroke:INK,'stroke-width':1.3},svg1);
   beam(150,mc,195,mc, 2.2,1, INK, svg1);
   curveBeam(195,mc,300,244, 2,1, ACC, svg1); beam(300,244,380,244, 2,1, ACC, svg1); curveBeam(380,244,485,mc, 2,1, ACC, svg1);
   curveBeam(195,mc,300,272, 2,1, BLU, svg1); beam(300,272,380,272, 2,1, BLU, svg1); curveBeam(380,272,485,mc, 2,1, BLU, svg1);
