@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Lab · Goccia di Millikan — La Quantistica</title>
+<link rel="stylesheet" href="assets/lang.css?v=5">
+<link rel="stylesheet" href="assets/sim-sg.css?v=2">
+<script defer src="assets/lang.js?v=5"></script>
+<style>
+  .panel{grid-template-columns:minmax(0,1fr) 380px;}
+  .btnrow{display:flex;gap:.5rem;flex-wrap:wrap;margin:.3rem 0;}
+  .simbtn{font-family:var(--n-mono);font-size:.76rem;font-weight:700;background:#2a2f38;border:1px solid #3d444f;color:#c7ccd4;border-radius:6px;padding:.42rem .8rem;cursor:pointer;transition:.15s;}
+  .simbtn:hover{background:#b06a12;color:#fff;border-color:#b06a12;}
+  .simbtn.primary{background:#b06a12;color:#fff;border-color:#b06a12;}
+  .simbtn:disabled{opacity:.4;cursor:not-allowed;}
+  .status{font-family:var(--n-mono);font-size:.82rem;font-weight:700;margin:.3rem 0;min-height:1.3em;}
+  .status.ok{color:#57d98a;} .status.no{color:#c79a4a;}
+  .hist{display:grid;grid-template-columns:repeat(6,1fr);gap:.35rem;align-items:end;height:120px;background:#0d1216;border:1px solid #2a303a;border-radius:6px;padding:.5rem;}
+  .hb{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;}
+  .hb .bar{width:70%;background:#ffb000;border-radius:3px 3px 0 0;transition:height .2s;min-height:2px;}
+  .hb .lbl{font-family:var(--n-mono);font-size:.62rem;color:#8b929c;margin-top:.25rem;}
+  .hb .cn{font-family:var(--n-mono);font-size:.66rem;color:#e6ece8;}
+</style>
+</head>
+<body>
+<main class="console" id="top">
+  <header class="con-head">
+    <div class="con-brand">
+      <span class="tag amber">Lab · Cap. 3</span>
+      <span class="con-title"><span class="it">Goccia di Millikan</span><span class="en">Millikan oil drop</span></span>
+    </div>
+    <div class="con-actions">
+      <div class="langsw" role="group" aria-label="Lingua / Language">
+        <button class="langbtn" type="button" data-l="it" aria-pressed="true">Italiano</button>
+        <button class="langbtn" type="button" data-l="en" aria-pressed="false">English</button>
+      </div>
+      <a class="doc-back-top" id="backTop" href="_lab-index.html"><span class="it">← Indice</span><span class="en">← Index</span></a>
+    </div>
+  </header>
+
+  <section class="panel">
+    <div class="stagecol">
+      <div class="sim-stage"><svg id="svg1" viewBox="0 0 660 360" role="img" aria-label="Condensatore con gocciolina d'olio"></svg></div>
+    </div>
+    <aside class="ctrlcol">
+      <p class="panel-lede"><span class="it">Una gocciolina d'olio carica è sospesa tra le piastre di un condensatore: regola la tensione <b>V</b> finché il peso è bilanciato dalla forza elettrica. Misurando molte gocce, le cariche risultano <b>multipli interi</b> di <b>e</b>.</span><span class="en">A charged oil droplet is suspended between capacitor plates: adjust the voltage <b>V</b> until the weight is balanced by the electric force. Measuring many droplets, the charges turn out to be <b>integer multiples</b> of <b>e</b>.</span></p>
+      <div class="sim-controls">
+        <div class="ctl"><label><span class="it">Tensione V</span><span class="en">Voltage V</span></label><input type="range" id="volt" min="0" max="600" step="1" value="0"><span class="val" id="voltv">0 V</span></div>
+      </div>
+      <div class="btnrow">
+        <button class="simbtn primary" id="newd" type="button"><span class="it">Nuova gocciolina</span><span class="en">New droplet</span></button>
+        <button class="simbtn" id="meas" type="button" disabled><span class="it">Misura carica</span><span class="en">Measure charge</span></button>
+        <button class="simbtn" id="clr" type="button"><span class="it">Azzera istogramma</span><span class="en">Reset histogram</span></button>
+      </div>
+      <div class="status" id="status"></div>
+      <p class="drives-cap" style="margin:.1rem 0 .4rem"><span class="it">Distribuzione delle cariche misurate (in unità di e):</span><span class="en">Distribution of measured charges (in units of e):</span></p>
+      <div class="hist" id="hist"></div>
+      <p class="hint"><span class="it">Prova: le frecce mostrano se la goccia sale o scende. Quando è ferma (<b>sospesa</b>) misura la carica. Ripeti con tante gocce: i valori si allineano su 1e, 2e, 3e… → la carica è <b>quantizzata</b>.</span><span class="en">Try: the arrows show whether the drop rises or falls. When it is still (<b>suspended</b>) measure the charge. Repeat with many droplets: the values line up on 1e, 2e, 3e… → charge is <b>quantized</b>.</span></p>
+    </aside>
+  </section>
+
+  <div class="con-foot"><span>La Quantistica · Lab locale · Cap. 03</span><span>F. Palma</span></div>
+</main>
+
+<script src="assets/sim-sg-core.js?v=2"></script>
+<script>
+var svg1=document.getElementById('svg1');
+var yTop=90, yBot=280, xC=330;
+var drop=null, data=[0,0,0,0,0,0];
+function newDrop(){ var n=1+Math.floor(Math.random()*5), Vs, mrel; do{ mrel=1+Math.random()*2.4; Vs=200*mrel/n; }while(Vs<90||Vs>520); drop={n:n,mrel:mrel,Vsusp:Vs,r:4+n*0.7}; document.getElementById('meas').disabled=true; draw(); }
+function draw(){
+  var V=+document.getElementById('volt').value;
+  [].slice.call(svg1.childNodes).forEach(function(x){svg1.removeChild(x);});
+  // piastre
+  el('rect',{x:120,y:yTop-16,width:420,height:14,rx:2,fill:'#12151a',stroke:'#d15a5a','stroke-width':2},svg1);
+  el('rect',{x:120,y:yBot+2,width:420,height:14,rx:2,fill:'#12151a',stroke:'#46b083','stroke-width':2},svg1);
+  txt(110,yTop-6,'−',{'text-anchor':'end','font-size':16,fill:'#d15a5a','font-family':'monospace'},svg1);
+  txt(110,yBot+14,'+',{'text-anchor':'end','font-size':16,fill:'#46b083','font-family':'monospace'},svg1);
+  txt(548,yTop-6,'V='+V,{'font-size':10,fill:'#e0a24d','font-family':'monospace'},svg1);
+  // campo (linee)
+  if(V>0){ for(var gx=170;gx<=490;gx+=40){ el('line',{x1:gx,y1:yTop+2,x2:gx,y2:yBot,stroke:'#24463a','stroke-width':1,'stroke-dasharray':'3 5'},svg1); } }
+  if(!drop){ txt(xC,185,'Premi «Nuova gocciolina»',{'text-anchor':'middle','font-size':11,fill:'#5a7d6a','font-family':'monospace'},svg1); document.getElementById('voltv').textContent=V+' V'; return; }
+  // posizione: offset ∝ (V - Vsusp)
+  var rel=(V-drop.Vsusp)/drop.Vsusp; var off=Math.max(-1,Math.min(1,rel*2.2))* (yBot-yTop)/2*0.8;
+  var yPos=(yTop+yBot)/2 - off;
+  var susp=Math.abs(V-drop.Vsusp)<8;
+  // gocciolina
+  el('circle',{cx:xC,cy:yPos,r:drop.r+3,fill:'#8fb7d6',opacity:.18},svg1);
+  el('circle',{cx:xC,cy:yPos,r:drop.r,fill:susp?'#8effd0':'#cfe0d6',stroke:susp?'#57d98a':'#8fb7d6','stroke-width':1.5},svg1);
+  // frecce forza: peso (giù) e elettrica (su)
+  var arU=Math.min(1,Math.max(0,(V/drop.Vsusp)))*34, arD=34;
+  el('line',{x1:xC-16,y1:yPos,x2:xC-16,y2:yPos+arD,stroke:'#d15a5a','stroke-width':1.8},svg1);
+  el('path',{d:'M'+(xC-19)+' '+(yPos+arD-5)+' L'+(xC-16)+' '+(yPos+arD)+' L'+(xC-13)+' '+(yPos+arD-5),fill:'none',stroke:'#d15a5a','stroke-width':1.8},svg1);
+  txt(xC-24,yPos+arD+2,'mg',{'text-anchor':'end','font-size':8,fill:'#d15a5a','font-family':'monospace'},svg1);
+  if(arU>2){ el('line',{x1:xC+16,y1:yPos,x2:xC+16,y2:yPos-arU,stroke:'#57d98a','stroke-width':1.8},svg1); el('path',{d:'M'+(xC+13)+' '+(yPos-arU+5)+' L'+(xC+16)+' '+(yPos-arU)+' L'+(xC+19)+' '+(yPos-arU+5),fill:'none',stroke:'#57d98a','stroke-width':1.8},svg1); txt(xC+24,yPos-arU+2,'qE',{'font-size':8,fill:'#57d98a','font-family':'monospace'},svg1); }
+  document.getElementById('voltv').textContent=V+' V';
+  document.getElementById('meas').disabled=!susp;
+  var st=document.getElementById('status');
+  if(susp){ st.className='status ok'; st.innerHTML='<span class="it">● SOSPESA — puoi misurare la carica</span><span class="en">● SUSPENDED — you can measure the charge</span>'; }
+  else if(V>drop.Vsusp){ st.className='status no'; st.innerHTML='<span class="it">↑ la goccia sale (V troppo alta)</span><span class="en">↑ the drop rises (V too high)</span>'; }
+  else { st.className='status no'; st.innerHTML='<span class="it">↓ la goccia scende (V troppo bassa)</span><span class="en">↓ the drop falls (V too low)</span>'; }
+}
+function measure(){ if(!drop) return; var V=+document.getElementById('volt').value; if(Math.abs(V-drop.Vsusp)>=8) return; var q=Math.round(200*drop.mrel/V); if(q>=1&&q<=6){ data[q-1]++; drawHist(); } var st=document.getElementById('status'); st.className='status ok'; st.innerHTML='<span class="it">Carica misurata: <b>'+q+' e</b></span><span class="en">Measured charge: <b>'+q+' e</b></span>'; drop=null; document.getElementById('meas').disabled=true; }
+function drawHist(){ var h=document.getElementById('hist'); var max=Math.max(1,Math.max.apply(null,data)); h.innerHTML=''; for(var i=0;i<6;i++){ var d=document.createElement('div'); d.className='hb'; d.innerHTML='<div class="cn">'+data[i]+'</div><div class="bar" style="height:'+(data[i]/max*80)+'%"></div><div class="lbl">'+(i+1)+'e</div>'; h.appendChild(d); } }
+document.getElementById('volt').addEventListener('input',draw);
+document.getElementById('newd').addEventListener('click',newDrop);
+document.getElementById('meas').addEventListener('click',measure);
+document.getElementById('clr').addEventListener('click',function(){ data=[0,0,0,0,0,0]; drawHist(); });
+initBackLink('_lab-index.html');
+drawHist(); draw();
+window.__lab={ get Vsusp(){return drop?drop.Vsusp:null;} };
+</script>
+</body>
+</html>
