@@ -36,6 +36,10 @@
   /* linea dal gauge (nel disegno) alla colonna della tabella, sovrapposta al pannello */
   .link{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:5;}
   #linkpath{fill:none;stroke:#e0a24d;stroke-width:1.9;opacity:0;filter:drop-shadow(0 0 3px rgba(224,162,77,.6));}
+  .ctl{font-family:var(--n-mono);font-size:.74rem;color:#c7ccd4;}
+  .ctl label{display:block;color:#8fbfa8;margin-bottom:.4rem;}
+  .ctl input[type=range]{width:100%;accent-color:#ffb000;cursor:pointer;}
+  .ctl .drives-cap{font-size:.62rem;color:#e0a24d;margin-top:.35rem;}
 </style>
 <script defer src="assets/lang.js?v=5"></script>
 </head>
@@ -59,7 +63,13 @@
     <div class="stagecol">
       <div class="sim-stage"><svg id="svg1" viewBox="0 0 720 510" role="img" aria-label="Esperimento 4: scomposizione e ricombinazione del fascio"></svg></div>
     </div>
-    <aside class="ctrlcol"></aside>
+    <aside class="ctrlcol">
+      <div class="ctl">
+        <label><span class="it">Curvatura dei cammini</span><span class="en">Path curvature</span></label>
+        <input type="range" id="curve" min="0" max="10" step="0.5" value="0" aria-label="curvatura">
+        <div class="drives-cap"><span class="it">↔ trascina: curva il diagramma centrale (illustrativo)</span><span class="en">↔ drag: bends the central diagram (illustrative)</span></div>
+      </div>
+    </aside>
   </section>
 
   <div class="con-foot"><span>La Quantistica · Simulatore · Cap. 02 · Esperimento 4</span><span>F. Palma</span></div>
@@ -69,6 +79,7 @@
 <script>
 var svg1 = document.getElementById('svg1');
 var blockUp=false, blockDn=false;   // entrambi i rami aperti (nessun muro)
+var curveVal=0;                     // curvatura illustrativa del diagramma centrale (0..10)
 var bubbleT = null;
 var needleCur=0, needleRAF=null;
 // muove la lancetta da needleCur al valore target con leggero overshoot (moto realistico)
@@ -135,17 +146,19 @@ function drawExp3(){
   // ===== BANDA 2: come le macchine 2·3·4 separano e poi ricombinano (allineata a 2·3·4) =====
   txt(360,172,'— come le macchine 2·3·4 separano e poi ricombinano il fascio —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
   var mc=258, uT=214,uB=236, lT=280,lB=302;
-  [215,340,465].forEach(function(mx){ poleBox(mx,uT,uB); poleBox(mx,lT,lB); });
-  beam(150,mc,195,mc, 2.2,1, INK, svg1);
-  curveBeam(195,mc,300,244, 2,1, ACC, svg1); beam(300,244,380,244, 2,1, ACC, svg1); curveBeam(380,244,485,mc, 2,1, ACC, svg1);
-  curveBeam(195,mc,300,272, 2,1, BLU, svg1); beam(300,272,380,272, 2,1, BLU, svg1); curveBeam(380,272,485,mc, 2,1, BLU, svg1);
-  beam(485,mc,540,mc, 2.2,1, INK, svg1);
-  vArrow(215, 274, 242, '#e0a24d');   // macchina 2: gradiente su
-  vArrow(340, 242, 274, '#e0a24d');   // macchina 3: gradiente giù (disfa la separazione)
-  vArrow(465, 274, 242, '#e0a24d');   // macchina 4: gradiente su (ricombina)
-  txt(150,mc-8,'|m₀=+k⟩',{'font-size':8.5,fill:INK,'font-family':'monospace'},svg1);
-  txt(275,230,'m₉₀=+k',{'text-anchor':'middle','font-size':8,fill:ACC,'font-family':'monospace'},svg1);
-  txt(275,290,'m₉₀=−k',{'text-anchor':'middle','font-size':8,fill:BLU,'font-family':'monospace'},svg1);
+  var bowA = curveVal*1.2;                                   // ampiezza della curvatura (illustrativa) ∝ slider
+  function bY(x){ return bowA * (1 - Math.pow((x-345)/195, 2)); }   // 0 ai bordi, max al centro
+  [215,340,465].forEach(function(mx){ var o=bY(mx); poleBox(mx,uT+o,uB+o); poleBox(mx,lT+o,lB+o); });
+  beam(150,mc+bY(150),195,mc+bY(195), 2.2,1, INK, svg1);
+  curveBeam(195,mc+bY(195),300,244+bY(300), 2,1, ACC, svg1); beam(300,244+bY(300),380,244+bY(380), 2,1, ACC, svg1); curveBeam(380,244+bY(380),485,mc+bY(485), 2,1, ACC, svg1);
+  curveBeam(195,mc+bY(195),300,272+bY(300), 2,1, BLU, svg1); beam(300,272+bY(300),380,272+bY(380), 2,1, BLU, svg1); curveBeam(380,272+bY(380),485,mc+bY(485), 2,1, BLU, svg1);
+  beam(485,mc+bY(485),540,mc+bY(540), 2.2,1, INK, svg1);
+  vArrow(215, 274+bY(215), 242+bY(215), '#e0a24d');   // macchina 2
+  vArrow(340, 242+bY(340), 274+bY(340), '#e0a24d');   // macchina 3
+  vArrow(465, 274+bY(465), 242+bY(465), '#e0a24d');   // macchina 4
+  txt(150,mc-8+bY(150),'|m₀=+k⟩',{'font-size':8.5,fill:INK,'font-family':'monospace'},svg1);
+  txt(275,230+bY(275),'m₉₀=+k',{'text-anchor':'middle','font-size':8,fill:ACC,'font-family':'monospace'},svg1);
+  txt(275,290+bY(275),'m₉₀=−k',{'text-anchor':'middle','font-size':8,fill:BLU,'font-family':'monospace'},svg1);
   el('line',{x1:40,y1:316,x2:680,y2:316,stroke:'#1c3a30','stroke-width':1},svg1);
 
   // ===== BANDA 3: diagramma a flussi interattivo (porte, sensore, misura) =====
@@ -207,6 +220,7 @@ function drawGauge(cx,cy,R,val,live){
 
 initBackLink('02-stern-gerlach-cascata.html');
 drawExp3();
+document.getElementById('curve').addEventListener('input', function(){ curveVal=+this.value; drawExp3(); });
 </script>
 </body>
 </html>
