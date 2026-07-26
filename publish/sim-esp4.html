@@ -36,10 +36,11 @@
   /* linea dal gauge (nel disegno) alla colonna della tabella, sovrapposta al pannello */
   .link{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:5;}
   #linkpath{fill:none;stroke:#e0a24d;stroke-width:1.9;opacity:0;filter:drop-shadow(0 0 3px rgba(224,162,77,.6));}
-  .ctl{font-family:var(--n-mono);font-size:.74rem;color:#c7ccd4;}
-  .ctl label{display:block;color:#8fbfa8;margin-bottom:.4rem;}
-  .ctl input[type=range]{width:100%;accent-color:#ffb000;cursor:pointer;}
-  .ctl .drives-cap{font-size:.62rem;color:#e0a24d;margin-top:.35rem;}
+  /* override della .ctl condivisa (grid a 3 colonne) → impilata verticale, solo in Esp.4 */
+  .ctl{display:block;grid-template-columns:none;font-family:var(--n-mono);font-size:.74rem;color:#c7ccd4;}
+  .ctl label{display:block;white-space:normal;color:#8fbfa8;margin-bottom:.4rem;}
+  .ctl input[type=range]{display:block;width:100%;accent-color:#ffb000;cursor:pointer;}
+  .ctl .drives-cap{display:block;font-size:.62rem;color:#e0a24d;margin-top:.35rem;}
 </style>
 <script defer src="assets/lang.js?v=5"></script>
 </head>
