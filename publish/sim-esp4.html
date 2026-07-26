@@ -59,35 +59,7 @@
     <div class="stagecol">
       <div class="sim-stage"><svg id="svg1" viewBox="0 0 720 510" role="img" aria-label="Esperimento 4: scomposizione e ricombinazione del fascio"></svg></div>
     </div>
-    <aside class="ctrlcol">
-      <p class="panel-lede"><span class="it">Cinque macchine: la prima <b>(1)</b> <b>seleziona</b> lo stato <b>m₀=+k</b>, le tre centrali <b>(2·3·4)</b> lo <b>dividono</b> (in m₉₀=+k e m₉₀=−k) e lo <b>ricongiungono</b>, l'ultima <b>(5)</b> <b>misura</b> di nuovo <b>m₀</b>. Scegli nella <b>tabella</b> quale ramo bloccare e <b>compila</b> la tabella della verità.</span><span class="en">Five machines: the first <b>(1)</b> <b>selects</b> the state <b>m₀=+k</b>, the three central ones <b>(2·3·4)</b> <b>split</b> it (into m₉₀=+k and m₉₀=−k) and <b>recombine</b> it, the last <b>(5)</b> <b>measures</b> <b>m₀</b> again. Choose in the <b>table</b> which branch to block and <b>fill in</b> the truth table.</span></p>
-
-      <div class="tbl-head"><span><b>Tabella della verità</b> · P(m₀=−k)</span><span class="led fit" id="fit1">● INTERF.</span></div>
-      <div class="tblwrap">
-        <table class="ttab" id="ttab">
-          <thead><tr>
-            <th><span class="it">porta ramo +k</span><span class="en">+k gate</span></th>
-            <th><span class="it">porta ramo −k</span><span class="en">−k gate</span></th>
-            <th class="pcol">P(m₀=−k)</th>
-          </tr></thead>
-          <tbody>
-            <tr data-up="0" data-dn="1"><td><span class="dot op"></span><span class="it">aperta</span><span class="en">open</span></td><td><span class="dot cl"></span><span class="it">chiusa</span><span class="en">closed</span></td><td class="res pcol">?</td></tr>
-            <tr data-up="1" data-dn="0"><td><span class="dot cl"></span><span class="it">chiusa</span><span class="en">closed</span></td><td><span class="dot op"></span><span class="it">aperta</span><span class="en">open</span></td><td class="res pcol">?</td></tr>
-            <tr data-up="0" data-dn="0"><td><span class="dot op"></span><span class="it">aperta</span><span class="en">open</span></td><td><span class="dot op"></span><span class="it">aperta</span><span class="en">open</span></td><td class="res pcol">?</td></tr>
-            <tr data-up="1" data-dn="1"><td><span class="dot cl"></span><span class="it">chiusa</span><span class="en">closed</span></td><td><span class="dot cl"></span><span class="it">chiusa</span><span class="en">closed</span></td><td class="res pcol">?</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="plot-status" id="stat1"></div>
-      <div class="sim-math" id="math1">
-        <div class="mrow"><span class="lab it">Scomposizione:</span><span class="lab en">Decomposition:</span><span id="mdecomp">|m₀=+k⟩ = (1/√2)|m₉₀=+k⟩ + (1/√2)|m₉₀=−k⟩</span></div>
-        <div class="mrow"><span class="lab it">Caso:</span><span class="lab en">Case:</span><span id="mcase"></span></div>
-        <div class="mrow"><span class="lab it">Misura di m₀:</span><span class="lab en">Measuring m₀:</span><span id="mres"></span></div>
-      </div>
-      <p class="hint"><span class="it">Ogni ramo <b>da solo</b> dà <b>P(m₀=−k)=50%</b>. Verrebbe da pensare che aprendo <b>entrambi</b> i rami si sommi a 100%: invece si <b>annulla a 0%</b> (si ricostruisce |m₀=+k⟩). Bloccando <b>entrambi</b> i rami, ovviamente, non arriva nulla: 0%.</span><span class="en">Each branch <b>alone</b> gives <b>P(m₀=−k)=50%</b>. One would think opening <b>both</b> branches adds up to 100%: instead it <b>cancels to 0%</b> (|m₀=+k⟩ is rebuilt). Blocking <b>both</b> branches, obviously, lets nothing through: 0%.</span></p>
-    </aside>
-    <svg class="link" id="linksvg" aria-hidden="true"><path id="linkpath"></path></svg>
-    <div class="fumetto" id="bubble"><span class="it">50% + 50% → <b>0%</b>: si sommano le <b>ampiezze</b>, non le probabilità.</span><span class="en">50% + 50% → <b>0%</b>: <b>amplitudes</b> add, not probabilities.</span></div>
+    <aside class="ctrlcol"></aside>
   </section>
 
   <div class="con-foot"><span>La Quantistica · Simulatore · Cap. 02 · Esperimento 4</span><span>F. Palma</span></div>
@@ -96,7 +68,7 @@
 <script src="assets/sim-sg-core.js?v=2"></script>
 <script>
 var svg1 = document.getElementById('svg1');
-var blockUp=false, blockDn=true;   // blocco del ramo +k / del ramo −k (default: blocca −k)
+var blockUp=false, blockDn=false;   // entrambi i rami aperti (nessun muro)
 var bubbleT = null;
 var needleCur=0, needleRAF=null;
 // muove la lancetta da needleCur al valore target con leggero overshoot (moto realistico)
@@ -184,9 +156,6 @@ function drawExp3(){
   beam(40,yIn,95,yIn, fw(1),1, INK, svg1);
   curveBeam(95,yIn,158,yPlat, fw(0.5),1, ACC, svg1);
   beam(158,yPlat,215,yPlat, fw(0.5),1, ACC, svg1);
-  curveBeam(95,yIn,148,yIn+38, fw(0.5),.85, BLU, svg1);
-  hatchStop(160,yIn+38,svg1);
-  txt(178,yIn+42,'m₀=−k',{'font-size':9,fill:'#6f8f80','font-family':'monospace'},svg1);
   txt(140,yPlat-8,'|m₀=+k⟩',{'font-size':9,fill:ACC,'font-family':'monospace','text-anchor':'middle'},svg1);
   curveBeam(215,yPlat,285,up, fw(0.25), showUp?1:.35, showUp?ACC:DIM, svg1);
   curveBeam(215,yPlat,285,dn, fw(0.25), showDn?1:.35, showDn?BLU:DIM, svg1);
@@ -209,21 +178,6 @@ function drawExp3(){
   txt(610,yPlat-38,'+k',{'text-anchor':'middle','font-size':9,fill:DIM,'font-family':'monospace'},svg1);
   txt(610,yPlat+42,'−k',{'text-anchor':'middle','font-size':9,fill:BLU,'font-family':'monospace'},svg1);
   drawGauge(668, yPlat+30, 30, r.Pm, !r.none);
-  // freccia dal gauge (misura −k) verso la tabella (a destra)
-  el('line',{x1:700,y1:yPlat+30,x2:710,y2:yPlat+30,stroke:'#e0a24d','stroke-width':1.3,'stroke-dasharray':'4 3'},svg1);
-  el('path',{d:'M705 '+(yPlat+26)+' L712 '+(yPlat+30)+' L705 '+(yPlat+34),fill:'none',stroke:'#e0a24d','stroke-width':1.3,'stroke-linejoin':'round'},svg1);
-  // rami bloccati: barriera (le porticine comandate sono state rimosse in questo step)
-  if(!showUp) hatchStop(gx,up,svg1);
-  if(!showDn) hatchStop(gx,dn,svg1);
-
-  // ---- readout ----
-  var recomb=!blockUp&&!blockDn, none=blockUp&&blockDn;
-  var ct = recomb ? {it:'entrambi i rami aperti: si ricombinano',en:'both branches open: they recombine'}
-         : none ? {it:'entrambi i rami bloccati: non passa nessun fascio',en:'both branches blocked: no beam passes'}
-         : blockUp ? {it:'passa solo il ramo m₉₀=−k',en:'only the m₉₀=−k branch passes'}
-         : {it:'passa solo il ramo m₉₀=+k',en:'only the m₉₀=+k branch passes'};
-  document.getElementById('mcase').innerHTML='<span class="it">'+ct.it+'</span><span class="en">'+ct.en+'</span>';
-  document.getElementById('mres').innerHTML='P(m₀=−k) = <b class="num">'+fmtPct(r.Pm)+'</b>';
 }
 
 // GAUGE a lancetta disegnato nel diagramma (macchina 5); lancetta persistente animata con transizione CSS
@@ -251,84 +205,8 @@ function drawGauge(cx,cy,R,val,live){
   tweenNeedle(rot, cx, cy);
 }
 
-// linea gauge → colonna della tabella: si «disegna» a ogni misura (trasporto) e poi sparisce
-var linkFadeT=null;
-function linkGeom(){
-  var panel=document.querySelector('.panel'), a=document.getElementById('gaugeAnchor'),
-      cell=document.querySelector('#ttab tbody tr.active .res') || document.querySelector('#ttab thead th.pcol');
-  if(!panel||!a||!cell) return null;
-  var pr=panel.getBoundingClientRect(), ar=a.getBoundingClientRect(), cr=cell.getBoundingClientRect();
-  return { x1:ar.left+ar.width/2-pr.left, y1:ar.top+ar.height/2-pr.top,
-           x2:cr.left+10-pr.left, y2:cr.top+cr.height/2-pr.top, W:pr.width, H:pr.height };
-}
-function animateLink(){
-  var g=linkGeom(), lsvg=document.getElementById('linksvg'), lp=document.getElementById('linkpath');
-  if(!g||!lsvg||!lp) return;
-  lsvg.setAttribute('viewBox','0 0 '+g.W+' '+g.H);
-  var midX=(g.x1+g.x2)/2;
-  lp.setAttribute('d','M'+g.x1.toFixed(1)+' '+g.y1.toFixed(1)+' C '+midX.toFixed(1)+' '+g.y1.toFixed(1)+' '+midX.toFixed(1)+' '+g.y2.toFixed(1)+' '+g.x2.toFixed(1)+' '+g.y2.toFixed(1));
-  var L=lp.getTotalLength();
-  lp.style.transition='none';
-  lp.style.strokeDasharray=L+' '+L;
-  lp.style.strokeDashoffset=L;
-  lp.style.opacity='0.95';
-  lp.getBoundingClientRect();               // reflow
-  lp.style.transition='stroke-dashoffset .55s ease-in-out';
-  lp.style.strokeDashoffset='0';
-  clearTimeout(linkFadeT);
-  linkFadeT=setTimeout(function(){ lp.style.transition='opacity .45s ease'; lp.style.opacity='0'; }, 780);
-}
-
-/* ---- tabella della verità: si compila provando le combinazioni di porte ---- */
-function fillTable(){
-  var rows=document.querySelectorAll('#ttab tbody tr');
-  [].forEach.call(rows,function(tr){
-    var bu=+tr.getAttribute('data-up'), bd=+tr.getAttribute('data-dn');
-    var active = bu===(blockUp?1:0) && bd===(blockDn?1:0);
-    tr.classList.toggle('active', active);
-    if(active && !tr.classList.contains('done')){
-      var rr=results(bu,bd);
-      tr.classList.add('done');
-      tr.querySelector('.res').innerHTML = fmtPct(rr.Pm) + (bu===0&&bd===0 ? ' <span class="ass"><span class="it">assurdo</span><span class="en">absurd</span></span>' : '');
-    }
-  });
-  var bothOpen=!blockUp&&!blockDn;
-  document.getElementById('fit1').classList.toggle('on', bothOpen);
-  var done=document.querySelectorAll('#ttab tbody tr.done').length;
-  document.getElementById('stat1').textContent = done<4
-    ? 'compila la tabella: prova tutte le combinazioni di porte ('+done+'/4)'
-    : 'tabella completa: 50% + 50% dei rami singoli, ma insieme 0% — è questo l\'assurdo';
-}
-
-// posiziona il fumetto a destra del gauge, alla sua stessa altezza (senza toccarlo né l'hint)
-function positionBubble(){
-  var panel=document.querySelector('.panel'), a=document.getElementById('gaugeAnchor'), b=document.getElementById('bubble'), hint=document.querySelector('.hint');
-  if(!panel||!a||!b) return;
-  var pr=panel.getBoundingClientRect(), ar=a.getBoundingClientRect();
-  var gx=ar.left+ar.width/2-pr.left, gy=ar.top+ar.height/2-pr.top;
-  var hb=hint?hint.getBoundingClientRect().bottom-pr.top:0;
-  b.style.left='auto'; b.style.top='auto'; b.style.right='auto'; b.style.bottom='auto';
-  b.style.left=(gx+44)+'px';
-  b.style.top=Math.max(hb+6, gy-34)+'px';
-}
-
-function setBlock(bu,bd){
-  blockUp=!!bu; blockDn=!!bd;
-  drawExp3(); fillTable(); animateLink();
-  clearTimeout(bubbleT);
-  var bub=document.getElementById('bubble');
-  if(!blockUp&&!blockDn){ bubbleT=setTimeout(function(){ positionBubble(); bub.classList.add('show'); }, 450); }
-  else bub.classList.remove('show');
-}
-
-document.getElementById('ttab').addEventListener('click',function(e){
-  var tr=e.target.closest('tbody tr'); if(!tr) return;
-  setBlock(+tr.getAttribute('data-up'), +tr.getAttribute('data-dn'));
-});
-
 initBackLink('02-stern-gerlach-cascata.html');
-drawExp3(); fillTable();
-requestAnimationFrame(function(){ setTimeout(animateLink, 80); });
+drawExp3();
 </script>
 </body>
 </html>
