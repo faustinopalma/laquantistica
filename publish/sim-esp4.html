@@ -167,14 +167,15 @@ function drawExp3(){
   }
   tiltMachine(215, +1);   // sinistra: oraria
   tiltMachine(465, -1);   // destra: antioraria
-  // fasci (seguono l'asse a V): entra parallelo a sx (in discesa) ed esce parallelo a dx (in salita)
-  beam(150,axis(150),195,axis(195), 2.2,1, INK, svg1);
-  curveBeam(195,axis(195),300,axis(300)-14, 2,1, ACC, svg1); beam(300,axis(300)-14,380,axis(380)-14, 2,1, ACC, svg1); curveBeam(380,axis(380)-14,485,axis(485), 2,1, ACC, svg1);
-  curveBeam(195,axis(195),300,axis(300)+14, 2,1, BLU, svg1); beam(300,axis(300)+14,380,axis(380)+14, 2,1, BLU, svg1); curveBeam(380,axis(380)+14,485,axis(485), 2,1, BLU, svg1);
-  beam(485,axis(485),540,axis(540), 2.2,1, INK, svg1);
+  // fasci: entrata/uscita seguono l'asse a V (canali delle macchine sollevate); nel tratto centrale
+  // (macchina 3 FERMA) restano a quote fisse 244/272 che scavalcano il blocco (252-268) → no collisioni
+  beam(150,axis(150),215,axis(215), 2.2,1, INK, svg1);
+  curveBeam(215,axis(215),300,244, 2,1, ACC, svg1); beam(300,244,380,244, 2,1, ACC, svg1); curveBeam(380,244,465,axis(465), 2,1, ACC, svg1);
+  curveBeam(215,axis(215),300,272, 2,1, BLU, svg1); beam(300,272,380,272, 2,1, BLU, svg1); curveBeam(380,272,465,axis(465), 2,1, BLU, svg1);
+  beam(465,axis(465),540,axis(540), 2.2,1, INK, svg1);
   txt(150,axis(150)-8,'|m₀=+k⟩',{'font-size':8.5,fill:INK,'font-family':'monospace'},svg1);
-  txt(275,axis(275)-28,'m₉₀=+k',{'text-anchor':'middle','font-size':8,fill:ACC,'font-family':'monospace'},svg1);
-  txt(275,axis(275)+32,'m₉₀=−k',{'text-anchor':'middle','font-size':8,fill:BLU,'font-family':'monospace'},svg1);
+  txt(275,230,'m₉₀=+k',{'text-anchor':'middle','font-size':8,fill:ACC,'font-family':'monospace'},svg1);
+  txt(275,292,'m₉₀=−k',{'text-anchor':'middle','font-size':8,fill:BLU,'font-family':'monospace'},svg1);
   el('line',{x1:40,y1:316,x2:680,y2:316,stroke:'#1c3a30','stroke-width':1},svg1);
 
   // ===== BANDA 3: diagramma a flussi interattivo (porte, sensore, misura) =====
