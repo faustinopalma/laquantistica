@@ -13,34 +13,11 @@
   /* layout esp3: diagramma a tutta altezza a sinistra, gauge + tabella a destra */
   .panel{grid-template-columns:minmax(0,1fr) 410px;position:relative;}
   .stagecol .sim-stage{flex:1 1 auto;}
-  /* tabella della verità */
-  .ttab{width:100%;border-collapse:collapse;font-family:var(--n-mono);font-size:.72rem;color:#c7ccd4;background:#0d1a15;}
-  .ttab th{color:#8fbfa8;font-weight:600;font-size:.62rem;padding:6px;border-bottom:1px solid #24463a;text-align:center;}
-  .ttab td{padding:7px 6px;text-align:center;border-bottom:1px solid #14261f;}
-  .ttab tbody tr{cursor:pointer;transition:.12s;}
-  .ttab tbody tr:hover{background:#12241d;}
-  .ttab tbody tr.active{background:#1c1608;box-shadow:inset 0 0 0 1px #ffb000;}
-  .ttab tbody tr.active td{color:#ffd57a;}
-  .ttab .res{font-weight:700;font-size:.92rem;color:#cfe0d6;}
-  .ttab tr:not(.done) .res{color:#46607a;font-weight:400;font-size:.8rem;}
-  .ttab .pcol{background:rgba(224,162,77,.09);}
-  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle;}
-  .dot.op{background:#46b083;} .dot.cl{background:#d15a5a;}
-  .ass{font-size:.54rem;letter-spacing:.05em;background:#7a1f1f;color:#ffd9d9;padding:1px 5px;border-radius:7px;margin-left:5px;}
-  /* header tabella + fumetto */
-  .tbl-head{display:flex;justify-content:space-between;align-items:center;font-family:var(--n-mono);font-size:.66rem;color:#8fbfa8;}
-  .tblwrap{position:relative;}
-  #bubble{left:auto;right:auto;top:auto;bottom:auto;max-width:225px;z-index:7;transform:translateY(8px) scale(.92);}
-  #bubble.show{transform:translateY(0) scale(1);}
-  #bubble::after{left:-13px;right:auto;top:50%;bottom:auto;transform:translateY(-50%);border:7px solid transparent;border-right-color:#ffb000;border-bottom-color:transparent;}
-  /* linea dal gauge (nel disegno) alla colonna della tabella, sovrapposta al pannello */
-  .link{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:5;}
-  #linkpath{fill:none;stroke:#e0a24d;stroke-width:1.9;opacity:0;filter:drop-shadow(0 0 3px rgba(224,162,77,.6));}
-  /* override della .ctl condivisa (grid a 3 colonne) → impilata verticale, solo in Esp.4 */
-  .ctl{display:block;grid-template-columns:none;font-family:var(--n-mono);font-size:.74rem;color:#c7ccd4;}
-  .ctl label{display:block;white-space:normal;color:#8fbfa8;margin-bottom:.4rem;}
-  .ctl input[type=range]{display:block;width:100%;accent-color:#ffb000;cursor:pointer;}
-  .ctl .drives-cap{display:block;font-size:.62rem;color:#e0a24d;margin-top:.35rem;}
+  /* pannello destro Esp.4: strumento di misura (slider φ + probabilità + registratore) */
+  .ctrlcol{overflow-x:hidden;}
+  .ctl input[type=range]{min-width:0;accent-color:#ffb000;}
+  .drives-cap{font-family:var(--n-mono);font-size:.64rem;color:#e0a24d;line-height:1.55;}
+  .drives-cap b{color:#ffd57a;}
 </style>
 <script defer src="assets/lang.js?v=5"></script>
 </head>
@@ -65,10 +42,43 @@
       <div class="sim-stage"><svg id="svg1" viewBox="0 0 720 510" role="img" aria-label="Esperimento 4: scomposizione e ricombinazione del fascio"></svg></div>
     </div>
     <aside class="ctrlcol">
-      <div class="ctl">
-        <label><span class="it">Curvatura dei cammini</span><span class="en">Path curvature</span></label>
-        <input type="range" id="curve" min="0" max="10" step="0.5" value="0" aria-label="curvatura">
-        <div class="drives-cap"><span class="it">↔ trascina: curva il diagramma centrale (illustrativo)</span><span class="en">↔ drag: bends the central diagram (illustrative)</span></div>
+      <div class="sim-controls">
+        <div class="ctl">
+          <label><span class="it">Sfasamento φ</span><span class="en">Phase shift φ</span></label>
+          <input type="range" id="phi" min="0" max="360" step="5" value="0" aria-label="sfasamento φ">
+          <span class="val" id="phiVal">0°</span>
+        </div>
+        <div class="drives-cap">
+          <span class="it">↔ trascina: sfasamento tra i due cammini · differenza di cammino ∆ = <b id="deltaVal">0.00</b> λ. La curvatura del diagramma a sinistra è illustrativa.</span>
+          <span class="en">↔ drag: phase shift between the two paths · path difference ∆ = <b id="deltaVal2">0.00</b> λ. The bending of the left diagram is illustrative.</span>
+        </div>
+        <div class="pbars">
+          <div class="pbar">
+            <div class="pk">P(m₀=+k)</div>
+            <div class="pv" id="pvPlus">100%</div>
+            <div class="track"><div class="fill" id="fillPlus" style="width:100%"></div></div>
+          </div>
+          <div class="pbar minus">
+            <div class="pk">P(m₀=−k)</div>
+            <div class="pv" id="pvMinus">0%</div>
+            <div class="track"><div class="fill" id="fillMinus" style="width:0"></div></div>
+          </div>
+        </div>
+        <div class="sim-math">
+          <div class="mrow"><span class="lab">P(m₀=+k)</span> = cos²(φ/2)</div>
+          <div class="mrow"><span class="lab">P(m₀=−k)</span> = sin²(φ/2)</div>
+          <div class="mrow" style="margin-top:.3rem"><span class="lab">φ = 2π·∆/λ</span> &nbsp;→&nbsp; φ=180° : ∆=λ/2 → 100% |m₀=−k⟩</div>
+        </div>
+        <div class="plotter">
+          <div class="plot-head">
+            <span class="plot-title">P(m₀=−k)</span>
+            <span class="plot-sub"><span class="it">vs sfasamento φ</span><span class="en">vs phase φ</span></span>
+            <div class="leds"><span class="led rec" id="ledRec">REC</span><span class="led fit" id="ledFit">FIT</span></div>
+            <button class="plot-clr" id="plotClr" type="button">CLR</button>
+          </div>
+          <div class="plot-screen"><svg id="plt" viewBox="0 0 660 210" role="img" aria-label="curva P(m₀=−k) in funzione di φ"></svg></div>
+          <div class="plot-status" id="plotStat">n = 0</div>
+        </div>
       </div>
     </aside>
   </section>
@@ -235,9 +245,26 @@ function drawGauge(cx,cy,R,val,live){
   tweenNeedle(rot, cx, cy);
 }
 
+var pPhi = function(phi){ return Math.pow(Math.sin(phi*Math.PI/360),2); };  // P(m₀=−k)=sin²(φ/2)
+var plt = makePlotter({svg:'plt', stat:'plotStat', rec:'ledRec', fit:'ledFit', xmin:0, xmax:360, fn:pPhi, color:'#35c8ff', xlabel:'φ (gradi)'});
+function setPhi(phi, rec){
+  document.getElementById('phiVal').textContent = phi+'°';
+  var Pm = pPhi(phi), Pp = 1-Pm;
+  document.getElementById('pvPlus').textContent  = fmtPct(Pp);
+  document.getElementById('pvMinus').textContent = fmtPct(Pm);
+  document.getElementById('fillPlus').style.width  = (Pp*100).toFixed(1)+'%';
+  document.getElementById('fillMinus').style.width = (Pm*100).toFixed(1)+'%';
+  var d=(phi/360).toFixed(2);
+  document.getElementById('deltaVal').textContent = d;
+  document.getElementById('deltaVal2').textContent = d;
+  curveVal = phi/360*10;      // guida la curvatura (illustrativa) del diagramma a sinistra
+  drawExp3();
+  if(rec!==false) plt.record(phi);
+}
 initBackLink('02-stern-gerlach-cascata.html');
-drawExp3();
-document.getElementById('curve').addEventListener('input', function(){ curveVal=+this.value; drawExp3(); });
+document.getElementById('phi').addEventListener('input', function(){ setPhi(+this.value, true); });
+document.getElementById('plotClr').addEventListener('click', function(){ plt.reset(); });
+setPhi(0, false);
 </script>
 </body>
 </html>
