@@ -93,7 +93,7 @@ body{
 .con-back:hover{background:#1d7a52;color:#fff;border-color:#1d7a52;text-decoration:none;}
 .con-brand .con-back{margin-right:.15rem;}
 .back-bottom{flex:none;display:flex;justify-content:center;padding:.3rem 0 .1rem;}
-@media (min-width:821px){ html,body{height:100%;overflow:hidden;} .console{height:100vh;overflow:hidden;} }
+@media (min-width:821px){ html,body{height:100%;overflow:hidden;} .console{height:100vh;overflow:hidden;} .back-bottom{display:none;} }
 @media (max-width:820px){
   .panel{grid-template-columns:1fr;padding:.7rem;}
   .stagecol .sim-stage{flex:none;height:34vh;}

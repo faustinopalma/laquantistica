@@ -3,6 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* Arrivo con #ancora (ritorno dai simulatori): salto ISTANTANEO, niente scorrimento animato.
+   Lo smooth resta attivo per i clic interni (riferimenti alle figure). */
+(function(){ if(location.hash){ var d=document.documentElement; d.style.scrollBehavior='auto'; window.addEventListener('load',function(){ try{ var e=document.getElementById(decodeURIComponent(location.hash.slice(1))); if(e) e.scrollIntoView(); }catch(_){} setTimeout(function(){ d.style.scrollBehavior=''; },80); }); } })();
+</script>
 <link rel="canonical" href="https://laquantistica.com/02-stern-gerlach-cascata.html">
 <title>Esperimenti di Stern-Gerlach in cascata · Cascaded Stern–Gerlach Experiments</title>
 <link rel="stylesheet" href="assets/style.css?v=12">
