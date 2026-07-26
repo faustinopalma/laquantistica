@@ -17,3 +17,10 @@ Thumbs.db
 
 # Azure CLI local config (isolated login - do not commit)
 .azure/
+
+# credenziali Azure 2o tenant (Foundry) - isolate dal deploy
+.azure-foundry/
+
+# Lab virtuali: BOZZE LOCALI - browsabili da localhost ma NON pubblicate (app_location=publish)
+publish/lab-*.html
+publish/_lab-index.html
