@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Lab virtuali (bozze locali) — La Quantistica</title>
+<link rel="stylesheet" href="assets/sim-sg.css?v=2">
+<style>
+  body{padding:0;margin:0;}
+  .wrap{max-width:1100px;margin:0 auto;padding:1.4rem clamp(.7rem,3vw,2rem) 3rem;}
+  .lab-h1{font-family:var(--n-mono);font-size:1.5rem;color:#ffb000;margin:.2rem 0 .2rem;}
+  .lab-sub{font-family:var(--n-mono);font-size:.82rem;color:#8b929c;margin:0 0 1.4rem;line-height:1.6;}
+  .lab-sub b{color:#e0a24d;}
+  .lab-chap{font-family:var(--n-mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:#57d98a;margin:1.6rem 0 .6rem;border-bottom:1px solid #1c3a30;padding-bottom:.3rem;}
+  .lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.8rem;}
+  .lab-card{display:block;background:#12151a;border:1px solid #2a303a;border-radius:8px;padding:.85rem 1rem;text-decoration:none;transition:.15s;}
+  .lab-card:hover{border-color:#ffb000;background:#171b21;transform:translateY(-2px);}
+  .lab-card .id{font-family:var(--n-mono);font-size:.62rem;color:#8b929c;letter-spacing:.05em;}
+  .lab-card .tt{font-family:var(--n-mono);font-size:.98rem;color:#e6ece8;font-weight:700;margin:.15rem 0 .25rem;}
+  .lab-card .ds{font-family:var(--n-mono);font-size:.72rem;color:#9aa0aa;line-height:1.5;}
+  .lab-card .st{display:inline-block;margin-top:.5rem;font-family:var(--n-mono);font-size:.6rem;padding:.12rem .5rem;border-radius:99px;}
+  .st.done{background:#123524;color:#57d98a;border:1px solid #1f6b45;}
+  .st.todo{background:#2a2f38;color:#8b929c;border:1px solid #3d444f;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1 class="lab-h1">Lab virtuali — bozze locali</h1>
+  <p class="lab-sub">Pagina di <b>appoggio</b> per sfogliare i simulatori in costruzione. <b>Non fa parte del sito</b>
+  pubblicato ed è solo locale. Ogni lab è collegato al capitolo di riferimento della tesi.</p>
+
+  <div class="lab-chap">Cap. 1 — Esperimento di Stern-Gerlach</div>
+  <div class="lab-grid">
+    <a class="lab-card" href="lab-01-sg-singolo.html">
+      <div class="id">L1.1</div><div class="tt">Stern-Gerlach singolo</div>
+      <div class="ds">Il fascio si divide in due sole macchie: previsione classica (banda) vs risultato quantistico (due punti).</div>
+      <span class="st todo" data-lab="lab-01-sg-singolo">in costruzione</span>
+    </a>
+  </div>
+
+  <div class="lab-chap">Cap. 3 — Esperimenti con gli Elettroni</div>
+  <div class="lab-grid">
+    <a class="lab-card" href="lab-03a-corrente-vuoto.html">
+      <div class="id">L3.1</div><div class="tt">Corrente nel vuoto</div>
+      <div class="ds">Emissione termoionica: scalda il filamento e osserva la corrente aumentare.</div>
+      <span class="st todo">in costruzione</span>
+    </a>
+    <a class="lab-card" href="lab-03b-deflessione-em.html">
+      <div class="id">L3.3–L3.4</div><div class="tt">Deflessione E / B — e/m</div>
+      <div class="ds">Il fascio devia nei campi elettrico e magnetico; si ricava il rapporto e/m.</div>
+      <span class="st todo">in costruzione</span>
+    </a>
+    <a class="lab-card" href="lab-03c-millikan.html">
+      <div class="id">L3.6</div><div class="tt">Goccia di Millikan</div>
+      <div class="ds">Sospendi la gocciolina e scopri che la carica è un multiplo intero di e.</div>
+      <span class="st todo">in costruzione</span>
+    </a>
+  </div>
+
+  <div class="lab-chap">Cap. 4 — Diffrazione degli Elettroni</div>
+  <div class="lab-grid">
+    <a class="lab-card" href="lab-04-diffrazione.html">
+      <div class="id">L4.2</div><div class="tt">Diffrazione elettronica</div>
+      <div class="ds">Anelli concentrici che si restringono all'aumentare della tensione (de Broglie).</div>
+      <span class="st todo">in costruzione</span>
+    </a>
+  </div>
+
+  <div class="lab-chap">Cap. 5 — Esperimento di Rutherford</div>
+  <div class="lab-grid">
+    <a class="lab-card" href="lab-05-rutherford.html">
+      <div class="id">L5.1</div><div class="tt">Diffusione di Rutherford</div>
+      <div class="ds">Traiettorie α, conteggio N(ϑ) e confronto con la legge 1/sin⁴(ϑ/2).</div>
+      <span class="st todo">in costruzione</span>
+    </a>
+  </div>
+
+  <div class="lab-chap">Cap. 7 — Esperimento di Franck-Hertz</div>
+  <div class="lab-grid">
+    <a class="lab-card" href="lab-07-franck-hertz.html">
+      <div class="id">L7.1</div><div class="tt">Franck-Hertz</div>
+      <div class="ds">Curva I(V) con massimi e minimi periodici; neon o mercurio.</div>
+      <span class="st todo">in costruzione</span>
+    </a>
+  </div>
+
+  <div class="lab-chap">Cap. 8 — Effetto Fotoelettrico</div>
+  <div class="lab-grid">
+    <a class="lab-card" href="lab-08-fotoelettrico.html">
+      <div class="id">L8.2</div><div class="tt">Effetto fotoelettrico</div>
+      <div class="ds">Tensione d'arresto vs frequenza → costante di Planck e lavoro di estrazione.</div>
+      <span class="st todo">in costruzione</span>
+    </a>
+  </div>
+
+  <div class="lab-chap">Cap. 9 — Spettri Atomici</div>
+  <div class="lab-grid">
+    <a class="lab-card" href="lab-09-spettri.html">
+      <div class="id">L9.1</div><div class="tt">Spettri atomici</div>
+      <div class="ds">Salti tra livelli dell'idrogeno → righe spettrali (serie di Balmer).</div>
+      <span class="st todo">in costruzione</span>
+    </a>
+  </div>
+</div>
+</body>
+</html>
