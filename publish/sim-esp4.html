@@ -147,19 +147,34 @@ function drawExp3(){
   // ===== BANDA 2: come le macchine 2·3·4 separano e poi ricombinano (allineata a 2·3·4) =====
   txt(360,172,'— come le macchine 2·3·4 separano e poi ricombinano il fascio —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
   var mc=258, uT=214,uB=236, lT=280,lB=302;
-  [215,340,465].forEach(function(mx){ poleBox(mx,uT,uB); poleBox(mx,lT,lB); });
-  // blocco addizionale sulla macchina 3: intensifica il gradiente nel percorso inferiore (Fig. 11)
+  // ---- curvatura (Fig. 11): le macchine laterali ruotano e si sollevano; il fascio le segue ----
+  var angMax = 8;                                  // gradi max (illustrativo, visibile ma senza collisioni)
+  var ang = (curveVal/10) * angMax;                // angolo corrente ∝ slider
+  var tanA = Math.tan(ang*Math.PI/180);
+  var rise = 125 * tanA;                           // sollevamento che fa combaciare la V con la macchina centrale
+  function axis(x){ return mc - Math.abs(x-340) * tanA; }   // asse del fascio: V col vertice al centro (fisso)
+  // macchina 3 (centrale) FERMA + blocco addizionale (intensifica il gradiente del percorso inferiore)
+  poleBox(340,uT,uB); poleBox(340,lT,lB);
   el('rect',{x:340-24,y:252,width:48,height:16,rx:2,fill:PANEL,stroke:INK,'stroke-width':1.3},svg1);
-  beam(150,mc,195,mc, 2.2,1, INK, svg1);
-  curveBeam(195,mc,300,244, 2,1, ACC, svg1); beam(300,244,380,244, 2,1, ACC, svg1); curveBeam(380,244,485,mc, 2,1, ACC, svg1);
-  curveBeam(195,mc,300,272, 2,1, BLU, svg1); beam(300,272,380,272, 2,1, BLU, svg1); curveBeam(380,272,485,mc, 2,1, BLU, svg1);
-  beam(485,mc,540,mc, 2.2,1, INK, svg1);
-  vArrow(215, 274, 242, '#e0a24d');   // macchina 2
-  vArrow(340, 242, 274, '#e0a24d');   // macchina 3
-  vArrow(465, 274, 242, '#e0a24d');   // macchina 4
-  txt(150,mc-8,'|m₀=+k⟩',{'font-size':8.5,fill:INK,'font-family':'monospace'},svg1);
-  txt(275,230,'m₉₀=+k',{'text-anchor':'middle','font-size':8,fill:ACC,'font-family':'monospace'},svg1);
-  txt(275,290,'m₉₀=−k',{'text-anchor':'middle','font-size':8,fill:BLU,'font-family':'monospace'},svg1);
+  vArrow(340, 242, 274, '#e0a24d');
+  // macchine 2 (sx: ruota oraria) e 4 (dx: ruota antioraria), sollevate — poli + freccia dentro il gruppo ruotato
+  function tiltMachine(cx, sign){
+    var g = el('g',{transform:'translate(0 '+(-rise)+') rotate('+(sign*ang)+' '+cx+' '+mc+')'},svg1);
+    el('rect',{x:cx-34,y:uT,width:68,height:uB-uT,rx:2,fill:PANEL,stroke:INK,'stroke-width':1.4},g);
+    el('rect',{x:cx-34,y:lT,width:68,height:lB-lT,rx:2,fill:PANEL,stroke:INK,'stroke-width':1.4},g);
+    el('line',{x1:cx,y1:274,x2:cx,y2:242,stroke:'#e0a24d','stroke-width':1.6},g);
+    el('path',{d:'M'+(cx-3.2)+' 247.5 L'+cx+' 242 L'+(cx+3.2)+' 247.5',fill:'none',stroke:'#e0a24d','stroke-width':1.6,'stroke-linecap':'round','stroke-linejoin':'round'},g);
+  }
+  tiltMachine(215, +1);   // sinistra: oraria
+  tiltMachine(465, -1);   // destra: antioraria
+  // fasci (seguono l'asse a V): entra parallelo a sx (in discesa) ed esce parallelo a dx (in salita)
+  beam(150,axis(150),195,axis(195), 2.2,1, INK, svg1);
+  curveBeam(195,axis(195),300,axis(300)-14, 2,1, ACC, svg1); beam(300,axis(300)-14,380,axis(380)-14, 2,1, ACC, svg1); curveBeam(380,axis(380)-14,485,axis(485), 2,1, ACC, svg1);
+  curveBeam(195,axis(195),300,axis(300)+14, 2,1, BLU, svg1); beam(300,axis(300)+14,380,axis(380)+14, 2,1, BLU, svg1); curveBeam(380,axis(380)+14,485,axis(485), 2,1, BLU, svg1);
+  beam(485,axis(485),540,axis(540), 2.2,1, INK, svg1);
+  txt(150,axis(150)-8,'|m₀=+k⟩',{'font-size':8.5,fill:INK,'font-family':'monospace'},svg1);
+  txt(275,axis(275)-28,'m₉₀=+k',{'text-anchor':'middle','font-size':8,fill:ACC,'font-family':'monospace'},svg1);
+  txt(275,axis(275)+32,'m₉₀=−k',{'text-anchor':'middle','font-size':8,fill:BLU,'font-family':'monospace'},svg1);
   el('line',{x1:40,y1:316,x2:680,y2:316,stroke:'#1c3a30','stroke-width':1},svg1);
 
   // ===== BANDA 3: diagramma a flussi interattivo (porte, sensore, misura) =====
