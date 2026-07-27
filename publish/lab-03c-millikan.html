@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Lab · Goccia di Millikan — La Quantistica</title>
+<link rel="stylesheet" href="assets/lang.css?v=5">
+<link rel="stylesheet" href="assets/sim-sg.css?v=4">
+<script defer src="assets/lang.js?v=5"></script>
+<style>
+  .console{min-height:auto;}
+  .panel{grid-template-columns:minmax(0,1fr) 360px;flex:0 0 auto;align-items:start;}
+  .ctrlcol{overflow:visible;}
+  .stagecol .sim-stage{flex:0 0 auto;max-width:620px;}
+  .stagecol .sim-stage svg{height:auto;}
+  .cmd{display:flex;flex-direction:column;gap:.1rem;margin-bottom:.5rem;}
+  .cmd .ctl{margin:.15rem 0;}
+  .btnrow{display:flex;gap:.5rem;flex-wrap:wrap;margin:.35rem 0;}
+  .simbtn{font-family:var(--n-mono);font-size:.76rem;font-weight:700;background:#2a2f38;border:1px solid #3d444f;color:#c7ccd4;border-radius:6px;padding:.42rem .8rem;cursor:pointer;transition:.15s;}
+  .simbtn:hover{background:#b06a12;color:#fff;border-color:#b06a12;}
+  .simbtn.primary{background:#b06a12;color:#fff;border-color:#b06a12;}
+  .simbtn.big{font-size:.84rem;padding:.55rem 1rem;width:100%;justify-content:center;}
+  .simbtn:disabled{opacity:.4;cursor:not-allowed;}
+  .simbtn.ready{background:#2b7a4b;border-color:#2b7a4b;color:#fff;animation:pulseb 1.3s ease-in-out infinite;}
+  #auto.running{background:#33404e;border-color:#5a6472;color:#e6ece8;}
+  @keyframes pulseb{0%,100%{box-shadow:0 0 0 0 rgba(87,217,138,.5);}50%{box-shadow:0 0 0 7px rgba(87,217,138,0);}}
+  .modeb{font-family:var(--n-mono);font-size:.74rem;font-weight:700;padding:.45rem .6rem;border-radius:6px;margin:.15rem 0;}
+  .modeb.auto{background:#122033;color:#7fc4ff;border:1px solid #24405f;}
+  .modeb.man{background:#1a2416;color:#9fd08a;border:1px solid #33502a;}
+  .readout{background:#12151a;border:1px solid #2d333d;border-radius:6px;padding:.5rem .8rem;margin:.35rem 0 0;font-family:var(--n-mono);}
+  .readout .k{font-size:.62rem;color:#8b929c;text-transform:uppercase;letter-spacing:.05em;}
+  .readout .v{font-size:1rem;font-weight:700;color:#c7ccd4;min-height:1.25em;}
+  .readout .v.ok{color:#57d98a;} .readout .v.no{color:#e0a24d;}
+  .histwrap{margin:.1rem 0 .45rem;}
+  .histtitle{font-family:var(--n-mono);font-size:.82rem;font-weight:700;color:#e6ece8;margin:0 0 .35rem;letter-spacing:.02em;}
+  .histbox{background:#0b0f13;border:1px solid #2e3640;border-radius:6px;padding:.5rem .5rem .3rem;}
+  .histbox svg{display:block;width:100%;height:auto;}
+  .flytok{position:fixed;z-index:9999;font-family:var(--n-mono);font-size:.82rem;font-weight:700;color:#1a1206;background:#ffce6a;border:1px solid #7a5a1e;border-radius:6px;padding:.08rem .34rem;pointer-events:none;transition:transform .8s cubic-bezier(.35,.7,.2,1),opacity .8s ease-out;box-shadow:0 2px 8px rgba(0,0,0,.45);}
+  .sim-math{font-size:.72rem;}
+  .hint{font-size:.72rem;color:#8b929c;}
+  #volt{display:none;}
+  #svg1 .sprayhit{cursor:pointer;fill:transparent;}
+  #svg1 .sprayhit:hover{fill:rgba(224,162,77,.15);}
+  #svg1 .trackhit{cursor:pointer;fill:transparent;touch-action:none;}
+  #svg1 .knob{pointer-events:none;}
+  #svg1 .autobtn{cursor:pointer;}
+  #svg1 .measbtn.ready{animation:mpulse 1.3s ease-in-out infinite;}
+  #svg1 .invite{pointer-events:none;animation:invite 1.4s ease-in-out infinite;}
+  @keyframes mpulse{0%,100%{opacity:1;}50%{opacity:.72;}}
+  @keyframes invite{0%,100%{opacity:.22;}50%{opacity:.72;}}
+  @keyframes lqfield{to{stroke-dashoffset:-16;}}
+  .lqfield{animation:lqfield 1.4s linear infinite;}
+  @media(prefers-reduced-motion:reduce){.lqfield{animation:none!important;}.flytok{transition:none!important;}.invite{animation:none!important;opacity:.5;}}
+</style>
+</head>
+<body>
+<main class="console" id="top">
+  <header class="con-head">
+    <div class="con-brand">
+      <a class="con-back" id="backTop" href="_lab-index.html"><span class="it">← Torna all'indice</span><span class="en">← Back to index</span></a>
+      <span class="tag amber">Lab · Cap. 3</span>
+      <span class="con-title"><span class="it">Goccia di Millikan</span><span class="en">Millikan oil drop</span></span>
+    </div>
+    <div class="con-actions">
+      <div class="langsw" role="group" aria-label="Lingua / Language">
+        <button class="langbtn" type="button" data-l="it" aria-pressed="true">Italiano</button>
+        <button class="langbtn" type="button" data-l="en" aria-pressed="false">English</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="panel">
+    <div class="stagecol">
+      <div class="sim-stage"><svg id="svg1" viewBox="0 56 540 396" role="img" aria-label="Apparato di Millikan con comandi integrati: spruzzatore cliccabile, cursore del campo, tasto Misura e autopilot sotto l'apparato"></svg></div>
+    </div>
+    <aside class="ctrlcol">
+      <div class="cmd">
+        <div id="modeb" class="modeb auto"></div>
+        <div class="readout"><div class="k"><span class="it">Stato della goccia</span><span class="en">Droplet state</span></div><div class="v" id="state">—</div></div>
+        <div class="btnrow"><button class="simbtn" id="clr" type="button"><span class="it">Azzera istogramma</span><span class="en">Reset histogram</span></button></div>
+      </div>
+      <div class="histwrap">
+        <div class="histtitle"><span class="it">Cariche misurate → quantizzazione della carica</span><span class="en">Measured charges → charge quantization</span></div>
+        <div class="histbox"><svg id="hist" viewBox="0 0 340 200" role="img" aria-label="Istogramma delle cariche misurate"></svg></div>
+      </div>
+      <div class="sim-math">
+        <div class="mrow"><span class="lab it">Ultima misura:</span><span class="lab en">Last measurement:</span> <b id="qmeas">—</b> &middot; <span class="lab it">carica elem.</span><span class="lab en">elem. charge</span> e &asymp; 1,602&times;10&#8315;&#185;&#8313; C</div>
+      </div>
+      <p class="hint"><span class="it"><b>Comandi sul modello</b>: clicca lo <b>spruzzatore</b> per far entrare una gocciolina, agisci sul <b>cursore</b> sotto l'apparato per regolare il campo, poi premi <b>MISURA</b>: il valore vola nell'istogramma. Non conta sospendere <i>una</i> goccia, ma <b>accumulare</b> misure che rivelano la <b>quantizzazione</b>.</span><span class="en"><b>Controls on the model</b>: click the <b>atomizer</b> to let a droplet in, use the <b>slider</b> under the apparatus to adjust the field, then press <b>MEASURE</b>: the value flies into the histogram. The goal is not to suspend <i>one</i> drop, but to <b>accumulate</b> measurements revealing <b>quantization</b>.</span></p>
+      <input type="range" id="volt" min="0" max="600" step="1" value="0" aria-hidden="true">
+    </aside>
+  </section>
+
+  <div class="back-bottom"><a class="con-back" id="backBottom" href="_lab-index.html"><span class="it">← Torna all'indice</span><span class="en">← Back to index</span></a></div>
+  <div class="con-foot"><span>La Quantistica · Lab locale · Cap. 03</span><span>F. Palma</span></div>
+</main>
+
+<script src="assets/sim-sg-core.js?v=2"></script>
+<script>
+(function(){
+var svg1=document.getElementById('svg1');
+var histSvg=document.getElementById('hist');
+var REDUCE=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+function L(it,en){ return document.documentElement.getAttribute('data-lang')==='en'?en:it; }
+// geometria: camera ermetica a due compartimenti (viewBox 540x340)
+var xPL=118, xPR=306, xC=212;
+var yPT=138, yPTb=148, yPB=244;      // piatto+(divisorio) 138..148, campo da 148; piatto− da 244
+var yMid=(yPTb+yPB)/2;               // 196
+var A=(yPB-yPTb)/2-8;                // 40
+var eyeX=470, eyeY=196, eyeR=50, ampEye=30;
+var trackX0=52, trackX1=458, trackY=358;   // cursore del campo (plancia comandi)
+var K=12;                            // Vsusp = K*massa/n
+var auto={on:false,phase:'idle',t0:0,count:0}, autoTimer=null;
+
+var drop=null, measList=[];          // measList: {q:valore preciso, n:multiplo intero}
+var R={};                            // riferimenti a nodi dinamici
+var offset=0, vel=0, rafId=null, lastTs=0, physOn=false;
+
+function clear(g){ while(g.firstChild) g.removeChild(g.firstChild); }
+
+function buildApparatus(){
+  clear(svg1);
+  var defs=el('defs',{},svg1);
+  var cp=el('clipPath',{id:'eyeclip'},defs);
+  el('circle',{cx:eyeX,cy:eyeY,r:eyeR-5},cp);
+
+  // ——— camera ermetica a due compartimenti (vetro sigillato, pareti spesse) ———
+  el('rect',{x:110,y:70,width:204,height:224,rx:14,fill:'#0e1319',stroke:'#52606f','stroke-width':3},svg1);
+  el('rect',{x:114,y:74,width:196,height:62,rx:8,fill:'#151b22'},svg1);   // compartimento superiore (spruzzo)
+  R.upperLab=txt(xC,90,'',{'text-anchor':'middle','font-size':8.5,fill:'#66707c','font-family':'monospace'},svg1);
+  // tinta del campo (∝ U) nel compartimento inferiore + linee di campo
+  R.fieldTint=el('rect',{x:xPL,y:yPTb,width:(xPR-xPL),height:(yPB-yPTb),fill:'#2b7fb0',opacity:0},svg1);
+  R.gField=el('g',{},svg1);
+
+  // ——— piastre ——— piatto+(divisorio a tutta larghezza con foro); piatto−
+  el('rect',{x:xPL,y:yPT,width:(xC-8-xPL),height:10,rx:2,fill:'#20262e',stroke:'#d15a5a','stroke-width':2},svg1);
+  el('rect',{x:(xC+8),y:yPT,width:(xPR-(xC+8)),height:10,rx:2,fill:'#20262e',stroke:'#d15a5a','stroke-width':2},svg1);
+  el('rect',{x:xPL,y:yPB,width:(xPR-xPL),height:10,rx:2,fill:'#20262e',stroke:'#5aa0d1','stroke-width':2},svg1);
+  el('line',{x1:100,y1:yPT+5,x2:xPL,y2:yPT+5,stroke:'#d15a5a','stroke-width':1.2},svg1);
+  txt(96,yPT+9,'+',{'text-anchor':'end','font-size':14,fill:'#d15a5a','font-family':'monospace','font-weight':'bold'},svg1);
+  el('line',{x1:100,y1:yPB+5,x2:xPL,y2:yPB+5,stroke:'#5aa0d1','stroke-width':1.2},svg1);
+  txt(96,yPB+9,'−',{'text-anchor':'end','font-size':14,fill:'#5aa0d1','font-family':'monospace','font-weight':'bold'},svg1);
+  el('path',{d:'M91 '+(yPB+15)+' h10 M93 '+(yPB+18)+' h6 M95 '+(yPB+21)+' h2',stroke:'#5aa0d1','stroke-width':1.2},svg1);
+  // foro: etichetta nel compartimento superiore + freccetta di discesa sotto il piatto
+  el('path',{d:'M'+(xC-3)+' '+(yPTb+4)+' L'+xC+' '+(yPTb+10)+' L'+(xC+3)+' '+(yPTb+4),fill:'none',stroke:'#66707c','stroke-width':1.2},svg1);
+  R.holeLab=txt(xC,130,'',{'text-anchor':'middle','font-size':8,fill:'#66707c','font-family':'monospace'},svg1);
+
+  // ——— badge del potenziale "U = … V" (niente cavi) ———
+  el('line',{x1:xPR,y1:143,x2:322,y2:146,stroke:'#7a5a1e','stroke-width':1},svg1);
+  el('rect',{x:322,y:136,width:62,height:19,rx:4,fill:'#1a140a',stroke:'#7a5a1e','stroke-width':1},svg1);
+  R.voltDisp=txt(353,149,'',{'text-anchor':'middle','font-size':11.5,fill:'#ffb000','font-family':'monospace','font-weight':'bold'},svg1);
+
+  // ——— spruzzatore a SINISTRA: spruzza in ORIZZONTALE nel compartimento superiore ———
+  el('ellipse',{cx:34,cy:92,rx:13,ry:9,fill:'#3a4048',stroke:'#5a6472','stroke-width':1.5},svg1);
+  el('path',{d:'M46 86 q 6 -3 8 4',fill:'none',stroke:'#5a6472','stroke-width':1},svg1);
+  el('rect',{x:50,y:84,width:18,height:24,rx:3,fill:'#241f14',stroke:'#5a6472','stroke-width':1},svg1);
+  el('rect',{x:52,y:94,width:14,height:12,rx:2,fill:'#e0a24d',opacity:.85},svg1);
+  el('rect',{x:68,y:92,width:8,height:8,rx:1,fill:'#3a4048',stroke:'#5a6472','stroke-width':1},svg1);
+  el('line',{x1:76,y1:96,x2:110,y2:96,stroke:'#5a6472','stroke-width':2},svg1);
+  R.sprayLab=txt(20,126,'',{'font-size':9,fill:'#8b929c','font-family':'monospace'},svg1);
+  R.gSpray=el('g',{},svg1);
+
+  // ——— sorgente di raggi X a SINISTRA, VICINA alla camera (fascio corto orizzontale) ———
+  el('rect',{x:20,y:172,width:32,height:26,rx:3,fill:'#333a43',stroke:'#5a6472','stroke-width':1.5},svg1);
+  el('rect',{x:52,y:181,width:54,height:10,rx:2,fill:'#2a3038',stroke:'#5a6472','stroke-width':1},svg1);
+  var xr='M106 '+yMid, up=true;
+  for(var wx=106; wx<xC-14; wx+=14){ xr+=' q 7 '+(up?-6:6)+' 14 0'; up=!up; }
+  el('path',{d:xr,fill:'none',stroke:'#4fd0e0','stroke-width':1.6,opacity:.9},svg1);
+  el('path',{d:'M'+(xC-14)+' '+(yMid-4)+' L'+(xC-7)+' '+yMid+' L'+(xC-14)+' '+(yMid+4),fill:'none',stroke:'#4fd0e0','stroke-width':1.6},svg1);
+  R.lightLab=txt(20,214,'',{'font-size':9,fill:'#8b929c','font-family':'monospace'},svg1);
+  R.lightLab2=txt(20,225,'',{'font-size':8,fill:'#6b7280','font-family':'monospace'},svg1);
+
+  // ——— microscopio (destra) ———
+  el('line',{x1:xC,y1:yMid,x2:314,y2:yMid,stroke:'#4a5563','stroke-width':1,'stroke-dasharray':'2 4'},svg1);
+  el('rect',{x:314,y:yMid-8,width:84,height:16,rx:3,fill:'#333a43',stroke:'#5a6472','stroke-width':1.5},svg1);
+  el('circle',{cx:319,cy:yMid,r:5,fill:'#20262e',stroke:'#5a6472','stroke-width':1},svg1);
+  el('circle',{cx:392,cy:yMid,r:8,fill:'#20262e',stroke:'#5a6472','stroke-width':1.5},svg1);
+  el('line',{x1:400,y1:yMid,x2:eyeX-eyeR+4,y2:eyeY,stroke:'#4a5563','stroke-width':1,'stroke-dasharray':'2 4'},svg1);
+  R.micLab=txt(322,yMid+22,'',{'font-size':9,fill:'#8b929c','font-family':'monospace'},svg1);
+
+  // ——— oculare: vista al microscopio ———
+  el('circle',{cx:eyeX,cy:eyeY,r:eyeR,fill:'#0a0e12',stroke:'#3a434e','stroke-width':2},svg1);
+  var gret=el('g',{'clip-path':'url(#eyeclip)'},svg1);
+  el('line',{x1:eyeX-eyeR,y1:eyeY,x2:eyeX+eyeR,y2:eyeY,stroke:'#2b6a4f','stroke-width':1,opacity:.7},gret);
+  for(var t=-3;t<=3;t++){ el('line',{x1:eyeX+t*12,y1:eyeY-5,x2:eyeX+t*12,y2:eyeY+5,stroke:'#2b6a4f','stroke-width':1,opacity:.5},gret); }
+  R.gEye=el('g',{'clip-path':'url(#eyeclip)'},svg1);
+  R.eyeGlow=el('circle',{cx:eyeX,cy:eyeY,r:14,fill:'#8effd0',opacity:.16},R.gEye);
+  R.eyeDrop=el('circle',{cx:eyeX,cy:eyeY,r:7,fill:'#eafff6',stroke:'#8effd0','stroke-width':1.5},R.gEye);
+  R.eyeLab=txt(eyeX,eyeY+eyeR+13,'',{'text-anchor':'middle','font-size':9,fill:'#8b929c','font-family':'monospace'},svg1);
+
+  // ——— goccia (glow + cerchio + frecce di forza, traslati insieme) ———
+  R.gDrop=el('g',{},svg1);
+  R.dropGlow=el('circle',{cx:xC,cy:yMid,r:9,fill:'#8effd0',opacity:.14},R.gDrop);
+  R.dropC=el('circle',{cx:xC,cy:yMid,r:4,fill:'#cfe0d6',stroke:'#8fb7d6','stroke-width':1.5},R.gDrop);
+  R.gForce=el('g',{},R.gDrop);
+  R.gDrop.style.display='none';
+
+  // area cliccabile sullo spruzzatore (clic = spruzza) + invito pulsante + suggerimento
+  R.sprayPulse=el('rect',{x:6,y:73,width:116,height:52,rx:8,fill:'none',stroke:'#e0a24d','stroke-width':1.5,'stroke-dasharray':'4 3','class':'invite'},svg1);
+  R.sprayHint=txt(20,137,'',{'font-size':7.5,fill:'#e0a24d','font-family':'monospace'},svg1);
+  R.sprayHit=el('rect',{x:12,y:76,width:104,height:48,'class':'sprayhit'},svg1);
+
+  // plancia comandi sotto l'apparato: cursore del campo + MISURA + AUTOPILOT
+  el('rect',{x:30,y:314,width:480,height:130,rx:8,fill:'#141a21',stroke:'#2e3640','stroke-width':1.5},svg1);
+  R.sliderLab=txt(46,338,'',{'font-size':9,fill:'#9aa1ab','font-family':'monospace'},svg1);
+  R.sliderVal=txt(498,338,'',{'text-anchor':'end','font-size':11,fill:'#ffb000','font-family':'monospace','font-weight':'bold'},svg1);
+  el('rect',{x:trackX0,y:trackY-3,width:(trackX1-trackX0),height:6,rx:3,fill:'#0a0e12',stroke:'#2e3640','stroke-width':1},svg1);
+  for(var tkk=0;tkk<=4;tkk++){ var xtk=trackX0+tkk*(trackX1-trackX0)/4; el('line',{x1:xtk,y1:trackY-10,x2:xtk,y2:trackY-6,stroke:'#4a5563','stroke-width':1},svg1); }
+  R.knobLevel=el('rect',{x:trackX0,y:trackY-3,width:0,height:6,rx:3,fill:'#e0a24d'},svg1);
+  R.trackHit=el('rect',{x:trackX0-10,y:trackY-16,width:(trackX1-trackX0+20),height:32,'class':'trackhit'},svg1);
+  R.knob=el('g',{'class':'knob'},svg1);
+  el('rect',{x:-7,y:trackY-13,width:14,height:26,rx:3,fill:'#cfd4db',stroke:'#6b7280','stroke-width':1},R.knob);
+  el('line',{x1:-7,y1:trackY,x2:7,y2:trackY,stroke:'#6b7280','stroke-width':1},R.knob);
+  R.measBtn=el('g',{'class':'measbtn'},svg1);
+  R.measRect=el('rect',{x:52,y:390,width:186,height:42,rx:8,fill:'#20262e',stroke:'#3d444f','stroke-width':1.5},R.measBtn);
+  R.measTxt=txt(145,417,'',{'text-anchor':'middle','font-size':13,fill:'#5a626c','font-family':'monospace','font-weight':'bold'},R.measBtn);
+  R.autoBtn=el('g',{'class':'autobtn'},svg1);
+  R.autoRect=el('rect',{x:256,y:390,width:202,height:42,rx:8,fill:'#b06a12',stroke:'#c98a2e','stroke-width':1.5},R.autoBtn);
+  R.autoTxt=txt(357,417,'',{'text-anchor':'middle','font-size':12.5,fill:'#fff','font-family':'monospace','font-weight':'bold','pointer-events':'none'},R.autoBtn);
+
+  applyLabels();
+}
+
+function applyLabels(){
+  R.upperLab.textContent=L('camera di spruzzo','spray chamber');
+  R.holeLab.textContent=L('foro','hole');
+  R.sprayLab.textContent=L('spruzzatore','atomizer');
+  R.sprayHint.textContent=L('▸ clicca per spruzzare','▸ click to spray');
+  R.lightLab.textContent=L('sorgente raggi X','X-ray source');
+  R.lightLab2.textContent=L('(ionizzante)','(ionizing)');
+  R.micLab.textContent=L('microscopio','microscope');
+  R.eyeLab.textContent=L('vista al microscopio','microscope view');
+  R.sliderLab.textContent=L('Campo elettrico — tensione U','Electric field — voltage U');
+  R.measTxt.textContent=L('MISURA','MEASURE');
+  autoBtnLabel();
+}
+
+function fieldLines(V){
+  clear(R.gField);
+  if(V<=0) return;
+  var n=Math.round(3+V/600*6), op=0.22+V/600*0.55, i;
+  for(i=0;i<n;i++){
+    var x=xPL+18+(xPR-xPL-36)*(i/(n-1||1));
+    if(Math.abs(x-xC)<14) continue;
+    el('line',{x1:x,y1:yPTb+3,x2:x,y2:yPB-9,stroke:'#3f7d63','stroke-width':1,'stroke-dasharray':'3 5','class':'lqfield',opacity:op},R.gField);
+    el('path',{d:'M'+(x-3)+' '+(yPB-14)+' L'+x+' '+(yPB-8)+' L'+(x+3)+' '+(yPB-14),fill:'none',stroke:'#3f7d63','stroke-width':1,opacity:op},R.gField);
+  }
+}
+
+function forces(V,Vs){
+  clear(R.gForce);
+  var mgL=26;   // peso costante (giù)
+  el('line',{x1:xC-16,y1:yMid,x2:xC-16,y2:yMid+mgL,stroke:'#d15a5a','stroke-width':2},R.gForce);
+  el('path',{d:'M'+(xC-19)+' '+(yMid+mgL-5)+' L'+(xC-16)+' '+(yMid+mgL)+' L'+(xC-13)+' '+(yMid+mgL-5),fill:'none',stroke:'#d15a5a','stroke-width':2},R.gForce);
+  txt(xC-22,yMid+mgL,'mg',{'text-anchor':'end','font-size':8,fill:'#d15a5a','font-family':'monospace'},R.gForce);
+  var qeL=Math.max(0,Math.min(34,mgL*V/Vs));   // forza elettrica (su) ∝ U
+  if(qeL>2){
+    el('line',{x1:xC+16,y1:yMid,x2:xC+16,y2:yMid-qeL,stroke:'#57d98a','stroke-width':2},R.gForce);
+    el('path',{d:'M'+(xC+13)+' '+(yMid-qeL+5)+' L'+(xC+16)+' '+(yMid-qeL)+' L'+(xC+19)+' '+(yMid-qeL+5),fill:'none',stroke:'#57d98a','stroke-width':2},R.gForce);
+    txt(xC+22,yMid-qeL+3,'qE',{'font-size':8,fill:'#57d98a','font-family':'monospace'},R.gForce);
+  }
+}
+
+function setDisp(d){
+  R.gDrop.setAttribute('transform','translate(0 '+d.toFixed(1)+')');
+  R.gEye.setAttribute('transform','translate(0 '+(d*ampEye/A).toFixed(1)+')');
+}
+function startPhysics(){ if(!physOn && !REDUCE && drop){ physOn=true; lastTs=0; rafId=requestAnimationFrame(physicsStep); } }
+function stopPhysics(){ physOn=false; if(rafId!=null){ cancelAnimationFrame(rafId); rafId=null; } }
+function physicsStep(ts){
+  if(!drop){ physOn=false; rafId=null; return; }
+  if(!lastTs){ lastTs=ts; rafId=requestAnimationFrame(physicsStep); return; }
+  var dt=Math.min(0.05,(ts-lastTs)/1000); lastTs=ts;
+  var V=+document.getElementById('volt').value, Vs=drop.Vsusp, rel=(V-Vs)/Vs;
+  var vT=Math.max(-80,Math.min(80,-rel*78));      // velocità obiettivo (px/s): <0 sale, >0 scende
+  vel+=(vT-vel)*Math.min(1,dt*5);                 // avvicinamento morbido → niente scatti né salti
+  offset+=vel*dt;
+  if(offset>A){ offset=A; if(vel>0) vel=0; }
+  if(offset<-A){ offset=-A; if(vel<0) vel=0; }
+  var disp=offset;
+  if(Math.abs(rel)<0.06 && Math.abs(vel)<3){ disp+=Math.sin(ts/650)*1.3; }  // galleggia dolcemente in equilibrio
+  setDisp(disp);
+  rafId=requestAnimationFrame(physicsStep);
+}
+
+var _raf=null;
+function scheduleUpdate(){ if(_raf) return; _raf=requestAnimationFrame(function(){ _raf=null; update(); }); }
+function setMeasBtn(on){
+  R.measEnabled=on;
+  R.measRect.setAttribute('fill',on?'#1f5a37':'#20262e');
+  R.measRect.setAttribute('stroke',on?'#57d98a':'#3d444f');
+  R.measTxt.setAttribute('fill',on?'#eafff0':'#5a626c');
+  R.measBtn.classList.toggle('ready',on);
+  R.measBtn.style.cursor=on?'pointer':'default';
+}
+
+function update(){
+  var V=+document.getElementById('volt').value;
+  R.voltDisp.textContent='U = '+V+' V';
+  R.sliderVal.textContent='U = '+V+' V';
+  var kx=trackX0+V/600*(trackX1-trackX0);
+  R.knob.setAttribute('transform','translate('+kx.toFixed(1)+' 0)');
+  R.knobLevel.setAttribute('width',(kx-trackX0).toFixed(1));
+  R.fieldTint.setAttribute('opacity',(V/600*0.16).toFixed(3));
+  fieldLines(V);
+  var invite=(!drop)&&(!auto.on);
+  R.sprayPulse.style.display=invite?'':'none';
+  R.sprayHint.style.display=invite?'':'none';
+  var st=document.getElementById('state');
+  if(!drop){
+    clear(R.gForce);
+    st.className='v'; st.innerHTML='<span class="it">— nessuna goccia: clicca lo spruzzatore</span><span class="en">— no droplet: click the atomizer</span>';
+    setMeasBtn(false);
+    return;
+  }
+  var Vs=drop.Vsusp, susp=Math.abs(V-Vs)<8, rel=(V-Vs)/Vs;
+  forces(V,Vs);
+  setMeasBtn(susp && !auto.on);
+  R.dropC.setAttribute('fill',susp?'#8effd0':'#cfe0d6');
+  R.dropC.setAttribute('stroke',susp?'#57d98a':'#8fb7d6');
+  R.eyeDrop.setAttribute('fill',susp?'#c6ffe6':'#eafff6');
+  if(REDUCE){ offset=Math.max(-A,Math.min(A,-rel*A*2.4)); setDisp(offset); } else { startPhysics(); }
+  if(susp){
+    st.className='v ok'; st.innerHTML='<span class="it">● SOSPESA — premi MISURA</span><span class="en">● SUSPENDED — press MEASURE</span>';
+  } else if(V>Vs){
+    st.className='v no'; st.innerHTML='<span class="it">↑ la goccia sale — U troppo alta</span><span class="en">↑ the drop rises — U too high</span>';
+  } else {
+    st.className='v no'; st.innerHTML='<span class="it">↓ la goccia scende — U troppo bassa</span><span class="en">↓ the drop falls — U too low</span>';
+  }
+}
+
+function sprayBurst(){
+  clear(R.gSpray);
+  if(REDUCE) return;
+  // sbuffo one-shot ORIZZONTALE: dall'ugello (sinistra) le goccioline entrano nel compartimento superiore
+  for(var k=0;k<8;k++){
+    var tx=124+Math.random()*82, ty=82+Math.random()*44;
+    var c=el('circle',{cx:108,cy:96,r:1.5,fill:'#e0b060'},R.gSpray);
+    c.style.transition='transform .9s ease-out, opacity .9s ease-out'; c.style.opacity='0.95';
+    (function(c,dx,dy){ requestAnimationFrame(function(){ requestAnimationFrame(function(){ c.style.transform='translate('+dx+'px,'+dy+'px)'; c.style.opacity='0'; }); }); })(c,tx-108,ty-96);
+  }
+  setTimeout(function(){ clear(R.gSpray); },1500);
+}
+
+function newDrop(){
+  var n=1+Math.floor(Math.random()*5), r, Vs, mass;
+  do{ r=2.6+Math.random()*2.0; mass=Math.pow(r,3); Vs=K*mass/n; }while(Vs<95||Vs>545);
+  drop={n:n,r:r,Vsusp:Vs};
+  var rad=3+(r-2.6)*1.5;
+  R.dropC.setAttribute('r',rad.toFixed(1));
+  R.dropGlow.setAttribute('r',(rad+5).toFixed(1));
+  R.eyeDrop.setAttribute('r',(rad*1.7).toFixed(1));
+  R.eyeGlow.setAttribute('r',(rad*1.7+7).toFixed(1));
+  R.gDrop.style.display='';
+  offset=-A; vel=0;                            // la goccia entra dall'alto attraverso il foro
+  var vStart=Math.max(20,Math.min(560,Math.round(drop.Vsusp*0.62)));  // parte a U non nulla → discesa lenta
+  document.getElementById('volt').value=vStart;
+  document.getElementById('qmeas').textContent='—';
+  sprayBurst();                                // sbuffo one-shot dello spruzzatore
+  update();
+  startPhysics();
+}
+
+function measure(){
+  if(!drop) return;
+  var V=+document.getElementById('volt').value;
+  if(Math.abs(V-drop.Vsusp)>=8) return;
+  var qraw=K*Math.pow(drop.r,3)/V;                                  // ≈ n (scarto se non perfettamente bilanciata)
+  var qp=qraw+(Math.random()+Math.random()+Math.random()-1.5)*0.05; // + rumore di misura realistico
+  var n=Math.round(qp); if(n<1)n=1; if(n>6)n=6;
+  flyValue(qp,n);
+  document.getElementById('qmeas').textContent=qp.toFixed(2)+' e  (≈ '+n+'e)';
+  var st=document.getElementById('state'); st.className='v ok';
+  st.innerHTML='<span class="it">✔ misura: '+qp.toFixed(2)+' e ≈ '+n+'e</span><span class="en">✔ measured: '+qp.toFixed(2)+' e ≈ '+n+'e</span>';
+  drop=null; stopPhysics(); R.gDrop.style.display='none'; clear(R.gForce);
+  setMeasBtn(false);
+  if(!auto.on){ R.sprayPulse.style.display=''; R.sprayHint.style.display=''; }
+}
+
+function drawHist(animBin){
+  clear(histSvg);
+  var x0=30, x1=330, yb=162, ytop=24, binW=(x1-x0)/6, i;
+  function bcx(i){ return x0+(i-0.5)*binW; }
+  function mxq(q){ return x0+(q-0.5)/6*(x1-x0); }
+  var counts=[0,0,0,0,0,0];
+  measList.forEach(function(m){ if(m.n>=1&&m.n<=6) counts[m.n-1]++; });
+  var maxC=Math.max(3,Math.max.apply(null,counts)), Hpx=yb-ytop;
+  el('line',{x1:x0-8,y1:yb,x2:x1+8,y2:yb,stroke:'#3a434e','stroke-width':1.5},histSvg);
+  for(i=1;i<=6;i++){
+    var c=counts[i-1], h=c/maxC*Hpx, cx=bcx(i), bw=binW*0.66, by=yb-h;
+    var rect=el('rect',{x:(cx-bw/2).toFixed(1),y:by.toFixed(1),width:bw.toFixed(1),height:h.toFixed(1),rx:2,fill:'#5a4a1e',stroke:'#c79a3a','stroke-width':1},histSvg);
+    if(animBin===i && c>0){ var ph=(c-1)/maxC*Hpx;
+      el('animate',{attributeName:'height',from:ph.toFixed(1),to:h.toFixed(1),dur:'0.4s',fill:'freeze'},rect);
+      el('animate',{attributeName:'y',from:(yb-ph).toFixed(1),to:by.toFixed(1),dur:'0.4s',fill:'freeze'},rect);
+    }
+    txt(cx,yb+18,i+'e',{'text-anchor':'middle','font-size':12,fill:'#9aa1ab','font-family':'monospace'},histSvg);
+    if(c>0) txt(cx,(by-6).toFixed(1),String(c),{'text-anchor':'middle','font-size':13,fill:'#ffce6a','font-family':'monospace','font-weight':'bold'},histSvg);
+  }
+  var stack=[0,0,0,0,0,0];
+  measList.forEach(function(m){ if(m.n<1||m.n>6) return; var c=counts[m.n-1], si=stack[m.n-1]++, h=c/maxC*Hpx, cy=yb-(si+0.5)/c*h;
+    el('circle',{cx:mxq(m.q).toFixed(1),cy:cy.toFixed(1),r:3.2,fill:'#ffb000',stroke:'#0b0f13','stroke-width':0.7},histSvg); });
+}
+function histBinScreenPos(n){
+  var r=histSvg.getBoundingClientRect(), vw=340, vh=200, x0=30, x1=330, binW=(x1-x0)/6, cx=x0+(n-0.5)*binW, cy=96;
+  return { x:r.left+cx/vw*r.width, y:r.top+cy/vh*r.height };
+}
+function flyValue(qp,n){
+  if(REDUCE){ measList.push({q:qp,n:n}); drawHist(n); return; }
+  var s=R.measRect.getBoundingClientRect(), t=histBinScreenPos(n);
+  var tok=document.createElement('div'); tok.className='flytok'; tok.textContent=qp.toFixed(2)+'e';
+  document.body.appendChild(tok);
+  var tw=tok.offsetWidth||30, th=tok.offsetHeight||16;
+  tok.style.left=s.left+'px'; tok.style.top=s.top+'px';
+  var done=false; function finish(){ if(done) return; done=true; if(tok.parentNode) tok.parentNode.removeChild(tok); measList.push({q:qp,n:n}); drawHist(n); }
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ tok.style.transform='translate('+(t.x-s.left-tw/2).toFixed(0)+'px,'+(t.y-s.top-th/2).toFixed(0)+'px) scale(.82)'; tok.style.opacity='0.12'; }); });
+  tok.addEventListener('transitionend',finish); setTimeout(finish,1000);
+}
+
+// ——— autopilot: assiste il processo automatico, poi l'utente può prendere il comando ———
+function autoBtnLabel(){
+  if(!R.autoTxt) return;
+  R.autoTxt.textContent=auto.on?L('✋ Prendi il comando','✋ Take control'):L('▶ Avvia autopilot','▶ Start autopilot');
+  R.autoRect.setAttribute('fill',auto.on?'#33404e':'#b06a12');
+  R.autoRect.setAttribute('stroke',auto.on?'#5a6472':'#c98a2e');
+}
+function setMode(on){
+  auto.on=on;
+  autoBtnLabel();
+  var mb=document.getElementById('modeb');
+  if(on){ mb.className='modeb auto'; mb.innerHTML='<span class="it">🔄 Autopilot: spruzzo, bilancio e misuro le goccioline…</span><span class="en">🔄 Autopilot: spraying, balancing and measuring droplets…</span>'; auto.phase='idle'; startAuto(); }
+  else { mb.className='modeb man'; mb.innerHTML='<span class="it">✋ Manuale: clicca lo spruzzatore · regola il campo col cursore · premi MISURA</span><span class="en">✋ Manual: click the atomizer · adjust the field with the slider · press MEASURE</span>'; stopAuto(); }
+  if(R.sprayHit) R.sprayHit.style.cursor=on?'default':'pointer';
+  update();
+}
+function startAuto(){ if(!autoTimer) autoTimer=setInterval(autoStep,130); }
+function stopAuto(){ if(autoTimer){ clearInterval(autoTimer); autoTimer=null; } }
+function autoStep(){
+  if(!auto.on) return;
+  var now=performance.now(), sl=document.getElementById('volt');
+  if(auto.phase==='idle'){
+    newDrop(); auto.phase='balance'; auto.t0=now;
+  } else if(auto.phase==='balance'){
+    if(!drop){ auto.phase='idle'; return; }
+    var V=+sl.value, Vs=drop.Vsusp, d=Vs-V;
+    if(Math.abs(d)<1.4){ sl.value=Math.round(Vs); update(); auto.phase='hold'; auto.t0=now; }
+    else { var stp=Math.max(-6,Math.min(6,d*0.14))+(d>0?0.6:-0.6); sl.value=Math.round(V+stp); update(); }
+  } else if(auto.phase==='hold'){
+    if(now-auto.t0>2300){ measure(); auto.count++; auto.phase='pause'; auto.t0=now; }
+  } else if(auto.phase==='pause'){
+    if(now-auto.t0>1800){ auto.phase='idle'; }
+  }
+}
+
+document.getElementById('clr').addEventListener('click',function(){ measList=[]; drawHist(); });
+document.addEventListener('visibilitychange',function(){ if(document.hidden){ stopPhysics(); if(auto.on) stopAuto(); } else { if(drop) startPhysics(); if(auto.on) startAuto(); } });
+new MutationObserver(function(){ applyLabels(); update(); }).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});
+
+initBackLink('03-elettroni.html');
+buildApparatus(); drawHist(); update();
+
+// comandi integrati nel modello (SVG): dopo buildApparatus gli elementi esistono
+function svgVBX(clientX){ var pt=svg1.createSVGPoint(); pt.x=clientX; pt.y=0; var m=svg1.getScreenCTM(); if(!m) return null; return pt.matrixTransform(m.inverse()).x; }
+var dragging=false;
+function setUfromClient(clientX){ var x=svgVBX(clientX); if(x==null) return; var U=Math.max(0,Math.min(600,Math.round((x-trackX0)/(trackX1-trackX0)*600))); document.getElementById('volt').value=U; scheduleUpdate(); }
+R.trackHit.addEventListener('pointerdown',function(e){ if(auto.on) return; dragging=true; try{R.trackHit.setPointerCapture(e.pointerId);}catch(_){} setUfromClient(e.clientX); e.preventDefault(); });
+R.trackHit.addEventListener('pointermove',function(e){ if(dragging) setUfromClient(e.clientX); });
+R.trackHit.addEventListener('pointerup',function(){ dragging=false; });
+window.addEventListener('pointerup',function(){ dragging=false; });
+R.measBtn.addEventListener('click',function(){ if(!auto.on && R.measEnabled) measure(); });
+R.sprayHit.addEventListener('click',function(){ if(!auto.on) newDrop(); });
+R.autoBtn.addEventListener('click',function(){ setMode(!auto.on); });
+
+setMode(!REDUCE);   // parte in autopilot (in reduced-motion parte in manuale)
+window.__lab={ get Vsusp(){return drop?drop.Vsusp:null;}, get offset(){return offset;}, get hasDrop(){return !!drop;}, get auto(){return auto.on;}, get count(){return auto.count;}, measure:measure, newDrop:newDrop, update:update, setMode:setMode, step:autoStep };
+})();
+</script>
+</body>
+</html>

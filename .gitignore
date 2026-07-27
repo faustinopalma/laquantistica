@@ -24,3 +24,11 @@ Thumbs.db
 # Lab virtuali: BOZZE LOCALI - browsabili da localhost ma NON pubblicate (app_location=publish)
 publish/lab-*.html
 publish/_lab-index.html
+# ...ma i 3 esperimenti del Cap.3 sono PUBBLICATI (collegati dalle CTA in 03-elettroni.html):
+!publish/lab-03a-corrente-vuoto.html
+!publish/lab-03b-deflessione-em.html
+!publish/lab-03c-millikan.html
+# Versioni animate/prototipi con libreria (p5.js) - SOLO locali, non pubblicate
+publish/game-*.html
+publish/_game-index.html
+publish/assets/p5.min.js
