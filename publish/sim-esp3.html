@@ -8,7 +8,7 @@
 <meta name="description" content="Simulatore interattivo dell'Esperimento 3 (Stern-Gerlach in cascata): scomposizione e ricombinazione. Bloccando a turno i rami si misura m₀; ricombinando entrambi si ricostruisce lo stato: le probabilità non si sommano, si sommano le ampiezze.">
 <link rel="stylesheet" href="assets/lang.css?v=5">
 <link rel="stylesheet" href="assets/note.css?v=2">
-<link rel="stylesheet" href="assets/sim-sg.css?v=4">
+<link rel="stylesheet" href="assets/sim-sg.css?v=5">
 <style>
   /* layout esp3: diagramma a tutta altezza a sinistra, gauge + tabella a destra */
   .panel{grid-template-columns:minmax(0,1fr) 410px;position:relative;}
@@ -42,7 +42,7 @@
 <script defer src="assets/lang.js?v=5"></script>
 </head>
 <body>
-<main class="console" id="top">
+<main class="console desktop-only" id="top">
   <header class="con-head">
     <div class="con-brand">
       <a class="con-back" id="backTop" href="02-stern-gerlach-cascata.html"><span class="it">← Torna al Capitolo 2</span><span class="en">← Back to Chapter 2</span></a>
@@ -92,6 +92,11 @@
     <div class="fumetto" id="bubble"><span class="it">50% + 50% → <b>0%</b>: si sommano le <b>ampiezze</b>, non le probabilità.</span><span class="en">50% + 50% → <b>0%</b>: <b>amplitudes</b> add, not probabilities.</span></div>
   </section>
 
+  <div class="mobile-only-msg">
+    <div class="big">🖥️</div>
+    <div class="t1"><span class="it">Disponibile solo da computer</span><span class="en">Available on desktop only</span></div>
+    <div class="t2"><span class="it">Questo esperimento interattivo è troppo articolato per lo schermo di un telefono. Aprilo da <b>computer</b> (o tablet in orizzontale) per usarlo al meglio.</span><span class="en">This interactive experiment is too detailed for a phone screen. Open it on a <b>desktop</b> (or a tablet in landscape) for the best experience.</span></div>
+  </div>
   <div class="back-bottom"><a class="con-back" id="backBottom" href="02-stern-gerlach-cascata.html"><span class="it">← Torna al Capitolo 2</span><span class="en">← Back to Chapter 2</span></a></div>
   <div class="con-foot"><span>La Quantistica · Simulatore · Cap. 02 · Esperimento 3</span><span>F. Palma</span></div>
 </main>
