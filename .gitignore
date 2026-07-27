@@ -28,6 +28,8 @@ publish/_lab-index.html
 !publish/lab-03a-corrente-vuoto.html
 !publish/lab-03b-deflessione-em.html
 !publish/lab-03c-millikan.html
+# ...e il lab del Cap.4 (collegato dalla CTA in 04-diffrazione.html):
+!publish/lab-04-diffrazione.html
 # Versioni animate/prototipi con libreria (p5.js) - SOLO locali, non pubblicate
 publish/game-*.html
 publish/_game-index.html
