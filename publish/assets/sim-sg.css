@@ -106,12 +106,14 @@ body{
   .console{height:100vh;overflow:hidden;padding:0 .4rem;}
   .con-head{padding:.25rem 0 .2rem;}
   .con-title{font-size:.8rem;}
-  .panel{grid-template-columns:minmax(0,1fr) clamp(220px,34vw,300px);gap:.5rem;padding:.5rem;min-height:0;}
-  /* colonna sinistra (diagrammi + grafico): FITTED, si adatta senza scorrere */
-  .stagecol{gap:.4rem;min-height:0;overflow:hidden;}
-  /* colonna destra (comandi): scorre su/giù se gli elementi non ci stanno */
+  /* due colonne al 50% ciascuna; ENTRAMBE scorrono in verticale (poco spazio) */
+  .console .panel{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.5rem;padding:.5rem;min-height:0;}
+  .stagecol{gap:.4rem;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+  .stagecol .sim-stage{flex:none;min-height:0;}
+  .stagecol .sim-stage svg{width:100%;height:auto;}
+  .stagecol .plotter{flex:none;min-height:0;}
+  .stagecol .plot-screen svg{width:100%;height:auto;}
   .ctrlcol{gap:.45rem;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;}
-  .ctrlcol .sim-math{display:none;}
   .panel-lede{font-size:.72rem;line-height:1.35;}
   .hint{font-size:.68rem;}
   .con-foot{font-size:.6rem;padding:.2rem .1rem 0;}
