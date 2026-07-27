@@ -84,16 +84,16 @@
       <div class="cmd">
         <div id="modeb" class="modeb auto"></div>
         <div class="readout"><div class="k"><span class="it">Stato della goccia</span><span class="en">Droplet state</span></div><div class="v" id="state">—</div></div>
-        <div class="btnrow"><button class="simbtn" id="clr" type="button"><span class="it">Azzera istogramma</span><span class="en">Reset histogram</span></button></div>
+        <div class="btnrow"><button class="simbtn" id="clr" type="button"><span class="it">Azzera grafico</span><span class="en">Reset chart</span></button></div>
       </div>
       <div class="histwrap">
         <div class="histtitle"><span class="it">Cariche misurate → quantizzazione della carica</span><span class="en">Measured charges → charge quantization</span></div>
-        <div class="histbox"><svg id="hist" viewBox="0 0 340 200" role="img" aria-label="Istogramma delle cariche misurate"></svg></div>
+        <div class="histbox"><svg id="hist" viewBox="0 0 340 200" role="img" aria-label="Distribuzione delle cariche misurate: somma di gaussiane con picchi ai multipli interi di e"></svg></div>
       </div>
       <div class="sim-math">
         <div class="mrow"><span class="lab it">Ultima misura:</span><span class="lab en">Last measurement:</span> <b id="qmeas">—</b> &middot; <span class="lab it">carica elem.</span><span class="lab en">elem. charge</span> e &asymp; 1,602&times;10&#8315;&#185;&#8313; C</div>
       </div>
-      <p class="hint"><span class="it"><b>Comandi sul modello</b>: clicca lo <b>spruzzatore</b> per far entrare una gocciolina, agisci sul <b>cursore</b> sotto l'apparato per regolare il campo, poi premi <b>MISURA</b>: il valore vola nell'istogramma. Non conta sospendere <i>una</i> goccia, ma <b>accumulare</b> misure che rivelano la <b>quantizzazione</b>.</span><span class="en"><b>Controls on the model</b>: click the <b>atomizer</b> to let a droplet in, use the <b>slider</b> under the apparatus to adjust the field, then press <b>MEASURE</b>: the value flies into the histogram. The goal is not to suspend <i>one</i> drop, but to <b>accumulate</b> measurements revealing <b>quantization</b>.</span></p>
+      <p class="hint"><span class="it"><b>Comandi sul modello</b>: clicca lo <b>spruzzatore</b> per far entrare una gocciolina, agisci sul <b>cursore</b> sotto l'apparato per regolare il campo, poi premi <b>MISURA</b>: il valore vola nel <b>grafico</b>. Non conta sospendere <i>una</i> goccia, ma <b>accumulare</b> misure: la curva forma picchi solo sui <b>multipli interi</b> di e, rivelando la <b>quantizzazione</b>.</span><span class="en"><b>Controls on the model</b>: click the <b>atomizer</b> to let a droplet in, use the <b>slider</b> under the apparatus to adjust the field, then press <b>MEASURE</b>: the value flies into the <b>chart</b>. The goal is not to suspend <i>one</i> drop, but to <b>accumulate</b> measurements: the curve peaks only at <b>integer multiples</b> of e, revealing <b>quantization</b>.</span></p>
       <input type="range" id="volt" min="0" max="600" step="1" value="0" aria-hidden="true">
     </aside>
   </section>
@@ -379,7 +379,7 @@ function measure(){
   if(Math.abs(V-drop.Vsusp)>=8) return;
   var qraw=K*Math.pow(drop.r,3)/V;                                  // ≈ n (scarto se non perfettamente bilanciata)
   var qp=qraw+(Math.random()+Math.random()+Math.random()-1.5)*0.05; // + rumore di misura realistico
-  var n=Math.round(qp); if(n<1)n=1; if(n>6)n=6;
+  var n=Math.round(qp); if(n<1)n=1; if(n>5)n=5;
   flyValue(qp,n);
   document.getElementById('qmeas').textContent=qp.toFixed(2)+' e  (≈ '+n+'e)';
   var st=document.getElementById('state'); st.className='v ok';
@@ -389,31 +389,48 @@ function measure(){
   if(!auto.on){ R.sprayPulse.style.display=''; R.sprayHint.style.display=''; }
 }
 
-function drawHist(animBin){
+function drawHist(animN){
   clear(histSvg);
-  var x0=30, x1=330, yb=162, ytop=24, binW=(x1-x0)/6, i;
-  function bcx(i){ return x0+(i-0.5)*binW; }
-  function mxq(q){ return x0+(q-0.5)/6*(x1-x0); }
-  var counts=[0,0,0,0,0,0];
-  measList.forEach(function(m){ if(m.n>=1&&m.n<=6) counts[m.n-1]++; });
-  var maxC=Math.max(3,Math.max.apply(null,counts)), Hpx=yb-ytop;
-  el('line',{x1:x0-8,y1:yb,x2:x1+8,y2:yb,stroke:'#3a434e','stroke-width':1.5},histSvg);
-  for(i=1;i<=6;i++){
-    var c=counts[i-1], h=c/maxC*Hpx, cx=bcx(i), bw=binW*0.66, by=yb-h;
-    var rect=el('rect',{x:(cx-bw/2).toFixed(1),y:by.toFixed(1),width:bw.toFixed(1),height:h.toFixed(1),rx:2,fill:'#5a4a1e',stroke:'#c79a3a','stroke-width':1},histSvg);
-    if(animBin===i && c>0){ var ph=(c-1)/maxC*Hpx;
-      el('animate',{attributeName:'height',from:ph.toFixed(1),to:h.toFixed(1),dur:'0.4s',fill:'freeze'},rect);
-      el('animate',{attributeName:'y',from:(yb-ph).toFixed(1),to:by.toFixed(1),dur:'0.4s',fill:'freeze'},rect);
-    }
-    txt(cx,yb+18,i+'e',{'text-anchor':'middle','font-size':12,fill:'#9aa1ab','font-family':'monospace'},histSvg);
-    if(c>0) txt(cx,(by-6).toFixed(1),String(c),{'text-anchor':'middle','font-size':13,fill:'#ffce6a','font-family':'monospace','font-weight':'bold'},histSvg);
+  var x0=34, x1=326, yb=150, ytop=26, W=x1-x0, Hpx=yb-ytop;
+  var emin=0.45, emax=5.55, LEVELS=5, SIG=0.135;
+  function xForE(e){ return x0+(e-emin)/(emax-emin)*W; }
+  // asse di base + griglia verticale ai livelli interi 1e..5e (“binari” della carica)
+  el('line',{x1:(x0-6).toFixed(1),y1:yb,x2:(x1+6).toFixed(1),y2:yb,stroke:'#3a434e','stroke-width':1.5},histSvg);
+  var k;
+  for(k=1;k<=LEVELS;k++){
+    var xk=xForE(k);
+    el('line',{x1:xk.toFixed(1),y1:ytop-2,x2:xk.toFixed(1),y2:yb,stroke:'#243040','stroke-width':1,'stroke-dasharray':'2 4'},histSvg);
+    txt(xk,yb+18,k+'e',{'text-anchor':'middle','font-size':12,fill:'#9aa1ab','font-family':'monospace','font-weight':'bold'},histSvg);
   }
-  var stack=[0,0,0,0,0,0];
-  measList.forEach(function(m){ if(m.n<1||m.n>6) return; var c=counts[m.n-1], si=stack[m.n-1]++, h=c/maxC*Hpx, cy=yb-(si+0.5)/c*h;
-    el('circle',{cx:mxq(m.q).toFixed(1),cy:cy.toFixed(1),r:3.2,fill:'#ffb000',stroke:'#0b0f13','stroke-width':0.7},histSvg); });
+  // conteggi per livello intero
+  var counts=[]; for(k=0;k<=LEVELS;k++) counts[k]=0;
+  measList.forEach(function(m){ if(m.n>=1&&m.n<=LEVELS) counts[m.n]++; });
+  var N=measList.length;
+  if(N===0){
+    txt((x0+x1)/2,(yb+ytop)/2,L('spruzza e misura per costruire la curva','spray and measure to build the curve'),{'text-anchor':'middle','font-size':10,fill:'#5a626c','font-family':'monospace'},histSvg);
+    return;
+  }
+  // curva = somma di gaussiane centrate su ogni misura -> picchi sugli interi
+  function dens(e){ var f=0,j; for(j=0;j<N;j++){ var d=(e-measList[j].q)/SIG; f+=Math.exp(-0.5*d*d); } return f; }
+  var samples=[], sx, fmax=0, e2, f;
+  for(sx=0; sx<=1.00001; sx+=1/170){ e2=emin+sx*(emax-emin); f=dens(e2); samples.push([xForE(e2),f]); if(f>fmax) fmax=f; }
+  var scale=fmax>0?(Hpx*0.94/fmax):0;
+  var dPath='M'+x0.toFixed(1)+' '+yb.toFixed(1);
+  samples.forEach(function(p){ dPath+=' L'+p[0].toFixed(1)+' '+(yb-p[1]*scale).toFixed(1); });
+  dPath+=' L'+x1.toFixed(1)+' '+yb.toFixed(1)+' Z';
+  var area=el('path',{d:dPath,fill:'rgba(224,162,77,0.15)',stroke:'#e0a24d','stroke-width':2,'stroke-linejoin':'round'},histSvg);
+  if(animN>=1 && !REDUCE){ el('animate',{attributeName:'opacity',from:'0.35',to:'1',dur:'0.45s',fill:'freeze'},area); }
+  // etichetta del conteggio sopra ogni picco
+  for(k=1;k<=LEVELS;k++){
+    if(counts[k]>0){ var yk=yb-dens(k)*scale; txt(xForE(k),(yk-7).toFixed(1),String(counts[k]),{'text-anchor':'middle','font-size':12,fill:'#ffce6a','font-family':'monospace','font-weight':'bold'},histSvg); }
+  }
+  // rug: ogni misura come trattino sotto l'asse (dati grezzi che collassano sugli interi)
+  measList.forEach(function(m){ var xm=xForE(m.q); el('line',{x1:xm.toFixed(1),y1:(yb+1).toFixed(1),x2:xm.toFixed(1),y2:(yb+6).toFixed(1),stroke:'#ffb000','stroke-width':1,opacity:0.5},histSvg); });
 }
 function histBinScreenPos(n){
-  var r=histSvg.getBoundingClientRect(), vw=340, vh=200, x0=30, x1=330, binW=(x1-x0)/6, cx=x0+(n-0.5)*binW, cy=96;
+  var r=histSvg.getBoundingClientRect(), vw=340, vh=200;
+  var x0=34, x1=326, W=x1-x0, emin=0.45, emax=5.55, yb=150;
+  var cx=x0+(n-emin)/(emax-emin)*W, cy=yb-72;
   return { x:r.left+cx/vw*r.width, y:r.top+cy/vh*r.height };
 }
 function flyValue(qp,n){
