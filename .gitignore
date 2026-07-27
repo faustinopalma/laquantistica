@@ -24,6 +24,8 @@ Thumbs.db
 # Lab virtuali: BOZZE LOCALI - browsabili da localhost ma NON pubblicate (app_location=publish)
 publish/lab-*.html
 publish/_lab-index.html
+# ...il lab del Cap.1 (collegato dalla CTA in 01-stern-gerlach.html):
+!publish/lab-01-stern-gerlach.html
 # ...ma i 3 esperimenti del Cap.3 sono PUBBLICATI (collegati dalle CTA in 03-elettroni.html):
 !publish/lab-03a-corrente-vuoto.html
 !publish/lab-03b-deflessione-em.html
