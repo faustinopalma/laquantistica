@@ -25,6 +25,7 @@
   .crow .clab{font-family:var(--n-mono);font-size:.72rem;color:#9aa1ab;white-space:nowrap;}
   .crow input[type=range]{flex:1 1 auto;min-width:0;accent-color:#35c8ff;height:22px;cursor:pointer;}
   .crow .cval{font-family:var(--n-mono);font-size:.82rem;font-weight:700;color:#35c8ff;min-width:4.2em;text-align:right;}
+  .csel{flex:1 1 auto;min-width:0;background:#20262e;border:1px solid #3d444f;color:#c7ccd4;border-radius:6px;padding:.42rem .5rem;font-family:var(--n-mono);font-size:.76rem;cursor:pointer;}
   .segrow{display:grid;grid-template-columns:1fr 1fr;gap:.4rem;}
   .segrow button{font-family:var(--n-mono);font-size:.74rem;font-weight:700;background:#20262e;border:1px solid #3d444f;color:#9aa1ab;border-radius:6px;padding:.45rem .4rem;cursor:pointer;transition:.15s;}
   .segrow button.on{background:#173a2c;border-color:#2b7a4b;color:#7fffc4;}
@@ -74,6 +75,14 @@
     <aside class="ctrlcol">
       <div class="cpanel">
         <div class="crow">
+          <span class="clab"><span class="it">Cristallo</span><span class="en">Crystal</span></span>
+          <select id="crystal" class="csel">
+            <option value="graphite"></option>
+            <option value="al"></option>
+            <option value="gold"></option>
+          </select>
+        </div>
+        <div class="crow">
           <span class="clab"><span class="it">Tensione</span><span class="en">Voltage</span></span>
           <input type="range" id="va" min="1500" max="6000" step="50" value="3000">
           <span class="cval" id="vav">3000 V</span>
@@ -89,10 +98,11 @@
         </div>
       </div>
       <div class="readout">
+        <div><span class="it">Cristallo</span><span class="en">Crystal</span>: <b id="crys" class="cyan">—</b></div>
         <div><span class="it">Onda di de Broglie</span><span class="en">de Broglie wave</span> λ = h/p: <b id="lam">— pm</b></div>
         <div><span class="it">Elettroni rivelati</span><span class="en">Electrons detected</span>: <span class="cyan"><b id="cnt" style="color:inherit">0</b></span></div>
       </div>
-      <p class="hint"><span class="it">Ogni elettrone arriva come un <b>punto</b> localizzato (particella), ma molti punti si <b>accumulano</b> in <b>anelli</b> (onda): è la <b>dualità onda-particella</b>. Alza la <b>tensione</b> → elettroni più veloci → λ più piccola → anelli più <b>stretti</b> (raggio ∝ 1/√V). Il modello <b>classico</b> darebbe solo una macchia centrale, non anelli.</span><span class="en">Each electron arrives as a localized <b>dot</b> (particle), yet many dots <b>build up</b> into <b>rings</b> (wave): this is <b>wave–particle duality</b>. Raise the <b>voltage</b> → faster electrons → smaller λ → <b>tighter</b> rings (radius ∝ 1/√V). The <b>classical</b> model would give only a central blob, not rings.</span></p>
+      <p class="hint"><span class="it">Ogni elettrone arriva come un <b>punto</b> localizzato (particella), ma molti punti si <b>accumulano</b> in <b>anelli</b> (onda): è la <b>dualità onda-particella</b>. Alza la <b>tensione</b> → elettroni più veloci → λ più piccola → anelli più <b>stretti</b> (raggio ∝ 1/√V). Cambia il <b>cristallo</b>: ogni materiale dà il suo schema di anelli (un'impronta). Il modello <b>classico</b> darebbe solo una macchia centrale.</span><span class="en">Each electron arrives as a localized <b>dot</b> (particle), yet many dots <b>build up</b> into <b>rings</b> (wave): this is <b>wave–particle duality</b>. Raise the <b>voltage</b> → faster electrons → smaller λ → <b>tighter</b> rings (radius ∝ 1/√V). Change the <b>crystal</b>: each material gives its own ring pattern (a fingerprint). The <b>classical</b> model would give only a central blob.</span></p>
     </aside>
   </section>
 
@@ -114,16 +124,26 @@ var voltEl=document.getElementById('va'), voltValEl=document.getElementById('vav
 var lamEl=document.getElementById('lam'), cntEl=document.getElementById('cnt');
 var beamBtn=document.getElementById('beam'), oneBtn=document.getElementById('one'), clrBtn=document.getElementById('clr');
 var seg=document.getElementById('segModel');
+var crySel=document.getElementById('crystal');
 var REDUCE=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
 function L(it,en){ return document.documentElement.getAttribute('data-lang')==='en'?en:it; }
 
 var CW=460, C0=230, Rs=208;          // canvas, centro, raggio schermo
-var d1=213, d2=123, KR=620;          // spaziature grafite (pm), scala anelli (px)
+var KR=620;                          // scala anelli (px = KR*lam/d)
+// cristalli policristallini: ogni anello = famiglia di piani (d in pm) con intensita' relativa
+var CRYSTALS={
+  graphite:{ it:'Grafite', en:'Graphite', sit:'esagonale', sen:'hexagonal', rings:[{d:213,w:1.0},{d:123,w:0.85},{d:106,w:0.16}] },
+  al:{ it:'Alluminio', en:'Aluminium', sit:'cubica FCC', sen:'FCC cubic', rings:[{d:234,w:1.0},{d:202,w:0.47},{d:143,w:0.22},{d:122,w:0.24},{d:117,w:0.07}] },
+  gold:{ it:'Oro', en:'Gold', sit:'cubica FCC', sen:'FCC cubic', rings:[{d:235,w:1.0},{d:204,w:0.52},{d:144,w:0.32},{d:123,w:0.36},{d:118,w:0.12}] }
+};
+Object.keys(CRYSTALS).forEach(function(k){ var t=0; CRYSTALS[k].rings.forEach(function(r){ t+=r.w; }); CRYSTALS[k].tot=t; });
+var crystal='graphite';
 var model='q', beamOn=!REDUCE, count=0, rafId=null, rate=11;
-var lam=0, r1=0, r2=0;
+var lam=0;
 
 function gauss(){ return (Math.random()+Math.random()+Math.random()+Math.random()-2); }
-function computeRings(){ var V=+voltEl.value; lam=1226.4/Math.sqrt(V); r1=KR*lam/d1; r2=KR*lam/d2; }
+function computeRings(){ var V=+voltEl.value; lam=1226.4/Math.sqrt(V); }
+function ringR(d){ return KR*lam/d; }
 
 /* ---- schema laterale (cannone → grafite → schermo) ---- */
 function drawSchem(){
@@ -143,22 +163,27 @@ function drawSchem(){
   // schermo
   el('line',{x1:sx,y1:12,x2:sx,y2:96,stroke:'#2a4a3c','stroke-width':3},schem);
   txt(sx,108,L('schermo','screen'),{'text-anchor':'middle','font-size':8.5,fill:'#5a7d6a','font-family':'monospace'},schem);
-  // raggi diffratti: convergono all'aumentare di V (scala fissa k)
-  var k=0.20;
-  var hits=(model==='q')?[[0,'#dfffe9'],[k*r1,'#ffb000'],[-k*r1,'#ffb000'],[k*r2,'#35c8ff'],[-k*r2,'#35c8ff']]:[[0,'#dfffe9']];
-  hits.forEach(function(h){
-    el('line',{x1:gx+8,y1:gy,x2:sx,y2:gy+h[0],stroke:h[1],'stroke-width':1.2,opacity:.55,'class':'lqbeam'},schem);
-    el('circle',{cx:sx,cy:gy+h[0],r:2.4,fill:h[1]},schem);
-  });
-  if(model!=='q') txt((gx+sx)/2,gy-14,L('previsione classica: nessun anello','classical prediction: no rings'),{'text-anchor':'middle','font-size':8,fill:'#c79a4a','font-family':'monospace'},schem);
+  // fascio non diffratto (centro) + raggi diffratti per ogni anello (opacita' ~ intensita')
+  el('line',{x1:gx+8,y1:gy,x2:sx,y2:gy,stroke:'#dfffe9','stroke-width':1.2,opacity:.6,'class':'lqbeam'},schem);
+  el('circle',{cx:sx,cy:gy,r:2.4,fill:'#dfffe9'},schem);
+  if(model==='q'){
+    var k=0.20, C=CRYSTALS[crystal];
+    C.rings.forEach(function(rr){ var h=k*ringR(rr.d), op=(0.22+0.5*rr.w).toFixed(2);
+      el('line',{x1:gx+8,y1:gy,x2:sx,y2:gy-h,stroke:'#ffb000','stroke-width':1.1,opacity:op,'class':'lqbeam'},schem);
+      el('line',{x1:gx+8,y1:gy,x2:sx,y2:gy+h,stroke:'#ffb000','stroke-width':1.1,opacity:op,'class':'lqbeam'},schem);
+      el('circle',{cx:sx,cy:gy-h,r:2,fill:'#ffb000',opacity:op},schem);
+      el('circle',{cx:sx,cy:gy+h,r:2,fill:'#ffb000',opacity:op},schem);
+    });
+  } else {
+    txt((gx+sx)/2,gy-16,L('previsione classica: nessun anello','classical prediction: no rings'),{'text-anchor':'middle','font-size':8,fill:'#c79a4a','font-family':'monospace'},schem);
+  }
 }
 
 /* ---- schermo di rivelazione (canvas, accumulo additivo) ---- */
-function guide(r,col,lab,lc){
+function guide(r,col){
   if(r<6||r>Rs) return;
-  ctx.save(); ctx.setLineDash([3,6]); ctx.strokeStyle=col; ctx.lineWidth=1.2;
+  ctx.save(); ctx.setLineDash([3,6]); ctx.strokeStyle=col; ctx.lineWidth=1.1;
   ctx.beginPath(); ctx.arc(C0,C0,r,0,6.2832); ctx.stroke(); ctx.restore();
-  ctx.fillStyle=lc; ctx.font='11px monospace'; ctx.textAlign='center'; ctx.fillText(lab,C0,C0-r-4);
 }
 function clearScreen(){
   ctx.globalCompositeOperation='source-over';
@@ -167,7 +192,7 @@ function clearScreen(){
   bg.addColorStop(0,'#08160e'); bg.addColorStop(1,'#030906');
   ctx.fillStyle=bg; ctx.beginPath(); ctx.arc(C0,C0,Rs,0,6.2832); ctx.fill();
   ctx.strokeStyle='#1c3a30'; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(C0,C0,Rs,0,6.2832); ctx.stroke();
-  if(model==='q'){ guide(r1,'rgba(255,176,0,0.18)','d\u2081','#c79a3a'); guide(r2,'rgba(53,200,255,0.18)','d\u2082','#3a8ac7'); }
+  if(model==='q'){ var C=CRYSTALS[crystal]; C.rings.forEach(function(rr){ guide(ringR(rr.d),'rgba(255,176,0,'+(0.10+0.14*rr.w).toFixed(2)+')'); }); }
   ctx.globalCompositeOperation='lighter';
   count=0; cntEl.textContent='0';
 }
@@ -175,10 +200,13 @@ function hit(){
   var r, th=Math.random()*6.2832;
   if(model==='c'){ r=Math.abs(gauss()*15); }
   else { var u=Math.random();
-    if(u<0.16) r=Math.abs(gauss()*5);
-    else if(u<0.54) r=r1+gauss()*4.5;
-    else if(u<0.88) r=r2+gauss()*4.5;
-    else r=20+Math.random()*(Rs-24);
+    if(u<0.15) r=Math.abs(gauss()*5);                 // fascio diretto (centro)
+    else if(u<0.25) r=20+Math.random()*(Rs-24);       // fondo diffuso
+    else {                                            // anelli, pesati per intensita'
+      var C=CRYSTALS[crystal], x=Math.random()*C.tot, d=C.rings[0].d, i;
+      for(i=0;i<C.rings.length;i++){ x-=C.rings[i].w; if(x<=0){ d=C.rings[i].d; break; } }
+      r=ringR(d)+gauss()*4.0;
+    }
   }
   if(r<0) r=-r; if(r>Rs-3) return;
   var x=C0+r*Math.cos(th), y=C0+r*Math.sin(th);
@@ -217,20 +245,28 @@ beamBtn.addEventListener('click',function(){ setBeam(!beamOn); });
 oneBtn.addEventListener('click',function(){ hit(); cntEl.textContent=count; });
 clrBtn.addEventListener('click',function(){ clearScreen(); });
 seg.addEventListener('click',function(e){ var b=e.target.closest('button'); if(!b) return; model=b.getAttribute('data-v'); [].forEach.call(seg.children,function(x){ x.classList.toggle('on',x.getAttribute('data-v')===model); }); recalc(true); });
+crySel.addEventListener('change',function(){ crystal=this.value; crystalLabels(); recalc(true); });
+
+function crystalLabels(){
+  Object.keys(CRYSTALS).forEach(function(kk){ var o=crySel.querySelector('option[value="'+kk+'"]'); if(o) o.textContent=L(CRYSTALS[kk].it,CRYSTALS[kk].en); });
+  var C=CRYSTALS[crystal];
+  document.getElementById('crys').textContent=L(C.it,C.en)+' ('+L(C.sit,C.sen)+', '+C.rings.length+L(' anelli',' rings')+')';
+}
 
 document.addEventListener('visibilitychange',function(){ if(document.hidden){ if(rafId){ cancelAnimationFrame(rafId); rafId=null; } } else { if(!REDUCE && !rafId) rafId=requestAnimationFrame(frame); } });
-new MutationObserver(function(){ drawSchem(); }).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});
+new MutationObserver(function(){ drawSchem(); crystalLabels(); }).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});
 
 initBackLink('04-diffrazione.html');
 computeRings();
 voltValEl.textContent=(+voltEl.value)+' V';
 lamEl.textContent=lam.toFixed(1)+' pm';
+crystalLabels();
 drawSchem();
 clearScreen();
 beamLabel();
 if(REDUCE){ seed(1700); } else { seed(450); rafId=requestAnimationFrame(frame); }
 
-window.__lab={ get count(){return count;}, get model(){return model;}, get beam(){return beamOn;}, get lam(){return lam;}, get r1(){return r1;}, get r2(){return r2;}, seed:seed, hit:hit, clear:clearScreen, setBeam:setBeam };
+window.__lab={ get count(){return count;}, get model(){return model;}, get crystal(){return crystal;}, get beam(){return beamOn;}, get lam(){return lam;}, get rings(){return CRYSTALS[crystal].rings;}, seed:seed, hit:hit, clear:clearScreen, setBeam:setBeam };
 })();
 </script>
 </body>
