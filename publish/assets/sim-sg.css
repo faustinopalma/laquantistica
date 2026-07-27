@@ -94,31 +94,36 @@ body{
 .con-brand .con-back{margin-right:.15rem;}
 .back-bottom{flex:none;display:flex;justify-content:center;padding:.3rem 0 .1rem;}
 @media (min-width:821px){ html,body{height:100%;overflow:hidden;} .console{height:100vh;overflow:hidden;} .back-bottom{display:none;} }
-@media (max-width:820px){
-  .panel{grid-template-columns:1fr;padding:.7rem;}
-  /* il disegno resta VISIBILE in cima (sticky) mentre si scorre ai comandi */
-  .stagecol{position:sticky;top:0;z-index:6;background:#0f1512;gap:.4rem;padding:.2rem 0 .35rem;box-shadow:0 8px 10px -7px rgba(0,0,0,.75);}
-  .stagecol .sim-stage{flex:none;height:32vh;}
-  .stagecol .plotter{display:none;}   /* registratore nascosto su mobile: priorità a disegno + slider */
-  .ctrlcol{overflow:visible;}
-  .ctrlcol .sim-math{display:none;}
-  /* gli slider vengono PRIMA del testo, subito raggiungibili */
-  .ctrlcol .sim-controls{order:1;}
-  .ctrlcol .pbars{order:2;}
-  .ctrlcol .sim-presets{order:3;}
-  .ctrlcol .panel-lede{order:4;margin-top:.3rem;}
-  .ctrlcol .hint{order:5;}
-  .panel-lede{font-size:.82rem;line-height:1.45;}
-  .con-title{font-size:.95rem;}
-  /* esperimenti troppo articolati per il telefono: messaggio "solo da PC" */
-  .console.desktop-only .panel{display:none;}
-  .console.desktop-only .back-bottom{display:none;}
-  .console.desktop-only .mobile-only-msg{display:flex;}
+/* MOBILE VERTICALE: lo schermo è troppo stretto → invita a ruotare in orizzontale */
+@media (max-width:820px) and (orientation:portrait){
+  .panel{display:none;}
+  .back-bottom{display:none;}
+  .console .rotate-msg{display:flex;}
 }
-.mobile-only-msg{display:none;flex-direction:column;align-items:center;justify-content:center;gap:.7rem;text-align:center;min-height:56vh;margin:1rem .5rem;padding:1.6rem 1.2rem;border:1px dashed #2a5a48;border-radius:12px;background:#0f1512;font-family:var(--n-mono);}
-.mobile-only-msg .big{font-size:2.4rem;}
-.mobile-only-msg .t1{font-size:1.05rem;color:#ffb000;font-weight:700;}
-.mobile-only-msg .t2{font-size:.84rem;line-height:1.55;color:#8fb7a4;max-width:22rem;}
+/* MOBILE ORIZZONTALE: esperimento completo ma compatto, tutto a schermo (grafico incluso) */
+@media (max-width:820px) and (orientation:landscape){
+  html,body{height:100%;overflow:hidden;}
+  .console{height:100vh;overflow:hidden;padding:0 .4rem;}
+  .con-head{padding:.25rem 0 .2rem;}
+  .con-title{font-size:.8rem;}
+  .panel{grid-template-columns:minmax(0,1fr) clamp(220px,34vw,300px);gap:.5rem;padding:.5rem;min-height:0;}
+  /* colonna sinistra (diagrammi + grafico): FITTED, si adatta senza scorrere */
+  .stagecol{gap:.4rem;min-height:0;overflow:hidden;}
+  /* colonna destra (comandi): scorre su/giù se gli elementi non ci stanno */
+  .ctrlcol{gap:.45rem;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+  .ctrlcol .sim-math{display:none;}
+  .panel-lede{font-size:.72rem;line-height:1.35;}
+  .hint{font-size:.68rem;}
+  .con-foot{font-size:.6rem;padding:.2rem .1rem 0;}
+  .back-bottom{display:none;}
+}
+/* invito a ruotare (visibile solo su telefono in verticale) */
+.rotate-msg{display:none;flex-direction:column;align-items:center;justify-content:center;gap:1rem;text-align:center;min-height:72vh;margin:1rem .5rem;padding:2rem 1.2rem;border:1px dashed #2a5a48;border-radius:12px;background:#0f1512;font-family:var(--n-mono);}
+.rotate-msg .big{font-size:3rem;display:inline-block;animation:lqrot 2.6s ease-in-out infinite;}
+.rotate-msg .t1{font-size:1.1rem;color:#ffb000;font-weight:700;}
+.rotate-msg .t2{font-size:.85rem;line-height:1.55;color:#8fb7a4;max-width:22rem;}
+@keyframes lqrot{0%,45%{transform:rotate(0);}62%,88%{transform:rotate(-90deg);}100%{transform:rotate(-90deg);}}
+@media (prefers-reduced-motion:reduce){.rotate-msg .big{animation:none;}}
 
 /* ---- header / cornice in stile strumento ---- */
 .con-brand .tag{background:#111a16;border:1px solid #2a5a48;color:#ffb000;font-family:var(--n-mono);
