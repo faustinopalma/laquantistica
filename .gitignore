@@ -32,6 +32,8 @@ publish/_lab-index.html
 !publish/lab-04-diffrazione.html
 # ...e il lab del Cap.5 (collegato dalla CTA in 05-rutherford.html):
 !publish/lab-05-rutherford.html
+# ...e il lab del Cap.7 (collegato dalla CTA in 07-franck-hertz.html):
+!publish/lab-07-franck-hertz.html
 # Versioni animate/prototipi con libreria (p5.js) - SOLO locali, non pubblicate
 publish/game-*.html
 publish/_game-index.html
