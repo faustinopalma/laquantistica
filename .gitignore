@@ -32,8 +32,10 @@ publish/_lab-index.html
 !publish/lab-03c-millikan.html
 # ...e il lab del Cap.4 (collegato dalla CTA in 04-diffrazione.html):
 !publish/lab-04-diffrazione.html
-# Cap.5/7/8/9: bozze LOCALI, NON ancora pubblicate (da rivedere insieme prima di ri-linkare).
-# lab-05-rutherford / lab-07-franck-hertz / lab-08-fotoelettrico / lab-09-spettri restano ignorati.
+# ...e il lab del Cap.5 (collegato dalla CTA in 05-rutherford.html):
+!publish/lab-05-rutherford.html
+# Cap.7/8/9: bozze LOCALI, NON ancora pubblicate (da rivedere insieme prima di ri-linkare).
+# lab-07-franck-hertz / lab-08-fotoelettrico / lab-09-spettri restano ignorati.
 # Versioni animate/prototipi con libreria (p5.js) - SOLO locali, non pubblicate
 publish/game-*.html
 publish/_game-index.html
