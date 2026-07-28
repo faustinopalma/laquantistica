@@ -604,9 +604,16 @@ function stopMeasure(){
   syncRun(); readouts(); drawPlot();
 }
 function startMeasure(){ N=0; simT=0; running=true; syncRun(); readouts(); }
+/* cambiare le condizioni di misura azzera il contatore: i conteggi raccolti al vecchio
+   angolo non devono ne' proseguire ne' finire archiviati sul nuovo */
+function resetCount(){ running=false; N=0; simT=0; syncRun(); }
 function tickCount(dt){
   if(!running) return;
-  var ds=dt*speed; simT+=ds;
+  var ds=dt*speed;
+  /* con «stop @20» limito il passo temporale: a x60000 un solo fotogramma varrebbe
+     migliaia di impulsi e la soglia verrebbe sfondata di ordini di grandezza */
+  if(auto20){ var r0=rateAt(theta); if(r0>0) ds=Math.min(ds,(21-N)/r0); }
+  simT+=ds;
   var k=poisson(rateAt(theta)*ds);
   if(k>0){ N+=k; flash=1; }
   if(auto20&&N>=20) stopMeasure();
@@ -673,13 +680,13 @@ function segInit(id,fn){
     fn(b.getAttribute('data-v'));
   });
 }
-segInit('segModel',function(v){ model=v; if(running) stopMeasure(); parts.length=0; clearBins(); readouts(); drawPlot(); });
+segInit('segModel',function(v){ model=v; resetCount(); parts.length=0; clearBins(); readouts(); drawPlot(); });
 segInit('segView',function(v){ view=v; });
 segInit('segSpeed',function(v){ speed=+v; });
-$('th').addEventListener('input',function(){ theta=+this.value; $('thv').textContent=theta+'°'; if(running) stopMeasure(); else { readouts(); drawPlot(); } });
-$('en').addEventListener('input',function(){ Ea=+this.value; $('env').textContent=nfmt(Ea,1)+' MeV'; if(running) stopMeasure(); pts=[]; readouts(); drawPlot(); });
-$('mat').addEventListener('change',function(){ mat=this.value; if(running) stopMeasure(); pts=[]; readouts(); drawPlot(); });
-$('slit').addEventListener('change',function(){ slit=+this.value; if(running) stopMeasure(); pts=[]; readouts(); drawPlot(); });
+$('th').addEventListener('input',function(){ theta=+this.value; $('thv').textContent=theta+'°'; resetCount(); readouts(); drawPlot(); });
+$('en').addEventListener('input',function(){ Ea=+this.value; $('env').textContent=nfmt(Ea,1)+' MeV'; resetCount(); pts=[]; readouts(); drawPlot(); });
+$('mat').addEventListener('change',function(){ mat=this.value; resetCount(); pts=[]; readouts(); drawPlot(); });
+$('slit').addEventListener('change',function(){ slit=+this.value; resetCount(); pts=[]; readouts(); drawPlot(); });
 $('run').addEventListener('click',function(){ if(running) stopMeasure(); else startMeasure(); });
 $('auto20').addEventListener('click',function(){ auto20=!auto20; this.classList.toggle('on',auto20); });
 $('clr').addEventListener('click',function(){ running=false; N=0; simT=0; pts=[]; parts.length=0; clearBins(); syncRun(); readouts(); drawPlot(); });
