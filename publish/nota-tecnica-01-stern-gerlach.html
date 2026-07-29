@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://laquantistica.com/nota-tecnica-01-stern-gerlach.html">
+<title>Nota tecnica · Dimensionamento dell'apparato di Stern-Gerlach · La Quantistica</title>
+<meta name="description" content="Nota tecnica al Capitolo 1: deflessione, compromesso traferro/gradiente, variante magnete corto con tratto di deriva, dimensionamento del vuoto, note costruttive e rivelazione.">
+<link rel="stylesheet" href="assets/lang.css?v=5">
+<link rel="stylesheet" href="assets/note.css?v=2">
+<script defer src="assets/lang.js?v=5"></script>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  svg: { fontCache: 'global' },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script defer src="assets/mathjax/tex-mml-svg.js"></script>
+<style>
+.param-table{border-collapse:collapse;margin:1.1rem 0;width:100%;font-size:.92rem}
+.param-table th,.param-table td{border:1px solid rgba(128,128,128,.35);padding:.4rem .65rem;text-align:left;vertical-align:top}
+.param-table thead th{background:rgba(128,128,128,.14);font-weight:700}
+.tn-eq{overflow-x:auto}
+</style>
+</head>
+<body>
+<main class="sheet" id="top">
+  <div class="sheet-inner">
+
+    <div class="doc-meta">
+      <span class="tag">Nota tecnica</span>
+      <span class="it">Cap. 01 · Stern–Gerlach</span><span class="en">Ch. 01 · Stern–Gerlach</span>
+      <div class="langsw" role="group" aria-label="Lingua / Language">
+        <button class="langbtn" type="button" data-l="it" aria-pressed="false">Italiano</button>
+        <button class="langbtn" type="button" data-l="en" aria-pressed="true">English</button>
+      </div>
+      <a class="doc-back-top" id="backTop" href="01-stern-gerlach.html#nota-tec"><span class="it">← Indietro</span><span class="en">← Back</span></a>
+    </div>
+
+    <h1 class="doc-title">
+      <span class="lead"><span class="it">Nota tecnica</span><span class="en">Technical note</span></span>
+      <span class="it">Dimensionamento dell'apparato di Stern-Gerlach</span><span class="en">Sizing the Stern-Gerlach apparatus</span>
+    </h1>
+
+    <p class="lede"><span class="it">Il Capitolo 1 descrive l'apparato di Stern-Gerlach; questa nota mostra da dove vengono le sue misure. Si parte dalla formula della deflessione, se ne ricava la separazione dei due fasci, si vede quale vincolo fisico la limita e come aggirarlo, e si dimensionano infine il vuoto, la struttura meccanica e la rivelazione che ne conseguono.</span><span class="en">Chapter 1 describes the Stern-Gerlach apparatus; this note shows where its dimensions come from. We start from the deflection formula, work out the separation of the two beams, see which physical constraint limits it and how to get around it, and finally size the vacuum system, the mechanical structure and the detection that follow.</span></p>
+
+    <h2><span class="it">1. Deflessione e parametri</span><span class="en">1. Deflection and parameters</span></h2>
+
+    <p><span class="it">La forza verticale sull'atomo è \(F_z=\mu_z\,\partial B/\partial z\). Per un magnete di lunghezza \(L\) seguito da un tratto di volo libero (deriva) \(D\), lo spostamento sul vetrino è</span><span class="en">The vertical force on the atom is \(F_z=\mu_z\,\partial B/\partial z\). For a magnet of length \(L\) followed by a free-flight (drift) length \(D\), the displacement on the slide is</span></p>
+
+    <p class="tn-eq" style="text-align:center">\[ z=\frac{\mu}{m}\,\frac{\partial B}{\partial z}\,\frac{L}{v^{2}}\left(\frac{L}{2}+D\right) \]</p>
+
+    <p><span class="it">con \(\mu=\mu_B=9{,}274\cdot10^{-24}\) J/T, \(m_{\text{Ag}}=1{,}791\cdot10^{-25}\) kg e \(v\approx600\) m/s, velocità più probabile del fascio effusivo a circa 1250 K. Ponendo \(D=0\) si ritrova il caso in cui il vetrino è all'uscita del magnete.</span><span class="en">with \(\mu=\mu_B=9.274\cdot10^{-24}\) J/T, \(m_{\text{Ag}}=1.791\cdot10^{-25}\) kg and \(v\approx600\) m/s, the most probable velocity of the effusive beam at about 1250 K. Setting \(D=0\) recovers the case in which the slide is at the magnet exit.</span></p>
+
+    <h2><span class="it">2. Il compromesso traferro/gradiente</span><span class="en">2. The gap/gradient trade-off</span></h2>
+
+    <p><span class="it">Il gradiente ottenibile scala all'incirca come \(B/d\), dove \(d\) è la larghezza del traferro. Con \(d=25\) mm e la saturazione del ferro attorno a 2 T, il tetto fisico è di circa 1 T/cm; poiché gran parte della forza magnetomotrice è spesa per attraversare il traferro, in pratica si realizza \(\partial B/\partial z\approx0{,}5\) T/cm. Un traferro largo è quindi <b>sicuro</b> per il fascio ma <b>limita</b> il gradiente: è questo equilibrio a fissare la separazione.</span><span class="en">The attainable gradient scales roughly as \(B/d\), where \(d\) is the gap width. With \(d=25\) mm and iron saturation around 2 T, the physical ceiling is about 1 T/cm; since most of the magnetomotive force is spent crossing the gap, in practice one achieves \(\partial B/\partial z\approx0.5\) T/cm. A wide gap is therefore <b>safe</b> for the beam but <b>limits</b> the gradient: it is this balance that fixes the separation.</span></p>
+
+    <p><span class="it">Con \(\partial B/\partial z\approx0{,}5\) T/cm, argento a \(v\approx600\) m/s ed espansioni lunghe \(L=600\) mm (\(D=0\)): accelerazione \(a\approx2{,}6\cdot10^{3}\) m/s², tempo di volo \(t=L/v\approx1{,}0\) ms, deflessione \(z\approx1{,}3\) mm per fascio, cioè una separazione complessiva di circa <b>2,6 mm</b> — quindici volte lo sdoppiamento osservato da Stern e Gerlach nel 1922 (~0,2 mm). L'escursione del fascio dentro il traferro è di soli 1,3 mm sui 12,5 mm disponibili: il fascio non si avvicina mai alle espansioni.</span><span class="en">With \(\partial B/\partial z\approx0.5\) T/cm, silver at \(v\approx600\) m/s and 600 mm poles (\(D=0\)): acceleration \(a\approx2.6\cdot10^{3}\) m/s², time of flight \(t=L/v\approx1.0\) ms, deflection \(z\approx1.3\) mm per beam, i.e. a total separation of about <b>2.6 mm</b> — fifteen times the splitting observed by Stern and Gerlach in 1922 (~0.2 mm). The beam's excursion inside the gap is only 1.3 mm out of the 12.5 mm available: the beam never approaches the pole pieces.</span></p>
+
+    <p><span class="it">Conviene fissare subito il tetto raggiungibile con questa geometria: per portare la separazione a 7 mm servirebbero \(\sim2\) T/cm, cioè circa 5 T sulla punta polare con un traferro da 25 mm, fuori dalla portata del ferro. Con un traferro largo il millimetro è dunque l'ordine di grandezza a cui ci si deve fermare, ed è quello dichiarato nel capitolo.</span><span class="en">It is worth setting straight away the ceiling reachable with this geometry: pushing the separation to 7 mm would require \(\sim2\) T/cm, i.e. about 5 T at the pole tip with a 25 mm gap, beyond what iron can deliver. With a wide gap the millimetre is therefore the order of magnitude one has to settle for, and it is the one quoted in the chapter.</span></p>
+
+    <h2><span class="it">3. Variante: magnete corto più tratto di deriva</span><span class="en">3. Variant: short magnet plus drift section</span></h2>
+
+    <p><span class="it">Per andare oltre conviene spostare la lunghezza dal campo alla <b>deriva</b>: il tratto di volo libero dopo il magnete amplifica la separazione senza pagare il vincolo del traferro. L'altezza della camera (100 mm) lascia spazio a espansioni più massicce senza cambiare il disegno esterno, e riducendo il traferro a 10 mm il rapporto larghezza/traferro sale a circa 4, valore sufficiente a rendere il campo uniforme nella zona utile.</span><span class="en">To go further it is best to move the length from the field to the <b>drift</b>: the free-flight section after the magnet amplifies the separation without paying the gap penalty. The chamber height (100 mm) leaves room for more massive poles without changing the external drawing, and reducing the gap to 10 mm raises the width-to-gap ratio to about 4, enough to make the field uniform over the useful region.</span></p>
+
+    <table class="param-table">
+    <thead><tr><th><span class="it">Parametro</span><span class="en">Parameter</span></th><th><span class="it">Progetto attuale</span><span class="en">Current design</span></th><th><span class="it">Variante</span><span class="en">Variant</span></th></tr></thead>
+    <tbody>
+    <tr><td><span class="it">Lunghezza espansioni</span><span class="en">Pole length</span></td><td>600 mm</td><td>250 mm</td></tr>
+    <tr><td><span class="it">Traferro</span><span class="en">Gap</span></td><td>25 mm</td><td>10 mm</td></tr>
+    <tr><td>∂B/∂z</td><td>~0,5 T/cm</td><td>~1,5 T/cm</td></tr>
+    <tr><td><span class="it">Tratto di deriva</span><span class="en">Drift length</span></td><td>0</td><td>700 mm</td></tr>
+    <tr><td><span class="it">Escursione in campo</span><span class="en">Excursion in field</span></td><td>1,3 mm</td><td>0,67 mm</td></tr>
+    <tr><td><span class="it">Angolo di uscita</span><span class="en">Exit angle</span></td><td>—</td><td>5,4 mrad</td></tr>
+    <tr><td><b><span class="it">Separazione al vetrino</span><span class="en">Separation at the slide</span></b></td><td><b>2,6 mm</b></td><td><b>8,9 mm</b></td></tr>
+    <tr><td><span class="it">Amperspire</span><span class="en">Ampere-turns</span></td><td>~25 000</td><td>~13 000</td></tr>
+    </tbody>
+    </table>
+
+    <p><span class="it">Verifica: \(a=\mu_B\cdot150/m_{\text{Ag}}=7{,}77\cdot10^{3}\) m/s²; \(t_\text{campo}=0{,}250/600=417\) µs; \(z_\text{campo}=\tfrac12 a t^2=0{,}67\) mm; \(\theta=a\,t/v=5{,}4\) mrad; \(z_\text{deriva}=\theta\cdot0{,}700=3{,}78\) mm; \(z_\text{tot}=0{,}67+3{,}78=4{,}45\) mm per fascio, ossia 8,9 mm di separazione. Le amperspire seguono da \(N I=B\,d_\text{eff}/\mu_0\), con \(d_\text{eff}\) che comprende il doppio spessore della parete inox attraversata dal flusso (\(10+2\times3=16\) mm).</span><span class="en">Check: \(a=\mu_B\cdot150/m_{\text{Ag}}=7.77\cdot10^{3}\) m/s²; \(t_\text{field}=0.250/600=417\) µs; \(z_\text{field}=\tfrac12 a t^2=0.67\) mm; \(\theta=a\,t/v=5.4\) mrad; \(z_\text{drift}=\theta\cdot0.700=3.78\) mm; \(z_\text{tot}=0.67+3.78=4.45\) mm per beam, i.e. 8.9 mm separation. The ampere-turns follow from \(N I=B\,d_\text{eff}/\mu_0\), with \(d_\text{eff}\) including the double thickness of the stainless wall crossed by the flux (\(10+2\times3=16\) mm).</span></p>
+
+    <p><span class="it">Vantaggi collaterali: magnete più corto e leggero, bobina di potenza dimezzata, tolleranza di parallelismo da mantenere su 250 mm invece che su 600, minore superficie interna da degassare.</span><span class="en">Side benefits: shorter and lighter magnet, halved power coil, parallelism tolerance to hold over 250 mm instead of 600, smaller internal surface to outgas.</span></p>
+
+    <h2><span class="it">4. Dimensionamento del vuoto</span><span class="en">4. Vacuum sizing</span></h2>
+
+    <p><span class="it">La pressione di lavoro si ricava dal rapporto fra il carico di degassamento, proporzionale alla <b>superficie</b> interna, e la velocità di pompaggio <b>effettiva</b>, limitata dalla conduttanza del condotto; il volume della camera pesa solo sul tempo di svuotamento iniziale. Con una superficie interna di circa 0,5 m² in acciaio inox il carico di gas è dell'ordine di \(10^{-4}\) mbar·l/s; la conduttanza della camera (sezione 100 × 50 mm) è di circa 40 l/s. Una pompa turbomolecolare da 80 l/s dà una velocità effettiva \(S_\text{eff}=(1/80+1/40)^{-1}\approx27\) l/s e quindi \(p=Q/S_\text{eff}\approx4{,}5\cdot10^{-6}\) mbar, cui corrisponde un cammino libero medio di alcuni metri.</span><span class="en">The working pressure follows from the ratio between the outgassing load, proportional to the internal <b>surface</b>, and the <b>effective</b> pumping speed, limited by the duct conductance; the chamber volume only bears on the initial pump-down time. With an internal surface of about 0.5 m² of stainless steel the gas load is of the order of \(10^{-4}\) mbar·l/s; the conductance of the chamber (100 × 50 mm cross-section) is about 40 l/s. An 80 l/s turbomolecular pump gives an effective speed \(S_\text{eff}=(1/80+1/40)^{-1}\approx27\) l/s and hence \(p=Q/S_\text{eff}\approx4.5\cdot10^{-6}\) mbar, corresponding to a mean free path of several metres.</span></p>
+
+    <p><span class="it">Il criterio da rispettare è \(\lambda\gtrsim10\,L\): con \(\lambda\) pari alla lunghezza del fascio sopravviverebbe solo il 37% degli atomi (\(I/I_0=e^{-L/\lambda}\)) e quelli diffusi ad angolo piccolo creerebbero un fondo che maschera lo sdoppiamento. Attenzione all'unità di misura: la specifica è \(2\cdot10^{-5}\) <b>mbar</b>; \(2\cdot10^{-5}\) bar sarebbero 2 Pa, cioè \(\lambda\approx3\) mm, e il fascio non arriverebbe al vetrino. Pompando da entrambe le estremità si guadagna quasi un ordine di grandezza.</span><span class="en">The criterion to satisfy is \(\lambda\gtrsim10\,L\): with \(\lambda\) equal to the beam length only 37% of the atoms would survive (\(I/I_0=e^{-L/\lambda}\)) and those scattered at small angles would create a background masking the split. Mind the unit: the specification is \(2\cdot10^{-5}\) <b>mbar</b>; \(2\cdot10^{-5}\) bar would be 2 Pa, i.e. \(\lambda\approx3\) mm, and the beam would not reach the slide. Pumping from both ends gains almost an order of magnitude.</span></p>
+
+    <h2><span class="it">5. Note costruttive</span><span class="en">5. Construction notes</span></h2>
+
+    <p><span class="it"><b>Materiali.</b> Il crogiolo è in allumina: il quarzo fuso si ammorbidisce già intorno ai ~1100 °C, cioè dentro l'intervallo di lavoro (1100÷1200 °C), necessario per portare la tensione di vapore dell'argento a un valore utile — fondere (961,8 °C) non basta. La camera è in acciaio inox <b>AISI 316L</b>: il 304 incrudito diventa leggermente ferromagnetico e perturberebbe il circuito magnetico.</span><span class="en"><b>Materials.</b> The crucible is alumina: fused quartz already softens around ~1100 °C, that is within the working range (1100–1200 °C) needed to bring silver's vapour pressure to a useful value — melting (961.8 °C) is not enough. The chamber is <b>AISI 316L</b> stainless steel: cold-worked 304 becomes slightly ferromagnetic and would perturb the magnetic circuit.</span></p>
+
+    <p><span class="it"><b>Forze e struttura.</b> La pressione magnetica \(B^2/2\mu_0\) vale ~4 bar a 1 T; su una faccia polare di 250 × 40 mm sono circa 4 kN di attrazione fra le espansioni: servono distanziali rigidi, altrimenti il traferro si chiude sotto carico. Il parallelismo delle espansioni va garantito su tutta la lunghezza. Il gradiente, infine, va <b>misurato o simulato (FEM)</b>, non assunto da una formula ideale, perché è la grandezza da cui si ricava il momento magnetico e ne determina l'incertezza.</span><span class="en"><b>Forces and structure.</b> The magnetic pressure \(B^2/2\mu_0\) is ~4 bar at 1 T; on a 250 × 40 mm pole face this is about 4 kN of attraction between the poles: rigid spacers are needed, otherwise the gap closes under load. The parallelism of the poles must be held over the whole length. Finally, the gradient must be <b>measured or simulated (FEM)</b>, not assumed from an ideal formula, because it is the quantity from which the magnetic moment is obtained and it sets its uncertainty.</span></p>
+
+    <p><span class="it"><b>Gravità.</b> È trascurabile: in ~2,2 ms di volo su tutto il percorso gli atomi cadono di ~23 µm, cioè lo 0,3% della deflessione magnetica.</span><span class="en"><b>Gravity.</b> It is negligible: in ~2.2 ms of flight over the whole path the atoms fall by ~23 µm, i.e. 0.3% of the magnetic deflection.</span></p>
+
+    <h2><span class="it">6. Rivelazione</span><span class="en">6. Detection</span></h2>
+
+    <p><span class="it">Il deposito di argento, spesso pochi strati atomici, si sviluppa esponendo il vetrino a vapori di zolfo, che lo convertono in solfuro d'argento, scuro (la tecnica del 1922). Con l'argento non è invece applicabile il rivelatore a filo caldo (ionizzazione superficiale), perché il suo potenziale di ionizzazione (7,58 eV) è troppo elevato rispetto al lavoro di estrazione del tungsteno. Per questo nei laboratori didattici moderni si preferiscono il potassio o il cesio, che consentono la lettura del profilo del fascio in tempo reale.</span><span class="en">The silver deposit, only a few atomic layers thick, is developed by exposing the slide to sulphur vapour, which converts it into dark silver sulphide (the 1922 technique). With silver, a hot-wire detector (surface ionisation) is not applicable, because its ionisation potential (7.58 eV) is too high compared with the work function of tungsten. This is why modern teaching laboratories prefer potassium or caesium, which allow the beam profile to be read in real time.</span></p>
+
+    <div class="doc-return">
+      <a id="backBottom" href="01-stern-gerlach.html#nota-tec"><span class="it">← Torna al punto di lettura</span><span class="en">← Back to where you were</span></a>
+    </div>
+
+    <div class="doc-foot">
+      <span>La Quantistica · Nota tecnica · Cap. 01</span>
+      <span>F. Palma</span>
+    </div>
+
+  </div>
+</main>
+
+<script>
+(function () {
+  function safeRet(v) {
+    if (!v) return null;
+    try { v = decodeURIComponent(v); } catch (e) { return null; }
+    if (v.indexOf('..') !== -1 || v.indexOf('//') !== -1) return null;
+    if (/^[A-Za-z0-9._\/-]+\.html(#[A-Za-z0-9._-]+)?$/.test(v)) return v;
+    return null;
+  }
+  var ret = safeRet(new URLSearchParams(location.search).get('ret')) || '01-stern-gerlach.html#nota-tec';
+  ['backTop', 'backBottom'].forEach(function (id) {
+    var a = document.getElementById(id);
+    if (a) a.setAttribute('href', ret);
+  });
+})();
+</script>
+</body>
+</html>
