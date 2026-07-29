@@ -29,11 +29,11 @@
 })();
 
 // Hash-landing fix (iOS Safari): when arriving at "page.html#anchor", the browser
-// scrolls to the anchor BEFORE MathJax re-renders the <math> elements into SVG.
-// That rendering reflows the equations above the anchor (and can even reset the
-// scroll to the top), so the reader is left far from where they intended (the
-// "torna indietro" from a note landed too high). After typesetting settles we
-// re-scroll to the anchor.
+// scrolls to the anchor before the math fonts have arrived. Until then KaTeX
+// measures the formulas with a fallback face, so the equations above the anchor
+// reflow once the real fonts load and the reader is left far from where they
+// intended (the "torna indietro" from a note landed too high). We re-scroll once
+// the fonts have settled.
 // Lo scorrimento morbido resta disattivato finche' l'atterraggio non e' concluso:
 // il ritorno da una nota o da un laboratorio deve essere istantaneo, non animato.
 (function () {
@@ -50,11 +50,13 @@
   }
   function done() { go(); enableSmooth(); }
   function fix() {
-    if (window.MathJax && MathJax.startup && MathJax.startup.promise) {
-      MathJax.startup.promise.then(function () { go(); setTimeout(go, 90); setTimeout(done, 350); })
-        .catch(function () { setTimeout(done, 150); });
+    go();
+    var pronti = (document.fonts && document.fonts.ready) || null;
+    if (pronti) {
+      pronti.then(function () { go(); setTimeout(done, 60); })
+        .catch(function () { setTimeout(done, 120); });
     } else {
-      setTimeout(done, 150);
+      setTimeout(done, 120);
     }
   }
   if (document.readyState === 'complete') fix();
