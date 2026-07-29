@@ -19,7 +19,12 @@ RegisterHTMLHandler(liteAdaptor());
 
 // bussproofs pretende un output jax con getBBox(): qui ci fermiamo al MathML.
 const packages = AllPackages.filter((p) => p !== 'bussproofs');
-const doc = mathjax.document('', { InputJax: new TeX({ packages }) });
+// \oiint e \oiiint (integrali su superficie/volume chiusi) non fanno parte del
+// repertorio di base di MathJax: senza queste macro finirebbero in rosso. Nel
+// sorgente teniamo il nome standard di esint, qui lo risolviamo nel simbolo.
+const MACROS = { oiint: '∯', oiiint: '∰' };
+
+const doc = mathjax.document('', { InputJax: new TeX({ packages, macros: MACROS }) });
 const visitor = new SerializedMmlVisitor();
 
 function convert(src, display) {

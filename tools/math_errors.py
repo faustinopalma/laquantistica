@@ -17,7 +17,11 @@ from math_extract import extract            # noqa: E402
 from mml2tex import mml_to_tex, MathMLUnsupported   # noqa: E402
 
 NODE_SCRIPT = Path('tools/mathgen/tex2mml.js')
+# MathJax segnala in due modi: <merror> per gli errori di sintassi e testo rosso
+# per i comandi che non conosce. Il secondo non e' un nodo di errore: va cercato
+# a parte, altrimenti passa inosservato.
 MERROR = re.compile(r'<merror[\s>]|data-mjx-error="([^"]*)"')
+UNDEF = re.compile(r'<mtext mathcolor="red">([^<]*)</mtext>')
 
 
 def check(path: Path):
@@ -48,6 +52,9 @@ def check(path: Path):
         elif MERROR.search(mml):
             m = re.search(r'data-mjx-error="([^"]*)"', mml)
             rows.append((it, it['tex'], 'LaTeX: ' + (m.group(1) if m else 'merror')))
+        elif UNDEF.search(mml):
+            names = sorted(set(UNDEF.findall(mml)))
+            rows.append((it, it['tex'], 'comando sconosciuto: ' + ', '.join(names)))
     return rows
 
 

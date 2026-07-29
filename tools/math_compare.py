@@ -27,7 +27,8 @@ PAGE = """<!DOCTYPE html>
 <title>Confronto formule · {name}</title>
 <script>
 window.MathJax = {{
-  tex: {{ inlineMath: [['\\\\(','\\\\)']], displayMath: [['\\\\[','\\\\]']] }},
+  tex: {{ inlineMath: [['\\\\(','\\\\)']], displayMath: [['\\\\[','\\\\]']],
+          macros: {{ oiint: '∯', oiiint: '∰' }} }},
   svg: {{ fontCache: 'none' }},
   startup: {{ typeset: true }}
 }};
