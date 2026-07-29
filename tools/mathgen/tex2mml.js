@@ -19,9 +19,10 @@ RegisterHTMLHandler(liteAdaptor());
 
 // bussproofs pretende un output jax con getBBox(): qui ci fermiamo al MathML.
 const packages = AllPackages.filter((p) => p !== 'bussproofs');
-// \oiint e \oiiint (integrali su superficie/volume chiusi) non fanno parte del
-// repertorio di base di MathJax: senza queste macro finirebbero in rosso. Nel
-// sorgente teniamo il nome standard di esint, qui lo risolviamo nel simbolo.
+// \oiint e \oiiint mancano dal repertorio di mathjax-full 3.2.2, su cui gira
+// questo strumento: senza macro finirebbero in rosso (verificato). Il browser usa
+// MathJax 4, che li conosce da se': la macro servira' finche' questo non passera'
+// a @mathjax/src, dove mathjax-full e' proseguito.
 const MACROS = { oiint: '∯', oiiint: '∰' };
 
 const doc = mathjax.document('', { InputJax: new TeX({ packages, macros: MACROS }) });
