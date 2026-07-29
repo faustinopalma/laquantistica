@@ -60,3 +60,6 @@ publish/_lab-index.html
 publish/game-*.html
 publish/_game-index.html
 publish/assets/p5.min.js
+
+# prova di aggiornamento MathJax (rigenerabile)
+build/mjcheck/
