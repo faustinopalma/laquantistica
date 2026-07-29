@@ -1,0 +1,80 @@
+/* Aspetto dello strumento di modifica locale. Non finisce mai nel sito pubblicato. */
+
+.lq-bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 99999;
+  display: flex; align-items: center; gap: 14px;
+  padding: 9px 16px; background: #12151a; color: #c7ccd4;
+  border-top: 2px solid #3d444f;
+  font: 13px/1.4 ui-monospace, "Cascadia Code", Consolas, monospace;
+  box-shadow: 0 -3px 14px rgba(0, 0, 0, .3);
+}
+.lq-bar.dirty { border-top-color: #e2a24d; }
+.lq-bar.bad { border-top-color: #e2604f; }
+.lq-tag {
+  background: #173a2c; color: #7fffc4; border: 1px solid #2a5a48;
+  border-radius: 3px; padding: .15rem .5rem; font-size: 11px;
+  letter-spacing: .08em; text-transform: uppercase; font-weight: 700;
+}
+.lq-bar.dirty .lq-tag { background: #3a2a12; color: #ffb000; border-color: #6b4a12; }
+.lq-bar.bad .lq-tag { background: #3a1a16; color: #ff9a8c; border-color: #6b2a22; }
+.lq-status { font-weight: 700; }
+.lq-help { margin-left: auto; color: #6f7d88; font-size: 12px; }
+.lq-save {
+  background: #2a2f38; border: 1px solid #3d444f; color: #c7ccd4;
+  border-radius: 3px; padding: .35rem .9rem; cursor: pointer;
+  font: inherit; font-weight: 700; transition: .15s;
+}
+.lq-save:hover:not(:disabled) { background: #1d7a52; border-color: #1d7a52; color: #fff; }
+.lq-save:disabled { opacity: .4; cursor: default; }
+
+body.lq-edit-on { padding-bottom: 52px; }
+
+/* le frasi modificabili si accendono solo al passaggio, per non disturbare la lettura */
+.lq-editable { border-radius: 3px; transition: background .12s, box-shadow .12s; }
+.lq-editable:hover { background: rgba(226, 162, 77, .10); box-shadow: 0 0 0 2px rgba(226, 162, 77, .18); }
+.lq-editing { background: rgba(226, 162, 77, .16) !important; box-shadow: 0 0 0 2px #e2a24d !important; outline: 0; }
+.lq-changed { background: rgba(127, 255, 196, .16); box-shadow: 0 0 0 2px rgba(45, 160, 110, .5); }
+
+.lq-eq { cursor: pointer; border-radius: 3px; }
+.lq-eq:hover { background: rgba(53, 200, 255, .12); box-shadow: 0 0 0 2px rgba(53, 200, 255, .3); }
+
+/* dentro un paragrafo in modifica, formule e rimandi sono blocchi che non si spezzano */
+.lq-atom { user-select: all; }
+.lq-editing .lq-atom { box-shadow: 0 0 0 1px rgba(120, 140, 170, .45); border-radius: 2px; }
+
+/* pannello della formula */
+.lq-dlg {
+  position: fixed; inset: 0; z-index: 100000; display: none;
+  align-items: center; justify-content: center; background: rgba(8, 11, 10, .62);
+}
+.lq-dlg.on { display: flex; }
+.lq-dlg-box {
+  width: min(760px, 92vw); background: #0f1512; color: #dfeee6;
+  border: 1px solid #2a5a48; border-radius: 6px; overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, .55);
+  font: 13px/1.5 ui-monospace, "Cascadia Code", Consolas, monospace;
+}
+.lq-dlg-head {
+  padding: .5rem .9rem; background: #12241d; border-bottom: 1px solid #2a5a48;
+  color: #7fffc4; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; font-weight: 700;
+}
+.lq-dlg textarea {
+  width: 100%; min-height: 130px; resize: vertical; border: 0; outline: 0;
+  background: #12151a; color: #e9e6df; padding: .8rem .9rem;
+  font: inherit; line-height: 1.6;
+}
+.lq-dlg-prev {
+  padding: 1rem .9rem; background: #fbfaf8; color: #1c1c1c; min-height: 62px;
+  display: flex; align-items: center; justify-content: center; overflow-x: auto;
+}
+.lq-dlg-err { padding: 0 .9rem; color: #ff9a8c; min-height: 1.5em; }
+.lq-dlg-err:not(:empty) { padding: .5rem .9rem; }
+.lq-dlg-foot {
+  display: flex; gap: .6rem; justify-content: flex-end;
+  padding: .7rem .9rem; border-top: 1px solid #2a303a;
+}
+.lq-dlg-foot button {
+  background: #2a2f38; border: 1px solid #3d444f; color: #c7ccd4;
+  border-radius: 3px; padding: .35rem 1rem; cursor: pointer; font: inherit; font-weight: 700;
+}
+.lq-dlg-foot button.go:hover { background: #1d7a52; border-color: #1d7a52; color: #fff; }

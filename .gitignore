@@ -13,6 +13,10 @@ tools/mathgen/package-lock.json
 # pagine di confronto delle formule (rigenerabili con tools/math_compare.py)
 build/mathcheck/
 
+# strumento di modifica locale: registro delle modifiche e copie di sicurezza
+build/edits/
+backups/edits/
+
 # OS
 Thumbs.db
 .DS_Store
