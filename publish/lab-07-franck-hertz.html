@@ -47,18 +47,22 @@
   .warn b{color:#ffb000;}
   .hint{font-size:.72rem;color:#8b929c;margin:.1rem 0 0;}
   .hint b{color:#aeb4bd;}
-  /* sim-sg.css blocca html/body a 100vh con overflow:hidden: qui il contenuto può essere
-     più alto della finestra, quindi la pagina deve poter scorrere */
+  /* Le due colonne scorrono in modo INDIPENDENTE: si possono scorrere i comandi a destra
+     senza spostare l'apparato a sinistra (e viceversa). La pagina in sé non scorre. */
+  .stagecol,.ctrlcol{scrollbar-width:thin;scrollbar-color:#3d444f #12151a;scrollbar-gutter:stable;}
   @media (min-width:821px){
-    html,body{height:auto;overflow:visible;}
-    .console{height:auto;min-height:100vh;overflow:visible;}
+    html,body{height:100%;overflow:hidden;}
+    .console{height:100vh;min-height:0;overflow:hidden;}
+    .console .panel{flex:1 1 auto;min-height:0;align-items:stretch;}
+    .console .stagecol{overflow-y:auto;min-height:0;}
+    .console .ctrlcol{overflow-y:auto;min-height:0;}
   }
   @media (max-width:820px) and (orientation:landscape){
-    html,body{height:auto;overflow:visible;}
-    .console{height:auto;min-height:0;overflow:visible;}
-    .console .panel{flex:0 0 auto;align-items:start;min-height:0;}
-    .console .stagecol{overflow:visible;min-height:0;}
-    .console .ctrlcol{overflow:visible;min-height:0;}
+    html,body{height:100%;overflow:hidden;}
+    .console{height:100vh;min-height:0;overflow:hidden;}
+    .console .panel{flex:1 1 auto;min-height:0;align-items:stretch;}
+    .console .stagecol{overflow-y:auto;min-height:0;}
+    .console .ctrlcol{overflow-y:auto;min-height:0;}
   }
 </style>
 </head>
