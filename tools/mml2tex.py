@@ -331,8 +331,18 @@ class Converter:
         t = _tag(el)
         if t == 'math':
             return self.children(el)
-        if t in ('mrow', 'mstyle', 'mpadded', 'semantics', 'menclose'):
+        if t in ('mrow', 'mpadded', 'semantics', 'menclose'):
             return self.row(el)
+        if t == 'mstyle':
+            # Word usa <mstyle displaystyle="true"> per tenere le frazioni a dimensione
+            # piena anche in linea: senza questo il LaTeX le rimpicciolisce.
+            inner = self.row(el)
+            ds = el.get('displaystyle')
+            if ds == 'true':
+                return r'{\displaystyle ' + inner + '}'
+            if ds == 'false':
+                return r'{\textstyle ' + inner + '}'
+            return inner
         if t == 'mi':
             return self.leaf_mi(el)
         if t == 'mn':
