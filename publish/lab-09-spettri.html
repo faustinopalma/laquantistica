@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lab · Spettri atomici di emissione — La Quantistica</title>
+<meta name="description" content="Spettrometro a goniometro simulato: reticolo di diffrazione, cannocchiale girevole, misura degli angoli delle righe di emissione di idrogeno, mercurio, neon, argon e azoto. Dalle righe alla costante di Rydberg e ai livelli dell'atomo di idrogeno.">
+<link rel="canonical" href="https://laquantistica.com/lab-09-spettri.html">
+<link rel="stylesheet" href="assets/lang.css?v=5">
+<link rel="stylesheet" href="assets/sim-sg.css?v=9">
+<script defer src="assets/lang.js?v=5"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0}
+.console{min-height:auto;}
+.panel{grid-template-columns:minmax(0,1fr) minmax(340px,420px);gap:clamp(1rem,2.5vw,2.4rem);flex:0 0 auto;align-items:start;}
+.ctrlcol{overflow:visible;}
+.stagecol{align-items:center;gap:.7rem;}
+.stagecol .sim-stage{flex:0 0 auto;width:100%;margin:0;}
+canvas.cv{width:100%;height:auto;display:block;}
+.stage-wrap{max-width:820px;}
+.eye-wrap{max-width:820px;}
+.plot-wrap{max-width:820px;}
+.cpanel{background:#12151a;border:1px solid #2d333d;border-radius:8px;padding:.6rem .7rem;margin:0 0 .55rem;display:flex;flex-direction:column;gap:.5rem;}
+.crow{display:flex;align-items:center;gap:.6rem;}
+.crow .clab{font-family:var(--n-mono);font-size:.72rem;color:#9aa1ab;white-space:nowrap;}
+.crow input[type=range]{flex:1 1 auto;min-width:0;accent-color:#35c8ff;height:22px;cursor:pointer;}
+.crow .cval{font-family:var(--n-mono);font-size:.82rem;font-weight:700;color:#35c8ff;min-width:5.2em;text-align:right;}
+.segrow{display:grid;gap:.4rem;}
+.segrow.c2{grid-template-columns:1fr 1fr;}
+.segrow.c3{grid-template-columns:1fr 1fr 1fr;}
+.segrow button{font-family:var(--n-mono);font-size:.72rem;font-weight:700;background:#20262e;border:1px solid #3d444f;color:#9aa1ab;border-radius:6px;padding:.45rem .3rem;cursor:pointer;transition:.15s;line-height:1.15;}
+.segrow button.on{background:#173a2c;border-color:#2b7a4b;color:#7fffc4;}
+.segrow button .sw{display:inline-block;width:.62em;height:.62em;border-radius:50%;margin-right:.35em;vertical-align:baseline;}
+.seglab{font-family:var(--n-mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:#727982;margin:.1rem 0 -.15rem;}
+.simbtn{font-family:var(--n-mono);font-size:.78rem;font-weight:700;background:#2a2f38;border:1px solid #3d444f;color:#c7ccd4;border-radius:6px;padding:.5rem .4rem;cursor:pointer;transition:.15s;text-align:center;}
+.simbtn:hover{background:#b06a12;color:#fff;border-color:#b06a12;}
+.simbtn.ghost{background:transparent;border-color:#2d333d;color:#8b929c;}
+.simbtn.wide{width:100%;margin-top:.1rem;}
+.simbtn.go{background:#173a2c;border-color:#2b7a4b;color:#7fffc4;}
+.simbtn.go:hover{background:#2b7a4b;color:#fff;}
+.simbtn[disabled]{opacity:.42;cursor:not-allowed;background:#20262e;border-color:#2d333d;color:#727982;}
+.simbtn[disabled]:hover{background:#20262e;color:#727982;border-color:#2d333d;}
+.nudge{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:.35rem;}
+.nudge button{font-family:var(--n-mono);font-size:.7rem;font-weight:700;background:#20262e;border:1px solid #3d444f;color:#9aa1ab;border-radius:6px;padding:.35rem .2rem;cursor:pointer;}
+.nudge button:hover{background:#35c8ff;color:#0b0e12;border-color:#35c8ff;}
+.readout{background:#12151a;border:1px solid #2d333d;border-radius:8px;padding:.55rem .8rem;margin:0 0 .5rem;font-family:var(--n-mono);font-size:.78rem;color:#aeb4bd;line-height:1.75;}
+.readout b{color:#ffb000;font-weight:700;}
+.readout .cyan{color:#35c8ff;}
+.readout .big{font-size:1.15rem;}
+.readout .sep{border-top:1px dashed #2d333d;margin:.4rem 0 .35rem;}
+.readout .dim{color:#727982;}
+.warn{background:#2a1410;border:1px solid #7a3a24;border-radius:8px;padding:.5rem .75rem;margin:0 0 .5rem;font-family:var(--n-mono);font-size:.74rem;line-height:1.6;color:#ffbfa3;}
+.hint{font-size:.72rem;color:#8b929c;margin:.1rem 0 0;line-height:1.65;}
+.mtab{width:100%;border-collapse:collapse;font-family:var(--n-mono);font-size:.7rem;color:#aeb4bd;}
+.mtab th{font-weight:700;color:#727982;text-align:right;padding:.25rem .3rem;border-bottom:1px solid #2d333d;font-size:.6rem;text-transform:uppercase;letter-spacing:.04em;}
+.mtab td{text-align:right;padding:.22rem .3rem;border-bottom:1px solid #1b1f26;white-space:nowrap;}
+.mtab td.sw{width:12px;padding:0 0 0 .2rem;}
+.mtab td.sw i{display:block;width:8px;height:8px;border-radius:50%;}
+.mtab td.id{color:#7fffc4;text-align:left;}
+.mtab .none{color:#727982;text-align:center;padding:.55rem;font-size:.72rem;}
+.tabwrap{background:#12151a;border:1px solid #2d333d;border-radius:8px;padding:.4rem .55rem .2rem;margin:0 0 .5rem;max-height:220px;overflow-y:auto;}
+/* Le due colonne scorrono in modo INDIPENDENTE: si possono scorrere i comandi a destra
+   senza spostare l'apparato a sinistra (e viceversa). La pagina in sé non scorre. */
+@media (min-width:821px){
+  html,body{height:100%;overflow:hidden;}
+  .console{height:100vh;min-height:0;overflow:hidden;}
+  .console .panel{flex:1 1 auto;min-height:0;align-items:stretch;}
+  .console .stagecol{overflow-y:auto;min-height:0;}
+  .console .ctrlcol{overflow-y:auto;min-height:0;}
+}
+@media (max-width:820px) and (orientation:landscape){
+  html,body{height:100%;overflow:hidden;}
+  .console{height:100vh;min-height:0;overflow:hidden;}
+  .console .panel{flex:1 1 auto;min-height:0;align-items:stretch;}
+  .console .stagecol{overflow-y:auto;min-height:0;}
+  .console .ctrlcol{overflow-y:auto;min-height:0;}
+}
+</style>
+</head>
+<body>
+<main class="console" id="top">
+  <header class="con-head">
+    <div class="con-brand">
+      <a class="con-back" id="backTop" href="09-spettri-atomici.html"><span class="it">← Torna al Capitolo 9</span><span class="en">← Back to Chapter 9</span></a>
+      <span class="tag amber">Lab · Cap. 9</span>
+      <span class="con-title"><span class="it">Spettrometro a goniometro · righe di emissione</span><span class="en">Goniometer spectrometer · emission lines</span></span>
+    </div>
+    <div class="con-actions">
+      <div class="langsw" role="group" aria-label="Lingua / Language">
+        <button class="langbtn" type="button" data-l="it" aria-pressed="true">Italiano</button>
+        <button class="langbtn" type="button" data-l="en" aria-pressed="false">English</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="panel">
+    <div class="stagecol">
+      <div class="sim-stage stage-wrap">
+        <canvas id="stage" class="cv" width="820" height="384" role="img"
+          aria-label="Banco ottico visto dall'alto: tubo a scarica, fenditura, due lenti convergenti, reticolo di diffrazione al centro di un cerchio graduato e cannocchiale girevole."></canvas>
+      </div>
+      <div class="sim-stage eye-wrap">
+        <canvas id="eye" class="cv" width="820" height="104" role="img"
+          aria-label="Campo del cannocchiale: le righe spettrali viste attraverso l'oculare, con il crocifilo al centro."></canvas>
+      </div>
+      <div class="sim-stage plot-wrap">
+        <canvas id="plot" class="cv" width="820" height="372" role="img"
+          aria-label="Spettro registrato in lunghezza d'onda e diagramma dei livelli dell'atomo di idrogeno con i salti misurati."></canvas>
+      </div>
+    </div>
+
+    <aside class="ctrlcol">
+      <div class="cpanel">
+        <div class="seglab"><span class="it">Sorgente sul banco</span><span class="en">Source on the bench</span></div>
+        <div class="segrow c3" id="segSrc">
+          <button type="button" data-v="h" class="on"><span class="sw" style="background:#ff78aa"></span><span class="it">Idrogeno</span><span class="en">Hydrogen</span></button>
+          <button type="button" data-v="hg"><span class="sw" style="background:#bfe0ff"></span><span class="it">Mercurio</span><span class="en">Mercury</span></button>
+          <button type="button" data-v="ne"><span class="sw" style="background:#ff8a3d"></span><span class="it">Neon</span><span class="en">Neon</span></button>
+          <button type="button" data-v="ar"><span class="sw" style="background:#b48cff"></span><span class="it">Argon</span><span class="en">Argon</span></button>
+          <button type="button" data-v="n2"><span class="sw" style="background:#d59bff"></span><span class="it">Azoto</span><span class="en">Nitrogen</span></button>
+          <button type="button" data-v="inc"><span class="sw" style="background:#ffd9a0"></span><span class="it">Filamento</span><span class="en">Filament</span></button>
+        </div>
+
+        <div class="seglab"><span class="it">Reticolo di diffrazione</span><span class="en">Diffraction grating</span></div>
+        <div class="segrow c3" id="segGr">
+          <button type="button" data-v="300">300 <span class="it">l/mm</span><span class="en">l/mm</span></button>
+          <button type="button" data-v="600" class="on">600 <span class="it">l/mm</span><span class="en">l/mm</span></button>
+          <button type="button" data-v="1200">1200 <span class="it">l/mm</span><span class="en">l/mm</span></button>
+        </div>
+
+        <div class="seglab"><span class="it">Ordine di diffrazione</span><span class="en">Diffraction order</span></div>
+        <div class="segrow c2" id="segOrd">
+          <button type="button" data-v="1" class="on">m = 1</button>
+          <button type="button" data-v="2">m = 2</button>
+        </div>
+
+        <div class="seglab"><span class="it">Cannocchiale · angolo letto sul goniometro</span><span class="en">Telescope · angle read on the goniometer</span></div>
+        <div class="crow">
+          <span class="clab">ϑ</span>
+          <input type="range" id="arm" min="0" max="85" step="0.05" value="0" aria-label="Angolo del cannocchiale">
+          <span class="cval" id="armV">0,00°</span>
+        </div>
+        <div class="nudge">
+          <button type="button" data-d="-1">−1°</button>
+          <button type="button" data-d="-0.05">−0,05°</button>
+          <button type="button" data-d="0.05">+0,05°</button>
+          <button type="button" data-d="1">+1°</button>
+        </div>
+        <button class="simbtn wide" type="button" id="btnCenter"><span class="it">Centra la riga più vicina</span><span class="en">Centre the nearest line</span></button>
+        <button class="simbtn wide go" type="button" id="btnMeas" disabled><span class="it">Misura la riga nel mirino</span><span class="en">Measure the line on the crosshair</span></button>
+        <div class="segrow c2">
+          <button class="simbtn" type="button" id="btnScan"><span class="it">Scansione automatica</span><span class="en">Automatic scan</span></button>
+          <button class="simbtn ghost" type="button" id="btnClear"><span class="it">Azzera misure</span><span class="en">Clear data</span></button>
+        </div>
+      </div>
+
+      <div class="warn" id="warnBox" hidden></div>
+
+      <div class="readout" id="ro1"></div>
+
+      <div class="tabwrap">
+        <table class="mtab" id="mtab">
+          <thead><tr>
+            <th></th>
+            <th>ϑ</th>
+            <th>λ (nm)</th>
+            <th>ν (10<sup>14</sup> Hz)</th>
+            <th>E (eV)</th>
+            <th style="text-align:left"><span class="it">riga</span><span class="en">line</span></th>
+          </tr></thead>
+          <tbody id="mbody"></tbody>
+        </table>
+      </div>
+
+      <div class="readout" id="ro2"></div>
+
+      <p class="hint">
+        <span class="it"><b>Che cosa stai facendo.</b> La luce della sorgente passa per una fenditura e per due lenti convergenti che la rendono un fascio parallelo, poi colpisce un reticolo di diffrazione. Il reticolo manda ogni lunghezza d'onda in una direzione diversa: <b>λ/d = sen ϑ</b>, cioè <b>ν = c / (d sen ϑ)</b>. Il cannocchiale gira su un cerchio graduato: quando una riga è sul crocifilo, l'angolo letto sul goniometro <i>è</i> la misura. Da ϑ ricavi λ, poi ν, poi l'energia del fotone E = hν, cioè il salto di energia dell'atomo. Con l'idrogeno le quattro righe visibili (serie di Balmer) danno la costante di Rydberg e quindi l'intera scala dei livelli. Prova poi il filamento incandescente: nessuna riga, solo un continuo — la quantizzazione è una proprietà degli atomi, non della luce in sé.</span>
+        <span class="en"><b>What you are doing.</b> Light from the source goes through a slit and two converging lenses that make it a parallel beam, then hits a diffraction grating. The grating sends each wavelength in a different direction: <b>λ/d = sin ϑ</b>, i.e. <b>ν = c / (d sin ϑ)</b>. The telescope turns on a graduated circle: when a line sits on the crosshair, the angle read on the goniometer <i>is</i> the measurement. From ϑ you get λ, then ν, then the photon energy E = hν, i.e. the atom's energy jump. With hydrogen the four visible lines (Balmer series) give the Rydberg constant and hence the whole ladder of levels. Then try the incandescent filament: no lines, just a continuum — quantisation is a property of atoms, not of light itself.</span>
+      </p>
+    </aside>
+  </section>
+
+  <div class="rotate-msg">
+    <div class="big">📱</div>
+    <div class="t1"><span class="it">Ruota il telefono in orizzontale</span><span class="en">Rotate your phone to landscape</span></div>
+    <div class="t2"><span class="it">Questo esperimento interattivo sta stretto in verticale. Gira il telefono in <b>orizzontale</b> per vederlo tutto (anche se piccolo). Per un'esperienza migliore aprilo da <b>computer</b> o da <b>tablet</b> con schermo abbastanza grande.</span><span class="en">This interactive experiment is cramped in portrait. Turn your phone to <b>landscape</b> to see it all (even if small). For a better experience, open it on a <b>desktop</b> or a <b>tablet</b> with a large enough screen.</span></div>
+  </div>
+
+  <div class="back-bottom"><a class="con-back" id="backBottom" href="09-spettri-atomici.html"><span class="it">← Torna al Capitolo 9</span><span class="en">← Back to Chapter 9</span></a></div>
+  <div class="con-foot"><span class="it">La Quantistica · Lab locale · Cap. 09</span><span class="en">La Quantistica · Local lab · Ch. 09</span><span>F. Palma</span></div>
+</main>
+
+<script src="assets/sim-sg-core.js?v=2"></script>
+<script>
+(function(){
+'use strict';
+var REDUCE = window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches;
+function L(it,en){ return document.documentElement.getAttribute('data-lang')==='en'?en:it; }
+function $(id){ return document.getElementById(id); }
+function nfmt(x,d){ var s=(+x).toFixed(d); return L(s.replace('.',','),s); }
+function clamp(v,a,b){ return v<a?a:(v>b?b:v); }
+var DEG=Math.PI/180;
+
+/* ---------------- costanti fisiche ---------------- */
+var HC   = 1239.84193;      /* eV·nm            E = HC/λ            */
+var CNU  = 2997.92458;      /* 10^14 Hz · nm    ν = CNU/λ           */
+var RYD  = 1.0967758e-2;    /* nm^-1            costante di Rydberg */
+
+/* ---------------- sorgenti ---------------- */
+/* λ in nm, i = intensità relativa, n = livello di partenza (solo idrogeno) */
+var SRC = {
+  h:{ it:'Lampada di Balmer (idrogeno)', en:'Balmer lamp (hydrogen)', glow:[255,120,170], kind:'atom',
+      lines:[{nm:656.28,i:1.00,n:3},{nm:486.13,i:0.62,n:4},{nm:434.05,i:0.34,n:5},{nm:410.17,i:0.20,n:6},{nm:397.01,i:0.10,n:7}] },
+  hg:{ it:'Lampada a vapori di mercurio', en:'Mercury-vapour lamp', glow:[190,220,255], kind:'atom',
+      lines:[{nm:404.66,i:0.55},{nm:407.78,i:0.14},{nm:435.83,i:0.95},{nm:491.60,i:0.18},{nm:546.07,i:1.00},{nm:576.96,i:0.58},{nm:579.07,i:0.58},{nm:623.44,i:0.12}] },
+  ne:{ it:'Tubo a scarica al neon', en:'Neon discharge tube', glow:[255,130,60], kind:'atom',
+      lines:[{nm:540.06,i:0.20},{nm:576.44,i:0.15},{nm:585.25,i:1.00},{nm:588.19,i:0.35},{nm:594.48,i:0.40},{nm:597.55,i:0.30},{nm:603.00,i:0.35},{nm:607.43,i:0.40},{nm:614.31,i:0.55},{nm:616.36,i:0.35},{nm:621.73,i:0.30},{nm:626.65,i:0.45},{nm:633.44,i:0.60},{nm:638.30,i:0.70},{nm:640.22,i:0.90},{nm:650.65,i:0.60},{nm:659.90,i:0.45},{nm:667.83,i:0.30},{nm:692.95,i:0.35},{nm:703.24,i:0.40}] },
+  ar:{ it:'Tubo a scarica all\u2019argon', en:'Argon discharge tube', glow:[170,130,255], kind:'atom',
+      lines:[{nm:415.86,i:0.30},{nm:420.07,i:0.30},{nm:425.94,i:0.35},{nm:430.01,i:0.35},{nm:434.52,i:0.30},{nm:451.07,i:0.25},{nm:470.23,i:0.20},{nm:476.49,i:0.16},{nm:488.00,i:0.16},{nm:696.54,i:0.90},{nm:706.72,i:0.70},{nm:727.29,i:0.50},{nm:738.40,i:0.65},{nm:750.39,i:1.00},{nm:763.51,i:0.95},{nm:772.38,i:0.70},{nm:794.82,i:0.60},{nm:811.53,i:0.90}] },
+  n2:{ it:'Tubo a scarica all\u2019azoto (molecolare)', en:'Nitrogen discharge tube (molecular)', glow:[205,150,255], kind:'band',
+      lines:[{nm:315.93,i:0.85},{nm:337.13,i:1.00},{nm:353.67,i:0.55},{nm:357.69,i:0.85},{nm:375.54,i:0.50},{nm:380.49,i:0.70},{nm:391.44,i:0.60},{nm:399.84,i:0.45},{nm:405.94,i:0.50},{nm:427.81,i:0.55},{nm:434.36,i:0.30},{nm:470.92,i:0.25},{nm:497.64,i:0.15},{nm:517.00,i:0.10}] },
+  inc:{ it:'Lampada a filamento incandescente', en:'Incandescent filament lamp', glow:[255,215,160], kind:'cont', lines:[] }
+};
+
+/* ---------------- colore e visibilità ---------------- */
+function wlRGB(nm){
+  var r=0,g=0,b=0;
+  if(nm>=380&&nm<440){ r=-(nm-440)/60; g=0; b=1; }
+  else if(nm<490){ r=0; g=(nm-440)/50; b=1; }
+  else if(nm<510){ r=0; g=1; b=-(nm-510)/20; }
+  else if(nm<580){ r=(nm-510)/70; g=1; b=0; }
+  else if(nm<645){ r=1; g=-(nm-645)/65; b=0; }
+  else if(nm<=830){ r=1; g=0; b=0; }
+  else { r=0.35; g=0.35; b=0.35; }
+  if(nm<380){ r=0.45; g=0.45; b=0.55; }
+  var f=1;
+  if(nm<380) f=0.55;
+  else if(nm<420) f=0.35+0.65*(nm-380)/40;
+  else if(nm<=700) f=1;
+  else if(nm<=830) f=0.35+0.65*(830-nm)/130;
+  r=clamp(r,0,1); g=clamp(g,0,1); b=clamp(b,0,1);
+  return [Math.round(255*Math.pow(r*f,0.8)), Math.round(255*Math.pow(g*f,0.8)), Math.round(255*Math.pow(b*f,0.8))];
+}
+function css(rgb,a){ return 'rgba('+rgb[0]+','+rgb[1]+','+rgb[2]+','+(a===undefined?1:a)+')'; }
+/* risposta grossolana dell'occhio: 0 = invisibile (serve la lastra fotografica) */
+function visF(nm){
+  if(nm<380||nm>780) return 0;
+  var f=(nm<420)?0.3+0.7*(nm-380)/40:(nm<=700?1:0.3+0.7*(780-nm)/80);
+  var w=Math.exp(-Math.pow((nm-555)/95,2));
+  return f*(0.15+0.85*w);
+}
+function invisible(nm){ return visF(nm)<0.03; }
+
+/* ---------------- stato ---------------- */
+var srcKey='h', gr=600, ord=1, arm=0;
+var rows=[];                 /* misure registrate */
+var scanT=null, scanList=[], scanIdx=0;
+var FOV=1.2;                 /* semiampiezza del campo del cannocchiale, in gradi */
+var TOL=0.15;                /* tolleranza di centratura per poter misurare       */
+
+function src(){ return SRC[srcKey]; }
+function dnm(){ return 1e6/gr; }           /* passo del reticolo, in nm */
+function thetaOf(nm){                       /* angolo di diffrazione, in gradi, o null */
+  var s=ord*nm/dnm();
+  if(s>1) return null;
+  return Math.asin(s)/DEG;
+}
+function lambdaOf(th){ return dnm()*Math.sin(th*DEG)/ord; }
+
+/* righe della sorgente effettivamente raggiungibili dal cannocchiale */
+function reachable(){
+  var out=[], ls=src().lines, i, th;
+  for(i=0;i<ls.length;i++){
+    th=thetaOf(ls[i].nm);
+    if(th===null||th>85) continue;
+    out.push({nm:ls[i].nm,i:ls[i].i,n:ls[i].n,th:th,rgb:wlRGB(ls[i].nm),vis:visF(ls[i].nm)});
+  }
+  out.sort(function(a,b){ return a.th-b.th; });
+  return out;
+}
+function nearest(){
+  var ls=reachable(), best=null, i, d;
+  for(i=0;i<ls.length;i++){ d=Math.abs(ls[i].th-arm); if(best===null||d<best.d) best={d:d,line:ls[i]}; }
+  return best;
+}
+
+/* ---------------- canvas ---------------- */
+var cS=$('stage'), xS=cS.getContext('2d');
+var cE=$('eye'),   xE=cE.getContext('2d');
+var cP=$('plot'),  xP=cP.getContext('2d');
+var GX=392, GY=300, RC=176;   /* centro del goniometro e raggio del cerchio graduato */
+
+function mono(px){ return px+'px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace'; }
+
+function lens(x,y,h,w){
+  xS.strokeStyle='#7fd7ff'; xS.fillStyle='rgba(120,205,255,.13)'; xS.lineWidth=1.6;
+  xS.beginPath();
+  xS.moveTo(x,y-h/2); xS.quadraticCurveTo(x+w,y,x,y+h/2);
+  xS.quadraticCurveTo(x-w,y,x,y-h/2); xS.closePath(); xS.fill(); xS.stroke();
+}
+
+function drawStage(){
+  var W=cS.width, H=cS.height, s=src(), i;
+  xS.clearRect(0,0,W,H);
+  /* fondo */
+  xS.fillStyle='#0b0e12'; xS.fillRect(0,0,W,H);
+
+  /* rotaia del banco ottico */
+  xS.fillStyle='#1a1f26'; xS.fillRect(12,GY+36,GX-12+22,13);
+  xS.strokeStyle='#2d333d'; xS.lineWidth=1; xS.strokeRect(12.5,GY+36.5,GX-12+21,12);
+
+  /* fascio dalla sorgente al reticolo */
+  var gcol=s.glow;
+  var gd=xS.createLinearGradient(110,0,GX,0);
+  gd.addColorStop(0,'rgba('+gcol[0]+','+gcol[1]+','+gcol[2]+',.30)');
+  gd.addColorStop(1,'rgba('+gcol[0]+','+gcol[1]+','+gcol[2]+',.13)');
+  xS.fillStyle=gd; xS.fillRect(110,GY-11,GX-110,22);
+
+  /* tubo a scarica / lampada */
+  xS.save();
+  xS.shadowColor='rgba('+gcol[0]+','+gcol[1]+','+gcol[2]+',.75)'; xS.shadowBlur=22;
+  xS.fillStyle='rgba('+gcol[0]+','+gcol[1]+','+gcol[2]+',.42)';
+  xS.fillRect(30,GY-20,80,40);
+  xS.restore();
+  xS.strokeStyle='#5b6470'; xS.lineWidth=1.4; xS.strokeRect(30.5,GY-20.5,79,41);
+  xS.fillStyle='#8b929c'; xS.fillRect(23,GY-7,8,14); xS.fillRect(109,GY-7,8,14);   /* elettrodi */
+  xS.fillStyle='#9aa1ab'; xS.font=mono(10); xS.textAlign='center';
+  xS.fillText(s.kind==='cont'?L('filamento incandescente','incandescent filament'):'~10⁻³ atm · ~1000 V',70,GY+64);
+  xS.fillStyle='#c7ccd4'; xS.font='700 '+mono(11);
+  xS.fillText(L(srcKey==='h'?'idrogeno':srcKey==='hg'?'mercurio':srcKey==='ne'?'neon':srcKey==='ar'?'argon':srcKey==='n2'?'azoto':'lampada',
+                srcKey==='h'?'hydrogen':srcKey==='hg'?'mercury':srcKey==='ne'?'neon':srcKey==='ar'?'argon':srcKey==='n2'?'nitrogen':'lamp'),70,GY-32);
+
+  /* fenditura */
+  xS.fillStyle='#3d444f'; xS.fillRect(150,GY-28,5,19); xS.fillRect(150,GY+9,5,19);
+  xS.fillStyle='#727982'; xS.font=mono(9); xS.fillText(L('fenditura','slit'),152,GY+78);
+
+  /* due lenti convergenti (collimatore) */
+  lens(210,GY,54,10); lens(280,GY,58,11);
+  xS.fillStyle='#727982'; xS.font=mono(9);
+  xS.fillText(L('due lenti convergenti','two converging lenses'),245,GY+64);
+
+  /* cerchio graduato del goniometro */
+  xS.strokeStyle='#2d333d'; xS.lineWidth=1;
+  xS.beginPath(); xS.arc(GX,GY,RC,-88*DEG,4*DEG); xS.stroke();
+  var a,tx,ty,tx2,ty2;
+  for(a=0;a<=85;a+=2.5){
+    var major=(Math.abs(a%10)<0.001);
+    var r1=RC-(major?9:5);
+    tx=GX+r1*Math.cos(a*DEG); ty=GY-r1*Math.sin(a*DEG);
+    tx2=GX+RC*Math.cos(a*DEG); ty2=GY-RC*Math.sin(a*DEG);
+    xS.strokeStyle=major?'#5b6470':'#333a44'; xS.lineWidth=major?1.3:1;
+    xS.beginPath(); xS.moveTo(tx,ty); xS.lineTo(tx2,ty2); xS.stroke();
+    if(major && a>0){
+      var rl=RC+13;
+      xS.fillStyle='#727982'; xS.font=mono(9); xS.textAlign='center'; xS.textBaseline='middle';
+      xS.fillText(a+'°',GX+rl*Math.cos(a*DEG),GY-rl*Math.sin(a*DEG));
+      xS.textBaseline='alphabetic';
+    }
+  }
+
+  /* ordine zero (fascio non deviato) */
+  xS.strokeStyle='rgba(230,235,245,.55)'; xS.lineWidth=2;
+  xS.beginPath(); xS.moveTo(GX,GY); xS.lineTo(GX+RC+42,GY); xS.stroke();
+  xS.fillStyle='#8b929c'; xS.font=mono(9); xS.textAlign='left';
+  xS.fillText(L('ordine 0','order 0'),GX+RC+48,GY+3);
+
+  /* raggi diffratti */
+  function ray(nm,inten){
+    var th=thetaOf(nm); if(th===null||th>86) return;
+    var rgb=wlRGB(nm), v=visF(nm);
+    var al=0.20+0.70*inten*(0.25+0.75*v);
+    xS.save();
+    xS.strokeStyle=css(rgb,al); xS.lineWidth=v<0.03?1.1:2.1;
+    if(v<0.03) xS.setLineDash([4,4]);
+    xS.shadowColor=css(rgb,0.55*al); xS.shadowBlur=v<0.03?0:7;
+    xS.beginPath(); xS.moveTo(GX,GY);
+    xS.lineTo(GX+(RC+30)*Math.cos(th*DEG), GY-(RC+30)*Math.sin(th*DEG));
+    xS.stroke(); xS.restore();
+  }
+  if(s.kind==='cont'){ for(i=380;i<=720;i+=3) ray(i,0.55); }
+  else { for(i=0;i<s.lines.length;i++) ray(s.lines[i].nm,s.lines[i].i); }
+
+  /* reticolo di diffrazione */
+  xS.save(); xS.translate(GX,GY);
+  xS.fillStyle='rgba(150,170,195,.20)'; xS.fillRect(-5,-36,10,72);
+  xS.strokeStyle='#8fa2b8'; xS.lineWidth=1.4; xS.strokeRect(-5,-36,10,72);
+  xS.strokeStyle='rgba(180,205,235,.55)'; xS.lineWidth=0.7;
+  for(i=-34;i<=34;i+=3.2){ xS.beginPath(); xS.moveTo(-5,i); xS.lineTo(5,i); xS.stroke(); }
+  xS.restore();
+  xS.fillStyle='#9aa1ab'; xS.font=mono(9); xS.textAlign='center';
+  xS.fillText(L('reticolo · ','grating · ')+gr+' '+L('linee/mm','lines/mm'),GX,GY+64);
+  xS.fillText('d = '+nfmt(dnm(),0)+' nm',GX,GY+78);
+
+  /* braccio con cannocchiale */
+  var ca=Math.cos(arm*DEG), sa=Math.sin(arm*DEG);
+  xS.save();
+  xS.strokeStyle='#ffb000'; xS.lineWidth=3;
+  xS.beginPath(); xS.moveTo(GX,GY); xS.lineTo(GX+(RC+8)*ca,GY-(RC+8)*sa); xS.stroke();
+  xS.translate(GX,GY); xS.rotate(-arm*DEG);
+  xS.fillStyle='#23282f'; xS.strokeStyle='#ffb000'; xS.lineWidth=1.6;
+  xS.beginPath(); xS.moveTo(RC-24,-13); xS.lineTo(RC+34,-9); xS.lineTo(RC+34,9); xS.lineTo(RC-24,13); xS.closePath();
+  xS.fill(); xS.stroke();
+  xS.beginPath(); xS.arc(RC+40,0,7,0,6.2832); xS.fillStyle='#12151a'; xS.fill(); xS.stroke();
+  xS.restore();
+  xS.fillStyle='#3a3f48'; xS.beginPath(); xS.arc(GX,GY,6,0,6.2832); xS.fill();
+
+  /* targhetta con l'angolo */
+  xS.fillStyle='rgba(18,21,26,.92)'; xS.strokeStyle='#3d444f'; xS.lineWidth=1;
+  xS.fillRect(W-176,12,164,44); xS.strokeRect(W-175.5,12.5,163,43);
+  xS.fillStyle='#727982'; xS.font=mono(9); xS.textAlign='left';
+  xS.fillText(L('GONIOMETRO','GONIOMETER'),W-166,28);
+  xS.fillStyle='#ffb000'; xS.font='700 '+mono(19);
+  xS.fillText('ϑ = '+nfmt(arm,2)+'°',W-166,49);
+
+  /* didascalia: l'equazione del reticolo */
+  xS.fillStyle='#5b6470'; xS.font=mono(11); xS.textAlign='right';
+  xS.fillText(L('λ / d = sen ϑ','λ / d = sin ϑ'),W-16,H-34);
+  xS.fillText(L('ν = c / (d sen ϑ)','ν = c / (d sin ϑ)'),W-16,H-18);
+  xS.textAlign='left';
+}
+
+function drawEye(){
+  var W=cE.width, H=cE.height, s=src(), i;
+  xE.clearRect(0,0,W,H);
+  xE.fillStyle='#0b0e12'; xE.fillRect(0,0,W,H);
+  var x0=40, x1=W-40, cx=(x0+x1)/2, halfW=(x1-x0)/2;
+  /* campo scuro */
+  xE.fillStyle='#05070a'; xE.fillRect(x0,16,x1-x0,H-34);
+  xE.strokeStyle='#2d333d'; xE.lineWidth=1; xE.strokeRect(x0+.5,16.5,x1-x0-1,H-35);
+
+  function px(dth){ return cx + (dth/FOV)*halfW; }
+
+  if(s.kind==='cont'){
+    for(i=x0;i<x1;i+=2){
+      var dth=((i-cx)/halfW)*FOV;
+      var lam=lambdaOf(clamp(arm+dth,0.001,89));
+      var rgb=wlRGB(lam);
+      xE.fillStyle=css(rgb,0.85); xE.fillRect(i,17,2,H-36);
+    }
+  } else {
+    var ls=reachable();
+    for(i=0;i<ls.length;i++){
+      var d=ls[i].th-arm;
+      if(Math.abs(d)>FOV) continue;
+      var X=px(d), a=0.30+0.70*ls[i].i;
+      if(ls[i].vis<0.03){
+        xE.save(); xE.setLineDash([3,3]); xE.strokeStyle='rgba(150,150,165,.55)'; xE.lineWidth=1.2;
+        xE.beginPath(); xE.moveTo(X,19); xE.lineTo(X,H-22); xE.stroke(); xE.restore();
+        xE.fillStyle='#8b929c'; xE.font=mono(8); xE.textAlign='center';
+        xE.fillText(L('invisibile','invisible'),X,H-26);
+      } else {
+        xE.save(); xE.shadowColor=css(ls[i].rgb,0.9); xE.shadowBlur=11;
+        xE.fillStyle=css(ls[i].rgb,a*(0.35+0.65*ls[i].vis));
+        xE.fillRect(X-2.2,18,4.4,H-38); xE.restore();
+      }
+    }
+  }
+  /* crocifilo */
+  xE.strokeStyle='rgba(255,176,0,.95)'; xE.lineWidth=1.2;
+  xE.beginPath(); xE.moveTo(cx,16); xE.lineTo(cx,H-18); xE.stroke();
+  xE.beginPath(); xE.moveTo(cx-9,(H-18)/2+8); xE.lineTo(cx+9,(H-18)/2+8); xE.stroke();
+  /* scala */
+  xE.fillStyle='#727982'; xE.font=mono(9); xE.textAlign='center';
+  for(i=-1;i<=1;i++){ if(i===0) continue; xE.fillText((i>0?'+':'')+i+'°',px(i),H-6); }
+  xE.fillText('0',cx,H-6);
+  xE.textAlign='left';
+  xE.fillText(L('campo del cannocchiale ±'+nfmt(FOV,1)+'°','telescope field ±'+nfmt(FOV,1)+'°'),8,12);
+}
+
+function drawPlot(){
+  var W=cP.width, H=cP.height, i;
+  xP.clearRect(0,0,W,H);
+  xP.fillStyle='#0b0e12'; xP.fillRect(0,0,W,H);
+
+  /* ---- 1) spettro registrato, scala in lunghezza d'onda ---- */
+  var sx0=64, sx1=W-24, sy0=30, sy1=76;
+  var lmin=380, lmax=720;
+  function LX(nm){ return sx0+(nm-lmin)/(lmax-lmin)*(sx1-sx0); }
+  xP.fillStyle='#727982'; xP.font=mono(10); xP.textAlign='left';
+  xP.fillText(L('SPETTRO REGISTRATO','RECORDED SPECTRUM'),sx0,20);
+  xP.fillStyle='#05070a'; xP.fillRect(sx0,sy0,sx1-sx0,sy1-sy0);
+  for(i=lmin;i<lmax;i+=2){
+    xP.fillStyle=css(wlRGB(i),0.16); xP.fillRect(LX(i),sy0,LX(i+2)-LX(i)+1,sy1-sy0);
+  }
+  xP.strokeStyle='#2d333d'; xP.lineWidth=1; xP.strokeRect(sx0+.5,sy0+.5,sx1-sx0-1,sy1-sy0-1);
+  for(i=400;i<=700;i+=50){
+    xP.strokeStyle='#3d444f'; xP.beginPath(); xP.moveTo(LX(i),sy1); xP.lineTo(LX(i),sy1+4); xP.stroke();
+    xP.fillStyle='#727982'; xP.font=mono(9); xP.textAlign='center'; xP.fillText(i,LX(i),sy1+15);
+  }
+  xP.textAlign='left'; xP.fillStyle='#727982'; xP.fillText('nm',sx1+2,sy1+15);
+  for(i=0;i<rows.length;i++){
+    var nm=rows[i].nm;
+    if(nm<lmin||nm>lmax) continue;
+    var rgb=wlRGB(nm);
+    xP.save(); xP.shadowColor=css(rgb,0.9); xP.shadowBlur=9;
+    xP.fillStyle=css(rgb,1); xP.fillRect(LX(nm)-1.6,sy0,3.2,sy1-sy0); xP.restore();
+  }
+  if(!rows.length){
+    xP.fillStyle='#727982'; xP.font=mono(10); xP.textAlign='center';
+    xP.fillText(L('nessuna riga misurata','no line measured yet'),(sx0+sx1)/2,(sy0+sy1)/2+4);
+  }
+
+  /* ---- 2) parte bassa: livelli dell'idrogeno oppure energie misurate ---- */
+  var by0=126, by1=H-16;
+  if(srcKey==='h') drawLevels(by0,by1,W);
+  else drawEnergies(by0,by1,W);
+}
+
+function drawLevels(y0,y1,W){
+  var i;
+  xP.fillStyle='#727982'; xP.font=mono(10); xP.textAlign='left';
+  xP.fillText(L('LIVELLI DELL\u2019ATOMO DI IDROGENO · Eₙ = −13,6 eV / n²','HYDROGEN ENERGY LEVELS · Eₙ = −13.6 eV / n²'),64,y0-10);
+  var E1=-13.606, x0=150, x1=W-160;
+  function EY(E){ return y0 + (E/E1)*(y1-y0); }   /* E=0 in alto, E1 in basso */
+  /* limite di ionizzazione */
+  xP.strokeStyle='#5b6470'; xP.setLineDash([5,4]); xP.lineWidth=1;
+  xP.beginPath(); xP.moveTo(x0-24,EY(0)); xP.lineTo(x1+24,EY(0)); xP.stroke(); xP.setLineDash([]);
+  xP.fillStyle='#8b929c'; xP.font=mono(9); xP.textAlign='left';
+  xP.fillText(L('E = 0 · ionizzazione','E = 0 · ionisation'),x1+30,EY(0)+3);
+
+  for(i=1;i<=7;i++){
+    var E=E1/(i*i), y=EY(E);
+    xP.strokeStyle=(i===2)?'#7fffc4':'#5b6470'; xP.lineWidth=(i===2)?1.8:1.2;
+    xP.beginPath(); xP.moveTo(x0,y); xP.lineTo(x1,y); xP.stroke();
+    if(i<=3){
+      xP.fillStyle=(i===2)?'#7fffc4':'#8b929c'; xP.font=mono(9); xP.textAlign='right';
+      xP.fillText('n = '+i,x0-8,y+3);
+      xP.textAlign='left'; xP.fillStyle='#727982';
+      xP.fillText(nfmt(E,2)+' eV',x1+30,y+3);
+    }
+  }
+  /* i livelli alti si accalcano verso il limite di ionizzazione */
+  xP.fillStyle='#727982'; xP.font=mono(9); xP.textAlign='right';
+  xP.fillText('n = 4, 5, 6, 7 …',x0-8,EY(E1/16)-7);
+
+  /* salti misurati */
+  var y2=EY(E1/4), drawn=0;
+  for(i=0;i<rows.length;i++){
+    var n=rows[i].n; if(!n||n<3||n>7) continue;
+    var yn=EY(E1/(n*n)), X=x0+56+(n-3)*((x1-x0-112)/4);
+    var rgb=wlRGB(rows[i].nm);
+    xP.save();
+    xP.strokeStyle=css(rgb,1); xP.fillStyle=css(rgb,1); xP.lineWidth=2;
+    xP.shadowColor=css(rgb,0.7); xP.shadowBlur=7;
+    xP.beginPath(); xP.moveTo(X,yn); xP.lineTo(X,y2-5); xP.stroke();
+    xP.beginPath(); xP.moveTo(X,y2); xP.lineTo(X-4.5,y2-9); xP.lineTo(X+4.5,y2-9); xP.closePath(); xP.fill();
+    xP.restore();
+    xP.fillStyle=css(rgb,1); xP.font='700 '+mono(9); xP.textAlign='center';
+    xP.fillText(nfmt(rows[i].nm,1),X,y2+15);
+    xP.fillStyle='#8b929c'; xP.font=mono(8);
+    xP.fillText(n+' → 2',X,y2+26);
+    drawn++;
+  }
+  if(drawn){
+    xP.fillStyle='#7fffc4'; xP.font=mono(9); xP.textAlign='left';
+    xP.fillText(L('serie di Balmer · visibile','Balmer series · visible'),x1+30,y2+22);
+  } else {
+    xP.fillStyle='#727982'; xP.font=mono(10); xP.textAlign='center';
+    xP.fillText(L('misura le righe: qui compariranno i salti n → 2 (serie di Balmer)','measure the lines: the n → 2 jumps (Balmer series) will appear here'),(x0+x1)/2,y2+40);
+  }
+
+  /* il salto 2 → 1: serie di Lyman, fuori dal visibile */
+  var yL=EY(E1), XL=x0+56;
+  xP.save();
+  xP.strokeStyle='rgba(160,160,180,.5)'; xP.fillStyle='rgba(160,160,180,.5)';
+  xP.lineWidth=1.6; xP.setLineDash([5,4]);
+  xP.beginPath(); xP.moveTo(XL,y2); xP.lineTo(XL,yL-6); xP.stroke();
+  xP.setLineDash([]);
+  xP.beginPath(); xP.moveTo(XL,yL); xP.lineTo(XL-4.5,yL-9); xP.lineTo(XL+4.5,yL-9); xP.closePath(); xP.fill();
+  xP.restore();
+  xP.fillStyle='#8b929c'; xP.font=mono(9); xP.textAlign='left';
+  xP.fillText(L('serie di Lyman · 2 → 1 · 121,6 nm','Lyman series · 2 → 1 · 121.6 nm'),XL+12,(y2+yL)/2-4);
+  xP.fillStyle='#727982'; xP.font=mono(8);
+  xP.fillText(L('ultravioletto: il cannocchiale non lo vede, serve la lastra fotografica','ultraviolet: the telescope cannot see it, a photographic plate is needed'),XL+12,(y2+yL)/2+10);
+}
+
+function drawEnergies(y0,y1,W){
+  var i;
+  xP.fillStyle='#727982'; xP.font=mono(10); xP.textAlign='left';
+  xP.fillText(L('ENERGIA DEI FOTONI MISURATI · E = hν','MEASURED PHOTON ENERGIES · E = hν'),64,y0-6);
+  var x0=64, x1=W-24, Emax=3.6;
+  xP.strokeStyle='#2d333d'; xP.lineWidth=1;
+  xP.beginPath(); xP.moveTo(x0,y1); xP.lineTo(x1,y1); xP.stroke();
+  for(i=1;i<=3;i++){
+    var y=y1-(i/Emax)*(y1-y0);
+    xP.strokeStyle='#1b1f26'; xP.beginPath(); xP.moveTo(x0,y); xP.lineTo(x1,y); xP.stroke();
+    xP.fillStyle='#727982'; xP.font=mono(9); xP.textAlign='right'; xP.fillText(i+' eV',x0-6,y+3);
+  }
+  if(!rows.length){
+    xP.fillStyle='#727982'; xP.font=mono(10); xP.textAlign='center';
+    xP.fillText(L('nessuna misura registrata','no measurement recorded'),(x0+x1)/2,(y0+y1)/2);
+    return;
+  }
+  var n=rows.length, bw=Math.min(34,(x1-x0-20)/n-6);
+  for(i=0;i<n;i++){
+    var E=HC/rows[i].nm, X=x0+18+i*((x1-x0-30)/n), h=clamp(E/Emax,0,1)*(y1-y0);
+    var rgb=wlRGB(rows[i].nm);
+    xP.fillStyle=css(rgb,0.9); xP.fillRect(X,y1-h,bw,h);
+    xP.fillStyle='#aeb4bd'; xP.font=mono(8); xP.textAlign='center';
+    xP.fillText(nfmt(E,2),X+bw/2,y1-h-4);
+  }
+}
+
+/* ---------------- misura ---------------- */
+function canMeasure(){
+  if(src().kind==='cont') return false;
+  var nr=nearest();
+  return !!(nr && nr.d<=TOL);
+}
+function assignH(nm){
+  /* 1/λ = R (1/4 − 1/n²)  ⇒  n */
+  var inv=1/(RYD*nm), t=0.25-inv;
+  if(t<=0) return null;
+  var n=1/Math.sqrt(t), nr=Math.round(n);
+  if(nr<3||nr>9||Math.abs(n-nr)>0.35) return null;
+  return nr;
+}
+function doMeasure(){
+  if(!canMeasure()) return null;
+  var nr=nearest();
+  var nm=lambdaOf(arm);
+  var n=(srcKey==='h')?assignH(nm):null;
+  var rec={th:arm,nm:nm,n:n,ref:nr.line.nm,vis:nr.line.vis};
+  /* niente doppioni: una misura per riga */
+  for(var i=0;i<rows.length;i++){
+    if(Math.abs(rows[i].ref-rec.ref)<1e-6){ rows[i]=rec; return rec; }
+  }
+  rows.push(rec);
+  rows.sort(function(a,b){ return a.nm-b.nm; });
+  return rec;
+}
+function rydberg(){
+  var s=0,k=0,i,r;
+  for(i=0;i<rows.length;i++){
+    if(!rows[i].n) continue;
+    r=1/(rows[i].nm*(0.25-1/(rows[i].n*rows[i].n)));
+    s+=r; k++;
+  }
+  return k?{R:s/k,k:k}:null;
+}
+
+/* ---------------- interfaccia ---------------- */
+function setSeg(id,v){
+  Array.prototype.forEach.call($(id).querySelectorAll('button'),function(b){
+    b.classList.toggle('on',b.getAttribute('data-v')===String(v));
+  });
+}
+function setArm(v){ arm=clamp(v,0,85); $('arm').value=arm; redraw(); }
+
+function warn(){
+  var b=$('warnBox'), s=src(), msg='';
+  var ls=reachable(), all=s.lines.length;
+  if(s.kind==='cont'){
+    msg=L('Il filamento incandescente non dà righe: il cannocchiale vede una banda continua, in cui ogni angolo corrisponde a una lunghezza d\u2019onda. Non c\u2019è nulla da misurare — ed è esattamente il punto: le righe sono una proprietà degli <b>atomi</b>.',
+          'The incandescent filament gives no lines: the telescope sees a continuous band in which every angle corresponds to a wavelength. There is nothing to measure — and that is exactly the point: lines are a property of <b>atoms</b>.');
+  } else if(ord===2 && ls.length===0){
+    msg=L('Al secondo ordine (m = 2) serve sen ϑ = 2λ/d ≤ 1: con questo reticolo nessuna riga di questa sorgente riesce a uscire. Usa un reticolo con meno linee per millimetro, oppure torna a m = 1.',
+          'At second order (m = 2) you need sin ϑ = 2λ/d ≤ 1: with this grating no line of this source can come out. Use a grating with fewer lines per millimetre, or go back to m = 1.');
+  } else if(ord===2 && ls.length<all){
+    msg=L('Al secondo ordine alcune righe hanno 2λ/d &gt; 1 e semplicemente non esistono: le righe più lunghe (il rosso) sono le prime a sparire.',
+          'At second order some lines have 2λ/d &gt; 1 and simply do not exist: the longest wavelengths (the red end) are the first to go.');
+  } else if(s.kind==='band'){
+    msg=L('L\u2019azoto è <b>molecolare</b>: quello che vedi non sono righe isolate ma <b>bande</b>, addensate verso il violetto e in gran parte nell\u2019ultravioletto. Le molecole hanno anche livelli di vibrazione e rotazione: lo spettro a righe nette è degli atomi.',
+          'Nitrogen is <b>molecular</b>: what you see are not isolated lines but <b>bands</b>, crowded towards the violet and largely in the ultraviolet. Molecules also have vibrational and rotational levels: the sharp line spectrum belongs to atoms.');
+  } else if(gr===300 && ord===1){
+    msg=L('Reticolo poco fitto: la dispersione è piccola e le righe vicine si accavallano nel campo del cannocchiale. Passa a 600 o 1200 linee/mm per separarle.',
+          'A coarse grating: dispersion is small and nearby lines crowd together in the telescope field. Switch to 600 or 1200 lines/mm to separate them.');
+  }
+  if(msg){ b.innerHTML=msg; b.hidden=false; } else { b.hidden=true; }
+}
+
+function readouts(){
+  var s=src(), nr=nearest(), lam=lambdaOf(arm), i;
+  var h1='';
+  h1+='<div><span class="dim">ϑ</span> <b class="big">'+nfmt(arm,2)+'°</b>';
+  h1+='&nbsp;&nbsp;<span class="dim">d</span> '+nfmt(dnm(),0)+' nm&nbsp;&nbsp;<span class="dim">m</span> '+ord+'</div>';
+  h1+='<div class="sep"></div>';
+  h1+='<div>λ = '+L('d·sen ϑ','d·sin ϑ')+' / m = <b>'+(arm>0.02?nfmt(lam,1)+' nm':'—')+'</b></div>';
+  h1+='<div>ν = '+L('c / (d sen ϑ)','c / (d sin ϑ)')+' = <span class="cyan">'+(arm>0.02?nfmt(CNU/lam,3)+' · 10¹⁴ Hz':'—')+'</span></div>';
+  h1+='<div>E = hν = <span class="cyan">'+(arm>0.02?nfmt(HC/lam,3)+' eV':'—')+'</span></div>';
+  h1+='<div class="sep"></div>';
+  if(s.kind==='cont'){
+    h1+='<div class="dim">'+L('spettro continuo: nessuna riga nel mirino','continuous spectrum: no line on the crosshair')+'</div>';
+  } else if(!nr){
+    h1+='<div class="dim">'+L('nessuna riga raggiungibile con questo reticolo','no line reachable with this grating')+'</div>';
+  } else if(nr.d<=TOL){
+    h1+='<div>'+L('riga centrata','line centred')+' · Δϑ = <b>'+nfmt(nr.d,3)+'°</b>'+(nr.line.vis<0.03?' <span class="dim">('+L('invisibile a occhio: servirebbe una lastra fotografica','invisible to the eye: a photographic plate would be needed')+')</span>':'')+'</div>';
+  } else {
+    h1+='<div class="dim">'+L('riga più vicina a','nearest line at')+' '+nfmt(nr.line.th,2)+'° · Δϑ = '+nfmt(nr.d,2)+'°</div>';
+  }
+  $('ro1').innerHTML=h1;
+
+  /* tabella */
+  var tb=$('mbody'), html='';
+  if(!rows.length){
+    html='<tr><td colspan="6" class="none">'+L('nessuna misura registrata','no measurement recorded')+'</td></tr>';
+  } else {
+    for(i=0;i<rows.length;i++){
+      var r=rows[i], rgb=wlRGB(r.nm);
+      html+='<tr>'
+        +'<td class="sw"><i style="background:'+css(rgb,1)+'"></i></td>'
+        +'<td>'+nfmt(r.th,2)+'°</td>'
+        +'<td>'+nfmt(r.nm,1)+'</td>'
+        +'<td>'+nfmt(CNU/r.nm,3)+'</td>'
+        +'<td>'+nfmt(HC/r.nm,3)+'</td>'
+        +'<td class="id">'+(r.n?(r.n+'→2'):'—')+'</td>'
+        +'</tr>';
+    }
+  }
+  tb.innerHTML=html;
+
+  /* sintesi */
+  var h2='', ry=rydberg();
+  if(srcKey==='h'){
+    if(ry){
+      var Rm=ry.R*1e9;             /* nm⁻¹ → m⁻¹ */
+      var E1=HC*ry.R;              /* eV·nm × nm⁻¹ = eV */
+      h2+='<div>'+L('Righe di Balmer identificate','Balmer lines identified')+': <b>'+ry.k+'</b></div>';
+      h2+='<div>'+L('Rydberg dalle misure','Rydberg from the data')+' R = <b>'+nfmt(Rm/1e7,4)+' · 10⁷ m⁻¹</b></div>';
+      h2+='<div class="dim">'+L('valore accettato','accepted value')+' '+nfmt(1.0967758,4)+' · 10⁷ m⁻¹ · '+L('scarto','deviation')+' '+nfmt(100*Math.abs(Rm-1.0967758e7)/1.0967758e7,2)+'%</div>';
+      h2+='<div class="sep"></div>';
+      h2+='<div>'+L('Energia di ionizzazione','Ionisation energy')+' E₁ = hcR = <b>'+nfmt(E1,2)+' eV</b></div>';
+      h2+='<div class="dim">'+L('dalle sole righe visibili si ricava l\u2019intera scala dei livelli','the whole ladder of levels follows from the visible lines alone')+'</div>';
+    } else {
+      h2+='<div class="dim">'+L('Misura le righe della serie di Balmer: da 1/λ = R(1/2² − 1/n²) si ricavano n, la costante di Rydberg e l\u2019energia di ionizzazione.','Measure the Balmer lines: from 1/λ = R(1/2² − 1/n²) you get n, the Rydberg constant and the ionisation energy.')+'</div>';
+    }
+  } else {
+    h2+='<div>'+L('Misure registrate','Measurements recorded')+': <b>'+rows.length+'</b></div>';
+    h2+='<div class="dim">'+L('Ogni riga è un salto fra due livelli di questa specie: le posizioni sono una sua impronta digitale.','Each line is a jump between two levels of this species: their positions are its fingerprint.')+'</div>';
+  }
+  $('ro2').innerHTML=h2;
+
+  $('armV').textContent=nfmt(arm,2)+'°';
+  $('arm').setAttribute('aria-label',L('Angolo del cannocchiale sul goniometro','Telescope angle on the goniometer'));
+  $('btnMeas').disabled=!canMeasure();
+  $('btnCenter').disabled=!nr;
+  $('btnScan').disabled=!nr;
+}
+
+function redraw(){ drawStage(); drawEye(); drawPlot(); warn(); readouts(); }
+
+/* ---------------- eventi ---------------- */
+Array.prototype.forEach.call($('segSrc').querySelectorAll('button'),function(b){
+  b.addEventListener('click',function(){
+    stopScan(); srcKey=b.getAttribute('data-v'); setSeg('segSrc',srcKey);
+    rows=[]; setArm(0);
+  });
+});
+Array.prototype.forEach.call($('segGr').querySelectorAll('button'),function(b){
+  b.addEventListener('click',function(){
+    stopScan(); gr=+b.getAttribute('data-v'); setSeg('segGr',gr); rows=[]; setArm(0);
+  });
+});
+Array.prototype.forEach.call($('segOrd').querySelectorAll('button'),function(b){
+  b.addEventListener('click',function(){
+    stopScan(); ord=+b.getAttribute('data-v'); setSeg('segOrd',ord); rows=[]; setArm(0);
+  });
+});
+$('arm').addEventListener('input',function(){ stopScan(); setArm(+this.value); });
+Array.prototype.forEach.call(document.querySelectorAll('.nudge button'),function(b){
+  b.addEventListener('click',function(){ stopScan(); setArm(arm+(+b.getAttribute('data-d'))); });
+});
+$('btnCenter').addEventListener('click',function(){
+  stopScan();
+  var nr=nearest(); if(nr) setArm(nr.line.th);
+});
+$('btnMeas').addEventListener('click',function(){ doMeasure(); redraw(); });
+$('btnClear').addEventListener('click',function(){ stopScan(); rows=[]; redraw(); });
+$('btnScan').addEventListener('click',function(){ if(scanT) stopScan(); else startScan(); });
+
+function scanLabel(on){
+  $('btnScan').innerHTML = on
+    ? '<span class="it">Ferma la scansione</span><span class="en">Stop the scan</span>'
+    : '<span class="it">Scansione automatica</span><span class="en">Automatic scan</span>';
+}
+function startScan(){
+  scanList=reachable(); scanIdx=0;
+  if(!scanList.length) return;
+  rows=[]; scanLabel(true);
+  scanT=setInterval(scanStep, REDUCE?120:620);
+  scanStep();
+}
+function stopScan(){ if(scanT){ clearInterval(scanT); scanT=null; scanLabel(false); } }
+function scanStep(){
+  if(scanIdx>=scanList.length){ stopScan(); redraw(); return; }
+  var l=scanList[scanIdx++];
+  arm=clamp(l.th+(Math.random()-0.5)*0.06,0,85);
+  $('arm').value=arm;
+  doMeasure(); redraw();
+}
+
+/* ---------------- avvio ---------------- */
+window.addEventListener('resize',function(){ redraw(); });
+new MutationObserver(function(){ redraw(); }).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});
+if(typeof initBackLink==='function') initBackLink('09-spettri-atomici.html');
+setSeg('segSrc',srcKey); setSeg('segGr',gr); setSeg('segOrd',ord);
+redraw();
+
+/* strumentazione per i test automatici */
+window.__lab={
+  get src(){ return srcKey; }, get grating(){ return gr; }, get order(){ return ord; },
+  get theta(){ return arm; }, get d(){ return dnm(); },
+  get lines(){ return reachable().map(function(l){ return {nm:l.nm,th:l.th,vis:l.vis}; }); },
+  get rows(){ return rows.map(function(r){ return {th:r.th,nm:r.nm,n:r.n,ref:r.ref}; }); },
+  get rydberg(){ var r=rydberg(); return r?r.R*1e9:null; },
+  setSource:function(k){ stopScan(); srcKey=k; setSeg('segSrc',k); rows=[]; setArm(0); },
+  setGrating:function(g){ stopScan(); gr=+g; setSeg('segGr',gr); rows=[]; setArm(0); },
+  setOrder:function(m){ stopScan(); ord=+m; setSeg('segOrd',ord); rows=[]; setArm(0); },
+  setArm:function(v){ stopScan(); setArm(v); },
+  centre:function(){ var nr=nearest(); if(nr) setArm(nr.line.th); return arm; },
+  /* misura sincrona, senza animazione */
+  measure:function(){ var r=doMeasure(); redraw(); return r; },
+  measureAll:function(){
+    stopScan(); rows=[];
+    var ls=reachable(), i;
+    for(i=0;i<ls.length;i++){ arm=clamp(ls[i].th+(Math.random()-0.5)*0.06,0,85); doMeasure(); }
+    $('arm').value=arm; redraw();
+    return rows.length;
+  },
+  clear:function(){ stopScan(); rows=[]; redraw(); }
+};
+})();
+</script>
+</body>
+</html>
