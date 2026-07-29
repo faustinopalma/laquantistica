@@ -45,6 +45,7 @@ GREEK = {
 # identificatori non alfabetici ammessi in <mi>
 MI_SYMBOL = {
     '\u210f': r'\hbar', '\u2032': "'", '\u2026': r'\dots',
+    '\u2020': r'\dagger', '\u2217': '*',
     '\u27e8': r'\langle', '\u27e9': r'\rangle', '\u27f6': r'\longrightarrow',
     '\u27f8': r'\Longleftarrow', '\u27f9': r'\Longrightarrow',
     '\u27fa': r'\Longleftrightarrow',
@@ -115,6 +116,9 @@ NBSP = '\u00a0'
 # (|psi>, <phi|) non e' una coppia.
 FENCE_PAIRS = {'(': ')', '[': ']', r'\{': r'\}', r'\langle': r'\rangle'}
 FENCE_CLOSE = {v: k for k, v in FENCE_PAIRS.items()}
+# delimitatori uguali in apertura e chiusura: si accoppiano solo se il MathML
+# li marca come tali con fence="true" e form="prefix"/"postfix"
+SELF_FENCE = {'|', r'\|', r'\Vert'}
 
 CMD_END = re.compile(r'\\[A-Za-z]+$')
 PRIMES = re.compile(r"'+")
@@ -205,14 +209,7 @@ class Converter:
         if txt == '':
             return ''
         if txt in OPERATOR:
-            op = OPERATOR[txt]
-            if el.get('stretchy') == 'true' and el.get('fence') == 'true':
-                form = el.get('form')
-                if op in ('(', '[', '|', r'\{', r'\langle'):
-                    return (r'\left' if form == 'prefix' else r'\right') + op
-                if op in (')', ']', r'\}', r'\rangle'):
-                    return (r'\right' if form == 'postfix' else r'\left') + op
-            return op
+            return OPERATOR[txt]
         self.unknown.append(f'<mo>{txt!r} ({" ".join(f"U+{ord(c):04X}" for c in txt)})')
         return ''
 
@@ -242,28 +239,35 @@ class Converter:
         return _join(self.node(c) for c in el)
 
     def row(self, el) -> str:
-        parts = []
+        parts = []                       # [tipo, chiusura attesa, testo]
         for c in el:
             tex = self.node(c)
-            kind = ''
+            kind, want = '', ''
             if _tag(c) == 'mo' and c.get('stretchy') != 'false':
                 if tex in FENCE_PAIRS:
-                    kind = 'open'
+                    kind, want = 'open', FENCE_PAIRS[tex]
                 elif tex in FENCE_CLOSE:
                     kind = 'close'
-            parts.append([kind, tex])
+                elif c.get('fence') == 'true' and tex in SELF_FENCE:
+                    # barre verticali: coppia solo se il MathML la dichiara tale
+                    form = c.get('form')
+                    if form == 'prefix':
+                        kind, want = 'open', tex
+                    elif form == 'postfix':
+                        kind = 'close'
+            parts.append([kind, want, tex])
         stack = []
         for p in parts:
             if p[0] == 'open':
                 stack.append(p)
             elif p[0] == 'close':
                 for j in range(len(stack) - 1, -1, -1):
-                    if FENCE_PAIRS[stack[j][1]] == p[1]:
-                        stack[j][1] = r'\left' + stack[j][1]
-                        p[1] = r'\right' + p[1]
+                    if stack[j][1] == p[2]:
+                        stack[j][2] = r'\left' + stack[j][2]
+                        p[2] = r'\right' + p[2]
                         del stack[j:]
                         break
-        return _join(p[1] for p in parts)
+        return _join(p[2] for p in parts)
 
     def script(self, el, kind: str) -> str:
         kids = list(el)
