@@ -22,7 +22,8 @@
 }
 
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+/* niente scorrimento animato: se si arriva su "nota.html#ancora" si deve comparire subito lì */
+html{scroll-behavior:auto}
 body{
   margin:0;
   background-color:var(--n-bg);

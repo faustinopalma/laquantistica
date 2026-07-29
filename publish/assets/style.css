@@ -24,7 +24,11 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+/* Lo scorrimento morbido vale per i clic dentro la pagina, NON per l'atterraggio su
+   "pagina.html#ancora": tornando da una nota o da un laboratorio si deve ricomparire
+   subito al punto di lettura. La classe la aggiunge app.js a atterraggio concluso. */
+html { scroll-behavior: auto; }
+html.smooth-scroll { scroll-behavior: smooth; }
 
 body {
   margin: 0;

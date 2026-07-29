@@ -34,21 +34,27 @@
 // scroll to the top), so the reader is left far from where they intended (the
 // "torna indietro" from a note landed too high). After typesetting settles we
 // re-scroll to the anchor.
+// Lo scorrimento morbido resta disattivato finche' l'atterraggio non e' concluso:
+// il ritorno da una nota o da un laboratorio deve essere istantaneo, non animato.
 (function () {
-  if (!location.hash) return;
-  var id;
-  try { id = decodeURIComponent(location.hash.slice(1)); } catch (e) { id = location.hash.slice(1); }
-  if (!id) return;
+  var html = document.documentElement;
+  function enableSmooth() { html.classList.add('smooth-scroll'); }
+  var id = null;
+  if (location.hash) {
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch (e) { id = location.hash.slice(1); }
+  }
+  if (!id) { enableSmooth(); return; }
   function go() {
     var el = document.getElementById(id);
     if (el) el.scrollIntoView();
   }
+  function done() { go(); enableSmooth(); }
   function fix() {
     if (window.MathJax && MathJax.startup && MathJax.startup.promise) {
-      MathJax.startup.promise.then(function () { go(); setTimeout(go, 90); setTimeout(go, 350); })
-        .catch(function () { setTimeout(go, 150); });
+      MathJax.startup.promise.then(function () { go(); setTimeout(go, 90); setTimeout(done, 350); })
+        .catch(function () { setTimeout(done, 150); });
     } else {
-      setTimeout(go, 150);
+      setTimeout(done, 150);
     }
   }
   if (document.readyState === 'complete') fix();
