@@ -46,6 +46,8 @@ GREEK = {
 MI_SYMBOL = {
     '\u210f': r'\hbar', '\u2032': "'", '\u2026': r'\dots',
     '\u27e8': r'\langle', '\u27e9': r'\rangle', '\u27f6': r'\longrightarrow',
+    '\u27f8': r'\Longleftarrow', '\u27f9': r'\Longrightarrow',
+    '\u27fa': r'\Longleftrightarrow',
     '\u1d52f': r'\mathfrak{r}',
     'cos': r'\cos', 'sen': r'\sin', 'sin': r'\sin', 'tan': r'\tan',
     'log': r'\log', 'ln': r'\ln', 'exp': r'\exp',
@@ -106,6 +108,13 @@ BIG_OPS = {'\u2211', '\u220f', '\u222b', '\u222c', '\u222d', '\u222e',
            '\u222f', '\u22c3', '\u22c2', 'lim'}
 
 NBSP = '\u00a0'
+
+# In MathML le parentesi sono elastiche per default e si allungano da sole attorno
+# a matrici e frazioni; in LaTeX no, serve \left ... \right. Abbiniamo qui le coppie
+# con apertura e chiusura DISTINTE: '|' resta fuori perche' nella notazione di Dirac
+# (|psi>, <phi|) non e' una coppia.
+FENCE_PAIRS = {'(': ')', '[': ']', r'\{': r'\}', r'\langle': r'\rangle'}
+FENCE_CLOSE = {v: k for k, v in FENCE_PAIRS.items()}
 
 CMD_END = re.compile(r'\\[A-Za-z]+$')
 PRIMES = re.compile(r"'+")
@@ -233,7 +242,28 @@ class Converter:
         return _join(self.node(c) for c in el)
 
     def row(self, el) -> str:
-        return self.children(el)
+        parts = []
+        for c in el:
+            tex = self.node(c)
+            kind = ''
+            if _tag(c) == 'mo' and c.get('stretchy') != 'false':
+                if tex in FENCE_PAIRS:
+                    kind = 'open'
+                elif tex in FENCE_CLOSE:
+                    kind = 'close'
+            parts.append([kind, tex])
+        stack = []
+        for p in parts:
+            if p[0] == 'open':
+                stack.append(p)
+            elif p[0] == 'close':
+                for j in range(len(stack) - 1, -1, -1):
+                    if FENCE_PAIRS[stack[j][1]] == p[1]:
+                        stack[j][1] = r'\left' + stack[j][1]
+                        p[1] = r'\right' + p[1]
+                        del stack[j:]
+                        break
+        return _join(p[1] for p in parts)
 
     def script(self, el, kind: str) -> str:
         kids = list(el)
@@ -337,10 +367,24 @@ class Converter:
         return ''
 
 
+MATRIX_ENV = {'(': 'pmatrix', '[': 'bmatrix', r'\{': 'Bmatrix',
+              '|': 'vmatrix', r'\|': 'Vmatrix'}
+
+
 def tidy(tex: str) -> str:
     tex = re.sub(r'[ \t]+', ' ', tex)
     tex = re.sub(r' *\n *', '\n', tex)
     tex = re.sub(r'(?<![\\\w]) (?=[,.;:])', '', tex)
+    # \left( \begin{array}{cc} ... \right)  ->  \begin{pmatrix} ... \end{pmatrix}
+    # (solo se dentro non c'e' un altro ambiente annidato, per non sbagliare coppia)
+    def _mat(m):
+        env = MATRIX_ENV.get(m.group(1))
+        return m.group(0) if not env else f'\\begin{{{env}}}{m.group(2)}\\end{{{env}}}'
+    body = r'((?:(?!\\begin\{)(?!\\end\{).)*?)'
+    tex = re.sub(r'\\left(\\\||\\\{|[(\[|])\s*\\begin\{(?:matrix|array)\}(?:\{c+\})?'
+                 + body +
+                 r'\\end\{(?:matrix|array)\}\s*\\right(?:\\\||\\\}|[)\]|])',
+                 _mat, tex, flags=re.S)
     return tex.strip()
 
 
