@@ -10,12 +10,14 @@
 <script defer src="assets/lang.js?v=5"></script>
 <script>
 window.MathJax = {
-  loader: { load: ['a11y/assistive-mml'] },
+  loader: { load: ['a11y/assistive-mml', 'a11y/explorer'],
+            paths: { fonts: 'assets/mathjax/fonts' } },
   tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
   svg: { fontCache: 'global' },
   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'],
-    enableAssistiveMml: true, enableSpeech: false, enableBraille: false,
-    menuOptions: { settings: { speech: false, braille: false } }
+    enableAssistiveMml: true, enableBraille: false,
+    sre: { locale: (function(){ try { return localStorage.getItem('site-lang') === 'it' ? 'it' : 'en'; } catch(e) { return 'en'; } })() },
+    menuOptions: { settings: { braille: false } }
   }
 };
 </script>
