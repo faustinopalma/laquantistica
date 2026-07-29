@@ -26,6 +26,11 @@ publish/lab-*.html
 publish/_lab-index.html
 # ...il lab del Cap.1 (collegato dalla CTA in 01-stern-gerlach.html):
 !publish/lab-01-stern-gerlach.html
+# ...i 4 esperimenti del Cap.2 sono PUBBLICATI (ex sim-esp1..4, CTA in 02-stern-gerlach-cascata.html):
+!publish/lab-02a-sg-angolo-relativo.html
+!publish/lab-02b-sg-tre-macchine.html
+!publish/lab-02c-sg-ricombinazione.html
+!publish/lab-02d-sg-sfasamento.html
 # ...i 3 esperimenti del Cap.3 sono PUBBLICATI (collegati dalle CTA in 03-elettroni.html):
 !publish/lab-03a-corrente-vuoto.html
 !publish/lab-03b-deflessione-em.html

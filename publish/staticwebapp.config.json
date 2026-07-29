@@ -12,7 +12,17 @@
     {
       "route": "/assets/*",
       "headers": { "cache-control": "public, max-age=604800, immutable" }
-    }
+    },
+    { "route": "/sim-esp1.html", "redirect": "/lab-02a-sg-angolo-relativo.html", "statusCode": 301 },
+    { "route": "/sim-esp1", "redirect": "/lab-02a-sg-angolo-relativo.html", "statusCode": 301 },
+    { "route": "/sim-esp2.html", "redirect": "/lab-02b-sg-tre-macchine.html", "statusCode": 301 },
+    { "route": "/sim-esp2", "redirect": "/lab-02b-sg-tre-macchine.html", "statusCode": 301 },
+    { "route": "/sim-esp3.html", "redirect": "/lab-02c-sg-ricombinazione.html", "statusCode": 301 },
+    { "route": "/sim-esp3", "redirect": "/lab-02c-sg-ricombinazione.html", "statusCode": 301 },
+    { "route": "/sim-esp4.html", "redirect": "/lab-02d-sg-sfasamento.html", "statusCode": 301 },
+    { "route": "/sim-esp4", "redirect": "/lab-02d-sg-sfasamento.html", "statusCode": 301 },
+    { "route": "/sim-stern-gerlach.html", "redirect": "/02-stern-gerlach-cascata.html", "statusCode": 301 },
+    { "route": "/sim-stern-gerlach", "redirect": "/02-stern-gerlach-cascata.html", "statusCode": 301 }
   ],
   "responseOverrides": {
     "404": { "rewrite": "/index.html", "statusCode": 404 }

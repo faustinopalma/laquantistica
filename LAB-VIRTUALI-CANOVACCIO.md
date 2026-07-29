@@ -76,16 +76,16 @@ Un atomo si comporta come una piccola calamita; in un campo **disuniforme** il f
 Introduzione a stati, sovrapposizione, ampiezze e interferenza tramite macchine SG in cascata.
 
 ### [L2.1] Esperimento 1 — due macchine, angolo relativo ✅
-- **Concetto:** conta solo l'angolo *relativo*; probabilità cos²/sin²(ϑ/2). → `sim-esp1.html`
+- **Concetto:** conta solo l'angolo *relativo*; probabilità cos²/sin²(ϑ/2). → `lab-02a-sg-angolo-relativo.html`
 
 ### [L2.2] Esperimento 2 — tre macchine ✅
-- **Concetto:** lo stato dopo la 2ª macchina è indipendente dall'orientazione della 1ª. → `sim-esp2.html`
+- **Concetto:** lo stato dopo la 2ª macchina è indipendente dall'orientazione della 1ª. → `lab-02b-sg-tre-macchine.html`
 
 ### [L2.3] Esperimento 3 — scomposizione e ricombinazione ✅
-- **Concetto:** ricombinando i rami le probabilità **non si sommano** (0,5+0,5=0). → `sim-esp3.html`
+- **Concetto:** ricombinando i rami le probabilità **non si sommano** (0,5+0,5=0). → `lab-02c-sg-ricombinazione.html`
 
 ### [L2.4] Esperimento 4 — sfasamento φ ✅
-- **Concetto:** un cammino più lungo introduce uno sfasamento; P(m₀=−k)=sin²(φ/2); curva d'interferenza. → `sim-esp4.html`
+- **Concetto:** un cammino più lungo introduce uno sfasamento; P(m₀=−k)=sin²(φ/2); curva d'interferenza. → `lab-02d-sg-sfasamento.html`
 
 ### [L2.5] Ampiezze come fasori 💡
 - **Concetto:** somma di ampiezze nel piano complesso (1 + e^{iφ}) → modulo quadro = probabilità.
