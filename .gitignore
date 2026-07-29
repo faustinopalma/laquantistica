@@ -63,3 +63,5 @@ publish/assets/p5.min.js
 
 # prova di aggiornamento MathJax (rigenerabile)
 build/mjcheck/
+
+build/katexcheck/
