@@ -214,7 +214,7 @@ figcaption {
 }
 
 /* Display equations */
-.equation, mjx-container[display="true"] {
+.equation, .katex-display {
   margin: .7rem 0 !important;
 }
 .equation {
@@ -222,6 +222,15 @@ figcaption {
   overflow-x: auto;
   overflow-y: hidden;
   padding: .15rem 0;
+}
+/* Una formula piu' larga della colonna si scorre di lato invece di essere
+   tagliata: KaTeX la tiene su una riga sola e senza questo deborderebbe.
+   Il padding lascia spazio a pedici e apici, che overflow-y taglierebbe. */
+.katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: .35rem 0;
 }
 /* Original Equation-Editor images extracted from the thesis */
 .eq-block {
@@ -567,5 +576,5 @@ table.data tbody tr:nth-child(even) { background: #faf8f2; }
   /* Wide data tables scroll horizontally instead of widening the whole page. */
   .page table { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   /* Very wide display equations scroll within their block rather than overflow. */
-  .page .equation { max-width: 100%; overflow-x: auto; }
+  .page .equation, .page .katex-display { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 }
