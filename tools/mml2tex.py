@@ -45,6 +45,8 @@ GREEK = {
 # identificatori non alfabetici ammessi in <mi>
 MI_SYMBOL = {
     '\u210f': r'\hbar', '\u2032': "'", '\u2026': r'\dots',
+    '\u221e': r'\infty', '\u2200': r'\forall', '\u2203': r'\exists',
+    '\u2202': r'\partial', '\u2207': r'\nabla',
     '\u2020': r'\dagger', '\u2217': '*',
     '\u27e8': r'\langle', '\u27e9': r'\rangle', '\u27f6': r'\longrightarrow',
     '\u27f8': r'\Longleftarrow', '\u27f9': r'\Longrightarrow',
@@ -68,6 +70,7 @@ OPERATOR = {
     '\u2260': r'\neq', '\u2261': r'\equiv', '\u2245': r'\cong',
     '\u2248': r'\approx', '\u2243': r'\simeq', '\u221d': r'\propto',
     '\u2264': r'\leq', '\u2265': r'\geq', '\u226a': r'\ll', '\u226b': r'\gg',
+    '<<': r'\ll', '>>': r'\gg',
     '\u2192': r'\to', '\u2190': r'\leftarrow', '\u2194': r'\leftrightarrow',
     '\u21d2': r'\Rightarrow', '\u21d0': r'\Leftarrow',
     '\u21d4': r'\Leftrightarrow', '\u27fa': r'\Longleftrightarrow',
@@ -81,7 +84,7 @@ OPERATOR = {
     '\u2208': r'\in', '\u2209': r'\notin', '\u2282': r'\subset',
     '\u2200': r'\forall', '\u2203': r'\exists',
     '\u2227': r'\wedge', '\u2228': r'\vee', '\u2218': r'\circ',
-    '\u22ef': r'\cdots', '\u22ee': r'\vdots', '\u22ef': r'\cdots',
+    '\u22ef': r'\cdots', '\u22ee': r'\vdots', '\u2026': r'\dots',
     '\u2223': r'\mid', '\u2225': r'\parallel',
     '\u27e8': r'\langle', '\u27e9': r'\rangle',
     '\u2061': '', '\u2062': '', '\u2063': '', '\u2064': '',  # invisibili
