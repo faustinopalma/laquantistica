@@ -38,7 +38,7 @@ PUBLISH = ROOT / 'publish'
 ASSETS = ROOT / 'tools' / 'edit_assets'
 BACKUPS = ROOT / 'backups' / 'edits'
 JOURNAL = ROOT / 'build' / 'edits' / 'journal.jsonl'
-NODE_TEX2MML = ROOT / 'tools' / 'mathgen' / 'tex2mml.js'
+NODE_TEX2KATEX = ROOT / 'tools' / 'katexgen' / 'tex2katex.js'
 PORT = 8790
 
 VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input',
@@ -139,23 +139,21 @@ def index_page(path: Path):
 
 # ---------------------------------------------------------------- LaTeX -> MathML
 
-def tex_to_mml(items: list[dict]) -> dict[int, str]:
+def tex_to_katex(items: list[dict]) -> dict[int, str]:
     if not items:
         return {}
     payload = json.dumps([{'i': i, 'tex': it['tex'], 'display': it['display']}
                           for i, it in enumerate(items)])
-    res = subprocess.run(['node', str(NODE_TEX2MML)], input=payload,
+    res = subprocess.run(['node', str(NODE_TEX2KATEX)], input=payload,
                          capture_output=True, text=True, encoding='utf-8',
                          cwd=str(ROOT))
     if res.returncode != 0:
-        raise RuntimeError(f'tex2mml: {res.stderr.strip()[:300]}')
+        raise RuntimeError(f'tex2katex: {res.stderr.strip()[:300]}')
     out = {}
     for row in json.loads(res.stdout):
         if row.get('err'):
             raise RuntimeError(f'LaTeX non valido: {row["err"]}')
-        if 'mathcolor="red"' in row['mml']:
-            raise RuntimeError('LaTeX contiene un comando sconosciuto')
-        out[row['i']] = re.sub(r'>\s+<', '><', row['mml']).strip()
+        out[row['i']] = row['html']
     return out
 
 
@@ -171,11 +169,11 @@ def expand_inline_tex(fragment: str) -> str:
     marked = INLINE_TEX.sub(grab, fragment)
     if not found:
         return fragment
-    mml = tex_to_mml(found)
+    reso = tex_to_katex(found)
     for i, f in enumerate(found):
         cls = 'eq-mml eq-mml-block' if f['display'] else 'eq-inline eq-mml'
         span = (f'<span class="{cls}" data-tex="{html.escape(f["tex"], quote=True)}">'
-                f'{mml[i]}</span>')
+                f'{reso[i]}</span>')
         marked = marked.replace(f'\x00{i}\x00', span)
     return marked
 
@@ -218,10 +216,10 @@ def apply_edits(name: str, edits: list[dict]) -> dict:
                             'line': row['line'], 'before': row['raw'],
                             'after': new, 'others': others})
         else:
-            mml = tex_to_mml([{'tex': e['tex'], 'display': row['display']}])[0]
+            reso = tex_to_katex([{'tex': e['tex'], 'display': row['display']}])[0]
             pieces.append((row['attr'][0], row['attr'][1],
                            html.escape(e['tex'], quote=True)))
-            pieces.append((row['start'], row['end'], mml))
+            pieces.append((row['start'], row['end'], reso))
             entries.append({'kind': 'tex', 'lang': None, 'index': i,
                             'line': row['line'], 'before': row['tex'],
                             'after': e['tex'], 'others': {}})
@@ -353,8 +351,8 @@ class Handler(SimpleHTTPRequestHandler):
             if u.path == '/__edit/open':
                 return self._json(open_in_vscode(body['file'], body['line']))
             if u.path == '/__edit/preview':
-                mml = tex_to_mml([{'tex': body['tex'], 'display': body.get('display', False)}])
-                return self._json({'ok': True, 'mml': mml[0]})
+                reso = tex_to_katex([{'tex': body['tex'], 'display': body.get('display', False)}])
+                return self._json({'ok': True, 'mml': reso[0]})
         except Exception as e:                       # errore = rifiuto, mai scrittura a caso
             return self._json({'error': str(e)}, 400)
         self.send_error(404)

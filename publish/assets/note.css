@@ -126,3 +126,14 @@ h1.doc-title .lead{
   .sheet::after{inset:6px;}
   h1.doc-title{font-size:1.7rem;}
 }
+
+/* Una formula piu' larga della colonna si scorre di lato invece di essere
+   tagliata: KaTeX la tiene su una riga sola e senza questo deborderebbe.
+   Il riempimento lascia spazio a pedici e apici, che overflow-y taglierebbe. */
+.katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: .35rem 0;
+  -webkit-overflow-scrolling: touch;
+}
