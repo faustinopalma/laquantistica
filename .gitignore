@@ -6,6 +6,13 @@ __pycache__/
 # LibreOffice headless profile (locks/cache, regenerable)
 build/louser/
 
+# MathJax per la generazione del MathML dal LaTeX (reinstallabile con npm install)
+tools/mathgen/node_modules/
+tools/mathgen/package-lock.json
+
+# pagine di confronto delle formule (rigenerabili con tools/math_compare.py)
+build/mathcheck/
+
 # OS
 Thumbs.db
 .DS_Store
