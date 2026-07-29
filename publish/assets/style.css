@@ -10,6 +10,8 @@
   --ink-soft: #4a4f57;
   --accent: #7b2d26;      /* rosso mattone, come i titoli della tesi */
   --accent-soft: #a8443b;
+  /* lo stesso rosso schiarito quanto basta a leggersi sulla barra scura */
+  --accent-on-dark: #e09a91;
   --line: #e0dccf;
   --link: #1a5276;
   --link-hover: #7b2d26;
@@ -107,7 +109,7 @@ main:focus { outline: none; }
 .sidebar nav a .num {
   display: inline-block;
   min-width: 1.5em;
-  color: var(--accent-soft);
+  color: var(--accent-on-dark);
   font-weight: 700;
 }
 .sidebar nav a:hover { background: rgba(255,255,255,.06); color: #fff; }
