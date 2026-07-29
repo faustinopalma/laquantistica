@@ -43,6 +43,25 @@ body {
 /* ----- Layout ----- */
 .layout { display: flex; min-height: 100vh; }
 
+/* Salta al contenuto: fuori schermo finché non riceve il fuoco da tastiera,
+   così chi naviga senza mouse non riattraversa l'indice a ogni pagina. */
+.skip-link {
+  position: fixed; top: 0; left: -9999px; z-index: 200;
+  background: var(--accent); color: #fff;
+  padding: .75rem 1.2rem; border-radius: 0 0 8px 0;
+  font-weight: 600; text-decoration: none;
+  box-shadow: 0 3px 12px rgba(0,0,0,.28);
+}
+.skip-link:focus { left: 0; }
+main:focus { outline: none; }
+
+/* nomi delle aree letti dagli assistenti vocali, invisibili sullo schermo */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; margin: -1px;
+  padding: 0; border: 0; overflow: hidden; white-space: nowrap;
+  clip: rect(0 0 0 0); clip-path: inset(50%);
+}
+
 .sidebar {
   width: 300px;
   flex: 0 0 300px;

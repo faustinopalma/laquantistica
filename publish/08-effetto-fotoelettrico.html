@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://laquantistica.com/08-effetto-fotoelettrico.html">
 <title>Effetto Fotoelettrico · The Photoelectric Effect</title>
-<link rel="stylesheet" href="assets/style.css?v=13">
+<link rel="stylesheet" href="assets/style.css?v=14">
 <link rel="stylesheet" href="assets/lang.css?v=5">
 <script defer src="assets/lang.js?v=5"></script>
 <script>
@@ -35,16 +35,17 @@ html,body{overflow-x:clip;}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#contenuto"><span class="it">Salta al contenuto</span><span class="en">Skip to content</span></a>
 <button class="menu-toggle" aria-label="Menu">☰</button>
 <div class="scrim"></div>
 <div class="layout">
-<aside class="sidebar">
+<header class="sidebar">
   <a class="brand" href="index.html"><span class="mark"><span class="bk">⟨</span>ΛQ<span class="bk">⟩</span></span> La Quantistica<small class="it">Esperimenti fondamentali di Meccanica Quantistica — Tesi di Laurea</small><small class="en">Fundamental Experiments of Quantum Mechanics — Master's Thesis</small></a>
   <div class="langsw" role="group" aria-label="Lingua / Language">
     <button class="langbtn" type="button" data-l="it" aria-pressed="false">Italiano</button>
     <button class="langbtn" type="button" data-l="en" aria-pressed="true">English</button>
   </div>
-  <nav><a href="index.html"><span class="num"></span><span class="it">Introduzione</span><span class="en">Introduction</span></a>
+  <nav aria-labelledby="nav-capitoli"><span id="nav-capitoli" class="sr-only"><span class="it">Capitoli</span><span class="en">Chapters</span></span><a href="index.html"><span class="num"></span><span class="it">Introduzione</span><span class="en">Introduction</span></a>
 <a href="01-stern-gerlach.html"><span class="num">1</span><span class="it">Esperimento di Stern-Gerlach</span><span class="en">The Stern–Gerlach Experiment</span></a>
 <a href="02-stern-gerlach-cascata.html"><span class="num">2</span><span class="it">Esperimenti di Stern-Gerlach in cascata</span><span class="en">Cascaded Stern–Gerlach Experiments</span></a>
 <a href="03-elettroni.html"><span class="num">3</span><span class="it">Esperimenti con gli Elettroni</span><span class="en">Experiments with Electrons</span></a>
@@ -59,8 +60,8 @@ html,body{overflow-x:clip;}
     <span class="en">Web edition revised from the 1999 original.</span>
     <a class="ghlink" href="https://github.com/faustinopalma/laquantistica" target="_blank" rel="noopener"><span class="it">Testo originale su GitHub ↗</span><span class="en">Original text on GitHub ↗</span></a>
   </p>
-</aside>
-<main class="content">
+</header>
+<main class="content" id="contenuto" tabindex="-1">
   <article class="page">
     <p class="eyebrow"><span class="it">Capitolo 8</span><span class="en">Chapter 8</span></p>
     <h1 class="title"><span class="it">Effetto Fotoelettrico</span><span class="en">The Photoelectric Effect</span></h1>
@@ -135,7 +136,7 @@ p &amp; =\frac{E}{c} \\
 p\lambda &amp; =h
 \end{aligned}"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtable displaystyle="true" columnalign="right left" columnspacing="0em" rowspacing="3pt"><mtr><mtd><mi>p</mi></mtd><mtd><mi></mi><mo>=</mo><mfrac><mi>E</mi><mi>c</mi></mfrac></mtd></mtr><mtr><mtd></mtd><mtd><mi></mi><mo>=</mo><mfrac><mrow><mi>h</mi><mi>&#x3BD;</mi></mrow><mi>c</mi></mfrac></mtd></mtr><mtr><mtd></mtd><mtd><mi></mi><mo>=</mo><mfrac><mi>h</mi><mi>&#x3BB;</mi></mfrac><mo stretchy="false">&#x21D2;</mo></mtd></mtr><mtr><mtd><mi>p</mi><mi>&#x3BB;</mi></mtd><mtd><mi></mi><mo>=</mo><mi>h</mi></mtd></mtr></mtable></math></span></div>
 <p><span class="it">Dunque abbiamo ritrovato la relazione di De Broglie anche per i fotoni.</span><span class="en">Thus we have recovered the De Broglie relation for photons as well.</span></p>
-    <nav class="chapter-nav"><a class="prev" href="07-franck-hertz.html"><span class="it">Precedente</span><span class="en">Previous</span><span class="ttl it">Esperimento di Franck-Hertz</span><span class="ttl en">The Franck–Hertz Experiment</span></a><a class="next" href="09-spettri-atomici.html"><span class="it">Successivo</span><span class="en">Next</span><span class="ttl it">Spettri atomici di emissione</span><span class="ttl en">Atomic Emission Spectra</span></a></nav>
+    <nav class="chapter-nav" aria-labelledby="nav-pagina"><span id="nav-pagina" class="sr-only"><span class="it">Capitolo precedente e successivo</span><span class="en">Previous and next chapter</span></span><a class="prev" href="07-franck-hertz.html"><span class="it">Precedente</span><span class="en">Previous</span><span class="ttl it">Esperimento di Franck-Hertz</span><span class="ttl en">The Franck–Hertz Experiment</span></a><a class="next" href="09-spettri-atomici.html"><span class="it">Successivo</span><span class="en">Next</span><span class="ttl it">Spettri atomici di emissione</span><span class="ttl en">Atomic Emission Spectra</span></a></nav>
   </article>
 </main>
 </div>
