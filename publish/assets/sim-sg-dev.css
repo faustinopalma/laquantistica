@@ -1,0 +1,41 @@
+/* Ritocchi in prova per il laboratorio del capitolo 1 su schermi piccoli.
+ *
+ * Vive solo nella copia di sviluppo: la pagina pubblicata carica soltanto
+ * sim-sg.css e resta com'e' finche' questi ritocchi non sono giudicati buoni.
+ *
+ * Il problema da cui si parte: su un telefono in orizzontale la finestra e' alta
+ * 390 punti, ma l'intestazione ne prende 106 e il disegno dell'apparato ne
+ * chiede 496. Tutto si comprime finche' le quote non si leggono piu'.
+ */
+
+/* --- schermi bassi: l'intestazione si fa da parte --- */
+@media (max-height: 500px) {
+  .con-head {
+    padding-top: .3rem;
+    padding-bottom: .3rem;
+    gap: .4rem;
+  }
+  /* il titolo lungo diventa una riga sola, tagliata invece che avvolta */
+  .con-head h1,
+  .con-head .t1 {
+    font-size: .82rem;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  /* il ritorno al capitolo e l'etichetta del laboratorio si stringono */
+  .con-head .back,
+  .con-head .badge {
+    padding: .25rem .6rem;
+    font-size: .72rem;
+  }
+  /* il selettore di lingua sta sulla stessa riga del titolo */
+  .langsw {
+    position: absolute;
+    top: .3rem;
+    right: .6rem;
+    transform: scale(.85);
+    transform-origin: right top;
+  }
+}
