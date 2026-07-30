@@ -131,7 +131,7 @@ table.ro tr.sec td{padding:10px 0 3px;color:var(--accent);font-size:10.5px;lette
 table.ro tr.sec:first-child td{padding-top:0}
 td.w{color:var(--warn)!important} td.b{color:var(--bad)!important} td.g{color:var(--good)!important}
 
-.presets{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.presets{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:6px}
 .presets button{
   background:#2a2f38;border:1px solid #3d444f;color:#c7ccd4;border-radius:999px;
   padding:.4rem .6rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.03em;
@@ -216,6 +216,7 @@ td.w{color:var(--warn)!important} td.b{color:var(--bad)!important} td.g{color:va
         <div class="presets">
           <button data-preset="pgeo"><span class="it">Espansioni 600 mm<br>traferro 25 mm</span><span class="en">Poles 600 mm<br>gap 25 mm</span></button>
           <button data-preset="p1922"><span class="it">Configurazione storica<br>Gerlach 1922</span><span class="en">Historical configuration<br>Gerlach 1922</span></button>
+<button data-preset="popt"><span class="it">Sdoppiamento leggibile<br>1,7 mm · 6 criteri su 6</span><span class="en">Readable splitting<br>1.7 mm · 6 criteria out of 6</span></button>
         </div>
         <p class="hint" style="margin-bottom:0">
           <span class="it">Parti da una configurazione, poi muovi un parametro alla volta e guarda cosa cede.</span>
@@ -414,7 +415,10 @@ const S={
 };
 const PRESETS={
   pgeo :{P:-5.2,T:1150,D:0.8,W:0.2,DS:300,G:25,L:600,Dr:0,Te:0.6,Hc:100,Wc:50},
-  p1922:{P:-5.0,T:1050,D:0.5,W:0.05,DS:60,G:1.5,L:35,Dr:0,Te:0.9,Hc:60,Wc:40}
+  p1922:{P:-5.0,T:1050,D:0.5,W:0.05,DS:60,G:1.5,L:35,Dr:0,Te:0.9,Hc:60,Wc:40},
+// trovata con l'ottimizzatore partendo dalla geometria da 600 mm: e' il punto in
+// cui le due tracce si leggono meglio senza violare nessuna delle cinque condizioni
+popt :{P:-5.2,T:1110,D:0.8,W:0.22,DS:300,G:23,L:600,Dr:0,Te:0.7,Hc:100,Wc:60}
 };
 document.querySelectorAll('[data-preset]').forEach(b=>{
   b.onclick=()=>{const p=PRESETS[b.dataset.preset];for(const k in p)S[k].value=p[k];optHist=[];document.getElementById('optlog').innerHTML='';render();};
