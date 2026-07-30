@@ -5,7 +5,13 @@
  *
  * Il problema da cui si parte: su un telefono in orizzontale la finestra e' alta
  * 390 punti, ma l'intestazione ne prende 106 e il disegno dell'apparato ne
- * chiede 496. Tutto si comprime finche' le quote non si leggono piu'.
+ * chiede 496. Tutto si comprime finche' le quote non si leggono piu': lo schema
+ * si riduce a 391x78 e il vetrino a 61x49, cioe' a nulla.
+ *
+ * La cura non e' rimpicciolire meglio, e' mostrare una cosa sola. Su schermo
+ * piccolo resta il vetrino, che e' il risultato dell'esperimento; lo schema
+ * dell'apparato si apre a schermo intero con un pulsante, quando serve capire
+ * la disposizione.
  */
 
 /* --- schermi bassi: l'intestazione si fa da parte --- */
@@ -39,3 +45,58 @@
     transform-origin: right top;
   }
 }
+
+/* il pulsante che richiama lo schema: dichiarato PRIMA della media query che lo
+   accende, altrimenti a parita' di specificita' vincerebbe l'ultimo scritto */
+#apri-schema {
+  display: none;
+  align-items: center;
+  gap: .4em;
+  margin: .3rem 0 .5rem;
+  padding: .4em .9em;
+  border: 1px solid var(--accent, #7b2d26);
+  border-radius: 7px;
+  background: transparent;
+  color: var(--accent, #7b2d26);
+  font: 600 .78rem/1 system-ui, sans-serif;
+  cursor: pointer;
+}
+#apri-schema:hover { background: var(--accent, #7b2d26); color: #fff; }
+
+/* --- schermo piccolo: una cosa sola alla volta --- */
+@media (max-height: 560px), (max-width: 760px) {
+  /* lo schema esce di scena e lascia tutto lo spazio al vetrino */
+  .panelbox:has(#cApp) { display: none; }
+  #apri-schema { display: inline-flex; }
+  /* il vetrino prende l'altezza che gli serve per essere leggibile */
+  .panelbox:has(#cPlate) .cwrap { min-height: 40vh; }
+}
+
+/* --- lo schema a schermo intero --- */
+body.schema-aperto .panelbox:has(#cApp) {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  margin: 0;
+  padding: 3.2rem .6rem .6rem;
+  background: var(--paper, #fff);
+  overflow: auto;
+}
+body.schema-aperto .panelbox:has(#cApp) .cwrap { min-height: 70vh; }
+
+#chiudi-schema {
+  display: none;
+  position: fixed;
+  top: .5rem;
+  right: .6rem;
+  z-index: 61;
+  padding: .45em 1em;
+  border: 1px solid var(--accent, #7b2d26);
+  border-radius: 7px;
+  background: var(--accent, #7b2d26);
+  color: #fff;
+  font: 600 .8rem/1 system-ui, sans-serif;
+  cursor: pointer;
+}
+body.schema-aperto #chiudi-schema { display: block; }
