@@ -256,6 +256,12 @@ figcaption {
   margin: 1.2rem auto;
   max-width: 100%;
 }
+/* un disegno su riga propria si centra come il testo che lo circonda: il
+   margine automatico da solo viene sopraffatto da regole piu' specifiche */
+.equation > .eq-figure {
+  display: inline-block;
+  margin: .4rem 0;
+}
 
 /* Figure gallery */
 .gallery {
