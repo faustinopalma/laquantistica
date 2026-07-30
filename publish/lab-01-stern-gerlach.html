@@ -638,7 +638,7 @@ function fit(cv){
   const r=cv.parentElement.getBoundingClientRect(), d=window.devicePixelRatio||1;
   cv.width=Math.max(1,Math.round(r.width*d)); cv.height=Math.max(1,Math.round(r.height*d));
   const c=cv.getContext('2d'); c.setTransform(d,0,0,d,0,0);
-  return {c,W:r.width,H:r.height};
+  return {c,W:r.width,H:r.height,d};
 }
 const fmt=(x,n=2)=>x.toFixed(n);
 function sci(x){
@@ -721,7 +721,7 @@ function drawApparatus(r){
 }
 
 function drawPlate(r){
-  const {c,W,H}=fit(document.getElementById('cPlate'));
+  const {c,W,H,d}=fit(document.getElementById('cPlate'));
   c.clearRect(0,0,W,H);
   const padL=52,padR=110,padT=14,padB=22;
   const pw=W-padL-padR, ph=H-padT-padB;
@@ -741,7 +741,10 @@ function drawPlate(r){
 
   // istogramma 2D
   const NB=170, bins=new Float64Array(NB);
-  const img=c.getImageData(padL,padT,Math.max(1,Math.round(pw)),Math.max(1,Math.round(ph)));
+  // getImageData e putImageData ignorano la trasformazione e lavorano in pixel
+    // fisici: su uno schermo ad alta densita' vanno moltiplicate per d, altrimenti
+    // la nuvola di punti finisce in un angolo del vetrino disegnato
+    const img=c.getImageData(padL*d,padT*d,Math.max(1,Math.round(pw*d)),Math.max(1,Math.round(ph*d)));
   const acc=new Float64Array(img.width*img.height);
   const binZ=2*zHalf/NB;
   for(let i=0;i<r.nOK;i++){
@@ -763,7 +766,7 @@ function drawPlate(r){
       img.data[o+1]=Math.round(img.data[o+1]*(1-dk)+30*dk);
       img.data[o+2]=Math.round(img.data[o+2]*(1-dk)+26*dk);
     }
-    c.putImageData(img,padL,padT);
+    c.putImageData(img,padL*d,padT*d);
   }
 
   // profilo di densità a destra

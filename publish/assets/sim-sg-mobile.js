@@ -30,7 +30,16 @@
   vetrino.closest('.panelbox').insertBefore(apri, vetrino.closest('.panelbox').firstChild);
   document.body.appendChild(chiudi);
 
+  // Da dove viene lo schema, per rimettercelo alla chiusura.
+  var casa = box.parentElement, posto = box.nextSibling;
+
   function mostra(aperto) {
+    // Lo schema si sposta davvero in fondo alla pagina invece di limitarsi a
+    // salire di livello: su Safari di iPhone un elemento a posizione fissa puo'
+    // restare comunque sotto ai vicini, e nessun z-index lo salva.
+    if (aperto) document.body.appendChild(box);
+    else casa.insertBefore(box, posto);
+
     document.body.classList.toggle('schema-aperto', aperto);
     (aperto ? chiudi : apri).focus();
     // il laboratorio ridisegna gia' su questo evento, e ogni disegno rilegge
