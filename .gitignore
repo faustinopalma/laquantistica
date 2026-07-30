@@ -65,3 +65,6 @@ publish/assets/p5.min.js
 build/mjcheck/
 
 build/katexcheck/
+
+# lettere e richieste di permesso: bozze private, non fanno parte del sito
+corrispondenza/
