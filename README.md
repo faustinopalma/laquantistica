@@ -110,6 +110,34 @@ Le nove «schede»:
 | `img/` | Figure e immagini |
 | `scripts/` | Strumenti di generazione del sito |
 
+## Correggere una pagina
+
+Per rivedere il sito si apre un capitolo in modalità modifica e lo si corregge
+guardandolo, senza passare dal codice:
+
+```powershell
+.\modifica.ps1              # elenca i capitoli e chiede quale
+.\modifica.ps1 cascata      # apre la pagina il cui nome contiene "cascata"
+```
+
+Si apre il browser sulla pagina vera. Lì dentro:
+
+| gesto | effetto |
+|---|---|
+| doppio clic su una frase | la si corregge sul posto |
+| doppio clic su una formula | si modifica il LaTeX, con anteprima |
+| frecce **↑ ↓** a sinistra di un blocco | lo si sposta sopra o sotto |
+| **Alt+clic** | apre quel punto esatto in VS Code |
+| **Salva** | scrive le correzioni di testo e formule |
+
+Le frecce compaiono passando il mouse sopra un paragrafo, un disegno o una
+formula, e agiscono **subito**: riordinare si giudica guardando. Le correzioni
+di testo invece si accumulano finché non si preme Salva.
+
+Ogni scrittura lascia una copia di sicurezza in `backups/edits/` e una riga in
+`build/edits/journal.jsonl`, così si può sempre tornare indietro e rileggere
+cosa è stato cambiato.
+
 ## Nota sull'edizione web
 
 L'edizione web è stata **lievemente rivista** rispetto alla tesi originale del
