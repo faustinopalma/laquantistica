@@ -33,6 +33,22 @@
   // Da dove viene lo schema, per rimettercelo alla chiusura.
   var casa = box.parentElement, posto = box.nextSibling;
 
+  // La tabella dell'esito, su schermo piccolo, era un riquadro basso da scorrere
+  // dentro un altro riquadro da scorrere. Va in coda alla colonna dei comandi:
+  // non si vede subito, ma si raggiunge scorrendo fino in fondo come tutto il resto.
+  var esito = document.querySelector('.verdict');
+  var comandi = document.querySelector('.ctrlcol');
+  var casaEsito = esito && esito.parentElement, postoEsito = esito && esito.nextSibling;
+  var stretto = window.matchMedia('(max-height: 560px), (max-width: 760px)');
+
+  function sistemaEsito() {
+    if (!esito || !comandi) return;
+    if (stretto.matches) { comandi.appendChild(esito); esito.classList.add('in-coda'); }
+    else { casaEsito.insertBefore(esito, postoEsito); esito.classList.remove('in-coda'); }
+  }
+  sistemaEsito();
+  stretto.addEventListener('change', sistemaEsito);
+
   function mostra(aperto) {
     // Lo schema si sposta davvero in fondo alla pagina invece di limitarsi a
     // salire di livello: su Safari di iPhone un elemento a posizione fissa puo'

@@ -8,7 +8,7 @@
 <link rel="canonical" href="https://laquantistica.com/lab-01-stern-gerlach.html">
 <link rel="stylesheet" href="assets/lang.css?v=7">
 <link rel="stylesheet" href="assets/sim-sg.css?v=10">
-<link rel="stylesheet" href="assets/sim-sg-mobile.css?v=1">
+<link rel="stylesheet" href="assets/sim-sg-mobile.css?v=2">
 <script defer src="assets/lang.js?v=5"></script>
 <script defer src="assets/sim-sg-core.js?v=2"></script>
 <style>
@@ -748,11 +748,14 @@ function drawPlate(r){
   const acc=new Float64Array(img.width*img.height);
   const binZ=2*zHalf/NB;
   for(let i=0;i<r.nOK;i++){
-    const px=Math.round(X(r.xs[i])-padL), py=Math.round(Y(r.zs[i])-padT);
+    // la mappa e' in pixel fisici, X e Y danno punti: senza *d la nuvola si
+    // stringe in un angolo su ogni schermo ad alta densita'
+    const px=Math.round((X(r.xs[i])-padL)*d), py=Math.round((Y(r.zs[i])-padT)*d);
     if(px<0||py<0||px>=img.width||py>=img.height)continue;
-    for(let dx=-2;dx<=2;dx++)for(let dy=-2;dy<=2;dy++){
+    const R=Math.max(2,Math.round(2*d));   // anche la macchia di ogni atomo cresce col numero di pixel
+    for(let dx=-R;dx<=R;dx++)for(let dy=-R;dy<=R;dy++){
       const qx=px+dx,qy=py+dy; if(qx<0||qy<0||qx>=img.width||qy>=img.height)continue;
-      acc[qy*img.width+qx]+=Math.exp(-(dx*dx+dy*dy)/4);
+      acc[qy*img.width+qx]+=Math.exp(-(dx*dx+dy*dy)/(4*d*d));
     }
     const b=Math.floor((r.zs[i]+zHalf)/binZ); if(b>=0&&b<NB)bins[b]++;
   }
@@ -1100,6 +1103,6 @@ function render(){
 window.addEventListener('resize',()=>{if(last){drawApparatus(last);drawPlate(last);}});
 render();
 </script>
-<script defer src="assets/sim-sg-mobile.js?v=1"></script>
+<script defer src="assets/sim-sg-mobile.js?v=2"></script>
 </body>
 </html>

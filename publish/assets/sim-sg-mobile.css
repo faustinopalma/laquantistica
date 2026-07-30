@@ -108,3 +108,21 @@ body.schema-aperto #chiudi-schema { display: block; }
   .split .col:has(#cPlate) { flex: 4 1 0%; }
   .split .col:not(:has(#cPlate)) { flex: 1 1 0%; min-width: 0; }
 }
+
+/* Quando lo schema e' aperto nulla deve scorrere sotto di lui: su iPhone la
+   barra di scorrimento e' un velo che il sistema disegna sopra ogni cosa, e
+   comparirebbe attraverso lo schema. Se non c'e' nulla da scorrere, non appare. */
+body.schema-aperto { overflow: hidden; }
+body.schema-aperto .ctrlcol,
+body.schema-aperto .verdict,
+body.schema-aperto .stagecol { overflow: hidden !important; }
+body.schema-aperto .panelbox:has(#cApp) { z-index: 999; }
+body.schema-aperto #chiudi-schema { z-index: 1000; }
+
+/* L'esito, quando scende in coda ai comandi, smette di essere un riquadro con
+   lo scorrimento suo e si distende: lo si legge scorrendo la colonna. */
+.verdict.in-coda {
+  max-height: none !important;
+  overflow: visible !important;
+  margin-top: .6rem;
+}
