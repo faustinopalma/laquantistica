@@ -58,6 +58,10 @@ INJECT = (
 # LaTeX scritto a mano dentro il testo: \( ... \) in linea, \[ ... \] a blocco
 INLINE_TEX = re.compile(r'\\\((.+?)\\\)|\\\[(.+?)\\\]', re.S)
 
+# gli elementi che si possono spostare su e giu': figli diretti di <main>
+BLOCCHI = {'p', 'figure', 'div', 'ul', 'ol', 'table', 'blockquote', 'pre',
+           'h2', 'h3', 'h4', 'hr'}
+
 
 # ---------------------------------------------------------------- indicizzatore
 
@@ -71,8 +75,10 @@ class Indexer(HTMLParser):
         self.starts = [0] + [m.end() for m in re.finditer('\n', src)]
         self.stack: list[dict] = []
         self.depth_main = 0
+        self.dentro_main = -1          # quanto era profonda la pila entrando in <main>
         self.lang: dict[str, list[dict]] = {c: [] for c in LANGS}
         self.tex: list[dict] = []
+        self.blocchi: list[dict] = []
         self.feed(src)
         self.close()
 
@@ -88,7 +94,16 @@ class Indexer(HTMLParser):
         refs = []
         if tag == 'main':
             self.depth_main += 1
+            self.dentro_main = len(self.stack) + 1
+        elif self.depth_main and tag == 'article':
+            # i blocchi stanno dentro l'articolo, non appesi a <main>;
+            # +1 perche' il contenitore entra nella pila solo dopo questo punto
+            self.dentro_main = len(self.stack) + 1
         if self.depth_main:
+            if tag in BLOCCHI and len(self.stack) == self.dentro_main:
+                refs.append(('blocco', None, len(self.blocchi)))
+                self.blocchi.append({'start': start, 'tag': tag,
+                                     'line': self.getpos()[0]})
             classes = (d.get('class') or '').split()
             for code in LANGS:
                 if code in classes:
@@ -117,6 +132,10 @@ class Indexer(HTMLParser):
             frame = self.stack.pop()
             if frame['tag'] == tag:
                 for kind, code, i in frame['refs']:
+                    if kind == 'blocco':
+                        # per un blocco serve la fine del tag di chiusura, non del contenuto
+                        self.blocchi[i]['end'] = end + len(tag) + 3
+                        continue
                     rows = self.lang[code] if kind == 'lang' else self.tex
                     rows[i]['end'] = end
                 break
@@ -135,6 +154,42 @@ def index_page(path: Path):
     for row in tex:
         row['tex'] = html.unescape(src[row['attr'][0]:row['attr'][1]])
     return src, lang, tex
+
+
+def sposta_blocco(name: str, indice: int, verso: int) -> dict:
+    """Scambia un blocco di primo livello con quello prima o dopo.
+
+    Uno scambio alla volta: e' l'operazione piu' facile da capire guardando la
+    pagina, e la piu' facile da annullare se il risultato non convince.
+    """
+    path = safe_page(name)
+    src = path.read_text(encoding='utf-8')
+    blocchi = [b for b in Indexer(src).blocchi if 'end' in b]
+    altro = indice + verso
+    if not (0 <= indice < len(blocchi) and 0 <= altro < len(blocchi)):
+        raise ValueError('il blocco e\' gia\' al suo estremo')
+
+    a, b = sorted((blocchi[indice], blocchi[altro]), key=lambda x: x['start'])
+    testa, coda = src[a['start']:a['end']], src[b['start']:b['end']]
+    mezzo = src[a['end']:b['start']]          # gli a capo fra i due, che restano
+    out = src[:a['start']] + coda + mezzo + testa + src[b['end']:]
+
+    BACKUPS.mkdir(parents=True, exist_ok=True)
+    stamp = datetime.now().strftime('%Y%m%d-%H%M%S')
+    shutil.copy2(path, BACKUPS / f'{path.stem}.{stamp}.html')
+    path.write_text(out, encoding='utf-8')
+
+    JOURNAL.parent.mkdir(parents=True, exist_ok=True)
+    with JOURNAL.open('a', encoding='utf-8') as f:
+        f.write(json.dumps({
+            't': datetime.now().isoformat(timespec='seconds'), 'file': name,
+            'kind': 'sposta', 'index': indice, 'verso': verso,
+            'line': blocchi[indice]['line'], 'reviewed': False,
+            'before': testa[:120], 'after': coda[:120], 'others': {},
+        }, ensure_ascii=False) + '\n')
+
+    return {'ok': True, 'blocchi': len(blocchi),
+            'backup': str((BACKUPS / f'{path.stem}.{stamp}.html').relative_to(ROOT))}
 
 
 # ---------------------------------------------------------------- LaTeX -> MathML
@@ -353,6 +408,9 @@ class Handler(SimpleHTTPRequestHandler):
             if u.path == '/__edit/preview':
                 reso = tex_to_katex([{'tex': body['tex'], 'display': body.get('display', False)}])
                 return self._json({'ok': True, 'mml': reso[0]})
+            if u.path == '/__edit/move':
+                return self._json(sposta_blocco(body['file'], int(body['index']),
+                                                int(body['verso'])))
         except Exception as e:                       # errore = rifiuto, mai scrittura a caso
             return self._json({'error': str(e)}, 400)
         self.send_error(404)

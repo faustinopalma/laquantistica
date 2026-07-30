@@ -271,13 +271,53 @@
     });
   }
 
+  /* ----------------------------------------------------- spostare i blocchi */
+
+  // Lo spostamento non passa dalla coda delle modifiche: scrive subito, uno
+  // scambio alla volta. Riordinare si giudica guardando, e chi guarda vuole
+  // vedere il risultato mentre decide, non dopo aver premuto Salva.
+  function setupMove() {
+    var main = document.querySelector('main article') || document.querySelector('main');
+    if (!main) return;
+    var blocchi = Array.prototype.filter.call(main.children, function (el) {
+      return /^(P|FIGURE|DIV|UL|OL|TABLE|BLOCKQUOTE|PRE|H2|H3|H4|HR)$/.test(el.tagName);
+    });
+    blocchi.forEach(function (el, i) {
+      el.classList.add('lq-blocco');
+      var cmd = document.createElement('span');
+      cmd.className = 'lq-move';
+      cmd.innerHTML =
+        '<button title="sposta sopra" data-verso="-1">↑</button>' +
+        '<button title="sposta sotto" data-verso="1">↓</button>';
+      if (i === 0) cmd.querySelector('[data-verso="-1"]').disabled = true;
+      if (i === blocchi.length - 1) cmd.querySelector('[data-verso="1"]').disabled = true;
+      cmd.addEventListener('click', function (ev) {
+        var b = ev.target.closest('button');
+        if (!b || b.disabled) return;
+        ev.preventDefault();
+        if (count()) { note('salva prima le modifiche al testo', true); return; }
+        muovi(i, parseInt(b.getAttribute('data-verso'), 10));
+      });
+      el.appendChild(cmd);
+    });
+  }
+
+  function muovi(indice, verso) {
+    var y = window.scrollY;
+    post('move', { file: FILE, index: indice, verso: verso }).then(function (r) {
+      if (r.error) { note(r.error, true); return; }
+      sessionStorage.setItem('lq-scroll', String(y));
+      location.reload();
+    });
+  }
+
   function buildBar() {
     bar = document.createElement('div');
     bar.className = 'lq-bar';
     bar.innerHTML =
       '<span class="lq-tag">modifica locale</span>' +
       '<span class="lq-status"></span>' +
-      '<span class="lq-help">doppio clic per modificare · Alt+clic apre VS Code</span>' +
+      '<span class="lq-help">doppio clic per modificare · ↑↓ per spostare · Alt+clic apre VS Code</span>' +
       '<button class="lq-save">Salva</button>';
     document.body.appendChild(bar);
     status = bar.querySelector('.lq-status');
@@ -286,6 +326,8 @@
     window.addEventListener('beforeunload', function (ev) {
       if (count()) { ev.preventDefault(); ev.returnValue = ''; }
     });
+    var y = sessionStorage.getItem('lq-scroll');
+    if (y !== null) { sessionStorage.removeItem('lq-scroll'); window.scrollTo(0, +y); }
   }
 
   /* -------------------------------------------------------------------- avvio */
@@ -299,6 +341,7 @@
       buildBar();
       setupText();
       setupEq();
+      setupMove();
       setupAltClick();
       refresh();
       document.body.classList.add('lq-edit-on');

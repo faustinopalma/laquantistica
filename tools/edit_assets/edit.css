@@ -78,3 +78,33 @@ body.lq-edit-on { padding-bottom: 52px; }
   border-radius: 3px; padding: .35rem 1rem; cursor: pointer; font: inherit; font-weight: 700;
 }
 .lq-dlg-foot button.go:hover { background: #1d7a52; border-color: #1d7a52; color: #fff; }
+
+/* ------------------------------------------------ spostare i blocchi su e giu' */
+/* I comandi restano invisibili finche' non si passa sopra al blocco: la pagina
+   va letta come la vedra' il lettore, non come una scacchiera di pulsanti. */
+.lq-edit-on .lq-blocco { position: relative; }
+.lq-edit-on .lq-move {
+  position: absolute;
+  top: 0;
+  left: -2.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity .12s;
+}
+.lq-edit-on .lq-blocco:hover .lq-move,
+.lq-edit-on .lq-move:focus-within { opacity: 1; }
+.lq-edit-on .lq-move button {
+  width: 1.5rem;
+  height: 1.2rem;
+  padding: 0;
+  border: 1px solid #cfc9bb;
+  border-radius: 4px;
+  background: #fff;
+  color: #6b6350;
+  font: 11px/1 system-ui, sans-serif;
+  cursor: pointer;
+}
+.lq-edit-on .lq-move button:hover:not(:disabled) { background: #7b2d26; border-color: #7b2d26; color: #fff; }
+.lq-edit-on .lq-move button:disabled { opacity: .3; cursor: default; }
