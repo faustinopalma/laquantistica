@@ -55,10 +55,10 @@ PASSI = [
      'image25.svg', 'width:3.490in'),
     ('Sfasiamo il secondo numero di ϕ ottenendo 1 e -<em>e<sup>iϕ</sup></em>.',
      'We phase-shift the second number by ϕ, obtaining 1 and -<em>e<sup>iϕ</sup></em>.',
-     'image26.svg', 'width:2.187in'),
+     'image27.svg', 'width:2.687in'),
     ('Sommiamo e prendiamone il modulo quadrato. Otteniamo il risultato:',
      'We add and take the squared modulus. We obtain the result:',
-     'image27.svg', 'width:2.687in'),
+     'image26.svg', 'width:2.187in'),
     ('__FORMULA2__', '__FORMULA2__', None, None),
 ]
 
