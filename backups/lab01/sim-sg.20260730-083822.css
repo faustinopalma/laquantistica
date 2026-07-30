@@ -1,0 +1,169 @@
+/* Simulatore Stern-Gerlach — tema "laboratorio di elettronica"
+   (indipendente dallo stile accademico del sito: font e colori propri). */
+
+/* tema: font tecnici + fondo da banco strumenti */
+body{
+  --n-mono:"Cascadia Code","JetBrains Mono","SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --n-sans:"Cascadia Code","JetBrains Mono",ui-monospace,Consolas,monospace;
+  --n-serif:"Cascadia Code","JetBrains Mono",ui-monospace,Consolas,monospace;
+  background:#080b0a;color:#c3d1c8;
+  background-image:linear-gradient(rgba(60,180,120,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(60,180,120,.05) 1px,transparent 1px);
+  background-size:30px 30px;
+  margin:0; /* il margine di default sommato a height:100% faceva sbordare la console */
+}
+
+/* apparato = schermo oscilloscopio (graticola verde su fondo scuro) */
+.sim-stage{width:100%;background:#07120e;border:1px solid #04120c;border-radius:3px;overflow:hidden;
+  box-shadow:inset 0 0 0 1px #16302a, inset 0 0 40px rgba(0,0,0,.6);
+  background-image:linear-gradient(rgba(70,200,140,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(70,200,140,.07) 1px,transparent 1px);
+  background-size:26px 26px;}
+.sim-stage svg{display:block;width:100%;height:auto;}
+
+/* preset */
+.sim-presets{display:flex;flex-wrap:wrap;gap:.4rem;}
+.sim-preset{font-family:var(--n-mono);font-size:.72rem;letter-spacing:.03em;background:#2a2f38;border:1px solid #3d444f;border-radius:999px;padding:.32rem .7rem;color:#c7ccd4;cursor:pointer;transition:.15s;}
+.sim-preset:hover{background:#e2a24d;color:#1e232b;border-color:#e2a24d;}
+
+/* comandi */
+.sim-controls{display:grid;gap:.9rem;}
+.ctl{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:.7rem;}
+.ctl label{font-family:var(--n-mono);font-size:.78rem;color:#aeb4bd;white-space:nowrap;}
+.ctl input[type=range]{width:100%;accent-color:#e2a24d;}
+.ctl .val{font-family:var(--n-mono);font-size:.82rem;font-weight:700;color:#e2a24d;min-width:3.4em;text-align:right;}
+.seg{display:inline-flex;border:1px solid #3d444f;border-radius:999px;overflow:hidden;background:#12151a;}
+.seg button{border:0;background:transparent;cursor:pointer;font-family:var(--n-mono);font-size:.76rem;font-weight:700;padding:.3rem .7rem;color:#aeb4bd;transition:.15s;}
+.seg button.on{background:#b06a12;color:#fff;}
+.ctl-row{display:flex;flex-wrap:wrap;gap:.6rem 1.1rem;align-items:center;}
+.ctl-row > span.lbl{font-family:var(--n-mono);font-size:.78rem;color:#aeb4bd;}
+
+/* matematica */
+.sim-math{background:#12151a;border:1px solid #2a303a;color:#e9e6df;border-radius:3px;padding:.7rem .8rem;font-family:var(--n-mono);font-size:.75rem;line-height:1.65;overflow-x:auto;}
+.sim-math .mrow{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem .6rem;margin:.15rem 0;}
+.sim-math .lab{color:#8fb7d6;}
+.sim-math b{color:#fff;}
+.sim-math .num{color:#e0a04b;font-weight:700;}
+.sim-math .ket{color:#e9e6df;}
+.vec{display:inline-grid;grid-auto-rows:1fr;border-left:2px solid #6b6f77;border-right:2px solid #6b6f77;padding:.05rem .5rem;margin:0 .1rem;text-align:center;vertical-align:middle;}
+.vec span{padding:.02rem .2rem;}
+
+/* tessere di probabilità */
+.pbars{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;}
+.pbar{background:#12151a;border:1px solid #2d333d;border-radius:3px;padding:.6rem .7rem;}
+.pbar .pk{font-family:var(--n-mono);font-size:.72rem;color:#8b929c;text-transform:uppercase;letter-spacing:.05em;}
+.pbar .pv{font-family:var(--n-mono);font-size:1.35rem;font-weight:700;line-height:1.1;color:#ffb000;text-shadow:0 0 10px rgba(255,176,0,.3);}
+.pbar.minus .pv{color:#35c8ff;text-shadow:0 0 10px rgba(53,200,255,.28);}
+.pbar .track{height:8px;background:#05070a;border-radius:99px;margin-top:.4rem;overflow:hidden;}
+.pbar .fill{height:100%;width:0;background:#ffb000;transition:width .18s ease;}
+.pbar.minus .fill{background:#35c8ff;}
+
+/* plotter (registratore) */
+.plotter{border:1px solid #0c0e13;border-radius:3px;background:#161a20;overflow:hidden;}
+.plot-head{display:flex;align-items:center;gap:.7rem;padding:.45rem .7rem;background:#0f1216;border-bottom:1px solid #2a303a;font-family:var(--n-mono);font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:#8b929c;}
+.plot-title{color:#e2a24d;font-weight:700;}
+.plot-sub{color:#9aa0aa;}
+.leds{display:flex;gap:.7rem;margin-left:auto;}
+.led{color:#3a434e;font-weight:700;transition:.18s;font-size:.7rem;}
+.led.rec.on{color:#ff5b52;text-shadow:0 0 7px rgba(255,91,82,.85);}
+.led.fit.on{color:#57d98a;text-shadow:0 0 7px rgba(87,217,138,.75);}
+.plot-clr{font-family:var(--n-mono);font-size:.68rem;font-weight:700;letter-spacing:.06em;background:#2a2f38;border:1px solid #3d444f;color:#c7ccd4;border-radius:3px;padding:.2rem .55rem;cursor:pointer;transition:.15s;}
+.plot-clr:hover{background:#b06a12;color:#fff;border-color:#b06a12;}
+.plot-screen{background:#08120d;}
+.plot-screen svg{display:block;width:100%;height:auto;}
+.plot-status{padding:.4rem .7rem;background:#0f1216;border-top:1px solid #2a303a;font-family:var(--n-mono);font-size:.72rem;color:#8b929c;letter-spacing:.03em;}
+
+/* console: un esperimento per schermata */
+.console{max-width:1560px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;padding:0 clamp(.6rem,2vw,1.4rem) .4rem;}
+.con-head{flex:none;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;padding:.5rem 0 .45rem;}
+.con-brand{display:flex;align-items:center;gap:.6rem;}
+.con-title{font-family:var(--n-mono);font-weight:700;font-size:1rem;letter-spacing:.02em;color:#dfeee6;}
+.con-actions{display:flex;align-items:center;gap:.8rem;}
+.panel{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 372px;gap:.9rem;background:#1e232b;border:1px solid #0c0e13;border-radius:4px;box-shadow:inset 0 0 0 1px #2a303a,0 3px 12px rgba(0,0,0,.35);padding:.9rem;}
+.stagecol{display:flex;flex-direction:column;gap:.65rem;min-height:0;}
+.stagecol .sim-stage{flex:1 1 60%;min-height:0;margin:0;}
+.stagecol .sim-stage svg{width:100%;height:100%;}
+.stagecol .plotter{flex:1 1 40%;min-height:0;margin:0;display:flex;flex-direction:column;}
+.stagecol .plot-screen{flex:1 1 auto;min-height:0;}
+.stagecol .plot-screen svg{width:100%;height:100%;}
+.ctrlcol{display:flex;flex-direction:column;gap:.7rem;min-height:0;overflow:auto;}
+/* barre di scorrimento sottili e scure, uguali in tutti i lab; il gutter riservato sulle due
+   colonne evita che il layout salti quando la barra compare */
+html,body,.console,.stagecol,.ctrlcol,.sim-math,.tabwrap{scrollbar-width:thin;scrollbar-color:#3d444f #12151a;}
+.stagecol,.ctrlcol{scrollbar-gutter:stable;}
+.panel-lede{font-family:var(--n-sans);font-size:.9rem;line-height:1.5;color:#aeb4bd;margin:0;}
+.panel-lede b{color:#e2a24d;font-weight:700;}
+.hint{font-family:var(--n-sans);font-size:.82rem;color:#9aa0aa;margin:0;font-style:italic;}
+.con-foot{flex:none;display:flex;justify-content:space-between;font-family:var(--n-mono);font-size:.66rem;color:#8b929c;padding:.35rem .1rem 0;}
+/* pulsante "indietro" ben visibile: pill (breadcrumb a sx nell'header + copia in fondo) */
+.con-back{display:inline-flex;align-items:center;gap:.3em;font-family:var(--n-mono);font-size:.76rem;font-weight:700;color:#cfe0d6;background:#12241d;border:1px solid #2a5a48;border-radius:999px;padding:.32rem .85rem;text-decoration:none;transition:.15s;white-space:nowrap;}
+.con-back:hover{background:#1d7a52;color:#fff;border-color:#1d7a52;text-decoration:none;}
+.con-brand .con-back{margin-right:.15rem;}
+.back-bottom{flex:none;display:flex;justify-content:center;padding:.3rem 0 .1rem;}
+/* la console occupa una schermata; se il contenuto non ci sta (finestre basse) deve poter scorrere */
+@media (min-width:821px){ html,body{height:100%;overflow:auto;} .console{height:100vh;overflow:auto;} .back-bottom{display:none;} }
+/* MOBILE VERTICALE: lo schermo è troppo stretto → invita a ruotare in orizzontale */
+@media (max-width:820px) and (orientation:portrait){
+  .panel{display:none;}
+  .back-bottom{display:none;}
+  .console .rotate-msg{display:flex;}
+}
+/* MOBILE ORIZZONTALE: esperimento completo ma compatto, tutto a schermo (grafico incluso) */
+@media (max-width:820px) and (orientation:landscape){
+  html,body{height:100%;overflow:auto;}
+  .console{height:100vh;overflow:auto;padding:0 .4rem;}
+  .con-head{padding:.25rem 0 .2rem;}
+  .con-title{font-size:.8rem;}
+  /* due colonne al 50% ciascuna; ENTRAMBE scorrono in verticale (poco spazio) */
+  .console .panel{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.5rem;padding:.5rem;min-height:0;}
+  .stagecol{gap:.4rem;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+  .stagecol .sim-stage{flex:none;min-height:0;}
+  .stagecol .sim-stage svg{width:100%;height:auto;}
+  .stagecol .plotter{flex:none;min-height:0;}
+  .stagecol .plot-screen svg{width:100%;height:auto;}
+  .ctrlcol{gap:.45rem;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+  .panel-lede{font-size:.72rem;line-height:1.35;}
+  .hint{font-size:.68rem;}
+  .con-foot{font-size:.6rem;padding:.2rem .1rem 0;}
+  .back-bottom{display:none;}
+}
+/* invito a ruotare (visibile solo su telefono in verticale) */
+.rotate-msg{display:none;flex-direction:column;align-items:center;justify-content:center;gap:1rem;text-align:center;min-height:72vh;margin:1rem .5rem;padding:2rem 1.2rem;border:1px dashed #2a5a48;border-radius:12px;background:#0f1512;font-family:var(--n-mono);}
+.rotate-msg .big{font-size:3rem;display:inline-block;animation:lqrot 2.6s ease-in-out infinite;}
+.rotate-msg .t1{font-size:1.1rem;color:#ffb000;font-weight:700;}
+.rotate-msg .t2{font-size:.85rem;line-height:1.55;color:#8fb7a4;max-width:22rem;}
+@keyframes lqrot{0%,45%{transform:rotate(0);}62%,88%{transform:rotate(-90deg);}100%{transform:rotate(-90deg);}}
+@media (prefers-reduced-motion:reduce){.rotate-msg .big{animation:none;}}
+
+/* ---- header / cornice in stile strumento ---- */
+.con-brand .tag{background:#111a16;border:1px solid #2a5a48;color:#ffb000;font-family:var(--n-mono);
+  text-transform:uppercase;letter-spacing:.08em;padding:.2rem .55rem;border-radius:3px;font-size:.7rem;
+  font-weight:700;box-shadow:0 0 8px rgba(255,176,0,.18);}
+.langsw{background:#0f1613;border:1px solid #24463a;border-radius:4px;}
+.langbtn{color:#8fb7a4;font-family:var(--n-mono);}
+.langbtn[aria-pressed="true"]{background:#173a2c;color:#7fffc4;}
+.doc-back-top{color:#8fb7a4;font-family:var(--n-mono);}
+.doc-back-top:hover{color:#7fffc4;}
+.panel{background:#0f1512;border:1px solid #04120c;box-shadow:inset 0 0 0 1px #17302a,0 4px 18px rgba(0,0,0,.5);}
+.panel-lede{color:#9fbcac;}
+.panel-lede b{color:#ffb000;}
+.hint{color:#6f8f80;}
+.con-foot{color:#5a7d6a;}
+
+/* ---- cursore che pilota il plotter: evidenziazione sobria (linea sopra) ---- */
+.ctl.driver{border-top:1px solid #7a5210;padding-top:.55rem;margin-top:.2rem;}
+.ctl.driver label{color:#e0a24d;}
+.ctl.driver input[type=range]{accent-color:#ffb000;}
+.drives-cap{font-family:var(--n-mono);font-size:.68rem;color:#e0a24d;margin:-.15rem 0 0;letter-spacing:.02em;}
+.drives-cap::before{content:"\21b3 ";color:#ffb000;}
+.drives-cap b{color:#ffb000;}
+
+/* ---- fumetto: annuncia il risultato sorprendente quando esce la linea ---- */
+.stagecol .plotter{position:relative;}
+.fumetto{position:absolute;z-index:6;left:50%;top:32%;transform:translate(-50%,-8px) scale(.7);
+  max-width:80%;background:#fff7e6;color:#1a1200;border:2px solid #ffb000;border-radius:12px;
+  padding:.5rem .85rem;font-family:var(--n-mono);font-size:.82rem;font-weight:700;line-height:1.35;text-align:center;
+  box-shadow:0 8px 22px rgba(0,0,0,.55),0 0 20px rgba(255,176,0,.45);opacity:0;pointer-events:none;
+  transition:opacity .4s ease, transform .45s cubic-bezier(.2,1.5,.4,1);}
+.fumetto b{color:#9a4a00;}
+.fumetto::after{content:"";position:absolute;left:50%;top:-13px;transform:translateX(-50%);
+  border:7px solid transparent;border-bottom-color:#ffb000;}
+.fumetto.show{opacity:1;transform:translate(-50%,0) scale(1);}
