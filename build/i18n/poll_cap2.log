@@ -1,0 +1,4 @@
+[10:07:15] poll 1  http=200  titoloEN=False  elapsed=0.8s
+[10:07:36] poll 2  http=200  titoloEN=False  elapsed=21.2s
+[10:07:56] poll 3  http=200  titoloEN=True  elapsed=41.5s
+VERDICT: capitolo 2 online dopo 41.5s
