@@ -26,7 +26,7 @@ for nome in pagine:
     nuove.append({'route': f'/{nome}.html', 'redirect': f'/it/{nome}', 'statusCode': 301})
 
 c['routes'] = teste + storiche + nuove
-c['responseOverrides'] = {'404': {'rewrite': '/index.html', 'statusCode': 404}}
+c['responseOverrides'] = {'404': {'rewrite': '/404.html', 'statusCode': 404}}
 
 CONFIG.write_text(json.dumps(c, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 print(f'regole: {len(teste)} intestazioni + {len(storiche)} storiche + {len(nuove)} per le pagine')

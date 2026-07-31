@@ -514,6 +514,76 @@ def pagina_scelta():
 '''
 
 
+def pagina_non_trovata():
+    """Mostrata per qualunque indirizzo inesistente (con stato 404). Dice cosa e'
+    successo invece di riportare in home di nascosto, e offre da dove ripartire."""
+    return f'''<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Pagina non trovata · Page not found · La Quantistica</title>
+<link rel="stylesheet" href="/assets/style.css?v=17">
+<link rel="stylesheet" href="/assets/lang.css?v=7">
+<script>
+(function () {{
+  var s = null;
+  try {{ s = localStorage.getItem('site-lang'); }} catch (e) {{}}
+  if (s !== 'it' && s !== 'en') {{
+    var l = (navigator.languages && navigator.languages.length)
+      ? navigator.languages : (navigator.language ? [navigator.language] : []);
+    s = 'en';
+    for (var i = 0; i < l.length; i++) {{
+      var t = String(l[i]).toLowerCase().split('-')[0];
+      if (t === 'it' || t === 'en') {{ s = t; break; }}
+    }}
+  }}
+  document.documentElement.setAttribute('lang', s);
+  document.documentElement.setAttribute('data-lang', s);
+}})();
+</script>
+<style>
+  body {{ margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+         background:var(--bg,#f5f3ee); color:var(--ink,#1f2328);
+         font-family:"Segoe UI",system-ui,sans-serif; }}
+  .avviso {{ max-width:34rem; padding:2rem 1.4rem; text-align:center; }}
+  .marchio {{ font-family:Georgia,"Times New Roman",serif; font-size:1.35rem; margin-bottom:1.6rem; }}
+  .marchio .bk {{ color:#c98b83; }}
+  h1 {{ font-size:1.5rem; margin:.2rem 0 .7rem; }}
+  p {{ line-height:1.6; color:#4a4f57; }}
+  .vai {{ margin-top:1.6rem; }}
+  .vai a {{ display:inline-block; margin:.25rem .3rem; padding:.55rem 1.2rem; border:1px solid #7b2d26;
+            border-radius:999px; color:#7b2d26; text-decoration:none; font-weight:600; }}
+  .vai a:hover {{ background:#7b2d26; color:#fff; }}
+  .altra {{ margin-top:1.1rem; font-size:.86rem; }}
+  .altra a {{ color:#4a4f57; }}
+</style>
+</head>
+<body>
+<div class="avviso">
+  <p class="marchio"><span class="bk">\u27e8</span>\u039bQ<span class="bk">\u27e9</span> La Quantistica</p>
+  <h1><span class="it">Pagina non trovata</span><span class="en">Page not found</span></h1>
+  <p>
+    <span class="it">L\u2019indirizzo che hai seguito non corrisponde a nessuna pagina del sito.
+      Forse contiene un refuso, oppure la pagina \u00e8 stata spostata.</span>
+    <span class="en">The address you followed does not match any page on this site.
+      It may contain a typo, or the page may have been moved.</span>
+  </p>
+  <p class="vai">
+    <a class="it" href="/it/" hreflang="it" lang="it">Vai all\u2019indice</a>
+    <a class="en" href="/en/" hreflang="en" lang="en">Go to the contents</a>
+  </p>
+  <p class="altra">
+    <span class="it"><a href="/en/" hreflang="en" lang="en">English</a></span>
+    <span class="en"><a href="/it/" hreflang="it" lang="it">Italiano</a></span>
+  </p>
+</div>
+</body>
+</html>
+'''
+
+
 def sitemap(nomi):
     righe = ['<?xml version="1.0" encoding="UTF-8"?>',
              '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
@@ -555,6 +625,7 @@ def main(solo=None):
     print(f'\npagine scritte: {len(list((USCITA / "it").glob("*.html")))} per lingua')
     if not solo:
         (USCITA / 'index.html').write_text(pagina_scelta(), encoding='utf-8')
+        (USCITA / '404.html').write_text(pagina_non_trovata(), encoding='utf-8')
         nomi = [p.name for p in pagine()]
         (USCITA / 'sitemap.xml').write_text(sitemap(nomi), encoding='utf-8')
         (USCITA / 'robots.txt').write_text(
