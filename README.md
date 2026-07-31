@@ -41,7 +41,8 @@ The nine “cards”:
 | `originale-doc/` | The authentic 1999 original: legacy `.doc` files and technical drawings (`.DWG`/`.WMF`), kept as an archive |
 | `originale-docx/` | Modern, openable `.docx` conversion of the thesis; the subfolders `da-doc-originale/` and `da-docx-originale/` record which source each conversion came from |
 | `site/` | HTML edition with native MathML formulas |
-| `publish/` | Bilingual web edition (Italian + English), ready to publish |
+| `sorgenti/` | Bilingual source pages (Italian + English in one file); these are the ones you edit |
+| `publish/` | The published site, generated from `sorgenti/`: `it/` and `en/`, one URL per language |
 | `build/` | Intermediate artifacts generated from the sources |
 | `img/` | Figures and images |
 | `scripts/` | Site-generation tools |
@@ -105,7 +106,8 @@ Le nove «schede»:
 | `originale-doc/` | Il vero originale del 1999: file `.doc` legacy e disegni tecnici (`.DWG`/`.WMF`), conservato come archivio |
 | `originale-docx/` | Conversione moderna e apribile in `.docx` della tesi; le sottocartelle `da-doc-originale/` e `da-docx-originale/` indicano la fonte di ciascuna conversione |
 | `site/` | Edizione HTML con formule in MathML nativo |
-| `publish/` | Edizione web bilingue (italiano + inglese), pronta per la pubblicazione |
+| `sorgenti/` | Pagine sorgente bilingui (italiano + inglese nello stesso file): sono quelle che si modificano |
+| `publish/` | Il sito pubblicato, generato da `sorgenti/`: `it/` e `en/`, un indirizzo per lingua |
 | `build/` | Artefatti intermedi generati dai sorgenti |
 | `img/` | Figure e immagini |
 | `scripts/` | Strumenti di generazione del sito |
@@ -118,6 +120,15 @@ guardandolo, senza passare dal codice:
 ```powershell
 .\modifica.ps1              # elenca i capitoli e chiede quale
 .\modifica.ps1 cascata      # apre la pagina il cui nome contiene "cascata"
+```
+
+Si modifica il sorgente bilingue in `sorgenti/`; a ogni salvataggio le due
+versioni pubblicate in `publish/it` e `publish/en` vengono rigenerate da sole.
+Per rifare tutto il sito da capo:
+
+```powershell
+python build/i18n/split.py       # rigenera it/ e en/, sitemap e robots
+python build/i18n/verifica.py    # controlla lingua, canonical, hreflang, collegamenti
 ```
 
 Si apre il browser sulla pagina vera. Lì dentro:

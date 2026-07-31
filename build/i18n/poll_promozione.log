@@ -1,0 +1,5 @@
+[10:59:03] poll 1  non ancora: Response status code does not indicate success: 404 (Not Found).
+[10:59:23] poll 2  non ancora: Response status code does not indicate success: 404 (Not Found).
+[10:59:44] poll 3  non ancora: Response status code does not indicate success: 404 (Not Found).
+[11:00:06] poll 4  http=200  pronto=True  elapsed=63.3s
+VERDICT: sito promosso dopo 63.3s

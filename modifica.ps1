@@ -13,8 +13,8 @@ param([string]$Pagina)
 $ErrorActionPreference = 'Stop'
 Set-Location $PSScriptRoot
 
-$pagine = Get-ChildItem publish -Filter *.html |
-    Where-Object { $_.Name -notlike 'lab-*' } | Sort-Object Name
+$pagine = Get-ChildItem sorgenti -Filter *.html |
+    Where-Object { $_.Name -notlike 'lab-*' -and $_.Name -notlike '_*' } | Sort-Object Name
 
 if (-not $Pagina) {
     Write-Host "`nQuale pagina vuoi modificare?`n" -ForegroundColor Cyan
