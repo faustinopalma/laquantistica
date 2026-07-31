@@ -273,6 +273,65 @@ def pota(testo, lingua_da_togliere):
     return ''.join(fuori), p.trovati, len(p.intervalli), ''.join(rimosso)
 
 
+class NodiTesto(HTMLParser):
+    """Offset e contenuto dei soli nodi di testo veri.
+
+    Serve per non toccare gli attributi: i tracciati SVG che KaTeX genera per le
+    parentesi grandi sono pieni di coppie come `3,-2` e verrebbero corrotti.
+    """
+
+    SALTA = {'script', 'style', 'annotation'}
+
+    def __init__(self, testo):
+        super().__init__(convert_charrefs=False)
+        self.testo = testo
+        self.inizi = [0]
+        for r in testo.splitlines(keepends=True):
+            self.inizi.append(self.inizi[-1] + len(r))
+        self.pila = []
+        self.nodi = []
+
+    def _off(self):
+        r, c = self.getpos()
+        return self.inizi[r - 1] + c
+
+    def handle_starttag(self, tag, attrs):
+        if tag not in VUOTI and tag not in ('path', 'use'):
+            self.pila.append(tag)
+
+    def handle_endtag(self, tag):
+        for i in range(len(self.pila) - 1, -1, -1):
+            if self.pila[i] == tag:
+                del self.pila[i:]
+                return
+
+    def handle_data(self, data):
+        if not any(t in self.SALTA for t in self.pila):
+            self.nodi.append((self._off(), data))
+
+
+def separatore_decimale(testo, lingua):
+    r"""Il separatore decimale segue la lingua: virgola in italiano, punto in inglese.
+    Alcuni numeri (tabelle di dati, letture dei laboratori) sono condivisi fra le due
+    versioni e sono scritti in una sola convenzione: qui si adeguano.
+    I confini `(?<![\d.])` evitano di toccare cose come 3.2.2."""
+    schema, rimpiazzo = ((r'(?<=\d),(?=\d)', '.') if lingua == 'en'
+                         else (r'(?<![\d.])(\d+)\.(\d+)(?![\d.])', r'\1,\2'))
+    p = NodiTesto(testo)
+    p.feed(testo)
+    p.close()
+    pezzi, ultimo, n = [], 0, 0
+    for off, dati in p.nodi:
+        nuovo, k = re.subn(schema, rimpiazzo, dati)
+        if k:
+            pezzi.append(testo[ultimo:off])
+            pezzi.append(nuovo)
+            ultimo = off + len(dati)
+            n += k
+    pezzi.append(testo[ultimo:])
+    return ''.join(pezzi), n
+
+
 SEL_LINGUA = re.compile(r'([ \t]*)<div class="langsw"[^>]*>.*?</div>', re.S)
 NOMI = {'it': 'Italiano', 'en': 'English'}
 
@@ -333,6 +392,10 @@ def trasforma(testo, lingua, file_, avvisi):
 
     # riferimenti agli asset: da relativi a radice del sito, cosi' non dipendono dalla cartella
     testo = re.sub(r'((?:src|href)=")(assets/|img/)', r'\1/\2', testo)
+
+    testo, n_dec = separatore_decimale(testo, lingua)
+    if n_dec:
+        avvisi.append(f'{lingua}/{file_}: {n_dec} separatori decimali adeguati')
 
     meta = META.get(file_, {}).get(lingua)
     if meta:
@@ -470,8 +533,9 @@ def main(solo=None):
         (USCITA / 'robots.txt').write_text(
             f'User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n', encoding='utf-8')
     da_curare = sorted({a.split(': ')[0].split('/')[1] for a in avvisi if 'titolo' in a})
-    segnaposti = [a for a in avvisi if 'segnaposto' in a]
-    veri_problemi = [a for a in avvisi if not any(k in a for k in ('titolo', 'descrizione', 'segnaposto'))]
+    segnaposti = [a for a in avvisi if 'segnaposto' in a or 'separatori' in a]
+    veri_problemi = [a for a in avvisi
+                     if not any(k in a for k in ('titolo', 'descrizione', 'segnaposto', 'separatori'))]
     print(f'\ntitoli ancora da curare ({len(da_curare)}): {", ".join(da_curare) or "nessuno"}')
     for a in segnaposti:
         print(f'  ~  {a}')
