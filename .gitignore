@@ -32,33 +32,11 @@ Thumbs.db
 # credenziali Azure 2o tenant (Foundry) - isolate dal deploy
 .azure-foundry/
 
-# Lab virtuali: BOZZE LOCALI - browsabili da localhost ma NON pubblicate (app_location=publish)
-publish/lab-*.html
-publish/_lab-index.html
-# ...il lab del Cap.1 (collegato dalla CTA in 01-stern-gerlach.html):
-!publish/lab-01-stern-gerlach.html
-# ...i 4 esperimenti del Cap.2 sono PUBBLICATI (ex sim-esp1..4, CTA in 02-stern-gerlach-cascata.html):
-!publish/lab-02a-sg-angolo-relativo.html
-!publish/lab-02b-sg-tre-macchine.html
-!publish/lab-02c-sg-ricombinazione.html
-!publish/lab-02d-sg-sfasamento.html
-# ...i 3 esperimenti del Cap.3 sono PUBBLICATI (collegati dalle CTA in 03-elettroni.html):
-!publish/lab-03a-corrente-vuoto.html
-!publish/lab-03b-deflessione-em.html
-!publish/lab-03c-millikan.html
-# ...e il lab del Cap.4 (collegato dalla CTA in 04-diffrazione.html):
-!publish/lab-04-diffrazione.html
-# ...e il lab del Cap.5 (collegato dalla CTA in 05-rutherford.html):
-!publish/lab-05-rutherford.html
-# ...e il lab del Cap.7 (collegato dalla CTA in 07-franck-hertz.html):
-!publish/lab-07-franck-hertz.html
-# ...e il lab del Cap.8 (collegato dalla CTA in 08-effetto-fotoelettrico.html):
-!publish/lab-08-fotoelettrico.html
-# ...e il lab del Cap.9 (collegato dalla CTA in 09-spettri-atomici.html):
-!publish/lab-09-spettri.html
-# Versioni animate/prototipi con libreria (p5.js) - SOLO locali, non pubblicate
-publish/game-*.html
-publish/_game-index.html
+# Bozze locali: i sorgenti bilingui stanno in sorgenti/ e vengono divisi in publish/it e
+# publish/en da build/i18n/split.py. Le pagine il cui nome inizia con _ (o con game-) sono
+# bozze: lo splitter le salta e qui restano fuori da git.
+sorgenti/_*.html
+sorgenti/game-*.html
 publish/assets/p5.min.js
 
 # prova di aggiornamento MathJax (rigenerabile)

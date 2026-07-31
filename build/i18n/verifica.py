@@ -8,9 +8,10 @@ import re
 import sys
 from urllib.parse import unquote, urlparse
 
-RADICE = pathlib.Path('publish')
-USCITA = RADICE / 'v2'
-BASE = 'https://laquantistica.com/v2'
+SORGENTI = pathlib.Path('sorgenti')
+RADICE = pathlib.Path('publish')       # radice del sito servito: qui stanno assets/ e img/
+USCITA = RADICE
+BASE = 'https://laquantistica.com'
 LINGUE = ('it', 'en')
 
 errori = []
@@ -42,7 +43,7 @@ for lingua in LINGUE:
     for f in sorted(cartella.glob('*.html')):
         nome = f'{lingua}/{f.name}'
         t = f.read_text(encoding='utf-8')
-        orig = (RADICE / f.name).read_text(encoding='utf-8')
+        orig = (SORGENTI / f.name).read_text(encoding='utf-8')
         monolingue = 'class="it"' not in orig and 'class="en"' not in orig
 
         m = re.search(r'<html[^>]*>', t)
@@ -69,8 +70,6 @@ for lingua in LINGUE:
             if not gemella.exists():
                 err(nome, f'manca la pagina gemella {l}/{f.name}')
 
-        if 'name="robots"' not in t:
-            err(nome, 'manca noindex (anteprima)')
         if re.search(r'src="[^"]*lang\.js', t):
             err(nome, 'lang.js ancora caricata')
         if 'lang.css' in orig and 'lang.css' not in t:
@@ -116,7 +115,7 @@ for lingua in LINGUE:
                 bersaglio = unquote(u.split('?')[0].split('#')[0])
                 if bersaglio and not (cartella / bersaglio).exists():
                     # gia' rotto nel sito pubblicato: la pagina bersaglio non e' deployata
-                    if bersaglio in orig and not (RADICE / bersaglio).exists() or bersaglio.startswith('_'):
+                    if bersaglio in orig and not (SORGENTI / bersaglio).exists() or bersaglio.startswith('_'):
                         avvisi.append(f'{nome}: collegamento gia' + "'" + f' rotto in produzione: {u}')
                     else:
                         err(nome, f'collegamento rotto: {u}')

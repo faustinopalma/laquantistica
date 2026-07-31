@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Laboratorio simulato della deflessione degli elettroni: campo elettrico e campo magnetico incrociati, misura del rapporto e/m fra carica e massa.">
+<title>Lab · Deflessione e/m — La Quantistica</title>
+<link rel="canonical" href="https://laquantistica.com/it/lab-03b-deflessione-em">
+<link rel="stylesheet" href="/assets/lang.css?v=7">
+<link rel="stylesheet" href="/assets/sim-sg.css?v=10">
+<style>
+  .panel{grid-template-columns:minmax(0,1fr) 390px;}
+  .readout{background:#12151a;border:1px solid #2d333d;border-radius:6px;padding:.6rem .8rem;margin:.4rem 0;font-family:var(--n-mono);}
+  .readout .k{font-size:.62rem;color:#8b929c;text-transform:uppercase;letter-spacing:.05em;}
+  .readout .v{font-size:1.25rem;font-weight:700;color:#ffb000;}
+  .balloon{margin-top:.4rem;font-family:var(--n-mono);font-size:.72rem;color:#57d98a;min-height:1.2em;}
+  /* animazioni leggere: solo CSS (compositor, pausa a tab nascosta) */
+  @keyframes lqflow{to{stroke-dashoffset:-60;}}
+  .lqbeam{stroke-dasharray:2 7;animation:lqflow 1.0s linear infinite;pointer-events:none;}
+  @media(prefers-reduced-motion:reduce){.lqbeam{animation:none!important;}}
+  /* scala sotto gli slider bipolari (E, B): − / tacca dello zero / + */
+  .ctl .scale{grid-column:2;display:flex;justify-content:space-between;align-items:center;margin-top:-.5rem;padding:0 3px;font-family:var(--n-mono);font-size:.85rem;font-weight:700;color:#8b929c;line-height:1;}
+  .ctl .scale .tick{width:2px;height:.6rem;background:#7a8a84;border-radius:1px;cursor:pointer;padding:.3rem 8px;box-sizing:content-box;background-clip:content-box;}
+  .ctl .scale .tick:hover{background:#e2a24d;}
+</style>
+<link rel="alternate" hreflang="it" href="https://laquantistica.com/it/lab-03b-deflessione-em">
+<link rel="alternate" hreflang="en" href="https://laquantistica.com/en/lab-03b-deflessione-em">
+<link rel="alternate" hreflang="x-default" href="https://laquantistica.com/en/lab-03b-deflessione-em">
+<link rel="stylesheet" href="/assets/lang-links.css?v=1">
+</head>
+<body>
+<main class="console" id="top">
+  <header class="con-head">
+    <div class="con-brand">
+      <a class="con-back" id="backTop" href="_lab-index.html"><span class="it">← Torna all'indice</span></a>
+      <span class="tag amber"><span class="it">Lab · Cap. 3</span></span>
+      <span class="con-title"><span class="it">Deflessione del fascio · e/m</span></span>
+    </div>
+    <div class="con-actions">
+      <div class="langsw" role="group" aria-label="Lingua / Language">
+        <a class="langbtn" href="../it/lab-03b-deflessione-em.html" hreflang="it" lang="it" aria-current="true">Italiano</a>
+        <a class="langbtn" href="../en/lab-03b-deflessione-em.html" hreflang="en" lang="en">English</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="panel">
+    <div class="stagecol">
+      <div class="sim-stage"><svg id="svg1" viewBox="0 0 660 360" role="img" aria-label="Cannone elettronico, piastre, bobine e schermo"></svg></div>
+    </div>
+    <aside class="ctrlcol">
+      <p class="panel-lede"><span class="it">Un fascio di elettroni attraversa un campo <b>elettrico</b> (piastre) e un campo <b>magnetico</b> (bobine). La deflessione mostra che le particelle sono <b>cariche negative</b>; bilanciando E e B (v = E/B) si ricava il rapporto <b>e/m</b>.</span></p>
+      <div class="sim-controls">
+        <div class="ctl"><label><span class="it">Tensione acceleratrice Vₐ</span></label><input type="range" id="va" min="500" max="5000" step="50" value="2000"><span class="val" id="vav">2000 V</span></div>
+        <div class="ctl"><label><span class="it">Piastre (campo E)</span></label><input type="range" id="vd" min="-100" max="100" step="1" value="0"><span class="val" id="vdv">0</span><div class="scale"><span>−</span><span class="tick"></span><span>+</span></div></div>
+        <div class="ctl"><label><span class="it">Bobine (campo B)</span></label><input type="range" id="bb" min="-100" max="100" step="1" value="0"><span class="val" id="bbv">0</span><div class="scale"><span>−</span><span class="tick"></span><span>+</span></div></div>
+      </div>
+      <div class="readout">
+        <div class="k"><span class="it">Deflessione sullo schermo</span></div>
+        <div class="v" id="defl">0.0 mm</div>
+        <div class="balloon" id="note"></div>
+      </div>
+      <div class="sim-math">
+        <div class="mrow"><span class="lab it">Carica del fascio:</span> <b id="sign">—</b></div>
+        <div class="mrow"><span class="lab it">Rapporto carica/massa (elettrone):</span> <b class="num">e/m ≈ 1,76×10¹¹ C/kg</b></div>
+      </div>
+      <p class="hint"><span class="it">Prova: aumenta Vₐ → deflessione minore (elettroni più veloci). Con solo E o solo B la macchia si sposta; regola B per <b>riportare la macchia al centro</b> (E e B bilanciati): è il <b>selettore di velocità</b>.</span></p>
+    </aside>
+  </section>
+
+  <div class="rotate-msg">
+    <div class="big">📱</div>
+    <div class="t1"><span class="it">Ruota il telefono in orizzontale</span></div>
+    <div class="t2"><span class="it">Questo esperimento interattivo sta stretto in verticale. Gira il telefono in <b>orizzontale</b> per vederlo tutto (anche se piccolo). Per un'esperienza migliore aprilo da <b>computer</b> o da <b>tablet</b> con schermo abbastanza grande.</span></div>
+  </div>
+  <div class="back-bottom"><a class="con-back" id="backBottom" href="_lab-index.html"><span class="it">← Torna all'indice</span></a></div>
+  <div class="con-foot"><span class="it">La Quantistica · Lab locale · Cap. 03</span><span>F. Palma</span></div>
+</main>
+
+<script src="/assets/sim-sg-core.js?v=2"></script>
+<script>
+var svg1=document.getElementById('svg1');
+var REDUCE=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+function L(it,en){ return document.documentElement.getAttribute('data-lang')==='en'?en:it; }
+// ---- proiezione ASSONOMETRICA (cavaliera): x a destra, y in alto (nel piano), z diagonale = asse delle bobine ----
+var OX=26, OY=192, AZx=0.5, AZy=0.34;          // +z va verso l'alto-destra (profondità nel foglio)
+function P(x,y,z){ return [OX + x + z*AZx, OY - y - z*AZy]; }
+var xGun0=8, xGunW=44, px0=240, px1=350, xc=(px0+px1)/2, xScreen=560;
+var Rc=80, dC=40, hP=38, pzP=30;               // raggio bobina, semi-distanza bobine, semi-gap piastre, semi-profondità piastre
+function poly3(pts,fill,stroke,w,op){ var d=pts.map(function(p,i){ var s=P(p[0],p[1],p[2]); return (i?'L':'M')+s[0].toFixed(1)+' '+s[1].toFixed(1); }).join(' ')+' Z'; el('path',{d:d,fill:fill||'none',stroke:stroke||'none','stroke-width':w||1,opacity:op==null?1:op,'stroke-linejoin':'round'},svg1); }
+function arr3(a,b,col,w,op){ op=op==null?1:op; var A=P(a[0],a[1],a[2]),B=P(b[0],b[1],b[2]); el('line',{x1:A[0].toFixed(1),y1:A[1].toFixed(1),x2:B[0].toFixed(1),y2:B[1].toFixed(1),stroke:col,'stroke-width':w||1.6,opacity:op},svg1); var dx=B[0]-A[0],dy=B[1]-A[1],Ln=Math.hypot(dx,dy)||1; dx/=Ln;dy/=Ln; var hx=B[0]-dx*7,hy=B[1]-dy*7,nx=-dy*3.4,ny=dx*3.4; el('polygon',{points:B[0].toFixed(1)+','+B[1].toFixed(1)+' '+(hx+nx).toFixed(1)+','+(hy+ny).toFixed(1)+' '+(hx-nx).toFixed(1)+','+(hy-ny).toFixed(1),fill:col,opacity:op},svg1); }
+function coil3(z,near){ var c=P(xc,0,z), col=near?'#9cc2df':'#5a7f96', w=near?2.6:2, op=near?1:0.7; el('circle',{cx:c[0].toFixed(1),cy:c[1].toFixed(1),r:Rc,fill:'none',stroke:col,'stroke-width':w,opacity:op},svg1); el('circle',{cx:c[0].toFixed(1),cy:c[1].toFixed(1),r:Rc-5,fill:'none',stroke:col,'stroke-width':w*0.7,opacity:op*0.85},svg1); return c; }
+function seg3(a,b,col,w,op){ var A=P(a[0],a[1],a[2]),B=P(b[0],b[1],b[2]); el('line',{x1:A[0].toFixed(1),y1:A[1].toFixed(1),x2:B[0].toFixed(1),y2:B[1].toFixed(1),stroke:col,'stroke-width':w||1.4,opacity:op==null?1:op,'stroke-linecap':'round'},svg1); }
+function beamY(x,defl){ var Lf=px1-px0, Ds=xScreen-px1, fD=defl/(1+2*Ds/Lf); if(x<=px0) return 0; if(x>=px1) return fD + (2*fD/Lf)*(x-px1); var t=(x-px0)/Lf; return fD*t*t; }
+function comp(){
+  var Va=+document.getElementById('va').value, Vd=+document.getElementById('vd').value, B=+document.getElementById('bb').value;
+  var vRel=Math.sqrt(Va/2000);                 // velocita' relativa (1 @ 2000 V)
+  var yE = 85*(Vd/100)/(Va/2000);              // deflessione da E  proporzionale a Vd/Va
+  var yB = -85*(B/100)/vRel;                    // deflessione da B  proporzionale a B/sqrt(Va) (verso opposto)
+  var defl = Math.max(-95, Math.min(95, yE+yB));
+  return {Va:Va,Vd:Vd,B:B,vRel:vRel,yE:yE,yB:yB,defl:defl};
+}
+function draw(){
+  var s=comp(), vd=s.Vd, B=s.B;
+  while(svg1.firstChild) svg1.removeChild(svg1.firstChild);
+  // --- cannone elettronico (2D, di lato): catodo incandescente + anodo con foro ---
+  var gx0=6, gx1=62, gyH=17, xCat=17, xAno=52;
+  var gTL=P(gx0,gyH,0); el('rect',{x:gTL[0].toFixed(1),y:gTL[1].toFixed(1),width:(gx1-gx0).toFixed(1),height:(2*gyH).toFixed(1),rx:4,fill:'#0d1a15',stroke:'#3a5750','stroke-width':1.4},svg1);
+  var cg=P(xCat,0,0); el('circle',{cx:cg[0].toFixed(1),cy:cg[1].toFixed(1),r:9,fill:'#ff9a3a',opacity:.16},svg1);
+  seg3([xCat,-10,0],[xCat,10,0],'#ff9a3a',3.5,.95);
+  var cm=P(xCat-7,0,0); txt(cm[0],cm[1]+3,'−',{'font-size':11,fill:'#e0a24d','font-family':'monospace','text-anchor':'middle'},svg1);
+  seg3([xAno,7,0],[xAno,gyH,0],'#9fd0e8',3,1); seg3([xAno,-gyH,0],[xAno,-7,0],'#9fd0e8',3,1);
+  var am=P(xAno+7,0,0); txt(am[0],am[1]+3,'+',{'font-size':11,fill:'#9fd0e8','font-family':'monospace','text-anchor':'middle'},svg1);
+  var gtl=P((gx0+gx1)/2,gyH+13,0); txt(gtl[0],gtl[1],L('cannone elettronico','electron gun'),{'text-anchor':'middle','font-size':8,fill:'#5a7d6a','font-family':'monospace'},svg1);
+  // --- alimentatore pilotato da Vₐ (2D), cablato al cannone ---
+  var sx0=8, sx1=82, syT=-46, syB=-84;
+  var sTL=P(sx0,syT,0); el('rect',{x:sTL[0].toFixed(1),y:sTL[1].toFixed(1),width:(sx1-sx0).toFixed(1),height:(syT-syB).toFixed(1),rx:4,fill:'#12211b',stroke:'#3a6152','stroke-width':1.6},svg1);
+  var dsp=P((sx0+sx1)/2,(syT+syB)/2+9,0); txt(dsp[0],dsp[1],'Vₐ',{'text-anchor':'middle','font-size':9,fill:'#8b929c','font-family':'monospace'},svg1);
+  var dv=P((sx0+sx1)/2,(syT+syB)/2-8,0); txt(dv[0],dv[1],s.Va+' V',{'text-anchor':'middle','font-size':13,fill:'#ffb000','font-family':'monospace','font-weight':'bold'},svg1);
+  var stl=P((sx0+sx1)/2,syB-9,0); txt(stl[0],stl[1],L('alimentatore','power supply'),{'text-anchor':'middle','font-size':8,fill:'#5a7d6a','font-family':'monospace'},svg1);
+  seg3([xAno,-gyH,0],[xAno,-31,0],'#d15a5a',1.6,1); seg3([xAno,-31,0],[sx1-14,-31,0],'#d15a5a',1.6,1); seg3([sx1-14,-31,0],[sx1-14,syT,0],'#d15a5a',1.6,1);
+  seg3([xCat,-gyH,0],[xCat,-25,0],'#6f97ac',1.6,1); seg3([xCat,-25,0],[sx0+14,-25,0],'#6f97ac',1.6,1); seg3([sx0+14,-25,0],[sx0+14,syT,0],'#6f97ac',1.6,1);
+  var tpp=P(sx1-14,syT+3,0); txt(tpp[0]+4,tpp[1],'+',{'font-size':10,fill:'#d15a5a','font-family':'monospace'},svg1);
+  var tmm=P(sx0+14,syT+3,0); txt(tmm[0]-4,tmm[1],'−',{'font-size':10,fill:'#6f97ac','font-family':'monospace','text-anchor':'end'},svg1);
+  // --- schermo (2D, verticale a destra) ---
+  var scT=P(xScreen,95,0), scB=P(xScreen,-95,0);
+  el('line',{x1:scT[0].toFixed(1),y1:scT[1].toFixed(1),x2:scB[0].toFixed(1),y2:scB[1].toFixed(1),stroke:'#2a4a3c','stroke-width':4,'stroke-linecap':'round'},svg1);
+  var sc0=P(xScreen,0,0); el('line',{x1:(sc0[0]-5).toFixed(1),y1:sc0[1].toFixed(1),x2:(sc0[0]+5).toFixed(1),y2:sc0[1].toFixed(1),stroke:'#4a6b59','stroke-width':1},svg1);
+  var sl=P(xScreen,104,0); txt(sl[0],sl[1],L('schermo','screen'),{'text-anchor':'middle','font-size':8,fill:'#5a7d6a','font-family':'monospace'},svg1);
+  // --- bobina POSTERIORE (z=+dC, lontana) ---
+  coil3(dC,false);
+  // --- piastre (DENTRO le bobine): superiore (y=+hP) e inferiore (y=-hP) ---
+  var colTop=vd>0?'#d15a5a':(vd<0?'#46b083':'#3d444f'), colBot=vd>0?'#46b083':(vd<0?'#d15a5a':'#3d444f');
+  poly3([[px0,hP,-pzP],[px1,hP,-pzP],[px1,hP,pzP],[px0,hP,pzP]],'#151d19',colTop,2,1);
+  poly3([[px0,-hP,-pzP],[px1,-hP,-pzP],[px1,-hP,pzP],[px0,-hP,pzP]],'#151d19',colBot,2,1);
+  var tp=P(px0-6,hP+2,pzP); txt(tp[0],tp[1],vd>0?'+':(vd<0?'−':''),{'text-anchor':'end','font-size':13,fill:colTop,'font-family':'monospace'},svg1);
+  var bp=P(px0-6,-hP-2,pzP); txt(bp[0],bp[1],vd>0?'−':(vd<0?'+':''),{'text-anchor':'end','font-size':13,fill:colBot,'font-family':'monospace'},svg1);
+  var pl=P(xc,-hP-18,pzP); txt(pl[0],pl[1],L('piastre (campo E)','plates (E field)'),{'text-anchor':'middle','font-size':8,fill:'#5a7d6a','font-family':'monospace'},svg1);
+  // --- campo E: frecce verticali tra le piastre (dal + al −) ---
+  if(vd!==0){ var eDown=vd>0, eI=Math.min(1,Math.abs(vd)/100), eOp=0.35+0.6*eI, eW=1.2+1.4*eI;   // l'intensità del campo E cresce con lo slider
+    var epts=[[px0+24,-14],[xc,4],[px1-24,14]]; if(eI>0.45){ epts.push([px0+24,14]); epts.push([px1-24,-14]); } if(eI>0.75) epts.push([xc,-16]);
+    epts.forEach(function(p){ if(eDown) arr3([p[0],hP-4,p[1]],[p[0],-hP+4,p[1]],'#e0a24d',eW,eOp); else arr3([p[0],-hP+4,p[1]],[p[0],hP-4,p[1]],'#e0a24d',eW,eOp); });
+    var ep=P(px0-4,0,-pzP); txt(ep[0]-2,ep[1],'E',{'font-size':10,fill:'#e0a24d','font-family':'monospace','font-weight':'bold','text-anchor':'end'},svg1); }
+  // --- campo B: frecce lungo l'asse delle bobine, SOPRA le piastre (visibili). B>0 = ENTRANTE nel foglio -> forza -e(v×B) verso il basso ---
+  if(B!==0){ var zs=B>0?1:-1, bI=Math.min(1,Math.abs(B)/100), bOp=0.42+0.55*bI, bW=1.3+1.5*bI;
+    var bpts=[[xc-32,0],[xc+32,0],[xc,26],[xc,-26]]; if(bI>0.45) bpts.push([xc,0]); if(bI>0.75){ bpts.push([xc-32,26]); bpts.push([xc+32,-26]); }
+    bpts.forEach(function(p){ arr3([p[0],p[1],-zs*34],[p[0],p[1],zs*34],'#7fb0e8',bW,bOp); });
+    var blp=P(xc+42,0,zs*36); txt(blp[0],blp[1],'B',{'font-size':11,fill:'#7fb0e8','font-family':'monospace','font-weight':'bold','text-anchor':'middle'},svg1);
+  }
+  // --- fascio (z=0): rettilineo -> parabola nel campo -> rettilineo fino allo schermo ---
+  var bd='', xx;
+  for(xx=xAno+2; xx<=xScreen+0.1; xx+=6){ var pp=P(xx, beamY(xx,s.defl), 0); bd += (bd?'L':'M')+pp[0].toFixed(1)+' '+pp[1].toFixed(1)+' '; }
+  el('path',{d:bd,fill:'none',stroke:'#35c8ff','stroke-width':1.3,'stroke-dasharray':'5 4','stroke-linecap':'round','stroke-linejoin':'round',opacity:.85},svg1);
+  // elettroni dispersi leggermente attorno alla linea (animazione leggera, SMIL)
+  if(!REDUCE){ for(var kd=0;kd<6;kd++){ var offY=((kd%2)?1:-1)*(1.5+Math.random()*3.2); var gEl=el('g',{transform:'translate(0 '+offY.toFixed(1)+')'},svg1); var dt=el('circle',{r:1.9,fill:'#cfeeff'},gEl); el('animateMotion',{dur:(1.1+Math.random()*0.5).toFixed(2)+'s',repeatCount:'indefinite',path:bd,begin:(-kd*0.22).toFixed(2)+'s',calcMode:'linear'},dt); } }
+  // --- bobina ANTERIORE (z=-dC, vicina) + etichetta ---
+  coil3(-dC,true);
+  var cl=P(xc,Rc+14,dC); txt(cl[0],cl[1],L('bobine','coils'),{'text-anchor':'middle','font-size':8,fill:'#9cc2df','font-family':'monospace'},svg1);
+  // --- macchia sullo schermo ---
+  var sp=P(xScreen, s.defl, 0); el('circle',{cx:sp[0].toFixed(1),cy:sp[1].toFixed(1),r:10,fill:'#8effd0',opacity:.22},svg1); el('circle',{cx:sp[0].toFixed(1),cy:sp[1].toFixed(1),r:5,fill:'#8effd0'},svg1);
+  // readout
+  document.getElementById('vav').textContent=s.Va+' V';
+  document.getElementById('vdv').textContent=(s.Vd>0?'+':'')+s.Vd;
+  document.getElementById('bbv').textContent=(s.B>0?'+':'')+s.B;
+  var dir=s.defl>2?L('su','up'):(s.defl<-2?L('giù','down'):L('centro','centre'));
+  document.getElementById('defl').textContent=(s.defl>=0?'+':'')+s.defl.toFixed(1)+' mm ('+dir+')';
+  var sg=document.getElementById('sign');
+  if(s.Vd===0){ sg.textContent='—'; } else { sg.innerHTML='<span class="it">negativa (verso il polo +)</span><span class="en">negative (toward + plate)</span>'; }
+  var note=document.getElementById('note'), it='',en='';
+  if(s.Vd!==0 && s.B!==0 && Math.abs(s.defl)<3){ it='Bilanciato: E e B si compensano → v = E/B (selettore di velocità).'; en='Balanced: E and B cancel → v = E/B (velocity selector).'; }
+  else if(s.Vd!==0 || s.B!==0){ it='La macchia è deflessa: il fascio è carico (negativo).'; en='The spot is deflected: the beam is charged (negative).'; }
+  note.innerHTML='<span class="it">'+it+'</span><span class="en">'+en+'</span>';
+}
+var _raf=null;
+function scheduleRedraw(){ if(_raf) return; _raf=requestAnimationFrame(function(){ _raf=null; draw(); }); }
+['va','vd','bb'].forEach(function(id){ document.getElementById(id).addEventListener('input',scheduleRedraw); });
+// tacca centrale cliccabile + tap singolo al centro -> azzera il campo (non durante il trascinamento)
+['vd','bb'].forEach(function(id){
+  var sl=document.getElementById(id), sc=sl.parentNode.querySelector('.scale'), tk=sc?sc.querySelector('.tick'):null;
+  function zero(){ if(+sl.value!==0){ sl.value=0; sl.dispatchEvent(new Event('input')); } }
+  if(tk){ tk.setAttribute('title','azzera / reset'); tk.addEventListener('click',zero); }
+  var moved=false, dx=0;
+  sl.addEventListener('pointerdown',function(e){ moved=false; dx=e.clientX; });
+  sl.addEventListener('pointermove',function(e){ if(e.buttons && Math.abs(e.clientX-dx)>4) moved=true; });
+  sl.addEventListener('click',function(){ if(!moved && Math.abs(+sl.value)<=10) zero(); });
+});
+initBackLink('03-elettroni.html');
+draw();
+// ridisegna le scritte dell'apparato al cambio lingua (data-lang su <html>)
+new MutationObserver(function(){ scheduleRedraw(); }).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});
+</script>
+</body>
+</html>

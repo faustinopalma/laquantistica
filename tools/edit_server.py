@@ -34,7 +34,8 @@ from pathlib import Path
 from urllib.parse import urlparse, parse_qs
 
 ROOT = Path(__file__).resolve().parent.parent
-PUBLISH = ROOT / 'publish'
+SORGENTI = ROOT / 'sorgenti'          # le pagine bilingui che si modificano
+PUBLISH = ROOT / 'publish'            # il sito generato: qui stanno assets/ e img/
 ASSETS = ROOT / 'tools' / 'edit_assets'
 BACKUPS = ROOT / 'backups' / 'edits'
 JOURNAL = ROOT / 'build' / 'edits' / 'journal.jsonl'
@@ -188,7 +189,7 @@ def sposta_blocco(name: str, indice: int, verso: int) -> dict:
             'before': testa[:120], 'after': coda[:120], 'others': {},
         }, ensure_ascii=False) + '\n')
 
-    return {'ok': True, 'blocchi': len(blocchi),
+    return {'ok': True, 'blocchi': len(blocchi), 'rigenerato': rigenera(name),
             'backup': str((BACKUPS / f'{path.stem}.{stamp}.html').relative_to(ROOT))}
 
 
@@ -238,10 +239,18 @@ def expand_inline_tex(fragment: str) -> str:
 def safe_page(name: str) -> Path:
     if not name or '/' in name or '\\' in name or not name.endswith('.html'):
         raise ValueError('nome di file non ammesso')
-    p = (PUBLISH / name).resolve()
-    if p.parent != PUBLISH.resolve() or not p.is_file():
+    p = (SORGENTI / name).resolve()
+    if p.parent != SORGENTI.resolve() or not p.is_file():
         raise ValueError('file inesistente')
     return p
+
+
+def rigenera(name: str) -> str:
+    """Riporta la modifica del sorgente nelle due versioni pubblicate."""
+    safe_page(name)
+    r = subprocess.run([sys.executable, str(ROOT / 'build' / 'i18n' / 'split.py'), name],
+                       cwd=str(ROOT), capture_output=True, text=True, encoding='utf-8')
+    return 'ok' if r.returncode == 0 else f'ERRORE: {(r.stderr or r.stdout)[-200:]}'
 
 
 def apply_edits(name: str, edits: list[dict]) -> dict:
@@ -295,7 +304,7 @@ def apply_edits(name: str, edits: list[dict]) -> dict:
                         'file': name, 'reviewed': False})
             f.write(json.dumps(en_, ensure_ascii=False) + '\n')
 
-    return {'ok': True, 'saved': len(entries),
+    return {'ok': True, 'saved': len(entries), 'rigenerato': rigenera(name),
             'backup': str((BACKUPS / f'{path.stem}.{stamp}.html').relative_to(ROOT))}
 
 
@@ -312,7 +321,14 @@ def open_in_vscode(name: str, line: int) -> dict:
 
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self, *a, **kw):
-        super().__init__(*a, directory=str(PUBLISH), **kw)
+        super().__init__(*a, directory=str(SORGENTI), **kw)
+
+    def translate_path(self, path):
+        # le pagine stanno in sorgenti/, ma assets e immagini vivono nel sito generato
+        p = urlparse(path).path
+        if p.startswith('/assets/') or p.startswith('/img/'):
+            return str(PUBLISH / p.lstrip('/'))
+        return super().translate_path(path)
 
     def log_message(self, fmt, *args):
         if '__edit' not in (args[0] if args else ''):

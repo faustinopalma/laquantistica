@@ -10,10 +10,10 @@ import shutil
 import sys
 from html.parser import HTMLParser
 
-RADICE = pathlib.Path('publish')
-USCITA = RADICE / 'v2'
-BASE = 'https://laquantistica.com/v2'   # diventera' https://laquantistica.com al promuovere
-ANTEPRIMA = True                        # mette noindex finche' e' una prova
+RADICE = pathlib.Path('sorgenti')      # bilingui, NON pubblicati
+USCITA = pathlib.Path('publish')       # sito generato: publish/it, publish/en
+BASE = 'https://laquantistica.com'
+ANTEPRIMA = False                      # True mette noindex (per le prove)
 
 VUOTI = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input',
          'link', 'meta', 'param', 'source', 'track', 'wbr'}
@@ -26,8 +26,15 @@ def url_pubblico(lingua, file_):
         return f'{BASE}/{lingua}/'
     return f'{BASE}/{lingua}/{file_[:-5]}'
 
-SALTA = {'_lab-index.html'}             # bozza locale, non pubblicata
+SALTA = ()                              # le bozze si riconoscono dal nome, vedi pagine()
 MONOLINGUI = {'errata.html'}            # nessun marcatore di lingua: copiata tale e quale
+
+
+def pagine():
+    """I sorgenti da pubblicare: le bozze locali (_nome, game-*) restano fuori."""
+    return [p for p in sorted(RADICE.glob('*.html'))
+            if not p.name.startswith('_') and not p.name.startswith('game-')
+            and p.name not in SALTA]
 
 # Titolo e descrizione per lingua. Le pagine assenti restano col titolo bilingue
 # e vengono segnalate nel resoconto.
@@ -361,18 +368,19 @@ def trasforma(testo, lingua, file_, avvisi):
 
 
 def pagina_scelta():
-    """Radice dei due alberi: manda alla lingua del browser, con entrambi i collegamenti visibili."""
+    """Porta d'ingresso: manda alla lingua del browser, con entrambi i collegamenti
+    visibili per chi ha JavaScript disattivato o vuole scegliere."""
     robots = '<meta name="robots" content="noindex,nofollow">\n' if ANTEPRIMA else ''
     return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-{robots}<link rel="alternate" hreflang="it" href="{url_pubblico('it', 'index.html')}">
+{robots}<link rel="canonical" href="{BASE}/">
+<link rel="alternate" hreflang="it" href="{url_pubblico('it', 'index.html')}">
 <link rel="alternate" hreflang="en" href="{url_pubblico('en', 'index.html')}">
 <link rel="alternate" hreflang="x-default" href="{url_pubblico('en', 'index.html')}">
 <title>La Quantistica</title>
-<link rel="stylesheet" href="/assets/style.css?v=17">
 <script>
 (function () {{
   var s = null;
@@ -386,30 +394,61 @@ def pagina_scelta():
       if (t === 'it' || t === 'en') {{ s = t; break; }}
     }}
   }}
-  location.replace(s + '/index.html');
+  location.replace('/' + s + '/');
 }})();
 </script>
+<style>
+  body {{ margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+         background:#f5f3ee; color:#1f2328; font-family:"Segoe UI",system-ui,sans-serif; }}
+  .scelta {{ text-align:center; padding:2rem; }}
+  .marchio {{ font-family:Georgia,"Times New Roman",serif; font-size:1.6rem; margin-bottom:1.4rem; }}
+  .marchio .bk {{ color:#c98b83; }}
+  a {{ display:inline-block; margin:0 .35rem; padding:.55rem 1.3rem; border:1px solid #7b2d26;
+       border-radius:999px; color:#7b2d26; text-decoration:none; font-weight:600; }}
+  a:hover {{ background:#7b2d26; color:#fff; }}
+</style>
 </head>
 <body>
-<p style="font-family:system-ui;padding:2rem">
-  <a href="it/index.html" hreflang="it" lang="it">Italiano</a> &middot;
-  <a href="en/index.html" hreflang="en" lang="en">English</a>
-</p>
+<div class="scelta">
+  <p class="marchio"><span class="bk">⟨</span>ΛQ<span class="bk">⟩</span> La Quantistica</p>
+  <a href="/it/" hreflang="it" lang="it">Italiano</a>
+  <a href="/en/" hreflang="en" lang="en">English</a>
+</div>
 </body>
 </html>
 '''
 
 
-def main():
-    if USCITA.exists():
-        shutil.rmtree(USCITA)
-    for l in ('it', 'en'):
-        (USCITA / l).mkdir(parents=True)
+def sitemap(nomi):
+    righe = ['<?xml version="1.0" encoding="UTF-8"?>',
+             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
+             'xmlns:xhtml="http://www.w3.org/1999/xhtml">']
+    for nome in nomi:
+        for l in ('it', 'en'):
+            righe.append('  <url>')
+            righe.append(f'    <loc>{url_pubblico(l, nome)}</loc>')
+            for a in ('it', 'en'):
+                righe.append(f'    <xhtml:link rel="alternate" hreflang="{a}" '
+                             f'href="{url_pubblico(a, nome)}"/>')
+            righe.append(f'    <xhtml:link rel="alternate" hreflang="x-default" '
+                         f'href="{url_pubblico("en", nome)}"/>')
+            righe.append('  </url>')
+    righe.append('</urlset>')
+    return '\n'.join(righe) + '\n'
 
-    pagine = [p for p in sorted(RADICE.glob('*.html')) if p.name not in SALTA]
+
+def main(solo=None):
+    if not solo:
+        for l in ('it', 'en'):
+            cartella = USCITA / l
+            if cartella.exists():
+                shutil.rmtree(cartella)
+            cartella.mkdir(parents=True)
+
+    da_fare = pagine() if not solo else [RADICE / n for n in solo]
     avvisi = []
     print(f'{"pagina":<38} {"tolti it":>9} {"tolti en":>9}')
-    for p in pagine:
+    for p in da_fare:
         testo = p.read_text(encoding='utf-8')
         if p.name in MONOLINGUI:
             for l in ('it', 'en'):
@@ -424,7 +463,12 @@ def main():
         print(f'{p.name:<38} {conteggi["it"]:>9} {conteggi["en"]:>9}')
 
     print(f'\npagine scritte: {len(list((USCITA / "it").glob("*.html")))} per lingua')
-    (USCITA / 'index.html').write_text(pagina_scelta(), encoding='utf-8')
+    if not solo:
+        (USCITA / 'index.html').write_text(pagina_scelta(), encoding='utf-8')
+        nomi = [p.name for p in pagine()]
+        (USCITA / 'sitemap.xml').write_text(sitemap(nomi), encoding='utf-8')
+        (USCITA / 'robots.txt').write_text(
+            f'User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n', encoding='utf-8')
     da_curare = sorted({a.split(': ')[0].split('/')[1] for a in avvisi if 'titolo' in a})
     segnaposti = [a for a in avvisi if 'segnaposto' in a]
     veri_problemi = [a for a in avvisi if not any(k in a for k in ('titolo', 'descrizione', 'segnaposto'))]
@@ -438,4 +482,5 @@ def main():
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    argomenti = [a for a in sys.argv[1:] if not a.startswith('-')]
+    sys.exit(main(argomenti or None))

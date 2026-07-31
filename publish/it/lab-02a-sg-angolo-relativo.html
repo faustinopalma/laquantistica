@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://laquantistica.com/it/lab-02a-sg-angolo-relativo">
+<title>Lab · Stern-Gerlach in cascata: angolo relativo — La Quantistica</title>
+<meta name="description" content="Simulatore interattivo dell'Esperimento 1 (Stern-Gerlach in cascata): due macchine, la prima seleziona lo stato, la seconda misura. Probabilità cos²/sin² dell'angolo relativo.">
+<link rel="stylesheet" href="/assets/lang.css?v=7">
+<link rel="stylesheet" href="/assets/note.css?v=4">
+<link rel="stylesheet" href="/assets/sim-sg.css?v=10">
+<link rel="alternate" hreflang="it" href="https://laquantistica.com/it/lab-02a-sg-angolo-relativo">
+<link rel="alternate" hreflang="en" href="https://laquantistica.com/en/lab-02a-sg-angolo-relativo">
+<link rel="alternate" hreflang="x-default" href="https://laquantistica.com/en/lab-02a-sg-angolo-relativo">
+<link rel="stylesheet" href="/assets/lang-links.css?v=1">
+</head>
+<body>
+<main class="console" id="top">
+  <header class="con-head">
+    <div class="con-brand">
+      <a class="con-back" id="backTop" href="02-stern-gerlach-cascata.html"><span class="it">← Torna al Capitolo 2</span></a>
+      <span class="tag amber"><span class="it">Esperimento 1</span></span>
+      <span class="con-title"><span class="it">Stern-Gerlach in cascata</span></span>
+    </div>
+    <div class="con-actions">
+      <div class="langsw" role="group" aria-label="Lingua / Language">
+        <a class="langbtn" href="../it/lab-02a-sg-angolo-relativo.html" hreflang="it" lang="it" aria-current="true">Italiano</a>
+        <a class="langbtn" href="../en/lab-02a-sg-angolo-relativo.html" hreflang="en" lang="en">English</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="panel">
+    <div class="stagecol">
+      <div class="sim-stage"><svg id="svg1" viewBox="0 0 660 360" role="img" aria-label="Esperimento 1: due macchine di Stern-Gerlach in cascata"></svg></div>
+      <div class="plotter">
+        <div class="plot-head"><span class="plot-title">Plotter</span><span class="plot-sub">P(+k) — ϑ₂</span>
+          <span class="leds"><span class="led rec" id="rec1">● REC</span><span class="led fit" id="fit1">● FIT</span></span>
+          <button class="plot-clr" type="button" id="clr1">CLR</button></div>
+        <div class="plot-screen"><svg id="plot1" viewBox="0 0 660 210" role="img" aria-label="grafico delle misure"></svg></div>
+        <div class="plot-status" id="stat1"></div>
+        <div class="fumetto" id="bubble"><span class="it">Legge <b>cos²</b>: conta solo l'angolo relativo ϑ₂−ϑ₁.</span></div>
+      </div>
+    </div>
+    <aside class="ctrlcol">
+      <p class="panel-lede"><span class="it">Due macchine in cascata. La <b>Macchina 1</b> (ϑ₁) divide il fascio e ne <b>seleziona</b> uno stato; la <b>Macchina 2</b> (ϑ₂) misura di nuovo e divide il fascio. Le intensità sono proporzionali a <b>cos²</b> e <b>sin²</b> di metà dell'angolo <b>relativo</b> tra le due macchine.</span></p>
+      <div class="sim-presets" id="presets1"></div>
+      <div class="sim-controls">
+        <div class="ctl"><label><span class="it">Macchina 1&nbsp; ϑ₁</span></label><input type="range" id="t1" min="0" max="360" step="1" value="0"><span class="val" id="t1v">0°</span></div>
+        <div class="ctl-row"><span class="lbl"><span class="it">Stato selezionato dalla Macchina 1:</span></span>
+          <span class="seg" id="sel"><button type="button" data-s="1" class="on">+k</button><button type="button" data-s="-1">−k</button></span></div>
+        <div class="ctl driver"><label><span class="it">Macchina 2&nbsp; ϑ₂</span></label><input type="range" id="t2" min="0" max="360" step="1" value="90"><span class="val" id="t2v">90°</span></div>
+        <p class="drives-cap"><span class="it">Muovi <b>ϑ₂</b> per <b>tracciare</b> la curva sul plotter.</span></p>
+      </div>
+      <div class="pbars">
+        <div class="pbar" id="m1plus"><div class="pk">P( m<sub>ϑ₂</sub> = +k )</div><div class="pv" id="m1pv">50%</div><div class="track"><div class="fill" id="m1pf"></div></div></div>
+        <div class="pbar minus" id="m1minus"><div class="pk">P( m<sub>ϑ₂</sub> = −k )</div><div class="pv" id="m1mv">50%</div><div class="track"><div class="fill" id="m1mf"></div></div></div>
+      </div>
+      <div class="sim-math" id="math1">
+        <div class="mrow"><span class="lab it">Stato preparato:</span><span class="ket" id="m1state"></span></div>
+        <div class="mrow"><span class="lab it">Ampiezza:</span><span id="m1amp"></span></div>
+        <div class="mrow"><span class="lab it">Probabilità:</span><span id="m1prob"></span></div>
+      </div>
+      <p class="hint"><span class="it">Prova: con ϑ₂ = ϑ₁ la seconda macchina ritrova lo stesso stato (100%); a 90° si divide a metà; a 180° si inverte. Conta solo l'angolo <em>relativo</em>.</span></p>
+    </aside>
+  </section>
+
+  <div class="rotate-msg">
+    <div class="big">📱</div>
+    <div class="t1"><span class="it">Ruota il telefono in orizzontale</span></div>
+    <div class="t2"><span class="it">Questo esperimento interattivo sta stretto in verticale. Gira il telefono in <b>orizzontale</b> per vederlo tutto (anche se piccolo). Per un'esperienza migliore aprilo da <b>computer</b> o da <b>tablet</b> con schermo abbastanza grande.</span></div>
+  </div>
+  <div class="back-bottom"><a class="con-back" id="backBottom" href="02-stern-gerlach-cascata.html"><span class="it">← Torna al Capitolo 2</span></a></div>
+  <div class="con-foot"><span class="it">La Quantistica · Lab locale · Cap. 02</span><span>F. Palma</span></div>
+</main>
+
+<script src="/assets/sim-sg-core.js?v=2"></script>
+<script>
+var svg1 = document.getElementById('svg1');
+var t1El = document.getElementById('t1'), t2El = document.getElementById('t2');
+var SEL = 1;
+function fw(f){ return 0.6 + f * 8; }   // larghezza linea ∝ flusso
+
+function drawExp1(){
+  while(svg1.firstChild) svg1.removeChild(svg1.firstChild);
+  var t1=+t1El.value, t2=+t2El.value, s1=SEL, upSel=(s1>0);
+  var st=ketVec(t1,s1);
+  var Pp=amp(st,t2,1); Pp=Pp*Pp; var Pm=1-Pp;
+
+  // ---- banda trasversale: le due macchine in sezione, con l'orientamento ϑ ----
+  txt(330,18,'— vista trasversale · sezione delle macchine —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
+  sgMagnet(200,96,t1,'Macchina 1  ϑ₁='+t1+'°',svg1);
+  sgMagnet(470,96,t2,'Macchina 2  ϑ₂='+t2+'°',svg1);
+
+  // ---- banda longitudinale: percorso degli atomi (larghezza ∝ flusso) ----
+  var yIn=250, ss=upSel?-1:1, yPlat=yIn+ss*34;
+  var selCol=upSel?ACC:BLU, blkCol=upSel?BLU:ACC;
+  el('line',{x1:30,y1:152,x2:630,y2:152,stroke:'#1c3a30','stroke-width':1},svg1);
+  txt(330,172,'— vista longitudinale · percorso degli atomi  (larghezza ∝ flusso) —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
+
+  txt(18,yIn-4,'⟶',{'font-size':18,fill:INK},svg1);
+  txt(14,yIn+18,'Ag',{'font-size':9,fill:'#6f8f80','font-family':'monospace'},svg1);
+  // fascio in ingresso: flusso pieno (linea spessa)
+  beam(40,yIn,200,yIn, fw(1), 1, INK, svg1);
+  // Macchina 1 divide il fascio in due (50/50): entrambi i rami visibili, metà spessore
+  curveBeam(200,yIn,272,yPlat, fw(0.5),1, selCol, svg1);
+  beam(272,yPlat,470,yPlat, fw(0.5),1, selCol, svg1);
+  curveBeam(200,yIn,258,yIn-ss*42, fw(0.5),.85, blkCol, svg1);
+  hatchStop(270,yIn-ss*42,svg1);
+  txt(288,yIn-ss*42+4,upSel?'−k':'+k',{'font-size':9,fill:'#6f8f80','font-family':'monospace'},svg1);
+  txt(360,yPlat-10,'|m'+'ϑ₁'+'='+(upSel?'+':'−')+'k⟩',{'font-size':10,fill:selCol,'font-family':'monospace','text-anchor':'middle'},svg1);
+  // Macchina 2 divide il fascio selezionato: spessore ∝ flusso (∝ probabilità)
+  curveBeam(470,yPlat,560,yPlat-36, fw(0.5*Pp),1, ACC, svg1);
+  curveBeam(470,yPlat,560,yPlat+36, fw(0.5*Pm),1, BLU, svg1);
+  beam(560,yPlat-36,610,yPlat-36, fw(0.5*Pp),1, ACC, svg1);
+  beam(560,yPlat+36,610,yPlat+36, fw(0.5*Pm),1, BLU, svg1);
+  detector(616,yPlat-36,ACC,svg1); detector(616,yPlat+36,BLU,svg1);
+  txt(628,yPlat-32,'+k',{'font-size':11,fill:ACC,'font-family':'monospace'},svg1);
+  txt(628,yPlat+40,'−k',{'font-size':11,fill:BLU,'font-family':'monospace'},svg1);
+  txt(596,yPlat-46,fmtPct(Pp),{'font-size':11,fill:ACC,'font-family':'monospace','font-weight':'bold','text-anchor':'end'},svg1);
+  txt(596,yPlat+54,fmtPct(Pm),{'font-size':11,fill:BLU,'font-family':'monospace','font-weight':'bold','text-anchor':'end'},svg1);
+
+  // ---- readout ----
+  document.getElementById('m1pv').textContent=fmtPct(Pp);
+  document.getElementById('m1mv').textContent=fmtPct(Pm);
+  document.getElementById('m1pf').style.width=(Pp*100)+'%';
+  document.getElementById('m1mf').style.width=(Pm*100)+'%';
+  document.getElementById('t1v').textContent=t1+'°';
+  document.getElementById('t2v').textContent=t2+'°';
+  document.getElementById('m1state').innerHTML='|m<sub>ϑ₁</sub>='+(s1>0?'+':'−')+'k⟩ = <span class="vec"><span>'+num(st[0])+'</span><span>'+num(st[1])+'</span></span>';
+  document.getElementById('m1amp').innerHTML='⟨m<sub>ϑ₂</sub>=+k | m<sub>ϑ₁</sub>='+(s1>0?'+':'−')+'k⟩ = cos( (ϑ₁−ϑ₂)/2 ) = <span class="num">'+num(amp(st,t2,1))+'</span>';
+  document.getElementById('m1prob').innerHTML='P = |amp|² = cos²( '+(t2-t1)+'°/2 ) = <b class="num">'+fmtPct(Pp)+'</b>';
+}
+
+/* plotter: P(+k) al variare di ϑ₂ (per lo stato preparato corrente) */
+var bubbleT=null;
+var plot1=makePlotter({svg:'plot1',stat:'stat1',rec:'rec1',fit:'fit1',xmin:0,xmax:360,xlabel:'ϑ₂ (°)',color:'#ff9d4d',
+  fn:function(x){ var st=ketVec(+t1El.value,SEL); var a=amp(st,x,1); return a*a; },
+  onDone:function(){ clearTimeout(bubbleT); bubbleT=setTimeout(function(){ document.getElementById('bubble').classList.add('show'); }, 1050); },
+  onReset:function(){ clearTimeout(bubbleT); document.getElementById('bubble').classList.remove('show'); }});
+
+function setSel(s){ SEL=s; [].forEach.call(document.getElementById('sel').children,function(c){c.classList.toggle('on',+c.getAttribute('data-s')===s);}); }
+
+t2El.addEventListener('input',function(){ drawExp1(); plot1.record(+t2El.value); });
+t1El.addEventListener('input',function(){ drawExp1(); plot1.reset(); plot1.record(+t2El.value); });
+document.getElementById('sel').addEventListener('click',function(e){
+  var b=e.target.closest('button'); if(!b) return; SEL=+b.getAttribute('data-s');
+  [].forEach.call(this.children,function(c){c.classList.toggle('on',c===b);}); drawExp1(); plot1.reset(); plot1.record(+t2El.value); });
+document.getElementById('clr1').addEventListener('click',function(){ plot1.reset(); });
+
+/* preset (casi della tesi: fig.3 ϑ=0, fig.4 ϑ=90, fig.5 entrambe inclinate) */
+var P1=[
+  ['ϑ₂=ϑ₁ · 100%',function(){t1El.value=0;t2El.value=0;setSel(1);}],
+  ['ϑ=0° · fig.3',function(){t1El.value=0;t2El.value=0;setSel(1);}],
+  ['ϑ=90° · fig.4',function(){t1El.value=0;t2El.value=90;setSel(1);}],
+  ['180° · flip',function(){t1El.value=0;t2El.value=180;setSel(1);}],
+  ['entrambe inclinate · fig.5',function(){t1El.value=30;t2El.value=75;setSel(1);}]
+];
+var host=document.getElementById('presets1');
+P1.forEach(function(p){ var b=document.createElement('button'); b.className='sim-preset'; b.type='button'; b.textContent=p[0];
+  b.addEventListener('click',function(){ p[1](); drawExp1(); plot1.reset(); plot1.record(+t2El.value); }); host.appendChild(b); });
+
+initBackLink('02-stern-gerlach-cascata.html');
+drawExp1(); plot1.record(+t2El.value);
+</script>
+</body>
+</html>

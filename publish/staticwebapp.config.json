@@ -7,25 +7,332 @@
   "routes": [
     {
       "route": "/img/*",
-      "headers": { "cache-control": "public, max-age=604800, immutable" }
+      "headers": {
+        "cache-control": "public, max-age=604800, immutable"
+      }
     },
     {
       "route": "/assets/*",
-      "headers": { "cache-control": "public, max-age=604800, immutable" }
+      "headers": {
+        "cache-control": "public, max-age=604800, immutable"
+      }
     },
-    { "route": "/sim-esp1.html", "redirect": "/lab-02a-sg-angolo-relativo.html", "statusCode": 301 },
-    { "route": "/sim-esp1", "redirect": "/lab-02a-sg-angolo-relativo.html", "statusCode": 301 },
-    { "route": "/sim-esp2.html", "redirect": "/lab-02b-sg-tre-macchine.html", "statusCode": 301 },
-    { "route": "/sim-esp2", "redirect": "/lab-02b-sg-tre-macchine.html", "statusCode": 301 },
-    { "route": "/sim-esp3.html", "redirect": "/lab-02c-sg-ricombinazione.html", "statusCode": 301 },
-    { "route": "/sim-esp3", "redirect": "/lab-02c-sg-ricombinazione.html", "statusCode": 301 },
-    { "route": "/sim-esp4.html", "redirect": "/lab-02d-sg-sfasamento.html", "statusCode": 301 },
-    { "route": "/sim-esp4", "redirect": "/lab-02d-sg-sfasamento.html", "statusCode": 301 },
-    { "route": "/sim-stern-gerlach.html", "redirect": "/02-stern-gerlach-cascata.html", "statusCode": 301 },
-    { "route": "/sim-stern-gerlach", "redirect": "/02-stern-gerlach-cascata.html", "statusCode": 301 }
+    {
+      "route": "/sim-esp1.html",
+      "redirect": "/it/lab-02a-sg-angolo-relativo",
+      "statusCode": 301
+    },
+    {
+      "route": "/sim-esp1",
+      "redirect": "/it/lab-02a-sg-angolo-relativo",
+      "statusCode": 301
+    },
+    {
+      "route": "/sim-esp2.html",
+      "redirect": "/it/lab-02b-sg-tre-macchine",
+      "statusCode": 301
+    },
+    {
+      "route": "/sim-esp2",
+      "redirect": "/it/lab-02b-sg-tre-macchine",
+      "statusCode": 301
+    },
+    {
+      "route": "/sim-esp3.html",
+      "redirect": "/it/lab-02c-sg-ricombinazione",
+      "statusCode": 301
+    },
+    {
+      "route": "/sim-esp3",
+      "redirect": "/it/lab-02c-sg-ricombinazione",
+      "statusCode": 301
+    },
+    {
+      "route": "/sim-esp4.html",
+      "redirect": "/it/lab-02d-sg-sfasamento",
+      "statusCode": 301
+    },
+    {
+      "route": "/sim-esp4",
+      "redirect": "/it/lab-02d-sg-sfasamento",
+      "statusCode": 301
+    },
+    {
+      "route": "/sim-stern-gerlach.html",
+      "redirect": "/it/02-stern-gerlach-cascata",
+      "statusCode": 301
+    },
+    {
+      "route": "/sim-stern-gerlach",
+      "redirect": "/it/02-stern-gerlach-cascata",
+      "statusCode": 301
+    },
+    {
+      "route": "/01-stern-gerlach",
+      "redirect": "/it/01-stern-gerlach",
+      "statusCode": 301
+    },
+    {
+      "route": "/01-stern-gerlach.html",
+      "redirect": "/it/01-stern-gerlach",
+      "statusCode": 301
+    },
+    {
+      "route": "/02-stern-gerlach-cascata",
+      "redirect": "/it/02-stern-gerlach-cascata",
+      "statusCode": 301
+    },
+    {
+      "route": "/02-stern-gerlach-cascata.html",
+      "redirect": "/it/02-stern-gerlach-cascata",
+      "statusCode": 301
+    },
+    {
+      "route": "/03-elettroni",
+      "redirect": "/it/03-elettroni",
+      "statusCode": 301
+    },
+    {
+      "route": "/03-elettroni.html",
+      "redirect": "/it/03-elettroni",
+      "statusCode": 301
+    },
+    {
+      "route": "/04-diffrazione",
+      "redirect": "/it/04-diffrazione",
+      "statusCode": 301
+    },
+    {
+      "route": "/04-diffrazione.html",
+      "redirect": "/it/04-diffrazione",
+      "statusCode": 301
+    },
+    {
+      "route": "/05-rutherford",
+      "redirect": "/it/05-rutherford",
+      "statusCode": 301
+    },
+    {
+      "route": "/05-rutherford.html",
+      "redirect": "/it/05-rutherford",
+      "statusCode": 301
+    },
+    {
+      "route": "/06-ulteriori-sviluppi",
+      "redirect": "/it/06-ulteriori-sviluppi",
+      "statusCode": 301
+    },
+    {
+      "route": "/06-ulteriori-sviluppi.html",
+      "redirect": "/it/06-ulteriori-sviluppi",
+      "statusCode": 301
+    },
+    {
+      "route": "/07-franck-hertz",
+      "redirect": "/it/07-franck-hertz",
+      "statusCode": 301
+    },
+    {
+      "route": "/07-franck-hertz.html",
+      "redirect": "/it/07-franck-hertz",
+      "statusCode": 301
+    },
+    {
+      "route": "/08-effetto-fotoelettrico",
+      "redirect": "/it/08-effetto-fotoelettrico",
+      "statusCode": 301
+    },
+    {
+      "route": "/08-effetto-fotoelettrico.html",
+      "redirect": "/it/08-effetto-fotoelettrico",
+      "statusCode": 301
+    },
+    {
+      "route": "/09-spettri-atomici",
+      "redirect": "/it/09-spettri-atomici",
+      "statusCode": 301
+    },
+    {
+      "route": "/09-spettri-atomici.html",
+      "redirect": "/it/09-spettri-atomici",
+      "statusCode": 301
+    },
+    {
+      "route": "/errata",
+      "redirect": "/it/errata",
+      "statusCode": 301
+    },
+    {
+      "route": "/errata.html",
+      "redirect": "/it/errata",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-01-stern-gerlach",
+      "redirect": "/it/lab-01-stern-gerlach",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-01-stern-gerlach.html",
+      "redirect": "/it/lab-01-stern-gerlach",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-02a-sg-angolo-relativo",
+      "redirect": "/it/lab-02a-sg-angolo-relativo",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-02a-sg-angolo-relativo.html",
+      "redirect": "/it/lab-02a-sg-angolo-relativo",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-02b-sg-tre-macchine",
+      "redirect": "/it/lab-02b-sg-tre-macchine",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-02b-sg-tre-macchine.html",
+      "redirect": "/it/lab-02b-sg-tre-macchine",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-02c-sg-ricombinazione",
+      "redirect": "/it/lab-02c-sg-ricombinazione",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-02c-sg-ricombinazione.html",
+      "redirect": "/it/lab-02c-sg-ricombinazione",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-02d-sg-sfasamento",
+      "redirect": "/it/lab-02d-sg-sfasamento",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-02d-sg-sfasamento.html",
+      "redirect": "/it/lab-02d-sg-sfasamento",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-03a-corrente-vuoto",
+      "redirect": "/it/lab-03a-corrente-vuoto",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-03a-corrente-vuoto.html",
+      "redirect": "/it/lab-03a-corrente-vuoto",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-03b-deflessione-em",
+      "redirect": "/it/lab-03b-deflessione-em",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-03b-deflessione-em.html",
+      "redirect": "/it/lab-03b-deflessione-em",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-03c-millikan",
+      "redirect": "/it/lab-03c-millikan",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-03c-millikan.html",
+      "redirect": "/it/lab-03c-millikan",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-04-diffrazione",
+      "redirect": "/it/lab-04-diffrazione",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-04-diffrazione.html",
+      "redirect": "/it/lab-04-diffrazione",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-05-rutherford",
+      "redirect": "/it/lab-05-rutherford",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-05-rutherford.html",
+      "redirect": "/it/lab-05-rutherford",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-07-franck-hertz",
+      "redirect": "/it/lab-07-franck-hertz",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-07-franck-hertz.html",
+      "redirect": "/it/lab-07-franck-hertz",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-08-fotoelettrico",
+      "redirect": "/it/lab-08-fotoelettrico",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-08-fotoelettrico.html",
+      "redirect": "/it/lab-08-fotoelettrico",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-09-spettri",
+      "redirect": "/it/lab-09-spettri",
+      "statusCode": 301
+    },
+    {
+      "route": "/lab-09-spettri.html",
+      "redirect": "/it/lab-09-spettri",
+      "statusCode": 301
+    },
+    {
+      "route": "/nota-01-stern-gerlach",
+      "redirect": "/it/nota-01-stern-gerlach",
+      "statusCode": 301
+    },
+    {
+      "route": "/nota-01-stern-gerlach.html",
+      "redirect": "/it/nota-01-stern-gerlach",
+      "statusCode": 301
+    },
+    {
+      "route": "/nota-02-prodotto-scalare",
+      "redirect": "/it/nota-02-prodotto-scalare",
+      "statusCode": 301
+    },
+    {
+      "route": "/nota-02-prodotto-scalare.html",
+      "redirect": "/it/nota-02-prodotto-scalare",
+      "statusCode": 301
+    },
+    {
+      "route": "/nota-tecnica-01-stern-gerlach",
+      "redirect": "/it/nota-tecnica-01-stern-gerlach",
+      "statusCode": 301
+    },
+    {
+      "route": "/nota-tecnica-01-stern-gerlach.html",
+      "redirect": "/it/nota-tecnica-01-stern-gerlach",
+      "statusCode": 301
+    }
   ],
   "responseOverrides": {
-    "404": { "rewrite": "/index.html", "statusCode": 404 }
+    "404": {
+      "rewrite": "/index.html",
+      "statusCode": 404
+    }
   },
   "mimeTypes": {
     ".json": "application/json",

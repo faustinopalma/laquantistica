@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://laquantistica.com/en/lab-02b-sg-tre-macchine">
+<title>Lab · Cascaded Stern–Gerlach: three machines — La Quantistica</title>
+<meta name="description" content="Interactive simulator of Experiment 2 (cascaded Stern–Gerlach): three machines. Rotating the first changes the intensity but not the ratio in which the third splits the beam: the state after the second machine is independent of the first.">
+<link rel="stylesheet" href="/assets/lang.css?v=7">
+<link rel="stylesheet" href="/assets/note.css?v=4">
+<link rel="stylesheet" href="/assets/sim-sg.css?v=10">
+<link rel="alternate" hreflang="it" href="https://laquantistica.com/it/lab-02b-sg-tre-macchine">
+<link rel="alternate" hreflang="en" href="https://laquantistica.com/en/lab-02b-sg-tre-macchine">
+<link rel="alternate" hreflang="x-default" href="https://laquantistica.com/en/lab-02b-sg-tre-macchine">
+<link rel="stylesheet" href="/assets/lang-links.css?v=1">
+</head>
+<body>
+<main class="console" id="top">
+  <header class="con-head">
+    <div class="con-brand">
+      <a class="con-back" id="backTop" href="02-stern-gerlach-cascata.html"><span class="en">← Back to Chapter 2</span></a>
+      <span class="tag amber"><span class="en">Experiment 2</span></span>
+      <span class="con-title"><span class="en">Cascaded Stern-Gerlach</span></span>
+    </div>
+    <div class="con-actions">
+      <div class="langsw" role="group" aria-label="Lingua / Language">
+        <a class="langbtn" href="../it/lab-02b-sg-tre-macchine.html" hreflang="it" lang="it">Italiano</a>
+        <a class="langbtn" href="../en/lab-02b-sg-tre-macchine.html" hreflang="en" lang="en" aria-current="true">English</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="panel">
+    <div class="stagecol">
+      <div class="sim-stage"><svg id="svg1" viewBox="0 0 720 440" role="img" aria-label="Esperimento 2: tre macchine di Stern-Gerlach in cascata"></svg></div>
+      <div class="plotter">
+        <div class="plot-head"><span class="plot-title">Plotter</span><span class="plot-sub">rapporto(+k @ M3) — ϑ₁</span>
+          <span class="leds"><span class="led rec" id="rec1">● REC</span><span class="led fit" id="fit1">● FIT</span></span>
+          <button class="plot-clr" type="button" id="clr1">CLR</button></div>
+        <div class="plot-screen"><svg id="plot1" viewBox="0 0 660 210" role="img" aria-label="grafico delle misure"></svg></div>
+        <div class="plot-status" id="stat1"></div>
+        <div class="fumetto" id="bubble"><span class="en">The ratio <b>does not depend</b> on ϑ₁.</span></div>
+      </div>
+    </div>
+    <aside class="ctrlcol">
+      <p class="panel-lede"><span class="en">Three machines in cascade. <b>M1</b> and <b>M2</b> select a state, <b>M3</b> measures. Rotating <b>ϑ₁</b> changes the <b>intensity</b> reaching M3 (line width ∝ flux), but <b>not</b> the <b>ratio</b> with which M3 splits it: that ratio depends only on <b>ϑ₃−ϑ₂</b>. The state after M2 is therefore independent of M1.</span></p>
+      <div class="sim-presets" id="presets1"></div>
+      <div class="sim-controls">
+        <div class="ctl"><label><span class="en">Machine 2&nbsp; ϑ₂</span></label><input type="range" id="t2" min="0" max="360" step="1" value="45"><span class="val" id="t2v">45°</span></div>
+        <div class="ctl"><label><span class="en">Machine 3&nbsp; ϑ₃</span></label><input type="range" id="t3" min="0" max="360" step="1" value="90"><span class="val" id="t3v">90°</span></div>
+        <div class="ctl driver"><label><span class="en">Machine 1&nbsp; ϑ₁</span></label><input type="range" id="t1" min="0" max="360" step="1" value="0"><span class="val" id="t1v">0°</span></div>
+        <p class="drives-cap"><span class="en">Now move <b>ϑ₁</b> to <b>trace</b>: the curve stays flat, it does not depend on ϑ₁.</span></p>
+      </div>
+      <div class="pbars">
+        <div class="pbar" id="m3plus"><div class="pk">rapporto( m<sub>ϑ₃</sub> = +k )</div><div class="pv" id="p3v">85%</div><div class="track"><div class="fill" id="p3f"></div></div></div>
+        <div class="pbar minus" id="m3minus"><div class="pk">rapporto( m<sub>ϑ₃</sub> = −k )</div><div class="pv" id="p3mv">15%</div><div class="track"><div class="fill" id="p3mf"></div></div></div>
+      </div>
+      <div class="sim-math" id="math1">
+        <div class="mrow"><span class="lab en">State after M2:</span><span class="ket" id="mstate"></span></div>
+        <div class="mrow"><span class="lab en">Intensity at M3 (∝ ϑ₁):</span><span id="mint"></span></div>
+        <div class="mrow"><span class="lab en">Ratio at M3 (indep. of ϑ₁):</span><span id="mratio"></span></div>
+      </div>
+      <p class="hint"><span class="en">Move ϑ₁: the lines get thinner/thicker (the flux changes) but the ratio at M3 — and the plotter line — stay flat.</span></p>
+    </aside>
+  </section>
+
+  <div class="rotate-msg">
+    <div class="big">📱</div>
+    <div class="t1"><span class="en">Rotate your phone to landscape</span></div>
+    <div class="t2"><span class="en">This interactive experiment is cramped in portrait. Turn your phone to <b>landscape</b> to see it all (even if small). For a better experience, open it on a <b>desktop</b> or a <b>tablet</b> with a large enough screen.</span></div>
+  </div>
+  <div class="back-bottom"><a class="con-back" id="backBottom" href="02-stern-gerlach-cascata.html"><span class="en">← Back to Chapter 2</span></a></div>
+  <div class="con-foot"><span class="en">La Quantistica · Local lab · Ch. 02</span><span>F. Palma</span></div>
+</main>
+
+<script src="/assets/sim-sg-core.js?v=2"></script>
+<script>
+var svg1 = document.getElementById('svg1');
+var t1El = document.getElementById('t1'), t2El = document.getElementById('t2'), t3El = document.getElementById('t3');
+function fw(f){ return 0.6 + f * 8; }   // larghezza linea ∝ flusso
+
+function drawExp2(){
+  while(svg1.firstChild) svg1.removeChild(svg1.firstChild);
+  var t1=+t1El.value, t2=+t2El.value, t3=+t3El.value;
+  var st1=ketVec(t1,1);
+  var P2=amp(st1,t2,1); P2=P2*P2;          // prob. che M2 misuri +k
+  var flux2=0.5*P2;                        // flusso uscente da M2 (ramo +k selezionato)
+  var st2=ketVec(t2,1);
+  var P3=amp(st2,t3,1); P3=P3*P3;          // rapporto +k a M3
+  var P3m=1-P3;
+  var fUp=flux2*P3, fDn=flux2*P3m;         // flussi ai rivelatori
+
+  // ---- banda trasversale: le tre macchine in sezione ----
+  txt(360,18,'— vista trasversale · sezione delle macchine —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
+  sgMagnet(150,92,t1,'M1  ϑ₁='+t1+'°',svg1);
+  sgMagnet(360,92,t2,'M2  ϑ₂='+t2+'°',svg1);
+  sgMagnet(570,92,t3,'M3  ϑ₃='+t3+'°',svg1);
+
+  // ---- banda longitudinale: percorso (larghezza ∝ flusso), a gradini ----
+  var yIn=332, plat1=yIn-30, plat2=yIn-60;
+  // ---- separatore: le due viste sono distinte e non vanno sovrapposte ----
+  el('line',{x1:40,y1:150,x2:680,y2:150,stroke:'#1c3a30','stroke-width':1},svg1);
+  txt(360,168,'— vista longitudinale · percorso  (larghezza ∝ flusso) —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
+
+  txt(16,yIn-4,'⟶',{'font-size':18,fill:INK},svg1);
+  txt(12,yIn+18,'Ag',{'font-size':9,fill:'#6f8f80','font-family':'monospace'},svg1);
+  beam(38,yIn,150,yIn, fw(1),1, INK, svg1);
+  // Macchina 1: divide 50/50, +k selezionato (deviato in su), −k fermato
+  curveBeam(150,yIn,216,plat1, fw(0.5),1, ACC, svg1);
+  beam(216,plat1,360,plat1, fw(0.5),1, ACC, svg1);
+  curveBeam(150,yIn,202,yIn+38, fw(0.5),.85, BLU, svg1);
+  hatchStop(214,yIn+38,svg1);
+  txt(232,yIn+42,'−k',{'font-size':9,fill:'#6f8f80','font-family':'monospace'},svg1);
+  txt(288,plat1-10,'|m'+'ϑ₁'+'=+k⟩',{'font-size':9,fill:ACC,'font-family':'monospace','text-anchor':'middle'},svg1);
+  // Macchina 2: divide, +k selezionato (flusso 0.5·P2), −k fermato
+  curveBeam(360,plat1,426,plat2, fw(flux2),1, ACC, svg1);
+  beam(426,plat2,570,plat2, fw(flux2),1, ACC, svg1);
+  curveBeam(360,plat1,412,plat1+38, fw(0.5*(1-P2)),.85, BLU, svg1);
+  hatchStop(424,plat1+38,svg1);
+  txt(442,plat1+42,'−k',{'font-size':9,fill:'#6f8f80','font-family':'monospace'},svg1);
+  txt(498,plat2-10,'|m'+'ϑ₂'+'=+k⟩',{'font-size':9,fill:ACC,'font-family':'monospace','text-anchor':'middle'},svg1);
+  // Macchina 3: misura -> due rivelatori (flusso ∝ intensità)
+  curveBeam(570,plat2,652,plat2-34, fw(fUp),1, ACC, svg1);
+  curveBeam(570,plat2,652,plat2+34, fw(fDn),1, BLU, svg1);
+  beam(652,plat2-34,694,plat2-34, fw(fUp),1, ACC, svg1);
+  beam(652,plat2+34,694,plat2+34, fw(fDn),1, BLU, svg1);
+  detector(700,plat2-34,ACC,svg1); detector(700,plat2+34,BLU,svg1);
+  txt(694,plat2-46,fmtPct(P3),{'font-size':11,fill:ACC,'font-family':'monospace','font-weight':'bold','text-anchor':'end'},svg1);
+  txt(694,plat2+56,fmtPct(P3m),{'font-size':11,fill:BLU,'font-family':'monospace','font-weight':'bold','text-anchor':'end'},svg1);
+
+  // ---- readout ----
+  document.getElementById('p3v').textContent=fmtPct(P3);
+  document.getElementById('p3mv').textContent=fmtPct(P3m);
+  document.getElementById('p3f').style.width=(P3*100)+'%';
+  document.getElementById('p3mf').style.width=(P3m*100)+'%';
+  document.getElementById('t1v').textContent=t1+'°';
+  document.getElementById('t2v').textContent=t2+'°';
+  document.getElementById('t3v').textContent=t3+'°';
+  document.getElementById('mstate').innerHTML='|m<sub>ϑ₂</sub>=+k⟩ = <span class="vec"><span>'+num(st2[0])+'</span><span>'+num(st2[1])+'</span></span>';
+  document.getElementById('mint').innerHTML='I = ½·cos²( (ϑ₁−ϑ₂)/2 ) = <span class="num">'+fmtPct(flux2)+'</span> <span style="color:#6f8f80">del fascio iniziale</span>';
+  document.getElementById('mratio').innerHTML='cos²( (ϑ₃−ϑ₂)/2 ) = cos²( '+(t3-t2)+'°/2 ) = <b class="num">'+fmtPct(P3)+'</b>';
+}
+
+/* plotter: rapporto(+k @ M3) al variare di ϑ₁ -> linea PIATTA (indipendenza da M1) */
+var bubbleT=null;
+var plot1=makePlotter({svg:'plot1',stat:'stat1',rec:'rec1',fit:'fit1',xmin:0,xmax:360,xlabel:'ϑ₁ (°)',color:'#ffb000',
+  fn:function(x){ var s2=ketVec(+t2El.value,1); var a=amp(s2,+t3El.value,1); return a*a; },
+  onDone:function(){ clearTimeout(bubbleT); bubbleT=setTimeout(function(){ document.getElementById('bubble').classList.add('show'); }, 1050); },
+  onReset:function(){ clearTimeout(bubbleT); document.getElementById('bubble').classList.remove('show'); }});
+
+t1El.addEventListener('input',function(){ drawExp2(); plot1.record(+t1El.value); });
+t2El.addEventListener('input',function(){ drawExp2(); plot1.reset(); plot1.record(+t1El.value); });
+t3El.addEventListener('input',function(){ drawExp2(); plot1.reset(); plot1.record(+t1El.value); });
+document.getElementById('clr1').addEventListener('click',function(){ plot1.reset(); });
+
+/* preset */
+var P2list=[
+  ['ϑ₃=ϑ₂ · M3=100%',function(){t1El.value=0;t2El.value=45;t3El.value=45;}],
+  ['ϑ₃−ϑ₂=90° · 50/50',function(){t1El.value=0;t2El.value=45;t3El.value=135;}],
+  ['fig.6',function(){t1El.value=0;t2El.value=45;t3El.value=90;}],
+  ['ruota M1 → stesso rapporto',function(){t1El.value=75;t2El.value=45;t3El.value=90;}]
+];
+var host=document.getElementById('presets1');
+P2list.forEach(function(p){ var b=document.createElement('button'); b.className='sim-preset'; b.type='button'; b.textContent=p[0];
+  b.addEventListener('click',function(){ p[1](); drawExp2(); plot1.reset(); plot1.record(+t1El.value); }); host.appendChild(b); });
+
+initBackLink('02-stern-gerlach-cascata.html');
+drawExp2(); plot1.record(+t1El.value);
+</script>
+</body>
+</html>
