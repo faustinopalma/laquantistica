@@ -12,13 +12,17 @@
     return null;
   }
 
-  // Italiano solo se e' la lingua principale del browser; in ogni altro caso inglese.
+  // Prima delle lingue dichiarate dall'utente, in ordine, che il sito parla (RFC 4647); poi inglese.
   function dalBrowser() {
     var l = (navigator.languages && navigator.languages.length)
-      ? navigator.languages[0]
-      : navigator.language;
-    if (!l) return 'en';
-    return String(l).toLowerCase().split('-')[0] === 'it' ? 'it' : 'en';
+      ? navigator.languages
+      : (navigator.language ? [navigator.language] : []);
+    for (var i = 0; i < l.length; i++) {
+      var t = String(l[i]).toLowerCase().split('-')[0];
+      if (t === 'it') return 'it';
+      if (t === 'en') return 'en';
+    }
+    return 'en';
   }
 
   function sincronizzaBottoni(l) {
