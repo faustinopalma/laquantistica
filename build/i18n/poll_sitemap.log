@@ -1,0 +1,5 @@
+[14:41:53] poll 1  http=200  indirizzi=52  conData=0  elapsed=1s
+[14:42:14] poll 2  http=200  indirizzi=52  conData=0  elapsed=21.4s
+[14:42:35] poll 3  http=200  indirizzi=52  conData=0  elapsed=41.7s
+[14:42:55] poll 4  http=200  indirizzi=52  conData=52  elapsed=62.1s
+VERDICT: sitemap online con le date dopo 62.2s
