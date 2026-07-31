@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Laboratorio simulato dell'Esperimento di Franck-Hertz: scegli neon o mercurio, esegui la scansione della tensione e osserva i massimi e i minimi della corrente e le zone luminose tra le griglie.">
+<title>Lab · Esperimento di Franck-Hertz — La Quantistica</title>
+<link rel="canonical" href="https://laquantistica.com/v2/it/lab-07-franck-hertz.html">
+<link rel="stylesheet" href="/assets/lang.css?v=7">
+<link rel="stylesheet" href="/assets/sim-sg.css?v=10">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0}
+  .console{min-height:auto;}
+  .panel{grid-template-columns:minmax(0,1fr) minmax(340px,420px);gap:clamp(1rem,2.5vw,2.4rem);flex:0 0 auto;align-items:start;}
+  .ctrlcol{overflow:visible;}
+  .stagecol{align-items:center;gap:.7rem;}
+  .stagecol .sim-stage{flex:0 0 auto;width:100%;margin:0;}
+  canvas.cv{width:100%;height:auto;display:block;}
+  .stage-wrap{max-width:760px;}
+  .plot-wrap{max-width:760px;}
+  .cpanel{background:#12151a;border:1px solid #2d333d;border-radius:8px;padding:.6rem .7rem;margin:0 0 .55rem;display:flex;flex-direction:column;gap:.5rem;}
+  .crow{display:flex;align-items:center;gap:.6rem;}
+  .crow .clab{font-family:var(--n-mono);font-size:.72rem;color:#9aa1ab;white-space:nowrap;}
+  .crow input[type=range]{flex:1 1 auto;min-width:0;accent-color:#35c8ff;height:22px;cursor:pointer;}
+  .crow input[type=range]:disabled{opacity:.35;cursor:default;}
+  .crow .cval{font-family:var(--n-mono);font-size:.82rem;font-weight:700;color:#35c8ff;min-width:4.6em;text-align:right;}
+  .segrow{display:grid;gap:.4rem;}
+  .segrow.c2{grid-template-columns:1fr 1fr;}
+  .segrow.c3{grid-template-columns:1fr 1fr 1fr;}
+  .segrow button{font-family:var(--n-mono);font-size:.72rem;font-weight:700;background:#20262e;border:1px solid #3d444f;color:#9aa1ab;border-radius:6px;padding:.45rem .3rem;cursor:pointer;transition:.15s;line-height:1.15;}
+  .segrow button.on{background:#173a2c;border-color:#2b7a4b;color:#7fffc4;}
+  .seglab{font-family:var(--n-mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:#727982;margin:.1rem 0 -.15rem;}
+  .btnrow3{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:.4rem;}
+  .simbtn{font-family:var(--n-mono);font-size:.78rem;font-weight:700;background:#2a2f38;border:1px solid #3d444f;color:#c7ccd4;border-radius:6px;padding:.5rem .4rem;cursor:pointer;transition:.15s;text-align:center;}
+  .simbtn:hover{background:#b06a12;color:#fff;border-color:#b06a12;}
+  .simbtn.run.on{background:#6b1212;border-color:#ff5c5c;color:#ffdede;}
+  .simbtn.ghost{background:transparent;border-color:#2d333d;color:#8b929c;}
+  .simbtn.ghost:hover{background:#20262e;color:#c7ccd4;border-color:#3d444f;}
+  .readout{background:#12151a;border:1px solid #2d333d;border-radius:8px;padding:.55rem .8rem;margin:0 0 .5rem;font-family:var(--n-mono);font-size:.78rem;color:#aeb4bd;line-height:1.75;}
+  .readout b{color:#ffb000;font-weight:700;}
+  .readout .cyan{color:#35c8ff;}
+  .readout .big{font-size:1.15rem;}
+  .readout .sep{border-top:1px dashed #2d333d;margin:.4rem 0 .35rem;}
+  .warn{background:#2a1410;border:1px solid #7a3a24;border-radius:8px;padding:.5rem .75rem;margin:0 0 .5rem;font-family:var(--n-mono);font-size:.74rem;line-height:1.6;color:#ffbfa3;}
+  .warn b{color:#ffb000;}
+  .hint{font-size:.72rem;color:#8b929c;margin:.1rem 0 0;}
+  .hint b{color:#aeb4bd;}
+  /* Le due colonne scorrono in modo INDIPENDENTE: si possono scorrere i comandi a destra
+     senza spostare l'apparato a sinistra (e viceversa). La pagina in sé non scorre. */
+  @media (min-width:821px){
+    html,body{height:100%;overflow:hidden;}
+    .console{height:100vh;min-height:0;overflow:hidden;}
+    .console .panel{flex:1 1 auto;min-height:0;align-items:stretch;}
+    .console .stagecol{overflow-y:auto;min-height:0;}
+    .console .ctrlcol{overflow-y:auto;min-height:0;}
+  }
+  @media (max-width:820px) and (orientation:landscape){
+    html,body{height:100%;overflow:hidden;}
+    .console{height:100vh;min-height:0;overflow:hidden;}
+    .console .panel{flex:1 1 auto;min-height:0;align-items:stretch;}
+    .console .stagecol{overflow-y:auto;min-height:0;}
+    .console .ctrlcol{overflow-y:auto;min-height:0;}
+  }
+</style>
+<link rel="alternate" hreflang="it" href="https://laquantistica.com/v2/it/lab-07-franck-hertz.html">
+<link rel="alternate" hreflang="en" href="https://laquantistica.com/v2/en/lab-07-franck-hertz.html">
+<link rel="alternate" hreflang="x-default" href="https://laquantistica.com/v2/en/lab-07-franck-hertz.html">
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="/assets/lang-links.css?v=1">
+</head>
+<body>
+<main class="console" id="top">
+  <header class="con-head">
+    <div class="con-brand">
+      <a class="con-back" id="backTop" href="07-franck-hertz.html"><span class="it">← Torna al Capitolo 7</span></a>
+      <span class="tag amber">Lab · Cap. 7</span>
+      <span class="con-title"><span class="it">Esperimento di Franck-Hertz</span></span>
+    </div>
+    <div class="con-actions">
+      <div class="langsw" role="group" aria-label="Lingua / Language">
+        <a class="langbtn" href="../it/lab-07-franck-hertz.html" hreflang="it" lang="it" aria-current="true">Italiano</a>
+        <a class="langbtn" href="../en/lab-07-franck-hertz.html" hreflang="en" lang="en">English</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="panel">
+    <div class="stagecol">
+      <div class="sim-stage stage-wrap"><canvas id="stage" class="cv" width="760" height="330" role="img" aria-label="Sezione dell'ampolla: filamento A, griglie B e C, elettrodo D; tra le griglie compaiono le zone luminose dove gli elettroni cedono energia agli atomi."></canvas></div>
+      <div class="sim-stage plot-wrap"><canvas id="plot" class="cv" width="760" height="330" role="img" aria-label="Schermo dell'oscilloscopio: corrente I in funzione della tensione VBC, con i massimi e i minimi caratteristici."></canvas></div>
+    </div>
+
+    <aside class="ctrlcol">
+      <div class="cpanel">
+        <div class="seglab"><span class="it">Gas nell'ampolla</span></div>
+        <div class="segrow c2" id="segGas">
+          <button type="button" data-v="ne" class="on"><span class="it">Neon<br>0–80 V</span></button>
+          <button type="button" data-v="hg"><span class="it">Mercurio<br>0–30 V · forno</span></button>
+        </div>
+        <div class="seglab"><span class="it">Modello di atomo</span></div>
+        <div class="segrow c2" id="segModel">
+          <button type="button" data-v="q" class="on"><span class="it">Livelli quantizzati</span></button>
+          <button type="button" data-v="c"><span class="it">Classico (continuo)</span></button>
+        </div>
+        <div class="crow">
+          <span class="clab">V<sub>BC</sub></span>
+          <input type="range" id="vbc" min="0" max="80" step="0.2" value="0">
+          <span class="cval" id="vbcv">0,0 V</span>
+        </div>
+        <div class="crow">
+          <span class="clab">V<sub>CD</sub> <span class="it">(freno)</span></span>
+          <input type="range" id="vcd" min="0" max="10" step="0.5" value="5">
+          <span class="cval" id="vcdv">5,0 V</span>
+        </div>
+        <div class="crow">
+          <span class="clab"><span class="it">Filamento</span></span>
+          <input type="range" id="fil" min="40" max="100" step="1" value="75">
+          <span class="cval" id="filv">75%</span>
+        </div>
+        <div class="crow" id="ovenRow">
+          <span class="clab"><span class="it">Forno</span></span>
+          <input type="range" id="oven" min="120" max="210" step="1" value="160">
+          <span class="cval" id="ovenv">160 °C</span>
+        </div>
+        <div class="seglab"><span class="it">Velocità di scansione</span></div>
+        <div class="segrow c3" id="segSpeed">
+          <button type="button" data-v="2"><span class="it">lenta</span></button>
+          <button type="button" data-v="6" class="on"><span class="it">media</span></button>
+          <button type="button" data-v="18"><span class="it">rapida</span></button>
+        </div>
+        <div class="btnrow3">
+          <button class="simbtn run" id="run" type="button"></button>
+          <button class="simbtn ghost" id="hold" type="button"><span class="it">Congela</span></button>
+          <button class="simbtn ghost" id="clr" type="button"><span class="it">Azzera</span></button>
+        </div>
+      </div>
+
+      <div class="warn" id="warnBox" hidden></div>
+
+      <div class="readout">
+        <div><span class="it">Corrente</span> I: <b class="big" id="rI">—</b></div>
+        <div><span class="it">Zone luminose tra le griglie</span>: <b id="rZ">0</b> <span id="rZn"></span></div>
+        <div class="sep"></div>
+        <div><span class="it">Massimi individuati</span>: <span class="cyan"><b id="rM" style="color:inherit">—</b></span></div>
+        <div><span class="it">Distanza media fra i massimi</span> ΔV: <b id="rDV">—</b></div>
+        <div><span class="it">Primo livello dedotto</span> ΔE = e·ΔV: <b id="rDE">—</b></div>
+      </div>
+
+      <p class="hint"><span class="it">Premi <b>SCANSIONE</b>: la tensione V<sub>BC</sub> sale lentamente e sull'oscilloscopio si disegna la curva I(V). Classicamente la corrente dovrebbe solo <b>crescere</b>; invece a intervalli regolari <b>cala</b>: gli elettroni che raggiungono l'energia del primo livello la cedono in blocco agli atomi e non superano più il freno V<sub>CD</sub>. Ogni calo aggiunge una <b>zona luminosa</b> tra le griglie — il neon la mostra rossa, il mercurio emette nell'ultravioletto e non si vede. La distanza fra i massimi <b>misura il livello</b>: ~19 V per il neon, ~5 V per il mercurio. Passa al modello <b>classico</b> per il confronto: curva monotòna, ampolla buia.</span></p>
+    </aside>
+  </section>
+
+  <div class="rotate-msg">
+    <div class="big">📱</div>
+    <div class="t1"><span class="it">Ruota il telefono in orizzontale</span></div>
+    <div class="t2"><span class="it">Questo esperimento interattivo sta stretto in verticale. Gira il telefono in <b>orizzontale</b> per vederlo tutto (anche se piccolo). Per un'esperienza migliore aprilo da <b>computer</b> o da <b>tablet</b> con schermo abbastanza grande.</span></div>
+  </div>
+  <div class="back-bottom"><a class="con-back" id="backBottom" href="07-franck-hertz.html"><span class="it">← Torna al Capitolo 7</span></a></div>
+  <div class="con-foot"><span>La Quantistica · Lab locale · Cap. 07</span><span>F. Palma</span></div>
+</main>
+
+<script src="/assets/sim-sg-core.js?v=2"></script>
+<script>
+(function(){
+'use strict';
+var REDUCE=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+function L(it,en){ return document.documentElement.getAttribute('data-lang')==='en'?en:it; }
+function $(id){ return document.getElementById(id); }
+function nfmt(x,d){ var s=x.toFixed(d); return L(s.replace('.',','),s); }
+
+/* ---------------- gas ---------------- */
+/* dE e soglie prese dalle misure del capitolo: neon zone a 19-38-57 V (la quarta appena
+   accennata a 80 V), mercurio sei massimi nell'intervallo 0-30 V */
+var GAS={
+  ne:{dE:19.0, vmax:80, w:0.10, glow:'255,88,50', glowName:{it:'rosse',en:'red'},
+      nm:{it:'Neon',en:'Neon'}, lvl:'≈ 19 eV'},
+  hg:{dE:4.9, vmax:30, w:0.16, glow:'150,120,255', glowName:{it:'UV (invisibili)',en:'UV (invisible)'},
+      nm:{it:'Mercurio',en:'Mercury'}, lvl:'4,9 eV'}
+};
+
+/* ---------------- stato ---------------- */
+var gas='ne', model='q', speed=6;
+var Vbc=0, Vcd=5, fil=75, oven=160;
+var running=false, trace=[], maxima=[];
+
+/* ---------------- fisica ---------------- */
+function G(){ return GAS[gas]; }
+function densFac(){                       /* vapore di mercurio: serve il forno */
+  if(gas==='ne') return 1;
+  var t=(oven-160)/22;                    /* densità ∝ tensione di vapore (esponenziale) */
+  return Math.exp(t);
+}
+function collFrac(){                      /* frazione di elettroni che urta davvero */
+  var d=densFac();
+  return d/(1+d);                         /* 0.5 a 160 °C, →1 a caldo, →0 a freddo */
+}
+function collEff(){                       /* efficienza degli urti: 1 nelle condizioni nominali */
+  return Math.min(1,2*collFrac());
+}
+function meanI(V){
+  var g=G(), amp=Math.pow(fil/75,3)*0.9;  /* emissione termoionica del filamento */
+  var ramp=Math.pow(Math.max(V-0.6,0),1.35)/Math.pow(g.vmax-0.6,1.35);
+  var att=(gas==='hg')?Math.exp(-Math.max(densFac()-1,0)*0.7):1;   /* forno troppo caldo: nebbia */
+  var base=amp*ramp*Math.exp(-Vcd/9)*att*100;                       /* scala in nA */
+  if(model==='c') return base;
+  var p=V/g.dE;
+  if(p<=0||Math.round(p)<1) return base;   /* nessun minimo prima del primo livello */
+  var xf=p-Math.round(p), w=g.w;   /* buca stretta: il massimo cade poco prima del minimo */
+  var dip=Math.exp(-(xf*xf)/(2*w*w));
+  var depth=Math.min(0.85,(0.30+0.055*Vcd))*collEff();
+  return base*(1-depth*dip);
+}
+/* fondo scala reale: con il freno alto il picco della curva supera I(Vmax) */
+var _scK='', _scV=1e-9;
+function Ipeak(){
+  var k=gas+model+'|'+Vcd+'|'+fil+'|'+oven;
+  if(k!==_scK){
+    _scK=k; var g=G(), m=0;
+    for(var v=0;v<=g.vmax;v+=g.vmax/240){ var y=meanI(v); if(y>m) m=y; }
+    _scV=m||1e-9;
+  }
+  return _scV;
+}
+function nZones(V){
+  if(model==='c') return 0;
+  var g=G(), n=Math.floor(V/g.dE+1e-9);
+  return Math.max(0,n);
+}
+
+/* ---------------- canvas ---------------- */
+function ctxOf(cv,LW,LH){
+  var dpr=Math.min(2,window.devicePixelRatio||1);
+  var w=cv.clientWidth||LW, W=Math.round(w*dpr), H=Math.round(w*LH/LW*dpr);
+  if(cv.width!==W||cv.height!==H){ cv.width=W; cv.height=H; }
+  var c=cv.getContext('2d'); var s=cv.width/LW;
+  c.setTransform(s,0,0,s,0,0);
+  c.clearRect(0,0,LW,LH);
+  return c;
+}
+var SW=760, SH=330, PW=760, PH=330;
+var stage=$('stage'), plotc=$('plot');
+
+/* ---------------- vista ampolla ---------------- */
+var XA=90, XB=170, XC=560, XD=650;       /* filamento, griglia B, griglia C, elettrodo D */
+var YT=70, YB=260, YM=(YT+YB)/2;
+var parts=[], spawnAcc=0, glowPulse=0;
+function zonesX(){
+  /* la k-esima zona sta dove la caduta di potenziale dall'inizio vale k·dE */
+  var g=G(), n=nZones(Vbc), a=[];
+  for(var k=1;k<=n;k++){ var f=k*g.dE/Vbc; if(f<=1) a.push(XB+f*(XC-XB)); }
+  return a;
+}
+function spawn(){
+  parts.push({x:XA+6,y:YM+(Math.random()-0.5)*(YB-YT-40),v:0.25,st:0,k:0,nc:0,life:1});
+}
+function stepParts(dt){
+  var perSec=(REDUCE?6:20)*Math.pow(fil/75,2);
+  spawnAcc+=dt*perSec;
+  while(spawnAcc>=1){ spawnAcc-=1; spawn(); }
+  var g=G(), zx=zonesX(), cf=collFrac();
+  for(var i=parts.length-1;i>=0;i--){
+    var p=parts[i];
+    if(p.st===3){ p.life-=dt*2.2; if(p.life<=0) parts.splice(i,1); continue; }
+    if(p.st===0){                           /* A → B */
+      p.x+=140*dt;
+      if(p.x>=XB){ p.st=1; p.e=0; p.v=60; }
+    } else if(p.st===1){                    /* B → C, accelerato */
+      var Efield=Vbc/(XC-XB);
+      p.v+=Efield*430*dt; p.x+=p.v*dt;
+      p.e=Vbc*(p.x-XB)/(XC-XB);
+      if(model==='q'&&p.k<zx.length&&p.x>=zx[p.k]){
+        if(Math.random()<cf){ p.v=25; p.nc++; glowPulse=1; }   /* urto anelastico: cede dE */
+        p.k++;                                                 /* zona attraversata, con o senza urto */
+      }
+      if(p.x>=XC){
+        var Eres=(model==='q')?p.e-p.nc*g.dE:p.e;
+        if(Eres>Vcd){ p.st=2; p.v=120; } else { p.st=3; p.life=1; }  /* frenato */
+      }
+    } else if(p.st===2){                    /* C → D, contro il freno */
+      p.v-=Vcd*26*dt; p.x+=Math.max(p.v,25)*dt;
+      if(p.x>=XD-6) parts.splice(i,1);
+    }
+  }
+}
+var bandSprite={};
+function bandImg(rgb){
+  /* la zona luminosa è un disco perpendicolare al fascio: di taglio si vede come una lamina
+     piatta, larga pochi millimetri e alta quanto l'ampolla, sfumata solo verso il vetro */
+  if(bandSprite[rgb]) return bandSprite[rgb];
+  var W=128, H=256, cv=document.createElement('canvas');
+  cv.width=W; cv.height=H;
+  var b=cv.getContext('2d'), gx=b.createLinearGradient(0,0,W,0);
+  gx.addColorStop(0,'rgba('+rgb+',0)');
+  gx.addColorStop(.18,'rgba('+rgb+',.07)');
+  gx.addColorStop(.34,'rgba('+rgb+',.45)');
+  gx.addColorStop(.5,'rgba('+rgb+',1)');
+  gx.addColorStop(.66,'rgba('+rgb+',.45)');
+  gx.addColorStop(.82,'rgba('+rgb+',.07)');
+  gx.addColorStop(1,'rgba('+rgb+',0)');
+  b.fillStyle=gx; b.fillRect(0,0,W,H);
+  var gy=b.createLinearGradient(0,0,0,H);
+  gy.addColorStop(0,'rgba(0,0,0,0)');
+  gy.addColorStop(.24,'rgba(0,0,0,1)');
+  gy.addColorStop(.76,'rgba(0,0,0,1)');
+  gy.addColorStop(1,'rgba(0,0,0,0)');
+  b.globalCompositeOperation='destination-in';
+  b.fillStyle=gy; b.fillRect(0,0,W,H);
+  bandSprite[rgb]=cv;
+  return cv;
+}
+function band(c,x,ry,rx,al,rgb){
+  c.globalAlpha=al;
+  c.drawImage(bandImg(rgb),x-rx,YM-ry,rx*2,ry*2);
+  c.globalAlpha=1;
+}
+function drawTube(c){
+  var g=G(), i;
+  /* vetro dell'ampolla */
+  c.strokeStyle='rgba(140,190,220,.35)'; c.lineWidth=2;
+  c.beginPath();
+  c.moveTo(XA-40,YT); c.lineTo(XD+40,YT);
+  c.arc(XD+40,YM,YM-YT,-Math.PI/2,Math.PI/2);
+  c.lineTo(XA-40,YB);
+  c.arc(XA-40,YM,YM-YT,Math.PI/2,Math.PI*1.5);
+  c.stroke();
+  /* riempimento di gas: tinta leggerissima */
+  c.fillStyle=gas==='ne'?'rgba(255,120,80,.03)':'rgba(160,170,255,.03)';
+  c.fillRect(XA-40,YT,XD-XA+80,YB-YT);
+  /* filamento A */
+  var hot=fil/100;
+  c.strokeStyle='rgba(255,'+Math.round(120+90*hot)+',60,1)'; c.lineWidth=3;
+  c.beginPath();
+  for(i=0;i<=6;i++){ var yy=YM-24+i*8; if(i===0)c.moveTo(XA,yy); else c.lineTo(XA+(i%2?8:-8),yy); }
+  c.stroke();
+  c.fillStyle='rgba(255,170,90,'+(0.10+0.16*hot)+')';
+  c.beginPath(); c.arc(XA,YM,26+10*hot,0,7); c.fill();
+  /* griglie B e C */
+  [XB,XC].forEach(function(x){
+    c.strokeStyle='#7fa8c8'; c.lineWidth=1.4;
+    c.setLineDash([5,4]); c.beginPath(); c.moveTo(x,YT+6); c.lineTo(x,YB-6); c.stroke(); c.setLineDash([]);
+  });
+  /* elettrodo D */
+  c.fillStyle='#2b3a44'; c.strokeStyle='#7fa8c8'; c.lineWidth=1.4;
+  c.beginPath(); c.rect(XD,YT+30,10,YB-YT-60); c.fill(); c.stroke();
+  /* etichette */
+  c.font='12px "Cascadia Code",monospace'; c.textAlign='center'; c.textBaseline='middle';
+  c.fillStyle='rgba(180,210,225,.85)';
+  c.fillText('A',XA,YT-18); c.fillText('B',XB,YT-18); c.fillText('C',XC,YT-18); c.fillText('D',XD+5,YT-18);
+  c.font='10px "Cascadia Code",monospace'; c.fillStyle='rgba(150,190,170,.7)';
+  c.fillText('V\u2090\u1D66 \u2248 5 V',(XA+XB)/2,YB+26);
+  c.fillStyle='#ffb000';
+  c.fillText('V\u1D66\u1D9C = '+nfmt(Vbc,1)+' V',(XB+XC)/2,YB+26);
+  c.fillStyle='rgba(150,190,170,.7)';
+  c.fillText('\u2212V\u1D9C\u1D48 = \u2212'+nfmt(Vcd,1)+' V',(XC+XD)/2+6,YB+26);
+  /* zone luminose */
+  if(model==='q'){
+    var zx=zonesX(), vis=gas==='ne';
+    var RY=(YB-YT)/2-7, em=(vis?1:0.30)*(0.55+0.45*collEff())+0.25*glowPulse;
+    c.globalCompositeOperation='lighter';   /* la luce si somma: alone + nucleo della banda */
+    for(i=0;i<zx.length;i++){
+      var x=zx[i], w=15+4*glowPulse;
+      band(c,x,RY,w*2.6,0.20*em,g.glow);
+      band(c,x,RY,w,0.52*em,g.glow);
+    }
+    c.globalCompositeOperation='source-over';
+    if(!vis) for(i=0;i<zx.length;i++){
+      c.strokeStyle='rgba('+g.glow+',.45)'; c.setLineDash([2,4]); c.lineWidth=1;
+      c.beginPath(); c.moveTo(zx[i],YT+10); c.lineTo(zx[i],YB-10); c.stroke(); c.setLineDash([]);
+    }
+    if(zx.length&&gas==='hg'){
+      c.fillStyle='rgba(170,150,255,.7)'; c.textAlign='left';
+      c.fillText(L('emissione UV: invisibile all\u2019occhio','UV emission: invisible to the eye'),XB+8,YT+16);
+    }
+  }
+  /* elettroni */
+  for(i=0;i<parts.length;i++){
+    var p=parts[i];
+    if(p.st===3){ c.fillStyle='rgba(255,92,92,'+p.life+')'; c.beginPath(); c.arc(p.x,p.y,3,0,7); c.fill(); continue; }
+    c.fillStyle=p.st===2?'#7fe0b8':'#35c8ff';
+    c.beginPath(); c.arc(p.x,p.y,2.1,0,7); c.fill();
+  }
+  /* micro-amperometro */
+  var I=meanI(Vbc), Imax=Ipeak()*1.05+1e-9;
+  var mAx=XD+58, mAy=YT+8;
+  c.strokeStyle='#2a5a48'; c.fillStyle='#0d1a15'; c.lineWidth=1.2;
+  c.beginPath(); c.rect(mAx-34,mAy,68,44); c.fill(); c.stroke();
+  c.fillStyle='#ffb000'; c.font='13px "Cascadia Code",monospace'; c.textAlign='center';
+  c.fillText(nfmt(I,1),mAx,mAy+18);
+  c.fillStyle='rgba(150,190,170,.7)'; c.font='9px "Cascadia Code",monospace';
+  c.fillText('I  [nA]',mAx,mAy+34);
+  /* forno per il mercurio */
+  if(gas==='hg'){
+    c.textAlign='left'; c.fillStyle=oven<150?'#ff8a3d':'rgba(255,176,0,.8)';
+    c.font='10px "Cascadia Code",monospace';
+    c.fillText(L('forno: '+oven+' \u00B0C','furnace: '+oven+' \u00B0C'),XA-38,YT-40);
+  }
+  c.textAlign='left'; c.fillStyle='rgba(150,190,170,.55)'; c.font='10px "Cascadia Code",monospace';
+  c.fillText(L('sezione dell\u2019ampolla \u2014 gli elettroni vanno da A a D','bulb cross-section \u2014 electrons travel from A to D'),14,SH-12);
+}
+
+/* ---------------- oscilloscopio I(V) ---------------- */
+var ML=58, MR=16, MT=20, MB=36;
+function px(v){ return ML+v/G().vmax*(PW-ML-MR); }
+function py(i){ var Imax=Ipeak()*1.12+1e-9; return PH-MB-Math.max(0,Math.min(1,i/Imax))*(PH-MT-MB); }
+function findMaxima(){
+  maxima=[];
+  var g=G(), n=trace.length, i, b;
+  if(n<20) return;
+  /* la traccia è rumorosa: i massimi si cercano sulla curva mediata a bin di tensione,
+     così il risultato non dipende dalla velocità di scansione */
+  var NB=200, dv=g.vmax/NB, sum=[], cnt=[];
+  for(b=0;b<NB;b++){ sum[b]=0; cnt[b]=0; }
+  for(i=0;i<n;i++){ b=Math.min(NB-1,Math.floor(trace[i].v/dv)); sum[b]+=trace[i].i; cnt[b]++; }
+  var hw=Math.max(1,Math.round(g.dE*0.06/dv)), sm=[];
+  for(b=0;b<NB;b++){
+    var s=0,c=0;
+    for(i=b-hw;i<=b+hw;i++) if(i>=0&&i<NB&&cnt[i]){ s+=sum[i]; c+=cnt[i]; }
+    sm[b]=c?s/c:null;
+  }
+  var win=Math.max(2,Math.round(g.dE*0.15/dv)), fwd=Math.max(3,Math.round(g.dE*0.60/dv));
+  var thr=0.04*Ipeak(), vend=trace[n-1].v;
+  for(b=0;b<NB;b++){
+    if(sm[b]===null||sm[b]<thr) continue;
+    var v=(b+0.5)*dv;
+    if(vend-v<g.dE*0.25) continue;              /* picco non ancora confermato dalla scansione */
+    var ok=true;
+    for(i=b-win;i<=b+win;i++) if(i>=0&&i<NB&&sm[i]!==null&&sm[i]>sm[b]){ ok=false; break; }
+    if(!ok) continue;
+    /* prominenza: dopo il picco la corrente deve calare davvero, altrimenti è solo rumore sulla salita */
+    var dropped=false;
+    for(i=b+1;i<=b+fwd&&i<NB;i++) if(sm[i]!==null&&sm[i]<sm[b]*0.94){ dropped=true; break; }
+    if(!dropped) continue;
+    if(!maxima.length||v-maxima[maxima.length-1]>g.dE*0.5) maxima.push(v);
+  }
+}
+function drawPlot(){
+  var c=ctxOf(plotc,PW,PH), g=G(), i;
+  c.font='10px "Cascadia Code",monospace'; c.textBaseline='middle';
+  /* griglia da oscilloscopio */
+  c.strokeStyle='rgba(70,200,140,.13)'; c.lineWidth=1;
+  var stepV=g.vmax>40?10:5;
+  for(i=0;i<=g.vmax;i+=stepV){
+    var x=px(i); c.beginPath(); c.moveTo(x,MT); c.lineTo(x,PH-MB); c.stroke();
+    c.fillStyle='rgba(150,190,170,.65)'; c.textAlign='center'; c.fillText(i+' V',x,PH-MB+13);
+  }
+  for(i=0;i<=4;i++){
+    var y=MT+(PH-MT-MB)*i/4;
+    c.strokeStyle='rgba(70,200,140,.13)';
+    c.beginPath(); c.moveTo(ML,y); c.lineTo(PW-MR,y); c.stroke();
+  }
+  c.fillStyle='rgba(150,190,170,.8)'; c.textAlign='left';
+  c.fillText('I',ML-40,MT-8);
+  c.textAlign='right'; c.fillText('V\u1D66\u1D9C',PW-MR,PH-MB+26);
+  /* curva media (traccia sottile di riferimento durante la scansione) */
+  c.strokeStyle='rgba(255,176,0,.25)'; c.lineWidth=1;
+  c.beginPath();
+  for(i=0;i<=300;i++){ var v=i/300*g.vmax, X=px(v), Y=py(meanI(v));
+    if(i===0)c.moveTo(X,Y); else c.lineTo(X,Y); }
+  c.stroke();
+  /* traccia registrata (con rumore) */
+  if(trace.length>1){
+    c.strokeStyle='#ffb000'; c.lineWidth=1.8; c.beginPath();
+    for(i=0;i<trace.length;i++){ var t=trace[i], X2=px(t.v), Y2=py(t.i);
+      if(i===0)c.moveTo(X2,Y2); else c.lineTo(X2,Y2); }
+    c.stroke();
+  }
+  /* massimi individuati */
+  c.fillStyle='#35c8ff'; c.textAlign='center';
+  for(i=0;i<maxima.length;i++){
+    var xm=px(maxima[i]);
+    c.beginPath(); c.moveTo(xm,MT+4); c.lineTo(xm-4,MT+12); c.lineTo(xm+4,MT+12); c.closePath(); c.fill();
+  }
+  if(maxima.length>=2){
+    c.strokeStyle='rgba(53,200,255,.5)'; c.lineWidth=1; c.setLineDash([3,3]);
+    var x1=px(maxima[maxima.length-2]), x2=px(maxima[maxima.length-1]);
+    c.beginPath(); c.moveTo(x1,MT+18); c.lineTo(x2,MT+18); c.stroke(); c.setLineDash([]);
+    c.fillStyle='#35c8ff';
+    c.fillText('\u0394V \u2248 '+nfmt(maxima[maxima.length-1]-maxima[maxima.length-2],1)+' V',(x1+x2)/2,MT+30);
+  }
+  /* cursore */
+  var xc=px(Vbc);
+  c.strokeStyle='rgba(255,255,255,.22)'; c.setLineDash([3,4]); c.lineWidth=1;
+  c.beginPath(); c.moveTo(xc,MT); c.lineTo(xc,PH-MB); c.stroke(); c.setLineDash([]);
+  var yc=py(meanI(Vbc));
+  c.fillStyle='#dff4ff'; c.beginPath(); c.arc(xc,yc,3.4,0,7); c.fill();
+}
+
+/* ---------------- misura / letture ---------------- */
+function readouts(){
+  var g=G(), I=meanI(Vbc);
+  $('rI').textContent=nfmt(I,1)+' nA';
+  var n=nZones(Vbc);
+  $('rZ').textContent=String(n);
+  $('rZn').textContent=n>0?'('+L(g.glowName.it,g.glowName.en)+')':'';
+  $('rM').textContent=maxima.length?String(maxima.length):'\u2014';
+  if(maxima.length>=2){
+    var dsum=0;
+    for(var i=1;i<maxima.length;i++) dsum+=maxima[i]-maxima[i-1];
+    var dv=dsum/(maxima.length-1);
+    $('rDV').textContent=nfmt(dv,1)+' V';
+    $('rDE').textContent=nfmt(dv,1)+' eV  ('+L('vero','true')+': '+L(g.lvl,g.lvl.replace(',','.'))+')';
+  } else { $('rDV').textContent='\u2014'; $('rDE').textContent='\u2014'; }
+  var w=$('warnBox');
+  if(model==='c'){
+    w.hidden=false;
+    w.innerHTML=L('<b>Atomi classici.</b> L\u2019energia si potrebbe cedere in quantit\u00E0 arbitrarie: la corrente cresce monot\u00F2na, nessun massimo, nessuna zona luminosa. Non \u00E8 ci\u00F2 che si osserva.','<b>Classical atoms.</b> Energy could be handed over in arbitrary amounts: the current grows monotonically, no maxima, no luminous zones. It is not what is observed.');
+  } else if(gas==='hg'&&oven<148){
+    w.hidden=false;
+    w.innerHTML=L('<b>Forno troppo freddo.</b> Il mercurio resta liquido e il vapore \u00E8 troppo rado: quasi nessun urto, i minimi spariscono. Porta il forno verso i 160 \u00B0C.','<b>Furnace too cold.</b> The mercury stays liquid and the vapour is too thin: almost no collisions, the minima vanish. Bring the furnace towards 160 \u00B0C.');
+  } else if(gas==='hg'&&oven>195){
+    w.hidden=false;
+    w.innerHTML=L('<b>Forno troppo caldo.</b> Il vapore \u00E8 cos\u00EC denso che gli elettroni urtano di continuo e la corrente crolla. Riporta il forno verso i 160 \u00B0C.','<b>Furnace too hot.</b> The vapour is so dense that the electrons collide continuously and the current collapses. Bring the furnace back towards 160 \u00B0C.');
+  } else w.hidden=true;
+}
+
+/* ---------------- controlli ---------------- */
+function segInit(id,fn){
+  var gEl=$(id);
+  gEl.addEventListener('click',function(e){
+    var b=e.target.closest?e.target.closest('button'):null; if(!b||!gEl.contains(b)) return;
+    Array.prototype.forEach.call(gEl.querySelectorAll('button'),function(x){ x.classList.toggle('on',x===b); });
+    fn(b.getAttribute('data-v'));
+  });
+}
+function resetTrace(){ trace=[]; maxima=[]; }
+function applyGas(){
+  var g=G();
+  $('vbc').max=g.vmax;
+  if(Vbc>g.vmax){ Vbc=0; $('vbc').value=0; }
+  $('oven').disabled=(gas!=='hg');
+  $('ovenRow').style.opacity=(gas==='hg')?'1':'0.35';
+  resetTrace(); parts.length=0;
+  syncV(); readouts(); drawPlot();
+}
+segInit('segGas',function(v){ gas=v; running=false; syncRun(); applyGas(); });
+segInit('segModel',function(v){ model=v; running=false; syncRun(); resetTrace(); parts.length=0; readouts(); drawPlot(); });
+segInit('segSpeed',function(v){ speed=+v; });
+function syncV(){
+  $('vbcv').textContent=nfmt(Vbc,1)+' V';
+  $('vcdv').textContent=nfmt(Vcd,1)+' V';
+  $('filv').textContent=Math.round(fil)+'%';
+  $('ovenv').textContent=Math.round(oven)+' \u00B0C';
+}
+$('vbc').addEventListener('input',function(){ Vbc=+this.value; running=false; syncRun(); syncV(); readouts(); drawPlot(); });
+$('vcd').addEventListener('input',function(){ Vcd=+this.value; resetTrace(); syncV(); readouts(); drawPlot(); });
+$('fil').addEventListener('input',function(){ fil=+this.value; resetTrace(); syncV(); readouts(); drawPlot(); });
+$('oven').addEventListener('input',function(){ oven=+this.value; resetTrace(); syncV(); readouts(); drawPlot(); });
+$('run').addEventListener('click',function(){
+  if(running){ running=false; }
+  else { if(Vbc>=G().vmax-0.5){ Vbc=0; resetTrace(); } running=true; }
+  syncRun();
+});
+$('hold').addEventListener('click',function(){ running=false; syncRun(); });
+$('clr').addEventListener('click',function(){ running=false; Vbc=0; $('vbc').value=0; resetTrace(); parts.length=0; syncRun(); syncV(); readouts(); drawPlot(); });
+function syncRun(){
+  var b=$('run');
+  b.classList.toggle('on',running);
+  b.textContent=running?L('\u25A0 FERMA','\u25A0 STOP'):L('\u25B6 SCANSIONE','\u25B6 SWEEP');
+}
+function labels(){ syncRun(); syncV(); readouts(); drawPlot(); }
+
+/* ---------------- loop ---------------- */
+var last=0, raf=null, tickN=0;
+function frame(ts){
+  var dt=last?Math.min((ts-last)/1000,0.05):0.016; last=ts;
+  if(running){
+    Vbc=Math.min(G().vmax,Vbc+speed*dt);
+    $('vbc').value=Vbc;
+    var noise=1+(Math.random()-0.5)*0.05;
+    trace.push({v:Vbc,i:meanI(Vbc)*noise});
+    if(Vbc>=G().vmax){ running=false; syncRun(); }
+    findMaxima();
+  }
+  if(glowPulse>0) glowPulse=Math.max(0,glowPulse-dt*3);
+  var c=ctxOf(stage,SW,SH);
+  stepParts(dt); drawTube(c);
+  if(running||((++tickN)%10===0)) { syncV(); readouts(); drawPlot(); }
+  raf=requestAnimationFrame(frame);
+}
+document.addEventListener('visibilitychange',function(){
+  if(document.hidden){ if(raf){ cancelAnimationFrame(raf); raf=null; last=0; } }
+  else if(!raf){ raf=requestAnimationFrame(frame); }
+});
+window.addEventListener('resize',function(){ drawPlot(); });
+new MutationObserver(function(){ labels(); }).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});
+
+if(typeof initBackLink==='function') initBackLink('07-franck-hertz.html');
+applyGas(); labels();
+raf=requestAnimationFrame(frame);
+
+window.__lab={ get V(){return Vbc;}, get I(){return meanI(Vbc);}, get zones(){return nZones(Vbc);},
+  get maxima(){return maxima.slice();}, get gas(){return gas;}, get model(){return model;},
+  setV:function(v){ Vbc=v; $('vbc').value=v; syncV(); readouts(); drawPlot(); },
+  sweep:function(){ running=true; syncRun(); }, stop:function(){ running=false; syncRun(); } };
+})();
+</script>
+</body>
+</html>

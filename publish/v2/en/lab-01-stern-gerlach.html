@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab · The Stern–Gerlach Experiment — La Quantistica</title>
+<meta name="description" content="Simulated laboratory of Experiment 1 (Stern–Gerlach with silver): adjust pressure, temperature, collimation and magnet, and watch the deposit build up on the slide.">
+<link rel="canonical" href="https://laquantistica.com/v2/en/lab-01-stern-gerlach.html">
+<link rel="stylesheet" href="/assets/lang.css?v=7">
+<link rel="stylesheet" href="/assets/sim-sg.css?v=10">
+<link rel="stylesheet" href="/assets/sim-sg-mobile.css?v=2">
+<script defer src="/assets/sim-sg-core.js?v=2"></script>
+<style>
+:root{
+  /* palette dei laboratori (sim-sg.css): verde da oscilloscopio + ambra */
+  --bg:#080b0a; --panel:#0f1512; --panel2:#121915; --line:#22453a;
+  --ink:#dfeee6; --dim:#9fb3a8; --faint:#71887d;
+  --accent:#e2a24d; --warn:#e8b34a; --bad:#e2604f; --good:#7fffc4;
+  --glass:#efe9df; --mono:"Cascadia Code","JetBrains Mono","SFMono-Regular",Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- guscio della console (come gli altri lab) ---------- */
+.console{max-width:1560px;}
+.con-brand .ttl small{display:block;font-weight:400;color:var(--faint);font-size:11.5px;
+  font-family:var(--mono);letter-spacing:0}
+.panel{grid-template-columns:minmax(0,1fr) 372px;}
+.stagecol{gap:.65rem;}
+.ctrlcol{gap:0;padding-right:.15rem;}
+
+/* ---------- layout ---------- */
+.stagecol{min-width:0}
+.ctrlcol{background:transparent;padding:0 .2rem 1.2rem 0}
+/* stesse barre di scorrimento degli altri lab (sim-sg.css) */
+.verdict{scrollbar-width:thin;scrollbar-color:#3d444f #12151a;scrollbar-gutter:stable}
+
+.banner{padding:9px 16px;font-size:13px;display:flex;gap:10px;align-items:flex-start;border-bottom:1px solid var(--line)}
+.banner .ic{font-size:15px;line-height:1.3}
+.banner.ok{background:rgba(111,206,143,.10);color:#a8e3bd}
+.banner.warn{background:rgba(232,179,74,.10);color:#f0cd86}
+.banner.bad{background:rgba(226,96,79,.12);color:#f0a094}
+.banner b{color:#fff;font-weight:600}
+.banner .fix{display:block;color:var(--dim);margin-top:2px;font-size:12.5px}
+
+/* i due riquadri grafici sono "schermi" come .sim-stage degli altri lab */
+.panelbox{flex:1;min-height:0;display:flex;flex-direction:column;
+  background:#07120e;border:1px solid #04120c;border-radius:3px;overflow:hidden;
+  box-shadow:inset 0 0 0 1px #16302a, inset 0 0 40px rgba(0,0,0,.6)}
+.panelbox.wide{flex:1.18}
+.split{display:flex;flex:1;min-height:0}
+.split .col{flex:1;min-width:0;display:flex;flex-direction:column}
+.verdict{width:330px;flex:none;border-left:1px solid #16302a;background:#0f1512;
+  overflow-y:auto;padding:9px 12px 12px}
+.vhead{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.72rem;letter-spacing:.05em;
+  text-transform:uppercase;color:#8b929c;padding-bottom:7px;border-bottom:1px solid #2a303a;margin-bottom:7px}
+.vhead .dot{width:9px;height:9px;border-radius:50%;flex:none;background:var(--good)}
+.vhead .dot.warn{background:var(--warn)} .vhead .dot.bad{background:var(--bad)}
+.vhead .st{margin-left:auto;font-family:var(--mono);letter-spacing:0;text-transform:none;font-size:11px}
+.note{margin-top:9px;padding:9px 10px;border-radius:7px;font-size:12.5px;line-height:1.45}
+.note b{display:block;margin-bottom:3px;color:#fff;font-weight:600}
+.note.ok{background:rgba(111,206,143,.10);color:#a8e3bd}
+.note.warn{background:rgba(232,179,74,.10);color:#f0cd86}
+.note.bad{background:rgba(226,96,79,.12);color:#f0a094}
+.note .more{display:block;margin-top:6px;color:var(--faint);font-size:11.5px}
+.panelbox:last-child{border-bottom:0}
+.phead{
+  display:flex;align-items:baseline;gap:10px;padding:.45rem .7rem;
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:#e2a24d;font-weight:700;
+  border-bottom:1px solid #2a303a;background:#0f1216
+}
+.phead .rd{margin-left:auto;font-family:var(--mono);font-size:.72rem;color:#8b929c;letter-spacing:.03em;text-transform:none;font-weight:400}
+.cwrap{flex:1;min-height:0;position:relative;background:#08120d}
+canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+/* ---------- controls ---------- */
+.grp{margin-bottom:.65rem;border:1px solid #2d333d;border-radius:3px;background:#12151a}
+.grp h3{
+  margin:0;padding:.45rem .7rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;
+  color:#e2a24d;border-bottom:1px solid #2a303a;font-weight:700;background:#0f1216
+}
+.grp .body{padding:10px 12px 12px}
+/* sim-sg.css definisce .ctl come griglia a 3 colonne: qui i controlli sono impilati */
+.ctl{display:block;margin-bottom:13px}
+.ctl:last-child{margin-bottom:0}
+.ctl .lab{display:flex;align-items:baseline;gap:8px;margin-bottom:5px}
+.ctl .lab .nm{font-size:12.5px;color:var(--ink)}
+.ctl .lab .vl{margin-left:auto;font-family:var(--mono);font-size:12.5px;color:var(--accent)}
+.ctl .lab .vl.alarm{color:var(--bad)}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:2px;
+  background:#2a303a;outline:0;margin:0
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:var(--accent);
+  cursor:pointer;border:2px solid #12151a
+}
+input[type=range]::-moz-range-thumb{
+  width:15px;height:15px;border-radius:50%;background:var(--accent);cursor:pointer;border:2px solid #12151a
+}
+.hint{font-size:11.5px;color:var(--faint);margin-top:4px;line-height:1.35}
+.pump{margin-top:7px;padding:7px 9px;border-radius:3px;background:#0f1216;border:1px solid #2a303a;
+  font-size:11.5px;line-height:1.4;color:var(--dim)}
+.pump b{display:block;color:var(--accent);font-family:var(--mono);font-size:12px;margin-bottom:2px}
+.pump.hard b{color:var(--warn)} .pump.no b{color:var(--bad)}
+
+/* ---------- checks & readouts ---------- */
+.checks{list-style:none;margin:0;padding:0}
+.checks li{display:flex;gap:9px;align-items:flex-start;padding:6px 0;font-size:12.5px;border-bottom:1px dashed var(--line)}
+.checks li:last-child{border-bottom:0}
+.checks .m{font-family:var(--mono);font-size:13px;width:14px;flex:none;text-align:center}
+.checks .pass .m{color:var(--good)} .checks .fail .m{color:var(--bad)}
+.checks .txt{flex:1;color:var(--dim)}
+.checks .pass .txt{color:var(--ink)}
+.checks .num{font-family:var(--mono);font-size:11.5px;color:var(--faint);display:block;margin-top:2px}
+.checks .fail .num{font-family:inherit;font-size:12px;color:#f0a094;line-height:1.4}
+
+table.ro{width:100%;border-collapse:collapse;font-size:12px}
+table.ro td{padding:3.5px 0;border-bottom:1px dashed var(--line)}
+table.ro td:last-child{text-align:right;font-family:var(--mono);color:var(--ink)}
+table.ro td:first-child{color:var(--dim)}
+table.ro tr:last-child td{border-bottom:0}
+table.ro tr.sec td{padding:10px 0 3px;color:var(--accent);font-size:10.5px;letter-spacing:.07em;
+  text-transform:uppercase;border-bottom:1px solid var(--line);text-align:left}
+table.ro tr.sec:first-child td{padding-top:0}
+td.w{color:var(--warn)!important} td.b{color:var(--bad)!important} td.g{color:var(--good)!important}
+
+.presets{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:6px}
+.presets button{
+  background:#2a2f38;border:1px solid #3d444f;color:#c7ccd4;border-radius:999px;
+  padding:.4rem .6rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.03em;
+  cursor:pointer;line-height:1.25;text-align:center;transition:.15s
+}
+.presets button:hover{background:#e2a24d;border-color:#e2a24d;color:#1e232b}
+
+.optlog{list-style:none;margin:8px 0 0;padding:0;counter-reset:o}
+.optlog li{position:relative;padding:5px 0 5px 20px;border-top:1px dashed var(--line);font-size:12px;line-height:1.4}
+.optlog li:before{counter-increment:o;content:counter(o);position:absolute;left:0;top:5px;
+  font-family:var(--mono);font-size:10px;color:var(--faint)}
+.optlog .mv{color:var(--ink)} .optlog .mv b{color:var(--accent);font-family:var(--mono);font-weight:400}
+.optlog .st{display:block;color:var(--faint);font-family:var(--mono);font-size:10.5px;margin-top:1px}
+.optlog li.stop{color:var(--warn)}
+.foot{font-size:11px;color:var(--faint);line-height:1.5;margin-top:6px}
+
+/* ---------- mobile: come gli altri lab (verticale = invito a ruotare) ---------- */
+@media (max-width:820px) and (orientation:landscape){
+  .panel{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .split{flex-direction:column}
+  .split .col{flex:1;min-height:110px}
+  .verdict{width:auto;flex:1;min-height:110px;border-left:0;border-top:1px solid #16302a}
+  .grp h3{font-size:.66rem}
+  .hint{font-size:10.5px}
+}
+</style>
+<link rel="alternate" hreflang="it" href="https://laquantistica.com/v2/it/lab-01-stern-gerlach.html">
+<link rel="alternate" hreflang="en" href="https://laquantistica.com/v2/en/lab-01-stern-gerlach.html">
+<link rel="alternate" hreflang="x-default" href="https://laquantistica.com/v2/en/lab-01-stern-gerlach.html">
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="/assets/lang-links.css?v=1">
+</head>
+<body>
+
+<main class="console" id="top">
+  <header class="con-head">
+    <div class="con-brand">
+      <a class="con-back" id="backTop" href="01-stern-gerlach.html"><span class="en">← Back to Chapter 1</span></a>
+      <span class="tag amber">Lab · Cap. 1</span>
+      <span class="con-title"><span class="en">Stern-Gerlach with silver · design parameters</span></span>
+    </div>
+    <div class="con-actions">
+      <div class="langsw" role="group" aria-label="Lingua / Language">
+        <a class="langbtn" href="../it/lab-01-stern-gerlach.html" hreflang="it" lang="it">Italiano</a>
+        <a class="langbtn" href="../en/lab-01-stern-gerlach.html" hreflang="en" lang="en" aria-current="true">English</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="panel">
+    <div class="stagecol">
+      <div class="panelbox">
+        <div class="phead">
+          <span class="en">Apparatus cross-section — vertical scale exaggerated</span>
+          <span class="rd" id="rdApp"></span>
+        </div>
+        <div class="cwrap"><canvas id="cApp"></canvas></div>
+      </div>
+
+      <div class="panelbox wide">
+        <div class="split">
+          <div class="col">
+            <div class="phead">
+              <span class="en">Slide after development — and density profile</span>
+              <span class="rd" id="rdPlate"></span>
+            </div>
+            <div class="cwrap"><canvas id="cPlate"></canvas></div>
+          </div>
+          <aside class="verdict">
+            <div class="vhead">
+              <span class="dot" id="vdot"></span>
+              <span class="en">Outcome</span>
+              <span class="st" id="vst"></span>
+            </div>
+            <ul class="checks" id="checks"></ul>
+            <div class="note ok" id="vnote"></div>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <aside class="ctrlcol">
+
+    <div class="grp">
+      <h3><span class="en">Starting configurations</span></h3>
+      <div class="body">
+        <div class="presets">
+          <button data-preset="pgeo"><span class="en">Poles 600 mm<br>gap 25 mm</span></button>
+          <button data-preset="p1922"><span class="en">Historical configuration<br>Gerlach 1922</span></button>
+<button data-preset="popt"><span class="en">Readable splitting<br>1.7 mm · 6 criteria out of 6</span></button>
+        </div>
+        <p class="hint" style="margin-bottom:0">
+          
+          <span class="en">Start from a configuration, then move one parameter at a time and watch what breaks.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="grp">
+      <h3><span class="en">Optimiser</span></h3>
+      <div class="body">
+        <div class="presets" style="grid-template-columns:1fr 1fr 1fr">
+          <button id="optStep"><span class="en">One step</span></button>
+          <button id="optRun"><span class="en">Five steps</span></button>
+          <button id="optUndo"><span class="en">Undo</span></button>
+        </div>
+        <p class="hint">
+          
+          <span class="en">It looks for the single parameter that, moved a little, improves the configuration most. It does not know the answer: it gropes forward one step at a time, as one would in the laboratory.</span>
+        </p>
+        <ol class="optlog" id="optlog"></ol>
+      </div>
+    </div>
+
+    <div class="grp">
+      <h3><span class="en">Vacuum</span></h3>
+      <div class="body">
+        <div class="ctl">
+          <div class="lab"><span class="nm en">Working pressure</span><span class="vl" id="vP"></span></div>
+          <input type="range" id="sP" min="-7" max="-2" step="0.05" value="-5.2">
+          <div class="hint">
+            
+            <span class="en">The atoms must cross the apparatus without hitting the residual gas: the mean free path must be far longer than the beam.</span>
+          </div>
+          <div class="pump" id="pump"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grp">
+      <h3><span class="en">Source</span></h3>
+      <div class="body">
+        <div class="ctl">
+          <div class="lab"><span class="nm en">Crucible temperature</span><span class="vl" id="vT"></span></div>
+          <input type="range" id="sT" min="900" max="1400" step="5" value="1150">
+          <div class="hint">
+            
+            <span class="en">Melting is not enough (962 °C): what counts is the vapour pressure. But too high and the atoms collide in the hole, so the beam is no longer effusive.</span>
+          </div>
+        </div>
+        <div class="ctl">
+          <div class="lab"><span class="nm en">Crucible hole ⌀</span><span class="vl" id="vD"></span></div>
+          <input type="range" id="sD" min="0.2" max="2.5" step="0.05" value="0.8">
+          <div class="hint">
+            
+            <span class="en">Do not confuse two different vacuums: inside the crucible the gas is silver vapour at a few pascal (λ ≈ 1 mm), outside it is the pump's residual gas, ten thousand times thinner (λ ≈ 10 m). The collisions that matter all happen within one hole diameter, because just outside the beam density falls as 1/r².</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grp">
+      <h3><span class="en">Collimation</span></h3>
+      <div class="body">
+        <div class="ctl">
+          <div class="lab"><span class="nm en">Slit width</span><span class="vl" id="vW"></span></div>
+          <input type="range" id="sW" min="0.03" max="1.2" step="0.01" value="0.2">
+          <div class="hint">
+            
+            <span class="en">Narrow = sharp but weak beam. Wide = intense but blurred: the trace broadens until it swallows the splitting.</span>
+          </div>
+        </div>
+        <div class="ctl">
+          <div class="lab"><span class="nm en">Slit separation</span><span class="vl" id="vDS"></span></div>
+          <input type="range" id="sDS" min="60" max="500" step="5" value="300">
+        </div>
+      </div>
+    </div>
+
+    <div class="grp">
+      <h3><span class="en">Magnet</span></h3>
+      <div class="body">
+        <div class="ctl">
+          <div class="lab"><span class="nm en">Air gap</span><span class="vl" id="vG"></span></div>
+          <input type="range" id="sG" min="1.5" max="30" step="0.5" value="25">
+          <div class="hint">
+            
+            <span class="en">The gradient grows as the gap narrows, but the room for deflection shrinks: if the beam touches the pole pieces, it is lost.</span>
+          </div>
+        </div>
+        <div class="ctl">
+          <div class="lab"><span class="nm en">Pole-piece length</span><span class="vl" id="vL"></span></div>
+          <input type="range" id="sL" min="30" max="700" step="10" value="600">
+        </div>
+      </div>
+    </div>
+
+    <div class="grp">
+      <h3><span class="en">Chamber</span></h3>
+      <div class="body">
+        <div class="ctl">
+          <div class="lab"><span class="nm en">Section height</span><span class="vl" id="vHc"></span></div>
+          <input type="range" id="sHc" min="40" max="200" step="5" value="100">
+          <div class="hint">
+            
+            <span class="en">It must hold the gap plus the iron of the pole pieces, which carries the flux without saturating. If it does not fit, the magnet cannot be mounted.</span>
+          </div>
+        </div>
+        <div class="ctl">
+          <div class="lab"><span class="nm en">Section width</span><span class="vl" id="vWc"></span></div>
+          <input type="range" id="sWc" min="30" max="160" step="5" value="50">
+          <div class="hint">
+            
+            <span class="en">It sets the pole width: for a uniform field where the beam passes, the poles should be two or three times the gap. A more generous section also improves conductance, but adds wall to outgas.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grp">
+      <h3><span class="en">Geometry</span></h3>
+      <div class="body">
+        <div class="ctl">
+          <div class="lab"><span class="nm en">Drift (magnet → slide)</span><span class="vl" id="vDr"></span></div>
+          <input type="range" id="sDr" min="0" max="800" step="10" value="0">
+          <div class="hint">
+            
+            <span class="en">After the magnet the separation keeps growing, and here no gap constrains it.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grp">
+      <h3><span class="en">Exposure</span></h3>
+      <div class="body">
+        <div class="ctl">
+          <div class="lab"><span class="nm en">Duration</span><span class="vl" id="vTe"></span></div>
+          <input type="range" id="sTe" min="-1.3" max="1.6" step="0.02" value="0.6">
+        </div>
+      </div>
+    </div>
+
+    <div class="grp">
+      <h3><span class="en">Derived quantities</span></h3>
+      <div class="body">
+        <table class="ro" id="ro"></table>
+        <p class="foot">
+          
+          <span class="en">Simplified model: gradient estimated from gap geometry, effusion from a Maxwell distribution, exposure times to order of magnitude. It is meant for finding workable configurations, not for replacing finite-element calculation.</span>
+        </p>
+      </div>
+    </div>
+
+    </aside>
+  </section>
+
+  <div class="rotate-msg">
+    <div class="big">📱</div>
+    <div class="t1"><span class="en">Rotate your phone to landscape</span></div>
+    <div class="t2"><span class="en">This interactive experiment is cramped in portrait. Turn your phone to <b>landscape</b> to see it all (even if small). For a better experience, open it on a <b>desktop</b> or a <b>tablet</b> with a large enough screen.</span></div>
+  </div>
+
+  <div class="back-bottom"><a class="con-back" id="backBottom" href="01-stern-gerlach.html"><span class="en">← Back to Chapter 1</span></a></div>
+  <div class="con-foot"><span class="en">La Quantistica · Local lab · Ch. 01</span><span>F. Palma</span></div>
+</main>
+
+<script>
+"use strict";
+/* ============ costanti fisiche ============ */
+const MUB=9.2740100783e-24, MAG=1.79118e-25, KB=1.380649e-23, MU0=4*Math.PI*1e-7;
+const N_SURF=1.4e19;            // atomi per m^2 in un monostrato di Ag
+const ETA=0.05;                 // resa complessiva (adesione, geometria, perdite)
+const H_SLIT=3e-3;              // altezza fenditure, m
+const L_OVEN=0.05;              // foro crogiolo -> prima fenditura, m
+const NMC=26000;                // atomi Monte Carlo
+
+/* ============ link di ritorno ============ */
+window.addEventListener('DOMContentLoaded',function(){
+  if(window.initBackLink) initBackLink('01-stern-gerlach.html');
+});
+
+/* ============ lingua (gestita da lang.js sull'attributo data-lang) ============ */
+const isEN=()=>document.documentElement.getAttribute('data-lang')==='en';
+const T=(it,en)=>isEN()?en:it;
+new MutationObserver(()=>render()).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});
+
+/* ============ controlli ============ */
+const S={
+  P:document.getElementById('sP'),   T:document.getElementById('sT'),
+  D:document.getElementById('sD'),   W:document.getElementById('sW'),
+  DS:document.getElementById('sDS'), G:document.getElementById('sG'),
+  L:document.getElementById('sL'),   Dr:document.getElementById('sDr'),
+  Te:document.getElementById('sTe'),
+  Hc:document.getElementById('sHc'), Wc:document.getElementById('sWc')
+};
+const PRESETS={
+  pgeo :{P:-5.2,T:1150,D:0.8,W:0.2,DS:300,G:25,L:600,Dr:0,Te:0.6,Hc:100,Wc:50},
+  p1922:{P:-5.0,T:1050,D:0.5,W:0.05,DS:60,G:1.5,L:35,Dr:0,Te:0.9,Hc:60,Wc:40},
+// trovata con l'ottimizzatore partendo dalla geometria da 600 mm: e' il punto in
+// cui le due tracce si leggono meglio senza violare nessuna delle cinque condizioni
+popt :{P:-5.2,T:1110,D:0.8,W:0.22,DS:300,G:23,L:600,Dr:0,Te:0.7,Hc:100,Wc:60}
+};
+document.querySelectorAll('[data-preset]').forEach(b=>{
+  b.onclick=()=>{const p=PRESETS[b.dataset.preset];for(const k in p)S[k].value=p[k];optHist=[];document.getElementById('optlog').innerHTML='';render();};
+});
+for(const k in S) S[k].addEventListener('input',schedule);
+
+let pending=false;
+function schedule(){ if(!pending){pending=true;requestAnimationFrame(()=>{pending=false;render();});} }
+
+/* ============ fisica ============ */
+// tensione di vapore dell'argento, Pa (Clausius-Clapeyron calibrata su 0,34 Pa @ 1235 K)
+function pVap(TC){ const Tk=TC+273.15; return Math.pow(10, -0.4685 + 12021*(1/1234.93 - 1/Tk)); }
+// cammino libero medio [m] a pressione p [Pa]
+const mfp = pPa => 0.0066/Math.max(pPa,1e-12);
+// gradiente stimato dal traferro [T/m], prima della correzione di uniformità
+const gradOf = gm => Math.min(1.5/gm, 1200);
+
+/* Geometria della sezione. Le espansioni sono larghe quanto la camera meno le
+   pareti e i giochi di montaggio; il ferro sopra e sotto il traferro deve
+   portare il flusso senza saturare. Se la larghezza polare non è almeno due o
+   tre volte il traferro, il campo degrada verso i bordi e il gradiente utile
+   sull'asse è inferiore a quello nominale. */
+const WALL=0.003;
+function chamber(g,Hc,Wc){
+  const poleW=Math.max(Wc-2*WALL-0.004, 0.004);          // larghezza utile del ferro
+  const ratio=poleW/g;
+  const unif=Math.max(0.45, Math.min(1, 0.45+0.55*(ratio-1)/2));
+  const iron=Math.max(0.008, 0.6*g);                     // spessore minimo per polo
+  const need=g+2*iron+2*WALL;                            // altezza richiesta
+  const fits=Hc>=need;
+  const clear=Hc/2-WALL-0.002;                           // semiapertura libera per il fascio
+  return {poleW,ratio,unif,iron,need,fits,clear};
+}
+
+// velocità dal fascio effusivo: pdf ~ v^3 exp(-v^2/a^2)  ->  u=v^2/a^2 ~ Gamma(2,1)
+function sampleV(alpha){
+  const u=-Math.log(1-Math.random())-Math.log(1-Math.random());
+  return alpha*Math.sqrt(u);
+}
+
+function compute(){
+  const p_mbar=Math.pow(10,+S.P.value), p_Pa=p_mbar*100;
+  const TC=+S.T.value, Tk=TC+273.15;
+  const dHole=+S.D.value*1e-3, w=+S.W.value*1e-3, ds=+S.DS.value*1e-3;
+  const g=+S.G.value*1e-3, L=+S.L.value*1e-3, D=+S.Dr.value*1e-3;
+  const Hc=+S.Hc.value*1e-3, Wc=+S.Wc.value*1e-3;
+  const hours=Math.pow(10,+S.Te.value);
+  const CH=chamber(g,Hc,Wc);
+
+  const pv=pVap(TC);
+  const alpha=Math.sqrt(2*KB*Tk/MAG);          // velocità più probabile (Maxwell)
+  const vMean=alpha;                            // velocità di riferimento per le traiettorie disegnate
+  const Ltot=L_OVEN+ds+L+D;
+  const lam=mfp(p_Pa), trans=Math.exp(-Ltot/lam);
+  const Kn=mfp(pv)/dHole;                       // Knudsen nel foro del crogiolo
+  const Gnom=gradOf(g), G=Gnom*CH.unif, a=MUB*G/MAG;
+  const Btip=Math.min(G*g/2,2.0), NI=Btip*(g+2*WALL)/MU0;
+  const diverg=2*w/ds;                          // divergenza piena, rad
+  const thetaDefl=a*(L/vMean)/vMean;            // angolo di deflessione a v media
+
+  // ---- Monte Carlo ----
+  const zs=new Float64Array(NMC), xs=new Float64Array(NMC), sg=new Int8Array(NMC);
+  let nOK=0, nHit=0, nScat=0;
+  for(let i=0;i<NMC;i++){
+    const v=sampleV(alpha);
+    const s=Math.random()<0.5?1:-1;
+    const z0=(Math.random()-0.5)*w, z1=(Math.random()-0.5)*w;
+    const th=(z1-z0)/ds;
+    const x1=(Math.random()-0.5)*H_SLIT, thx=(x1-(Math.random()-0.5)*H_SLIT)/ds;
+    if(Math.random()>trans){ nScat++; continue; }         // urtato dal gas residuo
+    const t1=L/v, az=s*a;
+    let hit=false;
+    for(let k=1;k<=6;k++){                                 // controllo urto sulle espansioni
+      const tk=t1*k/6, zk=z1+th*v*tk+0.5*az*tk*tk;
+      if(Math.abs(zk)>g/2){hit=true;break;}
+    }
+    if(hit){nHit++;continue;}
+    const zEx=z1+th*L+0.5*az*t1*t1, thEx=th+az*t1/v;
+    zs[nOK]=zEx+thEx*D; xs[nOK]=x1+thx*(L+D); sg[nOK]=s; nOK++;
+  }
+
+  /* ---- statistica robusta -------------------------------------------------
+     La deflessione varia come 1/v² e la coda maxwelliana è pesante: media e
+     deviazione standard non descrivono ciò che si misura sul vetrino. Si usa
+     quindi l'istogramma, come farebbe chi legge la lastra al microscopio:
+     posizione del massimo, larghezza a metà altezza, e "visibilità" dello
+     sdoppiamento (quanto il centro è più chiaro dei due massimi).            */
+  const zC=a*L*(L/2+D)/(alpha*alpha);                     // deflessione a v=α
+  const zPk=zC/3;                                         // massimo della distribuzione
+  const zR=Math.max(3*zPk, 8*w, 4e-4);
+  const NB=161, hist=new Float64Array(NB), dz=2*zR/NB;
+  for(let i=0;i<nOK;i++){
+    const b=Math.floor((zs[i]+zR)/dz); if(b>=0&&b<NB)hist[b]++;
+  }
+  const zOf=b=>-zR+(b+0.5)*dz;
+  let bPos=-1,vPos=0,bNeg=-1,vNeg=0;
+  for(let b=0;b<NB;b++){
+    if(zOf(b)>0&&hist[b]>vPos){vPos=hist[b];bPos=b;}
+    if(zOf(b)<0&&hist[b]>vNeg){vNeg=hist[b];bNeg=b;}
+  }
+  const enough=nOK>400&&vPos>0&&vNeg>0;
+  const sep=enough?zOf(bPos)-zOf(bNeg):0;
+  let fw=0;
+  if(enough){
+    const half=vPos/2; let lo=bPos,hi=bPos;
+    while(lo>0&&hist[lo]>half)lo--;
+    while(hi<NB-1&&hist[hi]>half)hi++;
+    fw=(hi-lo)*dz;
+  }
+  const bC=Math.floor(NB/2);
+  let cen=0;for(let b=bC-2;b<=bC+2;b++)cen+=hist[b]||0;
+  const vis=enough?Math.max(0,1-(cen/5)/vPos):0;          // visibilità dello sdoppiamento
+
+  // ---- flusso e deposito ----
+  const Phi=pv/Math.sqrt(2*Math.PI*MAG*KB*Tk);            // atomi/m²/s effusi
+  const Ahole=Math.PI*dHole*dHole/4;
+  const I0=Phi*Ahole/Math.PI;                             // per steradiante
+  const rSl=L_OVEN+ds, Om=(w*H_SLIT)/(rSl*rSl);
+  const rateFull=I0*Om*ETA;                               // atomi/s entrati nel magnete
+  const rate=rateFull*(nOK/NMC);                          // atomi/s che formano le tracce
+  const areaSpot=Math.max(2*Math.max(fw,w)*(H_SLIT*1.4),1e-9);
+  const ML=rate*hours*3600/(areaSpot*N_SURF);             // monostrati sulla traccia
+  const MLfog=rateFull*(nScat/NMC)*hours*3600/(1.6e-4*N_SURF);   // velo diffuso
+
+  /* ---- gruppo di pompaggio -------------------------------------------------
+     Camera 100 x 50 mm, lunga quanto il fascio. Il carico di gas viene dalle
+     pareti (degassamento ~2e-8 mbar·l/s per cm² di inox non trattato), non dal
+     volume; la conduttanza del condotto limita la velocità utile della pompa. */
+  const Lcm=Ltot*100, aCm=Hc*100, bCm=Wc*100;             // cm
+  const cond=30.9*aCm*aCm*bCm*bCm/((aCm+bCm)*Math.max(Lcm,1));  // l/s, condotto rettangolare
+  const area_cm2=2*(aCm+bCm)*Lcm;                         // superficie interna, cm²
+  const Qgas=2e-8*area_cm2;                               // mbar·l/s
+  const Sneed=Qgas/p_mbar;                                // velocità efficace richiesta
+  const Snom=Sneed<cond*0.95 ? 1/(1/Sneed-1/cond) : Infinity;
+
+  return {p_mbar,TC,dHole,w,ds,g,L,D,hours,pv,alpha,vMean,Ltot,lam,trans,Kn,G,a,Btip,NI,
+          diverg,thetaDefl,zs,xs,sg,nOK,nHit,nScat,sep,fw,vis,zPk,ML,MLfog,rate,
+          cond,Qgas,Sneed,Snom,Hc,Wc,CH,Gnom};
+}
+
+/* ============ scelta del gruppo di pompaggio ============ */
+function pumpAdvice(r){
+  const p=r.p_mbar;
+  if(p>=1){ return {cls:"",ttl:T("Pompa rotativa o a membrana","Rotary or diaphragm pump"),
+    txt:T("Basta una primaria: siamo nel vuoto grossolano. Ma a questa pressione il fascio atomico non esiste.",
+          "A backing pump is enough: this is rough vacuum. At this pressure, though, the atomic beam does not exist.")};}
+  if(p>=1e-2){ return {cls:"",ttl:T("Rotativa a doppio stadio","Two-stage rotary vane pump"),
+    txt:T("Vuoto medio, raggiungibile con la sola pompa primaria (~10 m³/h). Serve una trappola per i vapori d'olio.",
+          "Medium vacuum, reachable with the backing pump alone (~10 m³/h). An oil-vapour trap is needed.")};}
+  if(p>=1e-3){ return {cls:"hard",ttl:T("Limite della pompa primaria","Limit of the backing pump"),
+    txt:T("È il minimo che una rotativa ben tenuta raggiunge su una camera pulita. Scendendo ancora serve una turbomolecolare.",
+          "This is the best a well-maintained rotary pump reaches on a clean chamber. To go lower a turbomolecular pump is needed.")};}
+  if(!isFinite(r.Snom)){ return {cls:"no",ttl:T("Conduttanza insufficiente","Insufficient conductance"),
+    txt:T(`Servirebbero ${r.Sneed.toFixed(0)} l/s alla camera, ma il condotto 100×50 mm ne lascia passare al massimo ${r.cond.toFixed(0)}. Nessuna pompa, per quanto grande, basta da sola: occorre pompare da entrambe le estremità o allargare la sezione.`,
+          `About ${r.Sneed.toFixed(0)} l/s would be needed at the chamber, but the 100×50 mm duct passes at most ${r.cond.toFixed(0)}. No single pump is enough, however large: pump from both ends or widen the cross-section.`)};}
+  const S=r.Snom;
+  const cls=S>700?"hard":"";
+  let model;
+  if(S<=90)      model=T("turbomolecolare ~80 l/s (classe HiPace 80, nEXT85)","turbomolecular ~80 l/s (HiPace 80, nEXT85 class)");
+  else if(S<=300)model=T("turbomolecolare ~300 l/s (classe HiPace 300, nEXT240)","turbomolecular ~300 l/s (HiPace 300, nEXT240 class)");
+  else if(S<=700)model=T("turbomolecolare ~700 l/s","turbomolecular ~700 l/s");
+  else           model=T("turbomolecolare oltre 1000 l/s","turbomolecular above 1000 l/s");
+  const small=S<20?T(" La portata da smaltire è modesta: la misura della pompa la impone il regime di vuoto, non il carico di gas.",
+                     " The throughput is modest: the pump size is set by the vacuum regime, not by the gas load."):"";
+  return {cls,ttl:model,
+    txt:small+T(`Richieste ${S.toFixed(0)} l/s nominali (${r.Sneed.toFixed(0)} l/s efficaci alla camera, conduttanza ${r.cond.toFixed(0)} l/s), più una primaria a secco. Carico di gas stimato ${sci(r.Qgas)} mbar·l/s dalle pareti.`,
+          `${S.toFixed(0)} l/s nominal required (${r.Sneed.toFixed(0)} l/s effective at the chamber, conductance ${r.cond.toFixed(0)} l/s), plus a dry backing pump. Estimated wall gas load ${sci(r.Qgas)} mbar·l/s.`)};
+}
+
+/* ============ diagnostica ============ */
+function diagnose(r){
+  const bad=[],warn=[];
+  if(r.trans<0.35) bad.push({m:T("Il gas residuo distrugge il fascio.","The residual gas destroys the beam."),
+    f:T(`Solo il ${(r.trans*100).toFixed(0)}% degli atomi arriva al vetrino: il resto viene diffuso e forma un velo uniforme. Abbassa la pressione sotto 10⁻⁴ mbar.`,
+        `Only ${(r.trans*100).toFixed(0)}% of the atoms reach the slide: the rest are scattered into a uniform haze. Lower the pressure below 10⁻⁴ mbar.`)});
+  if(r.Kn<0.7) bad.push({m:T("Il fascio non è effusivo.","The beam is not effusive."),
+    f:T("Dentro il crogiolo gli atomi si urtano prima di uscire dal foro: la distribuzione delle velocità non è più maxwelliana e l'interpretazione salta. Abbassa la temperatura o riduci il foro.",
+        "Inside the crucible the atoms collide before leaving the hole: the velocity distribution is no longer Maxwellian and the interpretation breaks down. Lower the temperature or shrink the hole.")});
+  if(r.nHit/NMC>0.35) bad.push({m:T("Il fascio colpisce le espansioni polari.","The beam hits the pole pieces."),
+    f:T(`Il ${(100*r.nHit/NMC).toFixed(0)}% degli atomi si perde nel ferro prima di uscire. Allarga il traferro, accorcia il magnete, oppure sposta la separazione sul tratto di deriva.`,
+        `${(100*r.nHit/NMC).toFixed(0)}% of the atoms are lost in the iron before the exit. Widen the gap, shorten the magnet, or move the separation onto the drift section.`)});
+  if(r.ML<0.03) bad.push({m:T("Deposito troppo tenue per essere sviluppato.","Deposit too faint to be developed."),
+    f:T("Sul vetrino non resta abbastanza argento da annerire con i vapori di zolfo. Alza la temperatura, allarga le fenditure o prolunga l'esposizione.",
+        "Not enough silver is left on the slide to darken with sulphur vapour. Raise the temperature, widen the slits or extend the exposure.")});
+
+  if(r.vis<0.35&&r.sep>0) warn.push({m:T("Le due tracce non si risolvono.","The two traces are not resolved."),
+    f:T("La macchia è larga quanto la separazione: si vede un unico deposito allargato, che è esattamente la previsione classica. Restringi le fenditure o aumenta la deflessione.",
+        "The spot is as wide as the separation: you see a single broadened deposit, which is exactly the classical prediction. Narrow the slits or increase the deflection.")});
+  if(r.sep<3e-4) warn.push({m:T("Sdoppiamento troppo piccolo per la lettura diretta.","Splitting too small for direct reading."),
+    f:T("Sotto il terzo di millimetro servirebbe il microscopio, come nel 1922. Restringi il traferro o allunga il tratto di deriva.",
+        "Below a third of a millimetre you would need a microscope, as in 1922. Narrow the gap or lengthen the drift.")});
+  if(r.Kn>=0.7&&r.Kn<2) warn.push({m:T("Regime effusivo al limite.","Effusive regime at the limit."),
+    f:T("Il cammino libero medio nel vapore è confrontabile con il foro: la distribuzione delle velocità comincia a deformarsi. Un foro più piccolo o qualche decina di gradi in meno mettono al sicuro.",
+        "The mean free path in the vapour is comparable with the hole: the velocity distribution starts to distort. A smaller hole or a few tens of degrees less puts you on the safe side.")});
+  if(!r.CH.fits) bad.push({m:T("Le espansioni non entrano nella camera.","The pole pieces do not fit in the chamber."),
+    f:T(`Con un traferro di ${fmt(r.g*1000,1)} mm servono almeno ${(r.CH.need*1000).toFixed(0)} mm di altezza per il traferro più il ferro dei due poli, contro i ${(r.Hc*1000).toFixed(0)} mm disponibili. Alza la sezione o restringi il traferro.`,
+        `With a ${fmt(r.g*1000,1)} mm gap at least ${(r.CH.need*1000).toFixed(0)} mm of height are needed for the gap plus the iron of the two poles, against the ${(r.Hc*1000).toFixed(0)} mm available. Raise the section or narrow the gap.`)});
+  if((r.sep/2+r.fw)>r.CH.clear) bad.push({m:T("Il fascio deflesso esce dalla sezione utile.","The deflected beam leaves the useful section."),
+    f:T(`Le tracce arrivano a ${fmt((r.sep/2+r.fw)*1000,1)} mm dall'asse contro ${fmt(r.CH.clear*1000,1)} mm di apertura libera: gli atomi finiscono sulla parete prima del vetrino. Alza la sezione o riduci la deflessione.`,
+        `The traces reach ${fmt((r.sep/2+r.fw)*1000,1)} mm from the axis against ${fmt(r.CH.clear*1000,1)} mm of free aperture: the atoms end up on the wall before the slide. Raise the section or reduce the deflection.`)});
+  if(r.CH.ratio<2) warn.push({m:T("Espansioni troppo strette rispetto al traferro.","Pole pieces too narrow for the gap."),
+    f:T(`Larghezza polare ${fmt(r.CH.poleW*1000,0)} mm contro ${fmt(r.g*1000,1)} mm di traferro: il campo degrada verso i bordi e il gradiente utile scende al ${(r.CH.unif*100).toFixed(0)}% del nominale. Allarga la sezione o restringi il traferro.`,
+        `Pole width ${fmt(r.CH.poleW*1000,0)} mm against a ${fmt(r.g*1000,1)} mm gap: the field degrades towards the edges and the useful gradient drops to ${(r.CH.unif*100).toFixed(0)}% of nominal. Widen the section or narrow the gap.`)});
+  if(r.NI>4e4) warn.push({m:T("Bobina difficilmente realizzabile.","Coil hard to build."),
+    f:T(`Servono ~${(r.NI/1000).toFixed(0)}·10³ amperspire e un raffreddamento importante. Un traferro più stretto costa molto meno rame.`,
+        `About ${(r.NI/1000).toFixed(0)}·10³ ampere-turns and serious cooling are needed. A narrower gap costs far less copper.`)});
+  if(r.Ltot>1.5) warn.push({m:T("Apparato molto ingombrante.","Very bulky apparatus."),
+    f:T(`Lunghezza totale ${(r.Ltot*1000).toFixed(0)} mm: oltre il metro e mezzo diventano critici l'allineamento e il banco.`,
+        `Total length ${(r.Ltot*1000).toFixed(0)} mm: past a metre and a half, alignment and bench space become critical.`)});
+  if(r.hours>12) warn.push({m:T("Esposizione molto lunga.","Very long exposure."),
+    f:T(`${r.hours.toFixed(1)} ore di funzionamento ininterrotto sono difficili da sostenere: nel 1922 furono otto, al limite dell'apparato.`,
+        `${r.hours.toFixed(1)} hours of uninterrupted running is hard to sustain: in 1922 it was eight, at the limit of the apparatus.`)});
+  if(r.diverg>r.thetaDefl&&r.vis>=0.35) warn.push({m:T("Collimazione al limite.","Collimation at the limit."),
+    f:T("La divergenza del fascio è confrontabile con l'angolo di deflessione: la misura perde precisione.",
+        "The beam divergence is comparable with the deflection angle: the measurement loses precision.")});
+  return {bad,warn};
+}
+
+/* ============ rendering ============ */
+function fit(cv){
+  const r=cv.parentElement.getBoundingClientRect(), d=window.devicePixelRatio||1;
+  cv.width=Math.max(1,Math.round(r.width*d)); cv.height=Math.max(1,Math.round(r.height*d));
+  const c=cv.getContext('2d'); c.setTransform(d,0,0,d,0,0);
+  return {c,W:r.width,H:r.height,d};
+}
+const fmt=(x,n=2)=>x.toFixed(n);
+function sci(x){
+  if(x===0)return"0"; const e=Math.floor(Math.log10(Math.abs(x))), m=x/Math.pow(10,e);
+  return m.toFixed(1)+"·10"+String(e).replace(/-/g,"⁻").replace(/[0-9]/g,d=>"⁰¹²³⁴⁵⁶⁷⁸⁹"[d]);
+}
+
+function drawApparatus(r){
+  const {c,W,H}=fit(document.getElementById('cApp'));
+  c.clearRect(0,0,W,H);
+  const padL=52,padR=18,padT=16,padB=22;
+  const total=r.Ltot, sx=(W-padL-padR)/total;
+  const zHalf=Math.max(r.g/2, r.sep/2+2*r.fw, 1e-3)*1.35;
+  const sy=(H-padT-padB)/(2*zHalf), midY=padT+(H-padT-padB)/2;
+  const X=m=>padL+m*sx, Y=z=>midY-z*sy;
+
+  // assi / fondo
+  c.fillStyle="#0b0e13";c.fillRect(0,0,W,H);
+  c.strokeStyle="#1d2531";c.lineWidth=1;
+  c.beginPath();c.moveTo(padL,midY);c.lineTo(W-padR,midY);c.stroke();
+
+  const xOven=X(0), xS1=X(L_OVEN), xS2=X(L_OVEN+r.ds), xMe=X(L_OVEN+r.ds+r.L), xPl=X(total);
+
+  // espansioni polari
+  c.fillStyle="#3a4553";
+  const poleH=Math.min(28,(H-padT-padB)/2-Y(r.g/2)+midY+18);
+  c.fillRect(xS2,Y(r.g/2)-Math.max(10,poleH),xMe-xS2,Math.max(10,poleH));
+  c.fillRect(xS2,Y(-r.g/2),xMe-xS2,Math.max(10,poleH));
+  c.fillStyle="#8fa2bb";c.font="10px ui-monospace,monospace";
+  c.fillText("N",(xS2+xMe)/2-4,Y(r.g/2)-4);c.fillText("S",(xS2+xMe)/2-4,Y(-r.g/2)+12);
+
+  // fenditure
+  c.strokeStyle="#5c6b80";c.lineWidth=3;
+  [[xS1,"S1"],[xS2,"S2"]].forEach(([x,lb])=>{
+    c.beginPath();c.moveTo(x,Y(zHalf));c.lineTo(x,Y(r.w/2));c.moveTo(x,Y(-r.w/2));c.lineTo(x,Y(-zHalf));c.stroke();
+    c.fillStyle="#66748a";c.font="9px ui-monospace,monospace";c.fillText(lb,x-6,H-8);
+  });
+  // crogiolo
+  c.fillStyle="#4a3a2a";c.fillRect(xOven-16,midY-13,16,26);
+  c.fillStyle="#c9a227";c.fillRect(xOven-14,midY+3,12,8);
+  // vetrino
+  c.fillStyle="#efe9df";c.fillRect(xPl,Y(zHalf*0.92),5,Y(-zHalf*0.92)-Y(zHalf*0.92));
+
+  // traiettorie per tre velocità
+  const vs=[[r.alpha*0.72,"rgba(94,200,216,.30)"],[r.vMean,"rgba(94,200,216,.95)"],[r.alpha*1.7,"rgba(94,200,216,.30)"]];
+  vs.forEach(([v,col])=>{
+    [1,-1].forEach(s=>{
+      c.strokeStyle=col;c.lineWidth=v===r.vMean?1.6:1.1;c.beginPath();
+      let lost=false,lx=0,ly=0;
+      c.moveTo(xOven,midY);c.lineTo(xS2,midY);
+      const az=s*r.a, t1=r.L/v;
+      for(let k=0;k<=40;k++){
+        const tk=t1*k/40, z=0.5*az*tk*tk, xx=X(L_OVEN+r.ds+v*tk);
+        if(Math.abs(z)>r.g/2){lost=true;lx=xx;ly=Y(s*r.g/2);break;}
+        c.lineTo(xx,Y(z));
+      }
+      if(!lost){
+        const zEx=0.5*az*t1*t1, thEx=az*t1/v;
+        c.lineTo(xPl,Y(zEx+thEx*r.D));
+      }
+      c.stroke();
+      if(lost){c.strokeStyle="#e2604f";c.lineWidth=1.6;
+        c.beginPath();c.moveTo(lx-4,ly-4);c.lineTo(lx+4,ly+4);c.moveTo(lx+4,ly-4);c.lineTo(lx-4,ly+4);c.stroke();}
+    });
+  });
+
+  // velo di gas residuo
+  if(r.trans<0.9){
+    c.fillStyle="rgba(226,96,79,"+(0.16*(1-r.trans)).toFixed(3)+")";
+    c.fillRect(padL,padT,W-padL-padR,H-padT-padB);
+  }
+
+  // quote
+  c.fillStyle="#66748a";c.font="10px ui-monospace,monospace";
+  c.fillText(T("traferro","gap")+" "+fmt(r.g*1000,1)+" mm",xS2+4,padT+10);
+  c.fillText("L "+(r.L*1000).toFixed(0)+" mm",(xS2+xMe)/2-16,H-8);
+  if(r.D>0)c.fillText("D "+(r.D*1000).toFixed(0)+" mm",(xMe+xPl)/2-16,H-8);
+  c.save();c.translate(12,midY);c.rotate(-Math.PI/2);c.textAlign="center";
+  c.fillText("z ±"+fmt(zHalf*1000,1)+" mm",0,0);c.restore();
+}
+
+function drawPlate(r){
+  const {c,W,H,d}=fit(document.getElementById('cPlate'));
+  c.clearRect(0,0,W,H);
+  const padL=52,padR=110,padT=14,padB=22;
+  const pw=W-padL-padR, ph=H-padT-padB;
+  const zHalf=Math.max(r.sep/2+3*r.fw,1.2e-3)*1.25;
+  const Y=z=>padT+ph/2-z*(ph/(2*zHalf));
+  const X=x=>padL+pw/2+x*(pw/(2*(H_SLIT*1.9)));
+
+  // vetro
+  c.fillStyle="#0b0e13";c.fillRect(0,0,W,H);
+  c.fillStyle="#e9e3d8";c.fillRect(padL,padT,pw,ph);
+
+  // velo diffuso dagli atomi urtati
+  if(r.nScat>0){
+    const fog=Math.min(0.5,1-Math.exp(-Math.max(r.MLfog,0)/0.09));
+    c.fillStyle="rgba(70,58,48,"+fog.toFixed(3)+")";c.fillRect(padL,padT,pw,ph);
+  }
+
+  // istogramma 2D
+  const NB=170, bins=new Float64Array(NB);
+  // getImageData e putImageData ignorano la trasformazione e lavorano in pixel
+    // fisici: su uno schermo ad alta densita' vanno moltiplicate per d, altrimenti
+    // la nuvola di punti finisce in un angolo del vetrino disegnato
+    const img=c.getImageData(padL*d,padT*d,Math.max(1,Math.round(pw*d)),Math.max(1,Math.round(ph*d)));
+  const acc=new Float64Array(img.width*img.height);
+  const binZ=2*zHalf/NB;
+  for(let i=0;i<r.nOK;i++){
+    // la mappa e' in pixel fisici, X e Y danno punti: senza *d la nuvola si
+    // stringe in un angolo su ogni schermo ad alta densita'
+    const px=Math.round((X(r.xs[i])-padL)*d), py=Math.round((Y(r.zs[i])-padT)*d);
+    if(px<0||py<0||px>=img.width||py>=img.height)continue;
+    const R=Math.max(2,Math.round(2*d));   // anche la macchia di ogni atomo cresce col numero di pixel
+    for(let dx=-R;dx<=R;dx++)for(let dy=-R;dy<=R;dy++){
+      const qx=px+dx,qy=py+dy; if(qx<0||qy<0||qx>=img.width||qy>=img.height)continue;
+      acc[qy*img.width+qx]+=Math.exp(-(dx*dx+dy*dy)/(4*d*d));
+    }
+    const b=Math.floor((r.zs[i]+zHalf)/binZ); if(b>=0&&b<NB)bins[b]++;
+  }
+  let mx=0;for(let i=0;i<acc.length;i++)if(acc[i]>mx)mx=acc[i];
+  if(mx>0){
+    for(let i=0;i<acc.length;i++){
+      const mlLocal=r.ML*(acc[i]/mx);
+      const dk=1-Math.exp(-mlLocal/0.12);
+      const o=i*4;
+      img.data[o]  =Math.round(img.data[o]  *(1-dk)+38*dk);
+      img.data[o+1]=Math.round(img.data[o+1]*(1-dk)+30*dk);
+      img.data[o+2]=Math.round(img.data[o+2]*(1-dk)+26*dk);
+    }
+    c.putImageData(img,padL*d,padT*d);
+  }
+
+  // profilo di densità a destra
+  let bmax=0;for(let i=0;i<NB;i++)bmax=Math.max(bmax,bins[i]);
+  c.strokeStyle="#5ec8d8";c.lineWidth=1.4;c.beginPath();
+  for(let i=0;i<NB;i++){
+    const z=-zHalf+(i+0.5)*binZ, v=bmax?bins[i]/bmax:0;
+    const px=W-padR+8+v*(padR-24), py=Y(z);
+    i?c.lineTo(px,py):c.moveTo(px,py);
+  }
+  c.stroke();
+  c.strokeStyle="#28303b";c.beginPath();c.moveTo(W-padR+8,padT);c.lineTo(W-padR+8,padT+ph);c.stroke();
+
+  // scala z
+  c.fillStyle="#66748a";c.font="10px ui-monospace,monospace";c.textAlign="right";
+  [-1,-0.5,0,0.5,1].forEach(f=>{
+    const z=f*zHalf; c.fillText(fmt(z*1000,1),padL-6,Y(z)+3);
+    c.strokeStyle="#1d2531";c.beginPath();c.moveTo(padL-3,Y(z));c.lineTo(padL,Y(z));c.stroke();
+  });
+  c.textAlign="left";c.fillText("z [mm]",6,padT+9);
+
+  // quota separazione
+  if(r.sep>0&&r.nOK>500){
+    const y1=Y(r.sep/2), y2=Y(-r.sep/2), xq=padL+pw+14;
+    c.strokeStyle="#e8b34a";c.lineWidth=1;c.beginPath();
+    c.moveTo(xq,y1);c.lineTo(xq,y2);c.moveTo(xq-3,y1);c.lineTo(xq+3,y1);c.moveTo(xq-3,y2);c.lineTo(xq+3,y2);c.stroke();
+    c.fillStyle="#e8b34a";c.save();c.translate(xq+12,(y1+y2)/2);c.rotate(-Math.PI/2);c.textAlign="center";
+    c.fillText(fmt(r.sep*1000,2)+" mm",0,0);c.restore();
+  }
+}
+
+/* ============ pannelli laterali ============ */
+function paintSide(r,d){
+  document.getElementById('vP').textContent=sci(r.p_mbar)+" mbar";
+  const pa=pumpAdvice(r), pel=document.getElementById('pump');
+  pel.className="pump "+pa.cls;
+  pel.innerHTML="<b>"+pa.ttl+"</b>"+pa.txt;
+  document.getElementById('vT').textContent=r.TC.toFixed(0)+" °C";
+  document.getElementById('vD').textContent=fmt(r.dHole*1000,2)+" mm";
+  document.getElementById('vW').textContent=fmt(r.w*1000,2)+" mm";
+  document.getElementById('vDS').textContent=(r.ds*1000).toFixed(0)+" mm";
+  document.getElementById('vG').textContent=fmt(r.g*1000,1)+" mm";
+  document.getElementById('vL').textContent=(r.L*1000).toFixed(0)+" mm";
+  document.getElementById('vDr').textContent=(r.D*1000).toFixed(0)+" mm";
+  document.getElementById('vHc').textContent=(r.Hc*1000).toFixed(0)+" mm";
+  document.getElementById('vWc').textContent=(r.Wc*1000).toFixed(0)+" mm";
+  document.getElementById('vTe').textContent=r.hours<1?(r.hours*60).toFixed(0)+" min":fmt(r.hours,1)+" h";
+
+  const lamVap=mfp(r.pv), urti=r.dHole/lamVap;
+  const rows=[
+    ["§",T("Sorgente (vapore d'argento nel crogiolo)","Source (silver vapour in the crucible)")],
+    [T("tensione di vapore","vapour pressure"), fmt(r.pv,1)+" Pa",""],
+    [T("λ nel vapore","λ in the vapour"), fmt(lamVap*1000,2)+" mm",""],
+    [T("urti all'uscita dal foro","collisions on leaving the hole"), fmt(urti,1),
+      urti<0.5?"g":(urti<1.4?"w":"b")],
+    [T("Knudsen = λ / ⌀ foro","Knudsen = λ / hole ⌀"), fmt(r.Kn,1), r.Kn>=2?"g":(r.Kn>=0.7?"w":"b")],
+
+    ["§",T("Percorso (gas residuo nella camera)","Path (residual gas in the chamber)")],
+    [T("λ nel gas residuo","λ in the residual gas"), r.lam>99?">99 m":fmt(r.lam,2)+" m",""],
+    [T("lunghezza del fascio","beam length"), (r.Ltot*1000).toFixed(0)+" mm", r.Ltot<1.2?"g":(r.Ltot<1.5?"w":"b")],
+    [T("λ / lunghezza del fascio","λ / beam length"), fmt(r.lam/r.Ltot,0)+"×", r.lam/r.Ltot>10?"g":(r.lam/r.Ltot>3?"w":"b")],
+    [T("trasmissione del fascio","beam transmission"), (r.trans*100).toFixed(0)+"%", r.trans>0.8?"g":(r.trans>0.35?"w":"b")],
+    [T("pompa richiesta","pump required"), isFinite(r.Snom)?(r.Snom<1?"<1":r.Snom.toFixed(0))+" l/s":"—",
+      isFinite(r.Snom)?(r.Snom<=90?"g":(r.Snom<=700?"w":"b")):"b"],
+
+    ["§",T("Sezione della camera","Chamber section")],
+    [T("conduttanza del condotto","duct conductance"), r.cond.toFixed(0)+" l/s",""],
+    [T("larghezza polare / traferro","pole width / gap"), fmt(r.CH.ratio,1),
+      r.CH.ratio>=3?"g":(r.CH.ratio>=2?"w":"b")],
+    [T("gradiente utile / nominale","useful / nominal gradient"), (r.CH.unif*100).toFixed(0)+"%",
+      r.CH.unif>0.9?"g":(r.CH.unif>0.7?"w":"b")],
+    [T("altezza minima richiesta","minimum height required"), (r.CH.need*1000).toFixed(0)+" mm",
+      r.CH.fits?"g":"b"],
+    [T("apertura libera per il fascio","free aperture for the beam"), fmt(r.CH.clear*1000,1)+" mm",
+      (r.sep/2+r.fw)<r.CH.clear?"g":"b"],
+
+    ["§",T("Deflessione e deposito","Deflection and deposit")],
+    [T("gradiente ∂B/∂z","gradient ∂B/∂z"), fmt(r.G/100,2)+" T/cm",""],
+    [T("separazione","separation"), fmt(r.sep*1000,2)+" mm", r.sep>1e-3?"g":(r.sep>3e-4?"w":"b")],
+    [T("larghezza traccia","trace width"), fmt(r.fw*1000,2)+" mm",""],
+    [T("visibilità dello sdoppiamento","splitting visibility"), (r.vis*100).toFixed(0)+"%", r.vis>0.55?"g":(r.vis>0.35?"w":"b")],
+    [T("atomi persi nel ferro","atoms lost in the iron"), (100*r.nHit/NMC).toFixed(0)+"%", r.nHit/NMC<0.05?"g":(r.nHit/NMC<0.35?"w":"b")],
+    [T("deposito","deposit"), fmt(r.ML,2)+" ML", r.ML>0.1?"g":(r.ML>0.03?"w":"b")],
+    [T("amperspire","ampere-turns"), sci(r.NI), r.NI<2e4?"g":(r.NI<4e4?"w":"b")],
+    [T("divergenza / deflessione","divergence / deflection"), fmt(r.diverg/Math.max(r.thetaDefl,1e-9),2),""]
+  ];
+  document.getElementById('ro').innerHTML=rows.map(([k,v,cl])=>
+    k==="§" ? `<tr class="sec"><td colspan="2">${v}</td></tr>`
+            : `<tr><td>${k}</td><td class="${cl}">${v}</td></tr>`).join("");
+
+  const pc=(x)=>(100*x).toFixed(0)+"%";
+  const ck=[
+    {ok:r.trans>0.8,
+     t:T("Il fascio arriva integro al vetrino","The beam reaches the slide intact"),
+     n:T(`trasmissione ${pc(r.trans)}`,`transmission ${pc(r.trans)}`),
+     why:T(`Trasmissione ${pc(r.trans)}: il ${pc(1-r.trans)} degli atomi urta il gas residuo. Abbassa la pressione.`,
+           `Transmission ${pc(r.trans)}: ${pc(1-r.trans)} of the atoms hit the residual gas. Lower the pressure.`)},
+
+    {ok:r.Kn>=2,
+     t:T("La sorgente è in regime effusivo","The source is in the effusive regime"),
+     n:T(`Knudsen ${fmt(r.Kn,1)} nel foro del crogiolo`,`Knudsen ${fmt(r.Kn,1)} at the crucible hole`),
+     why:T(`Knudsen ${fmt(r.Kn,1)}: nel vapore il cammino libero medio è ${fmt(mfp(r.pv)*1000,2)} mm contro un foro di ${fmt(r.dHole*1000,2)} mm, quindi gli atomi si urtano prima di uscire. Il vetrino non lo mostra — le tracce restano belle — ma la distribuzione delle velocità non è più maxwelliana e il momento magnetico ricavato è falsato. Abbassa la temperatura o riduci il foro.`,
+           `Knudsen ${fmt(r.Kn,1)}: in the vapour the mean free path is ${fmt(mfp(r.pv)*1000,2)} mm against a ${fmt(r.dHole*1000,2)} mm hole, so the atoms collide before leaving. The slide does not show it — the traces still look fine — but the velocity distribution is no longer Maxwellian and the magnetic moment derived from it is wrong. Lower the temperature or shrink the hole.`)},
+
+    {ok:r.nHit/NMC<0.05,
+     t:T("Il fascio non tocca le espansioni","The beam does not touch the pole pieces"),
+     n:T(`perso nel ferro ${pc(r.nHit/NMC)}`,`lost in the iron ${pc(r.nHit/NMC)}`),
+     why:T(`Il ${pc(r.nHit/NMC)} degli atomi finisce contro il ferro dentro il traferro. Allarga il traferro, accorcia il magnete o sposta la separazione sul tratto di deriva.`,
+           `${pc(r.nHit/NMC)} of the atoms end up against the iron inside the gap. Widen the gap, shorten the magnet, or move the separation onto the drift.`)},
+
+    {ok:r.vis>=0.35&&r.sep>=3e-4,
+     t:T("Le due tracce sono separate e leggibili","The two traces are separated and readable"),
+     n:T(`sep. ${fmt(r.sep*1000,2)} mm · largh. ${fmt(r.fw*1000,2)} mm · visibilità ${pc(r.vis)}`,
+         `sep. ${fmt(r.sep*1000,2)} mm · width ${fmt(r.fw*1000,2)} mm · visibility ${pc(r.vis)}`),
+     why:(r.sep<3e-4
+        ? T(`Separazione ${fmt(r.sep*1000,3)} mm: troppo piccola per la lettura diretta. Restringi il traferro o allunga il tratto di deriva.`,
+            `Separation ${fmt(r.sep*1000,3)} mm: too small to read directly. Narrow the gap or lengthen the drift.`)
+        : T(`Visibilità ${pc(r.vis)}: le tracce sono larghe ${fmt(r.fw*1000,2)} mm contro ${fmt(r.sep*1000,2)} mm di separazione, il centro non si svuota. Restringi le fenditure o aumenta la deflessione.`,
+            `Visibility ${pc(r.vis)}: the traces are ${fmt(r.fw*1000,2)} mm wide against ${fmt(r.sep*1000,2)} mm of separation, so the centre does not empty out. Narrow the slits or increase the deflection.`))},
+
+    {ok:r.ML>=0.03&&r.hours<=12,
+     t:T("Deposito sviluppabile in tempi ragionevoli","Developable deposit in a reasonable time"),
+     n:`${fmt(r.ML,2)} ML · ${r.hours<1?(r.hours*60).toFixed(0)+" min":fmt(r.hours,1)+" h"}`,
+     why:(r.ML<0.03
+        ? T(`Solo ${fmt(r.ML,3)} monostrati: troppo poco argento da annerire con lo zolfo. Alza la temperatura, allarga le fenditure o prolunga l'esposizione.`,
+            `Only ${fmt(r.ML,3)} monolayers: too little silver to darken with sulphur. Raise the temperature, widen the slits or extend the exposure.`)
+        : T(`${fmt(r.hours,1)} ore di funzionamento ininterrotto: nel 1922 furono otto, al limite dell'apparato.`,
+            `${fmt(r.hours,1)} hours of uninterrupted running: in 1922 it was eight, at the limit of the apparatus.`))},
+
+    {ok:r.NI<=4e4&&r.Ltot<=1.5&&r.CH.fits&&(r.sep/2+r.fw)<r.CH.clear,
+     t:T("Magnete e camera compatibili","Magnet and chamber compatible"),
+     n:`${sci(r.NI)} A·sp · ${(r.Ltot*1000).toFixed(0)} mm · ${(r.Hc*1000).toFixed(0)}×${(r.Wc*1000).toFixed(0)} mm`,
+     why:(!r.CH.fits
+        ? T(`Servono ${(r.CH.need*1000).toFixed(0)} mm di altezza (traferro ${fmt(r.g*1000,1)} mm più il ferro dei poli) contro ${(r.Hc*1000).toFixed(0)} mm disponibili.`,
+            `${(r.CH.need*1000).toFixed(0)} mm of height are needed (gap ${fmt(r.g*1000,1)} mm plus the pole iron) against ${(r.Hc*1000).toFixed(0)} mm available.`)
+        : (r.sep/2+r.fw)>=r.CH.clear
+        ? T(`Le tracce arrivano a ${fmt((r.sep/2+r.fw)*1000,1)} mm dall'asse ma l'apertura libera è ${fmt(r.CH.clear*1000,1)} mm: il fascio colpisce la parete.`,
+            `The traces reach ${fmt((r.sep/2+r.fw)*1000,1)} mm from the axis but the free aperture is ${fmt(r.CH.clear*1000,1)} mm: the beam hits the wall.`)
+        : (r.NI>4e4
+        ? T(`Servono ${sci(r.NI)} amperspire: bobina enorme e raffreddamento importante. Un traferro più stretto costa molto meno rame.`,
+            `${sci(r.NI)} ampere-turns are needed: a huge coil and serious cooling. A narrower gap costs far less copper.`)
+        : T(`Lunghezza totale ${(r.Ltot*1000).toFixed(0)} mm: oltre il metro e mezzo allineamento e banco diventano critici.`,
+            `Total length ${(r.Ltot*1000).toFixed(0)} mm: past a metre and a half, alignment and bench space become critical.`)))}
+  ];
+  document.getElementById('checks').innerHTML=ck.map(o=>
+    `<li class="${o.ok?'pass':'fail'}"><span class="m">${o.ok?'✓':'✗'}</span><span class="txt">${o.t}<span class="num">${o.ok?o.n:o.why}</span></span></li>`).join("");
+
+  // ---- esito: pallino, contatore, nota esplicativa ----
+  const nfail=ck.filter(o=>!o.ok).length;
+  const dot=document.getElementById('vdot'), note=document.getElementById('vnote');
+  const cls=d.bad.length?"bad":(d.warn.length||nfail?"warn":"ok");
+  dot.className="dot"+(cls==="ok"?"":" "+cls);
+  document.getElementById('vst').textContent=(ck.length-nfail)+"/"+ck.length;
+
+  let title,body,more="";
+  if(d.bad.length){
+    title=d.bad[0].m; body=d.bad[0].f;
+    if(d.bad.length+d.warn.length>1)
+      more=T(`Restano ${d.bad.length+d.warn.length-1} altri punti da sistemare: si presentano uno alla volta, in ordine di gravità.`,
+             `${d.bad.length+d.warn.length-1} more points remain: they appear one at a time, in order of severity.`);
+  }else if(d.warn.length){
+    title=d.warn[0].m; body=d.warn[0].f;
+    if(d.warn.length>1)
+      more=T(`Altri ${d.warn.length-1} avvisi minori in attesa.`,`${d.warn.length-1} further minor warnings pending.`);
+  }else{
+    title=T("Configurazione praticabile.","Workable configuration.");
+    body=T(`Due tracce a ${fmt(r.sep*1000,2)} mm di distanza, larghe ${fmt(r.fw*1000,2)} mm, dopo ${r.hours<1?(r.hours*60).toFixed(0)+" minuti":fmt(r.hours,1)+" ore"} di esposizione.`,
+           `Two traces ${fmt(r.sep*1000,2)} mm apart, ${fmt(r.fw*1000,2)} mm wide, after ${r.hours<1?(r.hours*60).toFixed(0)+" minutes":fmt(r.hours,1)+" hours"} of exposure.`);
+    more=T("Prova ora a migliorarla: quanta separazione ottieni senza far cadere nessuna delle cinque condizioni?",
+           "Now try to improve it: how much separation can you get without breaking any of the five conditions?");
+  }
+  note.className="note "+cls;
+  note.innerHTML="<b>"+title+"</b>"+body+(more?'<span class="more">'+more+"</span>":"");
+
+  document.getElementById('rdApp').textContent=
+    T(`v̄ ${r.vMean.toFixed(0)} m/s · ∂B/∂z ${fmt(r.G/100,2)} T/cm`,`v̄ ${r.vMean.toFixed(0)} m/s · ∂B/∂z ${fmt(r.G/100,2)} T/cm`);
+  document.getElementById('rdPlate').textContent=
+    T(`${fmt(r.sep*1000,2)} mm · ${fmt(r.ML,2)} ML`,`${fmt(r.sep*1000,2)} mm · ${fmt(r.ML,2)} ML`);
+}
+
+
+/* ============ modello analitico deterministico (bussola dell'ottimizzatore) ==
+   Il Monte Carlo è fedele ma rumoroso: usato per decidere, farebbe scambiare le
+   fluttuazioni per miglioramenti. Qui la distribuzione della deflessione è
+   calcolata in forma chiusa. Poiché z = C/u con u = v²/α² distribuito come
+   Gamma(2,1), si ha f(z) = C²/z³·e^(−C/z); gli atomi troppo lenti finiscono
+   contro le espansioni, il che tronca la distribuzione a z_max = g(L/2+D)/L.  */
+function evalFast(V){
+  const p_mbar=Math.pow(10,V.P), p_Pa=p_mbar*100, TC=V.T, Tk=TC+273.15;
+  const dHole=V.D*1e-3, w=V.W*1e-3, ds=V.DS*1e-3;
+  const g=V.G*1e-3, L=V.L*1e-3, D=V.Dr*1e-3, hours=Math.pow(10,V.Te);
+  const Hc=V.Hc*1e-3, Wc=V.Wc*1e-3, CH=chamber(g,Hc,Wc);
+  const pv=pVap(TC), alpha=Math.sqrt(2*KB*Tk/MAG);
+  const Ltot=L_OVEN+ds+L+D, lam=mfp(p_Pa), trans=Math.exp(-Ltot/lam);
+  const Kn=mfp(pv)/dHole;
+  const Gnom=gradOf(g), G=Gnom*CH.unif, a=MUB*G/MAG;
+  const Btip=Math.min(G*g/2,2.0), NI=Btip*(g+2*WALL)/MU0;
+
+  const C=a*L*(L/2+D)/(alpha*alpha);            // deflessione a v = α
+  const uMin=a*L*L/(g*alpha*alpha);             // sotto questa u l'atomo tocca il ferro
+  const hit=1-(1+uMin)*Math.exp(-uMin);
+  const zMax=g*(L/2+D)/L;                       // = C/uMin
+  const wgeo=w*(1+2*(L+D)/ds);                  // larghezza geometrica del fascio
+
+  // distribuzione troncata, convoluta con il profilo delle fenditure
+  const Zr=Math.max(Math.min(zMax*1.15,4*C/3), 2.5*wgeo, 4e-4);
+  const N=241, dzg=2*Zr/(N-1), f=new Float64Array(N);
+  for(let i=0;i<N;i++){
+    const z=-Zr+i*dzg, az=Math.abs(z);
+    if(az<1e-9||az>zMax) continue;
+    f[i]=C*C/(az*az*az)*Math.exp(-C/az);
+  }
+  const half=Math.max(1,Math.round(wgeo/2/dzg)), sm=new Float64Array(N);
+  for(let i=0;i<N;i++){
+    let acc=0,cnt=0;
+    for(let k=-half;k<=half;k++){const j=i+k;if(j>=0&&j<N){acc+=f[j];cnt++;}}
+    sm[i]=cnt?acc/cnt:0;
+  }
+  let bP=-1,vP=0;
+  for(let i=0;i<N;i++){const z=-Zr+i*dzg;if(z>0&&sm[i]>vP){vP=sm[i];bP=i;}}
+  const zPeak=bP>=0?(-Zr+bP*dzg):0, sep=2*zPeak;
+  let fw=0;
+  if(bP>=0){let lo=bP,hi=bP;
+    while(lo>0&&sm[lo]>vP/2)lo--; while(hi<N-1&&sm[hi]>vP/2)hi++;
+    fw=(hi-lo)*dzg;}
+  const cen=sm[Math.round((N-1)/2)];
+  const vis=vP>0?Math.max(0,1-cen/vP):0;
+
+  const Phi=pv/Math.sqrt(2*Math.PI*MAG*KB*Tk), Ahole=Math.PI*dHole*dHole/4;
+  const I0=Phi*Ahole/Math.PI, rSl=L_OVEN+ds, Om=(w*H_SLIT)/(rSl*rSl);
+  const rate=I0*Om*ETA*(1-hit)*trans;
+  const area=Math.max(2*Math.max(fw,w)*(H_SLIT*1.4),1e-9);
+  const ML=rate*hours*3600/(area*N_SURF);
+  return {trans,Kn,hit,sep,fw,vis,ML,hours,NI,Ltot,G,fits:CH.fits,
+          clear:CH.clear,ratio:CH.ratio};
+}
+
+const cl=x=>Math.max(0,Math.min(1,x));
+function scoreOf(m){
+  /* Ogni vincolo smette di dare punti appena è comodamente soddisfatto: senza
+     questa saturazione l'ottimizzatore continuerebbe a spremere margine su un
+     vincolo già rispettato, sacrificando la separazione — cioè peggiorando
+     proprio il numero che l'utente sta guardando. */
+  const gates =
+      cl((m.trans-0.35)/0.50)                        // sat. a 85%
+    + cl((m.Kn-0.7)/1.30)                            // sat. a 2,0
+    + cl((0.10-m.hit)/0.08)                          // sat. a 2%
+    + cl(Math.log10(m.ML/0.03)/0.50)                 // sat. a ~0,10 ML
+    + cl((Math.log10(12)-Math.log10(m.hours))/0.30)  // sat. a ~6 h
+    + cl((Math.log10(4e4)-Math.log10(m.NI))/0.30)    // sat. a 2·10⁴ A·sp
+    + cl((1.5-m.Ltot)/0.30)                          // sat. a 1,2 m
+    + (m.fits?1:0)                                   // il magnete deve entrarci
+    + cl((m.clear-(m.sep/2+m.fw))/0.004);            // il fascio deve starci dentro
+  const obj = 2.0*cl((m.vis-0.30)/0.35)
+            + 3.0*cl(Math.log10(Math.max(m.sep,1e-9)/3e-4)/Math.log10(30));
+  return 3*gates + obj;
+}
+function passCount(m){
+  return [m.trans>0.8, m.Kn>=2, m.hit<0.05, m.vis>=0.35&&m.sep>=3e-4,
+          m.ML>=0.03&&m.hours<=12,
+          m.NI<=4e4&&m.Ltot<=1.5&&m.fits&&(m.sep/2+m.fw)<m.clear].filter(Boolean).length;
+}
+
+/* ============ ottimizzatore: discesa per coordinate ============ */
+const OPTV=[
+  {k:"P", d:0.15, nm:["pressione","pressure"],           f:v=>sci(Math.pow(10,v))+" mbar"},
+  {k:"T", d:20,   nm:["temperatura","temperature"],      f:v=>v.toFixed(0)+" °C"},
+  {k:"D", d:0.1,  nm:["foro crogiolo","crucible hole"],  f:v=>fmt(v,2)+" mm"},
+  {k:"W", d:0.02, nm:["fenditure","slits"],              f:v=>fmt(v,2)+" mm"},
+  {k:"DS",d:25,   nm:["distanza fenditure","slit spacing"],f:v=>v.toFixed(0)+" mm"},
+  {k:"G", d:2,    nm:["traferro","gap"],                 f:v=>fmt(v,1)+" mm"},
+  {k:"L", d:40,   nm:["espansioni","poles"],             f:v=>v.toFixed(0)+" mm"},
+  {k:"Dr",d:60,   nm:["deriva","drift"],                 f:v=>v.toFixed(0)+" mm"},
+  {k:"Hc",d:10,   nm:["altezza camera","chamber height"], f:v=>v.toFixed(0)+" mm"},
+  {k:"Wc",d:10,   nm:["larghezza camera","chamber width"], f:v=>v.toFixed(0)+" mm"},
+  {k:"Te",d:0.1,  nm:["esposizione","exposure"],         f:v=>{const h=Math.pow(10,v);return h<1?(h*60).toFixed(0)+" min":fmt(h,1)+" h";}}
+];
+const readV =()=>{const V={};for(const k in S)V[k]=+S[k].value;return V;};
+const writeV=V=>{for(const k in V)S[k].value=V[k];};
+let optHist=[];
+
+function optStep(){
+  const V=readV(), base=evalFast(V), s0=scoreOf(base);
+  let best=null;
+  for(const o of OPTV){
+    const el=S[o.k], lo=+el.min, hi=+el.max;
+    for(const dir of [-1,1]){
+      const nv=Math.min(hi,Math.max(lo, +(V[o.k]+dir*o.d).toFixed(6)));
+      if(nv===V[o.k])continue;
+      const W2=Object.assign({},V); W2[o.k]=nv;
+      const sc=scoreOf(evalFast(W2));
+      if(!best||sc>best.sc){best={sc,o,from:V[o.k],to:nv,W:W2};}
+    }
+  }
+  const log=document.getElementById('optlog');
+  if(!best||best.sc<=s0+2e-3){
+    const li=document.createElement('li'); li.className="stop";
+    li.textContent=T("Nessun miglioramento con passi di questa ampiezza: sei in un ottimo locale. Muovi tu un parametro per uscirne.",
+                     "No improvement with steps of this size: you are at a local optimum. Move a parameter yourself to get out.");
+    log.appendChild(li); return false;
+  }
+  optHist.push(V);
+  writeV(best.W); render();
+  const m=evalFast(best.W), i=isEN()?1:0;
+  const li=document.createElement('li');
+  li.innerHTML=`<span class="mv">${best.o.nm[i]} <b>${best.o.f(best.from)} → ${best.o.f(best.to)}</b></span>`+
+    `<span class="st">${T("separazione","separation")} ${fmt(base.sep*1000,2)}→${fmt(m.sep*1000,2)} mm · `+
+    `${T("visibilità","visibility")} ${(base.vis*100).toFixed(0)}→${(m.vis*100).toFixed(0)}% · `+
+    `${passCount(base)}→${passCount(m)}/6</span>`;
+  log.appendChild(li); log.scrollTop=log.scrollHeight;
+  return true;
+}
+document.getElementById('optStep').onclick=()=>optStep();
+document.getElementById('optRun').onclick=()=>{
+  let n=0; (function go(){ if(n++>=5)return; if(optStep()) setTimeout(go,520); })();
+};
+document.getElementById('optUndo').onclick=()=>{
+  if(!optHist.length)return;
+  writeV(optHist.pop()); render();
+  const log=document.getElementById('optlog');
+  if(log.lastChild)log.removeChild(log.lastChild);
+};
+
+/* ============ ciclo ============ */
+let last=null;
+function render(){
+  const r=compute(); last=r;
+  const d=diagnose(r);
+  drawApparatus(r); drawPlate(r); paintSide(r,d);
+}
+window.addEventListener('resize',()=>{if(last){drawApparatus(last);drawPlate(last);}});
+render();
+</script>
+<script defer src="/assets/sim-sg-mobile.js?v=2"></script>
+</body>
+</html>

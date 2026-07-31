@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://laquantistica.com/v2/it/01-stern-gerlach.html">
+<title>Esperimento di Stern-Gerlach · La Quantistica</title>
+<link rel="stylesheet" href="/assets/style.css?v=17">
+<link rel="stylesheet" href="/assets/lang.css?v=7">
+<link rel="stylesheet" href="/assets/katex/katex.min.css?v=1">
+<style id="sim-cta-style">
+.sim-cta-p{margin:.4rem 0 1.9rem;}
+.sim-cta{display:inline-flex;align-items:center;gap:.55em;padding:.62em 1.15em;border:1px solid var(--accent);border-radius:9px;background:var(--paper);color:var(--accent);font-weight:600;text-decoration:none;box-shadow:0 1px 2px rgba(0,0,0,.06);transition:background .15s,color .15s,box-shadow .15s;}
+.sim-cta:hover{background:var(--accent);color:#fff;text-decoration:none;box-shadow:0 3px 10px rgba(123,45,38,.28);}
+.sim-cta .ico{font-size:.85em;}
+.sim-cta .arw{transition:transform .15s;}
+.sim-cta:hover .arw{transform:translateX(3px);}
+</style>
+<link rel="alternate" hreflang="it" href="https://laquantistica.com/v2/it/01-stern-gerlach.html">
+<link rel="alternate" hreflang="en" href="https://laquantistica.com/v2/en/01-stern-gerlach.html">
+<link rel="alternate" hreflang="x-default" href="https://laquantistica.com/v2/en/01-stern-gerlach.html">
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="/assets/lang-links.css?v=1">
+</head>
+<body>
+<a class="skip-link" href="#contenuto"><span class="it">Salta al contenuto</span></a>
+<button class="menu-toggle" aria-label="Menu">☰</button>
+<div class="scrim"></div>
+<div class="layout">
+<header class="sidebar">
+  <a class="brand" href="index.html"><span class="mark"><span class="bk">⟨</span>ΛQ<span class="bk">⟩</span></span> La Quantistica<small class="it">Esperimenti fondamentali di Meccanica Quantistica — Tesi di Laurea</small></a>
+  <div class="langsw" role="group" aria-label="Lingua / Language">
+    <a class="langbtn" href="../it/01-stern-gerlach.html" hreflang="it" lang="it" aria-current="true">Italiano</a>
+    <a class="langbtn" href="../en/01-stern-gerlach.html" hreflang="en" lang="en">English</a>
+  </div>
+  <nav aria-labelledby="nav-capitoli"><span id="nav-capitoli" class="sr-only"><span class="it">Capitoli</span></span><a href="index.html"><span class="num"></span><span class="it">Introduzione</span></a>
+<a href="01-stern-gerlach.html"><span class="num">1</span><span class="it">Esperimento di Stern-Gerlach</span></a>
+<a href="02-stern-gerlach-cascata.html"><span class="num">2</span><span class="it">Esperimenti di Stern-Gerlach in cascata</span></a>
+<a href="03-elettroni.html"><span class="num">3</span><span class="it">Esperimenti con gli Elettroni</span></a>
+<a href="04-diffrazione.html"><span class="num">4</span><span class="it">Diffrazione degli Elettroni</span></a>
+<a href="05-rutherford.html"><span class="num">5</span><span class="it">Esperimento di Rutherford</span></a>
+<a href="06-ulteriori-sviluppi.html"><span class="num">6</span><span class="it">Ulteriori sviluppi della Teoria</span></a>
+<a href="07-franck-hertz.html"><span class="num">7</span><span class="it">Esperimento di Franck-Hertz</span></a>
+<a href="08-effetto-fotoelettrico.html"><span class="num">8</span><span class="it">Effetto Fotoelettrico</span></a>
+<a href="09-spettri-atomici.html"><span class="num">9</span><span class="it">Spettri atomici di emissione</span></a></nav>
+  <p class="sidenote">
+    <span class="it">Edizione web rivista rispetto all’originale del 1999.</span>
+    
+    <a class="ghlink" href="https://github.com/faustinopalma/laquantistica" target="_blank" rel="noopener"><span class="it">Testo originale su GitHub ↗</span></a>
+  </p>
+</header>
+<main class="content" id="contenuto" tabindex="-1">
+  <article class="page">
+    <p class="eyebrow"><span class="it">Capitolo 1</span></p>
+    <h1 class="title"><span class="it">Esperimento di Stern-Gerlach</span></h1>
+    
+<p class="opening"><span class="it">Questo esperimento fu ideato da Stern e da Gerlach nel 1921 con lo
+scopo di misurare il momento magnetico dei singoli atomi. Le prime prove
+furono effettuate con atomi di argento. I risultati andarono al di là
+delle aspettative, facendo emergere comportamenti inattesi, che oggi
+possiamo usare come punto di partenza
+per lo studio della Meccanica Quantistica.</span></p>
+<div class="nota-link" id="nota-1">
+<span class="k">Nota 01</span>
+<span class="it">Una nota onesta a margine di questo capitolo. <a href="nota-01-stern-gerlach.html?ret=01-stern-gerlach.html%23nota-1">Leggi →</a></span>
+</div>
+<h2 id="descrizione-dellesperimento."><span class="it">Descrizione
+dell’esperimento.</span></h2>
+<p><span class="it">Un atomo con il suo
+momento magnetico <em><strong>m</strong></em>, può essere immaginato
+come una piccola calamita (fig. <a class="ref" href="#fig-01_stern_gerlach-1" data-ref="fig-01_stern_gerlach-1">1</a>). Se la calamita viene immersa in un
+campo magnetico sui suoi poli si esercitano delle forze opposte. Se il
+campo è disuniforme le forze non sono bilanciate e la calamita accelera.
+La direzione verso la quale la calamita accelera dipende dal gradiente
+del campo e dall’orientazione del momento magnetico
+<em><strong>m</strong></em>, ad esempio nella figura la calamita
+accelera verso l’alto.</span></p>
+<figure id="fig-01_stern_gerlach-1" class="fig-inline"><img loading="lazy" src="/img/pandoc_ch1/fig1.svg?v=2" alt="Un atomo come piccola calamita in un campo disuniforme."><figcaption><b>Fig. 1</b> — <span class="it">Un atomo come piccola calamita in un campo magnetico disuniforme.</span></figcaption></figure>
+<p><span class="it">La figura <a class="ref" href="#fig-01_stern_gerlach-2" data-ref="fig-01_stern_gerlach-2">2</a> mostra il circuito magnetico che permette di realizzare
+un campo disomogeneo nel traferro.</span></p>
+<figure id="fig-01_stern_gerlach-2" class="fig-inline"><img loading="lazy" src="/img/pandoc_ch1/fig2.svg?v=2" alt="Il circuito magnetico che produce un campo disomogeneo nel traferro."><figcaption><b>Fig. 2</b> — <span class="it">Il circuito magnetico che produce un campo disomogeneo nel traferro.</span></figcaption></figure>
+<p><span class="it">L’esperimento di Stern-Gerlach si realizza facendo passare un fascio
+di atomi di argento, con una determinata velocità
+<em><strong>v</strong></em>, attraverso il traferro sagomato
+(fig. <a class="ref" href="#fig-01_stern_gerlach-3" data-ref="fig-01_stern_gerlach-3">3</a>).</span></p>
+<figure id="fig-01_stern_gerlach-3" class="fig-inline"><img loading="lazy" src="/img/pandoc_ch1/fig3.svg?v=2" alt="Il fascio di atomi attraverso il traferro sagomato."><figcaption><b>Fig. 3</b> — <span class="it">Il fascio di atomi attraverso il traferro sagomato.</span></figcaption></figure>
+<p><span class="it">Sotto l’azione del campo magnetico gli atomi vengono deflessi e alla
+fine del percorso si depositano su un vetrino. Dall’entità della
+deflessione misurata e dal gradiente del campo si può risalire al
+momento magnetico.</span></p>
+<figure id="fig-01_stern_gerlach-4" class="fig-inline"><img loading="lazy" src="/img/pandoc_ch1/fig4.svg?v=2" alt="Il percorso del fascio: fornetto, fenditure, vetrino."><figcaption><b>Fig. 4</b> — <span class="it">Il percorso del fascio: fornetto, fenditure di collimazione, vetrino.</span></figcaption></figure>
+<p><span class="it">Il fascio di atomi viene generato vaporizzando dell’argento
+all’interno di un fornetto sul quale è praticato un piccolo foro (fig. <a class="ref" href="#fig-01_stern_gerlach-4" data-ref="fig-01_stern_gerlach-4">4</a>). Gli
+atomi che fuoriescono dal foro passano attraverso una coppia di
+fenditure che servono a focalizzare il fascio. Tutto il percorso, dal
+fornetto fino al vetrino, viene realizzato nel vuoto, per impedire che
+gli atomi urtino contro le molecole di cui è costituita l’aria
+fermandosi prima di arrivare al vetrino.</span></p>
+<h2 id="descrizione-dellapparato-sperimentale."><span class="it">Descrizione
+dell’apparato sperimentale.</span></h2>
+<p><span class="it">Le figure che seguono riportano alcuni disegni di un apparato
+sperimentale progettato in bozza nel laboratorio didattico
+LAFIDIN.</span></p>
+<p><span class="it">Nella figura <a class="ref" href="#fig-01_stern_gerlach-5" data-ref="fig-01_stern_gerlach-5">5</a> sono rappresentati la camera dove viene vaporizzato
+l’argento e un tubo sul quale viene montata la prima fenditura di
+collimazione del fascio. Il crogiolo viene portato attorno ai 1100÷1200 °C. Non basta infatti fondere l’argento: occorre salire abbastanza perché la tensione di vapore produca un fascio di intensità utile, restando però sotto la soglia oltre la quale gli atomi cominciano a urtarsi nell’attraversare il foro e il fascio perde il carattere effusivo. Il riscaldamento avviene mediante un fornetto elettrico a resistenza all’interno del quale è disposto il crogiolo.</span></p>
+<figure id="fig-01_stern_gerlach-5" class="fig-inline"><img loading="lazy" src="/img/pandoc_ch1/app3.svg?v=3" alt="Camera di vaporizzazione e tubo con la prima fenditura di collimazione."><figcaption><b>Fig. 5</b> — <span class="it">camera di vaporizzazione e tubo con la prima fenditura di collimazione.</span></figcaption></figure>
+<p><span class="it">Nella figura <a class="ref" href="#fig-01_stern_gerlach-6" data-ref="fig-01_stern_gerlach-6">6</a> si rappresenta la camera che racchiude le espansioni polari. All’ingresso è montata la seconda fenditura di collimazione, all’uscita è disposto il vetrino.</span></p>
+<p><span class="it">L’intero percorso del fascio è mantenuto entro il metro: alla pressione di lavoro di circa 10⁻⁵ mbar il cammino libero medio degli atomi d’argento è di alcuni metri, molto maggiore della lunghezza del fascio, e gli urti con il gas residuo restano trascurabili.</span></p>
+<p><span class="it">Le due fenditure sono dimensionate in modo che la divergenza del fascio resti molto minore dell’angolo di deflessione. Il percorso lungo aiuta anche qui: permette aperture molto più larghe di quelle impiegate da Stern e Gerlach, e quindi un fascio più intenso e tempi di esposizione più brevi.</span></p>
+<p><span class="it">La sagoma delle espansioni polari è progettata per rendere il campo il più disomogeneo possibile nella regione attraversata dal fascio.</span></p>
+<figure id="fig-01_stern_gerlach-6" class="fig-inline"><img class="it" loading="lazy" src="/img/pandoc_ch1/app4.svg?v=3" alt="Camera delle espansioni polari con la seconda fenditura e il vetrino."><figcaption><b>Fig. 6</b> — <span class="it">camera delle espansioni polari con la seconda fenditura e il vetrino.</span></figcaption></figure>
+<p><span class="it">Nella figura <a class="ref" href="#fig-01_stern_gerlach-7" data-ref="fig-01_stern_gerlach-7">7</a> è riportato il circuito magnetico completo che
+permette di realizzare la configurazione di campo. Si osservi che la
+camera che contiene le espansioni è fatta di acciaio inox, questo
+materiale non è ferromagnetico e quindi non costituisce un corto
+circuito per il flusso magnetico.</span></p>
+<figure id="fig-01_stern_gerlach-7" class="fig-inline"><img class="it" loading="lazy" src="/img/pandoc_ch1/app5.svg?v=2" alt="Circuito magnetico completo in acciaio inox con le spire."><figcaption><b>Fig. 7</b> — <span class="it">circuito magnetico completo; la camera delle espansioni è in acciaio inox (non ferromagnetico).</span></figcaption></figure>
+<p><span class="it">Nella figura <a class="ref" href="#fig-01_stern_gerlach-8" data-ref="fig-01_stern_gerlach-8">8</a> si mostrano tutti gli oggetti assemblati e si descrivono
+le varie operazioni che compongono l’esperienza.</span></p>
+<figure id="fig-01_stern_gerlach-8" class="fig-inline"><img loading="lazy" src="/img/pandoc_ch1/app6.svg?v=2" alt="Apparato completo assemblato." style="max-height:520px;width:auto"><figcaption><b>Fig. 8</b> — <span class="it">tutti gli oggetti assemblati.</span></figcaption></figure>
+<p><span class="it">Una polvere di argento viene depositata nel crogiolo di allumina, il quale viene poi agganciato al resto dell’apparecchiatura mediante un raccordo sferico.</span></p>
+<p><span class="it">Viene attivata la pompa da vuoto che porta la pressione a circa 2⋅10<sup>-5</sup> mbar. A questa pressione il cammino libero medio degli atomi di argento è di alcuni metri, ossia oltre dieci volte la lunghezza del fascio: la frazione di atomi persi per urto con il gas residuo resta inferiore al 10%.</span></p>
+<p><span class="it">Si alimenta il fornetto e dopo un certo tempo il crogiolo raggiunge la temperatura di lavoro di 1100÷1200 °C, ben oltre la fusione dell’argento (962 °C), così che la tensione di vapore sia sufficiente a produrre un fascio effusivo di intensità utile.</span></p>
+<p><span class="it">L’argento fuso evapora dalla superficie del bagno: gli atomi emessi in tutte le direzioni attraversano il foro del crogiolo e, di questi, quelli che passano le due fenditure formano un fascio ben collimato.</span></p>
+<p><span class="it">Gli atomi che hanno attraversato le due fenditure passano nel traferro fra le espansioni polari, vengono deflessi, e alla fine del loro cammino si depositano su un disco di vetro posto all’estremità dell’apparato.</span></p>
+<p><span class="it">Dopo un certo tempo si spegne il fornetto, si fa entrare aria nelle camere e si preleva il vetrino. Il deposito di argento, spesso pochi strati atomici, non è visibile a occhio nudo: va sviluppato esponendo il vetrino a vapori di zolfo, che convertono l’argento in solfuro d’argento, di colore scuro — la stessa tecnica impiegata da Gerlach nel 1922. La lettura della deflessione avviene poi al microscopio con oculare micrometrico.</span></p>
+<h2 id="risultati-sperimentali."><span class="it">Risultati attesi.</span></h2>
+<p><span class="it">Sul vetrino, secondo la fisica classica, ci si attende una macchia unica, allargata nel verso del gradiente: i momenti magnetici degli atomi sono orientati a caso, e a ogni orientazione corrisponde una deflessione diversa. Quello che si osserva sono invece due depositi distinti, uno deflesso verso l’alto e uno verso il basso. Dall’entità della deflessione e dal gradiente del campo si risale al momento magnetico dei singoli atomi.</span></p>
+<figure id="fig-01_stern_gerlach-9" class="fig-inline"><img loading="lazy" src="/img/pandoc_ch1/vetrino-simulato.png?v=1" alt="Il vetrino con due bande scure separate, e accanto il profilo di densità del deposito con due massimi."><figcaption><b>Fig. 9</b> — <span class="it">Il vetrino dopo lo sviluppo, con accanto il profilo di densità del deposito. Le due bande sono separate di 1,7 mm e larghe 1,1 mm. L’immagine non è una fotografia: è generata dal <a href="lab-01-stern-gerlach.html">laboratorio simulato</a>, che ricostruisce il deposito a partire dai parametri dell’apparato; la configurazione è quella del terzo pulsante, «sdoppiamento leggibile». Mostra quindi ciò che il modello prevede, non ciò che uscirebbe da un apparato costruito davvero: le due bande sono pulite e parallele perché il modello assume un gradiente uniforme su tutta la larghezza del fascio.</span></figcaption></figure>
+<p><span class="it">L’entità della separazione dipende dal gradiente che le espansioni polari riescono effettivamente a realizzare, e sarà determinata in fase di costruzione. Con una geometria di questo tipo ci si attende un ordine di grandezza di qualche millimetro, contro i ~0,2 mm ottenuti da Stern e Gerlach nel 1922: uno sdoppiamento di quest’ordine si potrebbe leggere e misurare direttamente, senza ricorrere alle micrografie.</span></p>
+<p><span class="it">Le due tracce non saranno puntiformi. Poiché la deflessione varia come <span class="eq-inline eq-mml" data-tex="1/v^{2}"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi mathvariant="normal">/</mi><msup><mi>v</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">1/v^{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord">1/</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">v</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span></span> e gli atomi escono dal fornetto con una distribuzione maxwelliana di velocità, ciascuna traccia risulterà allungata, con un massimo netto e una coda diretta verso l’esterno. Le micrografie del 1922 mostrano invece una figura a labbra, con le due tracce che si separano al centro e tornano a toccarsi alle estremità: nel magnete di Gerlach il gradiente variava lungo la fenditura e si annullava ai bordi, mentre qui le espansioni sono dimensionate per mantenerlo uniforme sull’intera larghezza del fascio.</span></p>
+<figure id="fig-01_stern_gerlach-10" class="fig-inline"><img loading="lazy" src="/img/pandoc_ch1/gerlach-stern-1922.jpg?v=1" alt="Il deposito di argento fotografato al microscopio: a sinistra senza campo, una riga sola; a destra con il campo, la riga si apre al centro."><figcaption><b>Fig. 10</b> — <span class="it">Il risultato dell’esperimento come fu pubblicato da Gerlach e Stern nel 1922: il deposito di argento fotografato al microscopio. A sinistra senza campo magnetico, una riga sola — quello che la fisica classica prevede anche con il campo acceso. A destra con il campo: la riga si apre al centro e torna a chiudersi alle estremità. La forma a labbra e i contorni sfumati vengono dal traferro, formato da un’espansione a spigolo vivo e una scanalata: una geometria che produce un gradiente intenso, ma che varia da punto a punto e si annulla ai bordi della fenditura. La separazione massima è di circa due decimi di millimetro, un ordine di grandezza meno di quella della figura precedente. <i>Da W. Gerlach e O. Stern, Zeitschrift für Physik 9, 349 (1922).</i></span></figcaption></figure>
+<div class="nota-link" id="nota-tec">
+<span class="k"><span class="it">Nota tecnica</span></span>
+<span class="it">Da dove vengono queste misure: la formula della deflessione, il compromesso fra traferro e gradiente, il dimensionamento del vuoto e le note costruttive. <a href="nota-tecnica-01-stern-gerlach.html?ret=01-stern-gerlach.html%23nota-tec">Leggi i calcoli →</a></span>
+</div>
+<p class="sim-cta-p" id="lab-esp1"><a class="sim-cta" href="lab-01-stern-gerlach.html?ret=01-stern-gerlach.html%23lab-esp1"><span class="ico">▶</span><span class="it">Prova il laboratorio simulato · esegui l’esperimento di Stern-Gerlach</span><span class="arw">→</span></a></p>
+<h2 id="interpretazione-dei-risultati."><span class="it">Interpretazione dei
+risultati.</span></h2>
+<p><span class="it">Il fatto che il fascio si divide in due fasci distinti appare molto
+strano dal punto di vista della meccanica classica.</span></p>
+<p><span class="it">Gli atomi che escono dal fornetto dovrebbero avere un momento
+magnetico orientato in modo casuale, alcuni verso l’alto altri verso il
+basso, a sinistra, a destra, a quarantacinque gradi e in tutte le
+possibili angolazioni. Gli atomi che hanno momento magnetico inclinato
+rispetto alla verticale dovrebbero essere deflessi di meno, quelli con
+momento magnetico orizzontale non dovrebbero essere deflessi affatto, e
+in definitiva sul vetrino si sarebbe dovuto ottenere una macchia
+distribuita. Il fascio si sarebbe dovuto solo allargare e non
+dividere.</span></p>
+<p><span class="it">L’osservazione sperimentale ci mostra che, quando misuriamo la
+componente zeta del momento magnetico di un atomo di argento, possiamo
+ottenere solo due valori <em>+m<sub>0</sub></em> e
+<em>–m<sub>0</sub></em>. Non esiste nessuna buona spiegazione di questo
+fatto in termini della meccanica classica, per capire questo fenomeno
+bisogna studiare la Meccanica Quantistica.</span></p>
+
+    <nav class="chapter-nav" aria-labelledby="nav-pagina"><span id="nav-pagina" class="sr-only"><span class="it">Capitolo precedente e successivo</span></span><a class="prev" href="index.html"><span class="it">Precedente</span><span class="ttl it">Introduzione</span></a><a class="next" href="02-stern-gerlach-cascata.html"><span class="it">Successivo</span><span class="ttl it">Esperimenti di Stern-Gerlach in cascata</span></a></nav>
+  </article>
+</main>
+</div>
+<script src="/assets/app.js?v=10"></script>
+<div class="langsw-mobile" role="group" aria-label="Lingua / Language">
+  <span class="lg" aria-hidden="true">🌐</span>
+  <a class="langbtn" href="../it/01-stern-gerlach.html" hreflang="it" lang="it" aria-current="true">Italiano</a>
+  <a class="langbtn" href="../en/01-stern-gerlach.html" hreflang="en" lang="en">English</a>
+</div>
+</body>
+</html>

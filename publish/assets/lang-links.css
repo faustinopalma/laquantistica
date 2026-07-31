@@ -1,0 +1,17 @@
+/* Selettore di lingua come collegamenti fra i due alberi /it/ e /en/
+   (nella versione bilingue erano pulsanti gestiti da lang.js). */
+.langsw a.langbtn {
+  display: inline-block;
+  text-decoration: none;
+  line-height: 1.35;
+}
+.langbtn[aria-current="true"] { background: var(--accent); color: #fff; }
+.langbtn:not([aria-current="true"]):hover { color: #fff; }
+
+.doc-meta .langbtn[aria-current="true"] { background: var(--n-ink); color: #fff; }
+.doc-meta .langbtn:not([aria-current="true"]):hover { color: var(--n-ink); }
+
+@media (max-width: 900px) {
+  .langsw-mobile .langbtn[aria-current="true"] { background: var(--accent); color: #fff; }
+  .langsw-mobile a.langbtn { text-decoration: none; }
+}

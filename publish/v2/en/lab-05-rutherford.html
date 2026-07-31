@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Laboratorio simulato dell'Esperimento di Rutherford: ruota il rivelatore, conta gli impulsi, costruisci N(ϑ) e confrontalo con la legge 1/sin⁴(ϑ/2).">
+<title>Lab · Esperimento di Rutherford — La Quantistica</title>
+<link rel="canonical" href="https://laquantistica.com/v2/en/lab-05-rutherford.html">
+<link rel="stylesheet" href="/assets/lang.css?v=7">
+<link rel="stylesheet" href="/assets/sim-sg.css?v=10">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0}
+  .panel{grid-template-columns:minmax(0,1fr) minmax(340px,420px);gap:clamp(1rem,2.5vw,2.4rem);}
+  .ctrlcol{overscroll-behavior:contain;padding-right:.3rem;}
+  .stagecol{align-items:center;gap:.7rem;}
+  /* i canvas hanno rapporto fisso: object-fit li adatta all'altezza disponibile senza deformarli,
+     così la colonna dei comandi resta l'unica che scorre */
+  .stagecol .sim-stage{width:100%;max-width:760px;margin:0;min-height:0;}
+  .stagecol .stage-wrap{flex:1 1 59%;}
+  .stagecol .plot-wrap{flex:1 1 41%;}
+  canvas.cv{display:block;width:100%;height:100%;object-fit:contain;}
+  .cpanel{background:#12151a;border:1px solid #2d333d;border-radius:8px;padding:.6rem .7rem;margin:0 0 .55rem;display:flex;flex-direction:column;gap:.5rem;}
+  .crow{display:flex;align-items:center;gap:.6rem;}
+  .crow .clab{font-family:var(--n-mono);font-size:.72rem;color:#9aa1ab;white-space:nowrap;}
+  .crow input[type=range]{flex:1 1 auto;min-width:0;accent-color:#35c8ff;height:22px;cursor:pointer;}
+  .crow .cval{font-family:var(--n-mono);font-size:.82rem;font-weight:700;color:#35c8ff;min-width:4.6em;text-align:right;}
+  .csel{flex:1 1 auto;min-width:0;background:#20262e;border:1px solid #3d444f;color:#c7ccd4;border-radius:6px;padding:.42rem .5rem;font-family:var(--n-mono);font-size:.76rem;cursor:pointer;}
+  .segrow{display:grid;gap:.4rem;}
+  .segrow.c2{grid-template-columns:1fr 1fr;}
+  .segrow.c3{grid-template-columns:1fr 1fr 1fr;}
+  .segrow.c4{grid-template-columns:1fr 1fr 1fr 1fr;}
+  .segrow.c5{grid-template-columns:repeat(5,1fr);}
+  .segrow button{font-family:var(--n-mono);font-size:.72rem;font-weight:700;background:#20262e;border:1px solid #3d444f;color:#9aa1ab;border-radius:6px;padding:.45rem .3rem;cursor:pointer;transition:.15s;line-height:1.15;}
+  .segrow button.on{background:#173a2c;border-color:#2b7a4b;color:#7fffc4;}
+  .seglab{font-family:var(--n-mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:#727982;margin:.1rem 0 -.15rem;}
+  .btnrow3{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:.4rem;}
+  .simbtn{font-family:var(--n-mono);font-size:.78rem;font-weight:700;background:#2a2f38;border:1px solid #3d444f;color:#c7ccd4;border-radius:6px;padding:.5rem .4rem;cursor:pointer;transition:.15s;text-align:center;}
+  .simbtn:hover{background:#b06a12;color:#fff;border-color:#b06a12;}
+  .simbtn.run.on{background:#6b1212;border-color:#ff5c5c;color:#ffdede;}
+  .simbtn.tog.on{background:#124b6b;border-color:#35c8ff;color:#dff4ff;}
+  .simbtn.ghost{background:transparent;border-color:#2d333d;color:#8b929c;}
+  .simbtn.ghost:hover{background:#20262e;color:#c7ccd4;border-color:#3d444f;}
+  .readout{background:#12151a;border:1px solid #2d333d;border-radius:8px;padding:.55rem .8rem;margin:0 0 .5rem;font-family:var(--n-mono);font-size:.78rem;color:#aeb4bd;line-height:1.75;}
+  .readout b{color:#ffb000;font-weight:700;}
+  .readout .cyan{color:#35c8ff;}
+  .readout .big{font-size:1.15rem;}
+  .readout .sep{border-top:1px dashed #2d333d;margin:.4rem 0 .35rem;}
+  .warn{background:#2a1410;border:1px solid #7a3a24;border-radius:8px;padding:.5rem .75rem;margin:0 0 .5rem;font-family:var(--n-mono);font-size:.74rem;line-height:1.6;color:#ffbfa3;}
+  .warn b{color:#ffb000;}
+  .hint{font-size:.72rem;color:#8b929c;margin:.1rem 0 0;}
+  .hint b{color:#aeb4bd;}
+  /* in orizzontale su telefono le due colonne scorrono entrambe: i canvas tornano a larghezza piena */
+  @media (max-width:820px) and (orientation:landscape){
+    .stagecol .sim-stage{flex:none;}
+    canvas.cv{height:auto;object-fit:fill;}
+  }
+</style>
+<link rel="alternate" hreflang="it" href="https://laquantistica.com/v2/it/lab-05-rutherford.html">
+<link rel="alternate" hreflang="en" href="https://laquantistica.com/v2/en/lab-05-rutherford.html">
+<link rel="alternate" hreflang="x-default" href="https://laquantistica.com/v2/en/lab-05-rutherford.html">
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="/assets/lang-links.css?v=1">
+</head>
+<body>
+<main class="console" id="top">
+  <header class="con-head">
+    <div class="con-brand">
+      <a class="con-back" id="backTop" href="05-rutherford.html"><span class="en">← Back to Chapter 5</span></a>
+      <span class="tag amber">Lab · Cap. 5</span>
+      <span class="con-title"><span class="en">Scattering of α particles</span></span>
+    </div>
+    <div class="con-actions">
+      <div class="langsw" role="group" aria-label="Lingua / Language">
+        <a class="langbtn" href="../it/lab-05-rutherford.html" hreflang="it" lang="it">Italiano</a>
+        <a class="langbtn" href="../en/lab-05-rutherford.html" hreflang="en" lang="en" aria-current="true">English</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="panel">
+    <div class="stagecol">
+      <div class="sim-stage stage-wrap"><canvas id="stage" class="cv" width="760" height="430" role="img" aria-label="Vista dall'alto dell'apparato: sorgente di americio, collimatore, lamina d'oro e rivelatore mobile sul goniometro; le particelle alfa attraversano la lamina e vengono diffuse."></canvas></div>
+      <div class="sim-stage plot-wrap"><canvas id="plot" class="cv" width="760" height="300" role="img" aria-label="Grafico del numero di impulsi al secondo in funzione dell'angolo, con la curva teorica di Rutherford."></canvas></div>
+    </div>
+
+    <aside class="ctrlcol">
+      <div class="cpanel">
+        <div class="seglab"><span class="en">Atomic model</span></div>
+        <div class="segrow c3" id="segModel">
+          <button type="button" data-v="point" class="on"><span class="en">Rutherford<br>nucleus</span></button>
+          <button type="button" data-v="solid"><span class="en">Solid<br>spheres</span></button>
+          <button type="button" data-v="cloud"><span class="en">Thomson<br>pudding</span></button>
+        </div>
+        <div class="seglab"><span class="en">View</span></div>
+        <div class="segrow c2" id="segView">
+          <button type="button" data-v="app" class="on"><span class="en">Apparatus</span></button>
+          <button type="button" data-v="zoom"><span class="en">Zoom on the atom</span></button>
+        </div>
+        <div class="crow">
+          <span class="clab"><span class="en">Angle ϑ</span></span>
+          <input type="range" id="th" min="0" max="120" step="1" value="0">
+          <span class="cval" id="thv">0°</span>
+        </div>
+        <div class="crow">
+          <span class="clab"><span class="en">Foil</span></span>
+          <select id="mat" class="csel">
+            <option value="au"></option>
+            <option value="ag"></option>
+            <option value="cu"></option>
+            <option value="al"></option>
+          </select>
+        </div>
+        <div class="crow">
+          <span class="clab"><span class="en">Slit</span></span>
+          <select id="slit" class="csel">
+            <option value="1"></option>
+            <option value="5"></option>
+          </select>
+        </div>
+        <div class="crow">
+          <span class="clab"><span class="en">α energy</span></span>
+          <input type="range" id="en" min="3" max="8" step="0.1" value="5.5">
+          <span class="cval" id="env">5,5 MeV</span>
+        </div>
+        <div class="seglab"><span class="en">Time scale</span></div>
+        <div class="segrow c5" id="segSpeed">
+          <button type="button" data-v="1">×1</button>
+          <button type="button" data-v="60" class="on">×60</button>
+          <button type="button" data-v="600">×600</button>
+          <button type="button" data-v="6000">×6k</button>
+          <button type="button" data-v="60000">×60k</button>
+        </div>
+        <div class="btnrow3">
+          <button class="simbtn run" id="run" type="button"></button>
+          <button class="simbtn tog on" id="auto20" type="button">stop @20</button>
+          <button class="simbtn ghost" id="clr" type="button"><span class="en">Reset</span></button>
+        </div>
+      </div>
+
+      <div class="warn" id="warnBox" hidden></div>
+
+      <div class="readout">
+        <div><span class="en">Pulses counted</span> N: <b class="big" id="rN">0</b></div>
+        <div><span class="en">Detection time</span> Δt: <b id="rT">0 s</b></div>
+        <div>N/Δt: <b class="big" id="rR">—</b> <span id="rE"></span></div>
+        <div class="sep"></div>
+        <div><span class="en">Recorded points</span>: <span class="cyan"><b id="rP" style="color:inherit">0</b></span></div>
+      </div>
+
+      <div class="readout">
+        <div><span class="en">Closest approach (ϑ=180°)</span> D = k/E: <b id="rD">—</b></div>
+        <div><span class="en">compared to the atomic radius</span>: <b id="rRat">—</b></div>
+        <div class="sep"></div>
+        <div><span class="en">Nuclear charge from the counts</span>: <b id="rZ">—</b></div>
+        <div class="hint" style="margin:.15rem 0 0"><span class="en">Points at ϑ ≥ 25° are needed: there Rutherford's tail dominates over the direct beam and the rate is ∝ Z².</span></div>
+      </div>
+
+      <p class="hint"><span class="en">Set the angle ϑ, press <b>START</b> and let it count: at each stop the point (ϑ, N/Δt) lands on the graph with its statistical error bar (±1/√N). At <b>ϑ = 0</b> about 25 particles per second get through; at <b>30°</b> it takes over half an hour to count twenty. Together these say the foil is nearly <b>transparent</b> and that once in a while something inside the atom delivers a violent kick: a small, charged <b>nucleus</b>. Try the other two models: with <b>solid spheres</b> the counter stays silent (the foil would be opaque); with <b>Thomson's plum pudding</b> the charge is smeared over the whole atom, so b never drops below R and one atom deflects by at most 0.02°: after the whole foil you stay below one degree.<br><b>About the animation:</b> the α flight is drawn in slow motion (in reality they cross the apparatus in a few nanoseconds) and above ×1 only one in many is drawn — the figure is printed at the bottom of the apparatus view. The <b>counter counts them all</b>.</span></p>
+    </aside>
+  </section>
+
+  <div class="rotate-msg">
+    <div class="big">📱</div>
+    <div class="t1"><span class="en">Rotate your phone to landscape</span></div>
+    <div class="t2"><span class="en">This interactive experiment is cramped in portrait. Turn your phone to <b>landscape</b> to see it all (even if small). For a better experience, open it on a <b>desktop</b> or a <b>tablet</b> with a large enough screen.</span></div>
+  </div>
+  <div class="back-bottom"><a class="con-back" id="backBottom" href="05-rutherford.html"><span class="en">← Back to Chapter 5</span></a></div>
+  <div class="con-foot"><span>La Quantistica · Lab locale · Cap. 05</span><span>F. Palma</span></div>
+</main>
+
+<script src="/assets/sim-sg-core.js?v=2"></script>
+<script>
+(function(){
+'use strict';
+var RAD=Math.PI/180;
+var REDUCE=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+function L(it,en){ return document.documentElement.getAttribute('data-lang')==='en'?en:it; }
+function $(id){ return document.getElementById(id); }
+function nfmt(x,d){ var s=x.toFixed(d); return L(s.replace('.',','),s); }
+
+/* ---------------- materiali ---------------- */
+var MAT={
+  au:{Z:79,n:5.90e28,nm:{it:'Oro (Z=79)',en:'Gold (Z=79)'},ra:144},
+  ag:{Z:47,n:5.86e28,nm:{it:'Argento (Z=47)',en:'Silver (Z=47)'},ra:144},
+  cu:{Z:29,n:8.49e28,nm:{it:'Rame (Z=29)',en:'Copper (Z=29)'},ra:128},
+  al:{Z:13,n:6.03e28,nm:{it:'Alluminio (Z=13)',en:'Aluminium (Z=13)'},ra:143}
+};
+var E0=5.486;                 /* MeV, particelle α dell'Am241 */
+var K0=6.0e-5;                /* s⁻¹, taratura sulla tabella della scheda (fenditura 1 mm, oro) */
+var THS=6;                    /* gradi: risoluzione angolare (divergenza del fascio + apertura del rivelatore):
+                                 spiana la divergenza della 1/sin⁴ sotto i pochi gradi. NON è schermo elettronico,
+                                 che per α da 5,5 MeV su oro varrebbe ~0,005°. */
+
+/* ---------------- stato ---------------- */
+var model='point', view='app', speed=60;
+var theta=0, mat='au', slit=1, Ea=5.5;
+var running=false, auto20=true;
+var N=0, simT=0, pts=[], flash=0;
+
+/* ---------------- fisica ---------------- */
+function M(){ return MAT[mat]; }
+/* distanza di massimo avvicinamento nell'urto frontale, in fermi:
+   D = k/E con k = 2·Z·e²/4πε₀ = 2·Z·1,44 MeV·fm */
+function Dfm(){ return 2*M().Z*1.43996/Ea; }
+/* costante della coda di Rutherford al variare di lamina, energia, collimazione */
+function Kof(){ return K0*slit*(M().n/MAT.au.n)*Math.pow(M().Z/79,2)*Math.pow(E0/Ea,2); }
+/* fascio diretto trasmesso: nucleo gaussiano fissato dalla collimazione */
+function beamA(){ return 18*slit; }
+function beamS(){ return 4*Math.pow(slit,0.6); }
+function coreAt(th){ var s=th/beamS(); return beamA()*Math.exp(-s*s); }
+/* modello di Thomson: la carica + riempie tutto l'atomo, quindi b non scende mai sotto R
+   e la deflessione su un atomo vale al massimo tan(ϑ/2)=D/2R, cioe' ϑmax ≈ D/R */
+function thMaxCloud(){ return (Dfm()*1e-15/(M().ra*1e-12))/RAD; }
+function nAtoms(){ return M().n*2e-6*Math.PI*Math.pow(M().ra*1e-12,2); }
+function cloudSigma(){ return thMaxCloud()*Math.sqrt(nAtoms())/2; }
+/* teoria pura di Rutherford (quella che si sovrappone ai punti) */
+function ruthAt(th){ if(th<=0.05) return Infinity; var s=Math.sin(th*RAD/2); return Kof()/Math.pow(s,4); }
+/* stessa legge vista attraverso la risoluzione angolare finita dello strumento */
+function tailAt(th){ var s=Math.sin(th*RAD/2), ss=Math.sin(THS*RAD/2); return Kof()/Math.pow(s*s+ss*ss,2); }
+/* rate realmente misurato dal rivelatore */
+function rateAt(th){
+  if(model==='solid') return 0;
+  var core=coreAt(th);
+  if(model==='cloud') return core;
+  return core+tailAt(th);
+}
+
+/* ---------------- statistica ---------------- */
+function randn(){ var u=0,v=0; while(u===0)u=Math.random(); while(v===0)v=Math.random(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); }
+function poisson(lam){
+  if(lam<=0) return 0;
+  if(lam>30){ var k=Math.round(lam+Math.sqrt(lam)*randn()); return k>0?k:0; }
+  var l=Math.exp(-lam), p=1, n=-1;
+  do{ n++; p*=Math.random(); }while(p>l);
+  return n;
+}
+
+/* ---------------- canvas ---------------- */
+function ctxOf(cv,LW,LH){
+  var dpr=Math.min(2,window.devicePixelRatio||1);
+  var w=cv.clientWidth||LW, h=cv.clientHeight||0;
+  /* con object-fit:contain la larghezza davvero disegnata puo' essere limitata dall'altezza:
+     dimensionando il buffer su quella il disegno resta 1:1 e non viene riscalato */
+  if(h>0 && h*LW/LH<w) w=h*LW/LH;
+  var W=Math.round(w*dpr), H=Math.round(w*LH/LW*dpr);
+  if(cv.width!==W||cv.height!==H){ cv.width=W; cv.height=H; }
+  var c=cv.getContext('2d'); var s=cv.width/LW;
+  c.setTransform(s,0,0,s,0,0);
+  c.clearRect(0,0,LW,LH);
+  return c;
+}
+var SW=760, SH=430, PW=760, PH=300;
+var stage=$('stage'), plotc=$('plot');
+
+/* ---------------- vista apparato ---------------- */
+var CX=430, CY=215, RG=185;      /* centro della camera di diffusione e raggio */
+var parts=[], spawnAcc=0, drawEvery=1;
+var NB=72, bins=new Float32Array(NB), binMax=1;   /* istogramma di |ϑ|: l'alone che si accumula sul bordo */
+function clearBins(){ bins=new Float32Array(NB); binMax=1; }
+function addBin(a){
+  var t=Math.min(Math.abs(a),180), i=Math.floor(t/180*NB); if(i>=NB) i=NB-1;
+  bins[i]+=1; if(bins[i]>binMax) binMax=bins[i];
+}
+function detDir(){ return -theta*RAD; }                 /* angoli positivi verso l'alto */
+function scatterAngle(){
+  /* b campionato uniformemente nell'area, con taglio a ϑmin = 2° */
+  var u=Math.random(); if(u<1e-9)u=1e-9;
+  var t=2*Math.atan(1/(57.29*Math.sqrt(u)));
+  return t/RAD;
+}
+var spawned=0;
+function spawn(){
+  spawned++;
+  parts.push({x:52,y:CY+(Math.random()-0.5)*(2+slit*1.6),vx:1,vy:0,st:0,hit:0,tr:[]});
+}
+function stepParts(dt){
+  /* il fascio disegnato segue la scala dei tempi fino a un tetto di leggibilita':
+     oltre, sullo schermo finisce una α ogni drawEvery davvero passate */
+  var cap=REDUCE?60:150, want=(coreAt(0)+tailAt(0))*speed;
+  var perSec=Math.min(cap,want);
+  drawEvery=Math.max(1,Math.round(want/perSec));
+  spawnAcc+=dt*perSec;
+  while(spawnAcc>=1){ spawnAcc-=1; spawn(); }
+  var v=290;
+  for(var i=parts.length-1;i>=0;i--){
+    var p=parts[i];
+    if(p.st===2){ p.life-=dt; if(p.life<=0) parts.splice(i,1); continue; }
+    p.x+=p.vx*v*dt; p.y+=p.vy*v*dt;
+    if(p.st===0 && p.x>=CX){
+      if(model==='solid'){ p.x=CX; p.st=2; p.life=0.45; continue; }
+      var a=(model==='cloud')?(randn()*cloudSigma()):scatterAngle();
+      if(Math.random()<0.5) a=-a;
+      var ang=-a*RAD;
+      p.vx=Math.cos(ang); p.vy=Math.sin(ang); p.st=1; p.ang=a;
+      addBin(a);
+      var da=Math.abs(Math.abs(a)-theta);
+      p.hit=(a>0)===(theta>=0)&&da<3.2 ? 1:0;
+      if(theta===0) p.hit=Math.abs(a)<3.2?1:0;
+    }
+    if(p.st===1){
+      var dx=p.x-CX, dy=p.y-CY;
+      if(dx*dx+dy*dy>RG*RG){ parts.splice(i,1); continue; }
+    }
+    if(p.x<0||p.x>SW||p.y<0||p.y>SH) parts.splice(i,1);
+  }
+}
+/* alone sul bordo: quante α sono uscite in ciascuna direzione (scala log, è la 1/sin⁴ vista dal vivo) */
+function drawHalo(c){
+  var rout=RG-3, lg=Math.log(1+binMax);
+  for(var i=0;i<NB;i++){
+    var n=bins[i]; if(n<=0) continue;
+    var frac=Math.log(1+n)/lg;
+    var thc=(i+0.5)/NB*180, len=5+frac*22, br=(0.20+0.80*frac).toFixed(2);
+    c.strokeStyle=(thc>90?'rgba(255,92,92,':thc>15?'rgba(255,138,61,':'rgba(127,224,184,')+br+')';
+    c.lineWidth=1.7;
+    for(var sg=-1;sg<=1;sg+=2){
+      var r=-sg*thc*RAD;
+      c.beginPath();
+      c.moveTo(CX+Math.cos(r)*(rout-len),CY+Math.sin(r)*(rout-len));
+      c.lineTo(CX+Math.cos(r)*rout,CY+Math.sin(r)*rout);
+      c.stroke();
+    }
+  }
+}
+function drawApparatus(c){
+  var i,p;
+  /* camera di diffusione */
+  var bg=c.createRadialGradient(CX,CY,10,CX,CY,RG);
+  bg.addColorStop(0,'#101d18'); bg.addColorStop(1,'#070d0b');
+  c.fillStyle=bg; c.beginPath(); c.arc(CX,CY,RG,0,7); c.fill();
+  c.strokeStyle='rgba(70,200,140,.26)'; c.lineWidth=1.4;
+  c.beginPath(); c.arc(CX,CY,RG,0,7); c.stroke();
+  c.setLineDash([4,5]); c.strokeStyle='rgba(120,180,150,.20)'; c.lineWidth=1;
+  c.beginPath(); c.moveTo(CX-RG,CY); c.lineTo(CX+RG,CY); c.stroke(); c.setLineDash([]);
+  /* scala goniometrica su tutto il giro */
+  c.strokeStyle='rgba(70,200,140,.16)'; c.fillStyle='rgba(140,190,165,.55)';
+  c.font='10px "Cascadia Code",monospace'; c.textAlign='center'; c.textBaseline='middle';
+  for(var a=-165;a<=180;a+=15){
+    var r=-a*RAD, x1=CX+Math.cos(r)*(RG-7), y1=CY+Math.sin(r)*(RG-7);
+    var x2=CX+Math.cos(r)*RG, y2=CY+Math.sin(r)*RG;
+    c.beginPath(); c.moveTo(x1,y1); c.lineTo(x2,y2); c.stroke();
+    if(a%30===0&&a!==0&&a!==180){ c.fillText(Math.abs(a)+'°',CX+Math.cos(r)*(RG+13),CY+Math.sin(r)*(RG+13)); }
+  }
+  drawHalo(c);
+  /* sorgente + collimatore */
+  c.fillStyle='#1c2a24'; c.strokeStyle='#3d7a5f'; c.lineWidth=1.2;
+  c.beginPath(); c.rect(28,CY-19,26,38); c.fill(); c.stroke();
+  c.fillStyle='#ffb000'; c.beginPath(); c.arc(41,CY,4.5,0,7); c.fill();
+  c.fillStyle='rgba(180,210,195,.75)'; c.font='11px "Cascadia Code",monospace'; c.textAlign='left';
+  c.fillText('Am241',22,CY-30);
+  var gap=1.4+slit*1.1;
+  [130,200].forEach(function(sx){
+    c.fillStyle='#2b3a33';
+    c.fillRect(sx-4,CY-46,8,46-gap); c.fillRect(sx-4,CY+gap,8,46);
+    c.strokeStyle='#4a6b59'; c.lineWidth=1;
+    c.strokeRect(sx-4,CY-46,8,46-gap); c.strokeRect(sx-4,CY+gap,8,46);
+  });
+  c.fillStyle='rgba(180,210,195,.6)'; c.textAlign='center';
+  c.fillText(L('collimatore '+slit+' mm','collimator '+slit+' mm'),165,CY-56);
+  /* lamina */
+  c.strokeStyle=model==='solid'?'#c98a3a':'#e2a24d'; c.lineWidth=model==='solid'?7:3;
+  c.beginPath(); c.moveTo(CX,CY-72); c.lineTo(CX,CY+72); c.stroke();
+  c.fillStyle='rgba(226,162,77,.85)'; c.textAlign='center';
+  c.fillText(L(M().nm.it.split(' ')[0]+' 2 µm',M().nm.en.split(' ')[0]+' 2 µm'),CX,CY-84);
+  /* tracce */
+  for(i=0;i<parts.length;i++){
+    p=parts[i];
+    if(p.st===2){ c.fillStyle='rgba(255,92,92,'+(p.life/0.45)+')'; c.beginPath(); c.arc(p.x,p.y,5,0,7); c.fill(); continue; }
+    var big=p.st===1&&Math.abs(p.ang)>12;
+    c.fillStyle=p.hit?'#ffb000':(big?'#ff8a3d':'#7fe0b8');
+    c.globalAlpha=big?1:0.85;
+    c.beginPath(); c.arc(p.x,p.y,big?2.6:2,0,7); c.fill();
+    if(big){ c.globalAlpha=.35; c.strokeStyle='#ff8a3d'; c.lineWidth=1;
+      c.beginPath(); c.moveTo(CX,CY); c.lineTo(p.x,p.y); c.stroke(); }
+    c.globalAlpha=1;
+  }
+  /* rivelatore */
+  var r=detDir(), dx=CX+Math.cos(r)*RG, dy=CY+Math.sin(r)*RG;
+  c.save(); c.translate(dx,dy); c.rotate(r);
+  c.strokeStyle='rgba(53,200,255,.35)'; c.lineWidth=1;
+  c.beginPath(); c.moveTo(-RG+14,0); c.lineTo(-6,0); c.stroke();
+  c.fillStyle=flash>0?'#35c8ff':'#16323f'; c.strokeStyle='#35c8ff'; c.lineWidth=1.4;
+  c.beginPath(); c.rect(-14,-13,26,26); c.fill(); c.stroke();
+  if(flash>0){ c.globalAlpha=flash; c.fillStyle='rgba(53,200,255,.45)';
+    c.beginPath(); c.arc(0,0,22,0,7); c.fill(); c.globalAlpha=1; }
+  c.restore();
+  c.fillStyle='#35c8ff'; c.font='11px "Cascadia Code",monospace'; c.textAlign='center';
+  var lx=CX+Math.cos(r)*(RG+30), ly=CY+Math.sin(r)*(RG+30);
+  c.fillText('ϑ = '+theta+'°',Math.min(SW-34,Math.max(34,lx)),Math.min(SH-12,Math.max(14,ly)));
+  /* stato */
+  c.textAlign='left'; c.fillStyle='rgba(150,190,170,.6)'; c.font='10px "Cascadia Code",monospace';
+  c.fillText(L('vuoto < 1 mBar · scala dei tempi ×'+speed+' · '+(drawEvery>1?'ne disegno 1 ogni '+drawEvery:'le disegno tutte'),
+               'vacuum < 1 mBar · time scale ×'+speed+' · '+(drawEvery>1?'1 in '+drawEvery+' is drawn':'all of them drawn')),14,SH-12);
+  c.textAlign='right';
+  c.fillText(L('alone sul bordo: α uscite per angolo (scala log)','rim halo: α leaving per angle (log scale)'),SW-14,SH-12);
+  if(model==='solid'){
+    c.textAlign='center'; c.fillStyle='#ff8a3d'; c.font='13px "Cascadia Code",monospace';
+    c.fillText(L('lamina opaca: nessuna particella la attraversa','opaque foil: no particle gets through'),CX,CY+130);
+  }
+}
+
+/* ---------------- vista zoom su un nucleo ---------------- */
+/* unità: D = k/E = 1. Le traiettorie dipendono solo dal rapporto b/D. */
+var BS=[0.15,0.3,0.5,0.8,1.3,2.2,4,7], TRAJ=null;
+function buildTraj(){
+  TRAJ=[];
+  for(var i=0;i<BS.length;i++){
+    var b=BS[i], x=-9, y=b, vx=Math.SQRT2, vy=0, dt=0.0016, path=[];
+    for(var s=0;s<26000;s++){
+      var r2=x*x+y*y, r=Math.sqrt(r2), a=1/(r2*r);
+      vx+=a*x*dt; vy+=a*y*dt; x+=vx*dt; y+=vy*dt;
+      if(s%14===0) path.push(x,y);
+      if(x>9||Math.abs(y)>9) break;
+    }
+    TRAJ.push({b:b,p:path,th:2*Math.atan(1/(2*b))/RAD});
+  }
+}
+var zt=0;
+function drawZoom(c){
+  if(!TRAJ) buildTraj();
+  var sc=SH/17, ox=SW/2-40, oy=SH/2;
+  function X(u){ return ox+u*sc; } function Y(v){ return oy-v*sc; }
+  c.font='11px "Cascadia Code",monospace'; c.textBaseline='middle';
+  if(model==='solid'){
+    c.fillStyle='rgba(226,162,77,.18)'; c.strokeStyle='#e2a24d'; c.lineWidth=2;
+    c.beginPath(); c.arc(ox,oy,sc*5.2,0,7); c.fill(); c.stroke();
+    c.fillStyle='rgba(255,138,61,.9)'; c.textAlign='center';
+    c.fillText(L("sferetta piena: la particella α non entra e non passa","solid sphere: the α particle neither enters nor passes"),ox,oy+sc*6.3);
+    for(var k=0;k<7;k++){
+      var yy=oy-sc*4+k*sc*1.35;
+      c.strokeStyle='#7fe0b8'; c.lineWidth=1.4; c.globalAlpha=.8;
+      var xe=ox-Math.sqrt(Math.max(0,Math.pow(sc*5.2,2)-Math.pow(yy-oy,2)));
+      c.beginPath(); c.moveTo(30,yy); c.lineTo(xe,yy); c.stroke();
+      c.globalAlpha=1; c.fillStyle='#ff5c5c'; c.beginPath(); c.arc(xe,yy,3.4,0,7); c.fill();
+    }
+    return;
+  }
+  if(model==='cloud'){
+    var Ra=sc*3.6, thm=thMaxCloud(), ex=Math.max(1,3/thm);
+    var g2=c.createRadialGradient(ox,oy,2,ox,oy,Ra);
+    g2.addColorStop(0,'rgba(255,176,0,.26)'); g2.addColorStop(.7,'rgba(255,176,0,.10)'); g2.addColorStop(1,'rgba(255,176,0,0)');
+    c.fillStyle=g2; c.beginPath(); c.arc(ox,oy,Ra,0,7); c.fill();
+    c.setLineDash([3,5]); c.strokeStyle='rgba(255,176,0,.5)'; c.lineWidth=1;
+    c.beginPath(); c.arc(ox,oy,Ra,0,7); c.stroke(); c.setLineDash([]);
+    for(var e=0;e<14;e++){                       /* le "prugne": elettroni immersi nella carica positiva */
+      var ea=e*2.3999, er=Ra*Math.sqrt((e+0.6)/14);
+      c.fillStyle='rgba(53,200,255,.8)';
+      c.beginPath(); c.arc(ox+Math.cos(ea)*er,oy+Math.sin(ea)*er,2.8,0,7); c.fill();
+    }
+    c.textAlign='center'; c.font='11px "Cascadia Code",monospace'; c.fillStyle='rgba(255,176,0,.9)';
+    c.fillText(L('modello di Thomson (plum pudding) — R = '+nfmt(M().ra,0)+' pm',
+                 'Thomson model (plum pudding) — R = '+nfmt(M().ra,0)+' pm'),SW/2,16);
+    zt+=0.006; if(zt>1) zt=0;
+    var BC=[-1.9,-1.4,-1,-0.7,-0.35,0,0.35,0.7,1,1.4,1.9];
+    for(var q2=0;q2<BC.length;q2++){
+      var bb=BC[q2], ab=Math.abs(bb), yin=oy-bb*Ra;
+      /* ϑ(b) cresce fino a b = R, dove agisce tutta la carica, e oltre cala come 1/b */
+      var dth=thm*(ab<=1?ab:1/ab)*ex*RAD*(bb<0?-1:1);
+      var xa=26, xb=SW-46, yout=yin-(xb-ox)*Math.tan(dth);
+      c.strokeStyle='#7fe0b8'; c.globalAlpha=bb===0?.55:.9; c.lineWidth=1.4;
+      c.beginPath(); c.moveTo(xa,yin); c.lineTo(ox,yin); c.lineTo(xb,yout); c.stroke();
+      var u=zt, mx2, my2;
+      if(u<0.5){ mx2=xa+(ox-xa)*u/0.5; my2=yin; }
+      else { mx2=ox+(xb-ox)*(u-0.5)/0.5; my2=yin+(yout-yin)*(u-0.5)/0.5; }
+      c.globalAlpha=1; c.fillStyle='#dff4ff'; c.beginPath(); c.arc(mx2,my2,2.6,0,7); c.fill();
+      if(bb>=0){
+        c.textAlign='left'; c.font='10px "Cascadia Code",monospace'; c.fillStyle='rgba(160,200,180,.75)';
+        c.fillText('b = '+nfmt(bb,2)+' R',12,yin-9);
+      }
+    }
+    c.globalAlpha=1; c.textAlign='center'; c.font='11px "Cascadia Code",monospace'; c.fillStyle='#ff8a3d';
+    c.fillText(L('b non scende mai sotto R  →  ϑmax = D/R = '+nfmt(thm,3)+'°   (deflessioni disegnate ×'+nfmt(ex,0)+')',
+                 'b never goes below R  →  ϑmax = D/R = '+nfmt(thm,3)+'°   (deflections drawn ×'+nfmt(ex,0)+')'),SW/2,SH-30);
+    c.fillStyle='rgba(150,190,170,.75)';
+    c.fillText(L('2 µm di lamina ≈ '+Math.round(nAtoms())+' atomi in fila → ϑ tipico '+nfmt(cloudSigma(),2)+'°: rimbalzare all'+String.fromCharCode(39)+'indietro è impossibile',
+                 '2 µm of foil ≈ '+Math.round(nAtoms())+' atoms in a row → typical ϑ '+nfmt(cloudSigma(),2)+'°: bouncing back is impossible'),SW/2,SH-12);
+    return;
+  }
+  /* cerchio di riferimento r = D */
+  c.setLineDash([4,4]); c.strokeStyle='rgba(53,200,255,.45)'; c.lineWidth=1;
+  c.beginPath(); c.arc(ox,oy,sc,0,7); c.stroke(); c.setLineDash([]);
+  c.fillStyle='rgba(53,200,255,.75)'; c.textAlign='left';
+  c.fillText('r = D = '+nfmt(Dfm(),1)+' fm',ox+sc+8,oy-sc-10);
+  /* nucleo */
+  c.fillStyle='#ffb000'; c.beginPath(); c.arc(ox,oy,4,0,7); c.fill();
+  c.fillStyle='rgba(255,176,0,.18)'; c.beginPath(); c.arc(ox,oy,10,0,7); c.fill();
+  c.fillStyle='rgba(255,176,0,.9)'; c.textAlign='center';
+  c.fillText(L('nucleo +'+M().Z+'e','nucleus +'+M().Z+'e'),ox,oy+22);
+  zt+=0.006; if(zt>1) zt=0;
+  for(var i=0;i<TRAJ.length;i++){
+    var t=TRAJ[i], pth=t.p;
+    c.strokeStyle=t.th>60?'#ff8a3d':(t.th>15?'#ffb000':'#7fe0b8');
+    c.globalAlpha=.9; c.lineWidth=1.5; c.beginPath();
+    for(var j=0;j<pth.length;j+=2){
+      var ux=pth[j], uy=pth[j+1];
+      if(j===0) c.moveTo(X(ux),Y(uy)); else c.lineTo(X(ux),Y(uy));
+    }
+    c.stroke();
+    var idx=Math.min(pth.length-2,2*Math.floor(zt*(pth.length/2)));
+    var mx=pth[idx], my=pth[idx+1];
+    c.globalAlpha=1; c.fillStyle='#dff4ff'; c.beginPath(); c.arc(X(mx),Y(my),2.6,0,7); c.fill();
+    c.globalAlpha=1;
+  }
+  c.textAlign='left'; c.font='10px "Cascadia Code",monospace';
+  for(var q=0;q<TRAJ.length;q++){
+    c.fillStyle='rgba(160,200,180,.75)';
+    c.fillText('b = '+nfmt(TRAJ[q].b,2)+' D',12,Y(TRAJ[q].b));
+  }
+  c.textAlign='center'; c.fillStyle='rgba(150,190,170,.65)'; c.font='11px "Cascadia Code",monospace';
+  c.fillText(L('tan(ϑ/2) = D/2b  —  conta solo il rapporto b/D','tan(ϑ/2) = D/2b  —  only the ratio b/D matters'),SW/2,SH-16);
+}
+
+/* ---------------- grafico N/Δt(ϑ) ---------------- */
+var logY=true;
+var ML=62, MR=16, MT=18, MB=34;
+function px(th){ return ML+th/120*(PW-ML-MR); }
+function py(v){
+  if(logY){ var lo=-6, hi=2, u=(Math.log(Math.max(v,1e-7))/Math.LN10-lo)/(hi-lo);
+    return PH-MB-Math.max(0,Math.min(1,u))*(PH-MT-MB); }
+  var u2=Math.max(0,Math.min(1,v/30));
+  return PH-MB-u2*(PH-MT-MB);
+}
+function drawPlot(){
+  var c=ctxOf(plotc,PW,PH);
+  c.font='10px "Cascadia Code",monospace'; c.textBaseline='middle';
+  /* griglia */
+  c.strokeStyle='rgba(70,200,140,.13)'; c.lineWidth=1;
+  var d,i;
+  if(logY){ for(d=-6;d<=2;d++){ var y=py(Math.pow(10,d));
+      c.beginPath(); c.moveTo(ML,y); c.lineTo(PW-MR,y); c.stroke();
+      c.fillStyle='rgba(150,190,170,.65)'; c.textAlign='right';
+      c.fillText('10'+String(d).replace('-','⁻').replace(/[0-9]/g,function(m){return '⁰¹²³⁴⁵⁶⁷⁸⁹'[+m];}),ML-6,y); } }
+  else { for(i=0;i<=30;i+=5){ var y2=py(i);
+      c.beginPath(); c.moveTo(ML,y2); c.lineTo(PW-MR,y2); c.stroke();
+      c.fillStyle='rgba(150,190,170,.65)'; c.textAlign='right'; c.fillText(String(i),ML-6,y2); } }
+  c.textAlign='center';
+  for(i=0;i<=120;i+=15){
+    var x=px(i); c.strokeStyle='rgba(70,200,140,.10)';
+    c.beginPath(); c.moveTo(x,MT); c.lineTo(x,PH-MB); c.stroke();
+    c.fillStyle='rgba(150,190,170,.65)'; c.fillText(i+'°',x,PH-MB+13);
+  }
+  c.fillStyle='rgba(150,190,170,.8)'; c.textAlign='left';
+  c.fillText('N/Δt  [s⁻¹]',ML-52,MT-8);
+  c.textAlign='right'; c.fillText('ϑ',PW-MR,PH-MB+26);
+
+  /* curva teorica */
+  c.lineWidth=1.8;
+  if(model==='solid'){
+    c.strokeStyle='#ff5c5c'; c.setLineDash([6,4]);
+    c.beginPath(); c.moveTo(ML,PH-MB-1); c.lineTo(PW-MR,PH-MB-1); c.stroke(); c.setLineDash([]);
+    c.fillStyle='#ff5c5c'; c.textAlign='left';
+    c.fillText(L('previsione «sferette piene»: zero ovunque','“solid spheres” prediction: zero everywhere'),ML+10,PH-MB-12);
+  } else if(model==='cloud'){
+    c.strokeStyle='#ff8a3d'; c.beginPath();
+    for(i=0;i<=480;i++){ var t1=i/4, v1=coreAt(t1); var X1=px(t1),Y1=py(v1);
+      if(i===0)c.moveTo(X1,Y1); else c.lineTo(X1,Y1); }
+    c.stroke();
+    c.fillStyle='#ff8a3d'; c.textAlign='left';
+    c.fillText(L('previsione «panettone di Thomson»','“Thomson pudding” prediction'),px(18),py(coreAt(9))-8);
+  } else {
+    /* legge ideale 1/sin⁴: tratteggiata, si stacca solo dove pesa la risoluzione angolare */
+    c.strokeStyle='rgba(255,176,0,.42)'; c.setLineDash([5,4]); c.beginPath(); var st1=false;
+    for(i=0;i<=480;i++){ var t3=i/4; if(t3<1) continue; var X3=px(t3), Y3=py(ruthAt(t3));
+      if(!st1){ c.moveTo(X3,Y3); st1=true; } else c.lineTo(X3,Y3); }
+    c.stroke(); c.setLineDash([]);
+    c.fillStyle='rgba(255,176,0,.55)'; c.textAlign='left';
+    c.fillText(L('legge ideale','ideal law'),px(7)+5,py(ruthAt(7))-8);
+    /* curva effettivamente misurabile: fascio diretto + coda di Rutherford */
+    c.strokeStyle='#ffb000'; c.beginPath();
+    for(i=0;i<=480;i++){ var t2=i/4; var X2=px(t2), Y2=py(rateAt(t2));
+      if(i===0) c.moveTo(X2,Y2); else c.lineTo(X2,Y2); }
+    c.stroke();
+    c.fillStyle='#ffb000'; c.textAlign='left';
+    c.fillText('K / sin⁴(ϑ/2)',px(64),py(ruthAt(64))-9);
+  }
+
+  /* punti misurati */
+  for(i=0;i<pts.length;i++){
+    var p=pts[i], X=px(p.th), Y=py(p.r), err=p.r/Math.sqrt(p.N);
+    c.strokeStyle='rgba(53,200,255,.8)'; c.lineWidth=1.2;
+    c.beginPath(); c.moveTo(X,py(Math.max(p.r-err,1e-7))); c.lineTo(X,py(p.r+err)); c.stroke();
+    c.beginPath(); c.moveTo(X-4,py(p.r+err)); c.lineTo(X+4,py(p.r+err));
+    c.moveTo(X-4,py(Math.max(p.r-err,1e-7))); c.lineTo(X+4,py(Math.max(p.r-err,1e-7))); c.stroke();
+    c.fillStyle='#35c8ff'; c.beginPath(); c.arc(X,Y,3.4,0,7); c.fill();
+  }
+  /* cursore angolo */
+  var xc=px(theta);
+  c.strokeStyle='rgba(255,255,255,.22)'; c.setLineDash([3,4]); c.lineWidth=1;
+  c.beginPath(); c.moveTo(xc,MT); c.lineTo(xc,PH-MB); c.stroke(); c.setLineDash([]);
+  if(running&&N>0){ var yl=py(N/Math.max(simT,1e-6));
+    c.fillStyle='rgba(255,176,0,.9)'; c.beginPath(); c.arc(xc,yl,3,0,7); c.fill(); }
+  /* toggle scala */
+  c.fillStyle='rgba(150,190,170,.55)'; c.textAlign='right'; c.font='10px "Cascadia Code",monospace';
+  c.fillText(L('clic sul grafico: scala '+(logY?'lineare':'logaritmica'),'click the graph: '+(logY?'linear':'logarithmic')+' scale'),PW-MR,MT-8);
+}
+plotc.addEventListener('click',function(){ logY=!logY; drawPlot(); });
+
+/* ---------------- misura ---------------- */
+function stopMeasure(){
+  running=false;
+  if(N>0&&simT>0){
+    var r=N/simT;
+    pts=pts.filter(function(p){ return p.th!==theta; });
+    pts.push({th:theta,N:N,dt:simT,r:r});
+    pts.sort(function(a,b){ return a.th-b.th; });
+  }
+  syncRun(); readouts(); drawPlot();
+}
+function startMeasure(){ N=0; simT=0; running=true; syncRun(); readouts(); }
+/* cambiare le condizioni di misura azzera il contatore: i conteggi raccolti al vecchio
+   angolo non devono ne' proseguire ne' finire archiviati sul nuovo */
+function resetCount(){ running=false; N=0; simT=0; syncRun(); }
+function tickCount(dt){
+  if(!running) return;
+  var ds=dt*speed;
+  /* con «stop @20» limito il passo temporale: a x60000 un solo fotogramma varrebbe
+     migliaia di impulsi e la soglia verrebbe sfondata di ordini di grandezza */
+  if(auto20){ var r0=rateAt(theta); if(r0>0) ds=Math.min(ds,(21-N)/r0); }
+  simT+=ds;
+  var k=poisson(rateAt(theta)*ds);
+  if(k>0){ N+=k; flash=1; }
+  if(auto20&&N>=20) stopMeasure();
+}
+function fmtT(t){
+  if(t<120) return nfmt(t,1)+' s';
+  if(t<7200) return nfmt(t/60,1)+' min';
+  return nfmt(t/3600,2)+' h';
+}
+function syncRun(){
+  var b=$('run');
+  b.classList.toggle('on',running);
+  b.textContent=running?L('■ FERMA','■ STOP'):L('▶ AVVIA','▶ START');
+}
+function estZ(){
+  var use=pts.filter(function(p){ return p.th>=25&&p.N>0; });
+  if(!use.length) return null;
+  var base=K0*slit*(M().n/MAT.au.n)*Math.pow(E0/Ea,2);
+  var v=[],nn=[],i;
+  for(i=0;i<use.length;i++){
+    /* si inverte esattamente la legge che genera i conteggi, risoluzione angolare inclusa:
+       altrimenti Z risulterebbe sistematicamente basso (~75 invece di 79 a 25°÷30°) */
+    var s=Math.sin(use[i].th*RAD/2), ss=Math.sin(THS*RAD/2);
+    var tail=use[i].r-coreAt(use[i].th);
+    if(tail<=0) continue;                 /* fascio diretto più forte della coda: punto inutilizzabile */
+    v.push(79*Math.sqrt(tail*Math.pow(s*s+ss*ss,2)/base));
+    nn.push(use[i].N);
+  }
+  if(!v.length) return null;
+  var m=v.reduce(function(a,b){return a+b;},0)/v.length;
+  var sd=0; for(i=0;i<v.length;i++) sd+=(v[i]-m)*(v[i]-m);
+  /* con un solo punto l'errore viene dalla statistica di Poisson: Z ∝ √rate ⇒ σ_Z/Z = 1/(2√N) */
+  sd=v.length>1?Math.sqrt(sd/(v.length-1))/Math.sqrt(v.length):m/(2*Math.sqrt(nn[0]));
+  return {z:m,e:sd,n:v.length};
+}
+function readouts(){
+  $('rN').textContent=String(N);
+  $('rT').textContent=fmtT(simT);
+  var r=simT>0?N/simT:0;
+  $('rR').textContent=simT>0?nfmt(r,r>=0.1?2:(r>=1e-3?4:6))+' s⁻¹':'—';
+  $('rE').textContent=N>0?'± '+Math.round(100/Math.sqrt(N))+'%':'';
+  $('rP').textContent=String(pts.length);
+  var D=Dfm();
+  $('rD').textContent=nfmt(D,1)+' fm = '+(D>=10?nfmt(D/10,1)+'·10⁻¹⁴':nfmt(D,1)+'·10⁻¹⁵')+' m';
+  $('rRat').textContent='1 / '+Math.round(M().ra*1000/D);
+  var z=estZ();
+  $('rZ').textContent=z?('Z ≈ '+nfmt(z.z,0)+' ± '+nfmt(Math.max(z.e,0.5),0)+'  ('+L('vero','true')+': '+M().Z+')'):'—';
+  var w=$('warnBox');
+  if(model==='solid'){
+    w.hidden=false;
+    w.innerHTML=L('<b>Atomi come sferette piene.</b> La lamina è spessa ventimila atomi: nessuna particella α dovrebbe uscirne. Il contatore infatti resta a zero — ma il contatore <b>vero</b>, a ϑ=0, batte 25 colpi al secondo. Il modello è sbagliato.','<b>Atoms as solid spheres.</b> The foil is twenty thousand atoms thick: no α particle should get out. The counter indeed stays at zero — but the <b>real</b> counter, at ϑ=0, ticks 25 times a second. The model is wrong.');
+  } else if(model==='cloud'){
+    w.hidden=false;
+    w.innerHTML=L('<b>Panettone di Thomson.</b> La carica + è spalmata su tutto l’atomo, quindi b non scende mai sotto R: un atomo devia al massimo di '+nfmt(thMaxCloud(),3)+'° e dopo i ~'+Math.round(nAtoms())+' atomi della lamina si resta a ~'+nfmt(cloudSigma(),2)+'°. Oltre ~10° non arriva più nulla: prova a contare a 30°, il contatore non si muove.','<b>Thomson’s plum pudding.</b> The + charge is smeared over the whole atom, so b never drops below R: one atom deflects by at most '+nfmt(thMaxCloud(),3)+'° and after the ~'+Math.round(nAtoms())+' atoms of the foil you are still at ~'+nfmt(cloudSigma(),2)+'°. Beyond ~10° nothing arrives: try counting at 30°, the counter does not move.');
+  } else w.hidden=true;
+}
+
+/* ---------------- controlli ---------------- */
+function segInit(id,fn){
+  var g=$(id);
+  g.addEventListener('click',function(e){
+    var b=e.target.closest?e.target.closest('button'):null; if(!b||!g.contains(b)) return;
+    Array.prototype.forEach.call(g.querySelectorAll('button'),function(x){ x.classList.toggle('on',x===b); });
+    fn(b.getAttribute('data-v'));
+  });
+}
+segInit('segModel',function(v){ model=v; resetCount(); parts.length=0; clearBins(); readouts(); drawPlot(); });
+segInit('segView',function(v){ view=v; });
+segInit('segSpeed',function(v){ speed=+v; });
+$('th').addEventListener('input',function(){ theta=+this.value; $('thv').textContent=theta+'°'; resetCount(); readouts(); drawPlot(); });
+$('en').addEventListener('input',function(){ Ea=+this.value; $('env').textContent=nfmt(Ea,1)+' MeV'; resetCount(); pts=[]; readouts(); drawPlot(); });
+$('mat').addEventListener('change',function(){ mat=this.value; resetCount(); pts=[]; readouts(); drawPlot(); });
+$('slit').addEventListener('change',function(){ slit=+this.value; resetCount(); pts=[]; readouts(); drawPlot(); });
+$('run').addEventListener('click',function(){ if(running) stopMeasure(); else startMeasure(); });
+$('auto20').addEventListener('click',function(){ auto20=!auto20; this.classList.toggle('on',auto20); });
+$('clr').addEventListener('click',function(){ running=false; N=0; simT=0; pts=[]; parts.length=0; clearBins(); syncRun(); readouts(); drawPlot(); });
+
+function labels(){
+  var s=$('mat'); for(var i=0;i<s.options.length;i++){ var k=s.options[i].value; s.options[i].textContent=L(MAT[k].nm.it,MAT[k].nm.en); }
+  var t=$('slit');
+  t.options[0].textContent=L('1 mm — precisa, lenta','1 mm — precise, slow');
+  t.options[1].textContent=L('5 mm — veloce, sfocata','5 mm — fast, blurred');
+  $('env').textContent=nfmt(Ea,1)+' MeV';
+  syncRun(); readouts(); drawPlot();
+}
+
+/* ---------------- loop ---------------- */
+var last=0, raf=null, tickN=0;
+function frame(ts){
+  var dt=last?Math.min((ts-last)/1000,0.05):0.016; last=ts;
+  tickCount(dt);
+  if(flash>0) flash=Math.max(0,flash-dt*4);
+  var c=ctxOf(stage,SW,SH);
+  if(view==='app'){ stepParts(dt); drawApparatus(c); } else drawZoom(c);
+  if(running){ readouts(); if((++tickN%8)===0) drawPlot(); }
+  raf=requestAnimationFrame(frame);
+}
+document.addEventListener('visibilitychange',function(){
+  if(document.hidden){ if(raf){ cancelAnimationFrame(raf); raf=null; last=0; } }
+  else if(!raf){ raf=requestAnimationFrame(frame); }
+});
+window.addEventListener('resize',function(){ drawPlot(); });
+new MutationObserver(function(){ labels(); }).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});
+
+if(typeof initBackLink==='function') initBackLink('05-rutherford.html');
+labels();
+raf=requestAnimationFrame(frame);
+
+window.__lab={ get N(){return N;}, get t(){return simT;}, get pts(){return pts.length;}, get model(){return model;},
+  get rate(){return rateAt(theta);}, get drawn(){return spawned;}, get beam(){return coreAt(0)+tailAt(0);},
+  get onscreen(){return parts.length;},
+  setTheta:function(v){ theta=v; $('th').value=v; $('thv').textContent=v+'°'; readouts(); drawPlot(); },
+  start:startMeasure, stop:stopMeasure };
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Laboratorio simulato della diffrazione degli elettroni: fai crescere gli anelli sullo schermo, misurane il raggio e verifica la lunghezza d'onda di de Broglie.">
+<title>Lab · Diffrazione degli elettroni — La Quantistica</title>
+<link rel="canonical" href="https://laquantistica.com/v2/it/lab-04-diffrazione.html">
+<link rel="stylesheet" href="/assets/lang.css?v=7">
+<link rel="stylesheet" href="/assets/sim-sg.css?v=10">
+<style>
+  /* layout: PC schermo ampio a sinistra, colonna controlli "il necessario" a destra; mobile 50/50 */
+  .console{min-height:auto;}
+  .panel{grid-template-columns:minmax(0,1fr) minmax(340px,420px);gap:clamp(1rem,2.5vw,2.4rem);flex:0 0 auto;align-items:start;}
+  .ctrlcol{overflow:visible;}
+  .stagecol{align-items:center;gap:.7rem;}
+  .stagecol .sim-stage{flex:0 0 auto;width:100%;margin:0;}
+  .schem-stage{max-width:560px;}
+  .schem-stage svg{width:100%;height:auto;display:block;}
+  .screen-stage{max-width:460px;}
+  canvas#screen{width:100%;height:auto;display:block;border-radius:10px;background:#050c08;}
+  /* pannello controlli semplice, sopra i dati */
+  .cpanel{background:#12151a;border:1px solid #2d333d;border-radius:8px;padding:.6rem .7rem;margin:0 0 .55rem;display:flex;flex-direction:column;gap:.5rem;}
+  .crow{display:flex;align-items:center;gap:.6rem;}
+  .crow .clab{font-family:var(--n-mono);font-size:.72rem;color:#9aa1ab;white-space:nowrap;}
+  .crow input[type=range]{flex:1 1 auto;min-width:0;accent-color:#35c8ff;height:22px;cursor:pointer;}
+  .crow .cval{font-family:var(--n-mono);font-size:.82rem;font-weight:700;color:#35c8ff;min-width:4.2em;text-align:right;}
+  .csel{flex:1 1 auto;min-width:0;background:#20262e;border:1px solid #3d444f;color:#c7ccd4;border-radius:6px;padding:.42rem .5rem;font-family:var(--n-mono);font-size:.76rem;cursor:pointer;}
+  .segrow{display:grid;grid-template-columns:1fr 1fr;gap:.4rem;}
+  .segrow button{font-family:var(--n-mono);font-size:.74rem;font-weight:700;background:#20262e;border:1px solid #3d444f;color:#9aa1ab;border-radius:6px;padding:.45rem .4rem;cursor:pointer;transition:.15s;}
+  .segrow button.on{background:#173a2c;border-color:#2b7a4b;color:#7fffc4;}
+  .btnrow3{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:.4rem;}
+  .simbtn{font-family:var(--n-mono);font-size:.78rem;font-weight:700;background:#2a2f38;border:1px solid #3d444f;color:#c7ccd4;border-radius:6px;padding:.5rem .4rem;cursor:pointer;transition:.15s;text-align:center;}
+  .simbtn:hover{background:#b06a12;color:#fff;border-color:#b06a12;}
+  .simbtn.beam.on{background:#124b6b;border-color:#35c8ff;color:#dff4ff;}
+  .simbtn.ghost{background:transparent;border-color:#2d333d;color:#8b929c;}
+  .simbtn.ghost:hover{background:#20262e;color:#c7ccd4;border-color:#3d444f;}
+  .readout{background:#12151a;border:1px solid #2d333d;border-radius:8px;padding:.55rem .8rem;margin:0 0 .5rem;font-family:var(--n-mono);font-size:.78rem;color:#aeb4bd;line-height:1.7;}
+  .readout b{color:#ffb000;font-weight:700;}
+  .readout .cyan{color:#35c8ff;}
+  .hint{font-size:.72rem;color:#8b929c;margin:.1rem 0 0;}
+  /* animazioni leggere (solo compositor) */
+  @keyframes lqflow{to{stroke-dashoffset:-40;}}
+  .lqbeam{stroke-dasharray:3 6;animation:lqflow 1.1s linear infinite;pointer-events:none;}
+  @media(prefers-reduced-motion:reduce){.lqbeam{animation:none!important;}}
+  /* MOBILE ORIZZONTALE: pannello a piena altezza, 50/50, colonna destra scrollabile */
+  @media (max-width:820px) and (orientation:landscape){
+    .console{min-height:0;}
+    .console .panel{flex:1 1 auto;align-items:stretch;min-height:0;}
+    .console .ctrlcol{overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:0;}
+  }
+</style>
+<link rel="alternate" hreflang="it" href="https://laquantistica.com/v2/it/lab-04-diffrazione.html">
+<link rel="alternate" hreflang="en" href="https://laquantistica.com/v2/en/lab-04-diffrazione.html">
+<link rel="alternate" hreflang="x-default" href="https://laquantistica.com/v2/en/lab-04-diffrazione.html">
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="/assets/lang-links.css?v=1">
+</head>
+<body>
+<main class="console" id="top">
+  <header class="con-head">
+    <div class="con-brand">
+      <a class="con-back" id="backTop" href="04-diffrazione.html"><span class="it">← Torna al Capitolo 4</span></a>
+      <span class="tag amber">Lab · Cap. 4</span>
+      <span class="con-title"><span class="it">Diffrazione degli elettroni</span></span>
+    </div>
+    <div class="con-actions">
+      <div class="langsw" role="group" aria-label="Lingua / Language">
+        <a class="langbtn" href="../it/lab-04-diffrazione.html" hreflang="it" lang="it" aria-current="true">Italiano</a>
+        <a class="langbtn" href="../en/lab-04-diffrazione.html" hreflang="en" lang="en">English</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="panel">
+    <div class="stagecol">
+      <div class="sim-stage schem-stage"><svg id="schem" viewBox="0 0 540 116" role="img" aria-label="Schema laterale: cannone elettronico, campione cristallino, raggi diffratti e schermo"></svg></div>
+      <div class="sim-stage screen-stage"><canvas id="screen" width="460" height="460" role="img" aria-label="Schermo di rivelazione: gli elettroni arrivano uno a uno e si accumulano formando anelli (policristallo) o punti (monocristallo)"></canvas></div>
+    </div>
+    <aside class="ctrlcol">
+      <div class="cpanel">
+        <div class="crow">
+          <span class="clab"><span class="it">Campione</span></span>
+          <select id="sample" class="csel">
+            <optgroup id="og-poly">
+              <option value="poly-graphite"></option>
+              <option value="poly-al"></option>
+              <option value="poly-gold"></option>
+              <option value="poly-silicon"></option>
+            </optgroup>
+            <optgroup id="og-mono">
+              <option value="mono-100"></option>
+              <option value="mono-110"></option>
+              <option value="mono-111"></option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="crow">
+          <span class="clab"><span class="it">Tensione</span></span>
+          <input type="range" id="va" min="1500" max="6000" step="50" value="3000">
+          <span class="cval" id="vav">3000 V</span>
+        </div>
+        <div class="segrow" id="segModel">
+          <button type="button" data-v="q" class="on"><span class="it">Quantistico</span></button>
+          <button type="button" data-v="c"><span class="it">Classico</span></button>
+        </div>
+        <div class="btnrow3">
+          <button class="simbtn beam" id="beam" type="button"></button>
+          <button class="simbtn" id="one" type="button">+1 e⁻</button>
+          <button class="simbtn ghost" id="clr" type="button"><span class="it">Azzera</span></button>
+        </div>
+      </div>
+      <div class="readout">
+        <div><span class="it">Campione</span>: <b id="crys" class="cyan">—</b></div>
+        <div><span class="it">Onda di de Broglie</span> λ = h/p: <b id="lam">— pm</b></div>
+        <div><span class="it">Elettroni rivelati</span>: <span class="cyan"><b id="cnt" style="color:inherit">0</b></span></div>
+      </div>
+      <p class="hint"><span class="it">Ogni elettrone arriva come un <b>punto</b> localizzato (particella), ma molti punti si <b>accumulano</b> (onda): è la <b>dualità onda-particella</b>. Un campione <b>policristallino</b> (cristalliti orientati a caso) dà <b>anelli</b>; un <b>monocristallo</b> dà un reticolo di <b>punti</b> (proiezione del reticolo reciproco). Alza la <b>tensione</b> → λ più piccola → figura più <b>stretta</b> (∝ 1/√V). Il modello <b>classico</b> darebbe solo una macchia centrale.</span></p>
+    </aside>
+  </section>
+
+  <div class="rotate-msg">
+    <div class="big">📱</div>
+    <div class="t1"><span class="it">Ruota il telefono in orizzontale</span></div>
+    <div class="t2"><span class="it">Questo esperimento interattivo sta stretto in verticale. Gira il telefono in <b>orizzontale</b> per vederlo tutto (anche se piccolo). Per un'esperienza migliore aprilo da <b>computer</b> o da <b>tablet</b> con schermo abbastanza grande.</span></div>
+  </div>
+  <div class="back-bottom"><a class="con-back" id="backBottom" href="04-diffrazione.html"><span class="it">← Torna al Capitolo 4</span></a></div>
+  <div class="con-foot"><span>La Quantistica · Lab locale · Cap. 04</span><span>F. Palma</span></div>
+</main>
+
+<script src="/assets/sim-sg-core.js?v=2"></script>
+<script>
+(function(){
+var cv=document.getElementById('screen'), ctx=cv.getContext('2d');
+var schem=document.getElementById('schem');
+var voltEl=document.getElementById('va'), voltValEl=document.getElementById('vav');
+var lamEl=document.getElementById('lam'), cntEl=document.getElementById('cnt');
+var beamBtn=document.getElementById('beam'), oneBtn=document.getElementById('one'), clrBtn=document.getElementById('clr');
+var seg=document.getElementById('segModel');
+var sampleSel=document.getElementById('sample');
+var REDUCE=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+function L(it,en){ return document.documentElement.getAttribute('data-lang')==='en'?en:it; }
+
+var CW=460, C0=230, Rs=208;          // canvas, centro, raggio schermo
+var KR=620;                          // scala (raggio px = KR*lam/d)
+
+/* CAMPIONI — verificati su fonti reali (Wikipedia SAED/Powder diffraction; immagini di
+   riferimento in build/diffraction-refs). POLICRISTALLINO -> anelli (Debye-Scherrer), ogni
+   anello = famiglia di piani (d in pm) con intensita' relativa. MONOCRISTALLO -> reticolo di
+   punti = proiezione del reticolo reciproco lungo un asse di zona (legge di zona di Weiss +
+   estinzioni FCC): [100] quadrato, [110] rettangolo centrato, [111] esagono. Basi in unita' 1/a
+   (oro a=407.8 pm) -> i raggi dei punti coincidono con quelli degli anelli corrispondenti. */
+var SAMPLES={
+  'poly-graphite':{family:'poly', name:{it:'Grafite',en:'Graphite'}, det:{it:'policristallino esagonale · anelli',en:'polycrystalline hexagonal · rings'}, rings:[{d:213,w:1.0},{d:123,w:0.9}]},
+  'poly-al':{family:'poly', name:{it:'Alluminio',en:'Aluminium'}, det:{it:'policristallino FCC · anelli',en:'polycrystalline FCC · rings'}, rings:[{d:234,w:1.0},{d:202,w:0.47},{d:143,w:0.22},{d:122,w:0.24},{d:117,w:0.07}]},
+  'poly-gold':{family:'poly', name:{it:'Oro',en:'Gold'}, det:{it:'policristallino FCC · anelli',en:'polycrystalline FCC · rings'}, rings:[{d:235,w:1.0},{d:204,w:0.52},{d:144,w:0.32},{d:123,w:0.36},{d:118,w:0.12}]},
+  'poly-silicon':{family:'poly', name:{it:'Silicio',en:'Silicon'}, det:{it:'policristallino (diamante) · anelli',en:'polycrystalline (diamond) · rings'}, rings:[{d:313.5,w:1.0},{d:192,w:0.6},{d:163.8,w:0.35},{d:135.8,w:0.08},{d:124.6,w:0.13}]},
+  'mono-100':{family:'mono', name:{it:'Oro · [100]',en:'Gold · [100]'}, det:{it:'monocristallo FCC, asse [100] · punti (quadrato)',en:'FCC single crystal, [100] axis · spots (square)'}, a:407.8, v1:[2,0], v2:[0,2]},
+  'mono-110':{family:'mono', name:{it:'Oro · [110]',en:'Gold · [110]'}, det:{it:'monocristallo FCC, asse [110] · punti (rettangolo)',en:'FCC single crystal, [110] axis · spots (rectangle)'}, a:407.8, v1:[1.4142,1], v2:[1.4142,-1]},
+  'mono-111':{family:'mono', name:{it:'Oro · [111]',en:'Gold · [111]'}, det:{it:'monocristallo FCC, asse [111] · punti (esagono)',en:'FCC single crystal, [111] axis · spots (hexagon)'}, a:407.8, v1:[2.8284,0], v2:[1.4142,2.4495]}
+};
+Object.keys(SAMPLES).forEach(function(k){ var s=SAMPLES[k]; if(s.rings){ var t=0; s.rings.forEach(function(r){ t+=r.w; }); s.tot=t; } });
+
+var sample='poly-graphite';
+var model='q', beamOn=!REDUCE, count=0, rafId=null, rate=11;
+var lam=0, spots=[], spotsTot=0;
+
+function gauss(){ return (Math.random()+Math.random()+Math.random()+Math.random()-2); }
+function computeRings(){ var V=+voltEl.value; lam=1226.4/Math.sqrt(V); }
+function ringR(d){ return KR*lam/d; }
+
+// posizioni dei punti (monocristallo): reticolo 2D m*v1+n*v2, raggio px = KR*lam*|g|/a
+function computeSpots(){
+  spots=[]; spotsTot=0;
+  var C=SAMPLES[sample]; if(C.family!=='mono') return;
+  var S=KR*lam/C.a, v1=C.v1, v2=C.v2, m,n;
+  spots.push({x:0,y:0,w:1.3}); spotsTot+=1.3;          // fascio trasmesso (centro)
+  for(m=-5;m<=5;m++) for(n=-5;n<=5;n++){
+    if(m===0&&n===0) continue;
+    var gx=m*v1[0]+n*v2[0], gy=m*v1[1]+n*v2[1], g=Math.sqrt(gx*gx+gy*gy);
+    var px=S*gx, py=S*gy;
+    if(Math.sqrt(px*px+py*py)>Rs-6) continue;
+    var w=1/(1+0.28*g*g);                               // intensita' cala con l'ordine
+    spots.push({x:px,y:py,w:w}); spotsTot+=w;
+  }
+}
+
+/* ---- schema laterale (cannone → cristallo → schermo) ---- */
+function drawSchem(){
+  while(schem.firstChild) schem.removeChild(schem.firstChild);
+  var gy=54, gx=304, sx=502, C=SAMPLES[sample];
+  el('rect',{x:22,y:gy-16,width:18,height:32,rx:2,fill:PANEL,stroke:INK,'stroke-width':1.4},schem);
+  el('rect',{x:40,y:gy-9,width:6,height:18,fill:'#20262e',stroke:'#5a6472','stroke-width':1},schem);
+  txt(31,gy+30,L('cannone','gun'),{'text-anchor':'middle','font-size':8.5,fill:'#5a7d6a','font-family':'monospace'},schem);
+  txt(31,gy-22,'V = '+(+voltEl.value),{'text-anchor':'middle','font-size':8.5,fill:'#ffb000','font-family':'monospace','font-weight':'bold'},schem);
+  el('line',{x1:46,y1:gy,x2:gx-9,y2:gy,stroke:'#35c8ff','stroke-width':2,'class':'lqbeam'},schem);
+  // campione: mono = un cristallo; poly = tanti cristalliti
+  el('rect',{x:gx-8,y:gy-21,width:16,height:42,rx:2,fill:'#12211a',stroke:'#8fbfa8','stroke-width':1.4},schem);
+  if(C.family==='mono'){ for(var i=-2;i<=2;i++){ el('line',{x1:gx-8,y1:gy+i*7,x2:gx+8,y2:gy+i*7,stroke:'#2b5a45','stroke-width':.8},schem); } txt(gx,gy+34,L('monocristallo','single crystal'),{'text-anchor':'middle','font-size':8,fill:'#5a7d6a','font-family':'monospace'},schem); }
+  else { for(var j=0;j<6;j++){ var yy=gy-16+j*6.4; el('line',{x1:gx-8,y1:yy,x2:gx+8,y2:yy,stroke:'#2b5a45','stroke-width':.7,transform:'rotate('+((j*37)%80-40)+' '+gx+' '+yy+')'},schem); } txt(gx,gy+34,L('policristallo','polycrystal'),{'text-anchor':'middle','font-size':8,fill:'#5a7d6a','font-family':'monospace'},schem); }
+  el('line',{x1:sx,y1:12,x2:sx,y2:96,stroke:'#2a4a3c','stroke-width':3},schem);
+  txt(sx,108,L('schermo','screen'),{'text-anchor':'middle','font-size':8.5,fill:'#5a7d6a','font-family':'monospace'},schem);
+  // fascio non diffratto + raggi diffratti
+  el('line',{x1:gx+8,y1:gy,x2:sx,y2:gy,stroke:'#dfffe9','stroke-width':1.2,opacity:.6,'class':'lqbeam'},schem);
+  el('circle',{cx:sx,cy:gy,r:2.4,fill:'#dfffe9'},schem);
+  if(model==='q'){
+    var k=0.20;
+    if(C.family==='poly'){
+      C.rings.forEach(function(rr){ var h=k*ringR(rr.d), op=(0.22+0.5*rr.w).toFixed(2);
+        el('line',{x1:gx+8,y1:gy,x2:sx,y2:gy-h,stroke:'#ffb000','stroke-width':1.1,opacity:op,'class':'lqbeam'},schem);
+        el('line',{x1:gx+8,y1:gy,x2:sx,y2:gy+h,stroke:'#ffb000','stroke-width':1.1,opacity:op,'class':'lqbeam'},schem);
+        el('circle',{cx:sx,cy:gy-h,r:2,fill:'#ffb000',opacity:op},schem);
+        el('circle',{cx:sx,cy:gy+h,r:2,fill:'#ffb000',opacity:op},schem);
+      });
+    } else {
+      var S=KR*lam/C.a, seen={};
+      [[1,0],[0,1],[1,1],[1,-1],[2,0],[0,2]].forEach(function(mn){
+        var gyv=mn[0]*C.v1[1]+mn[1]*C.v2[1], gxv=mn[0]*C.v1[0]+mn[1]*C.v2[0];
+        var h=k*S*gyv; var key=Math.round(h*2);
+        if(Math.abs(h)<1||seen[key]) return; seen[key]=1;
+        el('line',{x1:gx+8,y1:gy,x2:sx,y2:gy-h,stroke:'#ffb000','stroke-width':1.1,opacity:.5,'class':'lqbeam'},schem);
+        el('circle',{cx:sx,cy:gy-h,r:2,fill:'#ffb000'},schem);
+      });
+    }
+  } else {
+    txt((gx+sx)/2,gy-16,L('previsione classica: nessuna figura','classical prediction: no pattern'),{'text-anchor':'middle','font-size':8,fill:'#c79a4a','font-family':'monospace'},schem);
+  }
+}
+
+/* ---- schermo di rivelazione (canvas, accumulo additivo) ---- */
+function guide(r,col){
+  if(r<6||r>Rs) return;
+  ctx.save(); ctx.setLineDash([3,6]); ctx.strokeStyle=col; ctx.lineWidth=1.1;
+  ctx.beginPath(); ctx.arc(C0,C0,r,0,6.2832); ctx.stroke(); ctx.restore();
+}
+function clearScreen(){
+  ctx.globalCompositeOperation='source-over';
+  ctx.clearRect(0,0,CW,CW);
+  var bg=ctx.createRadialGradient(C0,C0,8,C0,C0,Rs);
+  bg.addColorStop(0,'#08160e'); bg.addColorStop(1,'#030906');
+  ctx.fillStyle=bg; ctx.beginPath(); ctx.arc(C0,C0,Rs,0,6.2832); ctx.fill();
+  ctx.strokeStyle='#1c3a30'; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(C0,C0,Rs,0,6.2832); ctx.stroke();
+  if(model==='q'){
+    var C=SAMPLES[sample];
+    if(C.family==='mono'){ spots.forEach(function(sp){ ctx.fillStyle='rgba(255,176,0,'+(0.07+0.16*sp.w).toFixed(2)+')'; ctx.beginPath(); ctx.arc(C0+sp.x,C0+sp.y,2.1,0,6.2832); ctx.fill(); }); }
+    else { C.rings.forEach(function(rr){ guide(ringR(rr.d),'rgba(255,176,0,'+(0.10+0.14*rr.w).toFixed(2)+')'); }); }
+  }
+  ctx.globalCompositeOperation='lighter';
+  count=0; cntEl.textContent='0';
+}
+function paint(x,y){
+  var dx=x-C0, dy=y-C0; if(dx*dx+dy*dy>(Rs-3)*(Rs-3)) return;
+  var g=ctx.createRadialGradient(x,y,0,x,y,2.7);
+  g.addColorStop(0,'rgba(150,255,205,0.5)'); g.addColorStop(1,'rgba(150,255,205,0)');
+  ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,2.7,0,6.2832); ctx.fill();
+  count++;
+}
+function hit(){
+  var x,y, C=SAMPLES[sample], th=Math.random()*6.2832, r;
+  if(model==='c'){ r=Math.abs(gauss()*15); x=C0+r*Math.cos(th); y=C0+r*Math.sin(th); }
+  else if(C.family==='mono'){
+    if(Math.random()<0.035){ r=Math.random()*(Rs-6); x=C0+r*Math.cos(th); y=C0+r*Math.sin(th); }   // fondo debole
+    else { var s=Math.random()*spotsTot, sp=spots[0], i; for(i=0;i<spots.length;i++){ s-=spots[i].w; if(s<=0){ sp=spots[i]; break; } }
+      x=C0+sp.x+gauss()*2.1; y=C0+sp.y+gauss()*2.1; }
+  } else {
+    var u=Math.random();
+    if(u<0.15) r=Math.abs(gauss()*5);                 // fascio diretto (centro)
+    else if(u<0.25) r=20+Math.random()*(Rs-24);       // fondo diffuso
+    else { var x2=Math.random()*C.tot, d=C.rings[0].d, i; for(i=0;i<C.rings.length;i++){ x2-=C.rings[i].w; if(x2<=0){ d=C.rings[i].d; break; } } r=ringR(d)+gauss()*4.0; }
+    if(r<0) r=-r; x=C0+r*Math.cos(th); y=C0+r*Math.sin(th);
+  }
+  paint(x,y);
+}
+function seed(n){ for(var i=0;i<n;i++) hit(); cntEl.textContent=count; }
+
+function recalc(reseed){
+  computeRings();
+  computeSpots();
+  voltValEl.textContent=(+voltEl.value)+' V';
+  lamEl.textContent=lam.toFixed(1)+' pm';
+  drawSchem();
+  clearScreen();
+  if(reseed && (beamOn||REDUCE)) seed(REDUCE?1700:650);
+}
+
+function beamLabel(){
+  beamBtn.classList.toggle('on',beamOn);
+  beamBtn.innerHTML=beamOn?'<span class="it">⏸ Pausa</span><span class="en">⏸ Pause</span>':'<span class="it">▶ Fascio</span><span class="en">▶ Beam</span>';
+}
+function setBeam(on){
+  beamOn=on; beamLabel();
+  if(on){ if(REDUCE){ clearScreen(); seed(1700); } else if(count<60){ seed(450); } }
+}
+
+function frame(){
+  if(beamOn && !REDUCE){ for(var i=0;i<rate;i++) hit(); cntEl.textContent=count; }
+  rafId=requestAnimationFrame(frame);
+}
+
+voltEl.addEventListener('input',function(){ recalc(true); });
+beamBtn.addEventListener('click',function(){ setBeam(!beamOn); });
+oneBtn.addEventListener('click',function(){ hit(); cntEl.textContent=count; });
+clrBtn.addEventListener('click',function(){ clearScreen(); });
+seg.addEventListener('click',function(e){ var b=e.target.closest('button'); if(!b) return; model=b.getAttribute('data-v'); [].forEach.call(seg.children,function(x){ x.classList.toggle('on',x.getAttribute('data-v')===model); }); recalc(true); });
+sampleSel.addEventListener('change',function(){ sample=this.value; sampleLabels(); recalc(true); });
+
+function sampleLabels(){
+  var ogp=document.getElementById('og-poly'), ogm=document.getElementById('og-mono');
+  if(ogp) ogp.label=L('Policristallino (anelli)','Polycrystalline (rings)');
+  if(ogm) ogm.label=L('Monocristallo (punti)','Single crystal (spots)');
+  Object.keys(SAMPLES).forEach(function(kk){ var o=sampleSel.querySelector('option[value="'+kk+'"]'); if(o) o.textContent=L(SAMPLES[kk].name.it,SAMPLES[kk].name.en); });
+  var C=SAMPLES[sample];
+  document.getElementById('crys').textContent=L(C.name.it,C.name.en)+' — '+L(C.det.it,C.det.en);
+}
+
+document.addEventListener('visibilitychange',function(){ if(document.hidden){ if(rafId){ cancelAnimationFrame(rafId); rafId=null; } } else { if(!REDUCE && !rafId) rafId=requestAnimationFrame(frame); } });
+new MutationObserver(function(){ drawSchem(); sampleLabels(); }).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});
+
+initBackLink('04-diffrazione.html');
+computeRings();
+computeSpots();
+voltValEl.textContent=(+voltEl.value)+' V';
+lamEl.textContent=lam.toFixed(1)+' pm';
+sampleLabels();
+drawSchem();
+clearScreen();
+beamLabel();
+if(REDUCE){ seed(1700); } else { seed(450); rafId=requestAnimationFrame(frame); }
+
+window.__lab={ get count(){return count;}, get model(){return model;}, get sample(){return sample;}, get family(){return SAMPLES[sample].family;}, get beam(){return beamOn;}, get lam(){return lam;}, get spots(){return spots.length;}, seed:seed, hit:hit, clear:clearScreen, setBeam:setBeam };
+})();
+</script>
+</body>
+</html>

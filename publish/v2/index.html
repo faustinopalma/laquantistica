@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<link rel="alternate" hreflang="it" href="https://laquantistica.com/v2/it/index.html">
+<link rel="alternate" hreflang="en" href="https://laquantistica.com/v2/en/index.html">
+<link rel="alternate" hreflang="x-default" href="https://laquantistica.com/v2/en/index.html">
+<title>La Quantistica</title>
+<link rel="stylesheet" href="/assets/style.css?v=17">
+<script>
+(function () {
+  var s = null;
+  try { s = localStorage.getItem('site-lang'); } catch (e) {}
+  if (s !== 'it' && s !== 'en') {
+    var l = (navigator.languages && navigator.languages.length)
+      ? navigator.languages : (navigator.language ? [navigator.language] : []);
+    s = 'en';
+    for (var i = 0; i < l.length; i++) {
+      var t = String(l[i]).toLowerCase().split('-')[0];
+      if (t === 'it' || t === 'en') { s = t; break; }
+    }
+  }
+  location.replace(s + '/index.html');
+})();
+</script>
+</head>
+<body>
+<p style="font-family:system-ui;padding:2rem">
+  <a href="it/index.html" hreflang="it" lang="it">Italiano</a> &middot;
+  <a href="en/index.html" hreflang="en" lang="en">English</a>
+</p>
+</body>
+</html>
