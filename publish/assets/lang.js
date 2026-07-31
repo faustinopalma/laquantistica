@@ -12,16 +12,13 @@
     return null;
   }
 
+  // Italiano solo se e' la lingua principale del browser; in ogni altro caso inglese.
   function dalBrowser() {
-    var l = [];
-    if (navigator.languages && navigator.languages.length) l = navigator.languages;
-    else if (navigator.language) l = [navigator.language];
-    for (var i = 0; i < l.length; i++) {
-      var t = String(l[i]).toLowerCase().split('-')[0];
-      if (t === 'it') return 'it';
-      if (t === 'en') return 'en';
-    }
-    return 'en';
+    var l = (navigator.languages && navigator.languages.length)
+      ? navigator.languages[0]
+      : navigator.language;
+    if (!l) return 'en';
+    return String(l).toLowerCase().split('-')[0] === 'it' ? 'it' : 'en';
   }
 
   function sincronizzaBottoni(l) {
