@@ -332,6 +332,35 @@ def separatore_decimale(testo, lingua):
     return ''.join(pezzi), n
 
 
+ATTR_LINGUA = re.compile(r'\s([\w-]+)-en="([^"]*)"')
+
+
+def attributi_per_lingua(testo, lingua):
+    """`alt-en="..."` diventa `alt="..."` nella versione inglese e sparisce in quella
+    italiana. Serve per il testo che vive negli attributi (alt, aria-label): non
+    essendo elementi, non si puo' sdoppiarlo con gli span."""
+    n = 0
+
+    def per_tag(m):
+        nonlocal n
+        tag = m.group(0)
+        coppie = ATTR_LINGUA.findall(tag)
+        if not coppie:
+            return tag
+        n += len(coppie)
+        tag = ATTR_LINGUA.sub('', tag)
+        if lingua == 'en':
+            chiusura = '/>' if tag.rstrip('>').rstrip().endswith('/') else '>'
+            corpo = tag.rstrip('>').rstrip().rstrip('/').rstrip()
+            for nome, valore in coppie:
+                corpo = re.sub(rf'\s{re.escape(nome)}="[^"]*"', '', corpo)
+                corpo += f' {nome}="{valore}"'
+            tag = corpo + chiusura
+        return tag
+
+    return re.sub(r'<[a-zA-Z][^>]*>', per_tag, testo), n
+
+
 SEL_LINGUA = re.compile(r'([ \t]*)<div class="langsw"[^>]*>.*?</div>', re.S)
 NOMI = {'it': 'Italiano', 'en': 'English'}
 
@@ -396,6 +425,10 @@ def trasforma(testo, lingua, file_, avvisi):
     testo, n_dec = separatore_decimale(testo, lingua)
     if n_dec:
         avvisi.append(f'{lingua}/{file_}: {n_dec} separatori decimali adeguati')
+
+    testo, n_attr = attributi_per_lingua(testo, lingua)
+    if n_attr:
+        avvisi.append(f'{lingua}/{file_}: {n_attr} attributi per lingua risolti')
 
     meta = META.get(file_, {}).get(lingua)
     if meta:
@@ -533,9 +566,10 @@ def main(solo=None):
         (USCITA / 'robots.txt').write_text(
             f'User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n', encoding='utf-8')
     da_curare = sorted({a.split(': ')[0].split('/')[1] for a in avvisi if 'titolo' in a})
-    segnaposti = [a for a in avvisi if 'segnaposto' in a or 'separatori' in a]
+    segnaposti = [a for a in avvisi if 'segnaposto' in a or 'separatori' in a or 'attributi' in a]
     veri_problemi = [a for a in avvisi
-                     if not any(k in a for k in ('titolo', 'descrizione', 'segnaposto', 'separatori'))]
+                     if not any(k in a for k in ('titolo', 'descrizione', 'segnaposto',
+                                                'separatori', 'attributi'))]
     print(f'\ntitoli ancora da curare ({len(da_curare)}): {", ".join(da_curare) or "nessuno"}')
     for a in segnaposti:
         print(f'  ~  {a}')
