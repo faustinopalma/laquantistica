@@ -1,0 +1,5 @@
+[13:25:31] poll 1  http=200  pronto=False  elapsed=0.7s
+[13:25:51] poll 2  http=200  pronto=False  elapsed=21.4s
+[13:26:12] poll 3  http=200  pronto=False  elapsed=41.6s
+[13:26:32] poll 4  http=200  pronto=True  elapsed=61.9s
+VERDICT: online dopo 61.9s
