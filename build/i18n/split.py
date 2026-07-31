@@ -4,6 +4,8 @@ Principio: NON si rigenera nulla. Si rimuovono chirurgicamente gli elementi
 dell'altra lingua dal file esistente e tutto il resto resta byte per byte
 com'era. Cosi' il testo pubblicato non puo' cambiare per errore.
 """
+import html
+import json
 import pathlib
 import re
 import shutil
@@ -39,12 +41,20 @@ def pagine():
 # e vengono segnalate nel resoconto.
 META = {
     'index.html': {
-        'it': ('Esperimenti fondamentali della Meccanica Quantistica · La Quantistica', None),
-        'en': ('Fundamental Experiments of Quantum Mechanics · La Quantistica', None),
+        'it': ('Esperimenti fondamentali della Meccanica Quantistica · La Quantistica',
+               "Una tesi di laurea che ricava l'equazione di Schrödinger dagli esperimenti invece "
+               'di postularla. Nove capitoli, laboratori simulati, testo integrale e gratuito.'),
+        'en': ('Fundamental Experiments of Quantum Mechanics · La Quantistica',
+               "A master's thesis that derives Schrödinger's equation from the experiments instead "
+               'of postulating it. Nine chapters, simulated laboratories, full text, free.'),
     },
     '01-stern-gerlach.html': {
-        'it': ('Esperimento di Stern-Gerlach · La Quantistica', None),
-        'en': ('The Stern–Gerlach Experiment · La Quantistica', None),
+        'it': ('Esperimento di Stern-Gerlach · La Quantistica',
+               "L'esperimento di Stern-Gerlach: perché il momento magnetico di un atomo d'argento "
+               "si presenta in due sole direzioni. Con il laboratorio simulato dell'apparato."),
+        'en': ('The Stern–Gerlach Experiment · La Quantistica',
+               'The Stern–Gerlach experiment: why the magnetic moment of a silver atom shows up '
+               'in two directions only. With a simulated laboratory of the apparatus.'),
     },
     'nota-01-stern-gerlach.html': {
         'it': ('Nota 01 · Dietro le quinte — Stern-Gerlach · La Quantistica', None),
@@ -65,8 +75,12 @@ META = {
                'temperature, collimation and magnet, and watch the deposit build up on the slide.'),
     },
     '02-stern-gerlach-cascata.html': {
-        'it': ('Esperimenti di Stern-Gerlach in cascata · La Quantistica', None),
-        'en': ('Cascaded Stern–Gerlach Experiments · La Quantistica', None),
+        'it': ('Esperimenti di Stern-Gerlach in cascata · La Quantistica',
+               'Stern-Gerlach in cascata: da qui nascono ampiezze, sovrapposizione e interferenza. '
+               'Quattro esperimenti simulati con cui verificare ogni passaggio.'),
+        'en': ('Cascaded Stern–Gerlach Experiments · La Quantistica',
+               'Cascaded Stern–Gerlach: where amplitudes, superposition and interference come from. '
+               'Four simulated experiments to check every step.'),
     },
     'nota-02-prodotto-scalare.html': {
         'it': ('Nota 02 · Conservazione del prodotto scalare — La Quantistica', None),
@@ -101,32 +115,60 @@ META = {
                'the two paths, built on the same base as Experiment 3.'),
     },
     '03-elettroni.html': {
-        'it': ('Esperimenti con gli Elettroni · La Quantistica', None),
-        'en': ('Experiments with Electrons · La Quantistica', None),
+        'it': ('Esperimenti con gli Elettroni · La Quantistica',
+               "Corrente nel vuoto, rapporto e/m di Thomson ed esperimento di Millikan: come si è "
+               'scoperto che la carica elettrica è fatta di quanti tutti uguali.'),
+        'en': ('Experiments with Electrons · La Quantistica',
+               "Current in a vacuum, Thomson's e/m ratio and Millikan's experiment: how it was "
+               'discovered that electric charge comes in identical quanta.'),
     },
     '04-diffrazione.html': {
-        'it': ('Diffrazione degli Elettroni · La Quantistica', None),
-        'en': ('Electron Diffraction · La Quantistica', None),
+        'it': ('Diffrazione degli Elettroni · La Quantistica',
+               "Gli elettroni diffratti da un cristallo formano anelli: la lunghezza d'onda di "
+               "de Broglie misurata, e l'interpretazione probabilistica dell'ampiezza."),
+        'en': ('Electron Diffraction · La Quantistica',
+               "Electrons diffracted by a crystal form rings: de Broglie's wavelength measured, "
+               'and the probabilistic interpretation of the amplitude.'),
     },
     '05-rutherford.html': {
-        'it': ('Esperimento di Rutherford · La Quantistica', None),
-        'en': ('The Rutherford Experiment · La Quantistica', None),
+        'it': ('Esperimento di Rutherford · La Quantistica',
+               "L'esperimento di Rutherford e la legge 1/sin\u2074(\u03d1/2): dal conteggio delle particelle "
+               'alfa alla scoperta del nucleo, con il calcolo completo della diffusione.'),
+        'en': ('The Rutherford Experiment · La Quantistica',
+               "Rutherford's experiment and the 1/sin\u2074(\u03d1/2) law: from counting alpha particles to "
+               'the discovery of the nucleus, with the full scattering calculation.'),
     },
     '06-ulteriori-sviluppi.html': {
-        'it': ('Ulteriori sviluppi della Teoria · La Quantistica', None),
-        'en': ('Further Developments of the Theory · La Quantistica', None),
+        'it': ('Ulteriori sviluppi della Teoria · La Quantistica',
+               "Dai principi ricavati negli esperimenti all'equazione di Schrödinger: operatori, "
+               'osservabili ed evoluzione temporale, dedotti passo per passo.'),
+        'en': ('Further Developments of the Theory · La Quantistica',
+               "From the principles obtained in the experiments to Schrödinger's equation: "
+               'operators, observables and time evolution, derived step by step.'),
     },
     '07-franck-hertz.html': {
-        'it': ('Esperimento di Franck-Hertz · La Quantistica', None),
-        'en': ('The Franck–Hertz Experiment · La Quantistica', None),
+        'it': ('Esperimento di Franck-Hertz · La Quantistica',
+               "L'esperimento di Franck-Hertz: gli atomi assorbono energia solo a pacchetti. "
+               'I massimi e i minimi della corrente misurati su neon e mercurio.'),
+        'en': ('The Franck–Hertz Experiment · La Quantistica',
+               'The Franck–Hertz experiment: atoms absorb energy only in packets. The maxima and '
+               'minima of the current measured on neon and mercury.'),
     },
     '08-effetto-fotoelettrico.html': {
-        'it': ('Effetto Fotoelettrico · La Quantistica', None),
-        'en': ('The Photoelectric Effect · La Quantistica', None),
+        'it': ('Effetto Fotoelettrico · La Quantistica',
+               "L'effetto fotoelettrico: la tensione di sbarramento in funzione della frequenza dà "
+               'la costante di Planck e il lavoro di estrazione del metallo.'),
+        'en': ('The Photoelectric Effect · La Quantistica',
+               'The photoelectric effect: the stopping voltage against frequency gives Planck\u2019s '
+               'constant and the work function of the metal.'),
     },
     '09-spettri-atomici.html': {
-        'it': ('Spettri atomici di emissione · La Quantistica', None),
-        'en': ('Atomic Emission Spectra · La Quantistica', None),
+        'it': ('Spettri atomici di emissione · La Quantistica',
+               'Gli spettri atomici di emissione: dalle righe misurate col goniometro alla costante '
+               "di Rydberg e ai livelli energetici dell'atomo di idrogeno."),
+        'en': ('Atomic Emission Spectra · La Quantistica',
+               'Atomic emission spectra: from the lines measured with a goniometer to the Rydberg '
+               'constant and the energy levels of the hydrogen atom.'),
     },
     'lab-03a-corrente-vuoto.html': {
         'it': ('Lab · Corrente nel vuoto — La Quantistica', None),
@@ -360,6 +402,121 @@ def attributi_per_lingua(testo, lingua):
     return re.sub(r'<[a-zA-Z][^>]*>', per_tag, testo), n
 
 
+CAPITOLI = ['01-stern-gerlach.html', '02-stern-gerlach-cascata.html', '03-elettroni.html',
+            '04-diffrazione.html', '05-rutherford.html', '06-ulteriori-sviluppi.html',
+            '07-franck-hertz.html', '08-effetto-fotoelettrico.html', '09-spettri-atomici.html']
+
+AUTORE = {'@type': 'Person', 'name': 'Faustino Palma',
+          'sameAs': 'https://www.linkedin.com/in/faustinopalma/'}
+
+INSEGNA = {
+    'it': ['Quantizzazione dello spin e esperimento di Stern-Gerlach',
+           'Ampiezze di probabilita\u0300, sovrapposizione e interferenza',
+           'Quantizzazione della carica elettrica',
+           'Dualismo onda-particella e lunghezza d\u2019onda di de Broglie',
+           'Struttura nucleare dell\u2019atomo e diffusione di Rutherford',
+           'Operatori, osservabili ed equazione di Schr\u00f6dinger',
+           'Quantizzazione dei livelli energetici atomici'],
+    'en': ['Spin quantisation and the Stern\u2013Gerlach experiment',
+           'Probability amplitudes, superposition and interference',
+           'Quantisation of electric charge',
+           'Wave\u2013particle duality and the de Broglie wavelength',
+           'Nuclear structure of the atom and Rutherford scattering',
+           'Operators, observables and the Schr\u00f6dinger equation',
+           'Quantisation of atomic energy levels'],
+}
+
+SINTESI_CORSO = {
+    'it': ('Un percorso completo che parte dagli esperimenti fondamentali e arriva a ricavare '
+           'l\u2019equazione di Schr\u00f6dinger, invece di postularla. Chi lo segue fino in fondo, '
+           'capitolo dopo capitolo e con i laboratori simulati, arriva a padroneggiare buona '
+           'parte della meccanica quantistica non relativistica: quantizzazione, ampiezze di '
+           'probabilit\u00e0, sovrapposizione e interferenza, operatori e osservabili, evoluzione '
+           'temporale, struttura dell\u2019atomo e livelli energetici.'),
+    'en': ('A complete path that starts from the fundamental experiments and ends by deriving '
+           'the Schr\u00f6dinger equation instead of postulating it. Whoever follows it to the end, '
+           'chapter after chapter and with the simulated laboratories, comes to master a good '
+           'part of non-relativistic quantum mechanics: quantisation, probability amplitudes, '
+           'superposition and interference, operators and observables, time evolution, the '
+           'structure of the atom and its energy levels.'),
+}
+
+
+def dati_strutturati(lingua, file_, titolo, descrizione):
+    """Dichiara a Google che l'opera e' un corso completo, non una pagina sciolta."""
+    corso = {
+        '@type': ['Course', 'LearningResource'],
+        '@id': f'{BASE}/{lingua}/#corso',
+        'name': META['index.html'][lingua][0].split(' \u00b7 ')[0],
+        'description': SINTESI_CORSO[lingua],
+        'url': url_pubblico(lingua, 'index.html'),
+        'inLanguage': lingua,
+        'isAccessibleForFree': True,
+        'learningResourceType': 'corso completo' if lingua == 'it' else 'complete course',
+        'educationalLevel': 'universitario' if lingua == 'it' else 'undergraduate',
+        'teaches': INSEGNA[lingua],
+        'about': {'@type': 'Thing',
+                  'name': 'Meccanica quantistica' if lingua == 'it' else 'Quantum mechanics'},
+        'author': AUTORE,
+        'provider': {'@type': 'Organization', 'name': 'La Quantistica', 'url': f'{BASE}/'},
+        'isBasedOn': {
+            '@type': 'Thesis',
+            'name': 'Esperimenti fondamentali della Meccanica Quantistica',
+            'author': AUTORE,
+            'datePublished': '1999',
+            'inLanguage': 'it',
+            'sourceOrganization': {'@type': 'CollegeOrUniversity',
+                                   'name': 'Universit\u00e0 degli Studi di Napoli Federico II'},
+        },
+        'hasPart': [{'@type': 'LearningResource',
+                     'name': META[c][lingua][0].split(' \u00b7 ')[0],
+                     'url': url_pubblico(lingua, c),
+                     'position': i + 1}
+                    for i, c in enumerate(CAPITOLI)],
+    }
+    if file_ == 'index.html':
+        dati = corso
+    else:
+        dati = {
+            '@type': 'LearningResource',
+            'name': titolo.split(' \u00b7 ')[0],
+            'description': descrizione,
+            'url': url_pubblico(lingua, file_),
+            'inLanguage': lingua,
+            'isAccessibleForFree': True,
+            'position': CAPITOLI.index(file_) + 1,
+            'author': AUTORE,
+            'isPartOf': {'@type': 'Course', '@id': f'{BASE}/{lingua}/#corso',
+                         'name': corso['name'], 'url': corso['url']},
+        }
+    dati['@context'] = 'https://schema.org'
+    return ('<script type="application/ld+json">'
+            + json.dumps(dati, ensure_ascii=False, separators=(',', ':'))
+            + '</script>')
+
+
+def anteprima_social(lingua, file_, titolo, descrizione):
+    """Titolo, testo e immagine che compaiono quando il link viene condiviso."""
+    pulito = re.split(r' [\u00b7\u2014] La Quantistica', titolo)[0]
+    if len(descrizione) > 200:      # le piattaforme troncano: meglio tagliare fra due parole
+        descrizione = descrizione[:197].rsplit(' ', 1)[0].rstrip(' ,;:') + '\u2026'
+    voci = [
+        ('og:type', 'article' if file_ != 'index.html' else 'website'),
+        ('og:site_name', 'La Quantistica'),
+        ('og:locale', 'it_IT' if lingua == 'it' else 'en_GB'),
+        ('og:title', pulito),
+        ('og:description', descrizione),
+        ('og:url', url_pubblico(lingua, file_)),
+        ('og:image', f'{BASE}/img/social/copertina-{lingua}.png'),
+        ('og:image:width', '1200'),
+        ('og:image:height', '630'),
+        ('og:image:alt', pulito),
+    ]
+    testa = [f'<meta property="{k}" content="{html.escape(v, quote=True)}">' for k, v in voci]
+    testa.append('<meta name="twitter:card" content="summary_large_image">')
+    return '\n'.join(testa)
+
+
 SEL_LINGUA = re.compile(r'([ \t]*)<div class="langsw"[^>]*>.*?</div>', re.S)
 NOMI = {'it': 'Italiano', 'en': 'English'}
 
@@ -448,6 +605,15 @@ def trasforma(testo, lingua, file_, avvisi):
     for l in ('it', 'en'):
         testa.append(f'<link rel="alternate" hreflang="{l}" href="{url_pubblico(l, file_)}">')
     testa.append(f'<link rel="alternate" hreflang="x-default" href="{url_pubblico("en", file_)}">')
+
+    m_tit = re.search(r'<title>(.*?)</title>', testo, re.S)
+    m_des = re.search(r'<meta name="description" content="([^"]*)"', testo)
+    titolo_pagina = html.unescape(m_tit.group(1).strip()) if m_tit else 'La Quantistica'
+    descrizione = html.unescape(m_des.group(1)) if m_des else ''
+    if descrizione:
+        testa.append(anteprima_social(lingua, file_, titolo_pagina, descrizione))
+    if file_ == 'index.html' or file_ in CAPITOLI:
+        testa.append(dati_strutturati(lingua, file_, titolo_pagina, descrizione))
     if ANTEPRIMA:
         testa.append('<meta name="robots" content="noindex,nofollow">')
     testa.append('<link rel="stylesheet" href="/assets/lang-links.css?v=1">')
