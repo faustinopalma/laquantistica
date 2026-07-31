@@ -1,0 +1,5 @@
+[12:50:01] poll 1  errataSparita=False  sitoVivo=True  elapsed=0.8s
+[12:50:21] poll 2  errataSparita=False  sitoVivo=True  elapsed=21.5s
+[12:50:42] poll 3  errataSparita=False  sitoVivo=True  elapsed=42.9s
+[12:51:03] poll 4  errataSparita=True  sitoVivo=True  elapsed=63.2s
+VERDICT: fatto dopo 63.2s
