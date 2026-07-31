@@ -100,7 +100,7 @@ h1.doc-title .lead{
 .sheet-inner p{
   font-family:var(--n-serif);font-size:1.07rem;margin:0 0 1.05rem;color:#24272c;
 }
-.sheet-inner p.lede{font-size:1.15rem;color:var(--n-ink);}
+.sheet-inner p.lede{color:var(--n-ink);}
 .sheet-inner strong{color:var(--n-accent);font-weight:700;}
 .sheet-inner em{color:#000;}
 
