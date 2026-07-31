@@ -1,0 +1,4 @@
+[10:36:40] poll 1  http=200  formuleEN=False  elapsed=0.8s
+[10:37:01] poll 2  http=200  formuleEN=False  elapsed=21.2s
+[10:37:21] poll 3  http=200  formuleEN=True  elapsed=41.7s
+VERDICT: formule online dopo 41.7s
