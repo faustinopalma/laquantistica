@@ -18,6 +18,14 @@ ANTEPRIMA = True                        # mette noindex finche' e' una prova
 VUOTI = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input',
          'link', 'meta', 'param', 'source', 'track', 'wbr'}
 
+
+def url_pubblico(lingua, file_):
+    """Azure Static Web Apps risponde 301 da .html all'indirizzo senza estensione:
+    canonical e hreflang devono dichiarare gia' quello finale."""
+    if file_ == 'index.html':
+        return f'{BASE}/{lingua}/'
+    return f'{BASE}/{lingua}/{file_[:-5]}'
+
 SALTA = {'_lab-index.html'}             # bozza locale, non pubblicata
 MONOLINGUI = {'errata.html'}            # nessun marcatore di lingua: copiata tale e quale
 
@@ -208,14 +216,14 @@ def trasforma(testo, lingua, file_, avvisi):
 
     testa = []
     for l in ('it', 'en'):
-        testa.append(f'<link rel="alternate" hreflang="{l}" href="{BASE}/{l}/{file_}">')
-    testa.append(f'<link rel="alternate" hreflang="x-default" href="{BASE}/en/{file_}">')
+        testa.append(f'<link rel="alternate" hreflang="{l}" href="{url_pubblico(l, file_)}">')
+    testa.append(f'<link rel="alternate" hreflang="x-default" href="{url_pubblico("en", file_)}">')
     if ANTEPRIMA:
         testa.append('<meta name="robots" content="noindex,nofollow">')
     testa.append('<link rel="stylesheet" href="/assets/lang-links.css?v=1">')
     testo = testo.replace('</head>', '\n'.join(testa) + '\n</head>', 1)
 
-    nuovo_canonico = f'<link rel="canonical" href="{BASE}/{lingua}/{file_}">'
+    nuovo_canonico = f'<link rel="canonical" href="{url_pubblico(lingua, file_)}">'
     if re.search(r'<link rel="canonical"[^>]*>', testo):
         testo = re.sub(r'<link rel="canonical"[^>]*>', nuovo_canonico, testo, count=1)
     else:
@@ -232,9 +240,9 @@ def pagina_scelta():
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-{robots}<link rel="alternate" hreflang="it" href="{BASE}/it/index.html">
-<link rel="alternate" hreflang="en" href="{BASE}/en/index.html">
-<link rel="alternate" hreflang="x-default" href="{BASE}/en/index.html">
+{robots}<link rel="alternate" hreflang="it" href="{url_pubblico('it', 'index.html')}">
+<link rel="alternate" hreflang="en" href="{url_pubblico('en', 'index.html')}">
+<link rel="alternate" hreflang="x-default" href="{url_pubblico('en', 'index.html')}">
 <title>La Quantistica</title>
 <link rel="stylesheet" href="/assets/style.css?v=17">
 <script>

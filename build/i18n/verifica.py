@@ -17,6 +17,12 @@ errori = []
 avvisi = []
 
 
+def url_pubblico(lingua, file_):
+    if file_ == 'index.html':
+        return f'{BASE}/{lingua}/'
+    return f'{BASE}/{lingua}/{file_[:-5]}'
+
+
 def err(pagina, msg):
     errori.append(f'{pagina}: {msg}')
 
@@ -48,15 +54,15 @@ for lingua in LINGUE:
             continue
 
         can = re.findall(r'<link rel="canonical" href="([^"]*)"', t)
-        atteso = f'{BASE}/{lingua}/{f.name}'
+        atteso = url_pubblico(lingua, f.name)
         if can != [atteso]:
             err(nome, f'canonical {can} invece di [{atteso}]')
 
         alt = dict(re.findall(r'<link rel="alternate" hreflang="([^"]*)" href="([^"]*)"', t))
         for l in LINGUE:
-            if alt.get(l) != f'{BASE}/{l}/{f.name}':
+            if alt.get(l) != url_pubblico(l, f.name):
                 err(nome, f'hreflang {l} = {alt.get(l)}')
-        if alt.get('x-default') != f'{BASE}/en/{f.name}':
+        if alt.get('x-default') != url_pubblico('en', f.name):
             err(nome, f'hreflang x-default = {alt.get("x-default")}')
         for l in LINGUE:
             gemella = USCITA / l / f.name
