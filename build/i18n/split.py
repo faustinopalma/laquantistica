@@ -4,11 +4,13 @@ Principio: NON si rigenera nulla. Si rimuovono chirurgicamente gli elementi
 dell'altra lingua dal file esistente e tutto il resto resta byte per byte
 com'era. Cosi' il testo pubblicato non puo' cambiare per errore.
 """
+import datetime
 import html
 import json
 import pathlib
 import re
 import shutil
+import subprocess
 import sys
 from html.parser import HTMLParser
 
@@ -750,7 +752,34 @@ def pagina_non_trovata():
 '''
 
 
+def date_modifica():
+    """Data dell'ultimo commit che ha toccato ogni sorgente. E' cio' che serve a Google
+    per capire *cosa* e' cambiato invece di riscandagliare tutto alla cieca.
+    Se un file ha modifiche non ancora committate vale oggi."""
+    date = {}
+    try:
+        registro = subprocess.run(
+            ['git', 'log', '--format=%cs', '--name-only', '--', str(RADICE)],
+            capture_output=True, text=True, encoding='utf-8', check=True).stdout
+        corrente = None
+        for riga in registro.splitlines():
+            riga = riga.strip()
+            if re.fullmatch(r'\d{4}-\d{2}-\d{2}', riga):
+                corrente = riga
+            elif riga.endswith('.html') and corrente:
+                date.setdefault(pathlib.Path(riga).name, corrente)
+        sporchi = subprocess.run(['git', 'status', '--porcelain', '--', str(RADICE)],
+                                 capture_output=True, text=True, encoding='utf-8').stdout
+        oggi = datetime.date.today().isoformat()
+        for riga in sporchi.splitlines():
+            date[pathlib.Path(riga[3:].strip().strip('"')).name] = oggi
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        pass
+    return date
+
+
 def sitemap(nomi):
+    quando = date_modifica()
     righe = ['<?xml version="1.0" encoding="UTF-8"?>',
              '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
              'xmlns:xhtml="http://www.w3.org/1999/xhtml">']
@@ -758,6 +787,8 @@ def sitemap(nomi):
         for l in ('it', 'en'):
             righe.append('  <url>')
             righe.append(f'    <loc>{url_pubblico(l, nome)}</loc>')
+            if nome in quando:
+                righe.append(f'    <lastmod>{quando[nome]}</lastmod>')
             for a in ('it', 'en'):
                 righe.append(f'    <xhtml:link rel="alternate" hreflang="{a}" '
                              f'href="{url_pubblico(a, nome)}"/>')

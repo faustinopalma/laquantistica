@@ -43,12 +43,29 @@ e a segnalare loro le pagine nuove.
 
 ### Subito dopo la verifica
 
-1. **Sitemaps** (menù di sinistra) → aggiungi `sitemap.xml` → Invia.
-   Contiene tutti i 52 indirizzi del sito, con l'indicazione di quale pagina è la versione
-   italiana e quale l'inglese.
+1. **Sitemaps** (menù di sinistra) → nel campo incolla questo indirizzo:
+
+   ```
+   https://laquantistica.com/sitemap.xml
+   ```
+
+   e premi **Invia**. Se il modulo mostra già `https://laquantistica.com/` come prefisso
+   fisso, allora nel campo scrivi solo:
+
+   ```
+   sitemap.xml
+   ```
+
+   Si inserisce **una volta sola**: non si carica nessun file, si indica l'indirizzo. Google
+   torna a rileggerlo da solo ogni tanto, e il file viene rigenerato a ogni ricostruzione del
+   sito. Se aggiungi o togli una pagina, la sitemap la segue senza che tu debba fare nulla.
+
 2. **Controllo URL** (in alto) → incolla `https://laquantistica.com/it/` → **Richiedi
    l'indicizzazione**. Fallo per l'indice italiano e per quello inglese. Non serve farlo
    per tutte le pagine: dall'indice Google raggiunge il resto da solo.
+
+> La sitemap è anche dichiarata dentro `robots.txt`, quindi i motori la trovano comunque.
+> Segnalarla a mano serve solo ad accorciare i tempi la prima volta.
 
 ### Cosa aspettarsi, onestamente
 
@@ -68,7 +85,11 @@ diversi assistenti conversazionali. Vale la mezz'ora anche se il traffico di Bin
    Bing prende da lì proprietà e verifica, e non devi toccare nulla.
 3. Se preferisci non collegare i due account, puoi verificare anche qui con un record TXT
    su Cloudflare, con la stessa procedura.
-4. Anche qui, invia la sitemap: `https://laquantistica.com/sitemap.xml`.
+4. Anche qui, alla voce **Sitemaps**, inserisci lo stesso indirizzo:
+
+   ```
+   https://laquantistica.com/sitemap.xml
+   ```
 
 ---
 
@@ -78,7 +99,9 @@ Non serve rifarlo, ma è utile sapere che c'è.
 
 - **Un indirizzo per lingua**: `/it/…` e `/en/…`, con `hreflang` reciproci. Google può
   mostrare la versione italiana a chi cerca in italiano.
-- **`sitemap.xml`** con tutti i 52 indirizzi e le corrispondenze fra le due lingue.
+- **`sitemap.xml`** con tutti i 52 indirizzi, le corrispondenze fra le due lingue e la data
+  dell'ultima modifica di ogni pagina, così i motori sanno *cosa* è cambiato e non
+  riscandagliano tutto alla cieca.
 - **`robots.txt`** che apre tutto il sito e indica dove sta la sitemap.
 - **Titolo e descrizione** su ogni pagina, distinti e scritti a mano.
 - **Anteprima di condivisione** (Open Graph) su ogni pagina, con immagine di copertina
