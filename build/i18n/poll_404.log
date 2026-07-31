@@ -1,0 +1,25 @@
+[12:59:07] poll 1  stato=404  paginaGiusta=False  elapsed=0.8s
+[12:59:28] poll 2  stato=404  paginaGiusta=False  elapsed=21.7s
+[12:59:48] poll 3  stato=404  paginaGiusta=False  elapsed=42s
+[13:00:09] poll 4  stato=404  paginaGiusta=False  elapsed=62.4s
+[13:00:29] poll 5  stato=404  paginaGiusta=False  elapsed=82.9s
+[13:00:50] poll 6  stato=404  paginaGiusta=False  elapsed=103.4s
+[13:01:10] poll 7  stato=404  paginaGiusta=False  elapsed=123.7s
+[13:01:30] poll 8  stato=404  paginaGiusta=False  elapsed=144.2s
+[13:01:51] poll 9  stato=404  paginaGiusta=False  elapsed=164.5s
+[13:02:11] poll 10  stato=404  paginaGiusta=False  elapsed=186.2s
+[13:02:33] poll 11  stato=404  paginaGiusta=False  elapsed=206.6s
+[13:02:53] poll 12  stato=404  paginaGiusta=False  elapsed=226.9s
+[13:03:14] poll 13  stato=404  paginaGiusta=False  elapsed=247.2s
+[13:03:34] poll 14  stato=404  paginaGiusta=False  elapsed=267.6s
+[13:03:54] poll 15  stato=404  paginaGiusta=False  elapsed=289.2s
+[13:04:16] poll 16  stato=404  paginaGiusta=False  elapsed=309.7s
+[13:04:36] poll 17  stato=404  paginaGiusta=False  elapsed=330.1s
+[13:04:57] poll 18  stato=404  paginaGiusta=False  elapsed=350.3s
+[13:05:17] poll 19  stato=404  paginaGiusta=False  elapsed=370.8s
+[13:05:37] poll 20  stato=404  paginaGiusta=False  elapsed=391.2s
+[13:05:58] poll 21  stato=404  paginaGiusta=False  elapsed=411.3s
+[13:06:18] poll 22  stato=404  paginaGiusta=False  elapsed=431.5s
+[13:06:38] poll 23  stato=404  paginaGiusta=False  elapsed=451.8s
+[13:06:58] poll 24  stato=404  paginaGiusta=False  elapsed=473.1s
+VERDICT: non aggiornato entro il tempo previsto
