@@ -4,6 +4,7 @@
   display: inline-block;
   text-decoration: none;
   line-height: 1.35;
+  text-transform: none;   /* i <button> non ereditavano l'uppercase di .doc-meta, i <a> si' */
 }
 .langbtn[aria-current="true"] { background: var(--accent); color: #fff; }
 .langbtn:not([aria-current="true"]):hover { color: #fff; }
