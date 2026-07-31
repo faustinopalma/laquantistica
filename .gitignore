@@ -32,6 +32,10 @@ Thumbs.db
 # credenziali Azure 2o tenant (Foundry) - isolate dal deploy
 .azure-foundry/
 
+# Documenti personali dell'autore (libretto universitario, certificati di laurea):
+# contengono dati personali e NON vanno nella storia del deposito.
+librettouniversitario/
+
 # Bozze locali: i sorgenti bilingui stanno in sorgenti/ e vengono divisi in publish/it e
 # publish/en da build/i18n/split.py. Le pagine il cui nome inizia con _ (o con game-) sono
 # bozze: lo splitter le salta e qui restano fuori da git.
