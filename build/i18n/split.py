@@ -27,7 +27,6 @@ def url_pubblico(lingua, file_):
     return f'{BASE}/{lingua}/{file_[:-5]}'
 
 SALTA = ()                              # le bozze si riconoscono dal nome, vedi pagine()
-MONOLINGUI = {'errata.html'}            # nessun marcatore di lingua: copiata tale e quale
 
 
 def pagine():
@@ -546,11 +545,6 @@ def main(solo=None):
     print(f'{"pagina":<38} {"tolti it":>9} {"tolti en":>9}')
     for p in da_fare:
         testo = p.read_text(encoding='utf-8')
-        if p.name in MONOLINGUI:
-            for l in ('it', 'en'):
-                (USCITA / l / p.name).write_text(testo, encoding='utf-8')
-            print(f'{p.name:<38} {"(monolingue, copiata)":>19}')
-            continue
         conteggi = {}
         for l in ('it', 'en'):
             nuovo, trovati, tolti = trasforma(testo, l, p.name, avvisi)

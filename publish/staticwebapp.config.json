@@ -158,16 +158,6 @@
       "statusCode": 301
     },
     {
-      "route": "/errata",
-      "redirect": "/it/errata",
-      "statusCode": 301
-    },
-    {
-      "route": "/errata.html",
-      "redirect": "/it/errata",
-      "statusCode": 301
-    },
-    {
       "route": "/lab-01-stern-gerlach",
       "redirect": "/it/lab-01-stern-gerlach",
       "statusCode": 301

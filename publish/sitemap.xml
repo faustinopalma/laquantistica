@@ -109,18 +109,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://laquantistica.com/en/09-spettri-atomici"/>
   </url>
   <url>
-    <loc>https://laquantistica.com/it/errata</loc>
-    <xhtml:link rel="alternate" hreflang="it" href="https://laquantistica.com/it/errata"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://laquantistica.com/en/errata"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://laquantistica.com/en/errata"/>
-  </url>
-  <url>
-    <loc>https://laquantistica.com/en/errata</loc>
-    <xhtml:link rel="alternate" hreflang="it" href="https://laquantistica.com/it/errata"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://laquantistica.com/en/errata"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://laquantistica.com/en/errata"/>
-  </url>
-  <url>
     <loc>https://laquantistica.com/it/</loc>
     <xhtml:link rel="alternate" hreflang="it" href="https://laquantistica.com/it/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://laquantistica.com/en/"/>
