@@ -1,0 +1,4 @@
+[11:37:13] poll 1  http=200  decimaliEN=False  elapsed=0.6s
+[11:37:33] poll 2  http=200  decimaliEN=False  elapsed=21.1s
+[11:37:53] poll 3  http=200  decimaliEN=True  elapsed=41.4s
+VERDICT: online dopo 41.4s
