@@ -140,14 +140,16 @@ def pota(testo, lingua_da_togliere):
     if p.inizio_taglio is not None:
         raise ValueError('elemento di lingua mai chiuso')
     fuori = []
+    rimosso = []
     ultimo = 0
     for a, b in sorted(p.intervalli):
         if a < ultimo:
             raise ValueError('intervalli sovrapposti')
         fuori.append(testo[ultimo:a])
+        rimosso.append(testo[a:b])
         ultimo = b
     fuori.append(testo[ultimo:])
-    return ''.join(fuori), p.trovati, len(p.intervalli)
+    return ''.join(fuori), p.trovati, len(p.intervalli), ''.join(rimosso)
 
 
 SEL_LINGUA = re.compile(r'([ \t]*)<div class="langsw"[^>]*>.*?</div>', re.S)
@@ -177,11 +179,23 @@ def pillola_mobile(lingua, file_):
 
 def trasforma(testo, lingua, file_, avvisi):
     altra = 'en' if lingua == 'it' else 'it'
-    testo, trovati, tolti = pota(testo, altra)
+    testo, trovati, tolti, rimosso = pota(testo, altra)
 
     residui = re.findall(rf'class="{altra}"', re.sub(r'<script\b.*?</script>', '', testo, flags=re.S))
     if residui:
         avvisi.append(f'{lingua}/{file_}: {len(residui)} elementi "{altra}" non rimossi')
+
+    # un id che viveva nell'altra lingua ma che lo script cerca: senza segnaposto
+    # getElementById torna null e l'intero script si ferma (era il caso di lab-02d)
+    script = ' '.join(re.findall(r'<script\b[^>]*>(.*?)</script>', testo, re.S))
+    orfani = [i for i in re.findall(r'\sid="([^"]+)"', rimosso)
+              if re.search(rf'''["']{re.escape(i)}["']''', script)]
+    if orfani:
+        # in apertura di <body>: gli script in linea girano durante l'analisi del documento,
+        # quindi un segnaposto messo in fondo arriverebbe troppo tardi
+        segnaposto = ''.join(f'<span id="{i}" hidden></span>' for i in orfani)
+        testo = re.sub(r'(<body[^>]*>)', r'\1' + segnaposto, testo, count=1)
+        avvisi.append(f'{lingua}/{file_}: segnaposto per {", ".join(orfani)}')
 
     testo = re.sub(r'<html[^>]*>', f'<html lang="{lingua}" data-lang="{lingua}">', testo, count=1)
     testo = re.sub(r'[ \t]*<script src="assets/lang\.js\?v=\d+"></script>\n?', '', testo)
@@ -298,8 +312,11 @@ def main():
     print(f'\npagine scritte: {len(list((USCITA / "it").glob("*.html")))} per lingua')
     (USCITA / 'index.html').write_text(pagina_scelta(), encoding='utf-8')
     da_curare = sorted({a.split(': ')[0].split('/')[1] for a in avvisi if 'titolo' in a})
-    veri_problemi = [a for a in avvisi if 'titolo' not in a and 'descrizione' not in a]
+    segnaposti = [a for a in avvisi if 'segnaposto' in a]
+    veri_problemi = [a for a in avvisi if not any(k in a for k in ('titolo', 'descrizione', 'segnaposto'))]
     print(f'\ntitoli ancora da curare ({len(da_curare)}): {", ".join(da_curare) or "nessuno"}')
+    for a in segnaposti:
+        print(f'  ~  {a}')
     print(f'problemi strutturali: {len(veri_problemi)}')
     for a in veri_problemi:
         print(f'  !! {a}')
