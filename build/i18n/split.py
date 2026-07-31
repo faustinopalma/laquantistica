@@ -94,6 +94,84 @@ META = {
                'Interactive simulator of Experiment 4 (cascaded Stern–Gerlach): phase shift between '
                'the two paths, built on the same base as Experiment 3.'),
     },
+    '03-elettroni.html': {
+        'it': ('Esperimenti con gli Elettroni · La Quantistica', None),
+        'en': ('Experiments with Electrons · La Quantistica', None),
+    },
+    '04-diffrazione.html': {
+        'it': ('Diffrazione degli Elettroni · La Quantistica', None),
+        'en': ('Electron Diffraction · La Quantistica', None),
+    },
+    '05-rutherford.html': {
+        'it': ('Esperimento di Rutherford · La Quantistica', None),
+        'en': ('The Rutherford Experiment · La Quantistica', None),
+    },
+    '06-ulteriori-sviluppi.html': {
+        'it': ('Ulteriori sviluppi della Teoria · La Quantistica', None),
+        'en': ('Further Developments of the Theory · La Quantistica', None),
+    },
+    '07-franck-hertz.html': {
+        'it': ('Esperimento di Franck-Hertz · La Quantistica', None),
+        'en': ('The Franck–Hertz Experiment · La Quantistica', None),
+    },
+    '08-effetto-fotoelettrico.html': {
+        'it': ('Effetto Fotoelettrico · La Quantistica', None),
+        'en': ('The Photoelectric Effect · La Quantistica', None),
+    },
+    '09-spettri-atomici.html': {
+        'it': ('Spettri atomici di emissione · La Quantistica', None),
+        'en': ('Atomic Emission Spectra · La Quantistica', None),
+    },
+    'lab-03a-corrente-vuoto.html': {
+        'it': ('Lab · Corrente nel vuoto — La Quantistica', None),
+        'en': ('Lab · Current in a vacuum — La Quantistica',
+               'Simulated laboratory of current in a vacuum: heat the filament, adjust the voltage '
+               'between the electrodes and measure the current up to saturation.'),
+    },
+    'lab-03b-deflessione-em.html': {
+        'it': ('Lab · Deflessione e/m — La Quantistica', None),
+        'en': ('Lab · Beam deflection · e/m — La Quantistica',
+               'Simulated laboratory of electron deflection: crossed electric and magnetic fields, '
+               'measuring the ratio e/m between charge and mass.'),
+    },
+    'lab-03c-millikan.html': {
+        'it': ('Lab · Goccia di Millikan — La Quantistica', None),
+        'en': ('Lab · Millikan oil drop — La Quantistica',
+               'Simulated Millikan experiment: suspend the oil drop in the electric field, measure '
+               'the charges and discover that they are multiples of one elementary charge.'),
+    },
+    'lab-04-diffrazione.html': {
+        'it': ('Lab · Diffrazione degli elettroni — La Quantistica', None),
+        'en': ('Lab · Electron diffraction — La Quantistica',
+               'Simulated laboratory of electron diffraction: let the rings build up on the screen, '
+               'measure their radius and check the de Broglie wavelength.'),
+    },
+    'lab-05-rutherford.html': {
+        'it': ('Lab · Esperimento di Rutherford — La Quantistica', None),
+        'en': ('Lab · The Rutherford Experiment — La Quantistica',
+               'Simulated Rutherford experiment: rotate the detector, count the pulses, build N(ϑ) '
+               'and compare it with the 1/sin⁴(ϑ/2) law.'),
+    },
+    'lab-07-franck-hertz.html': {
+        'it': ('Lab · Esperimento di Franck-Hertz — La Quantistica', None),
+        'en': ('Lab · The Franck–Hertz Experiment — La Quantistica',
+               'Simulated Franck–Hertz experiment: choose neon or mercury, sweep the voltage and '
+               'watch the maxima and minima of the current and the glowing regions between the grids.'),
+    },
+    'lab-08-fotoelettrico.html': {
+        'it': ('Lab · Effetto fotoelettrico — La Quantistica', None),
+        'en': ('Lab · The photoelectric effect — La Quantistica',
+               'Simulated laboratory of the photoelectric effect: mercury vapour lamp, iris '
+               'diaphragm, interference filters, photocell and capacitor. Measure the stopping '
+               'voltage against frequency and obtain h/e, the work function and the threshold frequency.'),
+    },
+    'lab-09-spettri.html': {
+        'it': ('Lab · Spettri atomici di emissione — La Quantistica', None),
+        'en': ('Lab · Atomic emission spectra — La Quantistica',
+               'Simulated goniometer spectrometer: diffraction grating, rotating telescope, '
+               'measurement of the angles of the emission lines of hydrogen, mercury, neon, argon '
+               'and nitrogen. From the lines to the Rydberg constant and the levels of the hydrogen atom.'),
+    },
 }
 
 
