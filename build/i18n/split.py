@@ -58,6 +58,42 @@ META = {
                'Simulated laboratory of Experiment 1 (Stern–Gerlach with silver): adjust pressure, '
                'temperature, collimation and magnet, and watch the deposit build up on the slide.'),
     },
+    '02-stern-gerlach-cascata.html': {
+        'it': ('Esperimenti di Stern-Gerlach in cascata · La Quantistica', None),
+        'en': ('Cascaded Stern–Gerlach Experiments · La Quantistica', None),
+    },
+    'nota-02-prodotto-scalare.html': {
+        'it': ('Nota 02 · Conservazione del prodotto scalare — La Quantistica', None),
+        'en': ('Note 02 · Conservation of the scalar product — La Quantistica',
+               'Proof: time evolution preserves scalar products, from linear superposition and from '
+               'conservation of the total (polarisation identity).'),
+    },
+    'lab-02a-sg-angolo-relativo.html': {
+        'it': ('Lab · Stern-Gerlach in cascata: angolo relativo — La Quantistica', None),
+        'en': ('Lab · Cascaded Stern–Gerlach: relative angle — La Quantistica',
+               'Interactive simulator of Experiment 1 (cascaded Stern–Gerlach): two machines, the '
+               'first selects the state, the second measures. cos²/sin² probabilities of the relative angle.'),
+    },
+    'lab-02b-sg-tre-macchine.html': {
+        'it': ('Lab · Stern-Gerlach in cascata: tre macchine — La Quantistica', None),
+        'en': ('Lab · Cascaded Stern–Gerlach: three machines — La Quantistica',
+               'Interactive simulator of Experiment 2 (cascaded Stern–Gerlach): three machines. '
+               'Rotating the first changes the intensity but not the ratio in which the third splits '
+               'the beam: the state after the second machine is independent of the first.'),
+    },
+    'lab-02c-sg-ricombinazione.html': {
+        'it': ('Lab · Stern-Gerlach in cascata: ricombinazione — La Quantistica', None),
+        'en': ('Lab · Cascaded Stern–Gerlach: recombination — La Quantistica',
+               'Interactive simulator of Experiment 3 (cascaded Stern–Gerlach): splitting and '
+               'recombination. Blocking each branch in turn measures m₀; recombining both restores '
+               'the state: probabilities do not add, amplitudes do.'),
+    },
+    'lab-02d-sg-sfasamento.html': {
+        'it': ('Lab · Stern-Gerlach in cascata: sfasamento — La Quantistica', None),
+        'en': ('Lab · Cascaded Stern–Gerlach: phase shift — La Quantistica',
+               'Interactive simulator of Experiment 4 (cascaded Stern–Gerlach): phase shift between '
+               'the two paths, built on the same base as Experiment 3.'),
+    },
 }
 
 
