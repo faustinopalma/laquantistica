@@ -34,7 +34,9 @@ Thumbs.db
 
 # Documenti personali dell'autore (libretto universitario, certificati di laurea):
 # contengono dati personali e NON vanno nella storia del deposito.
-librettouniversitario/
+# Senza la barra finale: ignora l'intera cartella (e qualunque voce con quel nome),
+# non solo i file contenuti.
+librettouniversitario
 
 # Bozze locali: i sorgenti bilingui stanno in sorgenti/ e vengono divisi in publish/it e
 # publish/en da build/i18n/split.py. Le pagine il cui nome inizia con _ (o con game-) sono
