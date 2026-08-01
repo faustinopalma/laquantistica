@@ -228,9 +228,9 @@ td.w{color:var(--warn)!important} td.b{color:var(--bad)!important} td.g{color:va
       <h3><span class="en">Starting configurations</span></h3>
       <div class="body">
         <div class="presets">
-          <button data-preset="pgeo"><span class="en">Poles 600 mm<br>gap 25 mm</span></button>
-          <button data-preset="p1922"><span class="en">Historical configuration<br>Gerlach 1922</span></button>
-<button data-preset="popt"><span class="en">Readable splitting<br>1.7 mm · 6 criteria out of 6</span></button>
+          <button data-preset="pdesign"><span class="en">Thesis design<br>coaxial · 600 mm</span></button>
+          <button data-preset="psharp"><span class="en">Sharp edge<br>short magnet + drift</span></button>
+<button data-preset="popt"><span class="en">Readable splitting<br>6 criteria out of 6</span></button>
         </div>
         <p class="hint" style="margin-bottom:0">
           
@@ -275,7 +275,7 @@ td.w{color:var(--warn)!important} td.b{color:var(--bad)!important} td.g{color:va
       <div class="body">
         <div class="ctl">
           <div class="lab"><span class="nm en">Crucible temperature</span><span class="vl" id="vT"></span></div>
-          <input type="range" id="sT" min="900" max="1400" step="5" value="1150">
+          <input type="range" id="sT" min="900" max="1400" step="5" value="1110">
           <div class="hint">
             
             <span class="en">Melting is not enough (962 °C): what counts is the vapour pressure. But too high and the atoms collide in the hole, so the beam is no longer effusive.</span>
@@ -311,41 +311,35 @@ td.w{color:var(--warn)!important} td.b{color:var(--bad)!important} td.g{color:va
     </div>
 
     <div class="grp">
-      <h3><span class="en">Magnet</span></h3>
+      <h3><span class="en">Magnet (coaxial)</span></h3>
       <div class="body">
         <div class="ctl">
-          <div class="lab"><span class="nm en">Air gap</span><span class="vl" id="vG"></span></div>
-          <input type="range" id="sG" min="1.5" max="30" step="0.5" value="25">
+          <div class="lab"><span class="nm en">Inner (edge) radius</span><span class="vl" id="vR1"></span></div>
+          <input type="range" id="sR1" min="1" max="15" step="0.5" value="4">
           <div class="hint">
             
-            <span class="en">The gradient grows as the gap narrows, but the room for deflection shrinks: if the beam touches the pole pieces, it is lost.</span>
+            <span class="en">The sharp inner pole: the smaller it is, the more the field — and the gradient — crowd around it. In the thesis design it is 4 mm.</span>
+          </div>
+        </div>
+        <div class="ctl">
+          <div class="lab"><span class="nm en">Outer (groove) radius</span><span class="vl" id="vR2"></span></div>
+          <input type="range" id="sR2" min="6" max="40" step="0.5" value="26">
+          <div class="hint">
+            
+            <span class="en">The concave outer pole, concentric with the inner one (same centre, as in the section drawing). The radial gap is the difference of the two radii. In the design it is 26 mm.</span>
+          </div>
+        </div>
+        <div class="ctl">
+          <div class="lab"><span class="nm en">Beam position in the gap</span><span class="vl" id="vG"></span></div>
+          <input type="range" id="sG" min="5" max="95" step="1" value="27">
+          <div class="hint">
+            
+            <span class="en">Where the beam runs between the edge (0%) and the groove (100%). Near the edge the gradient is very strong but the room is little: the beam risks hitting the pole. The field goes as 1/r, the gradient as 1/r².</span>
           </div>
         </div>
         <div class="ctl">
           <div class="lab"><span class="nm en">Pole-piece length</span><span class="vl" id="vL"></span></div>
-          <input type="range" id="sL" min="30" max="700" step="10" value="600">
-        </div>
-      </div>
-    </div>
-
-    <div class="grp">
-      <h3><span class="en">Chamber</span></h3>
-      <div class="body">
-        <div class="ctl">
-          <div class="lab"><span class="nm en">Section height</span><span class="vl" id="vHc"></span></div>
-          <input type="range" id="sHc" min="40" max="200" step="5" value="100">
-          <div class="hint">
-            
-            <span class="en">It must hold the gap plus the iron of the pole pieces, which carries the flux without saturating. If it does not fit, the magnet cannot be mounted.</span>
-          </div>
-        </div>
-        <div class="ctl">
-          <div class="lab"><span class="nm en">Section width</span><span class="vl" id="vWc"></span></div>
-          <input type="range" id="sWc" min="30" max="160" step="5" value="50">
-          <div class="hint">
-            
-            <span class="en">It sets the pole width: for a uniform field where the beam passes, the poles should be two or three times the gap. A more generous section also improves conductance, but adds wall to outgas.</span>
-          </div>
+          <input type="range" id="sL" min="10" max="800" step="5" value="600">
         </div>
       </div>
     </div>
@@ -380,7 +374,7 @@ td.w{color:var(--warn)!important} td.b{color:var(--bad)!important} td.g{color:va
         <table class="ro" id="ro"></table>
         <p class="foot">
           
-          <span class="en">Simplified model: gradient estimated from gap geometry, effusion from a Maxwell distribution, exposure times to order of magnitude. It is meant for finding workable configurations, not for replacing finite-element calculation.</span>
+          <span class="en">Simplified model: coaxial magnet field (concentric edge and groove, as in the design drawing), 1/r gradient, effusion from a Maxwell distribution, exposure times to order of magnitude. Meant for finding workable configurations.</span>
         </p>
       </div>
     </div>
@@ -423,16 +417,16 @@ const S={
   P:document.getElementById('sP'),   T:document.getElementById('sT'),
   D:document.getElementById('sD'),   W:document.getElementById('sW'),
   DS:document.getElementById('sDS'), G:document.getElementById('sG'),
+  R1:document.getElementById('sR1'), R2:document.getElementById('sR2'),
   L:document.getElementById('sL'),   Dr:document.getElementById('sDr'),
-  Te:document.getElementById('sTe'),
-  Hc:document.getElementById('sHc'), Wc:document.getElementById('sWc')
+  Te:document.getElementById('sTe')
 };
 const PRESETS={
-  pgeo :{P:-5.2,T:1150,D:0.8,W:0.2,DS:300,G:25,L:600,Dr:0,Te:0.6,Hc:100,Wc:50},
-  p1922:{P:-5.0,T:1050,D:0.5,W:0.05,DS:60,G:1.5,L:35,Dr:0,Te:0.9,Hc:60,Wc:40},
-// trovata con l'ottimizzatore partendo dalla geometria da 600 mm: e' il punto in
-// cui le due tracce si leggono meglio senza violare nessuna delle cinque condizioni
-popt :{P:-5.2,T:1110,D:0.8,W:0.22,DS:300,G:23,L:600,Dr:0,Te:0.7,Hc:100,Wc:60}
+  pdesign:{P:-5.2,T:1110,D:0.8,W:0.2,DS:300,G:27,R1:4,R2:26,L:600,Dr:0,Te:0.7},
+  psharp :{P:-5.2,T:1150,D:0.8,W:0.2,DS:300,G:15,R1:4,R2:26,L:120,Dr:300,Te:0.6},
+// trovata con l'ottimizzatore: il punto in cui le due tracce si leggono meglio
+// senza violare nessuna delle cinque condizioni
+popt :{P:-5.2,T:1110,D:0.8,W:0.22,DS:300,G:22,R1:4,R2:26,L:600,Dr:100,Te:0.7}
 };
 document.querySelectorAll('[data-preset]').forEach(b=>{
   b.onclick=()=>{const p=PRESETS[b.dataset.preset];for(const k in p)S[k].value=p[k];optHist=[];document.getElementById('optlog').innerHTML='';render();};
@@ -447,24 +441,23 @@ function schedule(){ if(!pending){pending=true;requestAnimationFrame(()=>{pendin
 function pVap(TC){ const Tk=TC+273.15; return Math.pow(10, -0.4685 + 12021*(1/1234.93 - 1/Tk)); }
 // cammino libero medio [m] a pressione p [Pa]
 const mfp = pPa => 0.0066/Math.max(pPa,1e-12);
-// gradiente stimato dal traferro [T/m], prima della correzione di uniformità
-const gradOf = gm => Math.min(1.5/gm, 1200);
-
-/* Geometria della sezione. Le espansioni sono larghe quanto la camera meno le
-   pareti e i giochi di montaggio; il ferro sopra e sotto il traferro deve
-   portare il flusso senza saturare. Se la larghezza polare non è almeno due o
-   tre volte il traferro, il campo degrada verso i bordi e il gradiente utile
-   sull'asse è inferiore a quello nominale. */
 const WALL=0.003;
-function chamber(g,Hc,Wc){
-  const poleW=Math.max(Wc-2*WALL-0.004, 0.004);          // larghezza utile del ferro
-  const ratio=poleW/g;
-  const unif=Math.max(0.45, Math.min(1, 0.45+0.55*(ratio-1)/2));
-  const iron=Math.max(0.008, 0.6*g);                     // spessore minimo per polo
-  const need=g+2*iron+2*WALL;                            // altezza richiesta
-  const fits=Hc>=need;
-  const clear=Hc/2-WALL-0.002;                           // semiapertura libera per il fascio
-  return {poleW,ratio,unif,iron,need,fits,clear};
+const B_A=1.0;               // T, campo al polo interno (lama) — fattore di scala di progetto
+const B_SAT=2.0;             // T, saturazione del ferro dolce
+const HC_NOM=0.10, WC_NOM=0.05;   // camera nominale 100×50 mm (dimensione secondaria)
+
+/* Campo del magnete COASSIALE (concentrico): lama interna raggio rin, solco
+   esterno raggio rout, stesso centro (come nel disegno di progetto SEZIONE.DWG,
+   dove i due archi — R=4 mm e R=26 mm — risultano concentrici). Fra due
+   equipotenziali cilindriche concentriche il campo è radiale, B(r)=B_A·rin/r; il
+   gradiente vale B_A·rin/r² e il fattore geometrico kappa=(dB/dr)/B = 1/r. Il fascio
+   corre al raggio r0 nel traferro [rin,rout]. rin,rout,r0 in metri. */
+function magnet(rin,rout,r0){
+  const B0=B_A*rin/r0;                 // campo al fascio [T]
+  const G=B_A*rin/(r0*r0);             // gradiente |dB/dr| [T/m]
+  const kappa=1/r0;                    // (dB/dr)/B [1/m]
+  const NI=(B_A*rin/MU0)*Math.log(rout/rin);   // amperspire = ∮H·dr da rin a rout
+  return {B0,G,kappa,NI};
 }
 
 // velocità dal fascio effusivo: pdf ~ v^3 exp(-v^2/a^2)  ->  u=v^2/a^2 ~ Gamma(2,1)
@@ -477,10 +470,12 @@ function compute(){
   const p_mbar=Math.pow(10,+S.P.value), p_Pa=p_mbar*100;
   const TC=+S.T.value, Tk=TC+273.15;
   const dHole=+S.D.value*1e-3, w=+S.W.value*1e-3, ds=+S.DS.value*1e-3;
-  const g=+S.G.value*1e-3, L=+S.L.value*1e-3, D=+S.Dr.value*1e-3;
-  const Hc=+S.Hc.value*1e-3, Wc=+S.Wc.value*1e-3;
+  const L=+S.L.value*1e-3, D=+S.Dr.value*1e-3;
+  const rin=+S.R1.value*1e-3, rout=+S.R2.value*1e-3;       // lama (interna), solco (esterna)
+  const fpos=Math.min(0.98,Math.max(0.02,+S.G.value/100)); // posizione del fascio nel traferro (0=lama)
+  const r0=rin+fpos*(rout-rin), gap=rout-rin;              // raggio del fascio, traferro
   const hours=Math.pow(10,+S.Te.value);
-  const CH=chamber(g,Hc,Wc);
+  const M=magnet(rin,rout,r0), Hc=HC_NOM, Wc=WC_NOM;
 
   const pv=pVap(TC);
   const alpha=Math.sqrt(2*KB*Tk/MAG);          // velocità più probabile (Maxwell)
@@ -488,8 +483,8 @@ function compute(){
   const Ltot=L_OVEN+ds+L+D;
   const lam=mfp(p_Pa), trans=Math.exp(-Ltot/lam);
   const Kn=mfp(pv)/dHole;                       // Knudsen nel foro del crogiolo
-  const Gnom=gradOf(g), G=Gnom*CH.unif, a=MUB*G/MAG;
-  const Btip=Math.min(G*g/2,2.0), NI=Btip*(g+2*WALL)/MU0;
+  const G=M.G, a=MUB*G/MAG, NI=M.NI;
+  const clearIn=r0-rin, clearOut=rout-r0;       // spazio verso la lama / il solco
   const diverg=2*w/ds;                          // divergenza piena, rad
   const thetaDefl=a*(L/vMean)/vMean;            // angolo di deflessione a v media
 
@@ -505,9 +500,9 @@ function compute(){
     if(Math.random()>trans){ nScat++; continue; }         // urtato dal gas residuo
     const t1=L/v, az=s*a;
     let hit=false;
-    for(let k=1;k<=6;k++){                                 // controllo urto sulle espansioni
+    for(let k=1;k<=6;k++){                                 // urto su lama (interna) o solco (esterno)
       const tk=t1*k/6, zk=z1+th*v*tk+0.5*az*tk*tk;
-      if(Math.abs(zk)>g/2){hit=true;break;}
+      if(zk>clearOut||zk< -clearIn){hit=true;break;}
     }
     if(hit){nHit++;continue;}
     const zEx=z1+th*L+0.5*az*t1*t1, thEx=th+az*t1/v;
@@ -568,9 +563,9 @@ function compute(){
   const Sneed=Qgas/p_mbar;                                // velocità efficace richiesta
   const Snom=Sneed<cond*0.95 ? 1/(1/Sneed-1/cond) : Infinity;
 
-  return {p_mbar,TC,dHole,w,ds,g,L,D,hours,pv,alpha,vMean,Ltot,lam,trans,Kn,G,a,Btip,NI,
+  return {p_mbar,TC,dHole,w,ds,gap,rin,rout,r0,clearIn,clearOut,L,D,hours,pv,alpha,vMean,Ltot,lam,trans,Kn,G,a,B0:M.B0,kappa:M.kappa,NI,
           diverg,thetaDefl,zs,xs,sg,nOK,nHit,nScat,sep,fw,vis,zPk,ML,MLfog,rate,
-          cond,Qgas,Sneed,Snom,Hc,Wc,CH,Gnom};
+          cond,Qgas,Sneed,Snom,Hc,Wc};
 }
 
 /* ============ scelta del gruppo di pompaggio ============ */
@@ -612,8 +607,8 @@ function diagnose(r){
     f:T("Dentro il crogiolo gli atomi si urtano prima di uscire dal foro: la distribuzione delle velocità non è più maxwelliana e l'interpretazione salta. Abbassa la temperatura o riduci il foro.",
         "Inside the crucible the atoms collide before leaving the hole: the velocity distribution is no longer Maxwellian and the interpretation breaks down. Lower the temperature or shrink the hole.")});
   if(r.nHit/NMC>0.35) bad.push({m:T("Il fascio colpisce le espansioni polari.","The beam hits the pole pieces."),
-    f:T(`Il ${(100*r.nHit/NMC).toFixed(0)}% degli atomi si perde nel ferro prima di uscire. Allarga il traferro, accorcia il magnete, oppure sposta la separazione sul tratto di deriva.`,
-        `${(100*r.nHit/NMC).toFixed(0)}% of the atoms are lost in the iron before the exit. Widen the gap, shorten the magnet, or move the separation onto the drift section.`)});
+    f:T(`Il ${(100*r.nHit/NMC).toFixed(0)}% degli atomi si perde sui poli prima di uscire. Sposta il fascio più lontano dalla lama, accorcia il magnete, oppure sposta la separazione sul tratto di deriva.`,
+        `${(100*r.nHit/NMC).toFixed(0)}% of the atoms are lost on the poles before the exit. Move the beam farther from the edge, shorten the magnet, or move the separation onto the drift section.`)});
   if(r.ML<0.03) bad.push({m:T("Deposito troppo tenue per essere sviluppato.","Deposit too faint to be developed."),
     f:T("Sul vetrino non resta abbastanza argento da annerire con i vapori di zolfo. Alza la temperatura, allarga le fenditure o prolunga l'esposizione.",
         "Not enough silver is left on the slide to darken with sulphur vapour. Raise the temperature, widen the slits or extend the exposure.")});
@@ -622,20 +617,11 @@ function diagnose(r){
     f:T("La macchia è larga quanto la separazione: si vede un unico deposito allargato, che è esattamente la previsione classica. Restringi le fenditure o aumenta la deflessione.",
         "The spot is as wide as the separation: you see a single broadened deposit, which is exactly the classical prediction. Narrow the slits or increase the deflection.")});
   if(r.sep<3e-4) warn.push({m:T("Sdoppiamento troppo piccolo per la lettura diretta.","Splitting too small for direct reading."),
-    f:T("Sotto il terzo di millimetro servirebbe il microscopio, come nel 1922. Restringi il traferro o allunga il tratto di deriva.",
-        "Below a third of a millimetre you would need a microscope, as in 1922. Narrow the gap or lengthen the drift.")});
+    f:T("Sotto il terzo di millimetro servirebbe il microscopio, come nel 1922. Avvicina il fascio alla lama o allunga il tratto di deriva.",
+        "Below a third of a millimetre you would need a microscope, as in 1922. Move the beam closer to the edge or lengthen the drift.")});
   if(r.Kn>=0.7&&r.Kn<2) warn.push({m:T("Regime effusivo al limite.","Effusive regime at the limit."),
     f:T("Il cammino libero medio nel vapore è confrontabile con il foro: la distribuzione delle velocità comincia a deformarsi. Un foro più piccolo o qualche decina di gradi in meno mettono al sicuro.",
         "The mean free path in the vapour is comparable with the hole: the velocity distribution starts to distort. A smaller hole or a few tens of degrees less puts you on the safe side.")});
-  if(!r.CH.fits) bad.push({m:T("Le espansioni non entrano nella camera.","The pole pieces do not fit in the chamber."),
-    f:T(`Con un traferro di ${fmt(r.g*1000,1)} mm servono almeno ${(r.CH.need*1000).toFixed(0)} mm di altezza per il traferro più il ferro dei due poli, contro i ${(r.Hc*1000).toFixed(0)} mm disponibili. Alza la sezione o restringi il traferro.`,
-        `With a ${fmt(r.g*1000,1)} mm gap at least ${(r.CH.need*1000).toFixed(0)} mm of height are needed for the gap plus the iron of the two poles, against the ${(r.Hc*1000).toFixed(0)} mm available. Raise the section or narrow the gap.`)});
-  if((r.sep/2+r.fw)>r.CH.clear) bad.push({m:T("Il fascio deflesso esce dalla sezione utile.","The deflected beam leaves the useful section."),
-    f:T(`Le tracce arrivano a ${fmt((r.sep/2+r.fw)*1000,1)} mm dall'asse contro ${fmt(r.CH.clear*1000,1)} mm di apertura libera: gli atomi finiscono sulla parete prima del vetrino. Alza la sezione o riduci la deflessione.`,
-        `The traces reach ${fmt((r.sep/2+r.fw)*1000,1)} mm from the axis against ${fmt(r.CH.clear*1000,1)} mm of free aperture: the atoms end up on the wall before the slide. Raise the section or reduce the deflection.`)});
-  if(r.CH.ratio<2) warn.push({m:T("Espansioni troppo strette rispetto al traferro.","Pole pieces too narrow for the gap."),
-    f:T(`Larghezza polare ${fmt(r.CH.poleW*1000,0)} mm contro ${fmt(r.g*1000,1)} mm di traferro: il campo degrada verso i bordi e il gradiente utile scende al ${(r.CH.unif*100).toFixed(0)}% del nominale. Allarga la sezione o restringi il traferro.`,
-        `Pole width ${fmt(r.CH.poleW*1000,0)} mm against a ${fmt(r.g*1000,1)} mm gap: the field degrades towards the edges and the useful gradient drops to ${(r.CH.unif*100).toFixed(0)}% of nominal. Widen the section or narrow the gap.`)});
   if(r.NI>4e4) warn.push({m:T("Bobina difficilmente realizzabile.","Coil hard to build."),
     f:T(`Servono ~${(r.NI/1000).toFixed(0)}·10³ amperspire e un raffreddamento importante. Un traferro più stretto costa molto meno rame.`,
         `About ${(r.NI/1000).toFixed(0)}·10³ ampere-turns and serious cooling are needed. A narrower gap costs far less copper.`)});
@@ -669,7 +655,7 @@ function drawApparatus(r){
   c.clearRect(0,0,W,H);
   const padL=52,padR=18,padT=16,padB=22;
   const total=r.Ltot, sx=(W-padL-padR)/total;
-  const zHalf=Math.max(r.g/2, r.sep/2+2*r.fw, 1e-3)*1.35;
+  const zHalf=Math.max(r.clearIn, r.clearOut, r.sep/2+2*r.fw, 1e-3)*1.15;
   const sy=(H-padT-padB)/(2*zHalf), midY=padT+(H-padT-padB)/2;
   const X=m=>padL+m*sx, Y=z=>midY-z*sy;
 
@@ -680,13 +666,15 @@ function drawApparatus(r){
 
   const xOven=X(0), xS1=X(L_OVEN), xS2=X(L_OVEN+r.ds), xMe=X(L_OVEN+r.ds+r.L), xPl=X(total);
 
-  // espansioni polari
+  // poli coassiali: solco (esterno, lontano) e lama (interna, vicina) — distanze asimmetriche
   c.fillStyle="#3a4553";
-  const poleH=Math.min(28,(H-padT-padB)/2-Y(r.g/2)+midY+18);
-  c.fillRect(xS2,Y(r.g/2)-Math.max(10,poleH),xMe-xS2,Math.max(10,poleH));
-  c.fillRect(xS2,Y(-r.g/2),xMe-xS2,Math.max(10,poleH));
-  c.fillStyle="#8fa2bb";c.font="10px ui-monospace,monospace";
-  c.fillText("N",(xS2+xMe)/2-4,Y(r.g/2)-4);c.fillText("S",(xS2+xMe)/2-4,Y(-r.g/2)+12);
+  const ys=Y(r.clearOut), yl=Y(-r.clearIn);
+  const slab=Math.max(10,Math.min(26,(H-padT-padB)*0.22));
+  c.fillRect(xS2, ys-slab, xMe-xS2, slab);        // solco (sopra la faccia)
+  c.fillRect(xS2, yl, xMe-xS2, slab);             // lama (sotto la faccia)
+  c.fillStyle="#8fa2bb";c.font="9px ui-monospace,monospace";
+  c.fillText(T("solco","groove"),(xS2+xMe)/2-9,ys-3);
+  c.fillText(T("lama","edge"),(xS2+xMe)/2-9,yl+11);
 
   // fenditure
   c.strokeStyle="#5c6b80";c.lineWidth=3;
@@ -710,7 +698,7 @@ function drawApparatus(r){
       const az=s*r.a, t1=r.L/v;
       for(let k=0;k<=40;k++){
         const tk=t1*k/40, z=0.5*az*tk*tk, xx=X(L_OVEN+r.ds+v*tk);
-        if(Math.abs(z)>r.g/2){lost=true;lx=xx;ly=Y(s*r.g/2);break;}
+        if(z>r.clearOut||z< -r.clearIn){lost=true;lx=xx;ly=Y(z>0?r.clearOut:-r.clearIn);break;}
         c.lineTo(xx,Y(z));
       }
       if(!lost){
@@ -731,7 +719,7 @@ function drawApparatus(r){
 
   // quote
   c.fillStyle="#66748a";c.font="10px ui-monospace,monospace";
-  c.fillText(T("traferro","gap")+" "+fmt(r.g*1000,1)+" mm",xS2+4,padT+10);
+  c.fillText(T("traferro","gap")+" "+fmt(r.gap*1000,0)+" mm · r "+fmt(r.r0*1000,0)+" mm",xS2+4,padT+10);
   c.fillText("L "+(r.L*1000).toFixed(0)+" mm",(xS2+xMe)/2-16,H-8);
   if(r.D>0)c.fillText("D "+(r.D*1000).toFixed(0)+" mm",(xMe+xPl)/2-16,H-8);
   c.save();c.translate(12,midY);c.rotate(-Math.PI/2);c.textAlign="center";
@@ -829,11 +817,11 @@ function paintSide(r,d){
   document.getElementById('vD').textContent=fmt(r.dHole*1000,2)+" mm";
   document.getElementById('vW').textContent=fmt(r.w*1000,2)+" mm";
   document.getElementById('vDS').textContent=(r.ds*1000).toFixed(0)+" mm";
-  document.getElementById('vG').textContent=fmt(r.g*1000,1)+" mm";
+  document.getElementById('vG').textContent=fmt(r.r0*1000,1)+" mm";
+  document.getElementById('vR1').textContent=fmt(r.rin*1000,1)+" mm";
+  document.getElementById('vR2').textContent=fmt(r.rout*1000,1)+" mm";
   document.getElementById('vL').textContent=(r.L*1000).toFixed(0)+" mm";
   document.getElementById('vDr').textContent=(r.D*1000).toFixed(0)+" mm";
-  document.getElementById('vHc').textContent=(r.Hc*1000).toFixed(0)+" mm";
-  document.getElementById('vWc').textContent=(r.Wc*1000).toFixed(0)+" mm";
   document.getElementById('vTe').textContent=r.hours<1?(r.hours*60).toFixed(0)+" min":fmt(r.hours,1)+" h";
 
   const lamVap=mfp(r.pv), urti=r.dHole/lamVap;
@@ -852,20 +840,16 @@ function paintSide(r,d){
     [T("trasmissione del fascio","beam transmission"), (r.trans*100).toFixed(0)+"%", r.trans>0.8?"g":(r.trans>0.35?"w":"b")],
     [T("pompa richiesta","pump required"), isFinite(r.Snom)?(r.Snom<1?"<1":r.Snom.toFixed(0))+" l/s":"—",
       isFinite(r.Snom)?(r.Snom<=90?"g":(r.Snom<=700?"w":"b")):"b"],
-
-    ["§",T("Sezione della camera","Chamber section")],
     [T("conduttanza del condotto","duct conductance"), r.cond.toFixed(0)+" l/s",""],
-    [T("larghezza polare / traferro","pole width / gap"), fmt(r.CH.ratio,1),
-      r.CH.ratio>=3?"g":(r.CH.ratio>=2?"w":"b")],
-    [T("gradiente utile / nominale","useful / nominal gradient"), (r.CH.unif*100).toFixed(0)+"%",
-      r.CH.unif>0.9?"g":(r.CH.unif>0.7?"w":"b")],
-    [T("altezza minima richiesta","minimum height required"), (r.CH.need*1000).toFixed(0)+" mm",
-      r.CH.fits?"g":"b"],
-    [T("apertura libera per il fascio","free aperture for the beam"), fmt(r.CH.clear*1000,1)+" mm",
-      (r.sep/2+r.fw)<r.CH.clear?"g":"b"],
+
+    ["§",T("Magnete (coassiale)","Magnet (coaxial)")],
+    [T("traferro (r_solco − r_lama)","gap (r_out − r_in)"), fmt(r.gap*1000,0)+" mm",""],
+    [T("raggio del fascio","beam radius"), fmt(r.r0*1000,1)+" mm",""],
+    [T("campo al fascio","field at the beam"), fmt(r.B0,2)+" T",""],
+    [T("gradiente ∂B/∂r","gradient ∂B/∂r"), fmt(r.G/100,2)+" T/cm",""],
+    [T("fattore geometrico (dB/dr)/B = 1/r","geometric factor (dB/dr)/B = 1/r"), fmt(r.kappa/1000,3)+" mm⁻¹",""],
 
     ["§",T("Deflessione e deposito","Deflection and deposit")],
-    [T("gradiente ∂B/∂z","gradient ∂B/∂z"), fmt(r.G/100,2)+" T/cm",""],
     [T("separazione","separation"), fmt(r.sep*1000,2)+" mm", r.sep>1e-3?"g":(r.sep>3e-4?"w":"b")],
     [T("larghezza traccia","trace width"), fmt(r.fw*1000,2)+" mm",""],
     [T("visibilità dello sdoppiamento","splitting visibility"), (r.vis*100).toFixed(0)+"%", r.vis>0.55?"g":(r.vis>0.35?"w":"b")],
@@ -895,16 +879,16 @@ function paintSide(r,d){
     {ok:r.nHit/NMC<0.05,
      t:T("Il fascio non tocca le espansioni","The beam does not touch the pole pieces"),
      n:T(`perso nel ferro ${pc(r.nHit/NMC)}`,`lost in the iron ${pc(r.nHit/NMC)}`),
-     why:T(`Il ${pc(r.nHit/NMC)} degli atomi finisce contro il ferro dentro il traferro. Allarga il traferro, accorcia il magnete o sposta la separazione sul tratto di deriva.`,
-           `${pc(r.nHit/NMC)} of the atoms end up against the iron inside the gap. Widen the gap, shorten the magnet, or move the separation onto the drift.`)},
+     why:T(`Il ${pc(r.nHit/NMC)} degli atomi finisce contro il ferro dentro il traferro. Sposta il fascio più lontano dalla lama, accorcia il magnete o sposta la separazione sul tratto di deriva.`,
+           `${pc(r.nHit/NMC)} of the atoms end up on the poles inside the gap. Move the beam farther from the edge, shorten the magnet, or move the separation onto the drift.`)},
 
     {ok:r.vis>=0.35&&r.sep>=3e-4,
      t:T("Le due tracce sono separate e leggibili","The two traces are separated and readable"),
      n:T(`sep. ${fmt(r.sep*1000,2)} mm · largh. ${fmt(r.fw*1000,2)} mm · visibilità ${pc(r.vis)}`,
          `sep. ${fmt(r.sep*1000,2)} mm · width ${fmt(r.fw*1000,2)} mm · visibility ${pc(r.vis)}`),
      why:(r.sep<3e-4
-        ? T(`Separazione ${fmt(r.sep*1000,3)} mm: troppo piccola per la lettura diretta. Restringi il traferro o allunga il tratto di deriva.`,
-            `Separation ${fmt(r.sep*1000,3)} mm: too small to read directly. Narrow the gap or lengthen the drift.`)
+        ? T(`Separazione ${fmt(r.sep*1000,3)} mm: troppo piccola per la lettura diretta. Avvicina il fascio alla lama o allunga il tratto di deriva.`,
+            `Separation ${fmt(r.sep*1000,3)} mm: too small to read directly. Move the beam closer to the edge or lengthen the drift.`)
         : T(`Visibilità ${pc(r.vis)}: le tracce sono larghe ${fmt(r.fw*1000,2)} mm contro ${fmt(r.sep*1000,2)} mm di separazione, il centro non si svuota. Restringi le fenditure o aumenta la deflessione.`,
             `Visibility ${pc(r.vis)}: the traces are ${fmt(r.fw*1000,2)} mm wide against ${fmt(r.sep*1000,2)} mm of separation, so the centre does not empty out. Narrow the slits or increase the deflection.`))},
 
@@ -917,20 +901,14 @@ function paintSide(r,d){
         : T(`${fmt(r.hours,1)} ore di funzionamento ininterrotto: nel 1922 furono otto, al limite dell'apparato.`,
             `${fmt(r.hours,1)} hours of uninterrupted running: in 1922 it was eight, at the limit of the apparatus.`))},
 
-    {ok:r.NI<=4e4&&r.Ltot<=1.5&&r.CH.fits&&(r.sep/2+r.fw)<r.CH.clear,
-     t:T("Magnete e camera compatibili","Magnet and chamber compatible"),
-     n:`${sci(r.NI)} A·sp · ${(r.Ltot*1000).toFixed(0)} mm · ${(r.Hc*1000).toFixed(0)}×${(r.Wc*1000).toFixed(0)} mm`,
-     why:(!r.CH.fits
-        ? T(`Servono ${(r.CH.need*1000).toFixed(0)} mm di altezza (traferro ${fmt(r.g*1000,1)} mm più il ferro dei poli) contro ${(r.Hc*1000).toFixed(0)} mm disponibili.`,
-            `${(r.CH.need*1000).toFixed(0)} mm of height are needed (gap ${fmt(r.g*1000,1)} mm plus the pole iron) against ${(r.Hc*1000).toFixed(0)} mm available.`)
-        : (r.sep/2+r.fw)>=r.CH.clear
-        ? T(`Le tracce arrivano a ${fmt((r.sep/2+r.fw)*1000,1)} mm dall'asse ma l'apertura libera è ${fmt(r.CH.clear*1000,1)} mm: il fascio colpisce la parete.`,
-            `The traces reach ${fmt((r.sep/2+r.fw)*1000,1)} mm from the axis but the free aperture is ${fmt(r.CH.clear*1000,1)} mm: the beam hits the wall.`)
-        : (r.NI>4e4
-        ? T(`Servono ${sci(r.NI)} amperspire: bobina enorme e raffreddamento importante. Un traferro più stretto costa molto meno rame.`,
-            `${sci(r.NI)} ampere-turns are needed: a huge coil and serious cooling. A narrower gap costs far less copper.`)
+    {ok:r.NI<=4e4&&r.Ltot<=1.5,
+     t:T("Magnete realizzabile","Magnet buildable"),
+     n:`${sci(r.NI)} A·sp · L ${(r.Ltot*1000).toFixed(0)} mm`,
+     why:(r.NI>4e4
+        ? T(`Servono ${sci(r.NI)} amperspire: bobina enorme e raffreddamento importante. Un solco più stretto o un campo più basso costano meno rame.`,
+            `${sci(r.NI)} ampere-turns are needed: a huge coil and serious cooling. A tighter groove or a lower field cost less copper.`)
         : T(`Lunghezza totale ${(r.Ltot*1000).toFixed(0)} mm: oltre il metro e mezzo allineamento e banco diventano critici.`,
-            `Total length ${(r.Ltot*1000).toFixed(0)} mm: past a metre and a half, alignment and bench space become critical.`)))}
+            `Total length ${(r.Ltot*1000).toFixed(0)} mm: past a metre and a half, alignment and bench space become critical.`))}
   ];
   document.getElementById('checks').innerHTML=ck.map(o=>
     `<li class="${o.ok?'pass':'fail'}"><span class="m">${o.ok?'✓':'✗'}</span><span class="txt">${o.t}<span class="num">${o.ok?o.n:o.why}</span></span></li>`).join("");
@@ -963,7 +941,7 @@ function paintSide(r,d){
   note.innerHTML="<b>"+title+"</b>"+body+(more?'<span class="more">'+more+"</span>":"");
 
   document.getElementById('rdApp').textContent=
-    T(`v̄ ${r.vMean.toFixed(0)} m/s · ∂B/∂z ${fmt(r.G/100,2)} T/cm`,`v̄ ${r.vMean.toFixed(0)} m/s · ∂B/∂z ${fmt(r.G/100,2)} T/cm`);
+    T(`v̄ ${r.vMean.toFixed(0)} m/s · ∂B/∂r ${fmt(r.G/100,2)} T/cm`,`v̄ ${r.vMean.toFixed(0)} m/s · ∂B/∂r ${fmt(r.G/100,2)} T/cm`);
   document.getElementById('rdPlate').textContent=
     T(`${fmt(r.sep*1000,2)} mm · ${fmt(r.ML,2)} ML`,`${fmt(r.sep*1000,2)} mm · ${fmt(r.ML,2)} ML`);
 }
@@ -978,18 +956,20 @@ function paintSide(r,d){
 function evalFast(V){
   const p_mbar=Math.pow(10,V.P), p_Pa=p_mbar*100, TC=V.T, Tk=TC+273.15;
   const dHole=V.D*1e-3, w=V.W*1e-3, ds=V.DS*1e-3;
-  const g=V.G*1e-3, L=V.L*1e-3, D=V.Dr*1e-3, hours=Math.pow(10,V.Te);
-  const Hc=V.Hc*1e-3, Wc=V.Wc*1e-3, CH=chamber(g,Hc,Wc);
+  const L=V.L*1e-3, D=V.Dr*1e-3, hours=Math.pow(10,V.Te);
+  const rin=V.R1*1e-3, rout=V.R2*1e-3;
+  const fpos=Math.min(0.98,Math.max(0.02,V.G/100));
+  const r0=rin+fpos*(rout-rin), M=magnet(rin,rout,r0);
+  const clearIn=r0-rin, clearOut=rout-r0, geff=2*Math.min(clearIn,clearOut);
   const pv=pVap(TC), alpha=Math.sqrt(2*KB*Tk/MAG);
   const Ltot=L_OVEN+ds+L+D, lam=mfp(p_Pa), trans=Math.exp(-Ltot/lam);
   const Kn=mfp(pv)/dHole;
-  const Gnom=gradOf(g), G=Gnom*CH.unif, a=MUB*G/MAG;
-  const Btip=Math.min(G*g/2,2.0), NI=Btip*(g+2*WALL)/MU0;
+  const G=M.G, a=MUB*G/MAG, NI=M.NI;
 
   const C=a*L*(L/2+D)/(alpha*alpha);            // deflessione a v = α
-  const uMin=a*L*L/(g*alpha*alpha);             // sotto questa u l'atomo tocca il ferro
+  const uMin=a*L*L/(geff*alpha*alpha);          // sotto questa u l'atomo tocca lama/solco
   const hit=1-(1+uMin)*Math.exp(-uMin);
-  const zMax=g*(L/2+D)/L;                       // = C/uMin
+  const zMax=geff*(L/2+D)/L;                     // = C/uMin
   const wgeo=w*(1+2*(L+D)/ds);                  // larghezza geometrica del fascio
 
   // distribuzione troncata, convoluta con il profilo delle fenditure
@@ -1021,8 +1001,8 @@ function evalFast(V){
   const rate=I0*Om*ETA*(1-hit)*trans;
   const area=Math.max(2*Math.max(fw,w)*(H_SLIT*1.4),1e-9);
   const ML=rate*hours*3600/(area*N_SURF);
-  return {trans,Kn,hit,sep,fw,vis,ML,hours,NI,Ltot,G,fits:CH.fits,
-          clear:CH.clear,ratio:CH.ratio};
+  return {trans,Kn,hit,sep,fw,vis,ML,hours,NI,Ltot,G,fits:true,
+          clear:HC_NOM/2-WALL-0.002};
 }
 
 const cl=x=>Math.max(0,Math.min(1,x));
@@ -1058,11 +1038,11 @@ const OPTV=[
   {k:"D", d:0.1,  nm:["foro crogiolo","crucible hole"],  f:v=>fmt(v,2)+" mm"},
   {k:"W", d:0.02, nm:["fenditure","slits"],              f:v=>fmt(v,2)+" mm"},
   {k:"DS",d:25,   nm:["distanza fenditure","slit spacing"],f:v=>v.toFixed(0)+" mm"},
-  {k:"G", d:2,    nm:["traferro","gap"],                 f:v=>fmt(v,1)+" mm"},
-  {k:"L", d:40,   nm:["espansioni","poles"],             f:v=>v.toFixed(0)+" mm"},
-  {k:"Dr",d:60,   nm:["deriva","drift"],                 f:v=>v.toFixed(0)+" mm"},
-  {k:"Hc",d:10,   nm:["altezza camera","chamber height"], f:v=>v.toFixed(0)+" mm"},
-  {k:"Wc",d:10,   nm:["larghezza camera","chamber width"], f:v=>v.toFixed(0)+" mm"},
+  {k:"G", d:5,    nm:["posizione fascio","beam position"], f:v=>v.toFixed(0)+" %"},
+  {k:"R1",d:0.3,  nm:["raggio lama","inner radius"],      f:v=>fmt(v,1)+" mm"},
+  {k:"R2",d:2,    nm:["raggio solco","outer radius"],     f:v=>fmt(v,1)+" mm"},
+  {k:"L", d:20,   nm:["espansioni","poles"],              f:v=>v.toFixed(0)+" mm"},
+  {k:"Dr",d:40,   nm:["deriva","drift"],                  f:v=>v.toFixed(0)+" mm"},
   {k:"Te",d:0.1,  nm:["esposizione","exposure"],         f:v=>{const h=Math.pow(10,v);return h<1?(h*60).toFixed(0)+" min":fmt(h,1)+" h";}}
 ];
 const readV =()=>{const V={};for(const k in S)V[k]=+S[k].value;return V;};
