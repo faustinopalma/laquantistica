@@ -680,55 +680,61 @@ function drawApparatus(r){
   c.clearRect(0,0,W,H);
   const padL=52,padR=18,padT=16,padB=22;
   const total=r.Ltot, sx=(W-padL-padR)/total;
-  const zHalf=Math.max(r.clearIn, r.clearOut, r.sep/2+2*r.fw, 1e-3)*1.15;
+  // riferimento FISSO sul traferro: centro = mezzeria dell'anello concentrico,
+  // scala legata a (rout-rin) cos\u00ec eccentricit\u00e0 e posizione del fascio si vedono
+  const a=r.rin, b=r.rout, zin=a+r.ecc, z0=r.r0;      // lama, fascio: raggi dall'asse comune
+  const cMid=(a+b)/2, zHalf=Math.max((b-a)/2,1e-4)*1.28;
   const sy=(H-padT-padB)/(2*zHalf), midY=padT+(H-padT-padB)/2;
-  const X=m=>padL+m*sx, Y=z=>midY-z*sy;
+  const X=m=>padL+m*sx, Y=zeta=>midY-(zeta-cMid)*sy;   // zeta = raggio dall'asse comune
+  const Yb=Y(z0);                                       // altezza del fascio
 
-  // assi / fondo
   c.fillStyle="#0b0e13";c.fillRect(0,0,W,H);
   c.strokeStyle="#1d2531";c.lineWidth=1;
-  c.beginPath();c.moveTo(padL,midY);c.lineTo(W-padR,midY);c.stroke();
+  c.beginPath();c.moveTo(padL,Yb);c.lineTo(W-padR,Yb);c.stroke();   // asse del fascio
 
   const xOven=X(0), xS1=X(L_OVEN), xS2=X(L_OVEN+r.ds), xMe=X(L_OVEN+r.ds+r.L), xPl=X(total);
 
-  // poli coassiali: solco (esterno, lontano) e lama (interna, vicina) — distanze asimmetriche
+  // poli: solco (esterno, raggio b) e lama (interno, raggio a+ecc). Avvicinando i
+  // centri (ecc\u2191) la lama sale verso il solco e il traferro si stringe.
   c.fillStyle="#3a4553";
-  const ys=Y(r.clearOut), yl=Y(-r.clearIn);
-  const slab=Math.max(10,Math.min(26,(H-padT-padB)*0.22));
-  c.fillRect(xS2, ys-slab, xMe-xS2, slab);        // solco (sopra la faccia)
-  c.fillRect(xS2, yl, xMe-xS2, slab);             // lama (sotto la faccia)
+  const ySolco=Y(b), yLama=Y(zin);
+  c.fillRect(xS2, padT, xMe-xS2, Math.max(2,ySolco-padT));          // solco (sopra la faccia)
+  c.fillRect(xS2, yLama, xMe-xS2, Math.max(2,(H-padB)-yLama));      // lama (sotto la faccia)
   c.fillStyle="#8fa2bb";c.font="9px ui-monospace,monospace";
-  c.fillText(T("solco","groove"),(xS2+xMe)/2-9,ys-3);
-  c.fillText(T("lama","edge"),(xS2+xMe)/2-9,yl+11);
+  c.fillText(T("solco","groove"),(xS2+xMe)/2-9,ySolco+11);
+  c.fillText(T("lama","edge"),(xS2+xMe)/2-9,yLama-4);
 
-  // fenditure
+  // fenditure attorno all'altezza del fascio
   c.strokeStyle="#5c6b80";c.lineWidth=3;
+  const hw=Math.max(2,r.w/2*sy);
   [[xS1,"S1"],[xS2,"S2"]].forEach(([x,lb])=>{
-    c.beginPath();c.moveTo(x,Y(zHalf));c.lineTo(x,Y(r.w/2));c.moveTo(x,Y(-r.w/2));c.lineTo(x,Y(-zHalf));c.stroke();
+    c.beginPath();c.moveTo(x,padT);c.lineTo(x,Yb-hw);c.moveTo(x,Yb+hw);c.lineTo(x,H-padB);c.stroke();
     c.fillStyle="#66748a";c.font="9px ui-monospace,monospace";c.fillText(lb,x-6,H-8);
   });
-  // crogiolo
-  c.fillStyle="#4a3a2a";c.fillRect(xOven-16,midY-13,16,26);
-  c.fillStyle="#c9a227";c.fillRect(xOven-14,midY+3,12,8);
-  // vetrino
-  c.fillStyle="#efe9df";c.fillRect(xPl,Y(zHalf*0.92),5,Y(-zHalf*0.92)-Y(zHalf*0.92));
+  // crogiolo sull'altezza del fascio
+  c.fillStyle="#4a3a2a";c.fillRect(xOven-16,Yb-13,16,26);
+  c.fillStyle="#c9a227";c.fillRect(xOven-14,Yb+3,12,8);
+  // vetrino: striscia attorno alla regione delle tracce
+  c.fillStyle="#efe9df";
+  const vh=Math.max(8,(r.sep/2+2*r.fw)*sy);
+  c.fillRect(xPl, Yb-vh, 5, 2*vh);
 
-  // traiettorie per tre velocità
+  // traiettorie per tre velocit\u00e0: partono dal fascio (z0) e deflettono; zeta=z0+z
   const vs=[[r.alpha*0.72,"rgba(94,200,216,.30)"],[r.vMean,"rgba(94,200,216,.95)"],[r.alpha*1.7,"rgba(94,200,216,.30)"]];
   vs.forEach(([v,col])=>{
     [1,-1].forEach(s=>{
       c.strokeStyle=col;c.lineWidth=v===r.vMean?1.6:1.1;c.beginPath();
       let lost=false,lx=0,ly=0;
-      c.moveTo(xOven,midY);c.lineTo(xS2,midY);
+      c.moveTo(xOven,Yb);c.lineTo(xS2,Yb);
       const az=s*r.a, t1=r.L/v;
       for(let k=0;k<=40;k++){
         const tk=t1*k/40, z=0.5*az*tk*tk, xx=X(L_OVEN+r.ds+v*tk);
-        if(z>r.clearOut||z< -r.clearIn){lost=true;lx=xx;ly=Y(z>0?r.clearOut:-r.clearIn);break;}
-        c.lineTo(xx,Y(z));
+        if(z>r.clearOut||z< -r.clearIn){lost=true;lx=xx;ly=Y(z0+(z>0?r.clearOut:-r.clearIn));break;}
+        c.lineTo(xx,Y(z0+z));
       }
       if(!lost){
         const zEx=0.5*az*t1*t1, thEx=az*t1/v;
-        c.lineTo(xPl,Y(zEx+thEx*r.D));
+        c.lineTo(xPl,Y(z0+zEx+thEx*r.D));
       }
       c.stroke();
       if(lost){c.strokeStyle="#e2604f";c.lineWidth=1.6;
@@ -744,11 +750,10 @@ function drawApparatus(r){
 
   // quote
   c.fillStyle="#66748a";c.font="10px ui-monospace,monospace";
-  c.fillText(T("traferro","gap")+" "+fmt(r.gap*1000,0)+" mm · r "+fmt(r.r0*1000,0)+" mm",xS2+4,padT+10);
+  c.fillText(T("traferro","gap")+" "+fmt(r.gap*1000,1)+" mm"+(r.ecc>1e-6?" \u00b7 ecc "+fmt(r.ecc*1000,1)+" mm":""),xS2+4,padT+10);
   c.fillText("L "+(r.L*1000).toFixed(0)+" mm",(xS2+xMe)/2-16,H-8);
   if(r.D>0)c.fillText("D "+(r.D*1000).toFixed(0)+" mm",(xMe+xPl)/2-16,H-8);
-  c.save();c.translate(12,midY);c.rotate(-Math.PI/2);c.textAlign="center";
-  c.fillText("z ±"+fmt(zHalf*1000,1)+" mm",0,0);c.restore();
+  c.fillStyle="#5ec8d8";c.fillText(T("fascio","beam")+" r "+fmt(r.r0*1000,1)+" mm",padL+4,Yb-5);
 }
 
 function drawPlate(r){
