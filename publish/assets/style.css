@@ -279,6 +279,10 @@ body .katex { font-size: 1em; }
 .eq-inline.eq-axis {
   vertical-align: middle;
 }
+/* Le formule KaTeX inline (.eq-mml) hanno già la baseline corretta di KaTeX:
+   l'allineamento -0.18em / middle era per le vecchie immagini e le disallinea. */
+.eq-inline.eq-mml,
+.eq-inline.eq-axis.eq-mml { vertical-align: baseline; }
 /* a large image anchored inline in the source -> show it as a centred block */
 .eq-figure {
   display: block;
@@ -555,7 +559,7 @@ table.data tbody tr:nth-child(even) { background: #faf8f2; }
 .menu-toggle { display: none; }
 
 @media (max-width: 900px) {
-  body { font-size: 18px; }
+  body { font-size: 20px; }
   .layout { flex-direction: column; }
   .sidebar {
     position: fixed;
