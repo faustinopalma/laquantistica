@@ -60,7 +60,7 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-serif);
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
@@ -555,7 +555,7 @@ table.data tbody tr:nth-child(even) { background: #faf8f2; }
 .menu-toggle { display: none; }
 
 @media (max-width: 900px) {
-  body { font-size: 17px; }
+  body { font-size: 18px; }
   .layout { flex-direction: column; }
   .sidebar {
     position: fixed;
