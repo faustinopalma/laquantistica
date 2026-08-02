@@ -3,6 +3,29 @@
    Foglio di stile del sito statico
    ========================================================================== */
 
+/* Latin Modern Roman: stesso disegno del Computer Modern usato da KaTeX nelle
+   formule, così testo e matematica hanno lo stesso carattere. */
+@font-face {
+  font-family: "Latin Modern Roman";
+  src: url(fonts/lmroman-regular.woff2) format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Latin Modern Roman";
+  src: url(fonts/lmroman-italic.woff2) format("woff2");
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Latin Modern Roman";
+  src: url(fonts/lmroman-bold.woff2) format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Latin Modern Roman";
+  src: url(fonts/lmroman-bolditalic.woff2) format("woff2");
+  font-weight: 700; font-style: italic; font-display: swap;
+}
+
 :root {
   --bg: #f5f3ee;
   --paper: #ffffff;
@@ -20,7 +43,7 @@
   --sidebar-ink-soft: #b3ab99;
   --shadow: 0 1px 3px rgba(0,0,0,.08), 0 8px 24px rgba(0,0,0,.06);
   --maxw: 820px;
-  --font-serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, "Times New Roman", serif;
+  --font-serif: "Latin Modern Roman", "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, "Times New Roman", serif;
   --font-sans: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
 }
 
@@ -214,6 +237,12 @@ figcaption {
   margin-top: .6rem;
   font-style: italic;
 }
+
+/* KaTeX ingrandisce la matematica del 21% (font-size:1.21em) perch\u00e9 il Computer
+   Modern nasce piccolo. Ora che il testo \u00e8 lo stesso Latin Modern, quel +21% rende
+   le formule pi\u00f9 grandi del testo: le riporto alla dimensione del corpo. Selettore
+   con specificit\u00e0 sufficiente a battere katex.min.css, caricato dopo. */
+body .katex { font-size: 1em; }
 
 /* Display equations */
 .equation, .katex-display {

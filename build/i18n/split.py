@@ -692,7 +692,7 @@ def pagina_non_trovata():
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Pagina non trovata · Page not found · La Quantistica</title>
-<link rel="stylesheet" href="/assets/style.css?v=17">
+<link rel="stylesheet" href="/assets/style.css?v=18">
 <link rel="stylesheet" href="/assets/lang.css?v=7">
 <script>
 (function () {{
