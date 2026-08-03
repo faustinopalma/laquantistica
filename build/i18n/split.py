@@ -100,8 +100,8 @@ META = {
     'nota-04-i-principi.html': {
         'it': ('Nota 04 · I principi: due formulazioni — La Quantistica', None),
         'en': ('Note 04 · The principles: two formulations — La Quantistica',
-               'Why the introduction states four principles and chapter two states five: a table of '
-               'correspondences between the general formulation and the simplified one.'),
+               'Why the introduction states four principles and chapter two states five: each '
+               'formulation states what its own purpose requires.'),
     },
     'lab-02a-sg-angolo-relativo.html': {
         'it': ('Lab · Stern-Gerlach in cascata: angolo relativo — La Quantistica', None),
