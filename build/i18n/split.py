@@ -90,6 +90,13 @@ META = {
                'Proof: time evolution preserves scalar products, from linear superposition and from '
                'conservation of the total (polarisation identity).'),
     },
+    'nota-03-esperimenti-mentali.html': {
+        'it': ('Nota 03 · Esperimenti mentali e realizzazione — La Quantistica', None),
+        'en': ('Note 03 · Thought experiments and their realisation — La Quantistica',
+               'The cascaded Stern–Gerlach experiments are thought experiments: recombining the '
+               'separated beams is nearly impossible (the Humpty-Dumpty problem). Only recently did '
+               "Folman's group achieve it with atom chips."),
+    },
     'lab-02a-sg-angolo-relativo.html': {
         'it': ('Lab · Stern-Gerlach in cascata: angolo relativo — La Quantistica', None),
         'en': ('Lab · Cascaded Stern–Gerlach: relative angle — La Quantistica',
