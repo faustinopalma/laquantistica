@@ -98,10 +98,10 @@ META = {
                "Folman's group achieve it with atom chips."),
     },
     'nota-04-i-principi.html': {
-        'it': ('Nota 04 · I principi: due formulazioni — La Quantistica', None),
-        'en': ('Note 04 · The principles: two formulations — La Quantistica',
-               'Why the introduction states four principles and chapter two states five: each '
-               'formulation states what its own purpose requires.'),
+        'it': ('Nota 04 · I principi e la misura — La Quantistica', None),
+        'en': ('Note 04 · The principles and measurement — La Quantistica',
+               'The principles do not state the state in which a measurement leaves the system: not '
+               'needed to derive the Schrödinger equation, but essential for cascaded apparatuses.'),
     },
     'lab-02a-sg-angolo-relativo.html': {
         'it': ('Lab · Stern-Gerlach in cascata: angolo relativo — La Quantistica', None),
