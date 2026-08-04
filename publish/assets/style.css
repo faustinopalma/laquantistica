@@ -190,6 +190,10 @@ h3 {
 }
 
 p { margin: 0 0 1rem; text-align: justify; hyphens: auto; }
+/* La giustificazione serve al testo corrente. Fuori dalla colonna di lettura
+   i paragrafi sono corti o stretti: se vanno a capo, l'ultima riga piena viene
+   spalmata da un margine all'altro. */
+.sidebar p, .sim-cta-p, .doc-foot p, .chapter-nav p { text-align: left; }
 
 a { color: var(--link); text-decoration: none; }
 a:hover { color: var(--link-hover); text-decoration: underline; }
