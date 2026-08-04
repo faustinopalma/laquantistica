@@ -103,6 +103,13 @@ META = {
                'The principles do not state the state in which a measurement leaves the system: not '
                'needed to derive the Schrödinger equation, but essential for cascaded apparatuses.'),
     },
+    'nota-05-delta-dirac.html': {
+        'it': ('Nota 05 · La δ di Dirac e la sua derivata — La Quantistica', None),
+        'en': ('Note 05 · The Dirac δ and its derivative — La Quantistica',
+               'The Dirac δ is not a function but a distribution: it is defined by how it acts '
+               'under the integral sign. Its derivative is defined so that integration by parts '
+               'keeps holding.'),
+    },
     'lab-02a-sg-angolo-relativo.html': {
         'it': ('Lab · Stern-Gerlach in cascata: angolo relativo — La Quantistica', None),
         'en': ('Lab · Cascaded Stern–Gerlach: relative angle — La Quantistica',
