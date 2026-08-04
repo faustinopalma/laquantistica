@@ -393,6 +393,20 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://laquantistica.com/en/nota-05-delta-dirac"/>
   </url>
   <url>
+    <loc>https://laquantistica.com/it/nota-06-ehrenfest</loc>
+    <lastmod>2026-08-04</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://laquantistica.com/it/nota-06-ehrenfest"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://laquantistica.com/en/nota-06-ehrenfest"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://laquantistica.com/en/nota-06-ehrenfest"/>
+  </url>
+  <url>
+    <loc>https://laquantistica.com/en/nota-06-ehrenfest</loc>
+    <lastmod>2026-08-04</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://laquantistica.com/it/nota-06-ehrenfest"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://laquantistica.com/en/nota-06-ehrenfest"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://laquantistica.com/en/nota-06-ehrenfest"/>
+  </url>
+  <url>
     <loc>https://laquantistica.com/it/nota-tecnica-01-stern-gerlach</loc>
     <lastmod>2026-07-31</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://laquantistica.com/it/nota-tecnica-01-stern-gerlach"/>

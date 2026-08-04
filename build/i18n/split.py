@@ -110,6 +110,13 @@ META = {
                'under the integral sign. Its derivative is defined so that integration by parts '
                'keeps holding.'),
     },
+    'nota-06-ehrenfest.html': {
+        'it': ('Nota 06 · La media del campo e il campo nella posizione media — La Quantistica', None),
+        'en': ('Note 06 · The mean of the field and the field at the mean position — La Quantistica',
+               'Agreement with Newton is required on the mean of the field, not on the field at the '
+               'mean position: the two coincide when the particle is well localised compared with '
+               'the scale over which the field varies.'),
+    },
     'lab-02a-sg-angolo-relativo.html': {
         'it': ('Lab · Stern-Gerlach in cascata: angolo relativo — La Quantistica', None),
         'en': ('Lab · Cascaded Stern–Gerlach: relative angle — La Quantistica',
