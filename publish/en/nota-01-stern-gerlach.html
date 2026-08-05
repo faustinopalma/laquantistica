@@ -7,7 +7,8 @@
 <title>Note 01 · Behind the scenes — Stern–Gerlach · La Quantistica</title>
 <meta name="description" content="An honest note: why for 27 years I never put this thesis on the Internet, and the true story of the cigar that made the Stern–Gerlach experiment visible.">
 <link rel="stylesheet" href="/assets/lang.css?v=7">
-<link rel="stylesheet" href="/assets/note.css?v=5">
+<link rel="stylesheet" href="/assets/note.css?v=6">
+<script src="/assets/note-back.js?v=1" defer></script>
 <link rel="alternate" hreflang="it" href="https://laquantistica.com/it/nota-01-stern-gerlach">
 <link rel="alternate" hreflang="en" href="https://laquantistica.com/en/nota-01-stern-gerlach">
 <link rel="alternate" hreflang="x-default" href="https://laquantistica.com/en/nota-01-stern-gerlach">
@@ -30,12 +31,11 @@
 
     <div class="doc-meta">
       <span class="tag"><span class="en">Note 01</span></span>
-      <span class="en">Ch. 01 · Stern–Gerlach</span>
+      <a class="doc-back-crumb" id="backCrumb" href="01-stern-gerlach.html#nota-1"><span class="crumb-arrow" aria-hidden="true">&larr;</span><span class="vh"><span class="en">Back to </span></span><span class="cap en">Ch. 01 · Stern–Gerlach</span></a>
       <div class="langsw" role="group" aria-label="Lingua / Language">
         <a class="langbtn" href="../it/nota-01-stern-gerlach.html" hreflang="it" lang="it">Italiano</a>
         <a class="langbtn" href="../en/nota-01-stern-gerlach.html" hreflang="en" lang="en" aria-current="true">English</a>
       </div>
-      <a class="doc-back-top" id="backTop" href="01-stern-gerlach.html#nota-1"><span class="en">← Back</span></a>
     </div>
 
     <h1 class="doc-title">
@@ -49,7 +49,7 @@
 
     <p><span class="en">I almost immediately hit a wall made of thermodynamics and engineering. Producing a beam of silver atoms requires a furnace at 1000&nbsp;°C. Making them travel in a straight line demands a high vacuum that is extremely hard to maintain. Aligning them blindly in an asymmetric magnetic field is a nightmare. In short, building it with my own means turned out to be impossible.</span></p>
 
-    <p><span class="en">Because of this practical “failure”, for 27 years <em>I</em> never put this thesis online. It felt like incomplete work: the theory of an experiment <em>I</em> had not built.</span></p>
+    <p><span class="en">Because of this practical “failure”, for 27 years <em>I</em> never put this thesis online. It felt like incomplete work, with the very first experiment never carried out: for me it stayed a thought experiment.</span></p>
 
     <h2><span class="en">Why did <em>I</em> finally decide to share it online in 2026?</span></h2>
 
@@ -73,7 +73,7 @@
 
     <p><span class="en">In this thesis the experiment stays on paper — and the one in the next chapter, Stern-Gerlach analysers <em>in series</em>, is even harder to build. But make no mistake: these are not mere thought experiments. Their strength is first of all <strong>logical</strong> — they dismantle classical intuition piece by piece — yet they are also physically realisable. Not in my garage, of course: you need a well-equipped laboratory and a budget of a few million. But it has actually been done: around 2019 Ron Folman’s group at Ben-Gurion University built, on an <em>atom chip</em>, a full-loop Stern-Gerlach interferometer, splitting and then <em>recombining</em> the beams. In short: what you are about to read is not pure abstraction, but the description of something you can genuinely touch — if you have the means.</span></p>
 
-    <p><span class="en">One last thing, if you feel like digging deeper: in Chapter 4 the Schrödinger equation is not handed down as a postulate, but obtained from simpler principles. It is the most original part of this work and, in my view, alone worth the read: it reveals foundations that — starting from the standard formulations of quantum mechanics, where the equation is simply postulated — remain obscure. Enjoy the read.</span></p>
+    <p><span class="en">One last thing, if you feel like digging deeper: in Chapter 4 the Schrödinger equation is not handed down as a postulate, but obtained from simpler principles. It is the most original part of this work and it is also independent of the rest: it can be read on its own, without having read the other chapters. It is “a little bit” dense, <em>I</em> admit, but in my view it is worth the read all the same: it reveals foundations that — starting from the standard formulations of quantum mechanics, where the equation is simply postulated — remain obscure. Enjoy the read.</span></p>
 
     <div class="doc-return">
       <a id="backBottom" href="01-stern-gerlach.html#nota-1"><span class="en">← Back to where you were</span></a>
@@ -87,25 +87,5 @@
   </div>
 </main>
 
-<script>
-/* Ritorno dinamico: la nota può essere linkata da punti diversi.
-   Il link di partenza passa ?ret=<pagina.html%23ancora>; qui lo validiamo
-   (solo path interni .html + eventuale #ancora) e lo usiamo per i due "torna indietro".
-   Fallback: il capitolo 1. */
-(function () {
-  function safeRet(v) {
-    if (!v) return null;
-    try { v = decodeURIComponent(v); } catch (e) { return null; }
-    if (v.indexOf('..') !== -1 || v.indexOf('//') !== -1) return null;
-    if (/^[A-Za-z0-9._\/-]+\.html(#[A-Za-z0-9._-]+)?$/.test(v)) return v;
-    return null;
-  }
-  var ret = safeRet(new URLSearchParams(location.search).get('ret')) || '01-stern-gerlach.html#nota-1';
-  ['backTop', 'backBottom'].forEach(function (id) {
-    var a = document.getElementById(id);
-    if (a) a.setAttribute('href', ret);
-  });
-})();
-</script>
 </body>
 </html>

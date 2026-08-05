@@ -7,11 +7,12 @@
 <title>Note 07 · The energy levels of the hydrogen atom — La Quantistica</title>
 <meta name="description" content="The hydrogen level formula derived from the eigenvalue problem: restriction to spherically symmetric states, the substitution u=rψ, a power series and the termination condition from which the integer n emerges.">
 <link rel="stylesheet" href="/assets/lang.css?v=7">
-<link rel="stylesheet" href="/assets/note.css?v=5">
+<link rel="stylesheet" href="/assets/note.css?v=6">
 <link rel="stylesheet" href="/assets/katex/katex.min.css?v=1">
 <style id="note-math">
 html,body{overflow-x:clip;}
 </style>
+<script src="/assets/note-back.js?v=1" defer></script>
 <link rel="alternate" hreflang="it" href="https://laquantistica.com/it/nota-07-livelli-idrogeno">
 <link rel="alternate" hreflang="en" href="https://laquantistica.com/en/nota-07-livelli-idrogeno">
 <link rel="alternate" hreflang="x-default" href="https://laquantistica.com/en/nota-07-livelli-idrogeno">
@@ -28,18 +29,17 @@ html,body{overflow-x:clip;}
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="/assets/lang-links.css?v=1">
 </head>
-<body><span id="retLabelIt" hidden></span>
+<body>
 <main class="sheet" id="top">
   <div class="sheet-inner">
 
     <div class="doc-meta">
       <span class="tag"><span class="en">Note 07</span></span>
-      <span class="en" id="retLabelEn">Ch. 06 &middot; Further Developments of the Theory</span>
+      <a class="doc-back-crumb" id="backCrumb" href="06-ulteriori-sviluppi.html#nota-7"><span class="crumb-arrow" aria-hidden="true">&larr;</span><span class="vh"><span class="en">Back to </span></span><span class="cap en">Ch. 06 &middot; Further Developments of the Theory</span></a>
       <div class="langsw" role="group" aria-label="Lingua / Language">
         <a class="langbtn" href="../it/nota-07-livelli-idrogeno.html" hreflang="it" lang="it">Italiano</a>
         <a class="langbtn" href="../en/nota-07-livelli-idrogeno.html" hreflang="en" lang="en" aria-current="true">English</a>
       </div>
-      <a class="doc-back-top" id="backTop" href="06-ulteriori-sviluppi.html#nota-7"><span class="en">&larr; Back</span></a>
     </div>
 
     <h1 class="doc-title">
@@ -155,32 +155,5 @@ E &amp; =-\frac{\hbar^2\kappa^2}{2m}=-\frac{\hbar^2A^2}{8mn^2} \\
   </div>
 </main>
 
-<script>
-(function () {
-  function safeRet(v) {
-    if (!v) return null;
-    try { v = decodeURIComponent(v); } catch (e) { return null; }
-    if (v.indexOf('..') !== -1 || v.indexOf('//') !== -1) return null;
-    if (/^[A-Za-z0-9._\/-]+\.html(#[A-Za-z0-9._-]+)?$/.test(v)) return v;
-    return null;
-  }
-  var ret = safeRet(new URLSearchParams(location.search).get('ret')) || '06-ulteriori-sviluppi.html#nota-7';
-  ['backTop', 'backBottom'].forEach(function (id) {
-    var a = document.getElementById(id);
-    if (a) a.setAttribute('href', ret);
-  });
-  var LABELS = {
-    '06-ulteriori-sviluppi.html': ['Cap. 06 \u00b7 Ulteriori sviluppi della Teoria', 'Ch. 06 \u00b7 Further Developments of the Theory'],
-    '09-spettri-atomici.html': ['Cap. 09 \u00b7 Spettri atomici di emissione', 'Ch. 09 \u00b7 Atomic Emission Spectra']
-  };
-  var label = LABELS[ret.split('#')[0].split('/').pop()];
-  if (label) {
-    var it = document.getElementById('retLabelIt');
-    if (it) it.textContent = label[0];
-    var en = document.getElementById('retLabelEn');
-    if (en) en.textContent = label[1];
-  }
-})();
-</script>
 </body>
 </html>

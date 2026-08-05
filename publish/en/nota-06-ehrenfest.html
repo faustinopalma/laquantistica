@@ -7,11 +7,12 @@
 <title>Note 06 · The mean of the field and the field at the mean position — La Quantistica</title>
 <meta name="description" content="Agreement with Newton is required on the mean of the field, not on the field at the mean position: the two coincide when the particle is well localised compared with the scale over which the field varies.">
 <link rel="stylesheet" href="/assets/lang.css?v=7">
-<link rel="stylesheet" href="/assets/note.css?v=5">
+<link rel="stylesheet" href="/assets/note.css?v=6">
 <link rel="stylesheet" href="/assets/katex/katex.min.css?v=1">
 <style id="note-math">
 html,body{overflow-x:clip;}
 </style>
+<script src="/assets/note-back.js?v=1" defer></script>
 <link rel="alternate" hreflang="it" href="https://laquantistica.com/it/nota-06-ehrenfest">
 <link rel="alternate" hreflang="en" href="https://laquantistica.com/en/nota-06-ehrenfest">
 <link rel="alternate" hreflang="x-default" href="https://laquantistica.com/en/nota-06-ehrenfest">
@@ -28,18 +29,17 @@ html,body{overflow-x:clip;}
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="/assets/lang-links.css?v=1">
 </head>
-<body><span id="retLabelIt" hidden></span>
+<body>
 <main class="sheet" id="top">
   <div class="sheet-inner">
 
     <div class="doc-meta">
       <span class="tag"><span class="en">Note 06</span></span>
-      <span class="en" id="retLabelEn">Ch. 04 · Electron Diffraction</span>
+      <a class="doc-back-crumb" id="backCrumb" href="04-diffrazione.html#nota-6"><span class="crumb-arrow" aria-hidden="true">&larr;</span><span class="vh"><span class="en">Back to </span></span><span class="cap en">Ch. 04 · Electron Diffraction</span></a>
       <div class="langsw" role="group" aria-label="Lingua / Language">
         <a class="langbtn" href="../it/nota-06-ehrenfest.html" hreflang="it" lang="it">Italiano</a>
         <a class="langbtn" href="../en/nota-06-ehrenfest.html" hreflang="en" lang="en" aria-current="true">English</a>
       </div>
-      <a class="doc-back-top" id="backTop" href="04-diffrazione.html#nota-6"><span class="en">← Back</span></a>
     </div>
 
     <h1 class="doc-title">
@@ -78,31 +78,5 @@ c-10,0,-16.667,5,-20,15z M188 15 H145 v585 v1200 v585 h43z"/></svg></span></span
   </div>
 </main>
 
-<script>
-(function () {
-  function safeRet(v) {
-    if (!v) return null;
-    try { v = decodeURIComponent(v); } catch (e) { return null; }
-    if (v.indexOf('..') !== -1 || v.indexOf('//') !== -1) return null;
-    if (/^[A-Za-z0-9._\/-]+\.html(#[A-Za-z0-9._-]+)?$/.test(v)) return v;
-    return null;
-  }
-  var ret = safeRet(new URLSearchParams(location.search).get('ret')) || '04-diffrazione.html#nota-6';
-  ['backTop', 'backBottom'].forEach(function (id) {
-    var a = document.getElementById(id);
-    if (a) a.setAttribute('href', ret);
-  });
-  var LABELS = {
-    '04-diffrazione.html': ['Cap. 04 · Diffrazione degli Elettroni', 'Ch. 04 · Electron Diffraction']
-  };
-  var label = LABELS[ret.split('#')[0].split('/').pop()];
-  if (label) {
-    var it = document.getElementById('retLabelIt');
-    if (it) it.textContent = label[0];
-    var en = document.getElementById('retLabelEn');
-    if (en) en.textContent = label[1];
-  }
-})();
-</script>
 </body>
 </html>

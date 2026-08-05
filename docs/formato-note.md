@@ -26,10 +26,19 @@ della tesi (onestà intellettuale, dietro le quinte, aneddoti storici, ecc.).
   La scelta di lingua è condivisa con tutto il sito (`localStorage` `site-lang`).
 - **Ritorno al punto di partenza (dinamico)**: la stessa nota può essere linkata da
   punti diversi, quindi il link di ritorno **non è statico**. Il callout passa
-  `?ret=<pagina.html%23ancora>`; uno script nella nota valida il parametro (accetta solo
+  `?ret=<pagina.html%23ancora>`; `assets/note-back.js` valida il parametro (accetta solo
   path interni `.html` + eventuale `#ancora`, per sicurezza — no `javascript:`, no URL
-  esterni) e imposta i due link "indietro" (`#backTop` e `#backBottom`).
-  Fallback se `ret` manca o non è valido: il capitolo di riferimento.
+  esterni) e lo applica ai tre ritorni della nota:
+  1. `a.doc-back-crumb#backCrumb` — il nome del capitolo nella barra metadati, riscritto
+     secondo la destinazione (tabella `CAPITOLI` dentro `note-back.js`);
+  2. `.note-back-fab` — pillola creata dallo script, fissa in basso a sinistra, sempre a
+     portata di mano; sparisce quando si vede il pulsante di fine nota e, su schermo
+     stretto, si ritira mentre si scorre in avanti;
+  3. `#backBottom` — il pulsante grande in fondo alla nota.
+  Se si è arrivati proprio dalla pagina di ritorno, il clic usa `history.back()`: si
+  ritrova la posizione esatta di lettura invece dell'àncora del richiamo.
+  Lo script propaga `?ret=` anche ai link del selettore di lingua.
+  Fallback se `ret` manca o non è valido: la destinazione scritta nell'HTML.
 - **Canonical**: ogni nota ha `<link rel="canonical" href="https://laquantistica.com/nota-...html">`.
 
 ## Struttura minima di una pagina nota
@@ -42,22 +51,22 @@ della tesi (onestà intellettuale, dietro le quinte, aneddoti storici, ecc.).
   <link rel="canonical" href="https://laquantistica.com/nota-NN-slug.html">
   <title>Nota NN · Titolo · La Quantistica</title>
   <link rel="stylesheet" href="assets/lang.css?v=3">
-  <link rel="stylesheet" href="assets/note.css?v=2">
+  <link rel="stylesheet" href="assets/note.css?v=6">
   <script defer src="assets/lang.js?v=3"></script>
+  <script src="assets/note-back.js?v=1" defer></script>
 </head>
 <body>
 <main class="sheet" id="top">
   <div class="sheet-inner">
     <div class="doc-meta">
       <span class="tag">Nota NN</span>
-      <span class="it">Cap. NN · Titolo</span><span class="en">Ch. NN · Title</span>
+      <a class="doc-back-crumb" id="backCrumb" href="NN-....html#nota-N"><span class="crumb-arrow" aria-hidden="true">&larr;</span><span class="vh"><span class="it">Torna al </span><span class="en">Back to </span></span><span class="cap it">Cap. NN · Titolo</span><span class="cap en">Ch. NN · Title</span></a>
       <span class="sep">|</span>
       <span class="tag amber"><span class="it">Etichetta</span><span class="en">Label</span></span>
       <div class="langsw" role="group" aria-label="Lingua / Language">
         <button class="langbtn" type="button" data-l="it" aria-pressed="true">IT</button>
         <button class="langbtn" type="button" data-l="en" aria-pressed="false">EN</button>
       </div>
-      <a class="doc-back-top" id="backTop" href="NN-....html#nota-N"><span class="it">← Indietro</span><span class="en">← Back</span></a>
     </div>
 
     <h1 class="doc-title">
@@ -78,21 +87,6 @@ della tesi (onestà intellettuale, dietro le quinte, aneddoti storici, ecc.).
     </div>
   </div>
 </main>
-
-<script>
-/* Ritorno dinamico: legge ?ret=<pagina.html%23ancora>, lo valida e lo applica ai due link. */
-(function () {
-  function safeRet(v){
-    if(!v) return null;
-    try{ v = decodeURIComponent(v); }catch(e){ return null; }
-    if(v.indexOf('..')!==-1 || v.indexOf('//')!==-1) return null;
-    if(/^[A-Za-z0-9._\/-]+\.html(#[A-Za-z0-9._-]+)?$/.test(v)) return v;
-    return null;
-  }
-  var ret = safeRet(new URLSearchParams(location.search).get('ret')) || 'NN-....html#nota-N';
-  ['backTop','backBottom'].forEach(function(id){ var a=document.getElementById(id); if(a) a.setAttribute('href', ret); });
-})();
-</script>
 </body>
 </html>
 ```

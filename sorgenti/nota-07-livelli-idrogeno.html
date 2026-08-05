@@ -7,12 +7,13 @@
 <title>Nota 07 &middot; I livelli energetici dell&rsquo;atomo di idrogeno &mdash; La Quantistica</title>
 <meta name="description" content="La formula dei livelli dell'idrogeno ricavata dal problema agli autovalori: restrizione agli stati a simmetria sferica, sostituzione u=r&psi;, sviluppo in serie e condizione di troncamento da cui esce il numero intero n.">
 <link rel="stylesheet" href="assets/lang.css?v=7">
-<link rel="stylesheet" href="assets/note.css?v=5">
+<link rel="stylesheet" href="assets/note.css?v=6">
 <script src="assets/lang.js?v=8"></script>
 <link rel="stylesheet" href="assets/katex/katex.min.css?v=1">
 <style id="note-math">
 html,body{overflow-x:clip;}
 </style>
+<script src="assets/note-back.js?v=1" defer></script>
 </head>
 <body>
 <main class="sheet" id="top">
@@ -20,12 +21,11 @@ html,body{overflow-x:clip;}
 
     <div class="doc-meta">
       <span class="tag"><span class="it">Nota 07</span><span class="en">Note 07</span></span>
-      <span class="it" id="retLabelIt">Cap. 06 &middot; Ulteriori sviluppi della Teoria</span><span class="en" id="retLabelEn">Ch. 06 &middot; Further Developments of the Theory</span>
+      <a class="doc-back-crumb" id="backCrumb" href="06-ulteriori-sviluppi.html#nota-7"><span class="crumb-arrow" aria-hidden="true">&larr;</span><span class="vh"><span class="it">Torna al </span><span class="en">Back to </span></span><span class="cap it">Cap. 06 &middot; Ulteriori sviluppi della Teoria</span><span class="cap en">Ch. 06 &middot; Further Developments of the Theory</span></a>
       <div class="langsw" role="group" aria-label="Lingua / Language">
         <button class="langbtn" type="button" data-l="it" aria-pressed="false">Italiano</button>
         <button class="langbtn" type="button" data-l="en" aria-pressed="true">English</button>
       </div>
-      <a class="doc-back-top" id="backTop" href="06-ulteriori-sviluppi.html#nota-7"><span class="it">&larr; Indietro</span><span class="en">&larr; Back</span></a>
     </div>
 
     <h1 class="doc-title">
@@ -151,32 +151,5 @@ E &amp; =-\frac{\hbar^2\kappa^2}{2m}=-\frac{\hbar^2A^2}{8mn^2} \\
   </div>
 </main>
 
-<script>
-(function () {
-  function safeRet(v) {
-    if (!v) return null;
-    try { v = decodeURIComponent(v); } catch (e) { return null; }
-    if (v.indexOf('..') !== -1 || v.indexOf('//') !== -1) return null;
-    if (/^[A-Za-z0-9._\/-]+\.html(#[A-Za-z0-9._-]+)?$/.test(v)) return v;
-    return null;
-  }
-  var ret = safeRet(new URLSearchParams(location.search).get('ret')) || '06-ulteriori-sviluppi.html#nota-7';
-  ['backTop', 'backBottom'].forEach(function (id) {
-    var a = document.getElementById(id);
-    if (a) a.setAttribute('href', ret);
-  });
-  var LABELS = {
-    '06-ulteriori-sviluppi.html': ['Cap. 06 \u00b7 Ulteriori sviluppi della Teoria', 'Ch. 06 \u00b7 Further Developments of the Theory'],
-    '09-spettri-atomici.html': ['Cap. 09 \u00b7 Spettri atomici di emissione', 'Ch. 09 \u00b7 Atomic Emission Spectra']
-  };
-  var label = LABELS[ret.split('#')[0].split('/').pop()];
-  if (label) {
-    var it = document.getElementById('retLabelIt');
-    if (it) it.textContent = label[0];
-    var en = document.getElementById('retLabelEn');
-    if (en) en.textContent = label[1];
-  }
-})();
-</script>
 </body>
 </html>
