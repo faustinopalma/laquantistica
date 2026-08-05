@@ -47,13 +47,13 @@ html,body{overflow-x:clip;}
 '''
 
 CORPO = r'''
-<P class="lede">Ricavando l’equazione di evoluzione abbiamo trovato una matrice antihermitiana, {{A(t)}}, e l’abbiamo subito sostituita con {{H(t)=iA(t)}}, che è hermitiana. La sostituzione non aggiunge e non toglie nulla al risultato: è un cambio d’abito. Vediamo perché quell’abito ci conviene.
-|In deriving the evolution equation we found an anti-Hermitian matrix, {{A(t)}}, and immediately replaced it with {{H(t)=iA(t)}}, which is Hermitian. The replacement neither adds to nor takes away from the result: it is a change of clothes. Let us see why those clothes suit us.</P>
+<P class="lede">Ricavando l’equazione di evoluzione abbiamo trovato una matrice antihermitiana, {{A(t)}}, e l’abbiamo subito sostituita con {{H(t)=iA(t)}}, che è hermitiana. La sostituzione non aggiunge e non toglie nulla al risultato: le due scritture dicono la stessa cosa. Vediamo perché preferiamo la seconda.
+|In deriving the evolution equation we found an anti-Hermitian matrix, {{A(t)}}, and immediately replaced it with {{H(t)=iA(t)}}, which is Hermitian. The replacement neither adds to nor takes away from the result: the two ways of writing say the same thing. Let us see why we prefer the second.</P>
 
 <H2>Reali e immaginari puri|Real and purely imaginary</H2>
 
-<P>Fra le matrici e i numeri c’è un’analogia stretta, e in essa l’operazione di aggiunto fa la parte della coniugazione complessa. Un numero è reale quando coincide con il suo coniugato, {{z^*=z}}; è immaginario puro quando cambia segno, {{z^*=-z}}. Allo stesso modo una matrice è hermitiana quando {{H^+=H}}, ed è antihermitiana quando {{A^+=-A}}.
-|Between matrices and numbers there is a close analogy, and in it the adjoint plays the part of complex conjugation. A number is real when it equals its own conjugate, {{z^*=z}}; it is purely imaginary when it changes sign, {{z^*=-z}}. In the same way a matrix is Hermitian when {{H^+=H}}, and anti-Hermitian when {{A^+=-A}}.</P>
+<P>Fra le matrici e i numeri c’è un’analogia stretta, e in essa l’operazione di aggiunto corrisponde alla coniugazione complessa. Un numero è reale quando coincide con il suo coniugato, {{z^*=z}}; è immaginario puro quando cambia segno, {{z^*=-z}}. Allo stesso modo una matrice è hermitiana quando {{H^+=H}}, ed è antihermitiana quando {{A^+=-A}}.
+|Between matrices and numbers there is a close analogy, and in it the adjoint corresponds to complex conjugation. A number is real when it equals its own conjugate, {{z^*=z}}; it is purely imaginary when it changes sign, {{z^*=-z}}. In the same way a matrix is Hermitian when {{H^+=H}}, and anti-Hermitian when {{A^+=-A}}.</P>
 
 <P>L’analogia prosegue: moltiplicare per {{i}} porta un numero reale in un immaginario puro e viceversa, e porta una matrice hermitiana in una antihermitiana e viceversa. È il passaggio che abbiamo fatto scrivendo {{H=iA}}, lo stesso che avevamo già fatto passando dall’operatore derivata {{D}} alla matrice {{K=iD}}.
 |The analogy goes further: multiplying by {{i}} carries a real number into a purely imaginary one and back, and carries a Hermitian matrix into an anti-Hermitian one and back. It is the step we took in writing {{H=iA}}, the same one we had already taken in passing from the derivative operator {{D}} to the matrix {{K=iD}}.</P>
@@ -64,10 +64,8 @@ CORPO = r'''
 |The difference shows up best in the eigenvalues. Let {{|\psi\rangle}} be an eigenvector of a Hermitian matrix {{H}}, with eigenvalue {{a}}, that is {{H|\psi\rangle=a|\psi\rangle}}. Then</P>
 
 <EQ>\begin{aligned}
-a\langle\psi|\psi\rangle & =\langle\psi|H|\psi\rangle \\
-& ={\left(\langle\psi|H^+|\psi\rangle\right)}^* \\
-& ={\left(\langle\psi|H|\psi\rangle\right)}^* \\
-& =a^*\langle\psi|\psi\rangle
+a\langle\psi|\psi\rangle & =\langle\psi|H|\psi\rangle={\left(\langle\psi|H^+|\psi\rangle\right)}^* \\
+& ={\left(\langle\psi|H|\psi\rangle\right)}^*=a^*\langle\psi|\psi\rangle
 \end{aligned}</EQ>
 
 <P>dove il secondo passaggio vale per qualunque matrice e il terzo usa {{H^+=H}}. Poiché {{\langle\psi|\psi\rangle}} non è nullo, resta {{a=a^*}}: l’autovalore è reale. Rifacendo lo stesso conto con una matrice antihermitiana, dove {{A^+=-A}}, il terzo passaggio cambia segno e si arriva a {{a=-a^*}}: l’autovalore è immaginario puro. Lo zero, che è reale e immaginario puro insieme, è l’unico valore che le due famiglie hanno in comune.
@@ -80,8 +78,8 @@ a\langle\psi|\psi\rangle & =\langle\psi|H|\psi\rangle \\
 
 <H2>E se avessimo tenuto <em>A</em>?|And if we had kept <em>A</em>?</H2>
 
-<P>Non sarebbe cambiato nulla di essenziale. Il percorso resterebbe lo stesso: le formule si porterebbero dietro qualche {{i}} in più e qualche segno da sorvegliare, ma le conclusioni sarebbero le medesime. E l’unità immaginaria non sparirebbe: qui l’abbiamo tirata fuori subito, mettendola davanti alla matrice; se non lo avessimo fatto, l’avremmo incontrata comunque poco più avanti. A chiederla è l’equazione, non la nostra notazione.
-|Nothing essential would have changed. The path would be the same: the formulas would carry an extra {{i}} here and there, and a few signs to keep an eye on, but the conclusions would be the very same. And the imaginary unit would not disappear: here we have pulled it out at once, placing it in front of the matrix; had we not done so, we would have met it a little further on anyway. It is the equation that calls for it, not our notation.</P>
+<P>Non sarebbe cambiato nulla di essenziale. Il percorso resterebbe lo stesso: le formule avrebbero qualche {{i}} in più e qualche cambio di segno da tenere presente, ma le conclusioni sarebbero le medesime. E l’unità immaginaria non sparirebbe: qui l’abbiamo estratta subito, mettendola davanti alla matrice; se non lo avessimo fatto, l’avremmo incontrata comunque poco più avanti. È l’equazione a richiederla, non la nostra notazione.
+|Nothing essential would have changed. The path would be the same: the formulas would have an extra {{i}} here and there, and a few sign changes to keep in mind, but the conclusions would be the very same. And the imaginary unit would not disappear: here we have extracted it at once, placing it in front of the matrix; had we not done so, we would have met it a little further on anyway. It is the equation that requires it, not our notation.</P>
 
 <P>A questo punto della trattazione le due scritture sono del tutto equivalenti: dire che {{A}} è antihermitiana e dire che {{H}} è hermitiana è dire la stessa cosa. Abbiamo scelto la seconda perché è quella in cui riconosceremo prima le grandezze che ci interessano.
 |At this point of the treatment the two ways of writing are entirely equivalent: to say that {{A}} is anti-Hermitian and to say that {{H}} is Hermitian is to say the same thing. We have chosen the second because it is the one in which we shall sooner recognise the quantities we care about.</P>
