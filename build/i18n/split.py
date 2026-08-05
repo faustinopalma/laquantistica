@@ -124,6 +124,13 @@ META = {
                'spherically symmetric states, the substitution u=rψ, a power series and the '
                'termination condition from which the integer n emerges.'),
     },
+    'nota-08-matrici-hermitiane.html': {
+        'it': ('Nota 08 · Perché preferiamo le matrici hermitiane — La Quantistica', None),
+        'en': ('Note 08 · Why we prefer Hermitian matrices — La Quantistica',
+               'Hermitian matrices are to real numbers what anti-Hermitian ones are to purely '
+               'imaginary numbers: their eigenvalues are real, and real numbers are what a '
+               'measurement returns. And what would have changed had we kept the anti-Hermitian matrix.'),
+    },
     'lab-02a-sg-angolo-relativo.html': {
         'it': ('Lab · Stern-Gerlach in cascata: angolo relativo — La Quantistica', None),
         'en': ('Lab · Cascaded Stern–Gerlach: relative angle — La Quantistica',
