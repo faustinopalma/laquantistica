@@ -117,6 +117,13 @@ META = {
                'mean position: the two coincide when the particle is well localised compared with '
                'the scale over which the field varies.'),
     },
+    'nota-07-livelli-idrogeno.html': {
+        'it': ('Nota 07 · I livelli energetici dell’atomo di idrogeno — La Quantistica', None),
+        'en': ('Note 07 · The energy levels of the hydrogen atom — La Quantistica',
+               'The hydrogen level formula derived from the eigenvalue problem: restriction to '
+               'spherically symmetric states, the substitution u=rψ, a power series and the '
+               'termination condition from which the integer n emerges.'),
+    },
     'lab-02a-sg-angolo-relativo.html': {
         'it': ('Lab · Stern-Gerlach in cascata: angolo relativo — La Quantistica', None),
         'en': ('Lab · Cascaded Stern–Gerlach: relative angle — La Quantistica',

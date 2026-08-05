@@ -11,7 +11,7 @@ Documento interno: non è linkato da nessuna pagina del sito e non viene pubblic
 
 | # | Argomento | Dove serviva | Cosa dovrebbe contenere | Peso |
 |---|---|---|---|---|
-| 1 | **Atomo di idrogeno risolto** | scheda 5, §«Il modello atomico»; scheda 6, §«Livelli energetici per l'atomo di idrogeno» | Soluzione del problema agli autovalori per il potenziale coulombiano, da cui i livelli $E_n$ che la scheda 6 si limita ad anticipare. Deve rispondere alla domanda posta nella scheda 5: perché l'elettrone non precipita sul nucleo. | **alto** |
+| 1 | ~~**Atomo di idrogeno risolto**~~ — **fatto**: [nota 07](sorgenti/nota-07-livelli-idrogeno.html) | scheda 5, §«Il modello atomico»; scheda 6, §«Livelli energetici per l'atomo di idrogeno» | Soluzione del problema agli autovalori per il potenziale coulombiano, da cui i livelli $E_n$ che la scheda 6 si limita ad anticipare. Resta scoperta la domanda della scheda 5: perché l'elettrone non precipita sul nucleo. | — |
 | 2 | **Radioattività e radiazioni α** | scheda 5, §«Radioattività e radiazioni α» | Decadimento, tipi di radiazione, rivelatori. Deve contenere la misura della velocità dei raggi α: il valore $v = 1{,}6\cdot10^7$ m/s è usato nel calcolo della lunghezza d'onda di De Broglie e nella tesi resta senza provenienza. | **alto** |
 | 3 | **Raggi X** | scheda 4, §«La struttura del cristallo»; scheda 5, apertura | Diffrazione dei raggi X come misura del passo reticolare e quindi del volume occupato da un atomo. Serviva a due schede diverse. | medio |
 | 4 | **Materiali semiconduttori** | scheda 5, §«Apparato sperimentale» (il detector al silicio) | Perché la resistenza del bipolo di silicio si abbassa al passaggio di una particella α, cioè il funzionamento del rivelatore usato nell'esperimento. | medio |
@@ -22,7 +22,8 @@ Documento interno: non è linkato da nessuna pagina del sito e non viene pubblic
 | Argomento | Dove | Nota |
 |---|---|---|
 | Unicità della forma di $H$ | scheda 4, §«L'equazione di Schrödinger» | La ricerca è ristretta alle matrici $H=f(X)+g(K)$, e poi alle $g$ con $[g(K),X]=icK$. La soluzione trovata viene verificata sull'equazione di partenza, quindi vale; ma il testo non discute se esistano soluzioni fuori da quelle due famiglie. |
-| Equilibrio dell'atomo | schede 5 e 6 | La scheda 5 pone la domanda, la 6 dà i livelli energetici senza ricavarli: la risposta dipende dall'argomento 1 della tabella sopra. |
+| Equilibrio dell'atomo | schede 5 e 6 | La scheda 5 chiedeva perché l'elettrone non precipiti sul nucleo. La nota 07 ricava i livelli e mostra da dove viene il numero intero $n$, ma non affronta la stabilità: perché non esistano stati a energia arbitrariamente bassa resta da dire. |
+| Stati con momento angolare | nota 07 | La nota cerca solo tra le funzioni a simmetria sferica. Bastano per avere tutti i livelli $E_n$, non per avere tutti gli stati: le soluzioni che dipendono dagli angoli non sono ricavate. |
 
 ## Dove sono stati tolti i rimandi
 
