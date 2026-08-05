@@ -93,6 +93,7 @@ html,body,.console,.stagecol,.ctrlcol,.sim-math,.tabwrap{scrollbar-width:thin;sc
 .panel-lede b{color:#e2a24d;font-weight:700;}
 .hint{font-family:var(--n-sans);font-size:.82rem;color:#9aa0aa;margin:0;font-style:italic;}
 .con-foot{flex:none;display:flex;justify-content:space-between;font-family:var(--n-mono);font-size:.66rem;color:#8b929c;padding:.35rem .1rem 0;}
+.con-credit{flex:none;font-family:var(--n-mono);font-size:.58rem;line-height:1.55;color:#4f7063;padding:.15rem .1rem .45rem;}
 /* pulsante "indietro" ben visibile: pill (breadcrumb a sx nell'header + copia in fondo) */
 .con-back{display:inline-flex;align-items:center;gap:.3em;font-family:var(--n-mono);font-size:.76rem;font-weight:700;color:#cfe0d6;background:#12241d;border:1px solid #2a5a48;border-radius:999px;padding:.32rem .85rem;text-decoration:none;transition:.15s;white-space:nowrap;}
 .con-back:hover{background:#1d7a52;color:#fff;border-color:#1d7a52;text-decoration:none;}
@@ -123,6 +124,7 @@ html,body,.console,.stagecol,.ctrlcol,.sim-math,.tabwrap{scrollbar-width:thin;sc
   .panel-lede{font-size:.72rem;line-height:1.35;}
   .hint{font-size:.68rem;}
   .con-foot{font-size:.6rem;padding:.2rem .1rem 0;}
+  .con-credit{font-size:.54rem;padding:.1rem .1rem .3rem;}
   .back-bottom{display:none;}
 }
 /* invito a ruotare (visibile solo su telefono in verticale) */
