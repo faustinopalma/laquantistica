@@ -52,8 +52,8 @@ CORPO = r'''
 <P>Nella scheda abbiamo posto il problema agli autovalori per l&rsquo;energia e ci siamo limitati a riportare i livelli dell&rsquo;atomo di idrogeno. Qui lo risolviamo.
 |In the chapter we set up the eigenvalue problem for the energy and limited ourselves to reporting the levels of the hydrogen atom. Here we solve it.</P>
 
-<P><strong>Il problema.</strong> Il nucleo dell&rsquo;atomo di idrogeno ha carica {{+e}} e genera il potenziale {{V(r)=\frac{1}{4\pi\varepsilon_0}\frac{e}{r}}}; l&rsquo;elettrone che gli orbita intorno ha carica {{q=-e}}, quindi la sua energia potenziale &egrave; {{qV(r)=-\frac{1}{4\pi\varepsilon_0}\frac{e^2}{r}}}, negativa come dev&rsquo;essere per un&rsquo;attrazione. Il problema agli autovalori della scheda diventa
-|<strong>The problem.</strong> The nucleus of the hydrogen atom has charge {{+e}} and produces the potential {{V(r)=\frac{1}{4\pi\varepsilon_0}\frac{e}{r}}}; the electron orbiting it has charge {{q=-e}}, so its potential energy is {{qV(r)=-\frac{1}{4\pi\varepsilon_0}\frac{e^2}{r}}}, negative as it must be for an attraction. The eigenvalue problem of the chapter becomes</P>
+<P><strong>Il problema.</strong> Il nucleo dell&rsquo;atomo di idrogeno ha carica {{+e}} e genera il potenziale {{V(r)=e/(4\pi\varepsilon_0 r)}}; l&rsquo;elettrone che gli orbita intorno ha carica {{q=-e}}, quindi la sua energia potenziale &egrave; {{qV(r)=-e^2/(4\pi\varepsilon_0 r)}}, negativa come dev&rsquo;essere per un&rsquo;attrazione. Il problema agli autovalori della scheda diventa
+|<strong>The problem.</strong> The nucleus of the hydrogen atom has charge {{+e}} and produces the potential {{V(r)=e/(4\pi\varepsilon_0 r)}}; the electron orbiting it has charge {{q=-e}}, so its potential energy is {{qV(r)=-e^2/(4\pi\varepsilon_0 r)}}, negative as it must be for an attraction. The eigenvalue problem of the chapter becomes</P>
 
 <EQ>\left(qV(X)+\frac{1}{2m}{\overline{P}}^2\right)|\psi\rangle=E|\psi\rangle</EQ>
 
@@ -83,8 +83,8 @@ CORPO = r'''
 
 <EQ>-\frac{\hbar^2}{2m}\frac{d^2u}{dr^2}-\frac{1}{4\pi\varepsilon_0}\frac{e^2}{r}u=Eu</EQ>
 
-<P>Cerchiamo gli stati legati, quelli in cui l&rsquo;elettrone resta vicino al nucleo: per questi l&rsquo;energia &egrave; negativa, quindi {{-2mE/\hbar^2}} &egrave; una quantit&agrave; positiva. Poniamo allora {{\kappa^2=-\frac{2mE}{\hbar^2}}} e {{A=\frac{me^2}{2\pi\varepsilon_0\hbar^2}}}, e moltiplicando per {{-2m/\hbar^2}} l&rsquo;equazione si riscrive
-|We look for the bound states, those in which the electron stays near the nucleus: for these the energy is negative, so {{-2mE/\hbar^2}} is a positive quantity. Let us then set {{\kappa^2=-\frac{2mE}{\hbar^2}}} and {{A=\frac{me^2}{2\pi\varepsilon_0\hbar^2}}}, and multiplying by {{-2m/\hbar^2}} the equation becomes</P>
+<P>Cerchiamo gli stati legati, quelli in cui l&rsquo;elettrone resta vicino al nucleo: per questi l&rsquo;energia &egrave; negativa, quindi {{-2mE/\hbar^2}} &egrave; una quantit&agrave; positiva. Poniamo allora {{\kappa^2=-2mE/\hbar^2}} e {{A=me^2/(2\pi\varepsilon_0\hbar^2)}}, e moltiplicando per {{-2m/\hbar^2}} l&rsquo;equazione si riscrive
+|We look for the bound states, those in which the electron stays near the nucleus: for these the energy is negative, so {{-2mE/\hbar^2}} is a positive quantity. Let us then set {{\kappa^2=-2mE/\hbar^2}} and {{A=me^2/(2\pi\varepsilon_0\hbar^2)}}, and multiplying by {{-2m/\hbar^2}} the equation becomes</P>
 
 <EQ>\frac{d^2u}{dr^2}+\frac{A}{r}u-\kappa^2u=0</EQ>
 
@@ -144,8 +144,8 @@ CORPO = r'''
 
 <EQ>\frac{c_{k+1}}{c_k}\cong\frac{2\kappa}{k+1}</EQ>
 
-<P>ma questo &egrave; esattamente il rapporto tra due coefficienti successivi dello sviluppo {{e^{2\kappa r}=\sum_{k=0}^{\infty}\frac{(2\kappa)^k}{k!}r^k}}. Allora {{w}} si comporterebbe come {{e^{2\kappa r}}} e {{u=we^{-\kappa r}}} come {{e^{\kappa r}}}, che non va a zero: la soluzione non sarebbe uno stato legato.
-|but this is exactly the ratio between two successive coefficients of the expansion {{e^{2\kappa r}=\sum_{k=0}^{\infty}\frac{(2\kappa)^k}{k!}r^k}}. Then {{w}} would behave like {{e^{2\kappa r}}} and {{u=we^{-\kappa r}}} like {{e^{\kappa r}}}, which does not go to zero: the solution would not be a bound state.</P>
+<P>ma questo &egrave; esattamente il rapporto tra due coefficienti successivi dello sviluppo {{e^{2\kappa r}=\sum_{k=0}^{\infty}(2\kappa)^k r^k/k!}}. Allora {{w}} si comporterebbe come {{e^{2\kappa r}}} e {{u=we^{-\kappa r}}} come {{e^{\kappa r}}}, che non va a zero: la soluzione non sarebbe uno stato legato.
+|but this is exactly the ratio between two successive coefficients of the expansion {{e^{2\kappa r}=\sum_{k=0}^{\infty}(2\kappa)^k r^k/k!}}. Then {{w}} would behave like {{e^{2\kappa r}}} and {{u=we^{-\kappa r}}} like {{e^{\kappa r}}}, which does not go to zero: the solution would not be a bound state.</P>
 
 <P>Deve dunque esistere un intero {{n\geq1}} con {{c_n\neq0}} e {{c_{n+1}=0}}. In base alla 3a questo accade se e solo se
 |There must then exist an integer {{n\geq1}} with {{c_n\neq0}} and {{c_{n+1}=0}}. By 3a this happens if and only if</P>
@@ -172,8 +172,8 @@ E & =-\frac{\hbar^2\kappa^2}{2m}=-\frac{\hbar^2A^2}{8mn^2} \\
 <P>Come volevasi dimostrare.
 |Which is what we set out to prove.</P>
 
-<P><strong>Verifica.</strong> Prendiamo il primo livello, {{n=1}}. La 3a d&agrave; subito {{c_2=0}}, quindi {{w=c_1r}}, {{u=c_1re^{-\kappa r}}} e la funzione d&rsquo;onda &egrave; {{\psi=c_1e^{-\kappa r}}} con {{\kappa=\frac{A}{2}=\frac{me^2}{4\pi\varepsilon_0\hbar^2}}}. Il laplaciano vale
-|<strong>Check.</strong> Take the first level, {{n=1}}. Equation 3a immediately gives {{c_2=0}}, so {{w=c_1r}}, {{u=c_1re^{-\kappa r}}} and the wave function is {{\psi=c_1e^{-\kappa r}}} with {{\kappa=\frac{A}{2}=\frac{me^2}{4\pi\varepsilon_0\hbar^2}}}. The Laplacian is</P>
+<P><strong>Verifica.</strong> Prendiamo il primo livello, {{n=1}}. La 3a d&agrave; subito {{c_2=0}}, quindi {{w=c_1r}}, {{u=c_1re^{-\kappa r}}} e la funzione d&rsquo;onda &egrave; {{\psi=c_1e^{-\kappa r}}} con {{\kappa=A/2=me^2/(4\pi\varepsilon_0\hbar^2)}}. Il laplaciano vale
+|<strong>Check.</strong> Take the first level, {{n=1}}. Equation 3a immediately gives {{c_2=0}}, so {{w=c_1r}}, {{u=c_1re^{-\kappa r}}} and the wave function is {{\psi=c_1e^{-\kappa r}}} with {{\kappa=A/2=me^2/(4\pi\varepsilon_0\hbar^2)}}. The Laplacian is</P>
 
 <EQ>\begin{aligned}
 \nabla^2\psi & =\frac{c_1}{r}\frac{d^2\left(re^{-\kappa r}\right)}{dr^2} \\
@@ -196,8 +196,8 @@ E & =-\frac{\hbar^2\kappa^2}{2m}=-\frac{\hbar^2A^2}{8mn^2} \\
 -\frac{\hbar^2\kappa^2}{2m}\psi & =E\psi\quad\text{Verified.}
 \end{aligned}</EQ2>
 
-<P>Il termine in {{1/r}} si annulla perch&eacute; {{\frac{\hbar^2\kappa}{m}=\frac{e^2}{4\pi\varepsilon_0}}}, che &egrave; proprio la definizione di {{\kappa}} per {{n=1}}; resta {{E=-\hbar^2\kappa^2/2m}}, cio&egrave; la formula trovata.
-|The {{1/r}} term vanishes because {{\frac{\hbar^2\kappa}{m}=\frac{e^2}{4\pi\varepsilon_0}}}, which is precisely the definition of {{\kappa}} for {{n=1}}; there remains {{E=-\hbar^2\kappa^2/2m}}, that is, the formula we found.</P>
+<P>Il termine in {{1/r}} si annulla perch&eacute; {{\hbar^2\kappa/m=e^2/(4\pi\varepsilon_0)}}, che &egrave; proprio la definizione di {{\kappa}} per {{n=1}}; resta {{E=-\hbar^2\kappa^2/2m}}, cio&egrave; la formula trovata.
+|The {{1/r}} term vanishes because {{\hbar^2\kappa/m=e^2/(4\pi\varepsilon_0)}}, which is precisely the definition of {{\kappa}} for {{n=1}}; there remains {{E=-\hbar^2\kappa^2/2m}}, that is, the formula we found.</P>
 
 <P><strong>Cosa abbiamo lasciato fuori.</strong> Abbiamo cercato solo tra le funzioni a simmetria sferica, quelle a momento angolare nullo. Esistono anche soluzioni che dipendono dagli angoli, con momento angolare diverso da zero, e servono per descrivere gli stati dell&rsquo;atomo; ma non danno livelli nuovi: ogni {{E_n}} compare gi&agrave; tra le soluzioni trovate qui. Per i livelli energetici, che &egrave; quello che ci serviva, la restrizione non ha tolto nulla.
 |<strong>What we left out.</strong> We searched only among the spherically symmetric functions, those with zero angular momentum. There are also solutions depending on the angles, with non-zero angular momentum, and they are needed to describe the states of the atom; but they give no new levels: every {{E_n}} already appears among the solutions found here. For the energy levels, which is what we needed, the restriction took nothing away.</P>
