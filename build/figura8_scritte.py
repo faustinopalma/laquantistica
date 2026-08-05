@@ -7,20 +7,13 @@ from pathlib import Path
 
 SORGENTE = Path('publish/img/05_rutherford/IMPULSO.svg')
 FONT = "'Times New Roman', Times, serif"
-SCALA = 4
-CORPO = 6000                      # 6000 x 4 = 24000 unita' di disegno
-
-VECCHIO_VIEWBOX = 'viewBox="-22847 405291 431129 617583"'
-NUOVO_VIEWBOX = 'viewBox="-40000 405291 448282 617583"'
-VECCHIO_SFONDO = '<rect fill="#ffffff" x="-22847" y="405291" width="431129" height="617583"'
-NUOVO_SFONDO = '<rect fill="#ffffff" x="-40000" y="405291" width="448282" height="617583"'
-VECCHIA_MISURA = 'width="200.0mm" height="286.5mm"'
-NUOVA_MISURA = 'width="208.0mm" height="286.5mm"'
+SCALA = 2
+CORPO = 6000                      # 6000 x 2 = 12000 unita' di disegno
 
 # (x, y, ancora, testo_it, testo_en)
 ETICHETTE = [
     (25000, 455000, 'start', 'Tensione', 'Voltage'),
-    (2000, 578700, 'end', 'U', 'U'),
+    (2000, 574800, 'end', 'U', 'U'),
     (375000, 667500, 'end', 'Tempo', 'Time'),
     (150000, 490000, 'start', 'Impulso originale', 'Original pulse'),
     (25000, 762000, 'start', 'Tensione', 'Voltage'),
@@ -31,11 +24,6 @@ ETICHETTE = [
 
 def scrivi(s, lingua):
     assert '<text' not in s, 'la figura ha gia\u2019 delle scritte'
-    for vecchio, nuovo in ((VECCHIO_VIEWBOX, NUOVO_VIEWBOX),
-                           (VECCHIO_SFONDO, NUOVO_SFONDO),
-                           (VECCHIA_MISURA, NUOVA_MISURA)):
-        assert s.count(vecchio) == 1, vecchio
-        s = s.replace(vecchio, nuovo)
     testi = []
     for x, y, ancora, it, en in ETICHETTE:
         t = it if lingua == 'it' else en
