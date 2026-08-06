@@ -12,7 +12,7 @@ Questo sito ripercorre quegli esperimenti — eseguiti in laboratorio, non solo 
 
 ### L'origine di questo lavoro
 
-Questo materiale nasce come tesi di laurea: l'obiettivo era eseguire gli esperimenti fondamentali della Meccanica Quantistica e preparare, a partire dalla loro analisi, un percorso didattico che introducesse le basi concettuali della teoria. Il lavoro è stato presentato all'85° Congresso Nazionale della **Società Italiana di Fisica (SIF)**, tenutosi a Pavia nel settembre 1999 (comunicazione: C. Luponio, G. Mastrocinque, F. Palma, «La formulazione della fisica quantistica attraverso esperimenti eseguiti ed interpretati teoricamente»).
+Questo materiale nasce come tesi di laurea: l'obiettivo era eseguire gli esperimenti fondamentali della Meccanica Quantistica e preparare, a partire dalla loro analisi, un percorso didattico che introducesse le basi concettuali della teoria. Il lavoro è stato presentato all'85° Congresso Nazionale della **Società Italiana di Fisica (SIF)**, tenutosi a Pavia nel settembre 1999.
 
 Risale al 1999, ma tratta esperimenti e principi fondamentali della fisica, immutati da allora: il contenuto è pienamente attuale.
 
