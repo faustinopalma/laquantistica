@@ -58,7 +58,7 @@ CORPO = r'''
 
 <TABLE>
 <table class="choice-table">
-<thead><tr><th><span class="it">Algebra</span><span class="en">Algebra</span></th><th><span class="it">Dimensione</span><span class="en">Dimension</span></th><th><span class="it">Proprietà che non si conserva</span><span class="en">Property no longer retained</span></th></tr></thead>
+<thead><tr><th><span class="it">Algebra</span><span class="en">Algebra</span></th><th><span class="it">Dimensione</span><span class="en">Dimension</span></th><th><span class="it">Proprietà che si perde rispetto alla riga precedente</span><span class="en">Property lost with respect to the previous row</span></th></tr></thead>
 <tbody>
 <tr><td>{{\mathbb R}}</td><td>1</td><td><span class="it">—</span><span class="en">—</span></td></tr>
 <tr><td>{{\mathbb C}}</td><td>2</td><td><span class="it">ordinamento compatibile con le operazioni</span><span class="en">an ordering compatible with the operations</span></td></tr>
@@ -118,8 +118,8 @@ CORPO = r'''
 
 <EQ>i\frac{\partial\mathbf F}{\partial t}=c\,\nabla\!\times\!\mathbf F.</EQ>
 
-<P>Per verificarlo basta sostituire la definizione di {{\mathbf F}} e separare parte reale e parte immaginaria: si ritrovano rispettivamente la legge di Ampère-Maxwell e la legge di Faraday. Il vettore complesso {{\mathbf F}} è detto vettore di Riemann-Silberstein. In presenza di cariche e correnti compaiono i termini sorgente, ma il campo elettrico e quello magnetico restano raccolti in un solo campo complesso.
-|To verify this, it is enough to substitute the definition of {{\mathbf F}} and separate real and imaginary parts: the Ampère-Maxwell law and Faraday’s law are recovered respectively. The complex vector {{\mathbf F}} is called the Riemann-Silberstein vector. In the presence of charges and currents source terms appear, but the electric and magnetic fields remain combined into a single complex field.</P>
+<P>Per verificarlo basta sostituire la definizione di {{\mathbf F}} e separare le due parti: la parte reale dà la legge di Faraday, la parte immaginaria la legge di Ampère-Maxwell. Il vettore complesso {{\mathbf F}} è detto vettore di Riemann-Silberstein. In presenza di cariche e correnti al secondo membro si aggiungono i termini di sorgente, ma il campo elettrico e quello magnetico restano raccolti in un solo campo complesso.
+|To verify this, it is enough to substitute the definition of {{\mathbf F}} and separate the two parts: the real part gives Faraday’s law, the imaginary part the Ampère-Maxwell law. The complex vector {{\mathbf F}} is called the Riemann-Silberstein vector. In the presence of charges and currents, source terms are added on the right-hand side, but the electric and magnetic fields remain combined into a single complex field.</P>
 
 <P>Qui i campi misurabili restano reali. Il numero complesso non cambia l’elettromagnetismo: ne rende più visibile la struttura. Lo stesso vantaggio si presenta con i fasori nei circuiti in corrente alternata, dove resistenza e reattanza formano l’impedenza complessa {{Z=R+iX}}.
 |Here the measurable fields remain real. The complex number does not change electromagnetism: it makes its structure more visible. The same advantage appears with phasors in alternating-current circuits, where resistance and reactance form the complex impedance {{Z=R+iX}}.</P>
@@ -134,8 +134,8 @@ CORPO = r'''
 
 <H2>Una scelta che non ci vincola|A choice that does not bind us</H2>
 
-<P>Allargare il campo dai reali ai complessi non ci impedisce di ritrovare i reali. Se un’equazione lineare ha coefficienti reali, dalla soluzione complessa {{f}} otteniamo ancora due soluzioni reali, {{\operatorname{Re}f}} e {{\operatorname{Im}f}}. Se anche i dati sono reali e la soluzione è unica, {{f^*}} soddisfa lo stesso problema; per unicità deve essere {{f=f^*}}, quindi la soluzione è reale.
-|Extending the field from real to complex numbers does not prevent us from recovering the real numbers. If a linear equation has real coefficients, from a complex solution {{f}} we obtain two real solutions, {{\operatorname{Re}f}} and {{\operatorname{Im}f}}. If the data are also real and the solution is unique, {{f^*}} satisfies the same problem; by uniqueness {{f=f^*}}, so the solution is real.</P>
+<P>Allargare il campo dai reali ai complessi non ci impedisce di ritrovare i reali. Se un’equazione lineare omogenea ha coefficienti reali, dalla soluzione complessa {{f}} otteniamo ancora due soluzioni reali, {{\operatorname{Re}f}} e {{\operatorname{Im}f}}: è lo stesso motivo per cui poco fa abbiamo potuto prendere la parte reale dell’onda. Se poi il problema ha dati reali e soluzione unica, anche {{f^*}} lo soddisfa; per unicità deve essere {{f=f^*}}, quindi la soluzione è reale.
+|Extending the field from real to complex numbers does not prevent us from recovering the real numbers. If a homogeneous linear equation has real coefficients, from a complex solution {{f}} we obtain two real solutions, {{\operatorname{Re}f}} and {{\operatorname{Im}f}}: it is the same reason why we could take the real part of the wave a moment ago. If moreover the problem has real data and a unique solution, {{f^*}} satisfies it too; by uniqueness {{f=f^*}}, so the solution is real.</P>
 
 <P>Possiamo dunque esplorare il campo complesso senza assumere in anticipo che ogni grandezza fisica debba essere complessa. Se la legge e le condizioni del problema richiedono una soluzione reale, torneremo ai numeri reali. Se invece la fase ha conseguenze osservabili, come nell’interferenza, l’informazione necessaria è già presente.
 |We can therefore explore the complex field without assuming in advance that every physical quantity must be complex. If the law and the conditions of the problem require a real solution, we shall return to real numbers. If instead phase has observable consequences, as in interference, the necessary information is already present.</P>
