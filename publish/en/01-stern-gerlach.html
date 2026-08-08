@@ -40,36 +40,39 @@
 <div class="scrim"></div>
 <div class="layout">
 <header class="sidebar">
-  <a class="brand" href="index.html"><span class="mark"><span class="bk">⟨</span>ΛQ<span class="bk">⟩</span></span> La Quantistica<small class="en">Fundamental Experiments of Quantum Mechanics — Master's Thesis</small></a>
+  <a class="brand" href="./"><span class="mark"><span class="bk">⟨</span>ΛQ<span class="bk">⟩</span></span> La Quantistica<small class="en">An Introductory Course in Quantum Mechanics — from the experiments to the theory</small></a>
   <div class="langsw" role="group" aria-label="Lingua / Language">
-    <a class="langbtn" href="../it/01-stern-gerlach.html" hreflang="it" lang="it">Italiano</a>
-    <a class="langbtn" href="../en/01-stern-gerlach.html" hreflang="en" lang="en" aria-current="true">English</a>
+    <a class="langbtn" href="../it/01-stern-gerlach" hreflang="it" lang="it">Italiano</a>
+    <a class="langbtn" href="../en/01-stern-gerlach" hreflang="en" lang="en" aria-current="true">English</a>
   </div>
-  <nav aria-labelledby="nav-capitoli"><span id="nav-capitoli" class="sr-only"><span class="en">Chapters</span></span><a href="index.html"><span class="num"></span><span class="en">Introduction</span></a>
-<a href="01-stern-gerlach.html"><span class="num">1</span><span class="en">The Stern–Gerlach Experiment</span></a>
-<a href="02-stern-gerlach-cascata.html"><span class="num">2</span><span class="en">Cascaded Stern–Gerlach Experiments</span></a>
-<a href="03-elettroni.html"><span class="num">3</span><span class="en">Experiments with Electrons</span></a>
-<a href="04-diffrazione.html"><span class="num">4</span><span class="en">Electron Diffraction</span></a>
-<a href="05-rutherford.html"><span class="num">5</span><span class="en">The Rutherford Experiment</span></a>
-<a href="06-ulteriori-sviluppi.html"><span class="num">6</span><span class="en">Further Developments of the Theory</span></a>
-<a href="07-franck-hertz.html"><span class="num">7</span><span class="en">The Franck–Hertz Experiment</span></a>
-<a href="08-effetto-fotoelettrico.html"><span class="num">8</span><span class="en">The Photoelectric Effect</span></a>
-<a href="09-spettri-atomici.html"><span class="num">9</span><span class="en">Atomic Emission Spectra</span></a></nav>
+  <nav aria-labelledby="nav-capitoli"><span id="nav-capitoli" class="sr-only"><span class="en">Chapters</span></span><a href="./"><span class="num"></span><span class="en">Introduction</span></a>
+<a href="03-elettroni"><span class="num">1</span><span class="en">Experiments with Electrons</span></a>
+<a href="04-diffrazione"><span class="num">2</span><span class="en">Electron Diffraction</span></a>
+<a href="04b-forma-evoluzione"><span class="num">3</span><span class="en">The Form of the Evolution Equation</span></a>
+<a href="04c-hamiltoniana"><span class="num">4</span><span class="en">The Hamiltonian and the Schrödinger Equation</span></a>
+<a href="05-rutherford"><span class="num">5</span><span class="en">The Rutherford Experiment</span></a>
+<a href="05b-diffusione"><span class="num">6</span><span class="en">Rutherford’s Scattering Formula</span></a>
+<a href="07-franck-hertz"><span class="num">7</span><span class="en">The Franck–Hertz Experiment</span></a>
+<a href="08-effetto-fotoelettrico"><span class="num">8</span><span class="en">The Photoelectric Effect</span></a>
+<a href="01-stern-gerlach"><span class="num">9</span><span class="en">The Stern–Gerlach Experiment</span></a>
+<a href="02-stern-gerlach-cascata"><span class="num">10</span><span class="en">Cascaded Stern–Gerlach Experiments</span></a>
+<a href="06-ulteriori-sviluppi"><span class="num">11</span><span class="en">Further Developments of the Theory</span></a>
+<a href="09-spettri-atomici"><span class="num">12</span><span class="en">Atomic Emission Spectra</span></a></nav>
   <p class="sidenote">
     
-    <span class="en">Web edition revised from the 1999 original.</span>
+    <span class="en">Born as a master’s thesis, Federico II, 1999 — revised and expanded for the web.</span>
     <a class="ghlink" href="https://github.com/faustinopalma/laquantistica" target="_blank" rel="noopener"><span class="en">Original text on GitHub ↗</span></a>
   </p>
 </header>
 <main class="content" id="contenuto" tabindex="-1">
   <article class="page">
-    <p class="eyebrow"><span class="en">Chapter 1</span></p>
+    <p class="eyebrow"><span class="en">Chapter 9</span></p>
     <h1 class="title"><span class="en">The Stern–Gerlach Experiment</span></h1>
     
 <p class="opening"><span class="en">This experiment was devised by Stern and Gerlach in 1921 with the aim of measuring the magnetic moment of individual atoms. The first trials were carried out with silver atoms. The results went beyond every expectation, bringing to light unexpected behaviours that today we can use as a starting point for the study of Quantum Mechanics.</span></p>
 <div class="nota-link" id="nota-1">
 <span class="k"><span class="en">Note 01</span></span>
-<span class="en">I had really tried to build this apparatus: <a href="nota-01-stern-gerlach.html?ret=01-stern-gerlach.html%23nota-1">how it went →</a></span>
+<span class="en">I had really tried to build this apparatus: <a href="nota-01-stern-gerlach?ret=01-stern-gerlach.html%23nota-1">how it went →</a></span>
 </div>
 <h2 id="descrizione-dellesperimento."><span class="en">Description of the experiment.</span></h2>
 <p><span class="en">An atom with its magnetic moment <em><strong>m</strong></em> can be pictured as a small magnet (fig. <a class="ref" href="#fig-01_stern_gerlach-1" data-ref="fig-01_stern_gerlach-1">1</a>). If the magnet is placed in a magnetic field, opposite forces act on its poles. If the field is non-uniform the forces are not balanced and the magnet accelerates. The direction in which the magnet accelerates depends on the field gradient and on the orientation of the magnetic moment <em><strong>m</strong></em>; for example, in the figure the magnet accelerates upwards.</span></p>
@@ -102,30 +105,30 @@
 <p><span class="en">After a certain time the furnace is switched off, air is let into the chambers, and the glass slide is removed. The silver deposit, only a few atomic layers thick, is not visible to the naked eye: it must be developed by exposing the slide to sulphur vapour, which converts the silver into dark silver sulphide — the same technique used by Gerlach in 1922. The deflection is then read under a microscope with a micrometric eyepiece.</span></p>
 <h2 id="risultati-sperimentali."><span class="en">Expected results.</span></h2>
 <p><span class="en">On the slide, classical physics leads one to expect a single patch, spread along the gradient: the magnetic moments of the atoms are randomly oriented, and each orientation gives a different deflection. What is observed instead are two distinct deposits, one deflected upwards and one downwards. From the amount of deflection and the field gradient one obtains the magnetic moment of the individual atoms.</span></p>
-<figure id="fig-01_stern_gerlach-9" class="fig-inline"><img loading="lazy" src="/img/pandoc_ch1/vetrino-simulato.png?v=1" alt="The slide with two separate dark bands, and beside it the density profile of the deposit with two maxima."><figcaption><b>Fig. 9</b> — <span class="en">The slide after development, with the density profile of the deposit alongside. The two bands are 1.7 mm apart and 1.1 mm wide. This is not a photograph: it is generated by the <a href="lab-01-stern-gerlach.html">simulated laboratory</a>, which reconstructs the deposit from the parameters of the apparatus; the configuration is the third preset, “readable splitting”. It therefore shows what the model predicts, not what an apparatus actually built would produce: the two bands are clean and parallel because the model assumes a gradient uniform across the whole width of the beam.</span></figcaption></figure>
+<figure id="fig-01_stern_gerlach-9" class="fig-inline"><img loading="lazy" src="/img/pandoc_ch1/vetrino-simulato.png?v=1" alt="The slide with two separate dark bands, and beside it the density profile of the deposit with two maxima."><figcaption><b>Fig. 9</b> — <span class="en">The slide after development, with the density profile of the deposit alongside. The two bands are 1.7 mm apart and 1.1 mm wide. This is not a photograph: it is generated by the <a href="lab-01-stern-gerlach">simulated laboratory</a>, which reconstructs the deposit from the parameters of the apparatus; the configuration is the third preset, “readable splitting”. It therefore shows what the model predicts, not what an apparatus actually built would produce: the two bands are clean and parallel because the model assumes a gradient uniform across the whole width of the beam.</span></figcaption></figure>
 <p><span class="en">The size of the separation depends on the gradient the pole pieces can actually achieve, and will be determined at the construction stage. With a geometry of this kind one expects an order of magnitude of a few millimetres, against the ~0.2 mm obtained by Stern and Gerlach in 1922: a splitting of that order could be read and measured directly, without resorting to micrographs.</span></p>
 <p><span class="en">The two traces will not be point-like. Since the deflection scales as <span class="eq-inline eq-mml" data-tex="1/v^{2}"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi mathvariant="normal">/</mi><msup><mi>v</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">1/v^{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord">1/</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">v</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span></span> and the atoms leave the furnace with a Maxwellian velocity distribution, each trace will be elongated, with a sharp maximum and a tail directed outwards. The 1922 micrographs show instead a lip-shaped figure, the two traces parting in the middle and meeting again at the ends: in Gerlach’s magnet the gradient varied along the slit and vanished at its edges, whereas here the pole pieces are sized to keep it uniform across the whole width of the beam.</span></p>
 <figure id="fig-01_stern_gerlach-10" class="fig-inline"><img loading="lazy" src="/img/pandoc_ch1/gerlach-stern-1922.jpg?v=1" alt="The silver deposit photographed under the microscope: on the left without the field, a single line; on the right with the field, the line opens in the middle."><figcaption><b>Fig. 10</b> — <span class="en">The result of the experiment as published by Gerlach and Stern in 1922: the silver deposit photographed under the microscope. On the left, without the magnetic field, a single line — what classical physics predicts even with the field on. On the right, with the field: the line opens in the middle and closes again at the ends. The lip shape and the blurred edges come from the gap, formed by a knife-edge pole and a grooved one: a geometry that yields a strong gradient which however varies from point to point and vanishes at the edges of the slit. The maximum separation is about two tenths of a millimetre, an order of magnitude less than in the previous figure. <i>From W. Gerlach and O. Stern, Zeitschrift für Physik 9, 349 (1922).</i></span></figcaption></figure>
 <div class="nota-link" id="nota-tec">
 <span class="k"><span class="en">Technical note</span></span>
-<span class="en">Where these dimensions come from: the deflection formula, the gap/gradient trade-off, the vacuum sizing and the construction notes. <a href="nota-tecnica-01-stern-gerlach.html?ret=01-stern-gerlach.html%23nota-tec">Read the calculations →</a></span>
+<span class="en">Where these dimensions come from: the deflection formula, the gap/gradient trade-off, the vacuum sizing and the construction notes. <a href="nota-tecnica-01-stern-gerlach?ret=01-stern-gerlach.html%23nota-tec">Read the calculations →</a></span>
 </div>
-<p class="sim-cta-p" id="lab-esp1"><a class="sim-cta" href="lab-01-stern-gerlach.html?ret=01-stern-gerlach.html%23lab-esp1"><span class="ico">▶</span><span class="en">Try the simulated laboratory · run the Stern–Gerlach experiment</span><span class="arw">→</span></a></p>
+<p class="sim-cta-p" id="lab-esp1"><a class="sim-cta" href="lab-01-stern-gerlach?ret=01-stern-gerlach.html%23lab-esp1"><span class="ico">▶</span><span class="en">Try the simulated laboratory · run the Stern–Gerlach experiment</span><span class="arw">→</span></a></p>
 <h2 id="interpretazione-dei-risultati."><span class="en">Interpretation of the results.</span></h2>
 <p><span class="en">The fact that the beam splits into two distinct beams appears very strange from the point of view of classical mechanics.</span></p>
 <p><span class="en">The atoms leaving the furnace should have magnetic moments oriented at random — some upwards, some downwards, to the left, to the right, at forty-five degrees and at every possible angle. Atoms whose magnetic moment is tilted with respect to the vertical should be deflected less, those with a horizontal magnetic moment should not be deflected at all, and in the end a spread-out smear should have appeared on the slide. The beam should merely have broadened, not split.</span></p>
 <p><span class="en">The experimental observation shows us that, when we measure the z-component of the magnetic moment of a silver atom, we can obtain only two values, <em>+m<sub>0</sub></em> and
 <em>–m<sub>0</sub></em>. There is no good explanation of this fact in terms of classical mechanics; to understand this phenomenon one must study Quantum Mechanics.</span></p>
 
-    <nav class="chapter-nav" aria-labelledby="nav-pagina"><span id="nav-pagina" class="sr-only"><span class="en">Previous and next chapter</span></span><a class="prev" href="index.html"><span class="en">Previous</span><span class="ttl en">Introduction</span></a><a class="next" href="02-stern-gerlach-cascata.html"><span class="en">Next</span><span class="ttl en">Cascaded Stern–Gerlach Experiments</span></a></nav>
+    <nav class="chapter-nav" aria-labelledby="nav-pagina"><span id="nav-pagina" class="sr-only"><span class="en">Previous and next chapter</span></span><a class="prev" href="08-effetto-fotoelettrico"><span class="en">Previous</span><span class="ttl en">The Photoelectric Effect</span></a><a class="next" href="02-stern-gerlach-cascata"><span class="en">Next</span><span class="ttl en">Cascaded Stern–Gerlach Experiments</span></a></nav>
   </article>
 </main>
 </div>
 <script src="/assets/app.js?v=10"></script>
 <div class="langsw-mobile" role="group" aria-label="Lingua / Language">
   <span class="lg" aria-hidden="true">🌐</span>
-  <a class="langbtn" href="../it/01-stern-gerlach.html" hreflang="it" lang="it">Italiano</a>
-  <a class="langbtn" href="../en/01-stern-gerlach.html" hreflang="en" lang="en" aria-current="true">English</a>
+  <a class="langbtn" href="../it/01-stern-gerlach" hreflang="it" lang="it">Italiano</a>
+  <a class="langbtn" href="../en/01-stern-gerlach" hreflang="en" lang="en" aria-current="true">English</a>
 </div>
 </body>
 </html>

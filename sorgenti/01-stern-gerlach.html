@@ -24,30 +24,33 @@
 <div class="scrim"></div>
 <div class="layout">
 <header class="sidebar">
-  <a class="brand" href="index.html"><span class="mark"><span class="bk">⟨</span>ΛQ<span class="bk">⟩</span></span> La Quantistica<small class="it">Esperimenti fondamentali di Meccanica Quantistica — Tesi di Laurea</small><small class="en">Fundamental Experiments of Quantum Mechanics — Master's Thesis</small></a>
+  <a class="brand" href="index.html"><span class="mark"><span class="bk">⟨</span>ΛQ<span class="bk">⟩</span></span> La Quantistica<small class="it">Corso introduttivo di Meccanica Quantistica — dagli esperimenti alla teoria</small><small class="en">An Introductory Course in Quantum Mechanics — from the experiments to the theory</small></a>
   <div class="langsw" role="group" aria-label="Lingua / Language">
     <button class="langbtn" type="button" data-l="it" aria-pressed="false">Italiano</button>
     <button class="langbtn" type="button" data-l="en" aria-pressed="true">English</button>
   </div>
   <nav aria-labelledby="nav-capitoli"><span id="nav-capitoli" class="sr-only"><span class="it">Capitoli</span><span class="en">Chapters</span></span><a href="index.html"><span class="num"></span><span class="it">Introduzione</span><span class="en">Introduction</span></a>
-<a href="01-stern-gerlach.html"><span class="num">1</span><span class="it">Esperimento di Stern-Gerlach</span><span class="en">The Stern–Gerlach Experiment</span></a>
-<a href="02-stern-gerlach-cascata.html"><span class="num">2</span><span class="it">Esperimenti di Stern-Gerlach in cascata</span><span class="en">Cascaded Stern–Gerlach Experiments</span></a>
-<a href="03-elettroni.html"><span class="num">3</span><span class="it">Esperimenti con gli Elettroni</span><span class="en">Experiments with Electrons</span></a>
-<a href="04-diffrazione.html"><span class="num">4</span><span class="it">Diffrazione degli Elettroni</span><span class="en">Electron Diffraction</span></a>
+<a href="03-elettroni.html"><span class="num">1</span><span class="it">Esperimenti con gli Elettroni</span><span class="en">Experiments with Electrons</span></a>
+<a href="04-diffrazione.html"><span class="num">2</span><span class="it">Diffrazione degli Elettroni</span><span class="en">Electron Diffraction</span></a>
+<a href="04b-forma-evoluzione.html"><span class="num">3</span><span class="it">La forma dell’equazione di evoluzione</span><span class="en">The Form of the Evolution Equation</span></a>
+<a href="04c-hamiltoniana.html"><span class="num">4</span><span class="it">L’hamiltoniana e l’equazione di Schrödinger</span><span class="en">The Hamiltonian and the Schrödinger Equation</span></a>
 <a href="05-rutherford.html"><span class="num">5</span><span class="it">Esperimento di Rutherford</span><span class="en">The Rutherford Experiment</span></a>
-<a href="06-ulteriori-sviluppi.html"><span class="num">6</span><span class="it">Ulteriori sviluppi della Teoria</span><span class="en">Further Developments of the Theory</span></a>
+<a href="05b-diffusione.html"><span class="num">6</span><span class="it">La formula di diffusione di Rutherford</span><span class="en">Rutherford’s Scattering Formula</span></a>
 <a href="07-franck-hertz.html"><span class="num">7</span><span class="it">Esperimento di Franck-Hertz</span><span class="en">The Franck–Hertz Experiment</span></a>
 <a href="08-effetto-fotoelettrico.html"><span class="num">8</span><span class="it">Effetto Fotoelettrico</span><span class="en">The Photoelectric Effect</span></a>
-<a href="09-spettri-atomici.html"><span class="num">9</span><span class="it">Spettri atomici di emissione</span><span class="en">Atomic Emission Spectra</span></a></nav>
+<a href="01-stern-gerlach.html"><span class="num">9</span><span class="it">Esperimento di Stern-Gerlach</span><span class="en">The Stern–Gerlach Experiment</span></a>
+<a href="02-stern-gerlach-cascata.html"><span class="num">10</span><span class="it">Esperimenti di Stern-Gerlach in cascata</span><span class="en">Cascaded Stern–Gerlach Experiments</span></a>
+<a href="06-ulteriori-sviluppi.html"><span class="num">11</span><span class="it">Ulteriori sviluppi della Teoria</span><span class="en">Further Developments of the Theory</span></a>
+<a href="09-spettri-atomici.html"><span class="num">12</span><span class="it">Spettri atomici di emissione</span><span class="en">Atomic Emission Spectra</span></a></nav>
   <p class="sidenote">
-    <span class="it">Edizione web rivista rispetto all’originale del 1999.</span>
-    <span class="en">Web edition revised from the 1999 original.</span>
+    <span class="it">Nato come tesi di laurea, Federico II, 1999 — riveduto e ampliato per il web.</span>
+    <span class="en">Born as a master’s thesis, Federico II, 1999 — revised and expanded for the web.</span>
     <a class="ghlink" href="https://github.com/faustinopalma/laquantistica" target="_blank" rel="noopener"><span class="it">Testo originale su GitHub ↗</span><span class="en">Original text on GitHub ↗</span></a>
   </p>
 </header>
 <main class="content" id="contenuto" tabindex="-1">
   <article class="page">
-    <p class="eyebrow"><span class="it">Capitolo 1</span><span class="en">Chapter 1</span></p>
+    <p class="eyebrow"><span class="it">Capitolo 9</span><span class="en">Chapter 9</span></p>
     <h1 class="title"><span class="it">Esperimento di Stern-Gerlach</span><span class="en">The Stern–Gerlach Experiment</span></h1>
     
 <p class="opening"><span class="it">Questo esperimento fu ideato da Stern e da Gerlach nel 1921 con lo
@@ -153,7 +156,7 @@ fatto in termini della meccanica classica, per capire questo fenomeno
 bisogna studiare la Meccanica Quantistica.</span><span class="en">The experimental observation shows us that, when we measure the z-component of the magnetic moment of a silver atom, we can obtain only two values, <em>+m<sub>0</sub></em> and
 <em>–m<sub>0</sub></em>. There is no good explanation of this fact in terms of classical mechanics; to understand this phenomenon one must study Quantum Mechanics.</span></p>
 
-    <nav class="chapter-nav" aria-labelledby="nav-pagina"><span id="nav-pagina" class="sr-only"><span class="it">Capitolo precedente e successivo</span><span class="en">Previous and next chapter</span></span><a class="prev" href="index.html"><span class="it">Precedente</span><span class="en">Previous</span><span class="ttl it">Introduzione</span><span class="ttl en">Introduction</span></a><a class="next" href="02-stern-gerlach-cascata.html"><span class="it">Successivo</span><span class="en">Next</span><span class="ttl it">Esperimenti di Stern-Gerlach in cascata</span><span class="ttl en">Cascaded Stern–Gerlach Experiments</span></a></nav>
+    <nav class="chapter-nav" aria-labelledby="nav-pagina"><span id="nav-pagina" class="sr-only"><span class="it">Capitolo precedente e successivo</span><span class="en">Previous and next chapter</span></span><a class="prev" href="08-effetto-fotoelettrico.html"><span class="it">Precedente</span><span class="en">Previous</span><span class="ttl it">Effetto Fotoelettrico</span><span class="ttl en">The Photoelectric Effect</span></a><a class="next" href="02-stern-gerlach-cascata.html"><span class="it">Successivo</span><span class="en">Next</span><span class="ttl it">Esperimenti di Stern-Gerlach in cascata</span><span class="ttl en">Cascaded Stern–Gerlach Experiments</span></a></nav>
   </article>
 </main>
 </div>

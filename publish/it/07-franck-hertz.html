@@ -40,23 +40,26 @@
 <div class="scrim"></div>
 <div class="layout">
 <header class="sidebar">
-  <a class="brand" href="index.html"><span class="mark"><span class="bk">⟨</span>ΛQ<span class="bk">⟩</span></span> La Quantistica<small class="it">Esperimenti fondamentali di Meccanica Quantistica — Tesi di Laurea</small></a>
+  <a class="brand" href="./"><span class="mark"><span class="bk">⟨</span>ΛQ<span class="bk">⟩</span></span> La Quantistica<small class="it">Corso introduttivo di Meccanica Quantistica — dagli esperimenti alla teoria</small></a>
   <div class="langsw" role="group" aria-label="Lingua / Language">
-    <a class="langbtn" href="../it/07-franck-hertz.html" hreflang="it" lang="it" aria-current="true">Italiano</a>
-    <a class="langbtn" href="../en/07-franck-hertz.html" hreflang="en" lang="en">English</a>
+    <a class="langbtn" href="../it/07-franck-hertz" hreflang="it" lang="it" aria-current="true">Italiano</a>
+    <a class="langbtn" href="../en/07-franck-hertz" hreflang="en" lang="en">English</a>
   </div>
-  <nav aria-labelledby="nav-capitoli"><span id="nav-capitoli" class="sr-only"><span class="it">Capitoli</span></span><a href="index.html"><span class="num"></span><span class="it">Introduzione</span></a>
-<a href="01-stern-gerlach.html"><span class="num">1</span><span class="it">Esperimento di Stern-Gerlach</span></a>
-<a href="02-stern-gerlach-cascata.html"><span class="num">2</span><span class="it">Esperimenti di Stern-Gerlach in cascata</span></a>
-<a href="03-elettroni.html"><span class="num">3</span><span class="it">Esperimenti con gli Elettroni</span></a>
-<a href="04-diffrazione.html"><span class="num">4</span><span class="it">Diffrazione degli Elettroni</span></a>
-<a href="05-rutherford.html"><span class="num">5</span><span class="it">Esperimento di Rutherford</span></a>
-<a href="06-ulteriori-sviluppi.html"><span class="num">6</span><span class="it">Ulteriori sviluppi della Teoria</span></a>
-<a href="07-franck-hertz.html"><span class="num">7</span><span class="it">Esperimento di Franck-Hertz</span></a>
-<a href="08-effetto-fotoelettrico.html"><span class="num">8</span><span class="it">Effetto Fotoelettrico</span></a>
-<a href="09-spettri-atomici.html"><span class="num">9</span><span class="it">Spettri atomici di emissione</span></a></nav>
+  <nav aria-labelledby="nav-capitoli"><span id="nav-capitoli" class="sr-only"><span class="it">Capitoli</span></span><a href="./"><span class="num"></span><span class="it">Introduzione</span></a>
+<a href="03-elettroni"><span class="num">1</span><span class="it">Esperimenti con gli Elettroni</span></a>
+<a href="04-diffrazione"><span class="num">2</span><span class="it">Diffrazione degli Elettroni</span></a>
+<a href="04b-forma-evoluzione"><span class="num">3</span><span class="it">La forma dell’equazione di evoluzione</span></a>
+<a href="04c-hamiltoniana"><span class="num">4</span><span class="it">L’hamiltoniana e l’equazione di Schrödinger</span></a>
+<a href="05-rutherford"><span class="num">5</span><span class="it">Esperimento di Rutherford</span></a>
+<a href="05b-diffusione"><span class="num">6</span><span class="it">La formula di diffusione di Rutherford</span></a>
+<a href="07-franck-hertz"><span class="num">7</span><span class="it">Esperimento di Franck-Hertz</span></a>
+<a href="08-effetto-fotoelettrico"><span class="num">8</span><span class="it">Effetto Fotoelettrico</span></a>
+<a href="01-stern-gerlach"><span class="num">9</span><span class="it">Esperimento di Stern-Gerlach</span></a>
+<a href="02-stern-gerlach-cascata"><span class="num">10</span><span class="it">Esperimenti di Stern-Gerlach in cascata</span></a>
+<a href="06-ulteriori-sviluppi"><span class="num">11</span><span class="it">Ulteriori sviluppi della Teoria</span></a>
+<a href="09-spettri-atomici"><span class="num">12</span><span class="it">Spettri atomici di emissione</span></a></nav>
   <p class="sidenote">
-    <span class="it">Edizione web rivista rispetto all’originale del 1999.</span>
+    <span class="it">Nato come tesi di laurea, Federico II, 1999 — riveduto e ampliato per il web.</span>
     
     <a class="ghlink" href="https://github.com/faustinopalma/laquantistica" target="_blank" rel="noopener"><span class="it">Testo originale su GitHub ↗</span></a>
   </p>
@@ -95,7 +98,7 @@
 <p><span class="it">La figura <a class="ref" href="#fig-07_franck_hertz-7" data-ref="fig-07_franck_hertz-7">7</a> mostra ingrandito quello che si vede guardando tra le due griglie quando la tensione è di 70 V. Si possono osservare tre zone luminose rosse corrispondenti ai luoghi in cui gli elettroni cedono l’energia agli atomi.</span></p>
 <figure id="fig-07_franck_hertz-7" class="fig-inline"><img loading="lazy" src="/img/07_franck_hertz/zone-luminose.png" alt="Le zone luminose tra le griglie (a 70 V)."><figcaption><b>Fig. 7</b> — <span class="it">Le zone luminose tra le griglie (a 70 V).</span></figcaption></figure>
 <p><span class="it">Quando la tensione è minore di 19 V non si vedono zone luminose. A 19 V compare una prima “banda” vicino alla seconda griglia; quando si alza la tensione, questa zona si sposta a sinistra verso il centro. A 38 V la prima banda si troverà a metà percorso tra le due griglie, e si inizierà a vedere una seconda banda vicino alla griglia di arrivo. Alzando ancora la tensione queste due zone si sposteranno a sinistra e a 57 V si vedrà la terza zona nascere vicino alla seconda griglia. A 70 V si vede l’immagine che abbiamo riportato, e a 80 V si vedrà una quarta zona non ancora sviluppata vicino alla griglia.</span></p>
-<p><span class="it">Queste zone luminescenti sono dovute al fatto che, quando gli atomi assorbono una certa quantità di energia, non la mantengono a lungo e dopo pochissimo tempo la restituiscono sotto forma di onde elettromagnetiche, cioè di luce. Ci occuperemo di questo fenomeno di emissione approfonditamente nella nona scheda.</span></p>
+<p><span class="it">Queste zone luminescenti sono dovute al fatto che, quando gli atomi assorbono una certa quantità di energia, non la mantengono a lungo e dopo pochissimo tempo la restituiscono sotto forma di onde elettromagnetiche, cioè di luce. Ci occuperemo di questo fenomeno di emissione approfonditamente nella scheda sugli spettri atomici.</span></p>
 <h2 id="sec-descrizione-dellapparato-sperimentale-per-il-mercurio."><span class="it">Descrizione dell’apparato sperimentale per il mercurio.</span></h2>
 <p><span class="it">Le foto nelle figure <a class="ref" href="#fig-07_franck_hertz-8" data-ref="fig-07_franck_hertz-8">8</a> e <a class="ref" href="#fig-07_franck_hertz-9" data-ref="fig-07_franck_hertz-9">9</a> mostrano l’apparato sperimentale per il mercurio.</span></p>
 <figure id="fig-07_franck_hertz-8" class="fig-inline"><img loading="lazy" src="/img/07_franck_hertz/apparato-mercurio-1.jpg?v=2" alt="Apparato sperimentale per il mercurio."><figcaption><b>Fig. 8</b> — <span class="it">Apparato sperimentale per il mercurio.</span></figcaption></figure>
@@ -105,16 +108,16 @@
 <figure id="fig-07_franck_hertz-10" class="fig-inline"><img loading="lazy" src="/img/07_franck_hertz/oscilloscopio-mercurio.jpg" alt="Grafico tensione/corrente per il mercurio: sei massimi."><figcaption><b>Fig. 10</b> — <span class="it">Grafico tensione/corrente per il mercurio: sei massimi.</span></figcaption></figure>
 <figure class="fig-inline"><img loading="lazy" src="/img/07_franck_hertz/COMPUTER.png" alt="Apparato Franck-Hertz con acquisizione della curva al computer."><figcaption><span class="it">Lo stesso apparato con acquisizione della curva tensione/corrente tramite computer.</span></figcaption></figure>
 <figure class="fig-inline"><img loading="lazy" src="/img/07_franck_hertz/PLOTTER.png" alt="Apparato Franck-Hertz con registrazione della curva tramite plotter."><figcaption><span class="it">Lo stesso apparato con registrazione della curva tramite un registratore (plotter).</span></figcaption></figure>
-<p class="sim-cta-p" id="lab-esp7"><a class="sim-cta" href="lab-07-franck-hertz.html?ret=07-franck-hertz.html%23lab-esp7"><span class="ico">▶</span><span class="it">Prova il laboratorio simulato · Esperimento di Franck-Hertz</span><span class="arw">→</span></a></p>
-    <nav class="chapter-nav" aria-labelledby="nav-pagina"><span id="nav-pagina" class="sr-only"><span class="it">Capitolo precedente e successivo</span></span><a class="prev" href="06-ulteriori-sviluppi.html"><span class="it">Precedente</span><span class="ttl it">Ulteriori sviluppi della Teoria</span></a><a class="next" href="08-effetto-fotoelettrico.html"><span class="it">Successivo</span><span class="ttl it">Effetto Fotoelettrico</span></a></nav>
+<p class="sim-cta-p" id="lab-esp7"><a class="sim-cta" href="lab-07-franck-hertz?ret=07-franck-hertz.html%23lab-esp7"><span class="ico">▶</span><span class="it">Prova il laboratorio simulato · Esperimento di Franck-Hertz</span><span class="arw">→</span></a></p>
+    <nav class="chapter-nav" aria-labelledby="nav-pagina"><span id="nav-pagina" class="sr-only"><span class="it">Capitolo precedente e successivo</span></span><a class="prev" href="05b-diffusione"><span class="it">Precedente</span><span class="ttl it">La formula di diffusione di Rutherford</span></a><a class="next" href="08-effetto-fotoelettrico"><span class="it">Successivo</span><span class="ttl it">Effetto Fotoelettrico</span></a></nav>
   </article>
 </main>
 </div>
 <script src="/assets/app.js?v=10"></script>
 <div class="langsw-mobile" role="group" aria-label="Lingua / Language">
   <span class="lg" aria-hidden="true">🌐</span>
-  <a class="langbtn" href="../it/07-franck-hertz.html" hreflang="it" lang="it" aria-current="true">Italiano</a>
-  <a class="langbtn" href="../en/07-franck-hertz.html" hreflang="en" lang="en">English</a>
+  <a class="langbtn" href="../it/07-franck-hertz" hreflang="it" lang="it" aria-current="true">Italiano</a>
+  <a class="langbtn" href="../en/07-franck-hertz" hreflang="en" lang="en">English</a>
 </div>
 </body>
 </html>

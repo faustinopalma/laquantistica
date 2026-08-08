@@ -33,7 +33,7 @@ html,body{overflow-x:clip;}
 
     <div class="doc-meta">
       <span class="tag"><span class="it">Nota 09</span><span class="en">Note 09</span></span>
-      <a class="doc-back-crumb" id="backCrumb" href="04-diffrazione.html"><span class="crumb-arrow" aria-hidden="true">&larr;</span><span class="vh"><span class="it">Torna al </span><span class="en">Back to </span></span><span class="cap it">Cap. 04 · Diffrazione degli Elettroni</span><span class="cap en">Ch. 04 · Electron Diffraction</span></a>
+      <a class="doc-back-crumb" id="backCrumb" href="04b-forma-evoluzione.html#nota-9"><span class="crumb-arrow" aria-hidden="true">&larr;</span><span class="vh"><span class="it">Torna al </span><span class="en">Back to </span></span><span class="cap it">Cap. 03 · La forma dell’equazione di evoluzione</span><span class="cap en">Ch. 03 · The Form of the Evolution Equation</span></a>
       <div class="langsw" role="group" aria-label="Lingua / Language">
         <button class="langbtn" type="button" data-l="it" aria-pressed="false">Italiano</button>
         <button class="langbtn" type="button" data-l="en" aria-pressed="true">English</button>
@@ -129,7 +129,7 @@ CORPO = r'''
 <H2>Le onde ci indicano i complessi|Waves point us towards complex numbers</H2>
 
 <P>Nella scheda abbiamo visto che a un fascio di elettroni dobbiamo associare un’onda. Per descrivere un’onda l’ampiezza non basta: due onde della stessa ampiezza possono rinforzarsi o cancellarsi a seconda di come sono sfasate, e sono proprio queste cancellazioni a formare gli anelli sullo schermo. Ogni onda porta dunque due informazioni, l’ampiezza e la fase, e la seconda conta quanto la prima.
-|In the chapter we saw that a beam of electrons must be associated with a wave. To describe a wave the amplitude is not enough: two waves of the same amplitude can reinforce or cancel each other depending on their relative phase, and it is precisely these cancellations that form the rings on the screen. Every wave therefore carries two pieces of information, the amplitude and the phase, and the second counts as much as the first.</P>
+|In the previous card we saw that a beam of electrons must be associated with a wave. To describe a wave the amplitude is not enough: two waves of the same amplitude can reinforce or cancel each other depending on their relative phase, and it is precisely these cancellations that form the rings on the screen. Every wave therefore carries two pieces of information, the amplitude and the phase, and the second counts as much as the first.</P>
 
 <P>Un numero complesso porta esattamente due informazioni: il modulo e l’argomento. Scriviamo l’onda reale
 |A complex number carries exactly two pieces of information: the modulus and the argument. Let us write the real wave</P>
@@ -233,7 +233,7 @@ CORPO = r'''
 
 CODA = '''
     <div class="doc-return">
-      <a id="backBottom" href="04-diffrazione.html"><span class="it">← Torna al Capitolo 4</span><span class="en">← Back to Chapter 4</span></a>
+      <a id="backBottom" href="04b-forma-evoluzione.html#nota-9"><span class="it">← Torna al punto di lettura</span><span class="en">← Back to where you were</span></a>
     </div>
 
     <div class="doc-foot">

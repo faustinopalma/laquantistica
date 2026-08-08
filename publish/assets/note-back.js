@@ -5,15 +5,18 @@
    destinazione già scritta nel documento. */
 (function () {
   var CAPITOLI = {
-    '01-stern-gerlach.html':         ['Cap. 01 \u00b7 Stern\u2013Gerlach', 'Ch. 01 \u00b7 Stern\u2013Gerlach'],
-    '02-stern-gerlach-cascata.html': ['Cap. 02 \u00b7 Stern\u2013Gerlach in cascata', 'Ch. 02 \u00b7 Cascaded Stern\u2013Gerlach'],
-    '03-elettroni.html':             ['Cap. 03 \u00b7 Esperimenti con gli Elettroni', 'Ch. 03 \u00b7 Experiments with Electrons'],
-    '04-diffrazione.html':           ['Cap. 04 \u00b7 Diffrazione degli Elettroni', 'Ch. 04 \u00b7 Electron Diffraction'],
-    '05-rutherford.html':            ['Cap. 05 \u00b7 Esperimento di Rutherford', 'Ch. 05 \u00b7 The Rutherford Experiment'],
-    '06-ulteriori-sviluppi.html':    ['Cap. 06 \u00b7 Ulteriori sviluppi della Teoria', 'Ch. 06 \u00b7 Further Developments of the Theory'],
-    '07-franck-hertz.html':          ['Cap. 07 \u00b7 Esperimento di Franck-Hertz', 'Ch. 07 \u00b7 The Franck\u2013Hertz Experiment'],
-    '08-effetto-fotoelettrico.html': ['Cap. 08 \u00b7 Effetto Fotoelettrico', 'Ch. 08 \u00b7 The Photoelectric Effect'],
-    '09-spettri-atomici.html':       ['Cap. 09 \u00b7 Spettri atomici di emissione', 'Ch. 09 \u00b7 Atomic Emission Spectra']
+    '03-elettroni.html':                ['Cap. 01 \u00b7 Esperimenti con gli Elettroni', 'Ch. 01 \u00b7 Experiments with Electrons'],
+    '04-diffrazione.html':              ['Cap. 02 \u00b7 Diffrazione degli Elettroni', 'Ch. 02 \u00b7 Electron Diffraction'],
+    '04b-forma-evoluzione.html':        ['Cap. 03 \u00b7 La forma dell’equazione di evoluzione', 'Ch. 03 \u00b7 The Form of the Evolution Equation'],
+    '04c-hamiltoniana.html':            ['Cap. 04 \u00b7 L’hamiltoniana e l’equazione di Schrödinger', 'Ch. 04 \u00b7 The Hamiltonian and the Schrödinger Equation'],
+    '05-rutherford.html':               ['Cap. 05 \u00b7 Esperimento di Rutherford', 'Ch. 05 \u00b7 The Rutherford Experiment'],
+    '05b-diffusione.html':              ['Cap. 06 \u00b7 La formula di diffusione di Rutherford', 'Ch. 06 \u00b7 Rutherford’s Scattering Formula'],
+    '07-franck-hertz.html':             ['Cap. 07 \u00b7 Esperimento di Franck-Hertz', 'Ch. 07 \u00b7 The Franck–Hertz Experiment'],
+    '08-effetto-fotoelettrico.html':    ['Cap. 08 \u00b7 Effetto Fotoelettrico', 'Ch. 08 \u00b7 The Photoelectric Effect'],
+    '01-stern-gerlach.html':            ['Cap. 09 \u00b7 Esperimento di Stern-Gerlach', 'Ch. 09 \u00b7 The Stern–Gerlach Experiment'],
+    '02-stern-gerlach-cascata.html':    ['Cap. 10 \u00b7 Esperimenti di Stern-Gerlach in cascata', 'Ch. 10 \u00b7 Cascaded Stern–Gerlach Experiments'],
+    '06-ulteriori-sviluppi.html':       ['Cap. 11 \u00b7 Ulteriori sviluppi della Teoria', 'Ch. 11 \u00b7 Further Developments of the Theory'],
+    '09-spettri-atomici.html':          ['Cap. 12 \u00b7 Spettri atomici di emissione', 'Ch. 12 \u00b7 Atomic Emission Spectra']
   };
 
   function destinazioneValida(v) {

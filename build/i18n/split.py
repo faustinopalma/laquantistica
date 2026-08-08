@@ -39,6 +39,27 @@ def pagine():
             if not p.name.startswith('_') and not p.name.startswith('game-')
             and p.name not in SALTA]
 
+
+def collegamenti_canonici(testo):
+    """Evita che i link interni passino dal redirect automatico .html di Azure."""
+    pubbliche = {p.name for p in pagine()}
+
+    def riscrivi(m):
+        url = m.group(1)
+        fine_percorso = min((i for i in (url.find('?'), url.find('#')) if i >= 0),
+                            default=len(url))
+        percorso, suffisso = url[:fine_percorso], url[fine_percorso:]
+        nome = percorso.rsplit('/', 1)[-1]
+        if nome not in pubbliche:
+            return m.group(0)
+        if nome == 'index.html':
+            percorso = percorso[:-len(nome)] or './'
+        else:
+            percorso = percorso[:-5]
+        return f'href="{percorso}{suffisso}"'
+
+    return re.sub(r'href="([^"]+)"', riscrivi, testo)
+
 # Titolo e descrizione per lingua. Le pagine assenti restano col titolo bilingue
 # e vengono segnalate nel resoconto.
 META = {
@@ -138,6 +159,48 @@ META = {
         'en': ('Note 09 · Why do we choose complex numbers? — La Quantistica',
                'Why we use complex numbers: the four normed division algebras, wave amplitude and '
                'phase, the Riemann-Silberstein field and the recovery of real solutions.'),
+    },
+    '04b-forma-evoluzione.html': {
+        'it': ('La forma dell’equazione di evoluzione · La Quantistica',
+               'Dalle ampiezze di probabilità alla forma generale della legge di evoluzione: stato '
+               'come funzione complessa, algebra degli operatori, conservazione del prodotto scalare.'),
+        'en': ('The Form of the Evolution Equation · La Quantistica',
+               'From probability amplitudes to the general form of the law of evolution: the state '
+               'as a complex function, the algebra of operators, conservation of the scalar product.'),
+    },
+    '04c-hamiltoniana.html': {
+        'it': ('L’hamiltoniana e l’equazione di Schrödinger · La Quantistica',
+               'Determinazione della matrice hamiltoniana chiedendo l’accordo con l’equazione di '
+               'Newton, e la costante fissata da una sola misura: la relazione di De Broglie.'),
+        'en': ('The Hamiltonian and the Schrödinger Equation · La Quantistica',
+               'Determining the Hamiltonian matrix by requiring agreement with Newton’s equation, '
+               'and the constant fixed by a single measurement: the De Broglie relation.'),
+    },
+    '05b-diffusione.html': {
+        'it': ('La formula di diffusione di Rutherford · La Quantistica',
+               'L’equazione di Schrödinger in tre dimensioni, il flusso di probabilità e la formula '
+               'di diffusione di Rutherford, confrontata con le misure dell’esperimento.'),
+        'en': ('Rutherford’s Scattering Formula · La Quantistica',
+               'The Schrödinger equation in three dimensions, the probability flux and Rutherford’s '
+               'scattering formula, compared with the measurements from the experiment.'),
+    },
+    'nota-10-dimostrazione-commutatori.html': {
+        'it': ('Nota 10 · Le formule sui commutatori — La Quantistica', None),
+        'en': ('Note 10 · The commutator formulas — La Quantistica',
+               'Proof by induction of the four commutator formulas used to determine the '
+               'Hamiltonian matrix.'),
+    },
+    'nota-11-appendici-rutherford.html': {
+        'it': ('Nota 11 · Le due appendici al calcolo della diffusione — La Quantistica', None),
+        'en': ('Note 11 · The two appendices to the scattering calculation — La Quantistica',
+               'General solution of the Helmholtz equation and the integral used in Rutherford’s '
+               'scattering formula.'),
+    },
+    'nota-12-questa-edizione.html': {
+        'it': ('Nota 12 · Che cosa è cambiato rispetto al 1999 — La Quantistica', None),
+        'en': ('Note 12 · What has changed since 1999 — La Quantistica',
+               'What sets this web edition apart from the 1999 thesis: the reading order, the '
+               'splitting of the cards, and the original order with links to the pages.'),
     },
     'lab-02a-sg-angolo-relativo.html': {
         'it': ('Lab · Stern-Gerlach in cascata: angolo relativo — La Quantistica', None),
@@ -628,6 +691,7 @@ def trasforma(testo, lingua, file_, avvisi):
 
     # riferimenti agli asset: da relativi a radice del sito, cosi' non dipendono dalla cartella
     testo = re.sub(r'((?:src|href)=")(assets/|img/)', r'\1/\2', testo)
+    testo = collegamenti_canonici(testo)
 
     testo, n_dec = separatore_decimale(testo, lingua)
     if n_dec:
