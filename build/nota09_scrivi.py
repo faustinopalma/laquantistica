@@ -141,8 +141,8 @@ CORPO = r'''
 \nabla\!\times\!\mathbf B&=\mu_0\mathbf J+\frac{1}{c^2}\frac{\partial\mathbf E}{\partial t}.
 \end{aligned}</EQ>
 
-<P>dove {{\rho}} è la densità di carica, {{\mathbf J}} la densità di corrente, e le due costanti del vuoto sono legate dalla relazione {{\varepsilon_0\mu_0c^2=1}}.
-|where {{\rho}} is the charge density, {{\mathbf J}} the current density, and the two constants of free space are related by {{\varepsilon_0\mu_0c^2=1}}.</P>
+<P>dove {{\rho}} è la densità di carica, {{\mathbf J}} la densità di corrente, {{c}} la velocità della luce nel vuoto, e le due costanti del vuoto sono legate dalla relazione {{\varepsilon_0\mu_0c^2=1}}.
+|where {{\rho}} is the charge density, {{\mathbf J}} the current density, {{c}} the speed of light in vacuum, and the two constants of free space are related by {{\varepsilon_0\mu_0c^2=1}}.</P>
 
 <P>Poniamo
 |Let us set</P>
