@@ -7,6 +7,22 @@ della tesi (onestà intellettuale, dietro le quinte, aneddoti storici, ecc.).
 > Nota di lavoro: questo formato è una prima scelta grafica e potrà essere ritoccato.
 > Tutte le note condividono lo stesso CSS, quindi una modifica di stile si propaga a tutte.
 
+## Stile del testo (vale per tutti i testi del sito, non solo per le note)
+
+Regola stabilita dall'autore l'8 agosto 2026: ogni testo nuovo si scrive in questo stile,
+senza bisogno che venga richiesto di volta in volta.
+
+- **Niente metafore, niente retorica, niente similitudini divulgative.** Parole dell'autore:
+  «non ho praticamente mai usato metafore o retorica, secondo me inquina».
+- **Prima persona plurale** ("vediamo", "poniamo", "chiediamo"), prosa piana, frasi brevi.
+- **Il termine tecnico al posto della perifrasi.** Niente enfasi, niente esclamazioni.
+- **Si dichiara quanto vale una conclusione.** Le premesse che imponiamo noi vanno dichiarate
+  come tali; non si afferma più di quello che si dimostra.
+- **Nessuna nozione appesa e nessun salto logico.** Un concetto entra nel testo solo se serve
+  più avanti; non si rimanda a fatti che il lettore non può conoscere.
+- Nelle formule non si va a capo a ogni uguale: si spezza solo se la riga è davvero larga.
+- Le note esistono per **togliere peso** alla scheda, non per aggiungere materia.
+
 ## File coinvolti
 - `publish/assets/note.css` — stile completo della scheda (griglia tecnica di sfondo,
   foglio con cornice tratteggiata, barra metadati monospace, sezioni con prefisso `//`,
