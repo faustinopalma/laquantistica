@@ -48,25 +48,25 @@ html,body{overflow-x:clip;}
 '''
 
 CORPO = r'''
-<P class="lede">Per trascrivere le leggi della natura abbiamo bisogno di un’algebra: dobbiamo decidere quali numeri usare e quali operazioni ammettere. Non stiamo chiedendo di che cosa sia fatta la natura. Stiamo scegliendo un linguaggio, e lo vogliamo abbastanza ampio da esprimere quello che osserviamo e abbastanza semplice da permetterci di calcolare.
-|To transcribe the laws of nature we need an algebra: we must decide which numbers to use and which operations to allow. We are not asking what nature is made of. We are choosing a language, and we want it broad enough to express what we observe and simple enough to let us calculate.</P>
+<P class="lede">Per trascrivere le leggi della natura abbiamo bisogno di un’algebra: dobbiamo decidere quali numeri usare e quali operazioni ammettere. Non è una domanda su che cosa sia fatta la natura: è la scelta di uno strumento di calcolo.
+|To transcribe the laws of nature we need an algebra: we must decide which numbers to use and which operations to allow. This is not a question about what nature is made of: it is the choice of a tool for calculation.</P>
 
 <H2>Che cosa deve avere un’algebra|What an algebra must have</H2>
 
-<P>Conviene dire subito quali proprietà ci servono, perché da qui discende tutto il resto. Non le stiamo imponendo alla natura: stiamo scegliendo uno strumento di calcolo, e queste sono le proprietà senza le quali non sapremmo adoperarlo.
-|It is worth saying at once which properties we need, because everything else follows from them. We are not imposing them on nature: we are choosing a tool for calculation, and these are the properties without which we would not know how to use it.</P>
+<P>Queste sono le proprietà che ci servono. Da qui discende tutto il resto.
+|These are the properties we need. Everything else follows from them.</P>
 
-<P><strong>Somma e prodotto.</strong> I numeri si devono poter sommare e moltiplicare. Della somma vogliamo tutto quello che vale per i numeri reali: l’ordine degli addendi non conta, c’è uno zero che lascia le cose come stanno, ogni numero ha il suo opposto. Del prodotto vogliamo soltanto che si distribuisca sulla somma. Non pretendiamo che l’ordine dei fattori sia indifferente, né che le parentesi si possano spostare: chiediamo il meno possibile, per vedere quante possibilità restano.
-|<strong>Addition and multiplication.</strong> Numbers must be able to be added and multiplied. Of addition we want everything that holds for the real numbers: the order of the terms does not matter, there is a zero that leaves things as they are, every number has its opposite. Of multiplication we want only that it distribute over addition. We do not insist that the order of the factors be immaterial, nor that brackets can be moved: we ask for as little as possible, so as to see how many possibilities remain.</P>
+<P><strong>Somma e prodotto.</strong> I numeri si devono poter sommare e moltiplicare. Della somma vogliamo quello che vale per i numeri reali: l’ordine degli addendi non conta, esiste lo zero, ogni numero ha il suo opposto. Del prodotto vogliamo soltanto che si distribuisca sulla somma. Non pretendiamo che l’ordine dei fattori sia indifferente, né che le parentesi si possano spostare: chiediamo il meno possibile, per vedere quante possibilità restano.
+|<strong>Addition and multiplication.</strong> Numbers must be able to be added and multiplied. Of addition we want what holds for the real numbers: the order of the terms does not matter, there is a zero, every number has its opposite. Of multiplication we want only that it distribute over addition. We do not require the order of the factors to be immaterial, nor brackets to be movable: we ask for as little as possible, to see how many possibilities remain.</P>
 
-<P><strong>La divisione.</strong> Si deve poter dividere per qualunque numero diverso da zero. È la proprietà che rende risolubili le equazioni: dove manca, un’equazione elementare come {{ax=b}} può restare senza risposta.
-|<strong>Division.</strong> It must be possible to divide by any number other than zero. This is the property that makes equations solvable: where it is missing, an elementary equation such as {{ax=b}} may be left without an answer.</P>
+<P><strong>La divisione.</strong> Si deve poter dividere per qualunque numero diverso da zero. Serve per risolvere le equazioni: senza, un’equazione come {{ax=b}} può non avere soluzione.
+|<strong>Division.</strong> It must be possible to divide by any number other than zero. This is needed to solve equations: without it, an equation such as {{ax=b}} may have no solution.</P>
 
-<P><strong>Il modulo.</strong> Ogni numero deve avere una grandezza — un numero reale non negativo che chiamiamo modulo — e il modulo di un prodotto deve essere il prodotto dei moduli. Fra i numeri reali il modulo è il valore assoluto, e la regola vale già: {{|ab|=|a|\,|b|}}. È la proprietà meno evidente delle quattro ed è quella che restringe di più il campo. La vogliamo perché altrimenti la grandezza di un prodotto non sarebbe determinata da quelle dei fattori, e di un risultato non sapremmo prevedere nemmeno l’ordine di grandezza.
-|<strong>The modulus.</strong> Every number must have a size — a non-negative real number we call its modulus — and the modulus of a product must be the product of the moduli. Among the real numbers the modulus is the absolute value, and the rule already holds: {{|ab|=|a|\,|b|}}. It is the least obvious of the four properties and the one that narrows the field the most. We want it because otherwise the size of a product would not be determined by the sizes of the factors, and of a result we could not even foresee the order of magnitude.</P>
+<P><strong>Il modulo.</strong> Ogni numero ha un modulo, un numero reale non negativo, e il modulo di un prodotto è il prodotto dei moduli. Fra i numeri reali il modulo è il valore assoluto e la regola vale già: {{|ab|=|a|\,|b|}}. È la proprietà che restringe di più il campo: senza, la grandezza di un prodotto non sarebbe determinata da quelle dei fattori.
+|<strong>The modulus.</strong> Every number has a modulus, a non-negative real number, and the modulus of a product is the product of the moduli. Among the real numbers the modulus is the absolute value and the rule already holds: {{|ab|=|a|\,|b|}}. It is the property that narrows the field the most: without it, the size of a product would not be determined by the sizes of the factors.</P>
 
-<P>Nessuna di queste proprietà ci è imposta dall’esperienza: le vogliamo noi, perché senza di esse non sapremmo calcolare. Vale la pena tenerlo presente, perché la conclusione che segue vale quanto valgono le premesse.
-|None of these properties is imposed on us by experience: we want them ourselves, because without them we would not know how to calculate. It is worth keeping this in mind, because the conclusion that follows is worth exactly as much as the premises.</P>
+<P>Queste proprietà non sono imposte dall’esperienza: le scegliamo noi. La conclusione che segue vale quanto valgono queste premesse.
+|These properties are not imposed by experience: we choose them. The conclusion that follows is worth as much as these premises are.</P>
 
 <H2>Quante possibilità abbiamo?|How many possibilities do we have?</H2>
 
@@ -91,8 +91,8 @@ CORPO = r'''
 </table>
 </TABLE>
 
-<P>Non ci sono altre possibilità: le nostre scelte sono quattro. La tabella va letta a scalini, e conviene guardare da vicino che cosa significano quelle perdite, perché è su di esse che decideremo.
-|There are no other possibilities: our choices are four. The table is to be read as a descent, and it is worth looking closely at what those losses mean, because it is on them that we shall decide.</P>
+<P>Conviene vedere che cosa significano quelle perdite, perché è su di esse che decideremo.
+|It is worth seeing what those losses mean, because it is on them that we shall decide.</P>
 
 <P><strong>L’ordinamento.</strong> Fra due numeri reali possiamo sempre dire quale sia il maggiore, e la relazione va d’accordo con le operazioni: se sommiamo la stessa quantità a due numeri il loro ordine non cambia, e il prodotto di due numeri positivi è positivo. Fra i numeri complessi un ordinamento con queste proprietà non esiste: chiedersi se {{2+3i}} sia maggiore o minore di {{3+2i}} non ha senso. È una perdita che possiamo permetterci, perché i numeri che leggiamo sugli strumenti restano reali, e quelli si ordinano ancora.
 |<strong>The ordering.</strong> Of two real numbers we can always say which is the greater, and the relation agrees with the operations: adding the same quantity to two numbers does not change their order, and the product of two positive numbers is positive. Among complex numbers no ordering with these properties exists: asking whether {{2+3i}} is greater or smaller than {{3+2i}} makes no sense. This is a loss we can afford, because the numbers we read off our instruments remain real, and those can still be ordered.</P>
@@ -103,8 +103,8 @@ CORPO = r'''
 <P><strong>L’associatività.</strong> Negli ottonioni cambia anche il modo di raggruppare i fattori: {{(ab)c}} e {{a(bc)}} possono essere diversi. Le parentesi non si possono più spostare, e passaggi che di solito facciamo senza pensarci vanno rifatti da capo.
 |<strong>Associativity.</strong> Among the octonions even the grouping of factors matters: {{(ab)c}} and {{a(bc)}} may differ. Brackets can no longer be moved around, and steps we usually take without thinking must be redone from scratch.</P>
 
-<P>Le perdite si sommano scendendo: i quaternioni non sono ordinabili e non sono commutativi; gli ottonioni non sono ordinabili, non sono commutativi e non sono associativi. I numeri complessi sono dunque l’ultimo gradino in cui il prodotto si comporta come siamo abituati, e l’unica cosa che lasciamo per strada è l’ordinamento, di cui non abbiamo bisogno.
-|The losses accumulate as we go down: the quaternions are neither orderable nor commutative; the octonions are neither orderable, nor commutative, nor associative. The complex numbers are therefore the last step at which multiplication behaves as we are used to, and the only thing we leave behind is the ordering, which we do not need.</P>
+<P>Le perdite si sommano scendendo: i quaternioni non sono ordinabili e non sono commutativi; gli ottonioni non sono ordinabili, non sono commutativi e non sono associativi. I numeri complessi sono dunque l’ultima algebra in cui il prodotto è commutativo e associativo, e l’unica proprietà che perdiamo è l’ordinamento, di cui non abbiamo bisogno.
+|The losses accumulate as we go down: the quaternions are neither orderable nor commutative; the octonions are neither orderable, nor commutative, nor associative. The complex numbers are therefore the last algebra in which multiplication is commutative and associative, and the only property we lose is the ordering, which we do not need.</P>
 
 <H2>Perché non un’algebra a tre dimensioni?|Why not a three-dimensional algebra?</H2>
 
@@ -126,8 +126,8 @@ CORPO = r'''
 <P>Con questa convenzione l’elenco si legge bene. Le sole sfere che si lasciano pettinare per intero — cioè sulle quali si può disporre con continuità non una sola direzione tangente, ma un intero sistema di direzioni indipendenti — sono quelle di dimensione 0, 1, 3 e 7. Vivono in spazi di dimensione 1, 2, 4 e 8, e sono fatte esattamente dai numeri di modulo 1 delle quattro algebre. La sfera ordinaria, che di dimensione ne ha 2, nell’elenco non c’è: è per questo che manca l’algebra di dimensione 3.
 |With this convention the list reads clearly. The only spheres that can be combed entirely — that is, on which one can lay out continuously not just a single tangent direction, but a whole system of independent directions — are those of dimension 0, 1, 3 and 7. They live in spaces of dimension 1, 2, 4 and 8, and they consist precisely of the numbers of modulus 1 of the four algebras. The ordinary sphere, whose dimension is 2, is not on the list: this is why the algebra of dimension 3 is missing.</P>
 
-<P>Devo però dire fin dove arrivo io. Dietro a questi risultati c’è una matematica vasta — topologia algebrica, teoria dei fibrati, i lavori di Bott, Milnor e Kervaire — che non si impara in qualche settimana: sono cose che si studiano per anni. Io non le conosco. Mi limito a riportare le conclusioni di chi le ha costruite, e le uso come userei la misura fatta in un altro laboratorio: mi dicono che le strade percorribili sono quattro, e per la scelta che dobbiamo fare tanto basta. Spero di poterle studiare, un giorno.
-|I must say, though, how far I myself get. Behind these results lies a vast body of mathematics — algebraic topology, the theory of fibre bundles, the work of Bott, Milnor and Kervaire — which is not learned in a few weeks: these are things one studies for years. I do not know them. I merely report the conclusions of those who built them, and I use them as I would use a measurement made in another laboratory: they tell me that the practicable roads are four, and for the choice we have to make that is enough. I hope to be able to study them one day.</P>
+<P>Devo però dire fin dove arrivo io. Dietro a questi risultati c’è una matematica vasta — topologia algebrica, teoria dei fibrati, i lavori di Bott, Milnor e Kervaire — che non si impara in qualche settimana: sono cose che si studiano per anni. Io non le conosco. Mi limito a riportare le conclusioni di chi le ha costruite: le strade percorribili sono quattro, e per la scelta che dobbiamo fare questo basta. Spero di poterle studiare, un giorno.
+|I must say, though, how far I myself get. Behind these results lies a vast body of mathematics — algebraic topology, the theory of fibre bundles, the work of Bott, Milnor and Kervaire — which is not learned in a few weeks: these are things one studies for years. I do not know them. I merely report the conclusions of those who built them: the practicable roads are four, and for the choice we have to make this is enough. I hope to be able to study them one day.</P>
 
 <H2>Le onde ci indicano i complessi|Waves point us towards complex numbers</H2>
 
@@ -147,8 +147,8 @@ CORPO = r'''
 <P>Il solo fattore {{Ae^{i\phi}}} tiene insieme ampiezza e fase. E le operazioni che ci servono diventano prodotti: sfasare significa moltiplicare per un numero di modulo uno; derivare rispetto al tempo, per un’onda di frequenza definita, significa moltiplicare per {{-i\omega}}. Soprattutto, sommare due onde diventa sommare due numeri complessi, e la somma tiene conto da sé della fase relativa.
 |The single factor {{Ae^{i\phi}}} keeps amplitude and phase together. And the operations we need become products: shifting the phase means multiplying by a number of modulus one; differentiating with respect to time, for a wave of definite frequency, means multiplying by {{-i\omega}}. Above all, adding two waves becomes adding two complex numbers, and the sum takes the relative phase into account by itself.</P>
 
-<P>Il passaggio alla parte reale è lecito perché le equazioni che scriviamo sono lineari e a coefficienti reali; torneremo su questo punto alla fine. Aggiungiamo che tutto ciò non riguarda soltanto le onde quantistiche: vale per il suono, per la luce, per le correnti alternate. Dovunque ci sia un’onda, il numero complesso è il modo più breve di scriverla.
-|Taking the real part is legitimate because the equations we write are linear and have real coefficients; we shall return to this point at the end. Let us add that none of this concerns quantum waves only: it holds for sound, for light, for alternating currents. Wherever there is a wave, the complex number is the shortest way of writing it.</P>
+<P>Il passaggio alla parte reale è lecito perché le equazioni che scriviamo sono lineari e a coefficienti reali; torneremo su questo punto alla fine. Tutto ciò non riguarda soltanto le onde quantistiche: vale per il suono, per la luce, per le correnti alternate.
+|Taking the real part is legitimate because the equations we write are linear and have real coefficients; we shall return to this point at the end. None of this concerns quantum waves only: it holds for sound, for light, for alternating currents.</P>
 
 <H2>Un solo campo elettromagnetico|A single electromagnetic field</H2>
 
@@ -197,8 +197,8 @@ CORPO = r'''
 
 <EQ>a+ib\;\longleftrightarrow\;\begin{pmatrix}a & -b\\ b & a\end{pmatrix},</EQ>
 
-<P>e la moltiplicazione fra numeri complessi diventa il prodotto fra queste matrici. Possiamo dunque riscrivere con soli numeri reali qualunque calcolo complesso: nulla ce lo vieta. Il prezzo è raddoppiare le componenti e portarsi dietro in ogni passaggio, scritta per esteso, la struttura che {{i}} esprime in un simbolo solo. Per questo non diciamo che la natura «è complessa»: diciamo che i numeri complessi sono il modo più breve di scrivere quello che osserviamo.
-|and multiplication of complex numbers becomes the product of these matrices. We can therefore rewrite any complex calculation using real numbers alone: nothing forbids it. The price is doubling the components and carrying along at every step, written out in full, the structure that {{i}} expresses in a single symbol. This is why we do not say that nature “is complex”: we say that complex numbers are the shortest way of writing what we observe.</P>
+<P>e la moltiplicazione fra numeri complessi diventa il prodotto fra queste matrici. Possiamo dunque riscrivere con soli numeri reali qualunque calcolo complesso: nulla ce lo vieta. Il prezzo è raddoppiare le componenti e portarsi dietro in ogni passaggio, scritta per esteso, la struttura che {{i}} esprime in un simbolo solo. Per questo non diciamo che la natura «è complessa»: i numeri complessi sono soltanto il modo più breve di scrivere quello che osserviamo.
+|and multiplication of complex numbers becomes the product of these matrices. We can therefore rewrite any complex calculation using real numbers alone: nothing forbids it. The price is doubling the components and carrying along at every step, written out in full, the structure that {{i}} expresses in a single symbol. This is why we do not say that nature “is complex”: complex numbers are simply the shortest way of writing what we observe.</P>
 
 <H2>Il problema agli autovalori|The eigenvalue problem</H2>
 
