@@ -132,14 +132,17 @@ CORPO = r'''
 
 <H2>Un solo campo elettromagnetico|A single electromagnetic field</H2>
 
-<P>I numeri complessi non sono indispensabili per l’elettromagnetismo classico, ma mostrano la loro utilità anche lì. Nel vuoto e in assenza di cariche e correnti, le equazioni di Maxwell sono
-|Complex numbers are not indispensable to classical electromagnetism, but they show their usefulness there too. In vacuum and in the absence of charges and currents, Maxwell’s equations are</P>
+<P>I numeri complessi non sono indispensabili per l’elettromagnetismo classico, ma mostrano la loro utilità anche lì. Le equazioni di Maxwell nel vuoto, con le cariche e le correnti al loro posto, sono
+|Complex numbers are not indispensable to classical electromagnetism, but they show their usefulness there too. Maxwell’s equations in vacuum, with the charges and currents in place, are</P>
 
 <EQ>\begin{aligned}
-\nabla\!\cdot\!\mathbf E&=0, & \nabla\!\cdot\!\mathbf B&=0,\\
+\nabla\!\cdot\!\mathbf E&=\frac{\rho}{\varepsilon_0}, & \nabla\!\cdot\!\mathbf B&=0,\\
 \nabla\!\times\!\mathbf E&=-\frac{\partial\mathbf B}{\partial t}, &
-\nabla\!\times\!\mathbf B&=\frac{1}{c^2}\frac{\partial\mathbf E}{\partial t}.
+\nabla\!\times\!\mathbf B&=\mu_0\mathbf J+\frac{1}{c^2}\frac{\partial\mathbf E}{\partial t}.
 \end{aligned}</EQ>
+
+<P>dove {{\rho}} è la densità di carica, {{\mathbf J}} la densità di corrente, e le due costanti del vuoto sono legate dalla relazione {{\varepsilon_0\mu_0c^2=1}}.
+|where {{\rho}} is the charge density, {{\mathbf J}} the current density, and the two constants of free space are related by {{\varepsilon_0\mu_0c^2=1}}.</P>
 
 <P>Poniamo
 |Let us set</P>
@@ -149,15 +152,15 @@ CORPO = r'''
 <P>Il fattore {{c}} dà a {{\mathbf E}} e {{c\mathbf B}} le stesse dimensioni. La parte reale di {{\mathbf F}} è il campo elettrico, la parte immaginaria divisa per {{c}} è il campo magnetico. Le due equazioni di divergenza diventano una sola equazione complessa,
 |The factor {{c}} gives {{\mathbf E}} and {{c\mathbf B}} the same dimensions. The real part of {{\mathbf F}} is the electric field, the imaginary part divided by {{c}} is the magnetic field. The two divergence equations become a single complex equation,</P>
 
-<EQ>\nabla\!\cdot\!\mathbf F=0,</EQ>
+<EQ>\nabla\!\cdot\!\mathbf F=\frac{\rho}{\varepsilon_0},</EQ>
 
 <P>mentre le due equazioni di evoluzione diventano
 |while the two evolution equations become</P>
 
-<EQ>i\frac{\partial\mathbf F}{\partial t}=c\,\nabla\!\times\!\mathbf F.</EQ>
+<EQ>i\frac{\partial\mathbf F}{\partial t}=c\,\nabla\!\times\!\mathbf F-\frac{i}{\varepsilon_0}\mathbf J.</EQ>
 
-<P>Per verificarlo basta sostituire la definizione di {{\mathbf F}} e separare le due parti: la parte reale dà la legge di Faraday, la parte immaginaria la legge di Ampère-Maxwell. Il vettore complesso {{\mathbf F}} è detto vettore di Riemann-Silberstein. In presenza di cariche e correnti al secondo membro si aggiungono i termini di sorgente, ma l’elettrico e il magnetico restano raccolti in un solo campo.
-|To verify this, it is enough to substitute the definition of {{\mathbf F}} and separate the two parts: the real part gives Faraday’s law, the imaginary part the Ampère-Maxwell law. The complex vector {{\mathbf F}} is called the Riemann-Silberstein vector. In the presence of charges and currents, source terms are added on the right-hand side, but the electric and the magnetic field remain gathered into a single field.</P>
+<P>Per verificarlo basta sostituire la definizione di {{\mathbf F}} e separare le due parti. Nella prima equazione la parte reale dà la legge di Gauss e la parte immaginaria dice che il campo magnetico non ha sorgenti; nella seconda la parte reale dà la legge di Faraday e la parte immaginaria la legge di Ampère-Maxwell. Il vettore complesso {{\mathbf F}} è detto vettore di Riemann-Silberstein. Le quattro equazioni sono diventate due, sorgenti comprese, e l’elettrico e il magnetico stanno in un solo campo.
+|To verify this, it is enough to substitute the definition of {{\mathbf F}} and separate the two parts. In the first equation the real part gives Gauss’s law and the imaginary part says that the magnetic field has no sources; in the second the real part gives Faraday’s law and the imaginary part the Ampère-Maxwell law. The complex vector {{\mathbf F}} is called the Riemann-Silberstein vector. The four equations have become two, sources and all, and the electric and the magnetic field sit in a single field.</P>
 
 <P>Qui i campi misurabili restano reali: il numero complesso non cambia l’elettromagnetismo, ne accorcia la scrittura. Lo stesso vantaggio si ritrova nei circuiti in corrente alternata, dove resistenza e reattanza formano l’impedenza complessa {{Z=R+iX}}.
 |Here the measurable fields remain real: the complex number does not change electromagnetism, it shortens the way we write it. The same advantage is found in alternating-current circuits, where resistance and reactance form the complex impedance {{Z=R+iX}}.</P>
