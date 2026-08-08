@@ -131,6 +131,14 @@ META = {
                'imaginary numbers: their eigenvalues are real, and real numbers are what a '
                'measurement returns. And what would have changed had we kept the anti-Hermitian matrix.'),
     },
+    'nota-09-perche-numeri-complessi.html': {
+        'it': ('Nota 09 · Perché scegliamo i numeri complessi? — La Quantistica',
+               'Perché usiamo i numeri complessi: le quattro algebre di divisione normate, ampiezza '
+               'e fase delle onde, il campo di Riemann-Silberstein e il ritorno alle soluzioni reali.'),
+        'en': ('Note 09 · Why do we choose complex numbers? — La Quantistica',
+               'Why we use complex numbers: the four normed division algebras, wave amplitude and '
+               'phase, the Riemann-Silberstein field and the recovery of real solutions.'),
+    },
     'lab-02a-sg-angolo-relativo.html': {
         'it': ('Lab · Stern-Gerlach in cascata: angolo relativo — La Quantistica', None),
         'en': ('Lab · Cascaded Stern–Gerlach: relative angle — La Quantistica',
