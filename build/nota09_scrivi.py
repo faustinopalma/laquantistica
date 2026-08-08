@@ -48,8 +48,8 @@ html,body{overflow-x:clip;}
 '''
 
 CORPO = r'''
-<P class="lede">Per trascrivere le leggi della natura abbiamo bisogno di un’algebra: dobbiamo decidere quali numeri usare e quali operazioni ammettere. Non è una domanda su che cosa sia fatta la natura: è la scelta di uno strumento di calcolo.
-|To transcribe the laws of nature we need an algebra: we must decide which numbers to use and which operations to allow. This is not a question about what nature is made of: it is the choice of a tool for calculation.</P>
+<P class="lede">Per trascrivere le leggi della natura abbiamo bisogno di un’algebra: dobbiamo decidere quali numeri usare e quali operazioni ammettere. La scelta la facciamo noi, ed è questo il tema della nota. Che poi i fenomeni si lascino davvero descrivere con l’algebra scelta non lo decidiamo noi: lo dice l’esperienza, ed è un fatto che riguarda la natura, non la nostra scrittura.
+|To transcribe the laws of nature we need an algebra: we must decide which numbers to use and which operations to allow. The choice is ours to make, and it is the subject of this note. Whether the phenomena then really let themselves be described by the algebra we choose is not ours to decide: experience says that, and it is a fact about nature, not about the way we write.</P>
 
 <H2>Che cosa deve avere un’algebra|What an algebra must have</H2>
 
