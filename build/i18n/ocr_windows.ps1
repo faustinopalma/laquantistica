@@ -3,7 +3,7 @@
 # Uso:  powershell.exe -ExecutionPolicy Bypass -File build\i18n\ocr_windows.ps1
 
 $ErrorActionPreference = 'Stop'
-$cartella = Join-Path $PSScriptRoot '..\..\librettouniversitario' | Resolve-Path
+$cartella = Join-Path $PSScriptRoot '..\..\privato\librettouniversitario' | Resolve-Path
 $uscita = Join-Path $cartella '_ocr'
 New-Item -ItemType Directory -Force -Path $uscita | Out-Null
 

@@ -12,7 +12,7 @@ tracciati = subprocess.run(['git', 'ls-files'], capture_output=True, text=True,
 print(f'file tracciati: {len(tracciati)}')
 
 SOSPETTI_NOME = [
-    (re.compile(r'(^|/)(librettouniversitario|corrispondenza|bozze|private|personale)/', re.I),
+    (re.compile(r'(^|/)(privato|librettouniversitario|corrispondenza|bozze|private|personale)/', re.I),
      'cartella di lavoro o personale'),
     (re.compile(r'\.(pem|key|pfx|p12|ovpn|kdbx)$', re.I), 'file di chiavi'),
     (re.compile(r'(^|/)\.env|secrets?\.(json|ya?ml|txt)$', re.I), 'file di configurazione con segreti'),

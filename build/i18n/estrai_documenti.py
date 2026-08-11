@@ -8,7 +8,7 @@ import pathlib
 import re
 import zipfile
 
-CARTELLA = pathlib.Path('librettouniversitario')
+CARTELLA = pathlib.Path('privato/librettouniversitario')
 
 print('=== .pptx: testo contenuto nelle diapositive ===')
 pptx = next(CARTELLA.glob('*.pptx'), None)

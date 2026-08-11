@@ -7,7 +7,7 @@ import pathlib
 
 from PIL import Image, ImageOps
 
-CARTELLA = pathlib.Path('librettouniversitario')
+CARTELLA = pathlib.Path('privato/librettouniversitario')
 USCITA = CARTELLA / '_ritagli'
 USCITA.mkdir(exist_ok=True)
 

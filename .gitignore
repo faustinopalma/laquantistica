@@ -32,11 +32,12 @@ Thumbs.db
 # credenziali Azure 2o tenant (Foundry) - isolate dal deploy
 .azure-foundry/
 
-# Documenti personali dell'autore (libretto universitario, certificati di laurea):
-# contengono dati personali e NON vanno nella storia del deposito.
-# Senza la barra finale: ignora l'intera cartella (e qualunque voce con quel nome),
-# non solo i file contenuti.
-librettouniversitario
+# Materiale privato dell'autore: documenti personali (libretto universitario, certificati
+# di laurea), corrispondenza, bozze di lavorazione. Contiene dati personali e NON va nella
+# storia di questo deposito, che e' pubblico. La cartella ha un git suo, collegato a un
+# deposito privato: vedi privato/LEGGIMI.md.
+# Senza la barra finale: ignora l'intera cartella e qualunque voce con quel nome.
+privato
 
 # Bozze locali: i sorgenti bilingui stanno in sorgenti/ e vengono divisi in publish/it e
 # publish/en da build/i18n/split.py. Le pagine il cui nome inizia con _ (o con game-) sono
@@ -49,6 +50,3 @@ publish/assets/p5.min.js
 build/mjcheck/
 
 build/katexcheck/
-
-# lettere e richieste di permesso: bozze private, non fanno parte del sito
-corrispondenza/

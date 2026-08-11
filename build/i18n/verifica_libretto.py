@@ -7,7 +7,7 @@ import datetime
 import re
 import pathlib
 
-TESTO = pathlib.Path('librettouniversitario/trascrizione.md').read_text(encoding='utf-8')
+TESTO = pathlib.Path('privato/librettouniversitario/trascrizione.md').read_text(encoding='utf-8')
 
 IMMATRICOLAZIONE = datetime.date(1993, 11, 1)
 LAUREA = datetime.date(1999, 5, 28)
