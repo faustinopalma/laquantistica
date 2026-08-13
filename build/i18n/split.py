@@ -516,9 +516,10 @@ def attributi_per_lingua(testo, lingua):
     return re.sub(r'<[a-zA-Z][^>]*>', per_tag, testo), n
 
 
-CAPITOLI = ['01-stern-gerlach.html', '02-stern-gerlach-cascata.html', '03-elettroni.html',
-            '04-diffrazione.html', '05-rutherford.html', '06-ulteriori-sviluppi.html',
-            '07-franck-hertz.html', '08-effetto-fotoelettrico.html', '09-spettri-atomici.html']
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
+from ordine_schede import SCHEDE  # noqa: E402  (unica fonte dell'ordine di lettura)
+
+CAPITOLI = [slug for slug, _, _ in SCHEDE]
 
 AUTORE = {'@type': 'Person', 'name': 'Faustino Palma',
           'sameAs': 'https://www.linkedin.com/in/faustinopalma/'}
