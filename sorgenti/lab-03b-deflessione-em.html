@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Laboratorio simulato della deflessione degli elettroni: campo elettrico e campo magnetico incrociati, misura del rapporto e/m fra carica e massa.">
+<meta name="description" content="Laboratorio simulato dell'esperimento di Thomson: campo elettrico e campo magnetico incrociati, bilanciamento per ricavare la velocità e misura del rapporto e/m fra carica e massa dell'elettrone.">
 <title>Lab · Deflessione e/m — La Quantistica</title>
 <link rel="canonical" href="https://laquantistica.com/lab-03b-deflessione-em.html">
 <link rel="stylesheet" href="assets/lang.css?v=7">
@@ -11,18 +11,42 @@
 <script src="assets/lang.js?v=8"></script>
 <style>
   .panel{grid-template-columns:minmax(0,1fr) 390px;}
-  .readout{background:#12151a;border:1px solid #2d333d;border-radius:6px;padding:.6rem .8rem;margin:.4rem 0;font-family:var(--n-mono);}
+  .readout{background:#12151a;border:1px solid #2d333d;border-radius:6px;padding:.6rem .8rem;margin:0;font-family:var(--n-mono);}
   .readout .k{font-size:.62rem;color:#8b929c;text-transform:uppercase;letter-spacing:.05em;}
-  .readout .v{font-size:1.25rem;font-weight:700;color:#ffb000;}
-  .balloon{margin-top:.4rem;font-family:var(--n-mono);font-size:.72rem;color:#57d98a;min-height:1.2em;}
-  /* animazioni leggere: solo CSS (compositor, pausa a tab nascosta) */
-  @keyframes lqflow{to{stroke-dashoffset:-60;}}
-  .lqbeam{stroke-dasharray:2 7;animation:lqflow 1.0s linear infinite;pointer-events:none;}
-  @media(prefers-reduced-motion:reduce){.lqbeam{animation:none!important;}}
-  /* scala sotto gli slider bipolari (E, B): − / tacca dello zero / + */
+  .readout .v{font-size:1.35rem;font-weight:700;color:#ffb000;}
+  .readout .v.urto{color:#e06a5a;font-size:1rem;}
+  .balloon{margin-top:.35rem;font-family:var(--n-mono);font-size:.72rem;color:#57d98a;line-height:1.4;}
+  /* banco di misura: i due passi dell'esperimento di Thomson */
+  .measbox{background:#12151a;border:1px solid #2d333d;border-radius:6px;padding:.6rem .7rem;display:flex;flex-direction:column;gap:.55rem;}
+  .measbox .tit{font-family:var(--n-mono);font-size:.66rem;color:#8b929c;text-transform:uppercase;letter-spacing:.05em;}
+  .measbox .step{font-family:var(--n-mono);font-size:.74rem;color:#c7ccd4;line-height:1.45;min-height:3.9em;}
+  .measbox .step b{color:#ffb000;}
+  .btnrow{display:flex;gap:.5rem;}
+  .simbtn{flex:1 1 auto;font-family:var(--n-mono);font-size:.74rem;font-weight:700;background:#2a2f38;border:1px solid #3d444f;color:#c7ccd4;border-radius:6px;padding:.5rem .4rem;cursor:pointer;transition:.15s;text-align:center;}
+  .simbtn:hover:not(:disabled){background:#b06a12;color:#fff;border-color:#b06a12;}
+  .simbtn:disabled{opacity:.4;cursor:not-allowed;}
+  .simbtn.ready{background:#2b7a4b;border-color:#57d98a;color:#eafff0;}
+  .simbtn.ghost{flex:0 0 auto;background:transparent;border-color:#2d333d;color:#8b929c;font-weight:700;padding:.5rem .6rem;font-size:.8rem;}
+  .simbtn.ghost:hover{background:#20262e;color:#c7ccd4;border-color:#3d444f;}
+  .chain{font-family:var(--n-mono);font-size:.72rem;color:#8fb7d6;line-height:1.7;}
+  .chain div{white-space:nowrap;overflow-x:auto;}
+  .chain .out{color:#ffce6a;font-weight:700;}
+  .chain .off{color:#5a626c;}
+  /* scala sotto gli slider bipolari: − / tacca dello zero / + */
   .ctl .scale{grid-column:2;display:flex;justify-content:space-between;align-items:center;margin-top:-.5rem;padding:0 3px;font-family:var(--n-mono);font-size:.85rem;font-weight:700;color:#8b929c;line-height:1;}
   .ctl .scale .tick{width:2px;height:.6rem;background:#7a8a84;border-radius:1px;cursor:pointer;padding:.3rem 8px;box-sizing:content-box;background-clip:content-box;}
   .ctl .scale .tick:hover{background:#e2a24d;}
+  /* qui il disegno E' lo strumento: la scala graduata dello schermo deve restare leggibile.
+     Sotto i 1120 px la colonna dell'apparato sarebbe troppo stretta, quindi si passa a
+     colonna unica a tutta larghezza e a scorrere e' la pagina. */
+  @media (max-width:1120px) and (orientation:landscape){
+    html,body{height:auto;overflow:auto;}
+    .console{height:auto;min-height:100vh;overflow:visible;}
+    .console .panel{grid-template-columns:minmax(0,1fr);flex:0 0 auto;}
+    .console .stagecol,.console .ctrlcol{overflow:visible;min-height:0;}
+    .console .stagecol .sim-stage,.console .stagecol .plotter{flex:0 0 auto;}
+    .console .stagecol .sim-stage svg,.console .stagecol .plot-screen svg{height:auto;}
+  }
 </style>
 </head>
 <body>
@@ -43,25 +67,42 @@
 
   <section class="panel">
     <div class="stagecol">
-      <div class="sim-stage"><svg id="svg1" viewBox="0 0 660 360" role="img" aria-label="Cannone elettronico, piastre, bobine e schermo" aria-label-en="Electron gun, plates, coils and screen"></svg></div>
+      <div class="sim-stage"><svg id="svg1" viewBox="0 0 660 260" role="img" aria-label="Cannone elettronico, piastre di deflessione fra le bobine e schermo graduato" aria-label-en="Electron gun, deflecting plates between the coils and graduated screen"></svg></div>
+      <div class="plotter">
+        <div class="plot-head"><span class="plot-title">e/m</span><span class="plot-sub"><span class="it">determinazioni successive</span><span class="en">successive determinations</span></span>
+          <span class="leds"><span class="led rec" id="ledRec">● REC</span></span>
+          <button class="plot-clr" id="plotClr">CLR</button></div>
+        <div class="plot-screen"><svg id="plt" viewBox="0 0 660 210" role="img" aria-label="grafico delle determinazioni del rapporto carica su massa, con il valore accettato e la media" aria-label-en="chart of the determinations of the charge-to-mass ratio, with the accepted value and the mean"></svg></div>
+        <div class="plot-status" id="plotStat">n = 0</div>
+      </div>
     </div>
     <aside class="ctrlcol">
-      <p class="panel-lede"><span class="it">Un fascio di elettroni attraversa un campo <b>elettrico</b> (piastre) e un campo <b>magnetico</b> (bobine). La deflessione mostra che le particelle sono <b>cariche negative</b>; bilanciando E e B (v = E/B) si ricava il rapporto <b>e/m</b>.</span><span class="en">An electron beam crosses an <b>electric</b> field (plates) and a <b>magnetic</b> field (coils). The deflection shows the particles are <b>negatively charged</b>; by balancing E and B (v = E/B) one obtains the ratio <b>e/m</b>.</span></p>
+      <p class="panel-lede"><span class="it">Vogliamo misurare il rapporto <b>e/m</b> fra la carica e la massa delle particelle del fascio. Si procede in due passi: prima si <b>bilanciano</b> i due campi, e dall'equilibrio si ricava la velocità <b>v = E/B</b>; poi si spegne il campo elettrico e si misura la deflessione dovuta al solo campo magnetico.</span><span class="en">We want to measure the ratio <b>e/m</b> between the charge and the mass of the beam particles. It takes two steps: first the two fields are <b>balanced</b>, and the equilibrium gives the speed <b>v = E/B</b>; then the electric field is switched off and the deflection due to the magnetic field alone is measured.</span></p>
       <div class="sim-controls">
         <div class="ctl"><label><span class="it">Tensione acceleratrice Vₐ</span><span class="en">Accelerating voltage Vₐ</span></label><input type="range" id="va" min="500" max="5000" step="50" value="2000" aria-label="Tensione acceleratrice Va" aria-label-en="Accelerating voltage Va"><span class="val" id="vav">2000 V</span></div>
-        <div class="ctl"><label><span class="it">Piastre (campo E)</span><span class="en">Plates (E field)</span></label><input type="range" id="vd" min="-100" max="100" step="1" value="0" aria-label="Piastre, campo elettrico" aria-label-en="Plates, electric field"><span class="val" id="vdv">0</span><div class="scale"><span>−</span><span class="tick"></span><span>+</span></div></div>
-        <div class="ctl"><label><span class="it">Bobine (campo B)</span><span class="en">Coils (B field)</span></label><input type="range" id="bb" min="-100" max="100" step="1" value="0" aria-label="Bobine, campo magnetico" aria-label-en="Coils, magnetic field"><span class="val" id="bbv">0</span><div class="scale"><span>−</span><span class="tick"></span><span>+</span></div></div>
+        <div class="ctl"><label><span class="it">Piastre · tensione V<sub>d</sub></span><span class="en">Plates · voltage V<sub>d</sub></span></label><input type="range" id="vd" min="-200" max="200" step="1" value="0" aria-label="Tensione fra le piastre di deflessione" aria-label-en="Voltage across the deflecting plates"><span class="val" id="vdv">0 V</span><div class="scale"><span>−</span><span class="tick"></span><span>+</span></div></div>
+        <div class="ctl"><label><span class="it">Bobine · campo B</span><span class="en">Coils · field B</span></label><input type="range" id="bb" min="-80" max="80" step="1" value="0" aria-label="Campo magnetico delle bobine" aria-label-en="Magnetic field of the coils"><span class="val" id="bbv">0 mT</span><div class="scale"><span>−</span><span class="tick"></span><span>+</span></div></div>
       </div>
       <div class="readout">
-        <div class="k"><span class="it">Deflessione sullo schermo</span><span class="en">Deflection on the screen</span></div>
-        <div class="v" id="defl">0.0 mm</div>
+        <div class="k"><span class="it">Schermo graduato · lettura</span><span class="en">Graduated screen · reading</span></div>
+        <div class="v" id="defl">0,0 mm</div>
         <div class="balloon" id="note"></div>
       </div>
-      <div class="sim-math">
-        <div class="mrow"><span class="lab it">Carica del fascio:</span><span class="lab en">Beam charge:</span> <b id="sign">—</b></div>
-        <div class="mrow"><span class="lab it">Rapporto carica/massa (elettrone):</span><span class="lab en">Charge/mass ratio (electron):</span> <b class="num">e/m ≈ 1,76×10¹¹ C/kg</b></div>
+      <div class="measbox">
+        <div class="tit"><span class="it">Banco di misura</span><span class="en">Measuring bench</span></div>
+        <div class="step" id="step"></div>
+        <div class="btnrow">
+          <button class="simbtn" id="b1" type="button"><span class="it">① Registra il bilanciamento</span><span class="en">① Record the balance</span></button>
+          <button class="simbtn" id="b2" type="button" disabled><span class="it">② Registra la deflessione</span><span class="en">② Record the deflection</span></button>
+          <button class="simbtn ghost" id="brs" type="button" title="ricomincia / restart">↺</button>
+        </div>
+        <div class="chain" id="chain"></div>
       </div>
-      <p class="hint"><span class="it">Prova: aumenta Vₐ → deflessione minore (elettroni più veloci). Con solo E o solo B la macchia si sposta; regola B per <b>riportare la macchia al centro</b> (E e B bilanciati): è il <b>selettore di velocità</b>.</span><span class="en">Try: increase Vₐ → smaller deflection (faster electrons). With only E or only B the spot moves; adjust B to <b>bring the spot back to centre</b> (E and B balanced): the <b>velocity selector</b>.</span></p>
+      <div class="sim-math">
+        <div class="mrow"><span class="lab it">Geometria del tubo:</span><span class="lab en">Tube geometry:</span> <b class="num">l = 80 mm · d = 25 mm · D = 160 mm</b></div>
+        <div class="mrow"><span class="lab it">Carica del fascio:</span><span class="lab en">Beam charge:</span> <b id="sign">—</b></div>
+      </div>
+      <p class="hint"><span class="it">La lettura sullo schermo si fa a occhio sulla scala graduata, quindi è arrotondata al mezzo millimetro: da lì viene l'incertezza sul risultato. Se la deflessione è troppo forte il fascio urta le piastre e non arriva allo schermo: allora bisogna alzare V<sub>a</sub> oppure ridurre i campi.</span><span class="en">The reading on the screen is taken by eye on the graduated scale, so it is rounded to half a millimetre: that is where the uncertainty in the result comes from. If the deflection is too strong the beam hits the plates and never reaches the screen: then V<sub>a</sub> must be raised or the fields reduced.</span></p>
     </aside>
   </section>
 
@@ -81,112 +122,244 @@ var svg1=document.getElementById('svg1');
 var REDUCE=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 function L(it,en){ return document.documentElement.getAttribute('data-lang')==='en'?en:it; }
 function nfmt(x,d){ var s=(+x).toFixed(d); return L(s.replace('.',','),s); }
-// ---- proiezione ASSONOMETRICA (cavaliera): x a destra, y in alto (nel piano), z diagonale = asse delle bobine ----
-var OX=26, OY=192, AZx=0.5, AZy=0.34;          // +z va verso l'alto-destra (profondità nel foglio)
+function bil(it,en){ return '<span class="it">'+it+'</span><span class="en">'+en+'</span>'; }
+
+// ---- geometria del tubo: dichiarata in pagina, non nascosta nel codice ----
+var LP=0.080, DP=0.025, DS=0.160;      // piastre: lunghezza, traferro, distanza dallo schermo (m)
+var BRACCIO=LP/2+DS;                   // il fascio esce come se partisse dal centro delle piastre
+var LEVA=LP*BRACCIO;
+var EM=1.7588e11;                      // C/kg: valore accettato, da cui parte la simulazione
+var YMAX=70;                           // semialtezza dello schermo graduato (mm)
+var YURTO=(DP/2)*BRACCIO/(LP/2)*1000;  // oltre questa deflessione il fascio urta le piastre (mm)
+
+function vel(Va){ return Math.sqrt(2*EM*Va); }
+function deflE(Va,Vd){ return (Vd/DP)*LEVA/(2*Va)*1000; }   // mm; non dipende da e/m
+function deflB(Va,B){ return -EM*B*LEVA/vel(Va)*1000; }     // mm; verso opposto (carica negativa)
+function leggi(y){ return Math.round(y*2)/2; }              // scala graduata: mezzo millimetro
+
+function comp(){
+  var Va=+document.getElementById('va').value,
+      Vd=+document.getElementById('vd').value,
+      B=+document.getElementById('bb').value/100000;        // slider in centesimi di mT -> tesla
+  var yE=deflE(Va,Vd), yB=deflB(Va,B), y=yE+yB;
+  return {Va:Va,Vd:Vd,B:B,yE:yE,yB:yB,y:y,urto:Math.abs(y)>YURTO,letto:leggi(y)};
+}
+
+// ---- proiezione assonometrica (cavaliera): x a destra, y in alto, z = asse delle bobine ----
+var OX=26, OY=130, AZx=0.5, AZy=0.34;
+var MM=1.375;                                   // px per millimetro nel disegno
+var px0=240, px1=px0+MM*LP*1000, xc=(px0+px1)/2, xScreen=px1+MM*DS*1000;
+var hP=MM*DP*1000/2;                            // semitraferro in px, coerente con la fisica
+var Rc=80, dC=40, pzP=30, xGunA=52;
+
 function P(x,y,z){ return [OX + x + z*AZx, OY - y - z*AZy]; }
-var xGun0=8, xGunW=44, px0=240, px1=350, xc=(px0+px1)/2, xScreen=560;
-var Rc=80, dC=40, hP=38, pzP=30;               // raggio bobina, semi-distanza bobine, semi-gap piastre, semi-profondità piastre
 function poly3(pts,fill,stroke,w,op){ var d=pts.map(function(p,i){ var s=P(p[0],p[1],p[2]); return (i?'L':'M')+s[0].toFixed(1)+' '+s[1].toFixed(1); }).join(' ')+' Z'; el('path',{d:d,fill:fill||'none',stroke:stroke||'none','stroke-width':w||1,opacity:op==null?1:op,'stroke-linejoin':'round'},svg1); }
 function arr3(a,b,col,w,op){ op=op==null?1:op; var A=P(a[0],a[1],a[2]),B=P(b[0],b[1],b[2]); el('line',{x1:A[0].toFixed(1),y1:A[1].toFixed(1),x2:B[0].toFixed(1),y2:B[1].toFixed(1),stroke:col,'stroke-width':w||1.6,opacity:op},svg1); var dx=B[0]-A[0],dy=B[1]-A[1],Ln=Math.hypot(dx,dy)||1; dx/=Ln;dy/=Ln; var hx=B[0]-dx*7,hy=B[1]-dy*7,nx=-dy*3.4,ny=dx*3.4; el('polygon',{points:B[0].toFixed(1)+','+B[1].toFixed(1)+' '+(hx+nx).toFixed(1)+','+(hy+ny).toFixed(1)+' '+(hx-nx).toFixed(1)+','+(hy-ny).toFixed(1),fill:col,opacity:op},svg1); }
-function coil3(z,near){ var c=P(xc,0,z), col=near?'#9cc2df':'#5a7f96', w=near?2.6:2, op=near?1:0.7; el('circle',{cx:c[0].toFixed(1),cy:c[1].toFixed(1),r:Rc,fill:'none',stroke:col,'stroke-width':w,opacity:op},svg1); el('circle',{cx:c[0].toFixed(1),cy:c[1].toFixed(1),r:Rc-5,fill:'none',stroke:col,'stroke-width':w*0.7,opacity:op*0.85},svg1); return c; }
+function coil3(z,near){ var c=P(xc,0,z), col=near?'#9cc2df':'#5a7f96', w=near?2.4:1.8, op=near?1:0.65; el('circle',{cx:c[0].toFixed(1),cy:c[1].toFixed(1),r:Rc,fill:'none',stroke:col,'stroke-width':w,opacity:op},svg1); el('circle',{cx:c[0].toFixed(1),cy:c[1].toFixed(1),r:Rc-5,fill:'none',stroke:col,'stroke-width':w*0.7,opacity:op*0.85},svg1); }
 function seg3(a,b,col,w,op){ var A=P(a[0],a[1],a[2]),B=P(b[0],b[1],b[2]); el('line',{x1:A[0].toFixed(1),y1:A[1].toFixed(1),x2:B[0].toFixed(1),y2:B[1].toFixed(1),stroke:col,'stroke-width':w||1.4,opacity:op==null?1:op,'stroke-linecap':'round'},svg1); }
-function beamY(x,defl){ var Lf=px1-px0, Ds=xScreen-px1, fD=defl/(1+2*Ds/Lf); if(x<=px0) return 0; if(x>=px1) return fD + (2*fD/Lf)*(x-px1); var t=(x-px0)/Lf; return fD*t*t; }
-function comp(){
-  var Va=+document.getElementById('va').value, Vd=+document.getElementById('vd').value, B=+document.getElementById('bb').value;
-  var vRel=Math.sqrt(Va/2000);                 // velocita' relativa (1 @ 2000 V)
-  var yE = 85*(Vd/100)/(Va/2000);              // deflessione da E  proporzionale a Vd/Va
-  var yB = -85*(B/100)/vRel;                    // deflessione da B  proporzionale a B/sqrt(Va) (verso opposto)
-  var defl = Math.max(-95, Math.min(95, yE+yB));
-  return {Va:Va,Vd:Vd,B:B,vRel:vRel,yE:yE,yB:yB,defl:defl};
+// campo entrante nel foglio = croce, uscente = punto
+function bMark(x,y,z,entrante,op){ var c=P(x,y,z), r=4.6, k=r*0.62;
+  el('circle',{cx:c[0].toFixed(1),cy:c[1].toFixed(1),r:r,fill:'#0d1a15',stroke:'#7fb0e8','stroke-width':1.2,opacity:op},svg1);
+  if(entrante){
+    el('line',{x1:(c[0]-k).toFixed(1),y1:(c[1]-k).toFixed(1),x2:(c[0]+k).toFixed(1),y2:(c[1]+k).toFixed(1),stroke:'#7fb0e8','stroke-width':1.2,opacity:op},svg1);
+    el('line',{x1:(c[0]+k).toFixed(1),y1:(c[1]-k).toFixed(1),x2:(c[0]-k).toFixed(1),y2:(c[1]+k).toFixed(1),stroke:'#7fb0e8','stroke-width':1.2,opacity:op},svg1);
+  } else { el('circle',{cx:c[0].toFixed(1),cy:c[1].toFixed(1),r:1.7,fill:'#7fb0e8',opacity:op},svg1); }
 }
+function beamY(x,defl){ var Lf=px1-px0, Ds=xScreen-px1, fD=defl/(1+2*Ds/Lf); if(x<=px0) return 0; if(x>=px1) return fD + (2*fD/Lf)*(x-px1); var t=(x-px0)/Lf; return fD*t*t; }
+
 function draw(){
-  var s=comp(), vd=s.Vd, B=s.B;
+  var s=comp(), vd=s.Vd, B=s.B, dpx=s.y*MM;
   while(svg1.firstChild) svg1.removeChild(svg1.firstChild);
-  // --- cannone elettronico (2D, di lato): catodo incandescente + anodo con foro ---
-  var gx0=6, gx1=62, gyH=17, xCat=17, xAno=52;
+  // cannone elettronico: catodo incandescente + anodo forato
+  var gx0=6, gx1=62, gyH=17, xCat=17;
   var gTL=P(gx0,gyH,0); el('rect',{x:gTL[0].toFixed(1),y:gTL[1].toFixed(1),width:(gx1-gx0).toFixed(1),height:(2*gyH).toFixed(1),rx:4,fill:'#0d1a15',stroke:'#3a5750','stroke-width':1.4},svg1);
   var cg=P(xCat,0,0); el('circle',{cx:cg[0].toFixed(1),cy:cg[1].toFixed(1),r:9,fill:'#ff9a3a',opacity:.16},svg1);
   seg3([xCat,-10,0],[xCat,10,0],'#ff9a3a',3.5,.95);
   var cm=P(xCat-7,0,0); txt(cm[0],cm[1]+3,'−',{'font-size':11,fill:'#e0a24d','font-family':'monospace','text-anchor':'middle'},svg1);
-  seg3([xAno,7,0],[xAno,gyH,0],'#9fd0e8',3,1); seg3([xAno,-gyH,0],[xAno,-7,0],'#9fd0e8',3,1);
-  var am=P(xAno+7,0,0); txt(am[0],am[1]+3,'+',{'font-size':11,fill:'#9fd0e8','font-family':'monospace','text-anchor':'middle'},svg1);
+  seg3([xGunA,7,0],[xGunA,gyH,0],'#9fd0e8',3,1); seg3([xGunA,-gyH,0],[xGunA,-7,0],'#9fd0e8',3,1);
+  var am=P(xGunA+7,0,0); txt(am[0],am[1]+3,'+',{'font-size':11,fill:'#9fd0e8','font-family':'monospace','text-anchor':'middle'},svg1);
   var gtl=P((gx0+gx1)/2,gyH+13,0); txt(gtl[0],gtl[1],L('cannone elettronico','electron gun'),{'text-anchor':'middle','font-size':8,fill:'#5a7d6a','font-family':'monospace'},svg1);
-  // --- alimentatore pilotato da Vₐ (2D), cablato al cannone ---
+  // alimentatore pilotato da Vₐ, cablato al cannone
   var sx0=8, sx1=82, syT=-46, syB=-84;
   var sTL=P(sx0,syT,0); el('rect',{x:sTL[0].toFixed(1),y:sTL[1].toFixed(1),width:(sx1-sx0).toFixed(1),height:(syT-syB).toFixed(1),rx:4,fill:'#12211b',stroke:'#3a6152','stroke-width':1.6},svg1);
   var dsp=P((sx0+sx1)/2,(syT+syB)/2+9,0); txt(dsp[0],dsp[1],'Vₐ',{'text-anchor':'middle','font-size':9,fill:'#8b929c','font-family':'monospace'},svg1);
   var dv=P((sx0+sx1)/2,(syT+syB)/2-8,0); txt(dv[0],dv[1],s.Va+' V',{'text-anchor':'middle','font-size':13,fill:'#ffb000','font-family':'monospace','font-weight':'bold'},svg1);
   var stl=P((sx0+sx1)/2,syB-9,0); txt(stl[0],stl[1],L('alimentatore','power supply'),{'text-anchor':'middle','font-size':8,fill:'#5a7d6a','font-family':'monospace'},svg1);
-  seg3([xAno,-gyH,0],[xAno,-31,0],'#d15a5a',1.6,1); seg3([xAno,-31,0],[sx1-14,-31,0],'#d15a5a',1.6,1); seg3([sx1-14,-31,0],[sx1-14,syT,0],'#d15a5a',1.6,1);
+  seg3([xGunA,-gyH,0],[xGunA,-31,0],'#d15a5a',1.6,1); seg3([xGunA,-31,0],[sx1-14,-31,0],'#d15a5a',1.6,1); seg3([sx1-14,-31,0],[sx1-14,syT,0],'#d15a5a',1.6,1);
   seg3([xCat,-gyH,0],[xCat,-25,0],'#6f97ac',1.6,1); seg3([xCat,-25,0],[sx0+14,-25,0],'#6f97ac',1.6,1); seg3([sx0+14,-25,0],[sx0+14,syT,0],'#6f97ac',1.6,1);
-  var tpp=P(sx1-14,syT+3,0); txt(tpp[0]+4,tpp[1],'+',{'font-size':10,fill:'#d15a5a','font-family':'monospace'},svg1);
-  var tmm=P(sx0+14,syT+3,0); txt(tmm[0]-4,tmm[1],'−',{'font-size':10,fill:'#6f97ac','font-family':'monospace','text-anchor':'end'},svg1);
-  // --- schermo (2D, verticale a destra) ---
-  var scT=P(xScreen,95,0), scB=P(xScreen,-95,0);
+  // schermo graduato: tacche ogni 10 mm, numeri ogni 20 mm
+  var scT=P(xScreen,YMAX*MM,0), scB=P(xScreen,-YMAX*MM,0);
   el('line',{x1:scT[0].toFixed(1),y1:scT[1].toFixed(1),x2:scB[0].toFixed(1),y2:scB[1].toFixed(1),stroke:'#2a4a3c','stroke-width':4,'stroke-linecap':'round'},svg1);
-  var sc0=P(xScreen,0,0); el('line',{x1:(sc0[0]-5).toFixed(1),y1:sc0[1].toFixed(1),x2:(sc0[0]+5).toFixed(1),y2:sc0[1].toFixed(1),stroke:'#4a6b59','stroke-width':1},svg1);
-  var sl=P(xScreen,104,0); txt(sl[0],sl[1],L('schermo','screen'),{'text-anchor':'middle','font-size':8,fill:'#5a7d6a','font-family':'monospace'},svg1);
-  // --- bobina POSTERIORE (z=+dC, lontana) ---
+  for(var mm=-YMAX;mm<=YMAX;mm+=10){ var gr=(mm%20===0), t0=P(xScreen,mm*MM,0);
+    el('line',{x1:(t0[0]+3).toFixed(1),y1:t0[1].toFixed(1),x2:(t0[0]+(gr?11:7)).toFixed(1),y2:t0[1].toFixed(1),stroke:mm===0?'#8fbfa8':'#4a6b59','stroke-width':mm===0?1.6:1},svg1);
+    if(gr) txt(t0[0]+15,t0[1]+3,(mm>0?'+':'')+mm,{'font-size':7.5,fill:'#5a7d6a','font-family':'monospace'},svg1);
+  }
+  var sl=P(xScreen,-(YMAX+13)*MM,0); txt(sl[0]+10,sl[1],L('schermo (mm)','screen (mm)'),{'text-anchor':'middle','font-size':8,fill:'#5a7d6a','font-family':'monospace'},svg1);
   coil3(dC,false);
-  // --- piastre (DENTRO le bobine): superiore (y=+hP) e inferiore (y=-hP) ---
+  // piastre di deflessione, dentro le bobine
   var colTop=vd>0?'#d15a5a':(vd<0?'#46b083':'#3d444f'), colBot=vd>0?'#46b083':(vd<0?'#d15a5a':'#3d444f');
   poly3([[px0,hP,-pzP],[px1,hP,-pzP],[px1,hP,pzP],[px0,hP,pzP]],'#151d19',colTop,2,1);
   poly3([[px0,-hP,-pzP],[px1,-hP,-pzP],[px1,-hP,pzP],[px0,-hP,pzP]],'#151d19',colBot,2,1);
   var tp=P(px0-6,hP+2,pzP); txt(tp[0],tp[1],vd>0?'+':(vd<0?'−':''),{'text-anchor':'end','font-size':13,fill:colTop,'font-family':'monospace'},svg1);
   var bp=P(px0-6,-hP-2,pzP); txt(bp[0],bp[1],vd>0?'−':(vd<0?'+':''),{'text-anchor':'end','font-size':13,fill:colBot,'font-family':'monospace'},svg1);
-  var pl=P(xc,-hP-18,pzP); txt(pl[0],pl[1],L('piastre (campo E)','plates (E field)'),{'text-anchor':'middle','font-size':8,fill:'#5a7d6a','font-family':'monospace'},svg1);
-  // --- campo E: frecce verticali tra le piastre (dal + al −) ---
-  if(vd!==0){ var eDown=vd>0, eI=Math.min(1,Math.abs(vd)/100), eOp=0.35+0.6*eI, eW=1.2+1.4*eI;   // l'intensità del campo E cresce con lo slider
-    var epts=[[px0+24,-14],[xc,4],[px1-24,14]]; if(eI>0.45){ epts.push([px0+24,14]); epts.push([px1-24,-14]); } if(eI>0.75) epts.push([xc,-16]);
-    epts.forEach(function(p){ if(eDown) arr3([p[0],hP-4,p[1]],[p[0],-hP+4,p[1]],'#e0a24d',eW,eOp); else arr3([p[0],-hP+4,p[1]],[p[0],hP-4,p[1]],'#e0a24d',eW,eOp); });
+  // campo E: frecce dal piatto + al piatto −, nella metà anteriore del traferro
+  if(vd!==0){ var eDown=vd>0, eI=Math.min(1,Math.abs(vd)/200), eOp=0.4+0.55*eI, eW=1.2+1.3*eI;
+    var ex=[px0+16,xc-10,px1-30]; if(eI>0.5) ex.push(px0+40); if(eI>0.8) ex.push(px1-52);
+    ex.forEach(function(x){ if(eDown) arr3([x,hP-3,-20],[x,-hP+3,-20],'#e0a24d',eW,eOp); else arr3([x,-hP+3,-20],[x,hP-3,-20],'#e0a24d',eW,eOp); });
     var ep=P(px0-4,0,-pzP); txt(ep[0]-2,ep[1],'E',{'font-size':10,fill:'#e0a24d','font-family':'monospace','font-weight':'bold','text-anchor':'end'},svg1); }
-  // --- campo B: frecce lungo l'asse delle bobine, SOPRA le piastre (visibili). B>0 = ENTRANTE nel foglio -> forza -e(v×B) verso il basso ---
-  if(B!==0){ var zs=B>0?1:-1, bI=Math.min(1,Math.abs(B)/100), bOp=0.42+0.55*bI, bW=1.3+1.5*bI;
-    var bpts=[[xc-32,0],[xc+32,0],[xc,26],[xc,-26]]; if(bI>0.45) bpts.push([xc,0]); if(bI>0.75){ bpts.push([xc-32,26]); bpts.push([xc+32,-26]); }
-    bpts.forEach(function(p){ arr3([p[0],p[1],-zs*34],[p[0],p[1],zs*34],'#7fb0e8',bW,bOp); });
-    var blp=P(xc+42,0,zs*36); txt(blp[0],blp[1],'B',{'font-size':11,fill:'#7fb0e8','font-family':'monospace','font-weight':'bold','text-anchor':'middle'},svg1);
-  }
-  // --- fascio (z=0): rettilineo -> parabola nel campo -> rettilineo fino allo schermo ---
-  var bd='', xx;
-  for(xx=xAno+2; xx<=xScreen+0.1; xx+=6){ var pp=P(xx, beamY(xx,s.defl), 0); bd += (bd?'L':'M')+pp[0].toFixed(1)+' '+pp[1].toFixed(1)+' '; }
+  // campo B: entrante o uscente dal foglio, nella metà posteriore del traferro
+  if(B!==0){ var entra=B>0, bI=Math.min(1,Math.abs(B)/0.0008), bOp=0.5+0.5*bI;
+    var bx=[px0+24,xc+8,px1-16], by=[hP*0.52,-hP*0.52]; if(bI>0.55) by.push(0);
+    bx.forEach(function(x){ by.forEach(function(y){ bMark(x,y,20,entra,bOp); }); });
+    var blp=P(px1+4,hP+7,20); txt(blp[0],blp[1],'B',{'font-size':10,fill:'#7fb0e8','font-family':'monospace','font-weight':'bold'},svg1); }
+  // fascio: se la deflessione supera il traferro urta le piastre e non ne esce
+  var bd='', xx, xStop=xScreen, fD=dpx/(1+2*(xScreen-px1)/(px1-px0));
+  if(s.urto){ xStop=px0+(px1-px0)*Math.sqrt(Math.min(1,hP/Math.abs(fD))); }
+  for(xx=xGunA+2; xx<xStop; xx+=5){ var pp=P(xx, beamY(xx,dpx), 0); bd += (bd?'L':'M')+pp[0].toFixed(1)+' '+pp[1].toFixed(1)+' '; }
+  var ppEnd=P(xStop, beamY(xStop,dpx), 0); bd += 'L'+ppEnd[0].toFixed(1)+' '+ppEnd[1].toFixed(1);
   el('path',{d:bd,fill:'none',stroke:'#35c8ff','stroke-width':1.3,'stroke-dasharray':'5 4','stroke-linecap':'round','stroke-linejoin':'round',opacity:.85},svg1);
-  // elettroni dispersi leggermente attorno alla linea (animazione leggera, SMIL)
-  if(!REDUCE){ for(var kd=0;kd<6;kd++){ var offY=((kd%2)?1:-1)*(1.5+Math.random()*3.2); var gEl=el('g',{transform:'translate(0 '+offY.toFixed(1)+')'},svg1); var dt=el('circle',{r:1.9,fill:'#cfeeff'},gEl); el('animateMotion',{dur:(1.1+Math.random()*0.5).toFixed(2)+'s',repeatCount:'indefinite',path:bd,begin:(-kd*0.22).toFixed(2)+'s',calcMode:'linear'},dt); } }
-  // --- bobina ANTERIORE (z=-dC, vicina) + etichetta ---
+  if(!REDUCE){ for(var kd=0;kd<5;kd++){ var offY=((kd%2)?1:-1)*(1.5+kd*0.6); var gEl=el('g',{transform:'translate(0 '+offY.toFixed(1)+')'},svg1); var dt=el('circle',{r:1.9,fill:'#cfeeff'},gEl); el('animateMotion',{dur:'1.25s',repeatCount:'indefinite',path:bd,begin:(-kd*0.25).toFixed(2)+'s',calcMode:'linear'},dt); } }
   coil3(-dC,true);
-  var cl=P(xc,Rc+14,dC); txt(cl[0],cl[1],L('bobine','coils'),{'text-anchor':'middle','font-size':8,fill:'#9cc2df','font-family':'monospace'},svg1);
-  // --- macchia sullo schermo ---
-  var sp=P(xScreen, s.defl, 0); el('circle',{cx:sp[0].toFixed(1),cy:sp[1].toFixed(1),r:10,fill:'#8effd0',opacity:.22},svg1); el('circle',{cx:sp[0].toFixed(1),cy:sp[1].toFixed(1),r:5,fill:'#8effd0'},svg1);
-  // readout
-  document.getElementById('vav').textContent=s.Va+' V';
-  document.getElementById('vdv').textContent=(s.Vd>0?'+':'')+s.Vd;
-  document.getElementById('bbv').textContent=(s.B>0?'+':'')+s.B;
-  var dir=s.defl>2?L('su','up'):(s.defl<-2?L('giù','down'):L('centro','centre'));
-  document.getElementById('defl').textContent=(s.defl>=0?'+':'')+nfmt(s.defl,1)+' mm ('+dir+')';
-  var sg=document.getElementById('sign');
-  if(s.Vd===0){ sg.textContent='—'; } else { sg.innerHTML='<span class="it">negativa (verso il polo +)</span><span class="en">negative (toward + plate)</span>'; }
-  var note=document.getElementById('note'), it='',en='';
-  if(s.Vd!==0 && s.B!==0 && Math.abs(s.defl)<3){ it='Bilanciato: E e B si compensano → v = E/B (selettore di velocità).'; en='Balanced: E and B cancel → v = E/B (velocity selector).'; }
-  else if(s.Vd!==0 || s.B!==0){ it='La macchia è deflessa: il fascio è carico (negativo).'; en='The spot is deflected: the beam is charged (negative).'; }
-  note.innerHTML='<span class="it">'+it+'</span><span class="en">'+en+'</span>';
+  var cl=P(xc,Rc+12,dC); txt(cl[0],cl[1],L('bobine','coils'),{'text-anchor':'middle','font-size':8,fill:'#9cc2df','font-family':'monospace'},svg1);
+  var pl=P(xc,-(Rc+32),dC); txt(pl[0],pl[1],L('piastre e bobine agiscono sulla stessa regione','plates and coils act on the same region'),{'text-anchor':'middle','font-size':8,fill:'#5a7d6a','font-family':'monospace'},svg1);
+  if(s.urto){
+    el('circle',{cx:ppEnd[0].toFixed(1),cy:ppEnd[1].toFixed(1),r:5,fill:'#e06a5a',opacity:.85},svg1);
+    var wl=P(px1+40,hP+42,0); txt(wl[0],wl[1],L('il fascio urta le piastre','the beam hits the plates'),{'text-anchor':'middle','font-size':9,fill:'#e06a5a','font-family':'monospace','font-weight':'bold'},svg1);
+  } else {
+    var sp=P(xScreen, s.letto*MM, 0);
+    el('circle',{cx:sp[0].toFixed(1),cy:sp[1].toFixed(1),r:9,fill:'#8effd0',opacity:.22},svg1);
+    el('circle',{cx:sp[0].toFixed(1),cy:sp[1].toFixed(1),r:4.5,fill:'#8effd0'},svg1);
+  }
 }
+
+// ---- banco di misura: i due passi dell'esperimento di Thomson ----
+var bal=null, misure=[];
+function pronto1(s){ return !s.urto && s.Vd!==0 && s.B!==0 && Math.abs(s.letto)<=0.5; }
+function pronto2(s){ return !!bal && bal.Va===s.Va && s.Vd===0 && s.B!==0 && !s.urto && Math.abs(s.letto)>=5 && Math.abs(s.y)<=YMAX; }
+function emDa(s){ var th=Math.abs(s.letto/1000)/BRACCIO; return {th:th, em:th*bal.v/(Math.abs(s.B)*LP)}; }
+
+function registra1(){
+  var s=comp(); if(!pronto1(s)) return;
+  var E=s.Vd/DP;
+  bal={Va:s.Va, Vd:s.Vd, B:s.B, E:E, v:Math.abs(E/s.B)};
+  aggiorna();
+}
+function registra2(){
+  var s=comp(); if(!pronto2(s)) return;
+  var r=emDa(s);
+  misure.push({Va:s.Va, v:bal.v, B:s.B, y:s.letto, th:r.th, em:r.em});
+  var led=document.getElementById('ledRec'); if(led){ led.classList.add('on'); clearTimeout(registra2._t); registra2._t=setTimeout(function(){led.classList.remove('on');},400); }
+  bal=null;
+  aggiorna(); drawPlot();
+}
+
+function catena(s){
+  var r=[];
+  if(bal){
+    r.push('<div>E = V<sub>d</sub>/d = <span class="out">'+nfmt(bal.E/1000,1)+' kV/m</span></div>');
+    r.push('<div>v = E/B = <span class="out">'+nfmt(bal.v/1e7,2)+'×10⁷ m/s</span></div>');
+  } else {
+    r.push('<div class="off">E = V<sub>d</sub>/d = —</div>');
+    r.push('<div class="off">v = E/B = —</div>');
+  }
+  if(bal && pronto2(s)){
+    var q=emDa(s);
+    r.push('<div>ϑ = y/(l/2+D) = <span class="out">'+nfmt(q.th,4)+' rad</span></div>');
+    r.push('<div>e/m = ϑ·v/(B·l) = <span class="out">'+nfmt(q.em/1e11,3)+'×10¹¹ C/kg</span></div>');
+  } else {
+    r.push('<div class="off">ϑ = y/(l/2+D) = —</div>');
+    r.push('<div class="off">e/m = ϑ·v/(B·l) = —</div>');
+  }
+  return r.join('');
+}
+
+function aggiorna(){
+  var s=comp();
+  if(bal && bal.Va!==s.Va) bal=null;                    // il bilanciamento vale per quella Vₐ
+  draw();
+  document.getElementById('vav').textContent=s.Va+' V';
+  document.getElementById('vdv').textContent=(s.Vd>0?'+':'')+s.Vd+' V';
+  document.getElementById('bbv').textContent=(s.B>0?'+':'')+nfmt(s.B*1000,2)+' mT';
+  var dv=document.getElementById('defl');
+  if(s.urto){ dv.className='v urto'; dv.innerHTML=bil('fascio perduto sulle piastre','beam lost on the plates'); }
+  else { dv.className='v'; dv.textContent=(s.letto>0?'+':'')+nfmt(s.letto,1)+' mm'; }
+  var sg=document.getElementById('sign');
+  if(s.Vd===0) sg.innerHTML='—';
+  else if(s.Vd>0) sg.innerHTML=bil('va in alto, verso il piatto + ⇒ negativa','goes up, toward the + plate ⇒ negative');
+  else sg.innerHTML=bil('va in basso, verso il piatto + ⇒ negativa','goes down, toward the + plate ⇒ negative');
+  var note=document.getElementById('note');
+  if(s.urto) note.innerHTML=bil('Oltre '+nfmt(YURTO,1)+' mm il fascio non esce dalle piastre: alza V<sub>a</sub> o riduci i campi.','Beyond '+nfmt(YURTO,1)+' mm the beam does not leave the plates: raise V<sub>a</sub> or reduce the fields.');
+  else if(s.Vd!==0 && s.B!==0 && Math.abs(s.letto)<=0.5) note.innerHTML=bil('Bilanciato: forza elettrica e forza magnetica si compensano ⇒ v = E/B.','Balanced: the electric and magnetic forces cancel ⇒ v = E/B.');
+  else if(s.Vd!==0 || s.B!==0) note.innerHTML=bil('La macchia è deflessa: il fascio è carico.','The spot is deflected: the beam is charged.');
+  else note.innerHTML=bil('Campi spenti: il fascio arriva al centro dello schermo.','Fields off: the beam reaches the centre of the screen.');
+  var step=document.getElementById('step'), b1=document.getElementById('b1'), b2=document.getElementById('b2');
+  if(!bal){
+    step.innerHTML=bil('<b>Passo 1.</b> Accendi i due campi in opposizione e regolali finché la macchia torna al centro della scala, poi registra il bilanciamento.','<b>Step 1.</b> Switch on the two fields in opposition and adjust them until the spot is back at the centre of the scale, then record the balance.');
+    b1.disabled=!pronto1(s); b1.classList.toggle('ready',pronto1(s));
+    b2.disabled=true; b2.classList.remove('ready');
+  } else {
+    step.innerHTML=bil('<b>Passo 2.</b> Bilanciamento registrato a V<sub>a</sub> = '+bal.Va+' V. Ora azzera le piastre lasciando acceso il campo magnetico e leggi la deflessione sulla scala (almeno 5 mm).','<b>Step 2.</b> Balance recorded at V<sub>a</sub> = '+bal.Va+' V. Now zero the plates leaving the magnetic field on and read the deflection on the scale (at least 5 mm).');
+    b1.disabled=true; b1.classList.remove('ready');
+    b2.disabled=!pronto2(s); b2.classList.toggle('ready',pronto2(s));
+  }
+  document.getElementById('chain').innerHTML=catena(s);
+}
+
+// ---- grafico: una determinazione di e/m per misura, col valore accettato e la media ----
+function drawPlot(){
+  var svg=document.getElementById('plt'); if(!svg) return; while(svg.firstChild) svg.removeChild(svg.firstChild);
+  var GW=660,GH=210,mL=54,mR=16,mT=16,mB=30, ymin=1.2, ymax=2.4;
+  var n=misure.length, nx=Math.max(8,n);
+  function X(i){ return mL+(i-0.5)/nx*(GW-mL-mR); }
+  function Y(v){ return GH-mB-(v-ymin)/(ymax-ymin)*(GH-mT-mB); }
+  var q;
+  for(q=1.2;q<=2.401;q+=0.2){ el('line',{x1:mL,y1:Y(q),x2:GW-mR,y2:Y(q),stroke:'#123026','stroke-width':1},svg); txt(mL-6,Y(q)+3,nfmt(q,1),{'text-anchor':'end','font-size':9,fill:'#3e6b58','font-family':'monospace'},svg); }
+  txt(mL-46,Y(1.9),'e/m',{'font-size':9,fill:'#57d98a','font-family':'monospace'},svg);
+  txt(mL-46,Y(1.9)+11,'10¹¹',{'font-size':8,fill:'#3e6b58','font-family':'monospace'},svg);
+  txt(GW-mR,GH-4,L('n° della misura','measurement no.'),{'text-anchor':'end','font-size':9,fill:'#3e6b58','font-family':'monospace'},svg);
+  el('line',{x1:mL,y1:Y(EM/1e11),x2:GW-mR,y2:Y(EM/1e11),stroke:'#2f7d55','stroke-width':1.6,'stroke-dasharray':'6 4'},svg);
+  txt(GW-mR-4,Y(EM/1e11)-5,L('valore accettato 1,759','accepted value 1.759'),{'text-anchor':'end','font-size':8.5,fill:'#57d98a','font-family':'monospace'},svg);
+  var st=document.getElementById('plotStat');
+  if(!n){
+    txt((mL+GW-mR)/2,(Y(ymin)+Y(ymax))/2,L('completa i due passi per registrare una determinazione','complete the two steps to record a determination'),{'text-anchor':'middle','font-size':10,fill:'#3e6b58','font-family':'monospace'},svg);
+    if(st) st.textContent='n = 0'; return;
+  }
+  var somma=0, i;
+  for(i=0;i<n;i++) somma+=misure[i].em;
+  var media=somma/n;
+  el('line',{x1:mL,y1:Y(media/1e11),x2:GW-mR,y2:Y(media/1e11),stroke:'#ffb000','stroke-width':1.4,opacity:.8},svg);
+  txt(mL+4,Y(media/1e11)+11,L('media','mean'),{'font-size':8.5,fill:'#ffb000','font-family':'monospace'},svg);
+  for(i=0;i<n;i++){ var px=X(i+1), py=Y(Math.max(ymin,Math.min(ymax,misure[i].em/1e11)));
+    el('line',{x1:px,y1:py-4,x2:px,y2:py+4,stroke:'#e6ece8','stroke-width':1.3},svg);
+    el('line',{x1:px-4,y1:py,x2:px+4,y2:py,stroke:'#e6ece8','stroke-width':1.3},svg);
+    txt(px,GH-mB+14,String(i+1),{'text-anchor':'middle','font-size':9,fill:'#3e6b58','font-family':'monospace'},svg);
+  }
+  var scarto=(media-EM)/EM*100;
+  if(st) st.textContent='n = '+n+'   ·   '+L('media','mean')+' = '+nfmt(media/1e11,3)+'×10¹¹ C/kg   ·   '+L('scarto','deviation')+' '+(scarto>=0?'+':'')+nfmt(scarto,1)+' %';
+}
+
 var _raf=null;
-function scheduleRedraw(){ if(_raf) return; _raf=requestAnimationFrame(function(){ _raf=null; draw(); }); }
+function scheduleRedraw(){ if(_raf) return; _raf=requestAnimationFrame(function(){ _raf=null; aggiorna(); }); }
 ['va','vd','bb'].forEach(function(id){ document.getElementById(id).addEventListener('input',scheduleRedraw); });
 // tacca centrale cliccabile + tap singolo al centro -> azzera il campo (non durante il trascinamento)
 ['vd','bb'].forEach(function(id){
   var sl=document.getElementById(id), sc=sl.parentNode.querySelector('.scale'), tk=sc?sc.querySelector('.tick'):null;
-  function zero(){ if(+sl.value!==0){ sl.value=0; sl.dispatchEvent(new Event('input')); } }
+  function zero(){ if(+sl.value!==0){ sl.value=0; sl.dispatchEvent(new Event('input',{bubbles:true})); } }
   if(tk){ tk.setAttribute('title',L('azzera il campo','reset the field')); tk.addEventListener('click',zero); }
   var moved=false, dx=0;
   sl.addEventListener('pointerdown',function(e){ moved=false; dx=e.clientX; });
   sl.addEventListener('pointermove',function(e){ if(e.buttons && Math.abs(e.clientX-dx)>4) moved=true; });
   sl.addEventListener('click',function(){ if(!moved && Math.abs(+sl.value)<=10) zero(); });
 });
+document.getElementById('b1').addEventListener('click',registra1);
+document.getElementById('b2').addEventListener('click',registra2);
+document.getElementById('brs').addEventListener('click',function(){ bal=null; aggiorna(); });
+document.getElementById('plotClr').addEventListener('click',function(){ misure=[]; bal=null; aggiorna(); drawPlot(); });
 initBackLink('03-elettroni.html');
-draw();
+aggiorna(); drawPlot();
 // ridisegna le scritte dell'apparato al cambio lingua (data-lang su <html>)
-new MutationObserver(function(){ scheduleRedraw(); }).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});
+new MutationObserver(function(){ scheduleRedraw(); drawPlot(); }).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});
+window.__lab={ get bal(){return bal;}, get misure(){return misure;}, comp:comp, registra1:registra1, registra2:registra2, aggiorna:aggiorna, drawPlot:drawPlot };
 </script>
 </body>
 </html>
