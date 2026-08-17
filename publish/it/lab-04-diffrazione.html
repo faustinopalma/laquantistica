@@ -189,7 +189,7 @@
         <div id="rowH" hidden class="dim"><span class="it">valore accettato</span> h = <span class="it">6,626</span> · 10⁻³⁴ J·s · <span class="it">scarto</span> <span id="rDev">—</span></div>
       </div>
 
-      <p class="hint"><span class="it"><b>Come si misura.</b> Il cannone accelera gli elettroni con la tensione V, quindi la loro quantità di moto è p = √(2mqV): la si legge qui sopra. Gli elettroni arrivano sullo schermo uno per volta, come punti; dopo qualche migliaio di arrivi compaiono gli anelli, che sono la figura di diffrazione del reticolo cristallino. Scegli a quale famiglia di piani appartiene l'anello, poi portaci sopra il cerchio di misura — un tocco sullo schermo lo sposta lì, il cursore lo regola — e leggi il raggio r sulla scala graduata, in millimetri. Lo schermo dista L = 135 mm dal campione, quindi δ = arctg(r/L). La condizione di diffrazione sen δ = λ/d, con d noto dalla struttura del cristallo, dà la lunghezza d'onda λ. Registra la misura e ripetila ad altre tensioni: il prodotto pλ resta costante, ed è la costante di Planck. La lettura è arrotondata al mezzo millimetro, ed è da lì che viene la dispersione dei valori di pλ. Un campione <b>policristallino</b> (cristalliti orientati a caso) dà anelli; un <b>monocristallo</b> dà un reticolo di punti, proiezione del reticolo reciproco. Il modello <b>classico</b> darebbe solo una macchia centrale, e non ci sarebbe niente da misurare.</span></p>
+      <p class="hint"><span class="it"><b>Come si misura.</b> Il cannone accelera gli elettroni con la tensione V, quindi la loro quantità di moto è p = √(2mqV): la si legge qui sopra. Gli elettroni arrivano sullo schermo uno per volta, come punti; dopo qualche migliaio di arrivi compaiono gli anelli, che sono la figura di diffrazione del reticolo cristallino. Non sono righe sottili: sono bande larghe quanto la macchia del fascio diretto, appoggiate sul fondo diffuso degli urti anelastici, e si punta il centro della banda. A un passo reticolare d grande corrisponde un angolo piccolo, quindi <b>il primo anello dal centro è quello del d più grande</b>: se lo si abbina al piano sbagliato, pλ sballa del 40 o del 70 per cento. Scegli a quale famiglia di piani appartiene l'anello, poi portaci sopra il cerchio di misura — un tocco sullo schermo lo sposta lì, il cursore lo regola — e leggi il raggio r sulla scala graduata, in millimetri. Lo schermo dista L = 135 mm dal campione, quindi δ = arctg(r/L). La condizione di diffrazione sen δ = λ/d, con d noto dalla struttura del cristallo, dà la lunghezza d'onda λ. Registra la misura e ripetila ad altre tensioni: il prodotto pλ resta costante, ed è la costante di Planck. La lettura è arrotondata al mezzo millimetro, ed è da lì che viene la dispersione dei valori di pλ. Se si lascia il fascio acceso troppo a lungo la macchia centrale dilaga e mangia il primo anello, che sembra allora più stretto di quello che è: si azzera e si riprende con un'esposizione più breve. La fotografia della scheda è sovraesposta proprio così. Un campione <b>policristallino</b> (cristalliti orientati a caso) dà anelli; un <b>monocristallo</b> dà un reticolo di punti, proiezione del reticolo reciproco. Il modello <b>classico</b> darebbe solo una macchia centrale, e non ci sarebbe niente da misurare.</span></p>
     </aside>
   </section>
 
@@ -228,6 +228,9 @@ var SCRMM=45;                        // raggio utile dello schermo (mm)
 var STEPMM=0.5;                      // la scala si legge al mezzo millimetro
 var CW=460, C0=230, Rs=208;          // canvas, centro, raggio schermo in px
 var PXMM=Rs/SCRMM;                   // px per millimetro
+var SIG=0.8*PXMM;                    // raggio della macchia del fascio sullo schermo (mm)
+var HALO=20*PXMM;                    // scala del fondo diffuso (urti anelastici e plurimi)
+var WDIR=0.10, WHALO=0.52;           // quote di elettroni nel fascio diretto e nel fondo
 
 /* CAMPIONI — verificati su fonti reali (Wikipedia SAED/Powder diffraction; immagini di
    riferimento in build/diffraction-refs). POLICRISTALLINO -> anelli (Debye-Scherrer), ogni
@@ -252,6 +255,8 @@ var lam=0, spots=[], spotsTot=0;
 var plist=[], plane=0, rmm=0, rows=[];
 
 function gauss(){ return (Math.random()+Math.random()+Math.random()+Math.random()-2); }
+function gN(s){ return gauss()*s/0.5774; }    // gaussiana di scarto s (gauss() ha scarto 0,5774)
+function haloR(){ var u=Math.random(); return HALO*Math.sqrt(u/(1-u)); }   // densita' ∝ (1+(r/HALO)²)⁻²
 function pOf(V){ return Math.sqrt(2*ME*QE*V); }                      // kg·m/s
 function computeRings(){ lam=HPL/pOf(+voltEl.value)*1e12; }          // pm
 function radPx(sinD){ return sinD>=1?1e9:PXMM*LMM*Math.tan(Math.asin(sinD)); }
@@ -380,26 +385,29 @@ function clearScreen(){
 }
 function paint(x,y){
   var dx=x-C0, dy=y-C0; if(dx*dx+dy*dy>(Rs-3)*(Rs-3)) return;
-  var g=ctx.createRadialGradient(x,y,0,x,y,2.7);
-  g.addColorStop(0,'rgba(150,255,205,0.5)'); g.addColorStop(1,'rgba(150,255,205,0)');
-  ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,2.7,0,6.2832); ctx.fill();
+  var g=ctx.createRadialGradient(x,y,0,x,y,3.0);
+  g.addColorStop(0,'rgba(150,255,205,0.10)'); g.addColorStop(1,'rgba(150,255,205,0)');
+  ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,3.0,0,6.2832); ctx.fill();
   count++;
 }
+/* Un solo fascio: il raggio diffratto e' lo stesso fascio deviato, quindi macchia diretta e
+   anelli hanno lo stesso profilo SIG. Il fondo e' la coda continua degli urti anelastici. */
 function hit(){
-  var x,y, C=SAMPLES[sample], th=Math.random()*6.2832, r;
-  if(model==='c'){ r=Math.abs(gauss()*15); x=C0+r*Math.cos(th); y=C0+r*Math.sin(th); }
+  var C=SAMPLES[sample], th=Math.random()*6.2832, u=Math.random(), r;
+  if(model==='c'){ paint(C0+gN(3*SIG),C0+gN(3*SIG)); return; }
+  if(u<WDIR){ paint(C0+gN(SIG),C0+gN(SIG)); return; }
+  if(u<WDIR+WHALO){ r=haloR(); }
   else if(C.family==='mono'){
-    if(Math.random()<0.035){ r=Math.random()*(Rs-6); x=C0+r*Math.cos(th); y=C0+r*Math.sin(th); }   // fondo debole
-    else { var s=Math.random()*spotsTot, sp=spots[0], i; for(i=0;i<spots.length;i++){ s-=spots[i].w; if(s<=0){ sp=spots[i]; break; } }
-      x=C0+sp.x+gauss()*2.1; y=C0+sp.y+gauss()*2.1; }
+    var s=Math.random()*spotsTot, sp=spots[0], i;
+    for(i=0;i<spots.length;i++){ s-=spots[i].w; if(s<=0){ sp=spots[i]; break; } }
+    paint(C0+sp.x+gN(SIG),C0+sp.y+gN(SIG)); return;
   } else {
-    var u=Math.random();
-    if(u<0.15) r=Math.abs(gauss()*5);                 // fascio diretto (centro)
-    else if(u<0.25) r=20+Math.random()*(Rs-24);       // fondo diffuso
-    else { var x2=Math.random()*C.tot, d=C.rings[0].d, i; for(i=0;i<C.rings.length;i++){ x2-=C.rings[i].w; if(x2<=0){ d=C.rings[i].d; break; } } r=ringR(d)+gauss()*4.0; }
-    if(r<0) r=-r; x=C0+r*Math.cos(th); y=C0+r*Math.sin(th);
+    var x2=Math.random()*C.tot, d=C.rings[0].d, j;
+    for(j=0;j<C.rings.length;j++){ x2-=C.rings[j].w; if(x2<=0){ d=C.rings[j].d; break; } }
+    r=ringR(d)+gN(SIG);
   }
-  paint(x,y);
+  if(r<0) r=-r;
+  paint(C0+r*Math.cos(th),C0+r*Math.sin(th));
 }
 function seed(n){ for(var i=0;i<n;i++) hit(); cntEl.textContent=count; }
 
@@ -502,8 +510,10 @@ function sampleLabels(){
 }
 function planeLabels(){
   var what=SAMPLES[sample].family==='poly'?L('anello','ring'):L('punto','spot');
+  var ord=L(['1°','2°','3°','4°','5°'],['1st','2nd','3rd','4th','5th']);
+  var dal=L(' dal centro',' from the centre');
   var html='', i;
-  for(i=0;i<plist.length;i++) html+='<option value="'+i+'">'+what+' '+(i+1)+' · d = '+nfmt(plist[i],0)+' pm</option>';
+  for(i=0;i<plist.length;i++) html+='<option value="'+i+'">'+ord[i]+' '+what+dal+' · d = '+nfmt(plist[i],0)+' pm</option>';
   planesSel.innerHTML=html;
   planesSel.value=String(Math.min(plane,plist.length-1));
 }
