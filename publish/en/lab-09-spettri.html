@@ -59,6 +59,19 @@ canvas.cv{width:100%;height:auto;display:block;}
 .mtab td.id{color:#7fffc4;text-align:left;}
 .mtab .none{color:#727982;text-align:center;padding:.55rem;font-size:.72rem;}
 .tabwrap{background:#12151a;border:1px solid #2d333d;border-radius:8px;padding:.4rem .55rem .2rem;margin:0 0 .5rem;max-height:220px;overflow-y:auto;}
+@media (max-width:1120px) and (orientation:landscape){
+  html,body{height:100%;overflow:hidden;}
+  .console{height:100vh;min-height:0;overflow:hidden;padding:0 .5rem .3rem;}
+  .console .con-head{padding:.25rem 0 .2rem;}
+  .console .panel{grid-template-columns:minmax(0,60fr) minmax(0,40fr);gap:.5rem;padding:.5rem;
+    flex:1 1 auto;min-height:0;align-items:stretch;}
+  .console .stagecol{display:flex;flex-direction:column;gap:.4rem;min-height:0;overflow-y:auto;}
+  .console .stagecol .sim-stage{flex:0 0 auto;min-height:0;margin:0;}
+  .console .stagecol canvas.cv{width:100%;height:auto;}
+  .console .ctrlcol{overflow-y:auto;min-height:0;gap:.45rem;}
+  .console .panel-lede{font-size:.74rem;line-height:1.35;}
+  .console .hint{font-size:.68rem;}
+}
 /* Le due colonne scorrono in modo INDIPENDENTE: si possono scorrere i comandi a destra
    senza spostare l'apparato a sinistra (e viceversa). La pagina in sé non scorre. */
 @media (min-width:821px){
