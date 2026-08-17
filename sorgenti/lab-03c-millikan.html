@@ -307,7 +307,9 @@ function passo(ts){
   if(crono.stato!==st0) aggiorna(); else aggiornaLetture();
   rafId=requestAnimationFrame(passo);
 }
-function avvia(){ if(rafId==null && drop && !REDUCE){ lastTs=0; rafId=requestAnimationFrame(passo); } }
+// il moto della gocciolina E' il fenomeno da osservare: non va sospeso con prefers-reduced-motion
+// (restano ferme solo le decorazioni: sbuffo del nebulizzatore e tratteggio delle linee di campo)
+function avvia(){ if(rafId==null && drop){ lastTs=0; rafId=requestAnimationFrame(passo); } }
 function ferma(){ if(rafId!=null){ cancelAnimationFrame(rafId); rafId=null; } }
 
 function nuovaGoccia(){
