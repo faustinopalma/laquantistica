@@ -189,7 +189,7 @@
         <div id="rowH" hidden class="dim"><span class="en">accepted value</span> h = <span class="en">6.626</span> · 10⁻³⁴ J·s · <span class="en">deviation</span> <span id="rDev">—</span></div>
       </div>
 
-      <p class="hint"><span class="en"><b>How the measurement is made.</b> The gun accelerates the electrons through the voltage V, so their momentum is p = √(2mqV): it is displayed above. The electrons reach the screen one at a time, as dots; after a few thousand arrivals the rings appear, which are the diffraction pattern of the crystal lattice. They are not thin lines: they are bands as wide as the direct beam spot, sitting on the diffuse background of the inelastic collisions, and you aim at the middle of the band. A large lattice spacing d goes with a small angle, so <b>the first ring from the centre is the one of the largest d</b>: pairing it with the wrong planes throws pλ off by 40 or 70 per cent. Choose which family of planes the ring belongs to, then bring the measuring circle onto it — a tap on the screen moves it there, the slider fine-tunes it — and read the radius r on the graduated scale, in millimetres. The screen is L = 135 mm from the sample, so δ = arctan(r/L). The diffraction condition sin δ = λ/d, with d known from the structure of the crystal, gives the wavelength λ. Record the measurement and repeat it at other voltages: the product pλ stays constant, and it is Planck's constant. The reading is rounded to the half millimetre, and that is where the spread of the pλ values comes from. If the beam is left on too long the central spot spreads and eats into the first ring, which then looks tighter than it is: clear the screen and start again with a shorter exposure. The photograph in the chapter is overexposed in just this way. A <b>polycrystalline</b> sample (randomly oriented crystallites) gives rings; a <b>single crystal</b> gives a lattice of spots, a projection of the reciprocal lattice. The <b>classical</b> model would give only a central blob, and there would be nothing to measure.</span></p>
+      <p class="hint"><span class="en"><b>How the measurement is made.</b> The gun accelerates the electrons through the voltage V, so their momentum is p = √(2mqV): it is displayed above. The electrons reach the screen one at a time, as dots; after a few thousand arrivals the rings appear, which are the diffraction pattern of the crystal lattice. They are not thin lines: they are bands as wide as the direct beam spot, sitting on the diffuse background of the inelastic collisions, and you aim at the middle of the band. A large lattice spacing d goes with a small angle, so <b>the first ring from the centre is the one of the largest d</b>: pairing it with the wrong planes throws pλ off by 40 or 70 per cent. Choose which family of planes the ring belongs to, then bring the measuring circle onto it — a tap on the screen moves it there, the slider fine-tunes it — and read the radius r on the graduated scale, in millimetres. The screen is L = 135 mm from the sample, so δ = arctan(r/L). The diffraction condition sin δ = λ/d, with d known from the structure of the crystal, gives the wavelength λ. Record the measurement and repeat it at other voltages: the product pλ stays constant, and it is Planck's constant. The reading is rounded to the half millimetre, and that is where the spread of the pλ values comes from. The phosphors of the screen fade in about ten seconds, so after a while the figure stops growing: what you see is the rate of the arrivals, not their total. On pause it stays put, like a photograph. A <b>polycrystalline</b> sample (randomly oriented crystallites) gives rings; a <b>single crystal</b> gives a lattice of spots, a projection of the reciprocal lattice. The <b>classical</b> model would give only a central blob, and there would be nothing to measure.</span></p>
     </aside>
   </section>
 
@@ -231,6 +231,8 @@ var PXMM=Rs/SCRMM;                   // px per millimetro
 var SIG=0.8*PXMM;                    // raggio della macchia del fascio sullo schermo (mm)
 var HALO=20*PXMM;                    // scala del fondo diffuso (urti anelastici e plurimi)
 var WDIR=0.10, WHALO=0.52;           // quote di elettroni nel fascio diretto e nel fondo
+var TAU=10;                          // i fosfori si spengono con questa costante di tempo (s)
+var FADEDT=1/3;                      // ogni quanto si applica lo smorzamento (s)
 
 /* CAMPIONI — verificati su fonti reali (Wikipedia SAED/Powder diffraction; immagini di
    riferimento in build/diffraction-refs). POLICRISTALLINO -> anelli (Debye-Scherrer), ogni
@@ -251,6 +253,8 @@ Object.keys(SAMPLES).forEach(function(k){ var s=SAMPLES[k]; if(s.rings){ var t=0
 
 var sample='poly-graphite';
 var model='q', beamOn=true, count=0, rafId=null, rate=REDUCE?4:11;
+var REGIME=Math.round(rate*60*TAU);  // punti accesi quando arrivi e spegnimenti si pareggiano
+var fadeAcc=0, tPrev=0;
 var lam=0, spots=[], spotsTot=0;
 var plist=[], plane=0, rmm=0, rows=[];
 
@@ -373,21 +377,34 @@ function drawGauge(){
 }
 
 /* ---- schermo di rivelazione (canvas, accumulo additivo) ---- */
+var bgGrad=ctx.createRadialGradient(C0,C0,8,C0,C0,Rs);
+bgGrad.addColorStop(0,'#08160e'); bgGrad.addColorStop(1,'#030906');
+var dotImg=(function(){                 // il punto e' preparato una volta sola: seed() ne disegna migliaia
+  var c=document.createElement('canvas'); c.width=c.height=8;
+  var d=c.getContext('2d'), g=d.createRadialGradient(4,4,0,4,4,3.0);
+  var a=0.10*11/rate;                   // meno arrivi al secondo, punti piu' luminosi: stessa figura a regime
+  g.addColorStop(0,'rgba(150,255,205,'+a+')'); g.addColorStop(1,'rgba(150,255,205,0)');
+  d.fillStyle=g; d.fillRect(0,0,8,8); return c;
+})();
 function clearScreen(){
   ctx.globalCompositeOperation='source-over';
   ctx.clearRect(0,0,CW,CW);
-  var bg=ctx.createRadialGradient(C0,C0,8,C0,C0,Rs);
-  bg.addColorStop(0,'#08160e'); bg.addColorStop(1,'#030906');
-  ctx.fillStyle=bg; ctx.beginPath(); ctx.arc(C0,C0,Rs,0,6.2832); ctx.fill();
+  ctx.fillStyle=bgGrad; ctx.beginPath(); ctx.arc(C0,C0,Rs,0,6.2832); ctx.fill();
   ctx.strokeStyle='#1c3a30'; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(C0,C0,Rs,0,6.2832); ctx.stroke();
   ctx.globalCompositeOperation='lighter';
   count=0; cntEl.textContent='0';
 }
+// smorzamento verso il fondo: la traccia di un elettrone svanisce, la figura va a regime
+function fadePhosphor(){
+  ctx.save();
+  ctx.globalCompositeOperation='source-over';
+  ctx.globalAlpha=FADEDT/TAU;
+  ctx.fillStyle=bgGrad; ctx.beginPath(); ctx.arc(C0,C0,Rs,0,6.2832); ctx.fill();
+  ctx.restore();
+}
 function paint(x,y){
   var dx=x-C0, dy=y-C0; if(dx*dx+dy*dy>(Rs-3)*(Rs-3)) return;
-  var g=ctx.createRadialGradient(x,y,0,x,y,3.0);
-  g.addColorStop(0,'rgba(150,255,205,0.10)'); g.addColorStop(1,'rgba(150,255,205,0)');
-  ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,3.0,0,6.2832); ctx.fill();
+  ctx.drawImage(dotImg,x-4,y-4);
   count++;
 }
 /* Un solo fascio: il raggio diffratto e' lo stesso fascio deviato, quindi macchia diretta e
@@ -411,13 +428,15 @@ function hit(){
 }
 function seed(n){ for(var i=0;i<n;i++) hit(); cntEl.textContent=count; }
 
-function recalc(reseed){
+var reseedT=null;
+function recalc(riesponi){
   computeRings();
   computeSpots();
   drawSchem();
-  clearScreen();
   readouts();
-  if(reseed&&beamOn) seed(650);
+  if(!riesponi||beamOn) return;      // col fascio acceso la figura vecchia svanisce da se'
+  if(reseedT) clearTimeout(reseedT);
+  reseedT=setTimeout(function(){ reseedT=null; clearScreen(); seed(REGIME); },150);
 }
 
 /* ---- misura ---- */
@@ -479,11 +498,18 @@ function beamLabel(){
 }
 function setBeam(on){
   beamOn=on; beamLabel();
-  if(on&&count<60) seed(450);
+  if(on&&count<60) seed(REGIME);
 }
 
-function frame(){
-  if(beamOn){ for(var i=0;i<rate;i++) hit(); cntEl.textContent=count; }
+// a schermo fermo non si smorza: mettere in pausa e' come fotografare la figura
+function frame(ts){
+  if(beamOn){
+    for(var i=0;i<rate;i++) hit();
+    cntEl.textContent=count;
+    fadeAcc+=tPrev?Math.min((ts-tPrev)/1000,0.5):0;
+    while(fadeAcc>=FADEDT){ fadePhosphor(); fadeAcc-=FADEDT; }
+  }
+  tPrev=ts;
   rafId=requestAnimationFrame(frame);
 }
 
@@ -532,10 +558,10 @@ clearScreen();
 readouts();
 renderTab();
 beamLabel();
-seed(450);
+seed(REGIME);
 rafId=requestAnimationFrame(frame);
 
-window.__lab={ get count(){return count;}, get model(){return model;}, get sample(){return sample;}, get family(){return SAMPLES[sample].family;}, get beam(){return beamOn;}, get lam(){return lam;}, get spots(){return spots.length;}, get rmm(){return rmm;}, get plane(){return plane;}, get d(){return curD();}, get delta(){return delta();}, get lamMis(){return lamMis();}, get plam(){return plam();}, get rows(){return rows.slice();}, get ringR(){return ringR;}, setRad:setRad, setPlane:function(i){ plane=i; planesSel.value=String(i); readouts(); }, record:record, seed:seed, hit:hit, clear:clearScreen, setBeam:setBeam };
+window.__lab={ get count(){return count;}, get model(){return model;}, get sample(){return sample;}, get family(){return SAMPLES[sample].family;}, get beam(){return beamOn;}, get lam(){return lam;}, get spots(){return spots.length;}, get rmm(){return rmm;}, get plane(){return plane;}, get d(){return curD();}, get delta(){return delta();}, get lamMis(){return lamMis();}, get plam(){return plam();}, get rows(){return rows.slice();}, get ringR(){return ringR;}, get regime(){return REGIME;}, setRad:setRad, setPlane:function(i){ plane=i; planesSel.value=String(i); readouts(); }, record:record, seed:seed, hit:hit, fade:fadePhosphor, clear:clearScreen, setBeam:setBeam };
 })();
 </script>
 </body>

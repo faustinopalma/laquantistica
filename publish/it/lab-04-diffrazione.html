@@ -189,7 +189,7 @@
         <div id="rowH" hidden class="dim"><span class="it">valore accettato</span> h = <span class="it">6,626</span> · 10⁻³⁴ J·s · <span class="it">scarto</span> <span id="rDev">—</span></div>
       </div>
 
-      <p class="hint"><span class="it"><b>Come si misura.</b> Il cannone accelera gli elettroni con la tensione V, quindi la loro quantità di moto è p = √(2mqV): la si legge qui sopra. Gli elettroni arrivano sullo schermo uno per volta, come punti; dopo qualche migliaio di arrivi compaiono gli anelli, che sono la figura di diffrazione del reticolo cristallino. Non sono righe sottili: sono bande larghe quanto la macchia del fascio diretto, appoggiate sul fondo diffuso degli urti anelastici, e si punta il centro della banda. A un passo reticolare d grande corrisponde un angolo piccolo, quindi <b>il primo anello dal centro è quello del d più grande</b>: se lo si abbina al piano sbagliato, pλ sballa del 40 o del 70 per cento. Scegli a quale famiglia di piani appartiene l'anello, poi portaci sopra il cerchio di misura — un tocco sullo schermo lo sposta lì, il cursore lo regola — e leggi il raggio r sulla scala graduata, in millimetri. Lo schermo dista L = 135 mm dal campione, quindi δ = arctg(r/L). La condizione di diffrazione sen δ = λ/d, con d noto dalla struttura del cristallo, dà la lunghezza d'onda λ. Registra la misura e ripetila ad altre tensioni: il prodotto pλ resta costante, ed è la costante di Planck. La lettura è arrotondata al mezzo millimetro, ed è da lì che viene la dispersione dei valori di pλ. Se si lascia il fascio acceso troppo a lungo la macchia centrale dilaga e mangia il primo anello, che sembra allora più stretto di quello che è: si azzera e si riprende con un'esposizione più breve. La fotografia della scheda è sovraesposta proprio così. Un campione <b>policristallino</b> (cristalliti orientati a caso) dà anelli; un <b>monocristallo</b> dà un reticolo di punti, proiezione del reticolo reciproco. Il modello <b>classico</b> darebbe solo una macchia centrale, e non ci sarebbe niente da misurare.</span></p>
+      <p class="hint"><span class="it"><b>Come si misura.</b> Il cannone accelera gli elettroni con la tensione V, quindi la loro quantità di moto è p = √(2mqV): la si legge qui sopra. Gli elettroni arrivano sullo schermo uno per volta, come punti; dopo qualche migliaio di arrivi compaiono gli anelli, che sono la figura di diffrazione del reticolo cristallino. Non sono righe sottili: sono bande larghe quanto la macchia del fascio diretto, appoggiate sul fondo diffuso degli urti anelastici, e si punta il centro della banda. A un passo reticolare d grande corrisponde un angolo piccolo, quindi <b>il primo anello dal centro è quello del d più grande</b>: se lo si abbina al piano sbagliato, pλ sballa del 40 o del 70 per cento. Scegli a quale famiglia di piani appartiene l'anello, poi portaci sopra il cerchio di misura — un tocco sullo schermo lo sposta lì, il cursore lo regola — e leggi il raggio r sulla scala graduata, in millimetri. Lo schermo dista L = 135 mm dal campione, quindi δ = arctg(r/L). La condizione di diffrazione sen δ = λ/d, con d noto dalla struttura del cristallo, dà la lunghezza d'onda λ. Registra la misura e ripetila ad altre tensioni: il prodotto pλ resta costante, ed è la costante di Planck. La lettura è arrotondata al mezzo millimetro, ed è da lì che viene la dispersione dei valori di pλ. I fosfori dello schermo si spengono in una decina di secondi, quindi dopo un po' la figura non cresce più: quello che si vede è il ritmo degli arrivi, non il loro totale. In pausa resta ferma, come una fotografia. Un campione <b>policristallino</b> (cristalliti orientati a caso) dà anelli; un <b>monocristallo</b> dà un reticolo di punti, proiezione del reticolo reciproco. Il modello <b>classico</b> darebbe solo una macchia centrale, e non ci sarebbe niente da misurare.</span></p>
     </aside>
   </section>
 
@@ -231,6 +231,8 @@ var PXMM=Rs/SCRMM;                   // px per millimetro
 var SIG=0.8*PXMM;                    // raggio della macchia del fascio sullo schermo (mm)
 var HALO=20*PXMM;                    // scala del fondo diffuso (urti anelastici e plurimi)
 var WDIR=0.10, WHALO=0.52;           // quote di elettroni nel fascio diretto e nel fondo
+var TAU=10;                          // i fosfori si spengono con questa costante di tempo (s)
+var FADEDT=1/3;                      // ogni quanto si applica lo smorzamento (s)
 
 /* CAMPIONI — verificati su fonti reali (Wikipedia SAED/Powder diffraction; immagini di
    riferimento in build/diffraction-refs). POLICRISTALLINO -> anelli (Debye-Scherrer), ogni
@@ -251,6 +253,8 @@ Object.keys(SAMPLES).forEach(function(k){ var s=SAMPLES[k]; if(s.rings){ var t=0
 
 var sample='poly-graphite';
 var model='q', beamOn=true, count=0, rafId=null, rate=REDUCE?4:11;
+var REGIME=Math.round(rate*60*TAU);  // punti accesi quando arrivi e spegnimenti si pareggiano
+var fadeAcc=0, tPrev=0;
 var lam=0, spots=[], spotsTot=0;
 var plist=[], plane=0, rmm=0, rows=[];
 
@@ -373,21 +377,34 @@ function drawGauge(){
 }
 
 /* ---- schermo di rivelazione (canvas, accumulo additivo) ---- */
+var bgGrad=ctx.createRadialGradient(C0,C0,8,C0,C0,Rs);
+bgGrad.addColorStop(0,'#08160e'); bgGrad.addColorStop(1,'#030906');
+var dotImg=(function(){                 // il punto e' preparato una volta sola: seed() ne disegna migliaia
+  var c=document.createElement('canvas'); c.width=c.height=8;
+  var d=c.getContext('2d'), g=d.createRadialGradient(4,4,0,4,4,3.0);
+  var a=0.10*11/rate;                   // meno arrivi al secondo, punti piu' luminosi: stessa figura a regime
+  g.addColorStop(0,'rgba(150,255,205,'+a+')'); g.addColorStop(1,'rgba(150,255,205,0)');
+  d.fillStyle=g; d.fillRect(0,0,8,8); return c;
+})();
 function clearScreen(){
   ctx.globalCompositeOperation='source-over';
   ctx.clearRect(0,0,CW,CW);
-  var bg=ctx.createRadialGradient(C0,C0,8,C0,C0,Rs);
-  bg.addColorStop(0,'#08160e'); bg.addColorStop(1,'#030906');
-  ctx.fillStyle=bg; ctx.beginPath(); ctx.arc(C0,C0,Rs,0,6.2832); ctx.fill();
+  ctx.fillStyle=bgGrad; ctx.beginPath(); ctx.arc(C0,C0,Rs,0,6.2832); ctx.fill();
   ctx.strokeStyle='#1c3a30'; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(C0,C0,Rs,0,6.2832); ctx.stroke();
   ctx.globalCompositeOperation='lighter';
   count=0; cntEl.textContent='0';
 }
+// smorzamento verso il fondo: la traccia di un elettrone svanisce, la figura va a regime
+function fadePhosphor(){
+  ctx.save();
+  ctx.globalCompositeOperation='source-over';
+  ctx.globalAlpha=FADEDT/TAU;
+  ctx.fillStyle=bgGrad; ctx.beginPath(); ctx.arc(C0,C0,Rs,0,6.2832); ctx.fill();
+  ctx.restore();
+}
 function paint(x,y){
   var dx=x-C0, dy=y-C0; if(dx*dx+dy*dy>(Rs-3)*(Rs-3)) return;
-  var g=ctx.createRadialGradient(x,y,0,x,y,3.0);
-  g.addColorStop(0,'rgba(150,255,205,0.10)'); g.addColorStop(1,'rgba(150,255,205,0)');
-  ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,3.0,0,6.2832); ctx.fill();
+  ctx.drawImage(dotImg,x-4,y-4);
   count++;
 }
 /* Un solo fascio: il raggio diffratto e' lo stesso fascio deviato, quindi macchia diretta e
@@ -411,13 +428,15 @@ function hit(){
 }
 function seed(n){ for(var i=0;i<n;i++) hit(); cntEl.textContent=count; }
 
-function recalc(reseed){
+var reseedT=null;
+function recalc(riesponi){
   computeRings();
   computeSpots();
   drawSchem();
-  clearScreen();
   readouts();
-  if(reseed&&beamOn) seed(650);
+  if(!riesponi||beamOn) return;      // col fascio acceso la figura vecchia svanisce da se'
+  if(reseedT) clearTimeout(reseedT);
+  reseedT=setTimeout(function(){ reseedT=null; clearScreen(); seed(REGIME); },150);
 }
 
 /* ---- misura ---- */
@@ -479,11 +498,18 @@ function beamLabel(){
 }
 function setBeam(on){
   beamOn=on; beamLabel();
-  if(on&&count<60) seed(450);
+  if(on&&count<60) seed(REGIME);
 }
 
-function frame(){
-  if(beamOn){ for(var i=0;i<rate;i++) hit(); cntEl.textContent=count; }
+// a schermo fermo non si smorza: mettere in pausa e' come fotografare la figura
+function frame(ts){
+  if(beamOn){
+    for(var i=0;i<rate;i++) hit();
+    cntEl.textContent=count;
+    fadeAcc+=tPrev?Math.min((ts-tPrev)/1000,0.5):0;
+    while(fadeAcc>=FADEDT){ fadePhosphor(); fadeAcc-=FADEDT; }
+  }
+  tPrev=ts;
   rafId=requestAnimationFrame(frame);
 }
 
@@ -532,10 +558,10 @@ clearScreen();
 readouts();
 renderTab();
 beamLabel();
-seed(450);
+seed(REGIME);
 rafId=requestAnimationFrame(frame);
 
-window.__lab={ get count(){return count;}, get model(){return model;}, get sample(){return sample;}, get family(){return SAMPLES[sample].family;}, get beam(){return beamOn;}, get lam(){return lam;}, get spots(){return spots.length;}, get rmm(){return rmm;}, get plane(){return plane;}, get d(){return curD();}, get delta(){return delta();}, get lamMis(){return lamMis();}, get plam(){return plam();}, get rows(){return rows.slice();}, get ringR(){return ringR;}, setRad:setRad, setPlane:function(i){ plane=i; planesSel.value=String(i); readouts(); }, record:record, seed:seed, hit:hit, clear:clearScreen, setBeam:setBeam };
+window.__lab={ get count(){return count;}, get model(){return model;}, get sample(){return sample;}, get family(){return SAMPLES[sample].family;}, get beam(){return beamOn;}, get lam(){return lam;}, get spots(){return spots.length;}, get rmm(){return rmm;}, get plane(){return plane;}, get d(){return curD();}, get delta(){return delta();}, get lamMis(){return lamMis();}, get plam(){return plam();}, get rows(){return rows.slice();}, get ringR(){return ringR;}, get regime(){return REGIME;}, setRad:setRad, setPlane:function(i){ plane=i; planesSel.value=String(i); readouts(); }, record:record, seed:seed, hit:hit, fade:fadePhosphor, clear:clearScreen, setBeam:setBeam };
 })();
 </script>
 </body>
