@@ -20,7 +20,7 @@
   .schem-stage svg{width:100%;height:auto;display:block;}
   .screen-stage{max-width:460px;}
   .screenwrap{position:relative;line-height:0;}
-  canvas#screen{width:100%;height:auto;display:block;border-radius:10px;background:#050c08;cursor:crosshair;touch-action:none;}
+  canvas#screen{width:100%;height:auto;display:block;border-radius:10px;background:#050c08;cursor:crosshair;}
   canvas#gauge{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;}
   /* pannello controlli semplice, sopra i dati */
   .cpanel{background:#12151a;border:1px solid #2d333d;border-radius:8px;padding:.6rem .7rem;margin:0 0 .55rem;display:flex;flex-direction:column;gap:.5rem;}
@@ -175,7 +175,7 @@
         <div id="rowH" hidden class="dim"><span class="it">valore accettato</span><span class="en">accepted value</span> h = <span class="it">6,626</span><span class="en">6.626</span> · 10⁻³⁴ J·s · <span class="it">scarto</span><span class="en">deviation</span> <span id="rDev">—</span></div>
       </div>
 
-      <p class="hint"><span class="it"><b>Come si misura.</b> Il cannone accelera gli elettroni con la tensione V, quindi la loro quantità di moto è p = √(2mqV): la si legge qui sopra. Gli elettroni arrivano sullo schermo uno per volta, come punti; dopo qualche migliaio di arrivi compaiono gli anelli, che sono la figura di diffrazione del reticolo cristallino. Scegli a quale famiglia di piani appartiene l'anello, poi portaci sopra il cerchio di misura — si trascina direttamente sullo schermo, oppure col cursore — e leggi il raggio r sulla scala graduata, in millimetri. Lo schermo dista L = 135 mm dal campione, quindi δ = arctg(r/L). La condizione di diffrazione sen δ = λ/d, con d noto dalla struttura del cristallo, dà la lunghezza d'onda λ. Registra la misura e ripetila ad altre tensioni: il prodotto pλ resta costante, ed è la costante di Planck. La lettura è arrotondata al mezzo millimetro, ed è da lì che viene la dispersione dei valori di pλ. Un campione <b>policristallino</b> (cristalliti orientati a caso) dà anelli; un <b>monocristallo</b> dà un reticolo di punti, proiezione del reticolo reciproco. Il modello <b>classico</b> darebbe solo una macchia centrale, e non ci sarebbe niente da misurare.</span><span class="en"><b>How the measurement is made.</b> The gun accelerates the electrons through the voltage V, so their momentum is p = √(2mqV): it is displayed above. The electrons reach the screen one at a time, as dots; after a few thousand arrivals the rings appear, which are the diffraction pattern of the crystal lattice. Choose which family of planes the ring belongs to, then bring the measuring circle onto it — drag directly on the screen, or use the slider — and read the radius r on the graduated scale, in millimetres. The screen is L = 135 mm from the sample, so δ = arctan(r/L). The diffraction condition sin δ = λ/d, with d known from the structure of the crystal, gives the wavelength λ. Record the measurement and repeat it at other voltages: the product pλ stays constant, and it is Planck's constant. The reading is rounded to the half millimetre, and that is where the spread of the pλ values comes from. A <b>polycrystalline</b> sample (randomly oriented crystallites) gives rings; a <b>single crystal</b> gives a lattice of spots, a projection of the reciprocal lattice. The <b>classical</b> model would give only a central blob, and there would be nothing to measure.</span></p>
+      <p class="hint"><span class="it"><b>Come si misura.</b> Il cannone accelera gli elettroni con la tensione V, quindi la loro quantità di moto è p = √(2mqV): la si legge qui sopra. Gli elettroni arrivano sullo schermo uno per volta, come punti; dopo qualche migliaio di arrivi compaiono gli anelli, che sono la figura di diffrazione del reticolo cristallino. Scegli a quale famiglia di piani appartiene l'anello, poi portaci sopra il cerchio di misura — un tocco sullo schermo lo sposta lì, il cursore lo regola — e leggi il raggio r sulla scala graduata, in millimetri. Lo schermo dista L = 135 mm dal campione, quindi δ = arctg(r/L). La condizione di diffrazione sen δ = λ/d, con d noto dalla struttura del cristallo, dà la lunghezza d'onda λ. Registra la misura e ripetila ad altre tensioni: il prodotto pλ resta costante, ed è la costante di Planck. La lettura è arrotondata al mezzo millimetro, ed è da lì che viene la dispersione dei valori di pλ. Un campione <b>policristallino</b> (cristalliti orientati a caso) dà anelli; un <b>monocristallo</b> dà un reticolo di punti, proiezione del reticolo reciproco. Il modello <b>classico</b> darebbe solo una macchia centrale, e non ci sarebbe niente da misurare.</span><span class="en"><b>How the measurement is made.</b> The gun accelerates the electrons through the voltage V, so their momentum is p = √(2mqV): it is displayed above. The electrons reach the screen one at a time, as dots; after a few thousand arrivals the rings appear, which are the diffraction pattern of the crystal lattice. Choose which family of planes the ring belongs to, then bring the measuring circle onto it — a tap on the screen moves it there, the slider fine-tunes it — and read the radius r on the graduated scale, in millimetres. The screen is L = 135 mm from the sample, so δ = arctan(r/L). The diffraction condition sin δ = λ/d, with d known from the structure of the crystal, gives the wavelength λ. Record the measurement and repeat it at other voltages: the product pλ stays constant, and it is Planck's constant. The reading is rounded to the half millimetre, and that is where the spread of the pλ values comes from. A <b>polycrystalline</b> sample (randomly oriented crystallites) gives rings; a <b>single crystal</b> gives a lattice of spots, a projection of the reciprocal lattice. The <b>classical</b> model would give only a central blob, and there would be nothing to measure.</span></p>
     </aside>
   </section>
 
@@ -235,7 +235,7 @@ Object.keys(SAMPLES).forEach(function(k){ var s=SAMPLES[k]; if(s.rings){ var t=0
 var sample='poly-graphite';
 var model='q', beamOn=true, count=0, rafId=null, rate=REDUCE?4:11;
 var lam=0, spots=[], spotsTot=0;
-var plist=[], plane=0, rmm=0, rows=[], dragging=false;
+var plist=[], plane=0, rmm=0, rows=[];
 
 function gauss(){ return (Math.random()+Math.random()+Math.random()+Math.random()-2); }
 function pOf(V){ return Math.sqrt(2*ME*QE*V); }                      // kg·m/s
@@ -475,10 +475,7 @@ oneBtn.addEventListener('click',function(){ hit(); cntEl.textContent=count; });
 clrBtn.addEventListener('click',function(){ clearScreen(); });
 seg.addEventListener('click',function(e){ var b=e.target.closest('button'); if(!b) return; model=b.getAttribute('data-v'); [].forEach.call(seg.children,function(x){ x.classList.toggle('on',x.getAttribute('data-v')===model); }); recalc(true); });
 sampleSel.addEventListener('change',function(){ sample=this.value; plist=planeList(); plane=0; sampleLabels(); recalc(true); });
-cv.addEventListener('pointerdown',function(e){ dragging=true; if(cv.setPointerCapture) cv.setPointerCapture(e.pointerId); pick(e); e.preventDefault(); });
-cv.addEventListener('pointermove',function(e){ if(dragging) pick(e); });
-cv.addEventListener('pointerup',function(){ dragging=false; });
-cv.addEventListener('pointercancel',function(){ dragging=false; });
+cv.addEventListener('click',pick);   // solo il clic: trascinare bloccherebbe lo scorrimento sul telefono
 
 function sampleLabels(){
   var ogp=$('og-poly'), ogm=$('og-mono');
