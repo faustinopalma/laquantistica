@@ -95,12 +95,12 @@
         </div>
         <div class="crow">
           <span class="clab"><span class="it">Angolo ϑ</span><span class="en">Angle ϑ</span></span>
-          <input type="range" id="th" min="0" max="120" step="1" value="0">
+          <input type="range" id="th" min="0" max="120" step="1" value="0" aria-label="Angolo ϑ del rivelatore sul goniometro, in gradi" aria-label-en="Angle ϑ of the detector on the goniometer, in degrees">
           <span class="cval" id="thv">0°</span>
         </div>
         <div class="crow">
           <span class="clab"><span class="it">Lamina</span><span class="en">Foil</span></span>
-          <select id="mat" class="csel">
+          <select id="mat" class="csel" aria-label="Materiale della lamina" aria-label-en="Material of the foil">
             <option value="au"></option>
             <option value="ag"></option>
             <option value="cu"></option>
@@ -109,14 +109,14 @@
         </div>
         <div class="crow">
           <span class="clab"><span class="it">Fenditura</span><span class="en">Slit</span></span>
-          <select id="slit" class="csel">
+          <select id="slit" class="csel" aria-label="Apertura della fenditura del collimatore" aria-label-en="Aperture of the collimator slit">
             <option value="1"></option>
             <option value="5"></option>
           </select>
         </div>
         <div class="crow">
           <span class="clab"><span class="it">Energia α</span><span class="en">α energy</span></span>
-          <input type="range" id="en" min="3" max="8" step="0.1" value="5.5">
+          <input type="range" id="en" min="3" max="8" step="0.1" value="5.5" aria-label="Energia delle particelle α, in MeV" aria-label-en="Energy of the α particles, in MeV">
           <span class="cval" id="env">5,5 MeV</span>
         </div>
         <div class="seglab"><span class="it">Scala dei tempi</span><span class="en">Time scale</span></div>
