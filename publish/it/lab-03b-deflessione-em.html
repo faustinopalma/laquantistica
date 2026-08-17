@@ -50,6 +50,14 @@
     .console .stagecol .plotter{flex:0 0 auto;min-height:0;}
     .console .stagecol .plot-screen svg{width:100%;height:auto;}
     .console .ctrlcol{overflow-y:auto;min-height:0;gap:.45rem;}
+    /* .ctl e' a tre colonne con l'etichetta nowrap: nella colonna stretta del telefono
+       lascerebbe alla barra pochi pixel. Qui l'etichetta va sopra, a tutta larghezza. */
+    .console .sim-controls{gap:.55rem;}
+    .console .ctl{grid-template-columns:minmax(0,1fr) auto;gap:.1rem .5rem;}
+    .console .ctl label{grid-column:1 / -1;white-space:normal;font-size:.72rem;line-height:1.25;}
+    .console .ctl input[type=range]{grid-column:1;}
+    .console .ctl .val{grid-column:2;font-size:.76rem;}
+    .console .ctl .scale{grid-column:1;margin-top:-.35rem;}
     .console .panel-lede{font-size:.74rem;line-height:1.35;}
     .console .hint{font-size:.68rem;}
     .measbox .step{font-size:.7rem;min-height:0;}

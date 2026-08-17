@@ -36,6 +36,15 @@
   .explain-body p{font-size:.9rem;line-height:1.6;margin:.4rem 0;}
   .explain-body b{color:#ffb000;}
   .explain-body .fml{font-family:var(--n-mono);background:#0a1712;border:1px solid #1c3a30;border-radius:6px;padding:.5rem .7rem;margin:.55rem 0;color:#e8fff4;text-align:center;font-size:1rem;}
+  /* .ctl e' a tre colonne con l'etichetta nowrap: nella colonna stretta del telefono
+     lascerebbe alla barra pochi pixel. Qui l'etichetta va sopra, a tutta larghezza. */
+  @media (max-width:1120px) and (orientation:landscape){
+    .console .sim-controls{gap:.55rem;}
+    .console .ctl{grid-template-columns:minmax(0,1fr) auto;gap:.1rem .5rem;}
+    .console .ctl label{grid-column:1 / -1;white-space:normal;font-size:.72rem;line-height:1.25;}
+    .console .ctl input[type=range]{grid-column:1;}
+    .console .ctl .val{grid-column:2;font-size:.76rem;}
+  }
 </style>
 </head>
 <body>
