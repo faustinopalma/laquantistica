@@ -16,7 +16,7 @@
   <header class="con-head">
     <div class="con-brand">
       <a class="con-back" id="backTop" href="02-stern-gerlach-cascata.html"><span class="it">← Torna al Capitolo 10</span><span class="en">← Back to Chapter 10</span></a>
-      <span class="tag amber"><span class="it">Esperimento 1</span><span class="en">Experiment 1</span></span>
+      <span class="tag amber"><span class="it">Lab · Cap. 10</span><span class="en">Lab · Ch. 10</span></span>
       <span class="con-title"><span class="it">Stern-Gerlach in cascata</span><span class="en">Cascaded Stern-Gerlach</span></span>
     </div>
     <div class="con-actions">
@@ -43,10 +43,10 @@
       <p class="panel-lede"><span class="it">Due macchine in cascata. La <b>Macchina 1</b> (ϑ₁) divide il fascio e ne <b>seleziona</b> uno stato; la <b>Macchina 2</b> (ϑ₂) misura di nuovo e divide il fascio. Le intensità sono proporzionali a <b>cos²</b> e <b>sin²</b> di metà dell'angolo <b>relativo</b> tra le due macchine.</span><span class="en">Two machines in cascade. <b>Machine 1</b> (ϑ₁) splits the beam and <b>selects</b> one state; <b>Machine 2</b> (ϑ₂) measures again and splits the beam. The intensities are proportional to <b>cos²</b> and <b>sin²</b> of half the <b>relative</b> angle between the two machines.</span></p>
       <div class="sim-presets" id="presets1"></div>
       <div class="sim-controls">
-        <div class="ctl"><label><span class="it">Macchina 1&nbsp; ϑ₁</span><span class="en">Machine 1&nbsp; ϑ₁</span></label><input type="range" id="t1" min="0" max="360" step="1" value="0"><span class="val" id="t1v">0°</span></div>
+        <div class="ctl"><label><span class="it">Macchina 1&nbsp; ϑ₁</span><span class="en">Machine 1&nbsp; ϑ₁</span></label><input type="range" id="t1" min="0" max="360" step="1" value="0" aria-label="inclinazione della macchina 1, in gradi" aria-label-en="tilt of machine 1, in degrees"><span class="val" id="t1v">0°</span></div>
         <div class="ctl-row"><span class="lbl"><span class="it">Stato selezionato dalla Macchina 1:</span><span class="en">State selected by Machine 1:</span></span>
           <span class="seg" id="sel"><button type="button" data-s="1" class="on">+k</button><button type="button" data-s="-1">−k</button></span></div>
-        <div class="ctl driver"><label><span class="it">Macchina 2&nbsp; ϑ₂</span><span class="en">Machine 2&nbsp; ϑ₂</span></label><input type="range" id="t2" min="0" max="360" step="1" value="90"><span class="val" id="t2v">90°</span></div>
+        <div class="ctl driver"><label><span class="it">Macchina 2&nbsp; ϑ₂</span><span class="en">Machine 2&nbsp; ϑ₂</span></label><input type="range" id="t2" min="0" max="360" step="1" value="90" aria-label="inclinazione della macchina 2, in gradi" aria-label-en="tilt of machine 2, in degrees"><span class="val" id="t2v">90°</span></div>
         <p class="drives-cap"><span class="it">Muovi <b>ϑ₂</b> per <b>tracciare</b> la curva sul plotter.</span><span class="en">Move <b>ϑ₂</b> to <b>trace</b> the curve on the plotter.</span></p>
       </div>
       <div class="pbars">
@@ -72,7 +72,7 @@
   <div class="con-credit"><span class="it">Laboratorio simulato, scritto nel 2026 insieme a GitHub Copilot: modello didattico, non software scientifico.</span><span class="en">Simulated laboratory, written in 2026 together with GitHub Copilot: a teaching model, not scientific software.</span></div>
 </main>
 
-<script src="assets/sim-sg-core.js?v=2"></script>
+<script src="assets/sim-sg-core.js?v=3"></script>
 <script>
 var svg1 = document.getElementById('svg1');
 var t1El = document.getElementById('t1'), t2El = document.getElementById('t2');
@@ -86,15 +86,15 @@ function drawExp1(){
   var Pp=amp(st,t2,1); Pp=Pp*Pp; var Pm=1-Pp;
 
   // ---- banda trasversale: le due macchine in sezione, con l'orientamento ϑ ----
-  txt(330,18,'— vista trasversale · sezione delle macchine —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
-  sgMagnet(200,96,t1,'Macchina 1  ϑ₁='+t1+'°',svg1);
-  sgMagnet(470,96,t2,'Macchina 2  ϑ₂='+t2+'°',svg1);
+  txt(330,18,L('— vista trasversale · sezione delle macchine —','— cross-section view · the machines in section —'),{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
+  sgMagnet(200,96,t1,L('Macchina 1','Machine 1')+'  ϑ₁='+t1+'°',svg1);
+  sgMagnet(470,96,t2,L('Macchina 2','Machine 2')+'  ϑ₂='+t2+'°',svg1);
 
   // ---- banda longitudinale: percorso degli atomi (larghezza ∝ flusso) ----
   var yIn=250, ss=upSel?-1:1, yPlat=yIn+ss*34;
   var selCol=upSel?ACC:BLU, blkCol=upSel?BLU:ACC;
   el('line',{x1:30,y1:152,x2:630,y2:152,stroke:'#1c3a30','stroke-width':1},svg1);
-  txt(330,172,'— vista longitudinale · percorso degli atomi  (larghezza ∝ flusso) —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
+  txt(330,172,L('— vista longitudinale · percorso degli atomi  (larghezza ∝ flusso) —','— longitudinal view · path of the atoms  (line width ∝ flux) —'),{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
 
   txt(18,yIn-4,'⟶',{'font-size':18,fill:INK},svg1);
   txt(14,yIn+18,'Ag',{'font-size':9,fill:'#6f8f80','font-family':'monospace'},svg1);
@@ -148,15 +148,19 @@ document.getElementById('clr1').addEventListener('click',function(){ plot1.reset
 
 /* preset (casi della tesi: fig.3 ϑ=0, fig.4 ϑ=90, fig.5 entrambe inclinate) */
 var P1=[
-  ['ϑ₂=ϑ₁ · 100%',function(){t1El.value=0;t2El.value=0;setSel(1);}],
-  ['ϑ=0° · fig.3',function(){t1El.value=0;t2El.value=0;setSel(1);}],
-  ['ϑ=90° · fig.4',function(){t1El.value=0;t2El.value=90;setSel(1);}],
-  ['180° · flip',function(){t1El.value=0;t2El.value=180;setSel(1);}],
-  ['entrambe inclinate · fig.5',function(){t1El.value=30;t2El.value=75;setSel(1);}]
+  [['ϑ₂=ϑ₁ · 100%','ϑ₂=ϑ₁ · 100%'],function(){t1El.value=0;t2El.value=0;setSel(1);}],
+  [['ϑ=0° · fig.3','ϑ=0° · fig.3'],function(){t1El.value=0;t2El.value=0;setSel(1);}],
+  [['ϑ=90° · fig.4','ϑ=90° · fig.4'],function(){t1El.value=0;t2El.value=90;setSel(1);}],
+  [['180° · inversione','180° · flip'],function(){t1El.value=0;t2El.value=180;setSel(1);}],
+  [['entrambe inclinate · fig.5','both tilted · fig.5'],function(){t1El.value=30;t2El.value=75;setSel(1);}]
 ];
 var host=document.getElementById('presets1');
-P1.forEach(function(p){ var b=document.createElement('button'); b.className='sim-preset'; b.type='button'; b.textContent=p[0];
+P1.forEach(function(p){ var b=document.createElement('button'); b.className='sim-preset'; b.type='button';
+  b.innerHTML='<span class="it">'+p[0][0]+'</span><span class="en">'+p[0][1]+'</span>';
   b.addEventListener('click',function(){ p[1](); drawExp1(); plot1.reset(); plot1.record(+t2El.value); }); host.appendChild(b); });
+
+// il disegno contiene testo: al cambio di lingua va rifatto
+new MutationObserver(function(){ drawExp1(); plot1.draw(); }).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});
 
 initBackLink('02-stern-gerlach-cascata.html');
 drawExp1(); plot1.record(+t2El.value);

@@ -38,6 +38,7 @@
   #linkpath{fill:none;stroke:#e0a24d;stroke-width:1.9;opacity:0;filter:drop-shadow(0 0 3px rgba(224,162,77,.6));}
   @keyframes gatePulse{0%{transform:scale(.55);opacity:.9}70%{opacity:.28}100%{transform:scale(1.75);opacity:0}}
   .gate-pulse{transform-box:fill-box;transform-origin:center;animation:gatePulse 1.4s ease-out 3;}
+  @media(prefers-reduced-motion:reduce){.gate-pulse{animation:none;opacity:.55;}}
 </style>
 <link rel="alternate" hreflang="it" href="https://laquantistica.com/it/lab-02c-sg-ricombinazione">
 <link rel="alternate" hreflang="en" href="https://laquantistica.com/en/lab-02c-sg-ricombinazione">
@@ -60,7 +61,7 @@
   <header class="con-head">
     <div class="con-brand">
       <a class="con-back" id="backTop" href="02-stern-gerlach-cascata"><span class="it">← Torna al Capitolo 10</span></a>
-      <span class="tag amber"><span class="it">Esperimento 3</span></span>
+      <span class="tag amber"><span class="it">Lab · Cap. 10</span></span>
       <span class="con-title"><span class="it">Stern-Gerlach in cascata</span></span>
     </div>
     <div class="con-actions">
@@ -116,9 +117,10 @@
   <div class="con-credit"><span class="it">Laboratorio simulato, scritto nel 2026 insieme a GitHub Copilot: modello didattico, non software scientifico.</span></div>
 </main>
 
-<script src="/assets/sim-sg-core.js?v=2"></script>
+<script src="/assets/sim-sg-core.js?v=3"></script>
 <script>
 var svg1 = document.getElementById('svg1');
+var REDUCE = window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches;
 var blockUp=false, blockDn=true;   // blocco del ramo +k / del ramo −k (default: blocca −k)
 var bubbleT = null;
 var touchedUp=false, touchedDn=false, inviteTimer=null, invitePulseT=null;
@@ -130,7 +132,7 @@ function tweenNeedle(target, cx, cy){
   var start=needleCur;
   nn.setAttribute('transform','rotate('+target+' '+cx+' '+cy+')');   // stato finale: corretto anche senza animazione
   needleCur=target;
-  if(Math.abs(target-start)<0.5) return;
+  if(REDUCE || Math.abs(target-start)<0.5) return;
   var t0=null, dur=850, c=1.5;
   function ease(p){ p-=1; return 1 + p*p*((c+1)*p + c); }            // back-out (rimbalzo da lancetta)
   function step(ts){
@@ -191,7 +193,7 @@ function drawExp3(){
   var fUp = r.recFlux*r.Pp, fDn = r.recFlux*r.Pm;
 
   // ===== BANDA 1: viste di taglio delle 5 macchine =====
-  txt(360,16,'— vista trasversale · le 5 macchine SG  (1 e 5 a ϑ=0°, 2·3·4 a ϑ=90°) —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
+  txt(360,16,L('— vista trasversale · le 5 macchine SG  (1 e 5 a ϑ=0°, 2·3·4 a ϑ=90°) —','— cross-section view · the 5 SG machines  (1 and 5 at ϑ=0°, 2·3·4 at ϑ=90°) —'),{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
   sgMagnet( 95,98,0, '1', svg1);
   sgMagnet(215,98,90,'2', svg1);
   sgMagnet(340,98,90,'3', svg1);
@@ -200,7 +202,7 @@ function drawExp3(){
   el('line',{x1:40,y1:156,x2:680,y2:156,stroke:'#1c3a30','stroke-width':1},svg1);
 
   // ===== BANDA 2: come le macchine 2·3·4 separano e poi ricombinano (allineata a 2·3·4) =====
-  txt(360,172,'— come le macchine 2·3·4 separano e poi ricombinano il fascio —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
+  txt(360,172,L('— come le macchine 2·3·4 separano e poi ricombinano il fascio —','— how machines 2·3·4 split and then recombine the beam —'),{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
   var mc=258, uT=214,uB=236, lT=280,lB=302;
   [215,340,465].forEach(function(mx){ poleBox(mx,uT,uB); poleBox(mx,lT,lB); });
   beam(150,mc,195,mc, 2.2,1, INK, svg1);
@@ -217,7 +219,7 @@ function drawExp3(){
 
   // ===== BANDA 3: diagramma a flussi interattivo (porte, sensore, misura) =====
   var yIn=478, yPlat=438, up=yPlat-34, dn=yPlat+34;
-  txt(360,334,'— diagramma a flussi (larghezza ∝ flusso) · apri/chiudi le porte sui due rami —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
+  txt(360,334,L('— diagramma a flussi (larghezza ∝ flusso) · apri/chiudi le porte sui due rami —','— flux diagram (line width ∝ flux) · open/close the gates on the two branches —'),{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
   txt(16,yIn-4,'⟶',{'font-size':18,fill:INK},svg1);
   txt(12,yIn+18,'Ag',{'font-size':9,fill:'#6f8f80','font-family':'monospace'},svg1);
   beam(40,yIn,95,yIn, fw(1),1, INK, svg1);
@@ -237,7 +239,7 @@ function drawExp3(){
   if(showUp) curveBeam(405,up,465,yPlat, fw(0.25),1, ACC, svg1);
   if(showDn) curveBeam(405,dn,465,yPlat, fw(0.25),1, BLU, svg1);
   // fascio ricombinato -> macchina 5 (SG ϑ=0°, x=560): SPLIT in +k (su, non misurato) e −k (giù -> gauge)
-  txt(560,yPlat-18,'macchina 5',{'text-anchor':'middle','font-size':8.5,fill:'#8fbfa8','font-family':'monospace'},svg1);
+  txt(560,yPlat-18,L('macchina 5','machine 5'),{'text-anchor':'middle','font-size':8.5,fill:'#8fbfa8','font-family':'monospace'},svg1);
   if(!r.none){
     beam(465,yPlat,560,yPlat, fw(r.recFlux),1, INK, svg1);
     curveBeam(560,yPlat,614,yPlat-32, fw(fUp), fUp>0?1:.45, fUp>0?ACC:DIM, svg1);
@@ -254,7 +256,7 @@ function drawExp3(){
   // porte cliccabili sui due rami
   gate(gx, up, blockUp, 'up');
   gate(gx, dn, blockDn, 'dn');
-  txt(gx, up-30, 'porte: clic per aprire / chiudere', {'text-anchor':'middle','font-size':8.5,fill:'#8fbfa8','font-family':'monospace'},svg1);
+  txt(gx, up-30, L('porte: clic per aprire / chiudere','gates: click to open / close'), {'text-anchor':'middle','font-size':8.5,fill:'#8fbfa8','font-family':'monospace'},svg1);
 
   // ---- readout ----
   var recomb=!blockUp&&!blockDn, none=blockUp&&blockDn;
@@ -307,10 +309,10 @@ function animateLink(){
   lsvg.setAttribute('viewBox','0 0 '+g.W+' '+g.H);
   var midX=(g.x1+g.x2)/2;
   lp.setAttribute('d','M'+g.x1.toFixed(1)+' '+g.y1.toFixed(1)+' C '+midX.toFixed(1)+' '+g.y1.toFixed(1)+' '+midX.toFixed(1)+' '+g.y2.toFixed(1)+' '+g.x2.toFixed(1)+' '+g.y2.toFixed(1));
-  var L=lp.getTotalLength();
+  var L2=lp.getTotalLength();
   lp.style.transition='none';
-  lp.style.strokeDasharray=L+' '+L;
-  lp.style.strokeDashoffset=L;
+  lp.style.strokeDasharray=L2+' '+L2;
+  lp.style.strokeDashoffset=L2;
   lp.style.opacity='0.95';
   lp.getBoundingClientRect();               // reflow
   lp.style.transition='stroke-dashoffset .55s ease-in-out';
@@ -336,8 +338,10 @@ function fillTable(){
   document.getElementById('fit1').classList.toggle('on', bothOpen);
   var done=document.querySelectorAll('#ttab tbody tr.done').length;
   document.getElementById('stat1').textContent = done<4
-    ? 'compila la tabella: prova tutte le combinazioni di porte ('+done+'/4)'
-    : 'tabella completa: 50% + 50% dei rami singoli, ma insieme 0% — è questo l\'assurdo';
+    ? L('compila la tabella: prova tutte le combinazioni di porte ('+done+'/4)',
+        'fill in the table: try every combination of gates ('+done+'/4)')
+    : L('tabella completa: 50% + 50% dei rami singoli, ma insieme 0% — è questo l\'assurdo',
+        'table complete: 50% + 50% from the single branches, but 0% together — that is the absurdity');
 }
 
 // invito a toccare le porte: 3 pulsazioni, poi sparisce; riappare ogni 15s finché non si toccano entrambe
@@ -387,6 +391,9 @@ initBackLink('02-stern-gerlach-cascata.html');
 drawExp3(); fillTable();
 pulseGates();
 inviteTimer=setInterval(pulseGates, 15000);
+document.addEventListener('visibilitychange',function(){ if(document.hidden) clearTimeout(invitePulseT); });
+// il disegno e la riga di stato contengono testo: al cambio di lingua vanno rifatti
+new MutationObserver(function(){ drawExp3(); fillTable(); }).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});
 requestAnimationFrame(function(){ setTimeout(animateLink, 80); });
 </script>
 </body>

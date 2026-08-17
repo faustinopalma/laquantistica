@@ -16,8 +16,11 @@ function txt(x, y, s, attrs, parent) {
   t.textContent = s;
   return t;
 }
-function fmtPct(p) { return (Math.round(p * 1000) / 10) + '%'; }
-function num(x) { var r = Math.round(x * 1000) / 1000; return (r === 0 ? 0 : r).toString(); }
+function simLang() { return document.documentElement.getAttribute('data-lang') === 'en' ? 'en' : 'it'; }
+function L(it, en) { return simLang() === 'en' ? en : it; }
+function dec(s) { return L(String(s).replace('.', ','), String(s)); }
+function fmtPct(p) { return dec(Math.round(p * 1000) / 10) + '%'; }
+function num(x) { var r = Math.round(x * 1000) / 1000; return dec(r === 0 ? 0 : r); }
 
 /* ---- fasci ---- */
 function beam(x1, y1, x2, y2, w, op, color, parent) {
@@ -148,7 +151,9 @@ function makePlotter(o) {
     });
     if (done && !curveDrawn) { drawCurveAnimated(); curveDrawn = true; if (o.onDone) o.onDone(); }
     if (fit) fit.classList.toggle('on', curveDrawn);
-    if (stat) stat.textContent = 'n = ' + keys.length + '   ·   ' + (curveDrawn ? 'interpolante tracciata' : 'copertura ' + Math.round(cov * 100) + '%');
+    if (stat) stat.textContent = 'n = ' + keys.length + '   ·   ' + (curveDrawn
+      ? L('interpolante tracciata', 'interpolating curve drawn')
+      : L('copertura ', 'coverage ') + Math.round(cov * 100) + '%');
   }
   return { record: record, reset: reset, draw: draw };
 }

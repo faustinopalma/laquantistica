@@ -30,7 +30,7 @@
   <header class="con-head">
     <div class="con-brand">
       <a class="con-back" id="backTop" href="02-stern-gerlach-cascata"><span class="it">← Torna al Capitolo 10</span></a>
-      <span class="tag amber"><span class="it">Esperimento 2</span></span>
+      <span class="tag amber"><span class="it">Lab · Cap. 10</span></span>
       <span class="con-title"><span class="it">Stern-Gerlach in cascata</span></span>
     </div>
     <div class="con-actions">
@@ -45,7 +45,7 @@
     <div class="stagecol">
       <div class="sim-stage"><svg id="svg1" viewBox="0 0 720 440" role="img" aria-label="Esperimento 2: tre macchine di Stern-Gerlach in cascata"></svg></div>
       <div class="plotter">
-        <div class="plot-head"><span class="plot-title">Plotter</span><span class="plot-sub">rapporto(+k @ M3) — ϑ₁</span>
+        <div class="plot-head"><span class="plot-title">Plotter</span><span class="plot-sub"><span class="it">rapporto</span>(+k @ M3) — ϑ₁</span>
           <span class="leds"><span class="led rec" id="rec1">● REC</span><span class="led fit" id="fit1">● FIT</span></span>
           <button class="plot-clr" type="button" id="clr1">CLR</button></div>
         <div class="plot-screen"><svg id="plot1" viewBox="0 0 660 210" role="img" aria-label="grafico delle misure"></svg></div>
@@ -57,14 +57,14 @@
       <p class="panel-lede"><span class="it">Tre macchine in cascata. <b>M1</b> e <b>M2</b> selezionano uno stato, <b>M3</b> misura. Ruotando <b>ϑ₁</b> cambia l'<b>intensità</b> del fascio che arriva a M3 (spessore delle linee ∝ flusso), ma <b>non</b> il <b>rapporto</b> con cui M3 lo divide: quel rapporto dipende solo da <b>ϑ₃−ϑ₂</b>. Lo stato dopo M2 è dunque indipendente da M1.</span></p>
       <div class="sim-presets" id="presets1"></div>
       <div class="sim-controls">
-        <div class="ctl"><label><span class="it">Macchina 2&nbsp; ϑ₂</span></label><input type="range" id="t2" min="0" max="360" step="1" value="45"><span class="val" id="t2v">45°</span></div>
-        <div class="ctl"><label><span class="it">Macchina 3&nbsp; ϑ₃</span></label><input type="range" id="t3" min="0" max="360" step="1" value="90"><span class="val" id="t3v">90°</span></div>
-        <div class="ctl driver"><label><span class="it">Macchina 1&nbsp; ϑ₁</span></label><input type="range" id="t1" min="0" max="360" step="1" value="0"><span class="val" id="t1v">0°</span></div>
+        <div class="ctl"><label><span class="it">Macchina 2&nbsp; ϑ₂</span></label><input type="range" id="t2" min="0" max="360" step="1" value="45" aria-label="inclinazione della macchina 2, in gradi"><span class="val" id="t2v">45°</span></div>
+        <div class="ctl"><label><span class="it">Macchina 3&nbsp; ϑ₃</span></label><input type="range" id="t3" min="0" max="360" step="1" value="90" aria-label="inclinazione della macchina 3, in gradi"><span class="val" id="t3v">90°</span></div>
+        <div class="ctl driver"><label><span class="it">Macchina 1&nbsp; ϑ₁</span></label><input type="range" id="t1" min="0" max="360" step="1" value="0" aria-label="inclinazione della macchina 1, in gradi"><span class="val" id="t1v">0°</span></div>
         <p class="drives-cap"><span class="it">Ora muovi <b>ϑ₁</b> per <b>tracciare</b>: la curva resta piatta, non dipende da ϑ₁.</span></p>
       </div>
       <div class="pbars">
-        <div class="pbar" id="m3plus"><div class="pk">rapporto( m<sub>ϑ₃</sub> = +k )</div><div class="pv" id="p3v">85%</div><div class="track"><div class="fill" id="p3f"></div></div></div>
-        <div class="pbar minus" id="m3minus"><div class="pk">rapporto( m<sub>ϑ₃</sub> = −k )</div><div class="pv" id="p3mv">15%</div><div class="track"><div class="fill" id="p3mf"></div></div></div>
+        <div class="pbar" id="m3plus"><div class="pk"><span class="it">rapporto</span>( m<sub>ϑ₃</sub> = +k )</div><div class="pv" id="p3v">85%</div><div class="track"><div class="fill" id="p3f"></div></div></div>
+        <div class="pbar minus" id="m3minus"><div class="pk"><span class="it">rapporto</span>( m<sub>ϑ₃</sub> = −k )</div><div class="pv" id="p3mv">15%</div><div class="track"><div class="fill" id="p3mf"></div></div></div>
       </div>
       <div class="sim-math" id="math1">
         <div class="mrow"><span class="lab it">Stato dopo M2:</span><span class="ket" id="mstate"></span></div>
@@ -85,7 +85,7 @@
   <div class="con-credit"><span class="it">Laboratorio simulato, scritto nel 2026 insieme a GitHub Copilot: modello didattico, non software scientifico.</span></div>
 </main>
 
-<script src="/assets/sim-sg-core.js?v=2"></script>
+<script src="/assets/sim-sg-core.js?v=3"></script>
 <script>
 var svg1 = document.getElementById('svg1');
 var t1El = document.getElementById('t1'), t2El = document.getElementById('t2'), t3El = document.getElementById('t3');
@@ -103,7 +103,7 @@ function drawExp2(){
   var fUp=flux2*P3, fDn=flux2*P3m;         // flussi ai rivelatori
 
   // ---- banda trasversale: le tre macchine in sezione ----
-  txt(360,18,'— vista trasversale · sezione delle macchine —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
+  txt(360,18,L('— vista trasversale · sezione delle macchine —','— cross-section view · the machines in section —'),{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
   sgMagnet(150,92,t1,'M1  ϑ₁='+t1+'°',svg1);
   sgMagnet(360,92,t2,'M2  ϑ₂='+t2+'°',svg1);
   sgMagnet(570,92,t3,'M3  ϑ₃='+t3+'°',svg1);
@@ -112,7 +112,7 @@ function drawExp2(){
   var yIn=332, plat1=yIn-30, plat2=yIn-60;
   // ---- separatore: le due viste sono distinte e non vanno sovrapposte ----
   el('line',{x1:40,y1:150,x2:680,y2:150,stroke:'#1c3a30','stroke-width':1},svg1);
-  txt(360,168,'— vista longitudinale · percorso  (larghezza ∝ flusso) —',{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
+  txt(360,168,L('— vista longitudinale · percorso  (larghezza ∝ flusso) —','— longitudinal view · path  (line width ∝ flux) —'),{'text-anchor':'middle','font-family':'monospace','font-size':10,fill:'#5a7d6a'},svg1);
 
   txt(16,yIn-4,'⟶',{'font-size':18,fill:INK},svg1);
   txt(12,yIn+18,'Ag',{'font-size':9,fill:'#6f8f80','font-family':'monospace'},svg1);
@@ -149,7 +149,7 @@ function drawExp2(){
   document.getElementById('t2v').textContent=t2+'°';
   document.getElementById('t3v').textContent=t3+'°';
   document.getElementById('mstate').innerHTML='|m<sub>ϑ₂</sub>=+k⟩ = <span class="vec"><span>'+num(st2[0])+'</span><span>'+num(st2[1])+'</span></span>';
-  document.getElementById('mint').innerHTML='I = ½·cos²( (ϑ₁−ϑ₂)/2 ) = <span class="num">'+fmtPct(flux2)+'</span> <span style="color:#6f8f80">del fascio iniziale</span>';
+  document.getElementById('mint').innerHTML='I = ½·cos²( (ϑ₁−ϑ₂)/2 ) = <span class="num">'+fmtPct(flux2)+'</span> <span style="color:#6f8f80"><span class="it">del fascio iniziale</span><span class="en">of the initial beam</span></span>';
   document.getElementById('mratio').innerHTML='cos²( (ϑ₃−ϑ₂)/2 ) = cos²( '+(t3-t2)+'°/2 ) = <b class="num">'+fmtPct(P3)+'</b>';
 }
 
@@ -167,14 +167,18 @@ document.getElementById('clr1').addEventListener('click',function(){ plot1.reset
 
 /* preset */
 var P2list=[
-  ['ϑ₃=ϑ₂ · M3=100%',function(){t1El.value=0;t2El.value=45;t3El.value=45;}],
-  ['ϑ₃−ϑ₂=90° · 50/50',function(){t1El.value=0;t2El.value=45;t3El.value=135;}],
-  ['fig.6',function(){t1El.value=0;t2El.value=45;t3El.value=90;}],
-  ['ruota M1 → stesso rapporto',function(){t1El.value=75;t2El.value=45;t3El.value=90;}]
+  [['ϑ₃=ϑ₂ · M3=100%','ϑ₃=ϑ₂ · M3=100%'],function(){t1El.value=0;t2El.value=45;t3El.value=45;}],
+  [['ϑ₃−ϑ₂=90° · 50/50','ϑ₃−ϑ₂=90° · 50/50'],function(){t1El.value=0;t2El.value=45;t3El.value=135;}],
+  [['fig.6','fig.6'],function(){t1El.value=0;t2El.value=45;t3El.value=90;}],
+  [['ruota M1 → stesso rapporto','rotate M1 → same ratio'],function(){t1El.value=75;t2El.value=45;t3El.value=90;}]
 ];
 var host=document.getElementById('presets1');
-P2list.forEach(function(p){ var b=document.createElement('button'); b.className='sim-preset'; b.type='button'; b.textContent=p[0];
+P2list.forEach(function(p){ var b=document.createElement('button'); b.className='sim-preset'; b.type='button';
+  b.innerHTML='<span class="it">'+p[0][0]+'</span><span class="en">'+p[0][1]+'</span>';
   b.addEventListener('click',function(){ p[1](); drawExp2(); plot1.reset(); plot1.record(+t1El.value); }); host.appendChild(b); });
+
+// il disegno contiene testo: al cambio di lingua va rifatto
+new MutationObserver(function(){ drawExp2(); plot1.draw(); }).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});
 
 initBackLink('02-stern-gerlach-cascata.html');
 drawExp2(); plot1.record(+t1El.value);
