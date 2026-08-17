@@ -43,14 +43,23 @@
   .lqfield{animation:lqfield 1.4s linear infinite;}
   @media(prefers-reduced-motion:reduce){.lqfield{animation:none!important;}}
   /* qui il disegno E' lo strumento: l'oculare con i due riferimenti va letto. Sotto i 1120 px
-     la colonna dell'apparato sarebbe troppo stretta, quindi colonna unica e scorre la pagina. */
+     la colonna dell'apparato sarebbe troppo stretta, quindi colonna unica; e l'apparato resta
+     FISSO in alto, cosi' si regola la tensione vedendo la gocciolina. */
   @media (max-width:1120px) and (orientation:landscape){
-    html,body{height:auto;overflow:auto;}
+    html{height:auto;overflow-y:auto;scroll-padding-top:calc(52vh + 24px);}
+    body{height:auto;overflow:visible;}   /* overflow:auto sul body annullerebbe il position:sticky */
     .console{height:auto;min-height:100vh;overflow:visible;}
     .console .panel{grid-template-columns:minmax(0,1fr);flex:0 0 auto;}
-    .console .stagecol,.console .ctrlcol{overflow:visible;min-height:0;}
-    .console .stagecol .sim-stage,.console .stagecol .plotter{flex:0 0 auto;}
-    .console .stagecol .sim-stage svg,.console .stagecol .plot-screen svg{height:auto;}
+    .console .stagecol{display:contents;}
+    .console .stagecol .sim-stage{order:1;position:sticky;top:0;z-index:3;flex:0 0 auto;margin:0;
+      padding:.2rem 0 .35rem;background:#0f1512;border-bottom:1px solid #17302a;
+      display:flex;justify-content:center;}
+    .console .stagecol .sim-stage svg{height:52vh;width:auto;max-width:100%;}
+    .console .ctrlcol{order:2;overflow:visible;min-height:0;gap:.45rem;}
+    .console .stagecol .plotter{order:3;flex:0 0 auto;}
+    .console .stagecol .plot-screen svg{width:100%;height:auto;}
+    .console .panel-lede{font-size:.75rem;line-height:1.4;}
+    .console .hint{font-size:.7rem;}
   }
 </style>
 </head>

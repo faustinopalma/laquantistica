@@ -36,15 +36,23 @@
   .ctl .scale .tick{width:2px;height:.6rem;background:#7a8a84;border-radius:1px;cursor:pointer;padding:.3rem 8px;box-sizing:content-box;background-clip:content-box;}
   .ctl .scale .tick:hover{background:#e2a24d;}
   /* qui il disegno E' lo strumento: la scala graduata dello schermo deve restare leggibile.
-     Sotto i 1120 px la colonna dell'apparato sarebbe troppo stretta, quindi si passa a
-     colonna unica a tutta larghezza e a scorrere e' la pagina. */
+     Sotto i 1120 px la colonna dell'apparato sarebbe troppo stretta, quindi colonna unica;
+     e l'apparato resta FISSO in alto, cosi' si regolano i comandi vedendo che cosa succede. */
   @media (max-width:1120px) and (orientation:landscape){
-    html,body{height:auto;overflow:auto;}
+    html{height:auto;overflow-y:auto;scroll-padding-top:calc(52vh + 24px);}
+    body{height:auto;overflow:visible;}   /* overflow:auto sul body annullerebbe il position:sticky */
     .console{height:auto;min-height:100vh;overflow:visible;}
     .console .panel{grid-template-columns:minmax(0,1fr);flex:0 0 auto;}
-    .console .stagecol,.console .ctrlcol{overflow:visible;min-height:0;}
-    .console .stagecol .sim-stage,.console .stagecol .plotter{flex:0 0 auto;}
-    .console .stagecol .sim-stage svg,.console .stagecol .plot-screen svg{height:auto;}
+    .console .stagecol{display:contents;}
+    .console .stagecol .sim-stage{order:1;position:sticky;top:0;z-index:3;flex:0 0 auto;margin:0;
+      padding:.2rem 0 .35rem;background:#0f1512;border-bottom:1px solid #17302a;
+      display:flex;justify-content:center;}
+    .console .stagecol .sim-stage svg{height:52vh;width:auto;max-width:100%;}
+    .console .ctrlcol{order:2;overflow:visible;min-height:0;gap:.45rem;}
+    .console .stagecol .plotter{order:3;flex:0 0 auto;}
+    .console .stagecol .plot-screen svg{width:100%;height:auto;}
+    .console .panel-lede{font-size:.75rem;line-height:1.4;}
+    .console .hint{font-size:.7rem;}
   }
 </style>
 <link rel="alternate" hreflang="it" href="https://laquantistica.com/it/lab-03b-deflessione-em">
