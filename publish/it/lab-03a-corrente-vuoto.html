@@ -16,7 +16,7 @@
   .readout .track{height:9px;background:#05070a;border-radius:99px;margin-top:.45rem;overflow:hidden;}
   .readout .fill{height:100%;width:0;background:#35c8ff;transition:width .18s ease;}
   /* elettroni: particelle che si MUOVONO davvero dal filamento all'anodo (transform = GPU) */
-  @keyframes eflow{0%{transform:translateX(0);opacity:0;}6%{opacity:.95;}94%{opacity:.95;}100%{transform:translateX(276px);opacity:0;}}
+  @keyframes eflow{0%{transform:translateX(0);opacity:0;}6%{opacity:.95;}94%{opacity:.95;}100%{transform:translateX(264px);opacity:0;}}
   .e-particle{animation:eflow 1.2s linear both;}   /* passaggio UNICO: nasce al filamento, sparisce all'anodo */
   @media(prefers-reduced-motion:reduce){.e-particle{animation:none;opacity:.85;}}
   /* nota cliccabile (approfondimento facoltativo) + overlay a tutto schermo */
@@ -82,8 +82,8 @@
     <aside class="ctrlcol">
       <p class="panel-lede"><span class="it">Nel vuoto, tra due elettrodi, può passare corrente: il filamento <b>A</b>, se riscaldato, emette <b>elettroni</b> che raggiungono l'anodo <b>B</b>. Più caldo è il filamento, maggiore è la corrente.</span></p>
       <div class="sim-controls">
-        <div class="ctl"><label><span class="it">Riscaldamento filamento</span></label><input type="range" id="temp" min="0" max="100" step="1" value="0"><span class="val" id="tempv">0%</span></div>
-        <div class="ctl"><label><span class="it">Tensione A–B</span></label><input type="range" id="volt" min="0" max="200" step="1" value="80"><span class="val" id="voltv">80 V</span></div>
+        <div class="ctl"><label><span class="it">Riscaldamento filamento</span></label><input type="range" id="temp" min="0" max="100" step="1" value="55" aria-label="Riscaldamento del filamento"><span class="val" id="tempv">55%</span></div>
+        <div class="ctl"><label><span class="it">Tensione A–B</span></label><input type="range" id="volt" min="0" max="200" step="1" value="80" aria-label="Tensione fra A e B"><span class="val" id="voltv">80 V</span></div>
       </div>
       <div class="readout">
         <div class="k"><span class="it">Corrente misurata (amperometro)</span></div>
@@ -91,7 +91,7 @@
         <div class="track"><div class="fill" id="curf"></div></div>
       </div>
       <div class="sim-math"><div class="mrow" id="expl"></div></div>
-      <p class="hint"><span class="it">Prova: con il filamento freddo non passa quasi nulla; scaldandolo la corrente cresce rapidamente. Serve anche una tensione A–B: senza, gli elettroni emessi non vengono raccolti.</span></p>
+      <p class="hint"><span class="it">Prova: con il filamento freddo non passa quasi nulla; scaldandolo la corrente cresce rapidamente. Serve anche una tensione A–B: senza, gli elettroni emessi non vengono raccolti. Ogni volta che si cambia il riscaldamento il registratore apre una <b>nuova serie</b>: spazzando la tensione a due o tre riscaldamenti diversi si ottiene la famiglia di curve del diodo.</span></p>
       <button type="button" class="explain-btn" id="explainBtn"><span class="it">ⓘ Perché la corrente si <b>satura</b>? — approfondimento facoltativo</span></button>
     </aside>
   </section>
@@ -110,6 +110,7 @@
         <p><span class="it">Il campo diventa così forte da <b>portar via tutti</b> gli elettroni che il filamento riesce a emettere: la corrente non dipende più da V, ma solo dalla <b>temperatura</b>. Aumentare V non serve → la curva si <b>appiattisce</b>.</span></p>
         <div class="fml">I<sub>sat</sub> ∝ T<sup>2</sup> · e<sup>−W/kT</sup></div>
         <p><span class="it"><b>In breve:</b> I = min( I<sub>Child</sub>(V), I<sub>sat</sub>(T) ). Sotto la soglia limita la <b>tensione</b>; sopra, la <b>temperatura</b>. Alza il riscaldamento del filamento: il plateau sale e il «ginocchio» si sposta a tensioni maggiori.</span></p>
+        <p><span class="it">Nella simulazione le due leggi sono riprodotte in forma semplificata: il cursore regola un «riscaldamento» in percentuale, non una temperatura in kelvin, e la corrente di saturazione ne è una funzione crescente, non la formula di Richardson scritta sopra. L'andamento qualitativo — crescita, ginocchio, plateau — è quello giusto; i valori non sono quelli di un tubo reale.</span></p>
       </div>
     </div>
   </div>
@@ -133,6 +134,7 @@ function isat(T){ var e=Math.min(1,Math.max(0,(T-12)/88)); return 60*Math.pow(e,
 function ichild(V){ return V<=0?0:60*Math.pow(V/120,1.5); }
 function currentmA(T,V){ return Math.max(0, Math.min(ichild(V), isat(T))); }
 function L(it,en){ return (document.documentElement.getAttribute('data-lang')==='en')?en:it; }   // scritte SVG bilingui
+function nfmt(x,d){ var s=(+x).toFixed(d); return L(s.replace('.',','),s); }
 function glow(T){ var t=Math.min(1,Math.max(0,(T-12)/88)); var r=Math.round(60+195*t),g=Math.round(40+150*t),b=Math.round(40+20*t); return 'rgb('+r+','+g+','+b+')'; }
 var REDUCE = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 // due layer: apparato (ridisegnato a ogni draw) ed elettroni (PERSISTENTI, non azzerati)
@@ -145,7 +147,7 @@ function spawnElectron(dur){
   if(eLayer.childNodes.length>90) return;                  // tetto di sicurezza
   var y=yC + (Math.random()*2-1)*30;
   var d=dur*(0.85+Math.random()*0.35);
-  var c=el('circle',{cx:xA+8,cy:y,r:1.6+Math.random()*0.8,fill:'#7fe3ff','class':'e-particle'},eLayer);
+  var c=el('circle',{cx:xA+20,cy:y,r:1.6+Math.random()*0.8,fill:'#7fe3ff','class':'e-particle'},eLayer);
   c.style.animationDuration=d.toFixed(2)+'s';
   c.addEventListener('animationend',function(){ if(c.parentNode) c.parentNode.removeChild(c); });
 }
@@ -163,13 +165,13 @@ function emitTick(){
 }
 setInterval(emitTick,80);
 
-// ---- grafico I–V: si riempie di dati mentre si muove la tensione ----
-var pltData={};
-function recordPoint(){
+// ---- grafico I–V: una serie per ogni riscaldamento, cosi' le misure non si mescolano ----
+var pltData={};                                            // pltData[T] = { bin: {V,I} }
+function recordPt(){
   var T=+document.getElementById('temp').value, V=+document.getElementById('volt').value;
-  pltData[Math.round(V/8)]={V:V,I:currentmA(T,V)};
-  var led=document.getElementById('ledRec'); if(led){ led.classList.add('on'); clearTimeout(recordPoint._t); recordPoint._t=setTimeout(function(){led.classList.remove('on');},320); }
-  drawPlot();
+  if(!pltData[T]) pltData[T]={};
+  pltData[T][Math.round(V/8)]={V:V,I:currentmA(T,V)};
+  var led=document.getElementById('ledRec'); if(led){ led.classList.add('on'); clearTimeout(recordPt._t); recordPt._t=setTimeout(function(){led.classList.remove('on');},320); }
 }
 function drawPlot(){
   var svg=document.getElementById('plt'); if(!svg) return; while(svg.firstChild) svg.removeChild(svg.firstChild);
@@ -180,14 +182,32 @@ function drawPlot(){
   for(q=0;q<=200;q+=40){ el('line',{x1:X(q),y1:mT,x2:X(q),y2:GH-mB,stroke:'#0d241b','stroke-width':1},svg); txt(X(q),GH-mB+14,q+'',{'text-anchor':'middle','font-size':9,fill:'#3e6b58','font-family':'monospace'},svg); }
   txt(mL-38,Y(30),'I(mA)',{'font-size':9,fill:'#57d98a','font-family':'monospace'},svg);
   txt(GW-mR,GH-4,'V (volt)',{'text-anchor':'end','font-size':9,fill:'#3e6b58','font-family':'monospace'},svg);
-  var T=+document.getElementById('temp').value, d='', k;
-  for(k=0;k<=120;k++){ var vv=Vmax*k/120; d+=(k?'L':'M')+X(vv).toFixed(1)+' '+Y(currentmA(T,vv)).toFixed(1)+' '; }
-  el('path',{d:d,fill:'none',stroke:'#2f7d55','stroke-width':1.6,'stroke-dasharray':'5 3',opacity:.95},svg);
-  Object.keys(pltData).forEach(function(kk){ var pt=pltData[kk], px=X(pt.V), py=Y(pt.I); el('line',{x1:px-3,y1:py,x2:px+3,y2:py,stroke:'#e6ece8','stroke-width':1.3},svg); el('line',{x1:px,y1:py-3,x2:px,y2:py+3,stroke:'#e6ece8','stroke-width':1.3},svg); });
-  var Vc=+document.getElementById('volt').value, Ic=currentmA(T,Vc);
+  var Tcur=+document.getElementById('temp').value;
+  var temps=Object.keys(pltData).map(Number).sort(function(a,b){return a-b;});
+  var nser=temps.length;
+  if(temps.indexOf(Tcur)<0) temps.push(Tcur);
+  temps.forEach(function(T){
+    var cur=(T===Tcur), d='', k;
+    for(k=0;k<=120;k++){ var vv=Vmax*k/120; d+=(k?'L':'M')+X(vv).toFixed(1)+' '+Y(currentmA(T,vv)).toFixed(1)+' '; }
+    el('path',{d:d,fill:'none',stroke:cur?'#2f7d55':'#1e4c36','stroke-width':cur?1.6:1.1,'stroke-dasharray':'5 3',opacity:cur?.95:.75},svg);
+    var Ip=isat(T);
+    if(Ip>2) txt(X(Vmax)-4,Y(Ip)-5,T+'%',{'text-anchor':'end','font-size':9,fill:cur?'#57d98a':'#356b4f','font-family':'monospace'},svg);
+  });
+  var ntot=0;
+  temps.forEach(function(T){
+    var series=pltData[T]; if(!series) return;
+    var col=(T===Tcur)?'#e6ece8':'#6f7d77';
+    Object.keys(series).forEach(function(kk){ var pt=series[kk], px=X(pt.V), py=Y(pt.I); ntot++;
+      el('line',{x1:px-3,y1:py,x2:px+3,y2:py,stroke:col,'stroke-width':1.3},svg); el('line',{x1:px,y1:py-3,x2:px,y2:py+3,stroke:col,'stroke-width':1.3},svg); });
+  });
+  var Vc=+document.getElementById('volt').value, Ic=currentmA(Tcur,Vc);
   el('circle',{cx:X(Vc),cy:Y(Ic),r:8,fill:'#ffb000',opacity:.18},svg); el('circle',{cx:X(Vc),cy:Y(Ic),r:4,fill:'#ffb000'},svg);
-  var st=document.getElementById('plotStat'); if(st) st.textContent='n = '+Object.keys(pltData).length+'   ·   I = '+Ic.toFixed(1)+' mA';
+  var st=document.getElementById('plotStat');
+  if(st) st.textContent='n = '+ntot+'   ·   '+nser+' '+L('serie','series')+'   ·   I = '+nfmt(Ic,1)+' mA';
 }
+
+var WIRE='#3a6152';
+function wire(x1,y1,x2,y2){ el('line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:WIRE,'stroke-width':1.5},gApp); }
 
 function draw(){
   var T=+document.getElementById('temp').value, V=+document.getElementById('volt').value;
@@ -197,32 +217,46 @@ function draw(){
   // ampolla di vetro
   el('ellipse',{cx:325,cy:yC,rx:250,ry:120,fill:'#0a1712',stroke:'#1c3a30','stroke-width':2},gApp);
   txt(325,yC-95,L('ampolla sotto vuoto','vacuum tube'),{'text-anchor':'middle','font-size':9,fill:'#5a7d6a','font-family':'monospace'},gApp);
-  // filamento A (caldo)
-  var gp='M'+(xA-10)+' '+(yC-34); for(var i=0;i<7;i++){ gp+=' q 5 '+(i%2?-9:9)+' 10 0'; }
-  el('path',{d:'M'+(xA)+' '+(yC-40)+' L'+xA+' '+(yC+40),stroke:glow(T),'stroke-width':6,'stroke-linecap':'round',opacity:.9},gApp);
-  el('path',{d:gp,transform:'translate(0 40) scale(1 2)',fill:'none',stroke:glow(T),'stroke-width':2.4,opacity:.85},gApp);
+  // filamento A: forcina con le due gambe ondulate, i piedi in basso (catodo a riscaldamento diretto)
+  var fy0=yC+40, gp='M'+(xA-13)+' '+fy0, i;
+  for(i=0;i<7;i++) gp+=' q '+(i%2?9:-9)+' -6 0 -11';
+  gp+=' q 13 -14 26 0';
+  for(i=0;i<7;i++) gp+=' q '+(i%2?9:-9)+' 6 0 11';
+  el('path',{d:gp,fill:'none',stroke:glow(T),'stroke-width':3.2,'stroke-linecap':'round','stroke-linejoin':'round',opacity:.92},gApp);
   el('circle',{cx:xA,cy:yC,r:Math.max(0,(T/100)*46),fill:glow(T),opacity:.12},gApp);
-  txt(xA,yC+58,L('A (filamento)','A (filament)'),{'text-anchor':'middle','font-size':9,fill:'#e0a24d','font-family':'monospace'},gApp);
+  txt(xA-30,yC+56,L('A (filamento)','A (filament)'),{'text-anchor':'end','font-size':9,fill:'#e0a24d','font-family':'monospace'},gApp);
   // anodo B
   el('rect',{x:xB-6,y:yC-42,width:12,height:84,rx:2,fill:PANEL,stroke:INK,'stroke-width':1.6},gApp);
-  txt(xB,yC+58,L('B (anodo)','B (anode)'),{'text-anchor':'middle','font-size':9,fill:'#8fbfa8','font-family':'monospace'},gApp);
-  // reofori + batteria + amperometro (schematico) fuori dall'ampolla
-  el('line',{x1:xA,y1:yC+60,x2:xA,y2:320,stroke:'#3a6152','stroke-width':1.5},gApp);
-  el('line',{x1:xB,y1:yC+60,x2:xB,y2:320,stroke:'#3a6152','stroke-width':1.5},gApp);
-  el('line',{x1:xA,y1:320,x2:295,y2:320,stroke:'#3a6152','stroke-width':1.5},gApp);
-  el('line',{x1:xB,y1:320,x2:355,y2:320,stroke:'#3a6152','stroke-width':1.5},gApp);
-  el('circle',{cx:325,cy:320,r:16,fill:'#0d1a15',stroke:'#e0a24d','stroke-width':1.6},gApp);
-  txt(325,324,'A',{'text-anchor':'middle','font-size':11,fill:'#e0a24d','font-family':'monospace','font-weight':'bold'},gApp);
-  txt(325,346,L('amperometro','ammeter'),{'text-anchor':'middle','font-size':8,fill:'#5a7d6a','font-family':'monospace'},gApp);
-  txt(xB+16,yC-30,V>0?'+':'',{'font-size':13,fill:'#e0a24d','font-family':'monospace'},gApp);
+  txt(xB+14,yC+56,L('B (anodo)','B (anode)'),{'font-size':9,fill:'#8fbfa8','font-family':'monospace'},gApp);
+  // alimentatore del RISCALDAMENTO, ai due piedi del filamento
+  el('rect',{x:40,y:288,width:72,height:40,rx:4,fill:'#12211b',stroke:'#3a6152','stroke-width':1.5},gApp);
+  txt(76,304,L('riscald.','heating'),{'text-anchor':'middle','font-size':8,fill:'#8b929c','font-family':'monospace'},gApp);
+  txt(76,320,T+' %',{'text-anchor':'middle','font-size':12,fill:glow(T),'font-family':'monospace','font-weight':'bold'},gApp);
+  wire(xA-13,fy0,xA-13,298); wire(xA-13,298,112,298);
+  wire(xA+13,fy0,xA+13,318); wire(xA+13,318,112,318);
+  el('circle',{cx:xA+13,cy:318,r:2.2,fill:WIRE},gApp);
+  // circuito A-B: batteria (tensione applicata) + amperometro, fuori dall'ampolla
+  wire(xA+13,318,xA+13,330); wire(xA+13,330,266,330);
+  wire(291,330,377,330); wire(407,330,xB,330); wire(xB,330,xB,yC+42);
+  el('line',{x1:268,y1:325,x2:268,y2:335,stroke:'#cfe0d6','stroke-width':1.8},gApp);
+  el('line',{x1:275,y1:320,x2:275,y2:340,stroke:'#cfe0d6','stroke-width':1.8},gApp);
+  el('line',{x1:282,y1:325,x2:282,y2:335,stroke:'#cfe0d6','stroke-width':1.8},gApp);
+  el('line',{x1:289,y1:320,x2:289,y2:340,stroke:'#cfe0d6','stroke-width':1.8},gApp);
+  txt(263,325,'−',{'text-anchor':'end','font-size':12,fill:'#8fbfa8','font-family':'monospace'},gApp);
+  txt(294,325,'+',{'font-size':12,fill:'#e0a24d','font-family':'monospace'},gApp);
+  txt(278,354,'V = '+V+' V',{'text-anchor':'middle','font-size':10,fill:'#ffb000','font-family':'monospace','font-weight':'bold'},gApp);
+  el('circle',{cx:392,cy:330,r:15,fill:'#0d1a15',stroke:'#e0a24d','stroke-width':1.6},gApp);
+  txt(392,334,'A',{'text-anchor':'middle','font-size':11,fill:'#e0a24d','font-family':'monospace','font-weight':'bold'},gApp);
+  txt(392,356,L('amperometro','ammeter'),{'text-anchor':'middle','font-size':8,fill:'#5a7d6a','font-family':'monospace'},gApp);
+  txt(414,335,nfmt(I,1)+' mA',{'font-size':12,fill:'#ffb000','font-family':'monospace','font-weight':'bold'},gApp);
   if(n>0){ el('path',{d:'M'+(xA+40)+' '+(yC-52)+' L'+(xA+70)+' '+(yC-52),stroke:'#35c8ff','stroke-width':1.4},gApp); el('path',{d:'M'+(xA+64)+' '+(yC-55)+' L'+(xA+70)+' '+(yC-52)+' L'+(xA+64)+' '+(yC-49),fill:'none',stroke:'#35c8ff','stroke-width':1.4},gApp); txt(xA+42,yC-58,'e⁻',{'font-size':9,fill:'#35c8ff','font-family':'monospace'},gApp); }
   // elettroni: emessi in continuo dal GENERATORE (emitTick), cadenza ∝ corrente; gli elettroni
   // in volo proseguono da soli fino all'anodo. Fallback statico se 'prefers-reduced-motion'.
-  if(REDUCE){ while(eLayer.firstChild) eLayer.removeChild(eLayer.firstChild); for(var ri=0;ri<n;ri++){ el('circle',{cx:xA+8+276*(ri+0.5)/Math.max(1,n),cy:yC+(Math.random()*2-1)*30,r:1.9,fill:'#7fe3ff',opacity:.85},eLayer); } }
+  if(REDUCE){ while(eLayer.firstChild) eLayer.removeChild(eLayer.firstChild); for(var ri=0;ri<n;ri++){ el('circle',{cx:xA+20+264*(ri+0.5)/Math.max(1,n),cy:yC+(Math.random()*2-1)*30,r:1.9,fill:'#7fe3ff',opacity:.85},eLayer); } }
   // readout
   document.getElementById('tempv').textContent=T+'%';
   document.getElementById('voltv').textContent=V+' V';
-  document.getElementById('curv').textContent=I.toFixed(1)+' mA';
+  document.getElementById('curv').textContent=nfmt(I,1)+' mA';
   document.getElementById('curf').style.width=(I/60*100).toFixed(0)+'%';
   var e=document.getElementById('expl'),it,en;
   if(V<=0){ it='Senza tensione A–B gli elettroni emessi non vengono raccolti: <b>I ≈ 0</b>.'; en='Without an A–B voltage the emitted electrons are not collected: <b>I ≈ 0</b>.'; }
@@ -234,9 +268,9 @@ function draw(){
 // veloce l'handler input resta leggero (niente jank / thumb che si impunta)
 var _raf=null;
 function scheduleRedraw(){ if(_raf) return; _raf=requestAnimationFrame(function(){ _raf=null; draw(); drawPlot(); }); }
-function recordVolt(){ var T=+document.getElementById('temp').value, V=+document.getElementById('volt').value; pltData[Math.round(V/8)]={V:V,I:currentmA(T,V)}; var led=document.getElementById('ledRec'); if(led){ led.classList.add('on'); clearTimeout(recordVolt._t); recordVolt._t=setTimeout(function(){led.classList.remove('on');},320); } }
-document.getElementById('temp').addEventListener('input',scheduleRedraw);
-document.getElementById('volt').addEventListener('input',function(){ recordVolt(); scheduleRedraw(); });
+// entrambi i cursori registrano: muovendo il riscaldamento si apre una serie nuova
+document.getElementById('temp').addEventListener('input',function(){ recordPt(); scheduleRedraw(); });
+document.getElementById('volt').addEventListener('input',function(){ recordPt(); scheduleRedraw(); });
 document.getElementById('plotClr').addEventListener('click',function(){ pltData={}; drawPlot(); });
 initBackLink('03-elettroni.html');
 draw(); drawPlot();

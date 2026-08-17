@@ -99,7 +99,7 @@
       <div class="cpanel">
         <div class="crow">
           <span class="clab"><span class="en">Voltage U</span></span>
-          <input type="range" id="volt" min="0" max="600" step="1" value="0">
+          <input type="range" id="volt" min="0" max="600" step="1" value="0" aria-label="Voltage across the plates">
           <span class="cval" id="voltval">0 V</span>
         </div>
         <div class="cstate" id="state">—</div>
@@ -142,6 +142,7 @@ var autoEl=document.getElementById('autob');
 var stateEl=document.getElementById('state');
 var REDUCE=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
 function L(it,en){ return document.documentElement.getAttribute('data-lang')==='en'?en:it; }
+function nfmt(x,d){ var s=(+x).toFixed(d); return L(s.replace('.',','),s); }
 // geometria: camera ermetica a due compartimenti (viewBox 540x340)
 var xPL=118, xPR=306, xC=212;
 var yPT=138, yPTb=148, yPB=244;      // piatto+(divisorio) 138..148, campo da 148; piatto− da 244
@@ -373,9 +374,9 @@ function measure(){
   var qp=qraw+(Math.random()+Math.random()+Math.random()-1.5)*0.05; // + rumore di misura realistico
   var n=Math.round(qp); if(n<1)n=1; if(n>5)n=5;
   flyValue(qp,n);
-  document.getElementById('qmeas').textContent=qp.toFixed(2)+' e';
+  document.getElementById('qmeas').textContent=nfmt(qp,2)+' e';
   stateEl.className='cstate ok';
-  stateEl.innerHTML='<span class="it">✔ '+qp.toFixed(2)+' e ≈ '+n+'e</span><span class="en">✔ '+qp.toFixed(2)+' e ≈ '+n+'e</span>';
+  stateEl.innerHTML='<span class="it">✔ '+qp.toFixed(2).replace('.',',')+' e ≈ '+n+'e</span><span class="en">✔ '+qp.toFixed(2)+' e ≈ '+n+'e</span>';
   drop=null; stopPhysics(); R.gDrop.style.display='none'; clear(R.gForce);
   setMeasBtn(false);
   if(!auto.on){ setTimeout(function(){ if(!auto.on && !drop) newDrop(); }, 1000); }
@@ -422,7 +423,7 @@ function histBinScreenPos(n){
 function flyValue(qp,n){
   if(REDUCE){ measList.push({q:qp,n:n}); drawHist(n); return; }
   var s=measEl.getBoundingClientRect(), t=histBinScreenPos(n);
-  var tok=document.createElement('div'); tok.className='flytok'; tok.textContent=qp.toFixed(2)+'e';
+  var tok=document.createElement('div'); tok.className='flytok'; tok.textContent=nfmt(qp,2)+'e';
   document.body.appendChild(tok);
   var tw=tok.offsetWidth||30, th=tok.offsetHeight||16;
   tok.style.left=s.left+'px'; tok.style.top=s.top+'px';

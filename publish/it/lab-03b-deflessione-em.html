@@ -62,9 +62,9 @@
     <aside class="ctrlcol">
       <p class="panel-lede"><span class="it">Un fascio di elettroni attraversa un campo <b>elettrico</b> (piastre) e un campo <b>magnetico</b> (bobine). La deflessione mostra che le particelle sono <b>cariche negative</b>; bilanciando E e B (v = E/B) si ricava il rapporto <b>e/m</b>.</span></p>
       <div class="sim-controls">
-        <div class="ctl"><label><span class="it">Tensione acceleratrice Vₐ</span></label><input type="range" id="va" min="500" max="5000" step="50" value="2000"><span class="val" id="vav">2000 V</span></div>
-        <div class="ctl"><label><span class="it">Piastre (campo E)</span></label><input type="range" id="vd" min="-100" max="100" step="1" value="0"><span class="val" id="vdv">0</span><div class="scale"><span>−</span><span class="tick"></span><span>+</span></div></div>
-        <div class="ctl"><label><span class="it">Bobine (campo B)</span></label><input type="range" id="bb" min="-100" max="100" step="1" value="0"><span class="val" id="bbv">0</span><div class="scale"><span>−</span><span class="tick"></span><span>+</span></div></div>
+        <div class="ctl"><label><span class="it">Tensione acceleratrice Vₐ</span></label><input type="range" id="va" min="500" max="5000" step="50" value="2000" aria-label="Tensione acceleratrice Va"><span class="val" id="vav">2000 V</span></div>
+        <div class="ctl"><label><span class="it">Piastre (campo E)</span></label><input type="range" id="vd" min="-100" max="100" step="1" value="0" aria-label="Piastre, campo elettrico"><span class="val" id="vdv">0</span><div class="scale"><span>−</span><span class="tick"></span><span>+</span></div></div>
+        <div class="ctl"><label><span class="it">Bobine (campo B)</span></label><input type="range" id="bb" min="-100" max="100" step="1" value="0" aria-label="Bobine, campo magnetico"><span class="val" id="bbv">0</span><div class="scale"><span>−</span><span class="tick"></span><span>+</span></div></div>
       </div>
       <div class="readout">
         <div class="k"><span class="it">Deflessione sullo schermo</span></div>
@@ -94,6 +94,7 @@
 var svg1=document.getElementById('svg1');
 var REDUCE=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 function L(it,en){ return document.documentElement.getAttribute('data-lang')==='en'?en:it; }
+function nfmt(x,d){ var s=(+x).toFixed(d); return L(s.replace('.',','),s); }
 // ---- proiezione ASSONOMETRICA (cavaliera): x a destra, y in alto (nel piano), z diagonale = asse delle bobine ----
 var OX=26, OY=192, AZx=0.5, AZy=0.34;          // +z va verso l'alto-destra (profondità nel foglio)
 function P(x,y,z){ return [OX + x + z*AZx, OY - y - z*AZy]; }
@@ -175,7 +176,7 @@ function draw(){
   document.getElementById('vdv').textContent=(s.Vd>0?'+':'')+s.Vd;
   document.getElementById('bbv').textContent=(s.B>0?'+':'')+s.B;
   var dir=s.defl>2?L('su','up'):(s.defl<-2?L('giù','down'):L('centro','centre'));
-  document.getElementById('defl').textContent=(s.defl>=0?'+':'')+s.defl.toFixed(1)+' mm ('+dir+')';
+  document.getElementById('defl').textContent=(s.defl>=0?'+':'')+nfmt(s.defl,1)+' mm ('+dir+')';
   var sg=document.getElementById('sign');
   if(s.Vd===0){ sg.textContent='—'; } else { sg.innerHTML='<span class="it">negativa (verso il polo +)</span><span class="en">negative (toward + plate)</span>'; }
   var note=document.getElementById('note'), it='',en='';
@@ -190,7 +191,7 @@ function scheduleRedraw(){ if(_raf) return; _raf=requestAnimationFrame(function(
 ['vd','bb'].forEach(function(id){
   var sl=document.getElementById(id), sc=sl.parentNode.querySelector('.scale'), tk=sc?sc.querySelector('.tick'):null;
   function zero(){ if(+sl.value!==0){ sl.value=0; sl.dispatchEvent(new Event('input')); } }
-  if(tk){ tk.setAttribute('title','azzera / reset'); tk.addEventListener('click',zero); }
+  if(tk){ tk.setAttribute('title',L('azzera il campo','reset the field')); tk.addEventListener('click',zero); }
   var moved=false, dx=0;
   sl.addEventListener('pointerdown',function(e){ moved=false; dx=e.clientX; });
   sl.addEventListener('pointermove',function(e){ if(e.buttons && Math.abs(e.clientX-dx)>4) moved=true; });
