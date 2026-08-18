@@ -40,16 +40,17 @@ html,body{overflow-x:clip;}
   <nav aria-labelledby="nav-capitoli"><span id="nav-capitoli" class="sr-only"><span class="it">Capitoli</span><span class="en">Chapters</span></span><a href="index.html"><span class="num"></span><span class="it">Introduzione</span><span class="en">Introduction</span></a>
 <a href="03-elettroni.html"><span class="num">1</span><span class="it">Esperimenti con gli Elettroni</span><span class="en">Experiments with Electrons</span></a>
 <a href="04-diffrazione.html"><span class="num">2</span><span class="it">Diffrazione degli Elettroni</span><span class="en">Electron Diffraction</span></a>
-<a href="04b-forma-evoluzione.html"><span class="num">3</span><span class="it">La forma dell’equazione di evoluzione</span><span class="en">The Form of the Evolution Equation</span></a>
-<a href="04c-hamiltoniana.html"><span class="num">4</span><span class="it">L’hamiltoniana e l’equazione di Schrödinger</span><span class="en">The Hamiltonian and the Schrödinger Equation</span></a>
-<a href="05-rutherford.html"><span class="num">5</span><span class="it">Esperimento di Rutherford</span><span class="en">The Rutherford Experiment</span></a>
-<a href="05b-diffusione.html"><span class="num">6</span><span class="it">La formula di diffusione di Rutherford</span><span class="en">Rutherford’s Scattering Formula</span></a>
-<a href="07-franck-hertz.html"><span class="num">7</span><span class="it">Esperimento di Franck-Hertz</span><span class="en">The Franck–Hertz Experiment</span></a>
-<a href="08-effetto-fotoelettrico.html"><span class="num">8</span><span class="it">Effetto Fotoelettrico</span><span class="en">The Photoelectric Effect</span></a>
-<a href="01-stern-gerlach.html"><span class="num">9</span><span class="it">Esperimento di Stern-Gerlach</span><span class="en">The Stern–Gerlach Experiment</span></a>
-<a href="02-stern-gerlach-cascata.html"><span class="num">10</span><span class="it">Esperimenti di Stern-Gerlach in cascata</span><span class="en">Cascaded Stern–Gerlach Experiments</span></a>
-<a href="06-ulteriori-sviluppi.html"><span class="num">11</span><span class="it">Ulteriori sviluppi della Teoria</span><span class="en">Further Developments of the Theory</span></a>
-<a href="09-spettri-atomici.html"><span class="num">12</span><span class="it">Spettri atomici di emissione</span><span class="en">Atomic Emission Spectra</span></a></nav>
+<a href="04a-numeri-complessi.html"><span class="num">3</span><span class="it">Numeri complessi e vettori di stato</span><span class="en">Complex Numbers and State Vectors</span></a>
+<a href="04b-forma-evoluzione.html"><span class="num">4</span><span class="it">La forma dell’equazione di evoluzione</span><span class="en">The Form of the Evolution Equation</span></a>
+<a href="04c-hamiltoniana.html"><span class="num">5</span><span class="it">L’hamiltoniana e l’equazione di Schrödinger</span><span class="en">The Hamiltonian and the Schrödinger Equation</span></a>
+<a href="05-rutherford.html"><span class="num">6</span><span class="it">Esperimento di Rutherford</span><span class="en">The Rutherford Experiment</span></a>
+<a href="05b-diffusione.html"><span class="num">7</span><span class="it">La formula di diffusione di Rutherford</span><span class="en">Rutherford’s Scattering Formula</span></a>
+<a href="07-franck-hertz.html"><span class="num">8</span><span class="it">Esperimento di Franck-Hertz</span><span class="en">The Franck–Hertz Experiment</span></a>
+<a href="08-effetto-fotoelettrico.html"><span class="num">9</span><span class="it">Effetto Fotoelettrico</span><span class="en">The Photoelectric Effect</span></a>
+<a href="01-stern-gerlach.html"><span class="num">10</span><span class="it">Esperimento di Stern-Gerlach</span><span class="en">The Stern–Gerlach Experiment</span></a>
+<a href="02-stern-gerlach-cascata.html"><span class="num">11</span><span class="it">Esperimenti di Stern-Gerlach in cascata</span><span class="en">Cascaded Stern–Gerlach Experiments</span></a>
+<a href="06-ulteriori-sviluppi.html"><span class="num">12</span><span class="it">Ulteriori sviluppi della Teoria</span><span class="en">Further Developments of the Theory</span></a>
+<a href="09-spettri-atomici.html"><span class="num">13</span><span class="it">Spettri atomici di emissione</span><span class="en">Atomic Emission Spectra</span></a></nav>
   <p class="sidenote">
     <span class="it">Nato come tesi di laurea, Federico II, 1999 — riveduto e ampliato per il web.</span>
     <span class="en">Born as a master’s thesis, Federico II, 1999 — revised and expanded for the web.</span>
@@ -58,7 +59,7 @@ html,body{overflow-x:clip;}
 </header>
 <main class="content" id="contenuto" tabindex="-1">
   <article class="page">
-    <p class="eyebrow"><span class="it">Capitolo 10</span><span class="en">Chapter 10</span></p>
+    <p class="eyebrow"><span class="it">Capitolo 11</span><span class="en">Chapter 11</span></p>
     <h1 class="title"><span class="it">Esperimenti di Stern-Gerlach in cascata</span><span class="en">Cascaded Stern–Gerlach Experiments</span></h1>
     
 <p><span class="it">In questa
@@ -386,11 +387,7 @@ sovrapponiamo gli stati.</span><span class="en">The experiments we have describe
 rivelerà molto fertile, infatti tutte le leggi della Meccanica
 Quantistica si scrivono come semplici equazioni lineari in termini di
 questi vettori. Prima di andare avanti con la teoria conviene richiamare
-l’algebra degli spazi vettoriali complessi: la raccogliamo nella nota qui sotto.</span><span class="en">The idea of using complex vectors to represent states will prove very fruitful; indeed all the laws of Quantum Mechanics are written as simple linear equations in terms of these vectors. Before proceeding with the theory it is convenient to recall the algebra of complex vector spaces: we have collected it in the note below.</span></p>
-<div class="nota-link" id="nota-13">
-<span class="k"><span class="it">Nota 13</span><span class="en">Note 13</span></span>
-<span class="it">Il coniugato e il modulo quadro, il vettore duale, i simboli bra e ket, il prodotto scalare e la decomposizione su una base: <a href="nota-13-vettori-bra-ket.html?ret=02-stern-gerlach-cascata.html%23nota-13">i richiami di algebra →</a></span><span class="en">The conjugate and the squared modulus, the dual vector, the bra and ket symbols, the scalar product and the decomposition on a basis: <a href="nota-13-vettori-bra-ket.html?ret=02-stern-gerlach-cascata.html%23nota-13">the algebra recalled →</a></span>
-</div>
+l’algebra degli spazi vettoriali complessi: il coniugato e il modulo quadro, il vettore duale, i simboli bra e ket, il prodotto scalare e la decomposizione su una base sono nella scheda 3.</span><span class="en">The idea of using complex vectors to represent states will prove very fruitful; indeed all the laws of Quantum Mechanics are written as simple linear equations in terms of these vectors. Before proceeding with the theory it is convenient to recall the algebra of complex vector spaces: the conjugate and the squared modulus, the dual vector, the bra and ket symbols, the scalar product and the decomposition on a basis are in card 3.</span></p>
 <p><span class="it">Con il prodotto scalare e la decomposizione di un vettore su una base torniamo al nostro sistema.</span><span class="en">With the scalar product and the decomposition of a vector on a basis we return to our system.</span></p>
 <p><span class="it">Lo stato <em>m<sub>0</sub>=+k</em> è caratterizzato dal fatto che se
 si esegue una misura di <em>m<sub>0</sub></em> si ottiene con certezza

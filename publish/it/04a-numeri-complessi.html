@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="canonical" href="https://laquantistica.com/it/bozza-matematica">
-<title>Bozza · Numeri complessi e vettori di stato · La Quantistica</title>
+<link rel="canonical" href="https://laquantistica.com/it/04a-numeri-complessi">
+<meta name="description" content="Perché l’ampiezza di probabilità è un numero complesso: le quattro algebre di divisione normate, modulo e fase delle onde, e poi il coniugato, il vettore duale, i simboli bra e ket, il prodotto scalare e la decomposizione su una base.">
+<title>Numeri complessi e vettori di stato · La Quantistica</title>
 <link rel="stylesheet" href="/assets/style.css?v=21">
 <link rel="stylesheet" href="/assets/lang.css?v=7">
 <link rel="stylesheet" href="/assets/katex/katex.min.css?v=1">
@@ -25,10 +26,21 @@ html,body{overflow-x:clip;}
 .choice-table th{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.78rem;text-transform:uppercase;}
 @media(max-width:620px){.choice-table{font-size:.86rem}.choice-table th,.choice-table td{padding:.45rem .3rem;}}
 </style>
-<link rel="alternate" hreflang="it" href="https://laquantistica.com/it/bozza-matematica">
-<link rel="alternate" hreflang="en" href="https://laquantistica.com/en/bozza-matematica">
-<link rel="alternate" hreflang="x-default" href="https://laquantistica.com/en/bozza-matematica">
-<meta name="robots" content="noindex,nofollow">
+<link rel="alternate" hreflang="it" href="https://laquantistica.com/it/04a-numeri-complessi">
+<link rel="alternate" hreflang="en" href="https://laquantistica.com/en/04a-numeri-complessi">
+<link rel="alternate" hreflang="x-default" href="https://laquantistica.com/en/04a-numeri-complessi">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="La Quantistica">
+<meta property="og:locale" content="it_IT">
+<meta property="og:title" content="Numeri complessi e vettori di stato">
+<meta property="og:description" content="Perché l’ampiezza di probabilità è un numero complesso: le quattro algebre di divisione normate, modulo e fase delle onde, e poi il coniugato, il vettore duale, i simboli bra e ket, il prodotto…">
+<meta property="og:url" content="https://laquantistica.com/it/04a-numeri-complessi">
+<meta property="og:image" content="https://laquantistica.com/img/social/copertina-it.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Numeri complessi e vettori di stato">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@type":"LearningResource","name":"Numeri complessi e vettori di stato","description":"Perché l’ampiezza di probabilità è un numero complesso: le quattro algebre di divisione normate, modulo e fase delle onde, e poi il coniugato, il vettore duale, i simboli bra e ket, il prodotto scalare e la decomposizione su una base.","url":"https://laquantistica.com/it/04a-numeri-complessi","inLanguage":"it","isAccessibleForFree":true,"position":3,"author":{"@type":"Person","name":"Faustino Palma","sameAs":"https://www.linkedin.com/in/faustinopalma/"},"isPartOf":{"@type":"Course","@id":"https://laquantistica.com/it/#corso","name":"Esperimenti fondamentali della Meccanica Quantistica","url":"https://laquantistica.com/it/"},"@context":"https://schema.org"}</script>
 <link rel="stylesheet" href="/assets/lang-links.css?v=1">
 </head>
 <body>
@@ -39,22 +51,23 @@ html,body{overflow-x:clip;}
 <header class="sidebar">
   <a class="brand" href="./"><span class="mark"><span class="bk">⟨</span>ΛQ<span class="bk">⟩</span></span> La Quantistica<small class="it">Corso introduttivo di Meccanica Quantistica — dagli esperimenti alla teoria</small></a>
   <div class="langsw" role="group" aria-label="Lingua / Language">
-    <a class="langbtn" href="../it/bozza-matematica" hreflang="it" lang="it" aria-current="true">Italiano</a>
-    <a class="langbtn" href="../en/bozza-matematica" hreflang="en" lang="en">English</a>
+    <a class="langbtn" href="../it/04a-numeri-complessi" hreflang="it" lang="it" aria-current="true">Italiano</a>
+    <a class="langbtn" href="../en/04a-numeri-complessi" hreflang="en" lang="en">English</a>
   </div>
   <nav aria-labelledby="nav-capitoli"><span id="nav-capitoli" class="sr-only"><span class="it">Capitoli</span></span><a href="./"><span class="num"></span><span class="it">Introduzione</span></a>
 <a href="03-elettroni"><span class="num">1</span><span class="it">Esperimenti con gli Elettroni</span></a>
 <a href="04-diffrazione"><span class="num">2</span><span class="it">Diffrazione degli Elettroni</span></a>
-<a href="04b-forma-evoluzione"><span class="num">3</span><span class="it">La forma dell’equazione di evoluzione</span></a>
-<a href="04c-hamiltoniana"><span class="num">4</span><span class="it">L’hamiltoniana e l’equazione di Schrödinger</span></a>
-<a href="05-rutherford"><span class="num">5</span><span class="it">Esperimento di Rutherford</span></a>
-<a href="05b-diffusione"><span class="num">6</span><span class="it">La formula di diffusione di Rutherford</span></a>
-<a href="07-franck-hertz"><span class="num">7</span><span class="it">Esperimento di Franck-Hertz</span></a>
-<a href="08-effetto-fotoelettrico"><span class="num">8</span><span class="it">Effetto Fotoelettrico</span></a>
-<a href="01-stern-gerlach"><span class="num">9</span><span class="it">Esperimento di Stern-Gerlach</span></a>
-<a href="02-stern-gerlach-cascata"><span class="num">10</span><span class="it">Esperimenti di Stern-Gerlach in cascata</span></a>
-<a href="06-ulteriori-sviluppi"><span class="num">11</span><span class="it">Ulteriori sviluppi della Teoria</span></a>
-<a href="09-spettri-atomici"><span class="num">12</span><span class="it">Spettri atomici di emissione</span></a></nav>
+<a href="04a-numeri-complessi"><span class="num">3</span><span class="it">Numeri complessi e vettori di stato</span></a>
+<a href="04b-forma-evoluzione"><span class="num">4</span><span class="it">La forma dell’equazione di evoluzione</span></a>
+<a href="04c-hamiltoniana"><span class="num">5</span><span class="it">L’hamiltoniana e l’equazione di Schrödinger</span></a>
+<a href="05-rutherford"><span class="num">6</span><span class="it">Esperimento di Rutherford</span></a>
+<a href="05b-diffusione"><span class="num">7</span><span class="it">La formula di diffusione di Rutherford</span></a>
+<a href="07-franck-hertz"><span class="num">8</span><span class="it">Esperimento di Franck-Hertz</span></a>
+<a href="08-effetto-fotoelettrico"><span class="num">9</span><span class="it">Effetto Fotoelettrico</span></a>
+<a href="01-stern-gerlach"><span class="num">10</span><span class="it">Esperimento di Stern-Gerlach</span></a>
+<a href="02-stern-gerlach-cascata"><span class="num">11</span><span class="it">Esperimenti di Stern-Gerlach in cascata</span></a>
+<a href="06-ulteriori-sviluppi"><span class="num">12</span><span class="it">Ulteriori sviluppi della Teoria</span></a>
+<a href="09-spettri-atomici"><span class="num">13</span><span class="it">Spettri atomici di emissione</span></a></nav>
   <p class="sidenote">
     <span class="it">Nato come tesi di laurea, Federico II, 1999 — riveduto e ampliato per il web.</span>
     
@@ -64,7 +77,7 @@ html,body{overflow-x:clip;}
 <main class="content" id="contenuto" tabindex="-1">
   <article class="page">
 
-    <p class="eyebrow"><span class="it">Bozza · capitolo proposto</span></p>
+    <p class="eyebrow"><span class="it">Capitolo 3</span></p>
     <h1 class="title"><span class="it">Numeri complessi e vettori di stato</span></h1>
     <p class="opening"><span class="it">Nella scheda precedente gli elettroni hanno disegnato anelli di diffrazione, e per spiegarli abbiamo dovuto associare al fascio un’onda. Per scrivere l’equazione di quell’onda ci serve un sistema di numeri: qui vediamo quale scegliere, e mettiamo insieme le regole di calcolo che adopereremo dalla scheda seguente in poi.</span></p>
 <h2 id="sec-quali-numeri"><span class="it">Quali numeri usiamo</span></h2>
@@ -109,7 +122,7 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 </table>
     <div class="nota-link" id="nota-14">
 <span class="k"><span class="it">Nota 14</span></span>
-<span class="it">Nell’elenco il 3 non c’è, eppure lo spazio in cui viviamo ha tre dimensioni: <a href="nota-14-algebra-tre-dimensioni?ret=bozza-matematica.html%23nota-14">perché quell’algebra non esiste? →</a></span>
+<span class="it">Nell’elenco il 3 non c’è, eppure lo spazio in cui viviamo ha tre dimensioni: <a href="nota-14-algebra-tre-dimensioni?ret=04a-numeri-complessi.html%23nota-14">perché quell’algebra non esiste? →</a></span>
 </div>
     <p><span class="it">La terza colonna va letta in modo cumulativo. Le quattro proprietà di partenza — somma, prodotto, divisione, modulo — valgono in tutte e quattro le algebre: è ciò che le rende algebre di divisione normate. Ma ogni volta che si sale di dimensione si perde una proprietà che nell’algebra precedente valeva ancora, e le perdite si trascinano dietro: i numeri reali hanno tutto; i complessi hanno tutto tranne l’ordinamento; i quaternioni hanno perso anche la commutatività; gli ottonioni anche l’associatività.</span></p>
     <p><span class="it">Vediamo ora che cosa significa ciascuna perdita.</span></p>
@@ -402,8 +415,8 @@ data dal prodotto scalare tra questi due vettori.</span></p>
 <script src="/assets/app.js?v=10"></script>
 <div class="langsw-mobile" role="group" aria-label="Lingua / Language">
   <span class="lg" aria-hidden="true">🌐</span>
-  <a class="langbtn" href="../it/bozza-matematica" hreflang="it" lang="it" aria-current="true">Italiano</a>
-  <a class="langbtn" href="../en/bozza-matematica" hreflang="en" lang="en">English</a>
+  <a class="langbtn" href="../it/04a-numeri-complessi" hreflang="it" lang="it" aria-current="true">Italiano</a>
+  <a class="langbtn" href="../en/04a-numeri-complessi" hreflang="en" lang="en">English</a>
 </div>
 </body>
 </html>

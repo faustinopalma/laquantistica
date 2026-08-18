@@ -12,6 +12,8 @@ RADICE = pathlib.Path('sorgenti')
 SCHEDE = [
     ('03-elettroni.html', 'Esperimenti con gli Elettroni', 'Experiments with Electrons'),
     ('04-diffrazione.html', 'Diffrazione degli Elettroni', 'Electron Diffraction'),
+    ('04a-numeri-complessi.html', 'Numeri complessi e vettori di stato',
+     'Complex Numbers and State Vectors'),
     ('04b-forma-evoluzione.html', 'La forma dell’equazione di evoluzione',
      'The Form of the Evolution Equation'),
     ('04c-hamiltoniana.html', 'L’hamiltoniana e l’equazione di Schrödinger',
@@ -42,7 +44,7 @@ def barra():
 
 
 def avanti_indietro(posizione):
-    """posizione: 0 = introduzione, 1..12 = schede."""
+    """posizione: 0 = introduzione, 1..13 = schede."""
     pezzi = ['<nav class="chapter-nav" aria-labelledby="nav-pagina">'
              '<span id="nav-pagina" class="sr-only"><span class="it">Capitolo precedente e '
              'successivo</span><span class="en">Previous and next chapter</span></span>']

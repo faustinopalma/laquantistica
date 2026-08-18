@@ -20,32 +20,35 @@ outset with Dirac notation. The derivation of the Schrödinger equation does not
 require Analytical Mechanics: it rests only on Newtonian mechanics and
 electromagnetism.
 
-To the 1999 text, the web edition adds thirteen marginal notes and thirteen
-interactive simulated laboratories, one for each experiment.
+To the 1999 text, the web edition adds twelve marginal notes, thirteen
+interactive simulated laboratories — one for each experiment — and one card that
+does not come from the thesis.
 
-## The twelve cards, in reading order
+## The thirteen cards, in reading order
 
 The experimental cards describe apparatus and measurements; the theoretical ones
 build the theory starting from them.
 
 1. Experiments with Electrons
 2. Electron Diffraction
-3. The Form of the Evolution Equation
-4. The Hamiltonian and the Schrödinger Equation
-5. The Rutherford Experiment
-6. Rutherford’s Scattering Formula
-7. The Franck–Hertz Experiment
-8. The Photoelectric Effect
-9. The Stern–Gerlach Experiment
-10. Cascaded Stern–Gerlach Experiments
-11. Further Developments of the Theory
-12. Atomic Emission Spectra
+3. Complex Numbers and State Vectors
+4. The Form of the Evolution Equation
+5. The Hamiltonian and the Schrödinger Equation
+6. The Rutherford Experiment
+7. Rutherford’s Scattering Formula
+8. The Franck–Hertz Experiment
+9. The Photoelectric Effect
+10. The Stern–Gerlach Experiment
+11. Cascaded Stern–Gerlach Experiments
+12. Further Developments of the Theory
+13. Atomic Emission Spectra
 
 ## How this edition differs from the 1999 original
 
-The text of the cards is the 1999 text. What changed is **the order in which the
-cards are read**, and the fact that two of them have been **split**. The
-contents and the technical terminology have not been altered.
+The text of the cards that come from the thesis is the 1999 text. What changed
+is **the order in which the cards are read**, the fact that two of them have
+been **split**, and one card that has been **added**. The contents and the
+technical terminology have not been altered.
 
 ### The order
 
@@ -83,6 +86,14 @@ boundaries have been placed where the reasoning already paused. Two blocks of
 pure calculation — the proofs of the commutator formulas and the two appendices
 to the scattering calculation — have moved into notes; they remain readable in
 full, but no longer interrupt the thread.
+
+### The added card
+
+The third card, *Complex Numbers and State Vectors*, is not in the thesis. In
+1999 complex numbers and the algebra of complex vector spaces were taken as
+known, and the reader met them scattered through the derivation. They are now
+gathered before they are needed: why the probability amplitude is a complex
+number, and the algebra of bras and kets used from that point on.
 
 ### The 1999 order
 

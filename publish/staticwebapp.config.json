@@ -18,6 +18,46 @@
       }
     },
     {
+      "route": "/it/nota-09-perche-numeri-complessi",
+      "redirect": "/it/04a-numeri-complessi",
+      "statusCode": 301
+    },
+    {
+      "route": "/it/nota-09-perche-numeri-complessi.html",
+      "redirect": "/it/04a-numeri-complessi",
+      "statusCode": 301
+    },
+    {
+      "route": "/en/nota-09-perche-numeri-complessi",
+      "redirect": "/en/04a-numeri-complessi",
+      "statusCode": 301
+    },
+    {
+      "route": "/en/nota-09-perche-numeri-complessi.html",
+      "redirect": "/en/04a-numeri-complessi",
+      "statusCode": 301
+    },
+    {
+      "route": "/it/nota-13-vettori-bra-ket",
+      "redirect": "/it/04a-numeri-complessi",
+      "statusCode": 301
+    },
+    {
+      "route": "/it/nota-13-vettori-bra-ket.html",
+      "redirect": "/it/04a-numeri-complessi",
+      "statusCode": 301
+    },
+    {
+      "route": "/en/nota-13-vettori-bra-ket",
+      "redirect": "/en/04a-numeri-complessi",
+      "statusCode": 301
+    },
+    {
+      "route": "/en/nota-13-vettori-bra-ket.html",
+      "redirect": "/en/04a-numeri-complessi",
+      "statusCode": 301
+    },
+    {
       "route": "/sim-esp1.html",
       "redirect": "/it/lab-02a-sg-angolo-relativo",
       "statusCode": 301

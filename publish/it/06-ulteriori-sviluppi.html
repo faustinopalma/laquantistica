@@ -26,7 +26,7 @@ html,body{overflow-x:clip;}
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Ulteriori sviluppi della Teoria">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@type":"LearningResource","name":"Ulteriori sviluppi della Teoria","description":"Dai principi ricavati negli esperimenti all'equazione di Schrödinger: operatori, osservabili ed evoluzione temporale, dedotti passo per passo.","url":"https://laquantistica.com/it/06-ulteriori-sviluppi","inLanguage":"it","isAccessibleForFree":true,"position":11,"author":{"@type":"Person","name":"Faustino Palma","sameAs":"https://www.linkedin.com/in/faustinopalma/"},"isPartOf":{"@type":"Course","@id":"https://laquantistica.com/it/#corso","name":"Esperimenti fondamentali della Meccanica Quantistica","url":"https://laquantistica.com/it/"},"@context":"https://schema.org"}</script>
+<script type="application/ld+json">{"@type":"LearningResource","name":"Ulteriori sviluppi della Teoria","description":"Dai principi ricavati negli esperimenti all'equazione di Schrödinger: operatori, osservabili ed evoluzione temporale, dedotti passo per passo.","url":"https://laquantistica.com/it/06-ulteriori-sviluppi","inLanguage":"it","isAccessibleForFree":true,"position":12,"author":{"@type":"Person","name":"Faustino Palma","sameAs":"https://www.linkedin.com/in/faustinopalma/"},"isPartOf":{"@type":"Course","@id":"https://laquantistica.com/it/#corso","name":"Esperimenti fondamentali della Meccanica Quantistica","url":"https://laquantistica.com/it/"},"@context":"https://schema.org"}</script>
 <link rel="stylesheet" href="/assets/lang-links.css?v=1">
 </head>
 <body>
@@ -43,16 +43,17 @@ html,body{overflow-x:clip;}
   <nav aria-labelledby="nav-capitoli"><span id="nav-capitoli" class="sr-only"><span class="it">Capitoli</span></span><a href="./"><span class="num"></span><span class="it">Introduzione</span></a>
 <a href="03-elettroni"><span class="num">1</span><span class="it">Esperimenti con gli Elettroni</span></a>
 <a href="04-diffrazione"><span class="num">2</span><span class="it">Diffrazione degli Elettroni</span></a>
-<a href="04b-forma-evoluzione"><span class="num">3</span><span class="it">La forma dell’equazione di evoluzione</span></a>
-<a href="04c-hamiltoniana"><span class="num">4</span><span class="it">L’hamiltoniana e l’equazione di Schrödinger</span></a>
-<a href="05-rutherford"><span class="num">5</span><span class="it">Esperimento di Rutherford</span></a>
-<a href="05b-diffusione"><span class="num">6</span><span class="it">La formula di diffusione di Rutherford</span></a>
-<a href="07-franck-hertz"><span class="num">7</span><span class="it">Esperimento di Franck-Hertz</span></a>
-<a href="08-effetto-fotoelettrico"><span class="num">8</span><span class="it">Effetto Fotoelettrico</span></a>
-<a href="01-stern-gerlach"><span class="num">9</span><span class="it">Esperimento di Stern-Gerlach</span></a>
-<a href="02-stern-gerlach-cascata"><span class="num">10</span><span class="it">Esperimenti di Stern-Gerlach in cascata</span></a>
-<a href="06-ulteriori-sviluppi"><span class="num">11</span><span class="it">Ulteriori sviluppi della Teoria</span></a>
-<a href="09-spettri-atomici"><span class="num">12</span><span class="it">Spettri atomici di emissione</span></a></nav>
+<a href="04a-numeri-complessi"><span class="num">3</span><span class="it">Numeri complessi e vettori di stato</span></a>
+<a href="04b-forma-evoluzione"><span class="num">4</span><span class="it">La forma dell’equazione di evoluzione</span></a>
+<a href="04c-hamiltoniana"><span class="num">5</span><span class="it">L’hamiltoniana e l’equazione di Schrödinger</span></a>
+<a href="05-rutherford"><span class="num">6</span><span class="it">Esperimento di Rutherford</span></a>
+<a href="05b-diffusione"><span class="num">7</span><span class="it">La formula di diffusione di Rutherford</span></a>
+<a href="07-franck-hertz"><span class="num">8</span><span class="it">Esperimento di Franck-Hertz</span></a>
+<a href="08-effetto-fotoelettrico"><span class="num">9</span><span class="it">Effetto Fotoelettrico</span></a>
+<a href="01-stern-gerlach"><span class="num">10</span><span class="it">Esperimento di Stern-Gerlach</span></a>
+<a href="02-stern-gerlach-cascata"><span class="num">11</span><span class="it">Esperimenti di Stern-Gerlach in cascata</span></a>
+<a href="06-ulteriori-sviluppi"><span class="num">12</span><span class="it">Ulteriori sviluppi della Teoria</span></a>
+<a href="09-spettri-atomici"><span class="num">13</span><span class="it">Spettri atomici di emissione</span></a></nav>
   <p class="sidenote">
     <span class="it">Nato come tesi di laurea, Federico II, 1999 — riveduto e ampliato per il web.</span>
     
@@ -61,7 +62,7 @@ html,body{overflow-x:clip;}
 </header>
 <main class="content" id="contenuto" tabindex="-1">
   <article class="page">
-    <p class="eyebrow"><span class="it">Capitolo 11</span></p>
+    <p class="eyebrow"><span class="it">Capitolo 12</span></p>
     <h1 class="title"><span class="it">Ulteriori sviluppi della Teoria</span></h1>
     <p class="opening"><span class="it">Nella scheda sull’hamiltoniana abbiamo introdotto l’equazione di Schrödinger per una particella carica in un potenziale elettrico. Questa equazione ci permette di determinare <span class="eq-inline eq-mml" data-tex="\psi(x,y,z,t)"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ψ</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi><mo separator="true">,</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\psi(x,y,z,t)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">ψ</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span></span>, cioè la distribuzione di ampiezze di probabilità in funzione del tempo per la terna di grandezze misurabili <span class="eq-inline eq-mml" data-tex="(x,y,z)"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(x,y,z)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="mclose">)</span></span></span></span></span>. Lo scopo centrale della presente scheda sarà quello di determinare la distribuzione di ampiezze di probabilità per altre grandezze osservabili, in particolare per la quantità di moto, per il momento angolare e per l’energia.</span></p>
 <p><span class="it">Per raggiungere lo scopo è necessario rivedere e generalizzare i principi della Meccanica Quantistica nella versione semplificata che riassumiamo qui di seguito.</span></p>

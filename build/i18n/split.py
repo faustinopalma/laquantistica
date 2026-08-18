@@ -34,7 +34,7 @@ SALTA = ()                              # le bozze si riconoscono dal nome, vedi
 
 # Pagine pubblicate ma non collegate da nessuna parte: fuori dalla sitemap e con
 # noindex, perche' sono proposte in attesa di giudizio, non parte del percorso.
-BOZZE = {'bozza-matematica.html', 'nota-14-algebra-tre-dimensioni.html'}
+BOZZE = set()
 
 
 def pagine():
@@ -156,21 +156,6 @@ META = {
                'imaginary numbers: their eigenvalues are real, and real numbers are what a '
                'measurement returns. And what would have changed had we kept the anti-Hermitian matrix.'),
     },
-    'nota-09-perche-numeri-complessi.html': {
-        'it': ('Nota 09 · Perché scegliamo i numeri complessi? — La Quantistica',
-               'Perché usiamo i numeri complessi: le quattro algebre di divisione normate, ampiezza '
-               'e fase delle onde, il campo di Riemann-Silberstein e il ritorno alle soluzioni reali.'),
-        'en': ('Note 09 · Why do we choose complex numbers? — La Quantistica',
-               'Why we use complex numbers: the four normed division algebras, wave amplitude and '
-               'phase, the Riemann-Silberstein field and the recovery of real solutions.'),
-    },
-    'nota-13-vettori-bra-ket.html': {
-        'it': ('Nota 13 · Vettori, bra e ket — La Quantistica', None),
-        'en': ('Note 13 · Vectors, bras and kets — La Quantistica',
-               'A review of the algebra of complex vector spaces: the conjugate and the squared '
-               'modulus, the dual vector, the bra and ket symbols, the scalar product and the '
-               'decomposition of a vector on an orthogonal basis.'),
-    },
     '04b-forma-evoluzione.html': {
         'it': ('La forma dell’equazione di evoluzione · La Quantistica',
                'Dalle ampiezze di probabilità alla forma generale della legge di evoluzione: stato '
@@ -179,13 +164,23 @@ META = {
                'From probability amplitudes to the general form of the law of evolution: the state '
                'as a complex function, the algebra of operators, conservation of the scalar product.'),
     },
-    'bozza-matematica.html': {
-        'it': ('Bozza · Numeri complessi e vettori di stato · La Quantistica', None),
-        'en': ('Draft · Complex Numbers and State Vectors · La Quantistica', None),
+    '04a-numeri-complessi.html': {
+        'it': ('Numeri complessi e vettori di stato · La Quantistica',
+               'Perché l’ampiezza di probabilità è un numero complesso: le quattro algebre di '
+               'divisione normate, modulo e fase delle onde, e poi il coniugato, il vettore duale, '
+               'i simboli bra e ket, il prodotto scalare e la decomposizione su una base.'),
+        'en': ('Complex Numbers and State Vectors · La Quantistica',
+               'Why the probability amplitude is a complex number: the four normed division '
+               'algebras, wave modulus and phase, and then the conjugate, the dual vector, the bra '
+               'and ket symbols, the scalar product and the decomposition on a basis.'),
     },
     'nota-14-algebra-tre-dimensioni.html': {
-        'it': ('Nota 14 · Perché non un’algebra a tre dimensioni? — La Quantistica', None),
-        'en': ('Note 14 · Why not a three-dimensional algebra? — La Quantistica', None),
+        'it': ('Nota 14 · Perché non un’algebra a tre dimensioni? — La Quantistica',
+               'Nell’elenco delle algebre di divisione normate il 3 non compare: il teorema della '
+               'palla pelosa di Brouwer e le sfere che ammettono un campo di vettori tangenti mai nullo.'),
+        'en': ('Note 14 · Why not a three-dimensional algebra? — La Quantistica',
+               'Three is missing from the list of normed division algebras: Brouwer’s hairy ball '
+               'theorem and the spheres that admit a nowhere-vanishing tangent vector field.'),
     },
     '04c-hamiltoniana.html': {
         'it': ('L’hamiltoniana e l’equazione di Schrödinger · La Quantistica',

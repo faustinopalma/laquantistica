@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="canonical" href="https://laquantistica.com/bozza-matematica.html">
+<link rel="canonical" href="https://laquantistica.com/04a-numeri-complessi.html">
 <title>Numeri complessi e vettori di stato · Complex Numbers and State Vectors</title>
 <link rel="stylesheet" href="assets/style.css?v=21">
 <link rel="stylesheet" href="assets/lang.css?v=7">
@@ -41,16 +41,17 @@ html,body{overflow-x:clip;}
   <nav aria-labelledby="nav-capitoli"><span id="nav-capitoli" class="sr-only"><span class="it">Capitoli</span><span class="en">Chapters</span></span><a href="index.html"><span class="num"></span><span class="it">Introduzione</span><span class="en">Introduction</span></a>
 <a href="03-elettroni.html"><span class="num">1</span><span class="it">Esperimenti con gli Elettroni</span><span class="en">Experiments with Electrons</span></a>
 <a href="04-diffrazione.html"><span class="num">2</span><span class="it">Diffrazione degli Elettroni</span><span class="en">Electron Diffraction</span></a>
-<a href="04b-forma-evoluzione.html"><span class="num">3</span><span class="it">La forma dell’equazione di evoluzione</span><span class="en">The Form of the Evolution Equation</span></a>
-<a href="04c-hamiltoniana.html"><span class="num">4</span><span class="it">L’hamiltoniana e l’equazione di Schrödinger</span><span class="en">The Hamiltonian and the Schrödinger Equation</span></a>
-<a href="05-rutherford.html"><span class="num">5</span><span class="it">Esperimento di Rutherford</span><span class="en">The Rutherford Experiment</span></a>
-<a href="05b-diffusione.html"><span class="num">6</span><span class="it">La formula di diffusione di Rutherford</span><span class="en">Rutherford’s Scattering Formula</span></a>
-<a href="07-franck-hertz.html"><span class="num">7</span><span class="it">Esperimento di Franck-Hertz</span><span class="en">The Franck–Hertz Experiment</span></a>
-<a href="08-effetto-fotoelettrico.html"><span class="num">8</span><span class="it">Effetto Fotoelettrico</span><span class="en">The Photoelectric Effect</span></a>
-<a href="01-stern-gerlach.html"><span class="num">9</span><span class="it">Esperimento di Stern-Gerlach</span><span class="en">The Stern–Gerlach Experiment</span></a>
-<a href="02-stern-gerlach-cascata.html"><span class="num">10</span><span class="it">Esperimenti di Stern-Gerlach in cascata</span><span class="en">Cascaded Stern–Gerlach Experiments</span></a>
-<a href="06-ulteriori-sviluppi.html"><span class="num">11</span><span class="it">Ulteriori sviluppi della Teoria</span><span class="en">Further Developments of the Theory</span></a>
-<a href="09-spettri-atomici.html"><span class="num">12</span><span class="it">Spettri atomici di emissione</span><span class="en">Atomic Emission Spectra</span></a></nav>
+<a href="04a-numeri-complessi.html"><span class="num">3</span><span class="it">Numeri complessi e vettori di stato</span><span class="en">Complex Numbers and State Vectors</span></a>
+<a href="04b-forma-evoluzione.html"><span class="num">4</span><span class="it">La forma dell’equazione di evoluzione</span><span class="en">The Form of the Evolution Equation</span></a>
+<a href="04c-hamiltoniana.html"><span class="num">5</span><span class="it">L’hamiltoniana e l’equazione di Schrödinger</span><span class="en">The Hamiltonian and the Schrödinger Equation</span></a>
+<a href="05-rutherford.html"><span class="num">6</span><span class="it">Esperimento di Rutherford</span><span class="en">The Rutherford Experiment</span></a>
+<a href="05b-diffusione.html"><span class="num">7</span><span class="it">La formula di diffusione di Rutherford</span><span class="en">Rutherford’s Scattering Formula</span></a>
+<a href="07-franck-hertz.html"><span class="num">8</span><span class="it">Esperimento di Franck-Hertz</span><span class="en">The Franck–Hertz Experiment</span></a>
+<a href="08-effetto-fotoelettrico.html"><span class="num">9</span><span class="it">Effetto Fotoelettrico</span><span class="en">The Photoelectric Effect</span></a>
+<a href="01-stern-gerlach.html"><span class="num">10</span><span class="it">Esperimento di Stern-Gerlach</span><span class="en">The Stern–Gerlach Experiment</span></a>
+<a href="02-stern-gerlach-cascata.html"><span class="num">11</span><span class="it">Esperimenti di Stern-Gerlach in cascata</span><span class="en">Cascaded Stern–Gerlach Experiments</span></a>
+<a href="06-ulteriori-sviluppi.html"><span class="num">12</span><span class="it">Ulteriori sviluppi della Teoria</span><span class="en">Further Developments of the Theory</span></a>
+<a href="09-spettri-atomici.html"><span class="num">13</span><span class="it">Spettri atomici di emissione</span><span class="en">Atomic Emission Spectra</span></a></nav>
   <p class="sidenote">
     <span class="it">Nato come tesi di laurea, Federico II, 1999 — riveduto e ampliato per il web.</span>
     <span class="en">Born as a master’s thesis, Federico II, 1999 — revised and expanded for the web.</span>
@@ -60,7 +61,7 @@ html,body{overflow-x:clip;}
 <main class="content" id="contenuto" tabindex="-1">
   <article class="page">
 
-    <p class="eyebrow"><span class="it">Bozza · capitolo proposto</span><span class="en">Draft · proposed chapter</span></p>
+    <p class="eyebrow"><span class="it">Capitolo 3</span><span class="en">Chapter 3</span></p>
     <h1 class="title"><span class="it">Numeri complessi e vettori di stato</span><span class="en">Complex Numbers and State Vectors</span></h1>
     <p class="opening"><span class="it">Nella scheda precedente gli elettroni hanno disegnato anelli di diffrazione, e per spiegarli abbiamo dovuto associare al fascio un’onda. Per scrivere l’equazione di quell’onda ci serve un sistema di numeri: qui vediamo quale scegliere, e mettiamo insieme le regole di calcolo che adopereremo dalla scheda seguente in poi.</span><span class="en">In the previous chapter the electrons drew diffraction rings, and to explain them we had to associate a wave with the beam. To write the equation of that wave we need a system of numbers: here we see which one to choose, and we gather the rules of calculation we shall use from the next chapter onwards.</span></p>
 <h2 id="sec-quali-numeri"><span class="it">Quali numeri usiamo</span><span class="en">Which numbers we use</span></h2>
@@ -126,7 +127,7 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 </table>
     <div class="nota-link" id="nota-14">
 <span class="k"><span class="it">Nota 14</span><span class="en">Note 14</span></span>
-<span class="it">Nell’elenco il 3 non c’è, eppure lo spazio in cui viviamo ha tre dimensioni: <a href="nota-14-algebra-tre-dimensioni.html?ret=bozza-matematica.html%23nota-14">perché quell’algebra non esiste? →</a></span><span class="en">The list has no 3, yet the space we live in has three dimensions: <a href="nota-14-algebra-tre-dimensioni.html?ret=bozza-matematica.html%23nota-14">why that algebra does not exist? →</a></span>
+<span class="it">Nell’elenco il 3 non c’è, eppure lo spazio in cui viviamo ha tre dimensioni: <a href="nota-14-algebra-tre-dimensioni.html?ret=04a-numeri-complessi.html%23nota-14">perché quell’algebra non esiste? →</a></span><span class="en">The list has no 3, yet the space we live in has three dimensions: <a href="nota-14-algebra-tre-dimensioni.html?ret=04a-numeri-complessi.html%23nota-14">why that algebra does not exist? →</a></span>
 </div>
     <p><span class="it">La terza colonna va letta in modo cumulativo. Le quattro proprietà di partenza — somma, prodotto, divisione, modulo — valgono in tutte e quattro le algebre: è ciò che le rende algebre di divisione normate. Ma ogni volta che si sale di dimensione si perde una proprietà che nell’algebra precedente valeva ancora, e le perdite si trascinano dietro: i numeri reali hanno tutto; i complessi hanno tutto tranne l’ordinamento; i quaternioni hanno perso anche la commutatività; gli ottonioni anche l’associatività.</span><span class="en">The third column is to be read cumulatively. The four starting properties — addition, multiplication, division, modulus — hold in all four algebras: that is what makes them normed division algebras. But each time we go up in dimension a property that still held in the previous algebra is lost, and the losses carry over: the real numbers have everything; the complex numbers have everything except the ordering; the quaternions have lost commutativity as well; the octonions associativity too.</span></p>
     <p><span class="it">Vediamo ora che cosa significa ciascuna perdita.</span><span class="en">Let us now see what each loss means.</span></p>
