@@ -271,7 +271,7 @@ td.w{color:var(--warn)!important} td.b{color:var(--bad)!important} td.g{color:va
       <div class="body">
         <div class="ctl">
           <div class="lab"><span class="nm it">Pressione di lavoro</span><span class="vl" id="vP"></span></div>
-          <input type="range" id="sP" min="-7" max="-2" step="0.05" value="-5.2">
+          <input type="range" id="sP" min="-7" max="-2" step="0.05" value="-5.2" aria-label="Pressione di lavoro nella camera da vuoto, in mbar, scala logaritmica">
           <div class="hint">
             <span class="it">Gli atomi devono attraversare l'apparato senza urtare il gas residuo: serve un cammino libero medio molto maggiore della lunghezza del fascio.</span>
             
@@ -286,7 +286,7 @@ td.w{color:var(--warn)!important} td.b{color:var(--bad)!important} td.g{color:va
       <div class="body">
         <div class="ctl">
           <div class="lab"><span class="nm it">Temperatura crogiolo</span><span class="vl" id="vT"></span></div>
-          <input type="range" id="sT" min="900" max="1400" step="5" value="1110">
+          <input type="range" id="sT" min="900" max="1400" step="5" value="1110" aria-label="Temperatura del crogiolo, in gradi Celsius">
           <div class="hint">
             <span class="it">Fondere non basta (962 °C): conta la tensione di vapore. Ma salendo troppo gli atomi si urtano nel foro e il fascio non è più effusivo.</span>
             
@@ -294,7 +294,7 @@ td.w{color:var(--warn)!important} td.b{color:var(--bad)!important} td.g{color:va
         </div>
         <div class="ctl">
           <div class="lab"><span class="nm it">Foro del crogiolo ⌀</span><span class="vl" id="vD"></span></div>
-          <input type="range" id="sD" min="0.2" max="2.5" step="0.05" value="0.8">
+          <input type="range" id="sD" min="0.2" max="2.5" step="0.05" value="0.8" aria-label="Diametro del foro del crogiolo, in millimetri">
           <div class="hint">
             <span class="it">Attenzione a non confondere due vuoti diversi: dentro il crogiolo il gas è vapore d'argento a qualche pascal (λ ≈ 1 mm), fuori è il gas residuo della pompa, diecimila volte più rado (λ ≈ 10 m). Gli urti che contano avvengono tutti entro un diametro dal foro, perché appena fuori la densità del fascio cade come 1/r².</span>
             
@@ -308,7 +308,7 @@ td.w{color:var(--warn)!important} td.b{color:var(--bad)!important} td.g{color:va
       <div class="body">
         <div class="ctl">
           <div class="lab"><span class="nm it">Larghezza fenditure</span><span class="vl" id="vW"></span></div>
-          <input type="range" id="sW" min="0.03" max="1.2" step="0.01" value="0.2">
+          <input type="range" id="sW" min="0.03" max="1.2" step="0.01" value="0.2" aria-label="Larghezza delle fenditure di collimazione, in millimetri">
           <div class="hint">
             <span class="it">Strette = fascio nitido ma debole. Larghe = intenso ma sfocato: la traccia si allarga fino a coprire lo sdoppiamento.</span>
             
@@ -316,7 +316,7 @@ td.w{color:var(--warn)!important} td.b{color:var(--bad)!important} td.g{color:va
         </div>
         <div class="ctl">
           <div class="lab"><span class="nm it">Distanza fra le fenditure</span><span class="vl" id="vDS"></span></div>
-          <input type="range" id="sDS" min="60" max="500" step="5" value="300">
+          <input type="range" id="sDS" min="60" max="500" step="5" value="300" aria-label="Distanza fra le due fenditure, in millimetri">
         </div>
       </div>
     </div>
@@ -326,7 +326,7 @@ td.w{color:var(--warn)!important} td.b{color:var(--bad)!important} td.g{color:va
       <div class="body">
         <div class="ctl">
           <div class="lab"><span class="nm it">Raggio della lama (interna)</span><span class="vl" id="vR1"></span></div>
-          <input type="range" id="sR1" min="1" max="15" step="0.5" value="4">
+          <input type="range" id="sR1" min="1" max="15" step="0.5" value="4" aria-label="Raggio del polo interno a lama, in millimetri">
           <div class="hint">
             <span class="it">Il polo interno affilato: più è stretto, più il campo — e quindi il gradiente — si addensa attorno ad esso. Nel progetto della tesi vale 4 mm.</span>
             
@@ -334,7 +334,7 @@ td.w{color:var(--warn)!important} td.b{color:var(--bad)!important} td.g{color:va
         </div>
         <div class="ctl">
           <div class="lab"><span class="nm it">Raggio del solco (esterna)</span><span class="vl" id="vR2"></span></div>
-          <input type="range" id="sR2" min="6" max="40" step="0.5" value="26">
+          <input type="range" id="sR2" min="6" max="40" step="0.5" value="26" aria-label="Raggio del polo esterno a solco, in millimetri">
           <div class="hint">
             <span class="it">Il polo esterno concavo, concentrico all'interno (stesso centro, come nel disegno di sezione). Il traferro radiale è la differenza dei due raggi. Nel progetto vale 26 mm.</span>
             
@@ -342,7 +342,7 @@ td.w{color:var(--warn)!important} td.b{color:var(--bad)!important} td.g{color:va
         </div>
         <div class="ctl">
           <div class="lab"><span class="nm it">Eccentricità (avvicinamento dei centri)</span><span class="vl" id="vE"></span></div>
-          <input type="range" id="sE" min="0" max="90" step="1" value="0">
+          <input type="range" id="sE" min="0" max="90" step="1" value="0" aria-label="Eccentricità fra i due poli, in percentuale">
           <div class="hint">
             <span class="it">A 0% i due cerchi sono concentrici (come nel disegno di progetto). Aumentandola il cerchio interno si sposta verso un lato: da quella parte il traferro si stringe e il campo si concentra, come nel classico magnete a lama e solco sfalsati.</span>
             
@@ -350,7 +350,7 @@ td.w{color:var(--warn)!important} td.b{color:var(--bad)!important} td.g{color:va
         </div>
         <div class="ctl">
           <div class="lab"><span class="nm it">Posizione del fascio nel traferro</span><span class="vl" id="vG"></span></div>
-          <input type="range" id="sG" min="5" max="95" step="1" value="27">
+          <input type="range" id="sG" min="5" max="95" step="1" value="27" aria-label="Posizione del fascio nel traferro, in percentuale dalla lama al solco">
           <div class="hint">
             <span class="it">Dove corre il fascio fra lama (0%) e solco (100%). Vicino alla lama il gradiente è fortissimo ma lo spazio è poco: il fascio rischia di finire sul polo. Il campo va come 1/r, il gradiente come 1/r².</span>
             
@@ -358,7 +358,7 @@ td.w{color:var(--warn)!important} td.b{color:var(--bad)!important} td.g{color:va
         </div>
         <div class="ctl">
           <div class="lab"><span class="nm it">Lunghezza espansioni</span><span class="vl" id="vL"></span></div>
-          <input type="range" id="sL" min="10" max="800" step="5" value="600">
+          <input type="range" id="sL" min="10" max="800" step="5" value="600" aria-label="Lunghezza delle espansioni polari, in millimetri">
         </div>
       </div>
     </div>
@@ -368,7 +368,7 @@ td.w{color:var(--warn)!important} td.b{color:var(--bad)!important} td.g{color:va
       <div class="body">
         <div class="ctl">
           <div class="lab"><span class="nm it">Tratto di deriva (magnete → vetrino)</span><span class="vl" id="vDr"></span></div>
-          <input type="range" id="sDr" min="0" max="800" step="10" value="0">
+          <input type="range" id="sDr" min="0" max="800" step="10" value="0" aria-label="Tratto di deriva dal magnete al vetrino, in millimetri">
           <div class="hint">
             <span class="it">Dopo il magnete la separazione continua a crescere, e qui nessun traferro la limita.</span>
             
@@ -382,7 +382,7 @@ td.w{color:var(--warn)!important} td.b{color:var(--bad)!important} td.g{color:va
       <div class="body">
         <div class="ctl">
           <div class="lab"><span class="nm it">Durata</span><span class="vl" id="vTe"></span></div>
-          <input type="range" id="sTe" min="-1.3" max="1.6" step="0.02" value="0.6">
+          <input type="range" id="sTe" min="-1.3" max="1.6" step="0.02" value="0.6" aria-label="Durata dell'esposizione, in ore, scala logaritmica">
         </div>
       </div>
     </div>
