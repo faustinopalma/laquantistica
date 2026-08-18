@@ -34,7 +34,7 @@ SALTA = ()                              # le bozze si riconoscono dal nome, vedi
 
 # Pagine pubblicate ma non collegate da nessuna parte: fuori dalla sitemap e con
 # noindex, perche' sono proposte in attesa di giudizio, non parte del percorso.
-BOZZE = {'bozza-matematica.html'}
+BOZZE = {'bozza-matematica.html', 'nota-14-algebra-tre-dimensioni.html'}
 
 
 def pagine():
@@ -182,6 +182,10 @@ META = {
     'bozza-matematica.html': {
         'it': ('Bozza · Numeri complessi e vettori di stato · La Quantistica', None),
         'en': ('Draft · Complex Numbers and State Vectors · La Quantistica', None),
+    },
+    'nota-14-algebra-tre-dimensioni.html': {
+        'it': ('Nota 14 · Perché non un’algebra a tre dimensioni? — La Quantistica', None),
+        'en': ('Note 14 · Why not a three-dimensional algebra? — La Quantistica', None),
     },
     '04c-hamiltoniana.html': {
         'it': ('L’hamiltoniana e l’equazione di Schrödinger · La Quantistica',
