@@ -16,7 +16,7 @@ FINE = ('    <h3><span class="it">Il problema agli autovalori</span>'
 
 RICHIAMO = '''    <div class="nota-link" id="nota-14">
 <span class="k"><span class="it">Nota 14</span><span class="en">Note 14</span></span>
-<span class="it">Nell\u2019elenco il 3 non c\u2019\u00e8, eppure lo spazio in cui viviamo ha tre dimensioni: <a href="nota-14-algebra-tre-dimensioni.html?ret=bozza-matematica.html%23nota-14">perch\u00e9 quell\u2019algebra non esiste \u2192</a></span><span class="en">The list has no 3, yet the space we live in has three dimensions: <a href="nota-14-algebra-tre-dimensioni.html?ret=bozza-matematica.html%23nota-14">why that algebra does not exist \u2192</a></span>
+<span class="it">Nell\u2019elenco il 3 non c\u2019\u00e8, eppure lo spazio in cui viviamo ha tre dimensioni: <a href="nota-14-algebra-tre-dimensioni.html?ret=bozza-matematica.html%23nota-14">perch\u00e9 quell\u2019algebra non esiste? \u2192</a></span><span class="en">The list has no 3, yet the space we live in has three dimensions: <a href="nota-14-algebra-tre-dimensioni.html?ret=bozza-matematica.html%23nota-14">why that algebra does not exist? \u2192</a></span>
 </div>
 '''
 
