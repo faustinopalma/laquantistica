@@ -32,9 +32,15 @@ def senza_script(t):
     return re.sub(r'<script\b.*?</script>', '', t, flags=re.S)
 
 
+def risorsa_locale(base, url):
+    percorso = unquote(urlparse(url).path)
+    bersaglio = base / percorso
+    candidati = (bersaglio, pathlib.Path(f'{bersaglio}.html'), bersaglio / 'index.html')
+    return next((p for p in candidati if p.exists()), None)
+
+
 def esiste_risorsa(url):
-    p = unquote(urlparse(url).path).lstrip('/')
-    return (RADICE / p).exists()
+    return risorsa_locale(RADICE, unquote(urlparse(url).path).lstrip('/')) is not None
 
 
 for lingua in LINGUE:
@@ -91,10 +97,11 @@ for lingua in LINGUE:
             correnti = sel.group(1).count('aria-current="true"')
             if correnti != 1:
                 err(nome, f'aria-current presente {correnti} volte invece di 1')
-            if f'href="../{lingua}/{f.name}"' not in sel.group(1):
+            destinazione = '' if f.name == 'index.html' else f.name[:-5]
+            if f'href="../{lingua}/{destinazione}"' not in sel.group(1):
                 err(nome, 'il selettore non punta a se stesso')
-            if f'href="../{altra}/{f.name}"' not in sel.group(1):
-                err(nome, f'il selettore non punta a {altra}/{f.name}')
+            if f'href="../{altra}/{destinazione}"' not in sel.group(1):
+                err(nome, f'il selettore non punta a {altra}/{destinazione}')
 
         ha_sidebar = 'class="sidebar"' in t
         ha_pillola = 'langsw-mobile' in t
@@ -105,15 +112,21 @@ for lingua in LINGUE:
             u = m.group(1)
             if re.match(r'^(https?:|mailto:|#|data:|javascript:)', u):
                 continue
+            percorso = unquote(urlparse(u).path)
+            nome_collegato = pathlib.PurePosixPath(percorso).name
+            pubblicabile = (nome_collegato and not nome_collegato.startswith(('_', 'game-'))
+                             and (SORGENTI / nome_collegato).exists())
+            if percorso.endswith('.html') and pubblicabile:
+                err(nome, f'collegamento interno non canonico: {u}')
             if u.startswith('/'):
                 if not esiste_risorsa(u):
                     err(nome, f'risorsa mancante: {u}')
             elif u.startswith('../'):
-                if not (cartella / u).resolve().exists():
+                if not risorsa_locale(cartella, u):
                     err(nome, f'collegamento rotto: {u}')
             else:
                 bersaglio = unquote(u.split('?')[0].split('#')[0])
-                if bersaglio and not (cartella / bersaglio).exists():
+                if bersaglio and not risorsa_locale(cartella, bersaglio):
                     # gia' rotto nel sito pubblicato: la pagina bersaglio non e' deployata
                     if bersaglio in orig and not (SORGENTI / bersaglio).exists() or bersaglio.startswith('_'):
                         avvisi.append(f'{nome}: collegamento gia' + "'" + f' rotto in produzione: {u}')

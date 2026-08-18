@@ -40,10 +40,9 @@ The nine “cards”:
 |---|---|
 | `originale-doc/` | The authentic 1999 original: legacy `.doc` files and technical drawings (`.DWG`/`.WMF`), kept as an archive |
 | `originale-docx/` | Modern, openable `.docx` conversion of the thesis; the subfolders `da-doc-originale/` and `da-docx-originale/` record which source each conversion came from |
-| `site/` | HTML edition with native MathML formulas |
 | `sorgenti/` | Bilingual source pages (Italian + English in one file); these are the ones you edit |
 | `publish/` | The published site, generated from `sorgenti/`: `it/` and `en/`, one URL per language |
-| `build/` | Intermediate artifacts generated from the sources |
+| `build/i18n/` | The generator: splits the bilingual sources into `it/` and `en/`, and checks the result |
 | `img/` | Figures and images |
 | `scripts/` | Site-generation tools |
 
@@ -105,10 +104,9 @@ Le nove «schede»:
 |---|---|
 | `originale-doc/` | Il vero originale del 1999: file `.doc` legacy e disegni tecnici (`.DWG`/`.WMF`), conservato come archivio |
 | `originale-docx/` | Conversione moderna e apribile in `.docx` della tesi; le sottocartelle `da-doc-originale/` e `da-docx-originale/` indicano la fonte di ciascuna conversione |
-| `site/` | Edizione HTML con formule in MathML nativo |
 | `sorgenti/` | Pagine sorgente bilingui (italiano + inglese nello stesso file): sono quelle che si modificano |
 | `publish/` | Il sito pubblicato, generato da `sorgenti/`: `it/` e `en/`, un indirizzo per lingua |
-| `build/` | Artefatti intermedi generati dai sorgenti |
+| `build/i18n/` | Il generatore: divide i sorgenti bilingui in `it/` e `en/` e ne verifica il risultato |
 | `img/` | Figure e immagini |
 | `scripts/` | Strumenti di generazione del sito |
 
