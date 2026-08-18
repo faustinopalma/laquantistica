@@ -160,6 +160,13 @@ META = {
                'Why we use complex numbers: the four normed division algebras, wave amplitude and '
                'phase, the Riemann-Silberstein field and the recovery of real solutions.'),
     },
+    'nota-13-vettori-bra-ket.html': {
+        'it': ('Nota 13 · Vettori, bra e ket — La Quantistica', None),
+        'en': ('Note 13 · Vectors, bras and kets — La Quantistica',
+               'A review of the algebra of complex vector spaces: the conjugate and the squared '
+               'modulus, the dual vector, the bra and ket symbols, the scalar product and the '
+               'decomposition of a vector on an orthogonal basis.'),
+    },
     '04b-forma-evoluzione.html': {
         'it': ('La forma dell’equazione di evoluzione · La Quantistica',
                'Dalle ampiezze di probabilità alla forma generale della legge di evoluzione: stato '
