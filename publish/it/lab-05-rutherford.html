@@ -90,7 +90,7 @@
 
   <section class="panel">
     <div class="stagecol">
-      <div class="sim-stage stage-wrap"><canvas id="stage" class="cv" width="760" height="430" role="img" aria-label="Vista dall'alto dell'apparato: sorgente di americio, collimatore, lamina d'oro e rivelatore mobile sul goniometro; le particelle alfa attraversano la lamina e vengono diffuse."></canvas></div>
+      <div class="sim-stage stage-wrap"><canvas id="stage" class="cv" width="760" height="430" role="img" aria-label="Vista dall'alto dell'apparato: sorgente di americio, collimatore, lamina d'oro e rivelatore mobile sul goniometro; le particelle alfa attraversano la lamina e vengono diffuse. In basso a sinistra la catena di rivelazione: detector al silicio collegato all'amplificatore con la sua soglia U, contatore digitale e cronometro."></canvas></div>
       <div class="sim-stage plot-wrap"><canvas id="plot" class="cv" width="760" height="300" role="img" aria-label="Grafico del numero di impulsi al secondo in funzione dell'angolo, con la curva teorica di Rutherford."></canvas></div>
     </div>
 
@@ -166,7 +166,7 @@
         <div class="hint" style="margin:.15rem 0 0"><span class="it">Servono punti a ϑ ≥ 25°: lì la coda di Rutherford domina sul fascio diretto e il rate è ∝ Z².</span></div>
       </div>
 
-      <p class="hint"><span class="it">Fissa l'angolo ϑ, premi <b>AVVIA</b> e lascia contare: a ogni stop il punto (ϑ, N/Δt) finisce sul grafico con la sua barra d'errore statistico (±1/√N). A <b>ϑ = 0</b> passano ~25 particelle al secondo; a <b>30°</b> ci vuole più di mezz'ora per contarne venti. Le due cose insieme dicono che la lamina è quasi <b>trasparente</b> e che ogni tanto qualcosa dentro l'atomo dà un calcio violentissimo: un <b>nucleo</b> piccolo e carico. Prova gli altri due modelli: con le <b>sferette piene</b> il contatore resta muto (la lamina sarebbe opaca), con il <b>panettone di Thomson</b> la carica è spalmata su tutto l'atomo, quindi b non scende mai sotto R e un atomo devia al massimo di 0,02°: dopo tutta la lamina si resta sotto il grado.<br><b>Nota sull'animazione:</b> il volo delle α è disegnato al rallentatore (in realtà attraversano l'apparato in pochi nanosecondi) e sopra ×1 se ne disegna solo una ogni tante — il numero è scritto in basso nell'apparato. Il <b>contatore le conta tutte</b>.</span></p>
+      <p class="hint"><span class="it">Fissa l'angolo ϑ, premi <b>AVVIA</b> e lascia contare: a ogni stop il punto (ϑ, N/Δt) finisce sul grafico con la sua barra d'errore statistico (±1/√N). A <b>ϑ = 0</b> passano ~25 particelle al secondo; a <b>30°</b> ci vuole quasi mezz'ora per contarne venti. Le due cose insieme dicono che la lamina è quasi <b>trasparente</b> e che ogni tanto qualcosa dentro l'atomo dà un calcio violentissimo: un <b>nucleo</b> piccolo e carico. Prova gli altri due modelli: con le <b>sferette piene</b> il contatore resta muto (la lamina sarebbe opaca), con il <b>panettone di Thomson</b> la carica è spalmata su tutto l'atomo, quindi b non scende mai sotto R e un atomo devia al massimo di 0,02°: dopo tutta la lamina si resta sotto il grado.<br><b>Nota sull'animazione:</b> il volo delle α è disegnato al rallentatore (in realtà attraversano l'apparato in pochi nanosecondi) e sopra ×1 se ne disegna solo una ogni tante — il numero è scritto in basso nell'apparato. Il <b>contatore le conta tutte</b>.</span></p>
     </aside>
   </section>
 
@@ -334,6 +334,61 @@ function drawHalo(c){
     }
   }
 }
+/* strumento da rack: cornice, etichetta e display a cifre ambra */
+function instr(c,x,y,w,h,tit,val){
+  c.fillStyle='#111b17'; c.strokeStyle='#3d7a5f'; c.lineWidth=1.2;
+  c.beginPath(); c.rect(x,y,w,h); c.fill(); c.stroke();
+  c.fillStyle='rgba(150,190,170,.75)'; c.font='9px "Cascadia Code",monospace';
+  c.textAlign='left'; c.textBaseline='top'; c.fillText(tit,x+7,y+5);
+  c.fillStyle='#0a0f0d'; c.fillRect(x+7,y+18,w-14,h-25);
+  c.strokeStyle='rgba(70,200,140,.22)'; c.lineWidth=1; c.strokeRect(x+7,y+18,w-14,h-25);
+  c.fillStyle='#ffb000'; c.font='15px "Cascadia Code",monospace';
+  c.textAlign='right'; c.textBaseline='middle'; c.fillText(val,x+w-12,y+18+(h-25)/2);
+}
+/* catena di rivelazione delle figg. 5-8: detector al silicio (sul goniometro, disegnato
+   col rivelatore), amplificatore con soglia U, contatore digitale e cronometro */
+function drawChain(c){
+  var fx=CX+Math.cos(135*RAD)*RG, fy=CY+Math.sin(135*RAD)*RG;   /* passante da vuoto: a 135° il rivelatore non arriva mai */
+  c.strokeStyle='rgba(53,200,255,.4)'; c.lineWidth=1.6;
+  c.beginPath(); c.moveTo(fx,fy); c.quadraticCurveTo(272,374,240,372); c.stroke();
+  c.beginPath(); c.moveTo(148,320); c.lineTo(136,320); c.stroke();
+  c.fillStyle='#16323f'; c.strokeStyle='#35c8ff'; c.lineWidth=1.2;
+  c.beginPath(); c.arc(fx,fy,4.5,0,7); c.fill(); c.stroke();
+
+  /* amplificatore di misura */
+  var AX=148, AY=300, AW=92, AH=86;
+  c.fillStyle='#111b17'; c.strokeStyle='#3d7a5f'; c.lineWidth=1.2;
+  c.beginPath(); c.rect(AX,AY,AW,AH); c.fill(); c.stroke();
+  c.fillStyle='rgba(150,190,170,.75)'; c.font='9px "Cascadia Code",monospace';
+  c.textAlign='left'; c.textBaseline='top';
+  c.fillText(L('amplificatore','amplifier'),AX+7,AY+5);
+  /* l'impulso squadrato e la soglia U: sopra la soglia il contatore scatta, sotto no */
+  var SX=AX+7, SY=AY+20, SW2=AW-14, SH2=34, base=SY+SH2-6, thr=SY+13;
+  c.fillStyle='#0a0f0d'; c.fillRect(SX,SY,SW2,SH2);
+  c.strokeStyle='rgba(70,200,140,.22)'; c.lineWidth=1; c.strokeRect(SX,SY,SW2,SH2);
+  c.setLineDash([3,3]); c.strokeStyle='rgba(255,92,92,.75)';
+  c.beginPath(); c.moveTo(SX+2,thr); c.lineTo(SX+SW2-2,thr); c.stroke(); c.setLineDash([]);
+  c.fillStyle='rgba(255,92,92,.85)'; c.font='8px "Cascadia Code",monospace';
+  c.fillText('U',SX+3,thr-10);
+  c.strokeStyle=flash>0?'#7fe0b8':'rgba(127,224,184,.6)'; c.lineWidth=1.4;
+  c.beginPath();
+  c.moveTo(SX+4,base); c.lineTo(SX+20,base); c.lineTo(SX+20,SY+5); c.lineTo(SX+32,SY+5);
+  c.lineTo(SX+32,base); c.lineTo(SX+48,base); c.lineTo(SX+48,base-6); c.lineTo(SX+56,base-6);
+  c.lineTo(SX+56,base); c.lineTo(SX+SW2-4,base);
+  c.stroke();
+  /* manopola della soglia */
+  c.fillStyle='#16323f'; c.strokeStyle='#4a6b59'; c.lineWidth=1.2;
+  c.beginPath(); c.arc(AX+15,AY+70,8.5,0,7); c.fill(); c.stroke();
+  c.strokeStyle='#ffb000'; c.lineWidth=1.6;
+  c.beginPath(); c.moveTo(AX+15,AY+70); c.lineTo(AX+15-6,AY+70-6); c.stroke();
+  c.fillStyle='rgba(180,210,195,.8)'; c.font='9px "Cascadia Code",monospace';
+  c.textAlign='left'; c.textBaseline='middle';
+  c.fillText('U = '+nfmt(0.5,2)+' V',AX+28,AY+70);
+
+  instr(c,14,300,122,40,L('contatore','counter'),String(N));
+  instr(c,14,348,122,40,L('cronometro','stopwatch'),fmtT(simT));
+  c.textAlign='left'; c.textBaseline='middle';
+}
 function drawApparatus(c){
   var i,p;
   /* camera di diffusione */
@@ -396,9 +451,14 @@ function drawApparatus(c){
   if(flash>0){ c.globalAlpha=flash; c.fillStyle='rgba(53,200,255,.45)';
     c.beginPath(); c.arc(0,0,22,0,7); c.fill(); c.globalAlpha=1; }
   c.restore();
+  /* il detector e' al silicio: l'etichetta sta dentro la scatola, dritta, cosi' non
+     finisce mai sopra le tacche del goniometro */
+  c.fillStyle=flash>0?'#08222c':'#35c8ff'; c.font='9px "Cascadia Code",monospace';
+  c.textAlign='center'; c.textBaseline='middle'; c.fillText('Si',dx-1,dy);
   c.fillStyle='#35c8ff'; c.font='11px "Cascadia Code",monospace'; c.textAlign='center';
-  var lx=CX+Math.cos(r)*(RG+30), ly=CY+Math.sin(r)*(RG+30);
-  c.fillText('ϑ = '+theta+'°',Math.min(SW-34,Math.max(34,lx)),Math.min(SH-12,Math.max(14,ly)));
+  var lx=Math.min(SW-40,Math.max(40,CX+Math.cos(r)*(RG+38))), ly=Math.min(SH-26,Math.max(14,CY+Math.sin(r)*(RG+38)));
+  c.fillText('ϑ = '+theta+'°',lx,ly);
+  drawChain(c);
   /* stato */
   c.textAlign='left'; c.fillStyle='rgba(150,190,170,.6)'; c.font='10px "Cascadia Code",monospace';
   c.fillText(L('vuoto < 1 mBar · scala dei tempi ×'+speed+' · '+(drawEvery>1?'ne disegno 1 ogni '+drawEvery:'le disegno tutte'),
