@@ -146,6 +146,7 @@ canvas.cv{width:100%;height:auto;display:block;}
           <button type="button" data-v="ne"><span class="sw" style="background:#ff8a3d"></span><span class="en">Neon</span></button>
           <button type="button" data-v="ar"><span class="sw" style="background:#b48cff"></span><span class="en">Argon</span></button>
           <button type="button" data-v="n2"><span class="sw" style="background:#d59bff"></span><span class="en">Nitrogen</span></button>
+          <button type="button" data-v="o2"><span class="sw" style="background:#8fd8e8"></span><span class="en">Oxygen</span></button>
           <button type="button" data-v="inc"><span class="sw" style="background:#ffd9a0"></span><span class="en">Filament</span></button>
         </div>
 
@@ -249,6 +250,8 @@ var SRC = {
       lines:[{nm:415.86,i:0.30},{nm:420.07,i:0.30},{nm:425.94,i:0.35},{nm:430.01,i:0.35},{nm:434.52,i:0.30},{nm:451.07,i:0.25},{nm:470.23,i:0.20},{nm:476.49,i:0.16},{nm:488.00,i:0.16},{nm:696.54,i:0.90},{nm:706.72,i:0.70},{nm:727.29,i:0.50},{nm:738.40,i:0.65},{nm:750.39,i:1.00},{nm:763.51,i:0.95},{nm:772.38,i:0.70},{nm:794.82,i:0.60},{nm:811.53,i:0.90}] },
   n2:{ it:'Tubo a scarica all\u2019azoto (molecolare)', en:'Nitrogen discharge tube (molecular)', glow:[205,150,255], kind:'band',
       lines:[{nm:315.93,i:0.85},{nm:337.13,i:1.00},{nm:353.67,i:0.55},{nm:357.69,i:0.85},{nm:375.54,i:0.50},{nm:380.49,i:0.70},{nm:391.44,i:0.60},{nm:399.84,i:0.45},{nm:405.94,i:0.50},{nm:427.81,i:0.55},{nm:434.36,i:0.30},{nm:470.92,i:0.25},{nm:497.64,i:0.15},{nm:517.00,i:0.10}] },
+  o2:{ it:'Tubo a scarica all\u2019ossigeno', en:'Oxygen discharge tube', glow:[143,216,232], kind:'atom',
+      lines:[{nm:372.73,i:0.30},{nm:374.95,i:0.35},{nm:391.20,i:0.55},{nm:394.75,i:0.20},{nm:397.33,i:0.55},{nm:398.27,i:0.30},{nm:407.22,i:0.40},{nm:407.59,i:0.55},{nm:411.92,i:0.35},{nm:418.54,i:0.35},{nm:418.98,i:0.55},{nm:431.71,i:0.35},{nm:434.94,i:0.35},{nm:441.49,i:0.80},{nm:441.70,i:0.45},{nm:459.10,i:0.50},{nm:459.62,i:0.40},{nm:464.18,i:0.50},{nm:464.91,i:1.00},{nm:466.16,i:0.50},{nm:467.62,i:0.40},{nm:470.54,i:0.40},{nm:615.68,i:0.35},{nm:645.60,i:0.30},{nm:700.22,i:0.35},{nm:725.44,i:0.35},{nm:777.19,i:0.60}] },
   inc:{ it:'Lampada a filamento incandescente', en:'Incandescent filament lamp', glow:[255,215,160], kind:'cont', lines:[] }
 };
 
@@ -357,8 +360,8 @@ function drawStage(){
   xS.fillStyle='#9aa1ab'; xS.font=mono(10); xS.textAlign='center';
   xS.fillText(s.kind==='cont'?L('filamento incandescente','incandescent filament'):'~10⁻³ atm · ~1000 V',70,GY+64);
   xS.fillStyle='#c7ccd4'; xS.font='700 '+mono(11);
-  xS.fillText(L(srcKey==='h'?'idrogeno':srcKey==='hg'?'mercurio':srcKey==='ne'?'neon':srcKey==='ar'?'argon':srcKey==='n2'?'azoto':'lampada',
-                srcKey==='h'?'hydrogen':srcKey==='hg'?'mercury':srcKey==='ne'?'neon':srcKey==='ar'?'argon':srcKey==='n2'?'nitrogen':'lamp'),70,GY-32);
+  xS.fillText(L(srcKey==='h'?'idrogeno':srcKey==='hg'?'mercurio':srcKey==='ne'?'neon':srcKey==='ar'?'argon':srcKey==='n2'?'azoto':srcKey==='o2'?'ossigeno':'lampada',
+                srcKey==='h'?'hydrogen':srcKey==='hg'?'mercury':srcKey==='ne'?'neon':srcKey==='ar'?'argon':srcKey==='n2'?'nitrogen':srcKey==='o2'?'oxygen':'lamp'),70,GY-32);
 
   /* fenditura */
   xS.fillStyle='#3d444f'; xS.fillRect(150,GY-28,5,19); xS.fillRect(150,GY+9,5,19);
