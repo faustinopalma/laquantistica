@@ -32,6 +32,10 @@ def url_pubblico(lingua, file_):
 
 SALTA = ()                              # le bozze si riconoscono dal nome, vedi pagine()
 
+# Pagine pubblicate ma non collegate da nessuna parte: fuori dalla sitemap e con
+# noindex, perche' sono proposte in attesa di giudizio, non parte del percorso.
+BOZZE = {'bozza-matematica.html'}
+
 
 def pagine():
     """I sorgenti da pubblicare: le bozze locali (_nome, game-*) restano fuori."""
@@ -174,6 +178,10 @@ META = {
         'en': ('The Form of the Evolution Equation · La Quantistica',
                'From probability amplitudes to the general form of the law of evolution: the state '
                'as a complex function, the algebra of operators, conservation of the scalar product.'),
+    },
+    'bozza-matematica.html': {
+        'it': ('Bozza · Numeri complessi e vettori di stato · La Quantistica', None),
+        'en': ('Draft · Complex Numbers and State Vectors · La Quantistica', None),
     },
     '04c-hamiltoniana.html': {
         'it': ('L’hamiltoniana e l’equazione di Schrödinger · La Quantistica',
@@ -737,7 +745,7 @@ def trasforma(testo, lingua, file_, avvisi):
         testa.append(anteprima_social(lingua, file_, titolo_pagina, descrizione))
     if file_ == 'index.html' or file_ in CAPITOLI:
         testa.append(dati_strutturati(lingua, file_, titolo_pagina, descrizione))
-    if ANTEPRIMA:
+    if ANTEPRIMA or file_ in BOZZE:
         testa.append('<meta name="robots" content="noindex,nofollow">')
     testa.append('<link rel="stylesheet" href="/assets/lang-links.css?v=1">')
     testo = testo.replace('</head>', '\n'.join(testa) + '\n</head>', 1)
@@ -944,7 +952,7 @@ def main(solo=None):
     if not solo:
         (USCITA / 'index.html').write_text(pagina_scelta(), encoding='utf-8')
         (USCITA / '404.html').write_text(pagina_non_trovata(), encoding='utf-8')
-        nomi = [p.name for p in pagine()]
+        nomi = [p.name for p in pagine() if p.name not in BOZZE]
         (USCITA / 'sitemap.xml').write_text(sitemap(nomi), encoding='utf-8')
         (USCITA / 'robots.txt').write_text(
             f'User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n', encoding='utf-8')
