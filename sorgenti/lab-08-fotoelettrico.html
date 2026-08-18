@@ -157,14 +157,13 @@
   <div class="con-credit"><span class="it">Laboratorio simulato, scritto nel 2026 insieme a GitHub Copilot: modello didattico, non software scientifico.</span><span class="en">Simulated laboratory, written in 2026 together with GitHub Copilot: a teaching model, not scientific software.</span></div>
 </main>
 
-<script src="assets/sim-sg-core.js?v=3"></script>
+<script src="assets/sim-sg-core.js?v=4"></script>
 <script>
 (function(){
 'use strict';
 var REDUCE=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
 function L(it,en){ return document.documentElement.getAttribute('data-lang')==='en'?en:it; }
 function $(id){ return document.getElementById(id); }
-function nfmt(x,d){ var s=x.toFixed(d); return L(s.replace('.',','),s); }
 
 /* ------------------------------------------------------------------ fisica
    I quattro punti della tabella del capitolo (giallo 5,19 / verde 5,49 /

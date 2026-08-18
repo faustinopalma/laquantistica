@@ -19,6 +19,7 @@ function txt(x, y, s, attrs, parent) {
 function simLang() { return document.documentElement.getAttribute('data-lang') === 'en' ? 'en' : 'it'; }
 function L(it, en) { return simLang() === 'en' ? en : it; }
 function dec(s) { return L(String(s).replace('.', ','), String(s)); }
+function nfmt(x, d) { return dec((+x).toFixed(d)); }
 function fmtPct(p) { return dec(Math.round(p * 1000) / 10) + '%'; }
 function num(x) { var r = Math.round(x * 1000) / 1000; return dec(r === 0 ? 0 : r); }
 

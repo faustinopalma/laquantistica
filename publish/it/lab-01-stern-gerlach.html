@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/assets/lang.css?v=7">
 <link rel="stylesheet" href="/assets/sim-sg.css?v=12">
 <link rel="stylesheet" href="/assets/sim-sg-mobile.css?v=2">
-<script defer src="/assets/sim-sg-core.js?v=3"></script>
+<script src="/assets/sim-sg-core.js?v=4"></script>
 <style>
 :root{
   /* palette dei laboratori (sim-sg.css): verde da oscilloscopio + ambra */
@@ -669,8 +669,8 @@ function diagnose(r){
     f:T(`Lunghezza totale ${(r.Ltot*1000).toFixed(0)} mm: oltre il metro e mezzo diventano critici l'allineamento e il banco.`,
         `Total length ${(r.Ltot*1000).toFixed(0)} mm: past a metre and a half, alignment and bench space become critical.`)});
   if(r.hours>12) warn.push({m:T("Esposizione molto lunga.","Very long exposure."),
-    f:T(`${r.hours.toFixed(1)} ore di funzionamento ininterrotto sono difficili da sostenere: nel 1922 furono otto, al limite dell'apparato.`,
-        `${r.hours.toFixed(1)} hours of uninterrupted running is hard to sustain: in 1922 it was eight, at the limit of the apparatus.`)});
+    f:T(`${nfmt(r.hours,1)} ore di funzionamento ininterrotto sono difficili da sostenere: nel 1922 furono otto, al limite dell'apparato.`,
+        `${nfmt(r.hours,1)} hours of uninterrupted running is hard to sustain: in 1922 it was eight, at the limit of the apparatus.`)});
   if(r.diverg>r.thetaDefl&&r.vis>=0.35) warn.push({m:T("Collimazione al limite.","Collimation at the limit."),
     f:T("La divergenza del fascio è confrontabile con l'angolo di deflessione: la misura perde precisione.",
         "The beam divergence is comparable with the deflection angle: the measurement loses precision.")});
@@ -684,10 +684,10 @@ function fit(cv){
   const c=cv.getContext('2d'); c.setTransform(d,0,0,d,0,0);
   return {c,W:r.width,H:r.height,d};
 }
-const fmt=(x,n=2)=>x.toFixed(n);
+const fmt=(x,n=2)=>nfmt(x,n);
 function sci(x){
   if(x===0)return"0"; const e=Math.floor(Math.log10(Math.abs(x))), m=x/Math.pow(10,e);
-  return m.toFixed(1)+"·10"+String(e).replace(/-/g,"⁻").replace(/[0-9]/g,d=>"⁰¹²³⁴⁵⁶⁷⁸⁹"[d]);
+  return nfmt(m,1)+"·10"+String(e).replace(/-/g,"⁻").replace(/[0-9]/g,d=>"⁰¹²³⁴⁵⁶⁷⁸⁹"[d]);
 }
 
 function drawApparatus(r){

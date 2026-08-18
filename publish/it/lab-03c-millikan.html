@@ -147,7 +147,7 @@
   <div class="con-credit"><span class="it">Laboratorio simulato, scritto nel 2026 insieme a GitHub Copilot: modello didattico, non software scientifico.</span></div>
 </main>
 
-<script src="/assets/sim-sg-core.js?v=3"></script>
+<script src="/assets/sim-sg-core.js?v=4"></script>
 <script>
 (function(){
 var svg1=document.getElementById('svg1'), pltSvg=document.getElementById('plt');
@@ -155,7 +155,6 @@ var voltEl=document.getElementById('volt'), voltValEl=document.getElementById('v
 var b1=document.getElementById('b1'), b2=document.getElementById('b2'), autoEl=document.getElementById('autob');
 var REDUCE=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches);
 function L(it,en){ return document.documentElement.getAttribute('data-lang')==='en'?en:it; }
-function nfmt(x,d){ var s=(+x).toFixed(d); return L(s.replace('.',','),s); }
 function bil(it,en){ return '<span class="it">'+it+'</span><span class="en">'+en+'</span>'; }
 
 // ---- costanti della tesi (cap. 1) ----

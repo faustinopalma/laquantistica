@@ -215,7 +215,7 @@
   <div class="con-credit"><span class="en">Simulated laboratory, written in 2026 together with GitHub Copilot: a teaching model, not scientific software.</span></div>
 </main>
 
-<script src="/assets/sim-sg-core.js?v=3"></script>
+<script src="/assets/sim-sg-core.js?v=4"></script>
 <script>
 (function(){
 'use strict';
@@ -232,7 +232,6 @@ var seg=$('segModel');
 var sampleSel=$('sample');
 var REDUCE=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
 function L(it,en){ return document.documentElement.getAttribute('data-lang')==='en'?en:it; }
-function nfmt(x,d){ var s=(+x).toFixed(d); return L(s.replace('.',','),s); }
 
 var HPL=6.62607e-34, ME=9.10938e-31, QE=1.602177e-19;   // h serve al MODELLO, non alla misura
 var LMM=135;                         // distanza campione-schermo, dichiarata in pagina (mm)
